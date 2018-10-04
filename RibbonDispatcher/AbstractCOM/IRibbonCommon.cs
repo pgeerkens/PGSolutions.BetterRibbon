@@ -1,0 +1,44 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2017 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+    /// <summary>The base interface for Ribbnon controls.</summary>
+    [ComVisible(true)]
+    [CLSCompliant(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid(Guids.IRibbonCommon)]
+    public interface IRibbonCommon {
+        /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
+        [DispId(DispIds.Id)]
+        string Id          { get; }
+        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
+        [DispId(DispIds.Description)]
+        string Description { get; }
+        /// <summary>Returns the KeyTip string for this control.</summary>
+        [DispId(DispIds.KeyTip)]
+        string KeyTip       { get; }
+        /// <summary>Returns the Label string for this control.</summary>
+        [DispId(DispIds.Label)]
+        string Label        { get; }
+        /// <summary>Returns the screenTip string for this control.</summary>
+        [DispId(DispIds.ScreenTip)]
+        string ScreenTip    { get; }
+        /// <summary>Returns the SuperTip string for this control.</summary>
+        [DispId(DispIds.SuperTip)]
+        string SuperTip     { get; }
+        /// <summary>TODO</summary>
+        [DispId(DispIds.SetLanguageStrings)]
+        void   SetLanguageStrings(IRibbonTextLanguageControl languageStrings);
+
+        /// <summary>TODO</summary>
+        [DispId(DispIds.IsEnabled)]
+        bool   IsEnabled   { get; set; }
+        /// <summary>TODO</summary>
+        [DispId(DispIds.IsVisible)]
+        bool   IsVisible   { get; set; }
+    }
+}
