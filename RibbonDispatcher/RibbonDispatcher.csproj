@@ -30,7 +30,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>RibbonDispatcher.ruleset</CodeAnalysisRuleSet>
@@ -129,8 +129,6 @@
     <None Include="RibbonDispatcher.ruleset">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Sample Ribbons\RibbonLibrary.xlsm.zip" />
-    <None Include="Sample Ribbons\SampleRibbon V0.6.5.xlsm.zip" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

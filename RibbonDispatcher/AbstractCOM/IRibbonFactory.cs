@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher {
         [DispId(13)]
         RibbonButton NewRibbonButtonMso(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size            = rdLarge,
-            string          ImageMso        = "MacroSecurity",  // This one get's peope's attention ;-)
+            string          ImageMso        = "MacroSecurity",  // This one get's people's attention ;-)
             bool            ShowImage       = false,
             bool            ShowLabel       = true
         );
