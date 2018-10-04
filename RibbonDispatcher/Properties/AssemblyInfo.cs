@@ -10,12 +10,12 @@ using PGSolutions.RibbonDispatcher;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PGSolutions RibbonDispatcher")]
+[assembly: AssemblyTitle("PGSolutions Ribbon Dispatcher")]
 [assembly: AssemblyDescription("Generic dispatcher for the EXCEL fluent ribbon")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
-[assembly: AssemblyProduct("PGSolutions RibbonDispatcher")]
-[assembly: AssemblyCopyright("Copyright ©  2017 Pieter Geerkens")]
+[assembly: AssemblyProduct("PGSolutions Ribbon Dispatcher")]
+[assembly: AssemblyCopyright("Copyright © 2017 Pieter Geerkens")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en-US")]

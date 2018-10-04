@@ -9,7 +9,7 @@ using PGSolutions.RibbonDispatcher.Concrete;
 namespace PGSolutions.RibbonDispatcher {
     using static RdControlSize;
 
-    /// <summary>The factory interface for the Ribbon DIspatcher.</summary>
+    /// <summary>The factory interface for the Ribbon Dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
