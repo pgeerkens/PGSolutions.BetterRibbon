@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
@@ -14,9 +15,7 @@ using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
 namespace PGSolutions.RibbonDispatcher {
 
-    /// <summary>
-    /// TODO
-    /// </summary>
+    /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>
     /// The {SuppressMessage} attributes are left in the source here, instead of being 'fired and
     /// forgotten' to the Global Suppresion file, as commentary on a practice often seen as a C#
@@ -32,6 +31,7 @@ namespace PGSolutions.RibbonDispatcher {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonFactory))]
     [Guid(Guids.RibbonFactory)]
+    [Description("Implementation of the factory for Ribbon objects.")]
     public class RibbonFactory : IRibbonFactory {
         internal RibbonFactory(IRibbonUI RibbonUI, IResourceManager ResourceManager) {
             _ribbonUI        = RibbonUI;
@@ -54,7 +54,7 @@ namespace PGSolutions.RibbonDispatcher {
         private  readonly IDictionary<string, IImageableMixin>  _imageables;
         private  readonly IDictionary<string, IToggleableMixin> _toggleables;
 
-        internal object LoadImage(string imageId) => _resourceManager.LoadImage(imageId);
+        internal object LoadImage(string imageId) => _resourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IRibbonCommon>    Controls    => new ReadOnlyDictionary<string, IRibbonCommon>(_controls);
@@ -161,5 +161,9 @@ namespace PGSolutions.RibbonDispatcher {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public SelectableItem NewSelectableItemMso(string ItemId, string ImageMso = "MacroSecurity")
             => new SelectableItem(ItemId, _resourceManager, new ImageObject(ImageMso));
+
+        /// <inheritdoc/>
+        [DispId(20)]
+        public ResourceLoader NewResourceLoader() => new ResourceLoader();
     }
 }

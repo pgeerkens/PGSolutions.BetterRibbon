@@ -63,5 +63,28 @@ namespace PGSolutions.RibbonDispatcher {
         public const int Clicked                = 45;
 
         public const int AlternateLabel         = 46;
+
+        // IRibbonFactory
+        public const int NewRibbonGroup         = 101;
+        public const int NewRibbonButton        = 1 + NewRibbonGroup;
+        public const int NewRibbonButtonMso     = 1 + NewRibbonButton;
+        public const int NewRibbonToggle        = 1 + NewRibbonButtonMso;
+        public const int NewRibbonToggleMso     = 1 + NewRibbonToggle;
+        public const int NewRibbonCheckBox      = 1 + NewRibbonToggleMso;
+        public const int NewRibbonDropDown      = 1 + NewRibbonCheckBox;
+        public const int NewSelectableItem      = 1 + NewRibbonDropDown;
+        public const int NewSelectableItemMso   = 1 + NewSelectableItem;
+        public const int NewResourceLoader      = 1 + NewSelectableItemMso;
+
+        // IResourceLoader
+        public const int ControlStringsIndexer  = 1 + NewResourceLoader;
+        public const int AddControlStrings      = 1 + ControlStringsIndexer;
+
+        // IResourceManager
+        public const int GetControlStrings      = 1 + AddControlStrings;
+        public const int GetImage               = 1 + GetControlStrings;
+
+        //public const int NewRibbonGroup = 1 + DispIds.GetImage;
+        //public const int NewRibbonGroup = 1 + DispIds.NewRibbonGroup;
     }
 }

@@ -17,15 +17,15 @@ Private Type TRibbonModel
 End Type
 Private This As TRibbonModel
 
-Private Strings                         As PGSolutions_RibbonDispatcher.ControlStrings
+Private Strings                         As PGSolutions_RibbonDispatcher.ResourceLoader
 
 Private BrandingGroup                   As RibbonGroup
 Attribute BrandingGroup.VB_VarHelpID = -1
 Private WithEvents BrandingButton       As RibbonButton
 Attribute BrandingButton.VB_VarHelpID = -1
 
-Private StandardGroup                   As RibbonGroup
-Attribute StandardGroup.VB_VarHelpID = -1
+Private FirstGroup                      As RibbonGroup
+Attribute FirstGroup.VB_VarHelpID = -1
 Private WithEvents StandardButton1      As RibbonButton
 Attribute StandardButton1.VB_VarHelpID = -1
 Private WithEvents StandardButton2      As RibbonButton
@@ -40,18 +40,18 @@ Attribute ShowAdvancedToggle.VB_VarHelpID = -1
 Attribute ShowAdvancedToggle.VB_VarHelpID = -1
 #End If
 
-Private CustomGroup                     As RibbonGroup
-Attribute CustomGroup.VB_VarHelpID = -1
-Private WithEvents AdvancedButton1      As RibbonButton
-Attribute AdvancedButton1.VB_VarHelpID = -1
-Private WithEvents AdvancedButton2      As RibbonButton
-Attribute AdvancedButton2.VB_VarHelpID = -1
-Private WithEvents AdvancedButton3      As RibbonButton
-Attribute AdvancedButton3.VB_VarHelpID = -1
+Private SecondGroup                     As RibbonGroup
+Attribute SecondGroup.VB_VarHelpID = -1
+Private WithEvents Group2Button1        As RibbonButton
+Attribute Group2Button1.VB_VarHelpID = -1
+Private WithEvents Group2Button2        As RibbonButton
+Attribute Group2Button2.VB_VarHelpID = -1
+Private WithEvents Group2Button3        As RibbonButton
+Attribute Group2Button3.VB_VarHelpID = -1
 Private WithEvents CustomSizeToggle     As RibbonToggleButton
 Attribute CustomSizeToggle.VB_VarHelpID = -1
-Private WithEvents AdvancedOptions      As RibbonDropDown
-Attribute AdvancedOptions.VB_VarHelpID = -1
+Private WithEvents Group2Options        As RibbonDropDown
+Attribute Group2Options.VB_VarHelpID = -1
 
 Implements PGSolutions_RibbonDispatcher.IResourceManager
 
@@ -59,22 +59,22 @@ Private Sub BrandingButton_Clicked()
     MsgBox "Canadien, eh!", vbOKOnly Or vbInformation, "PGSolutions Ribbon Refresh"
 End Sub
 
-Private Sub AdvancedButton1_Clicked()
-    DefaultButtonAction AdvancedButton1
+Private Sub Group2Button1_Clicked()
+    DefaultButtonAction Group2Button1
 End Sub
-Private Sub AdvancedButton2_Clicked()
-    DefaultButtonAction AdvancedButton2
+Private Sub Group2Button2_Clicked()
+    DefaultButtonAction Group2Button2
 End Sub
-Private Sub AdvancedButton3_Clicked()
-    DefaultButtonAction AdvancedButton3
+Private Sub Group2Button3_Clicked()
+    DefaultButtonAction Group2Button3
 End Sub
-Private Sub AdvancedOptions_SelectionMade(ByVal ItemId As String, ByVal ItemIndex As Long)
-    SetButtonView ItemIndex, AdvancedButton1, AdvancedButton2, AdvancedButton3
+Private Sub Group2Options_SelectionMade(ByVal ItemId As String, ByVal ItemIndex As Long)
+    SetButtonView ItemIndex, Group2Button1, Group2Button2, Group2Button3
 End Sub
 
 Private Sub CustomSizeToggle_Toggled(ByVal IsPressed As Boolean)
-    AdvancedOptions.IsEnabled = _
-            ToggleCustomSize(Not IsPressed, AdvancedButton1, AdvancedButton2, AdvancedButton3)
+    Group2Options.IsEnabled = _
+            ToggleCustomSize(Not IsPressed, Group2Button1, Group2Button2, Group2Button3)
 End Sub
 
 Private Sub StandardButton1_Clicked()
@@ -88,33 +88,36 @@ Private Sub StandardOptions_SelectionMade(ByVal ItemId As String, ByVal ItemInde
     SetButtonView ItemIndex, StandardButton1, StandardButton2
 End Sub
 Private Sub ShowAdvancedToggle_Toggled(ByVal IsPressed As Boolean)
-    CustomGroup.IsVisible = IsPressed
+    SecondGroup.IsVisible = IsPressed
 End Sub
 
 Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
     On Error GoTo EH
     Dim HideUndefined   As Boolean    ' When true hides the undefined controls in Group2
-    HideUndefined = True
-    
-    Set Strings = New PGSolutions_RibbonDispatcher.ControlStrings
+    HideUndefined = False
     
     Set This.ViewModel = NewRibbonViewModel(RibbonUI, Me)
     With This.ViewModel.RibbonFactory
         Dim Discard As Object
         
+        Set Strings = .NewResourceLoader
+'        Dim v As Variant
+'        v = Strings.AddControlStrings(ControlId:="TabPGSolutions", Label:="Sample App #1")
+'        Dim w As Variant
+'        Set w = .NewRibbonGroup(v)
         Set This.RibbonTab = .NewRibbonGroup( _
-            Strings.AddControl(ControlID:="TabPGSolutions", _
+            Strings.AddControlStrings(ControlId:="TabPGSolutions", _
                 Label:="Sample App #1"))
     
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         ''' Branding Group
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Set BrandingGroup = .NewRibbonGroup( _
-            Strings.AddControl(ControlID:="BrandingGroup", _
+            Strings.AddControlStrings(ControlId:="BrandingGroup", _
                 Label:="PGSolutions", _
                 ScreenTip:="Tools for VBA Development"))
         Set BrandingButton = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="BrandingButton", _
+            Strings.AddControlStrings(ControlId:="BrandingButton", _
                 Label:="About Ribbon", _
                 ScreenTip:="A Sample Pre-Plumbed Ribbon", _
                 SuperTip:="An example of a pre-plumbed ribbon with improved error handling"), _
@@ -124,19 +127,19 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         ''' Group 1
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Set StandardGroup = .NewRibbonGroup( _
-            Strings.AddControl(ControlID:="Group1", _
+        Set FirstGroup = .NewRibbonGroup( _
+            Strings.AddControlStrings(ControlId:="Group1", _
                 Label:="Standard Buttons", _
                 ScreenTip:="Buttons Always Visible", _
                 SuperTip:="These buttons are always visible on this ribbon."), _
             Visible:=True, Enabled:=True)
             
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControl(ControlID:="Group1Toggle1", _
-                Label:="Show Advanced"), _
+            Strings.AddControlStrings(ControlId:="Group1Toggle1", _
+                Label:="Show Group #2"), _
             Visible:=False, Enabled:=False)
         Set StandardOptions = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group1Dropdown1", _
+            Strings.AddControlStrings(ControlId:="Group1Dropdown1", _
                 Label:="Options", _
                 ScreenTip:="Controls Button Display", _
                 SuperTip:="Display options for Standard Buttons:" & _
@@ -145,29 +148,29 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
                         vbNewLine & "Label & Image"), _
             Visible:=True, Enabled:=True)
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Grp1Dropdown1_LabelOnly", _
+            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_LabelOnly", _
                 Label:="Label Only", _
                 ScreenTip:="Display Label Only", _
                 SuperTip:="Displays just the button label when its size is Regular; else both."))
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Grp1Dropdown1_ImageOnly", _
+            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_ImageOnly", _
                 Label:="Image Only", _
                 ScreenTip:="Display Image Only", _
                 SuperTip:="Displays just the button image when its size is Regular; else both."))
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Grp1Dropdown1_LabelAndImage", _
+            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_LabelAndImage", _
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group1Dropdown2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group1Dropdown3", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Dropdown3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set StandardButton1 = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="Group1Button1", _
+            Strings.AddControlStrings(ControlId:="Group1Button1", _
                 Label:="1st Std Button", _
                 ScreenTip:="First Std Button", _
                 SuperTip:="Demonstration of a 'standard button'; one that is always visible on the ribbon."), _
@@ -178,7 +181,7 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
             ShowImage:=True, _
             ShowLabel:=True)
         Set StandardButton2 = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="Group1Button2", _
+            Strings.AddControlStrings(ControlId:="Group1Button2", _
                 Label:="Refresh Ribbon", _
                 ScreenTip:="Reinitializes Ribbon", _
                 SuperTip:="Reinitializees the ribbon, as long as the original RibbonUI value is valid."), _
@@ -191,34 +194,34 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
         Set Discard = .NewRibbonButtonMso("Group1Button3", False, False, rdRegular)
         
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group1Checkbox1", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group1Checkbox2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Checkbox2", Label:=""), _
             Visible:=False, Enabled:=False)
             
 #If UseCheckBox Then
         Set ShowAdvancedToggle = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group1Checkbox3", _
-                Label:="Show Advanced", _
-                ScreenTip:="Toggles Display of Advanced Buttons", _
-                SuperTip:="Alternates between setting the advanced buttons visible and hidden.", _
+            Strings.AddControlStrings(ControlId:="Group1Checkbox3", _
+                Label:="Show Group #2", _
+                ScreenTip:="Toggles Display of Group #2 Buttons", _
+                SuperTip:="Alternates between setting the Group #2 buttons visible and hidden.", _
                 AlternateLabel:=""), _
             Visible:=True, Enabled:=True)
         
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControl(ControlID:="Group1Toggle2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Toggle2", Label:=""), _
             Visible:=False, Enabled:=False)
 #Else
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group1Checkbox3", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group1Checkbox3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set ShowAdvancedToggle = .NewRibbonToggle( _
-            Strings.AddControl(ControlID:="Group1Toggle2", _
-                Label:="Show Advanced", _
-                ScreenTip:="Toggles Display of Advanced Buttons", _
-                SuperTip:="Alternates between setting the advanced buttons visible and hidden.", _
+            Strings.AddControlStrings(ControlId:="Group1Toggle2", _
+                Label:="Show Group #2", _
+                ScreenTip:="Toggles Display of Group #2 Buttons", _
+                SuperTip:="Alternates between setting the Group #2 buttons visible and hidden.", _
                 AlternateLabel:=""), _
             Visible:=True, Enabled:=True)
 #End If
@@ -226,57 +229,57 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         ''' Group 2
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Set CustomGroup = .NewRibbonGroup( _
-            Strings.AddControl(ControlID:="Group2", _
-                Label:="Advanced Buttons", _
+        Set SecondGroup = .NewRibbonGroup( _
+            Strings.AddControlStrings(ControlId:="Group2", _
+                Label:="Group #2 Controls", _
                 ScreenTip:="Buttons Optionally Visible", _
                 SuperTip:="These buttons are visible on this ribbon only when requested."), _
             True)
         Set CustomSizeToggle = .NewRibbonToggleMso( _
-            Strings.AddControl(ControlID:="Group2Toggle1", _
+            Strings.AddControlStrings(ControlId:="Group2Toggle1", _
                 Label:="Prefer Small", _
                 ScreenTip:="Toggles Button Size", _
                 SuperTip:="Toggles between large and small (preferred size for) buttons for this ribbon group.", _
                 AlternateLabel:="Prefer Large"), _
             True, True, rdLarge, DefaultImage, False, True)
         
-        Set AdvancedOptions = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group2Dropdown1", _
+        Set Group2Options = .NewRibbonDropDown( _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown1", _
                 Label:="Display Options", _
-                ScreenTip:="Advanced Button Options", _
-                SuperTip:="Display options for Advanced Buttons:" & _
+                ScreenTip:="Group #2 Button Options", _
+                SuperTip:="Display options for Group #2 Buttons:" & _
                         vbNewLine & "Label Only;" & _
                         vbNewLine & "Image Only;" & _
                         vbNewLine & "Label & Image"), _
             Visible:=True, Enabled:=False)
-        AdvancedOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Group2Dropdown1_LabelOnly", _
+        Group2Options.AddItem .NewSelectableItem( _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown1_LabelOnly", _
                 Label:="Label Only", _
                 ScreenTip:="Display Label Only", _
                 SuperTip:="Displays just the button label when its size is Regular; else both."))
-        AdvancedOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Group2Dropdown1_ImageOnly", _
+        Group2Options.AddItem .NewSelectableItem( _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown1_ImageOnly", _
                 Label:="Image Only", _
                 ScreenTip:="Display Image Only", _
                 SuperTip:="Displays just the button image when its size is Regular; else both."))
-        AdvancedOptions.AddItem .NewSelectableItem( _
-            Strings.AddControl(ControlID:="Group2Dropdown1_LabelAndImage", _
+        Group2Options.AddItem .NewSelectableItem( _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown1_LabelAndImage", _
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
 If HideUndefined Then
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group2Dropdown2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControl(ControlID:="Group2Dropdown3", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Dropdown3", Label:=""), _
             Visible:=False, Enabled:=False)
 End If
         
-        Set AdvancedButton1 = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="Group2Button1", _
-                Label:="1st Advanced Button", _
-                ScreenTip:="First Custom Button", _
+        Set Group2Button1 = .NewRibbonButtonMso( _
+            Strings.AddControlStrings(ControlId:="Group2Button1", _
+                Label:="Group #2 1st Button", _
+                ScreenTip:="First Group #2 Button", _
                 SuperTip:="First example of a custom button."), _
             Visible:=True, _
             Enabled:=True, _
@@ -284,10 +287,10 @@ End If
             ImageMso:="RefreshAll", _
             ShowImage:=True, _
             ShowLabel:=True)
-        Set AdvancedButton2 = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="Group2Button2", _
-                Label:="2nd Advanced Button", _
-                ScreenTip:="Seccond Custom Button", _
+        Set Group2Button2 = .NewRibbonButtonMso( _
+            Strings.AddControlStrings(ControlId:="Group2Button2", _
+                Label:="Group #2 2nd Button", _
+                ScreenTip:="Seccond Group #2 Button", _
                 SuperTip:="Second example of a custom button."), _
             Visible:=True, _
             Enabled:=True, _
@@ -295,10 +298,10 @@ End If
             ImageMso:="Refresh", _
             ShowImage:=True, _
             ShowLabel:=True)
-        Set AdvancedButton3 = .NewRibbonButtonMso( _
-            Strings.AddControl(ControlID:="Group2Button3", _
-                Label:="3rd Advanced Button", _
-                ScreenTip:="Third Custom Button", _
+        Set Group2Button3 = .NewRibbonButtonMso( _
+            Strings.AddControlStrings(ControlId:="Group2Button3", _
+                Label:="Group #2 3rd Button", _
+                ScreenTip:="Third Group #2 Button", _
                 SuperTip:="Third example of a custom button."), _
             Visible:=True, _
             Enabled:=True, _
@@ -309,17 +312,17 @@ End If
         
 If HideUndefined Then
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group2Checkbox1", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group2Checkbox2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Checkbox2", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControl(ControlID:="Group2Checkbox3", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Checkbox3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControl(ControlID:="Group2Toggle2", Label:=""), _
+            Strings.AddControlStrings(ControlId:="Group2Toggle2", Label:=""), _
             Visible:=False, Enabled:=False)
 End If
 
@@ -329,8 +332,8 @@ End If
         ShowAdvancedToggle.OnToggled False
         StandardOptions.OnActionDropDown "", 2
     
-        AdvancedOptions.SelectedItemId = "Group2Dropdown1_LabelAndImage"
-        AdvancedOptions.IsEnabled = CustomSizeToggle.IsPressed
+        Group2Options.SelectedItemId = "Group2Dropdown1_LabelAndImage"
+        Group2Options.IsEnabled = CustomSizeToggle.IsPressed
     End With
     This.ViewModel.Invalidate
     
@@ -338,7 +341,7 @@ End If
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".Initialize"
     Resume XT
-    Resume Next
+    Resume          ' for debugging only
 End Function
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -352,20 +355,22 @@ Friend Sub ActivateTab()
     This.ViewModel.ActivateTab This.RibbonTab.ID
 End Sub
 
-Private Function IResourceManager_GetCurrentUIString(ByVal Name As String) As String
+Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IRibbonTextLanguageControl
     On Error GoTo EH
-    IResourceManager_GetCurrentUIString = Strings.Item(Name)
+    Dim v As Variant
+    Set v = Strings.Item(ControlId)
+    Set IResourceManager_GetControlStrings = Strings.Item(ControlId)
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_GetCurrentUIString"
-    IResourceManager_GetCurrentUIString = "Name Unknown"
+    'set IResourceManager_GetCurrentUIString = Nothing
     Resume XT
 End Function
 
-Private Function IResourceManager_LoadImage(ByVal ImageId As String)
+Private Function IResourceManager_GetImage(ByVal ImageId As String)
     On Error GoTo EH
-    Set IResourceManager_LoadImage = Nothing ' Sheet1.Pictures(ImageId)
+    Set IResourceManager_GetImage = Nothing ' Sheet1.Pictures(ImageId)
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_LoadImage"
-    Set IResourceManager_LoadImage = Nothing
+    Set IResourceManager_GetImage = Nothing
     Resume XT
 End Function

@@ -16,13 +16,13 @@ namespace PGSolutions.RibbonDispatcher {
     [Guid(Guids.IRibbonFactory)]
     public interface IRibbonFactory {
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
-        [DispId(11)]
+        [DispId(DispIds.NewRibbonGroup)]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         RibbonGroup NewRibbonGroup(string ItemId, bool Visible = true, bool Enabled = true);
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(12)]
+        [DispId(DispIds.NewRibbonButton)]
         RibbonButton NewRibbonButton(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size            = rdLarge,
             IPictureDisp    Image           = null,
@@ -31,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher {
         );
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses an Office built-in Image.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(13)]
+        [DispId(DispIds.NewRibbonButtonMso)]
         RibbonButton NewRibbonButtonMso(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size            = rdLarge,
             string          ImageMso        = "MacroSecurity",  // This one get's people's attention ;-)
@@ -41,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher {
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(14)]
+        [DispId(DispIds.NewRibbonToggle)]
         RibbonToggleButton NewRibbonToggle(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size            = rdLarge,
             IPictureDisp    Image           = null,
@@ -50,7 +50,7 @@ namespace PGSolutions.RibbonDispatcher {
         );
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses an Office built-in Image.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(15)]
+        [DispId(DispIds.NewRibbonToggleMso)]
         RibbonToggleButton NewRibbonToggleMso(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size            = rdLarge,
             string          ImageMso        = "MacroSecurity",  // This one gets people's attention ;-)
@@ -60,22 +60,26 @@ namespace PGSolutions.RibbonDispatcher {
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(16)]
+        [DispId(DispIds.NewRibbonCheckBox)]
         RibbonCheckBox NewRibbonCheckBox(string ItemId, bool Visible = true, bool Enabled = true);
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(17)]
+        [DispId(DispIds.NewRibbonDropDown)]
         RibbonDropDown NewRibbonDropDown(string ItemId, bool Visible = true, bool Enabled = true);
 
         /// <summary>Returns a new {SelectableItem} from a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(18)]
+        [DispId(DispIds.NewSelectableItem)]
         SelectableItem NewSelectableItem(string ItemId, IPictureDisp Image = null);
 
         /// <summary>Returns a new {SelectableItem} from an Office built-in Image.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(19)]
+        [DispId(DispIds.NewSelectableItemMso)]
         SelectableItem NewSelectableItemMso(string ItemId, string ImageMso = "MacroSecurity");
+
+        /// <summary>Returns a new {ResourceLoader} object.</summary>
+        [DispId(DispIds.NewResourceLoader)]
+        ResourceLoader NewResourceLoader();
     }
 }

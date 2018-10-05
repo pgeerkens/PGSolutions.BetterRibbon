@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.Concrete
             string alternateLabel,
             string description
         ) {
-            Label = label ?? throw new ArgumentNullException(nameof(label)); 
+            Label           = label         ?? throw new ArgumentNullException(nameof(label)); 
             ScreenTip       = screenTip     ?? Label; 
             SuperTip        = superTip      ?? "SuperTip text for " + Label; 
             KeyTip          = keyTip        ?? "";

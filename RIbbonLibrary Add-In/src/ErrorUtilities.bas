@@ -6,7 +6,9 @@ Public Sub ReraiseError(ByVal Err As ErrObject, _
     Optional ByVal Details As String _
 )
     If Not IsMissing(Details) Then MethodName = MethodName & "(" & Details & ")"
-    Err.Raise Err.Number, "    " & MethodName & vbNewLine & Err.Source
+    Err.Raise Err.Number, Err.Source & vbNewLine & _
+        MethodName, _
+        Err.Description
 End Sub
 
 Public Sub DisplayError(ByVal MyError As ErrObject, _
@@ -14,10 +16,10 @@ Public Sub DisplayError(ByVal MyError As ErrObject, _
     Optional ByVal Details As String _
 )
     If Not IsMissing(Details) Then MethodName = MethodName & "(" & Details & ")"
-    MsgBox "Error #" & Err.Number & ": " & Err.Description & _
-            vbNewLine & "From: " & _
-            vbNewLine & "    " & MethodName & _
-            vbNewLine & "    " & Err.Source, _
+    MsgBox "Error #" & Err.Number & ": " & Err.Description & vbNewLine & _
+            "From: " & vbNewLine & _
+            Err.Source & vbNewLine & _
+            MethodName, _
             vbOKOnly Or vbCritical, MethodName
 End Sub
 

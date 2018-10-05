@@ -72,14 +72,6 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
         public void OnChanged() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
 
         private static LanguageStrings GetLanguageStrings(string controlId, IResourceManager mgr)
-            => new RibbonTextLanguageControl(
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_Label"))          ?? controlId,
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_ScreenTip"))      ?? controlId + " ScreenTip",
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_SuperTip"))       ?? controlId + " SuperTip",
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_KeyTip"))         ?? "",
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_AlternateLabel")) ?? controlId + " Alternate",
-                    mgr.GetCurrentUIString(Invariant($"{controlId ?? ""}_Description"))    ?? controlId + " Description");
-        /// <summary>TODO</summary>
-        private static string Invariant(string formattable) => string.Format(formattable, CultureInfo.InvariantCulture);
+            => mgr.GetControlStrings(controlId);
     }
 }

@@ -71,10 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractCOM\IResourceLoadercs.cs" />
     <Compile Include="AbstractCOM\IResourceManager.cs" />
+    <Compile Include="AbstractCOM\IRibbonWorkbook.cs" />
     <Compile Include="AbstractCOM\ISelectableItem.cs" />
-    <Compile Include="Concrete\ControlStrings.cs" />
-    <Compile Include="AbstractCOM\IControlStrings.cs" />
+    <Compile Include="Concrete\ResourceLoader.cs" />
     <Compile Include="Concrete\SelectableItem.cs" />
     <Compile Include="ControlMixins\ClickableMixin.cs" />
     <Compile Include="ControlMixins\ImageableMixin.cs" />

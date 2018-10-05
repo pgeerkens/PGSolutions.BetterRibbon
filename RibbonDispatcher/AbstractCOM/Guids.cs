@@ -34,13 +34,16 @@ namespace PGSolutions.RibbonDispatcher {
         public const string RibbonDropDown              = "69E19419" + GuidSpace;
         public const string IRibbonGroup                = "69E1941A" + GuidSpace;
         public const string RibbonGroup                 = "69E1941B" + GuidSpace;
-        public const string IRibbonTextLanguageControl  = "69E1941C" + GuidSpace;
-        public const string RibbonTextLanguageControl   = "69E1941D" + GuidSpace;
+        public const string IRibbonTextLanguageControl = "69E1941C" + GuidSpace;
+        public const string RibbonTextLanguageControl = "69E1941D" + GuidSpace;
         public const string IRibbonToggleButton         = "69E1941E" + GuidSpace;
         public const string RibbonToggleButton          = "69E1941F" + GuidSpace;
         public const string ISelectableItem             = "69E19420" + GuidSpace;
         public const string SelectableItem              = "69E19421" + GuidSpace;
+
         public const string IControlStrings             = "69E19422" + GuidSpace;
         public const string ControlStrings              = "69E19423" + GuidSpace;
+        public const string IResourceLoader             = "69E19424" + GuidSpace;
+        public const string ResourceLoader              = "69E19425" + GuidSpace;
     }
 }
