@@ -2,6 +2,7 @@
 using Office = Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Excel;
+using PGSolutions.RibbonDispatcher;
 
 namespace PGSolutions.ExcelRibbon2013 {
     [CLSCompliant(false)]
@@ -16,9 +17,9 @@ namespace PGSolutions.ExcelRibbon2013 {
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => _viewModel = new RibbonViewModel();
 
-        private Lazy<AddInUtilities> utilities => new Lazy<AddInUtilities> ( () => new AddInUtilities() );
+        private Lazy<Main> Entries = new Lazy<Main> ( () => new Main() );
 
-        protected override object RequestComAddInAutomationService() => utilities.Value;
+        protected override object RequestComAddInAutomationService() => Entries.Value;
 
         #region VSTO generated code
 

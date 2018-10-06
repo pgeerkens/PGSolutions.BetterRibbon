@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -20,9 +21,22 @@ namespace PGSolutions.RibbonDispatcher {
     [Guid(Guids.Main)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public class Main : IMain {
+        private static Lazy<Dictionary<string,IRibbonUI>> RibbonCollection =
+                new Lazy<Dictionary<string, IRibbonUI>>( () => new Dictionary<string, IRibbonUI>() );
+
         /// <inheritdoc/>
         [Description("Returns a new RibbonViewModel associated with the supplied IRibbonUI and IResourceManager.")]
         public IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI, IResourceManager resourceManager)
             => new RibbonViewModel(ribbonUI, resourceManager);
+
+        /// <inheritdoc/>
+        public IRibbonUI SetRibbonUI(IRibbonUI ribbonUI, string workbookPath) {
+            RibbonCollection.Value.AddNotNull(workbookPath,ribbonUI);
+            return ribbonUI;
+        }
+
+        /// <inheritdoc/>
+        public IRibbonUI GetRibbonUI(string WorkbookPath) =>
+            RibbonCollection.Value.GetOrDefault(WorkbookPath);
     }
 }

@@ -20,5 +20,11 @@ namespace PGSolutions.RibbonDispatcher {
         [DispId(1)]
         [Description("Returns a new instance of {RibbonViewModel} for the supplied {IRibbonUI} and {IResourceManager}.")]
         IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI, IResourceManager resourceManager);
+
+        /// <summary>TODO</summary>
+        IRibbonUI SetRibbonUI(IRibbonUI ribbonUI, string workbookPath);
+
+        /// <summary>TODO</summary>
+        IRibbonUI GetRibbonUI(string WorkbookPath);
     }
 }

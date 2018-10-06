@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IResourceLoader))]
     [Guid(Guids.ResourceLoader)]
-    public class ResourceLoader : IResourceLoader {
+    public class ResourceLoader : IResourceLoader, IResourceManager {
         /// <summary>Creates a new empty ControlStrings collection.</summary>
         internal ResourceLoader() {
             _controls = new Dictionary<string, IRibbonTextLanguageControl>();
@@ -27,7 +27,7 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
         }
 
         Dictionary<string, IRibbonTextLanguageControl>  _controls;
-        Dictionary<string, IPictureDisp>    _images;
+        Dictionary<string, IPictureDisp>                _images;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -58,6 +58,11 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
             _images.AddNotNull(ImageId, image);
             return ImageId;
         }
+
+        public IRibbonTextLanguageControl GetControlStrings(string ControlId) =>
+            _controls.FirstOrDefault(i => i.Key == ControlId).Value;
+        public object GetImage(string Name) =>
+            _images.FirstOrDefault(i => i.Key == Name).Value;
 
         /// <inheritdoc/>
         public IRibbonTextLanguageControl this[string ControlId] => _controls.FirstOrDefault(i => i.Key == ControlId).Value;
