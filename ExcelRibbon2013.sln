@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelRibbon2013", "ExcelRib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcher", "RibbonDispatcher\RibbonDispatcher.csproj", "{132427F1-7441-4BFB-AE4F-886D926ABF24}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeskSetup", "DeskSetup\DeskSetup.vdproj", "{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Debug|Any CPU.ActiveCfg = Debug
+		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Debug|Any CPU.Build.0 = Debug
+		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Release|Any CPU.ActiveCfg = Release
+		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

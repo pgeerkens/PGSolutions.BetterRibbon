@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
@@ -15,24 +16,24 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
     [CLSCompliant(true)]
     [ComDefaultInterface(typeof(IRibbonViewModel))]
     [Guid(Guids.AbstractDispatcher)]
-    public abstract class AbstractRibbonViewModel : IRibbonViewModel {
-        /// <summary>TODO</summary>
-        protected void InitializeRibbonFactory(IRibbonUI RibbonUI, IResourceManager ResourceManager) 
+    public abstract class AbstractRibbonViewModel : IRibbonViewModel, IResourceManager {
+        /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
+        protected void Initialize(IRibbonUI RibbonUI, IResourceManager ResourceManager) 
             => _ribbonFactory = new RibbonFactory(RibbonUI, ResourceManager);
 
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
 
         /// <inheritdoc/>
         public IRibbonFactory RibbonFactory => _ribbonFactory; private RibbonFactory _ribbonFactory;
 
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
         public void Invalidate()                            => _ribbonFactory.Invalidate();
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
         public void InvalidateControl(string ControlId)     => _ribbonFactory.InvalidateControl(ControlId);
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
         public void InvalidateControlMso(string ControlId)  => _ribbonFactory.InvalidateControlMso(ControlId);
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
         public void ActivateTab(string ControlId)           => _ribbonFactory.ActivateTab(ControlId);
 
         #region IRibbonCommon implementation
@@ -140,17 +141,36 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
             => Selectables(Control?.Id)?.OnActionDropDown(SelectedId, SelectedIndex);
         #endregion
 
-        /// <summary>Returns a string as the ID of the supplied control suffixed with ' unknown'.</summary>
-        protected static string Unknown(IRibbonControl Control) => Unknown(Control?.Id);
+        /// <inheritdoc/>
+        public IRibbonTextLanguageControl GetControlStrings(string ControlId) =>
+            new RibbonTextLanguageControl(
+                    GetCurrentUIString($"{ControlId}_Label")            ?? Unknown(ControlId),
+                    GetCurrentUIString($"{ControlId}_ScreenTip")        ?? Unknown(ControlId, "ScreenTip"),
+                    GetCurrentUIString($"{ControlId}_SuperTip")         ?? Unknown(ControlId, "SuperTip"),
+                    GetCurrentUIString($"{ControlId}_KeyTip")           ?? "",
+                    GetCurrentUIString($"{ControlId}_AlternativeLabel") ?? Unknown(ControlId, "Alternate"),
+                    GetCurrentUIString($"{ControlId}_Description")      ?? Unknown(ControlId, "Description")
+            );
+
+        /// <inheritdoc/>
+        public object GetImage(string Name) => ResourceManager.Value.GetResourceImage(Name);
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with ' Unknown'.</summary>
+        protected static string Unknown(IRibbonControl Control) => Unknown(Control?.Id, "Unknown");
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with ' Unknown'.</summary>
+        protected static string Unknown(string controlId)       => Unknown(controlId, "Unknown");
 
         /// <summary>Returns a string as the ID of the supplied control suffixed with the supplied string.</summary>
         protected static string Unknown(IRibbonControl Control, string suffix) => Unknown(Control?.Id, suffix);
 
-        /// <summary>Returns a string as the ID of the supplied control suffixed with ' unknown'.</summary>
-        protected static string Unknown(string controlId)       => Unknown(controlId, "Unknown");
-
         /// <summary>Returns a string as the ID of the supplied control suffixed with the supplied string.</summary>
         protected static string Unknown(string controlId, string suffix)
             => string.Format(CultureInfo.InvariantCulture, $"'{controlId ?? ""}' {suffix}");
+
+        /// <summary>TODO</summary>
+        protected abstract Lazy<ResourceManager> ResourceManager {  get; }
+
+        private string GetCurrentUIString(string controlId) => ResourceManager.Value.GetCurrentUIString(controlId);
     }
 }

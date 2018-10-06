@@ -9,16 +9,16 @@ namespace PGSolutions.ExcelRibbon2013 {
     {
         private RibbonViewModel _viewModel;
 
-        private void ThisAddIn_Startup(object sender, EventArgs e)
-        {
-        }
+        private void ThisAddIn_Startup(object sender, EventArgs e) { }
 
-        private void ThisAddIn_Shutdown(object sender, EventArgs e)
-        {
-        }
+        private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => _viewModel = new RibbonViewModel();
+
+        private Lazy<AddInUtilities> utilities => new Lazy<AddInUtilities> ( () => new AddInUtilities() );
+
+        protected override object RequestComAddInAutomationService() => utilities.Value;
 
         #region VSTO generated code
 

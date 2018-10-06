@@ -6,6 +6,7 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.Concrete;
 using PGSolutions.RibbonDispatcher.AbstractCOM;
+using System.Resources;
 
 namespace PGSolutions.RibbonDispatcher {
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for COM clients.</summary>
@@ -36,6 +37,9 @@ namespace PGSolutions.RibbonDispatcher {
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonViewModel {
         /// <summary>TODO</summary>
         internal RibbonViewModel(IRibbonUI RibbonUI, IResourceManager ResourceManager) : base() 
-            => InitializeRibbonFactory(RibbonUI, ResourceManager);
+            => Initialize(RibbonUI, ResourceManager);
+
+        /// <inheritdoc/>
+        protected override Lazy<ResourceManager> ResourceManager => new Lazy<ResourceManager>( () => null);
     }
 }
