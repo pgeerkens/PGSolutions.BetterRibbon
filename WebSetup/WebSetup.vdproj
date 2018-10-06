@@ -39,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E314EDC420354A92ACB1C549C8333B63"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EB9EECBA33D344ED8256FC39BD94E68F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -64,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_84A09EB3A79857F585706C9834936C5B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_18EC1F6E6E254A6EB2B88C13A2A5416D"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -77,6 +65,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D2CCB2178E66126EA1728DA78741C583"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_84A09EB3A79857F585706C9834936C5B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -266,26 +260,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E314EDC420354A92ACB1C549C8333B63"
-            {
-            "SourcePath" = "8:..\\RIbbonLibrary Add-In\\RibbonLibrary.xlam"
-            "TargetName" = "8:RibbonLibrary.xlam"
-            "Tag" = "8:"
-            "Folder" = "8:_52DC20AC1BE24A8AB9689457C9563CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F121323F939D48E4845DB0A9B9FAF462"
             {
             "SourcePath" = "8:C:\\Users\\PseudoAdmin\\AppData\\Roaming\\Microsoft\\AddIns\\RibbonLibrary.xlam"
@@ -471,7 +445,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.RibbonDispatcher"
         "ProductCode" = "8:{3AA8C6C2-5E90-4D5A-A956-CA67C11DD3E2}"
-        "PackageCode" = "8:{6E63F2E8-9761-49FA-BA7D-98BAC13BDFD5}"
+        "PackageCode" = "8:{6576B4DA-4D87-44FF-84A8-7BD6545D530D}"
         "UpgradeCode" = "8:{2A7E96BE-BFEE-4686-9FA0-AB3A528B94A7}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -545,20 +519,6 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_F5F16E842AE6432FB54A5C107B05C7BE"
             "Folder" = "8:_68121AC2FD8B4FE8B18B3A88E0EE955D"
-            "WorkingFolder" = "8:_CCB7D3E31F284288BD7DACA437336165"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE290EB5E4A64713AC655AC109CE38D3"
-            {
-            "Name" = "8:Shortcut to SampleWkBk.xlsb"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_F5F16E842AE6432FB54A5C107B05C7BE"
-            "Folder" = "8:_451C3A565613446E86CFD9611A530FD4"
             "WorkingFolder" = "8:_CCB7D3E31F284288BD7DACA437336165"
             "Icon" = "8:"
             "Feature" = "8:"
@@ -979,7 +939,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_18EC1F6E6E254A6EB2B88C13A2A5416D"
             {
-            "SourcePath" = "8:..\\RibbonDispatcher\\obj\\Release\\PGSolutions.RibbonDispatcher.dll"
+            "SourcePath" = "8:..\\RibbonDispatcher\\obj\\Debug\\PGSolutions.RibbonDispatcher.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_CCB7D3E31F284288BD7DACA437336165"
@@ -1007,7 +967,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EB9EECBA33D344ED8256FC39BD94E68F"
             {
-            "SourcePath" = "8:..\\RibbonDispatcher\\bin\\Release\\PGSolutions.RibbonDispatcher.xml"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_CCB7D3E31F284288BD7DACA437336165"

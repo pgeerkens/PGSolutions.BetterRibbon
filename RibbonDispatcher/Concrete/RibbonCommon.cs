@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.AbstractCOM;

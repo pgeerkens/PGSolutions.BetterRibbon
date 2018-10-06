@@ -22,19 +22,7 @@
         "Entry"
         {
         "MsmKey" = "8:_057DF66FECEF0E37F4C885A7B850A5D7"
-        "OwnerKey" = "8:_F2CEA26D7E154C07A551300123AF0CC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_362EEB415CA7AE72AA9464C7265908C2"
-        "OwnerKey" = "8:_F2CEA26D7E154C07A551300123AF0CC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5EBA4B25CF5E4492BCF4E0EB0EB5AC6B"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A3583A25EE5649ADBE4F7C549F1E132C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -45,20 +33,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_91B08D680059415D9908A52916759E04"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_840C38BAD502BEF0D5A390B059E669B9"
+        "OwnerKey" = "8:_A3583A25EE5649ADBE4F7C549F1E132C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F2CEA26D7E154C07A551300123AF0CC1"
+        "MsmKey" = "8:_A3583A25EE5649ADBE4F7C549F1E132C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F3ADD7EBE08D4B1B425B032A55F59230"
-        "OwnerKey" = "8:_F2CEA26D7E154C07A551300123AF0CC1"
+        "OwnerKey" = "8:_A3583A25EE5649ADBE4F7C549F1E132C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2CEA26D7E154C07A551300123AF0CC1"
+        "OwnerKey" = "8:_A3583A25EE5649ADBE4F7C549F1E132C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -235,46 +223,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_362EEB415CA7AE72AA9464C7265908C2"
-            {
-            "SourcePath" = "8:PGSolutions.RibbonDispatcher.tlb"
-            "TargetName" = "8:PGSolutions.RibbonDispatcher.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EBA4B25CF5E4492BCF4E0EB0EB5AC6B"
-            {
-            "SourcePath" = "8:..\\RIbbonLibrary Add-In\\RibbonLibrary.xlam"
-            "TargetName" = "8:RibbonLibrary.xlam"
-            "Tag" = "8:"
-            "Folder" = "8:_8E7D8D62C8EC40FDBF759C3BD09B416A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EE8925AE0B64B5180A56CD9D7C6A43B"
             {
             "SourcePath" = "8:..\\RIbbonLibrary Add-In\\RibbonLibrary.xlam"
@@ -293,6 +241,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_840C38BAD502BEF0D5A390B059E669B9"
+            {
+            "SourcePath" = "8:PGSolutions.RibbonDispatcher.tlb"
+            "TargetName" = "8:PGSolutions.RibbonDispatcher.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F3ADD7EBE08D4B1B425B032A55F59230"
@@ -416,7 +384,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.RibbonDispatcher"
         "ProductCode" = "8:{CA0DAF85-79DA-47D3-9A2F-C50E2491DACB}"
-        "PackageCode" = "8:{FB3C1F08-294E-457D-B661-74A6E639159C}"
+        "PackageCode" = "8:{D2F9D413-7082-4813-ADD3-C7BB42702A3D}"
         "UpgradeCode" = "8:{29C7E5C8-FF18-40DF-86D1-E44B03F568B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -536,34 +504,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1CF842B1BFDF4ADEB3EE32B3599D1C7E"
-            {
-            "Name" = "8:Shortcut to SampleWkBk.xlsb"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_01F342BF6C8D447E84FEDD22277E37B4"
-            "Folder" = "8:_1380EE4668764E7CA9A648E67BA12892"
-            "WorkingFolder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EDF2F4ECAB82430482D735BB922C522B"
-            {
-            "Name" = "8:Shortcut to SampleWkBk.xlsb"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_01F342BF6C8D447E84FEDD22277E37B4"
-            "Folder" = "8:_B1DBACAC38914D12B3247C5AB48C6EE0"
-            "WorkingFolder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
@@ -963,9 +903,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_91B08D680059415D9908A52916759E04"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_03FDFFF1F57C4C81918242098869026E"
             {
-            "SourcePath" = "8:..\\RibbonDispatcher\\bin\\Release\\PGSolutions.RibbonDispatcher.xml"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
@@ -991,7 +931,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D63B7F7EE9F14DE09E3A9A5B3BF413F5"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3199C5AEF39F49B5919FC0D7EE5EBE33"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"
@@ -1019,9 +959,9 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F2CEA26D7E154C07A551300123AF0CC1"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A3583A25EE5649ADBE4F7C549F1E132C"
             {
-            "SourcePath" = "8:..\\RibbonDispatcher\\obj\\Release\\PGSolutions.RibbonDispatcher.dll"
+            "SourcePath" = "8:..\\RibbonDispatcher\\obj\\Debug\\PGSolutions.RibbonDispatcher.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
