@@ -11,6 +11,11 @@ Option Explicit
 
 #Const UseCheckBox = False
 
+Public Enum ControlSize
+    rdRegular = RdControlSize_rdRegular
+    rdLarge = RdControlSize_rdLarge
+End Enum
+
 Private Type TRibbonModel
     ViewModel       As RibbonViewModel
     RibbonTab       As RibbonCommon
@@ -81,7 +86,6 @@ Private Sub StandardButton1_Clicked()
     DefaultButtonAction StandardButton1
 End Sub
 Private Sub StandardButton2_Clicked()
-    'DefaultButtonAction StandardButton2
     RibbonLoader.InitializeRibbon
 End Sub
 Private Sub StandardOptions_SelectionMade(ByVal ItemId As String, ByVal ItemIndex As Long)
@@ -91,14 +95,14 @@ Private Sub ShowAdvancedToggle_Toggled(ByVal IsPressed As Boolean)
     SecondGroup.IsVisible = IsPressed
 End Sub
 
-Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
+Friend Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
     On Error GoTo EH
     Dim HideGrp2Undefined   As Boolean    ' When true hides the undefined controls in Group2
     HideGrp2Undefined = True
     Dim HideGrp1Undefined As Boolean
     HideGrp1Undefined = True
     
-    Set This.ViewModel = NewRibbonViewModel(RibbonUI, Me)
+    Set This.ViewModel = NewRibbonViewModel(RibbonUI)
     With This.ViewModel.RibbonFactory
         Dim Discard As Object
         
@@ -363,12 +367,9 @@ End Sub
 
 Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IRibbonTextLanguageControl
     On Error GoTo EH
-    Dim v As Variant
-    Set v = Strings.Item(ControlId)
     Set IResourceManager_GetControlStrings = Strings.Item(ControlId)
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_GetCurrentUIString"
-    'set IResourceManager_GetCurrentUIString = Nothing
     Resume XT
 End Function
 

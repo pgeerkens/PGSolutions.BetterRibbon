@@ -17,8 +17,12 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
     [ComDefaultInterface(typeof(IRibbonViewModel))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractRibbonViewModel : IRibbonViewModel, IResourceManager {
+        /// <summary>Initializes this instance with the supplied {IRibbonUI}.</summary>
+        protected void Initialize(IRibbonUI RibbonUI) 
+            => _ribbonFactory = new RibbonFactory(RibbonUI);
+
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
-        protected void Initialize(IRibbonUI RibbonUI, IResourceManager ResourceManager) 
+        protected void Initialize(IRibbonUI RibbonUI, IResourceManager ResourceManager)
             => _ribbonFactory = new RibbonFactory(RibbonUI, ResourceManager);
 
         /// <inheritdoc/>

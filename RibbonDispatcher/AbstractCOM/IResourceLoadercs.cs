@@ -9,8 +9,6 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IResourceLoader)]
     public interface IResourceLoader {
-        ///// <summary>Returns the number of items in the collection.</summary>
-        //int Count { get; }
         /// <summary>Returns the specified {ControlStrings} object.</summary>
         [DispId(DispIds.ControlStringsIndexer)]
         [Description("Returns the specified ControlStrings object.")]

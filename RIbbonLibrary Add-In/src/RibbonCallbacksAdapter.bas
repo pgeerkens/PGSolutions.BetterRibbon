@@ -4,33 +4,6 @@ Option Explicit
 Public Const ModuleName   As String = "RibbonCallbacksAdapter."
 Public Const DefaultImage As String = "MacroSecurity"
 
-Public Enum ControlSize
-    rdRegular = RdControlSize_rdRegular
-    rdLarge = RdControlSize_rdLarge
-End Enum
-
-''' <summary>EventHandler for RibbonLoad, initializing the ViewModel and Model.</summary>
-''' <param name="RibbonUI">An IRibbonUI for the ribbon just loaded.</param>
-''' <param name="ResourceManager">An IResourceManager for the ribbon just loaded.</param>
-Public Function NewRibbonViewModel(ByVal RibbonUI As Office.IRibbonUI, ResourceManager As IResourceManager) As RibbonViewModel
-    On Error GoTo EH
-    Dim i As Integer: i = 1
-    If i = 0 Then
-        With CreateObject("PGSolutions.RibbonDispatcher.Main")
-            Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI, ResourceManager)
-        End With
-    Else
-        With New PGSolutions_RibbonDispatcher.Main
-            Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI, ResourceManager)
-        End With
-    End If
-    
-XT: Exit Function
-EH: ReraiseError Err, ModuleName & "NewRibbonViewModel"
-    Resume XT
-    Resume      ' for debugging only
-End Function
-
 Private Function ViewModelFor(ByVal Control As IRibbonControl _
 ) As PGSolutions_RibbonDispatcher.RibbonViewModel
     On Error Resume Next
@@ -44,17 +17,6 @@ XT: Exit Function
 EH: If Err.Number <> 438 Then ReraiseError Err, ModuleName & "NewRibbonModel"
     Resume XT
 End Function
-
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-'''                             Published Actions
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Public Sub LoadImage(ByVal ImageId, ByRef Image)
-    On Error GoTo EH
-    Set Image = Nothing
-XT: Exit Sub
-EH: If Err.Number <> 91 Then DisplayError Err, ModuleName & "LoadImage", ImageId
-    Resume XT
-End Sub
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''                         Common to Many Controls

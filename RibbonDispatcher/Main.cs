@@ -26,8 +26,8 @@ namespace PGSolutions.RibbonDispatcher {
 
         /// <inheritdoc/>
         [Description("Returns a new RibbonViewModel associated with the supplied IRibbonUI and IResourceManager.")]
-        public IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI, IResourceManager resourceManager)
-            => new RibbonViewModel(ribbonUI, resourceManager);
+        public IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI)
+            => new RibbonViewModel(ribbonUI);
 
         /// <inheritdoc/>
         public IRibbonUI SetRibbonUI(IRibbonUI ribbonUI, string workbookPath) {

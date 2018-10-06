@@ -15,6 +15,8 @@ namespace PGSolutions.RibbonDispatcher {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonFactory)]
     public interface IRibbonFactory {
+        IResourceManager ResourceManager { get; }
+
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [DispId(DispIds.NewRibbonGroup)]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -80,6 +82,6 @@ namespace PGSolutions.RibbonDispatcher {
 
         /// <summary>Returns a new {ResourceLoader} object.</summary>
         [DispId(DispIds.NewResourceLoader)]
-        ResourceLoader NewResourceLoader();
+        IResourceLoader NewResourceLoader();
     }
 }

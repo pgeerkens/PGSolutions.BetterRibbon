@@ -36,8 +36,8 @@ namespace PGSolutions.RibbonDispatcher {
     [Guid(Guids.RibbonViewModel)]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonViewModel {
         /// <summary>TODO</summary>
-        internal RibbonViewModel(IRibbonUI RibbonUI, IResourceManager ResourceManager) : base() 
-            => Initialize(RibbonUI, ResourceManager);
+        internal RibbonViewModel(IRibbonUI RibbonUI) : base() 
+            => Initialize(RibbonUI);
 
         /// <inheritdoc/>
         protected override Lazy<ResourceManager> ResourceManager => new Lazy<ResourceManager>( () => null);

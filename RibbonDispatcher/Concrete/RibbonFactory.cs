@@ -33,20 +33,27 @@ namespace PGSolutions.RibbonDispatcher {
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
     public class RibbonFactory : IRibbonFactory {
-        internal RibbonFactory(IRibbonUI RibbonUI, IResourceManager ResourceManager) {
-            _ribbonUI        = RibbonUI;
-            _resourceManager = ResourceManager;
+        internal RibbonFactory(IRibbonUI ribbonUI) : this(ribbonUI, new ResourceLoader(), null) { ; }
 
-            _controls        = new Dictionary<string, IRibbonCommon>();
-            _sizeables       = new Dictionary<string, ISizeableMixin>();
-            _actionables     = new Dictionary<string, IClickableMixin>();
-            _toggleables     = new Dictionary<string, IToggleableMixin>();
-            _selectables     = new Dictionary<string, ISelectableMixin>();
-            _imageables      = new Dictionary<string, IImageableMixin>();
+        internal RibbonFactory(IRibbonUI ribbonUI, IResourceManager manager) : this(ribbonUI, null, manager) { ; }
+
+        internal RibbonFactory(IRibbonUI ribbonUI, ResourceLoader loader, IResourceManager manager) {
+            _ribbonUI        = ribbonUI;
+            ResourceLoader   = loader;
+            ResourceManager  = manager ?? loader;
+
+            _controls    = new Dictionary<string, IRibbonCommon>();
+            _sizeables   = new Dictionary<string, ISizeableMixin>();
+            _actionables = new Dictionary<string, IClickableMixin>();
+            _toggleables = new Dictionary<string, IToggleableMixin>();
+            _selectables = new Dictionary<string, ISelectableMixin>();
+            _imageables  = new Dictionary<string, IImageableMixin>();
         }
 
+        internal IResourceLoader  ResourceLoader  { get; }
+        public   IResourceManager ResourceManager { get; }
+
         private  readonly IRibbonUI                             _ribbonUI;
-        internal readonly IResourceManager                      _resourceManager;
         private  readonly IDictionary<string, IRibbonCommon>    _controls;
         private  readonly IDictionary<string, ISizeableMixin>   _sizeables;
         private  readonly IDictionary<string, IClickableMixin> _actionables;
@@ -54,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher {
         private  readonly IDictionary<string, IImageableMixin>  _imageables;
         private  readonly IDictionary<string, IToggleableMixin> _toggleables;
 
-        internal object LoadImage(string imageId) => _resourceManager.GetImage(imageId);
+        internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IRibbonCommon>    Controls    => new ReadOnlyDictionary<string, IRibbonCommon>(_controls);
@@ -104,7 +111,7 @@ namespace PGSolutions.RibbonDispatcher {
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonGroup NewRibbonGroup(string ItemId, bool Visible = true, bool Enabled = true)
-            => Add(new RibbonGroup(ItemId, _resourceManager, Visible, Enabled));
+            => Add(new RibbonGroup(ItemId, ResourceManager, Visible, Enabled));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -113,7 +120,7 @@ namespace PGSolutions.RibbonDispatcher {
             IPictureDisp  Image     = null,
             bool          ShowImage = true,
             bool          ShowLabel = true
-        ) => Add(new RibbonButton(ItemId, _resourceManager, Visible, Enabled, Size, new ImageObject(Image), ShowImage, ShowLabel));
+        ) => Add(new RibbonButton(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(Image), ShowImage, ShowLabel));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -122,7 +129,7 @@ namespace PGSolutions.RibbonDispatcher {
             string        ImageMso  = "Unknown",
             bool          ShowImage = true,
             bool          ShowLabel = true
-        ) => Add(new RibbonButton(ItemId, _resourceManager, Visible, Enabled, Size, new ImageObject(ImageMso), ShowImage, ShowLabel));
+        ) => Add(new RibbonButton(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(ImageMso), ShowImage, ShowLabel));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -131,7 +138,7 @@ namespace PGSolutions.RibbonDispatcher {
             IPictureDisp  Image     = null,
             bool          ShowImage = true,
             bool          ShowLabel = true
-        ) => Add(new RibbonToggleButton(ItemId, _resourceManager, Visible, Enabled, Size, new ImageObject(Image), ShowImage, ShowLabel));
+        ) => Add(new RibbonToggleButton(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(Image), ShowImage, ShowLabel));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -140,30 +147,29 @@ namespace PGSolutions.RibbonDispatcher {
             string        ImageMso  = "Unknown",
             bool          ShowImage = true,
             bool          ShowLabel = true
-        ) => Add(new RibbonToggleButton(ItemId, _resourceManager, Visible, Enabled, Size, new ImageObject(ImageMso), ShowImage, ShowLabel));
+        ) => Add(new RibbonToggleButton(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(ImageMso), ShowImage, ShowLabel));
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonCheckBox NewRibbonCheckBox(string ItemId, bool Visible = true, bool Enabled = true)
-            => Add(new RibbonCheckBox(ItemId, _resourceManager, Visible, Enabled));
+            => Add(new RibbonCheckBox(ItemId, ResourceManager, Visible, Enabled));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonDropDown NewRibbonDropDown(string ItemId, bool Visible = true, bool Enabled = true)
-            => Add(new RibbonDropDown(ItemId, _resourceManager, Visible, Enabled));
+            => Add(new RibbonDropDown(ItemId, ResourceManager, Visible, Enabled));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public SelectableItem NewSelectableItem(string ItemId, IPictureDisp Image = null)
-            => new SelectableItem(ItemId, _resourceManager, new ImageObject(Image));
+            => new SelectableItem(ItemId, ResourceManager, new ImageObject(Image));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public SelectableItem NewSelectableItemMso(string ItemId, string ImageMso = "MacroSecurity")
-            => new SelectableItem(ItemId, _resourceManager, new ImageObject(ImageMso));
+            => new SelectableItem(ItemId, ResourceManager, new ImageObject(ImageMso));
 
         /// <inheritdoc/>
-        [DispId(20)]
-        public ResourceLoader NewResourceLoader() => new ResourceLoader();
+        public IResourceLoader NewResourceLoader() => ResourceLoader;
     }
 }

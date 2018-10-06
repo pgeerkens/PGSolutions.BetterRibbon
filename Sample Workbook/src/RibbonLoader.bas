@@ -1,7 +1,7 @@
 Attribute VB_Name = "RibbonLoader"
 Option Explicit
 
-Private Const MModuleName   As String = "RibbonLoader."
+Private Const mModuleName   As String = "RibbonLoader."
 Private MRibbonUI           As Office.IRibbonUI
 
 ''' <summary>Returns whether or not to display popups during load, for easier debugging.</summary>
@@ -13,25 +13,24 @@ Public Sub OnRibbonLoad(ByVal RibbonUI As Office.IRibbonUI)
     On Error GoTo EH
     If ShowAlerts Then DisplayAlert "OnRibbonLoad"
     
-    Set MRibbonUI = SetRibbonUI(RibbonUI, ThisWorkbook)
+    Set MRibbonUI = SetRibbonUI(RibbonUI)
     InitializeRibbon
     
 XT: Exit Sub
-EH: DisplayError Err, MModuleName & "OnRibbonLoad"
+EH: DisplayError Err, mModuleName & "OnRibbonLoad"
     Resume XT
     Resume      ' for debugging only
 End Sub
 
 Public Sub InitializeRibbon()
     On Error GoTo EH
-    If MRibbonUI Is Nothing Then Set MRibbonUI = GetRibbonUI(ThisWorkbook)
+    If MRibbonUI Is Nothing Then Set MRibbonUI = GetRibbonUI()
     If MRibbonUI Is Nothing Then Err.Raise -1, "", "RibbonUI is Nothing"
     With New RibbonModel
         Set ThisWorkbook.RibbonModel = .Initialize(MRibbonUI)
     End With
-
 XT: Exit Sub
-EH: ReraiseError Err, MModuleName & "InitializeRibbon"
+EH: ReraiseError Err, mModuleName & "InitializeRibbon"
     Resume XT
     Resume      ' for debugging only
 End Sub
