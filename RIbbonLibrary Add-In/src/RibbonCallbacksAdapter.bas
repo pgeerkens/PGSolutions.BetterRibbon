@@ -14,9 +14,17 @@ End Enum
 ''' <param name="ResourceManager">An IResourceManager for the ribbon just loaded.</param>
 Public Function NewRibbonViewModel(ByVal RibbonUI As Office.IRibbonUI, ResourceManager As IResourceManager) As RibbonViewModel
     On Error GoTo EH
-    With New PGSolutions_RibbonDispatcher.Main
-        Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI, ResourceManager)
-    End With
+    Dim i As Integer: i = 1
+    If i = 0 Then
+        With CreateObject("PGSolutions.RibbonDispatcher.Main")
+            Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI, ResourceManager)
+        End With
+    Else
+        With New PGSolutions_RibbonDispatcher.Main
+            Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI, ResourceManager)
+        End With
+    End If
+    
 XT: Exit Function
 EH: ReraiseError Err, ModuleName & "NewRibbonViewModel"
     Resume XT

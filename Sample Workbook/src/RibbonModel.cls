@@ -93,18 +93,16 @@ End Sub
 
 Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
     On Error GoTo EH
-    Dim HideUndefined   As Boolean    ' When true hides the undefined controls in Group2
-    HideUndefined = False
+    Dim HideGrp2Undefined   As Boolean    ' When true hides the undefined controls in Group2
+    HideGrp2Undefined = True
+    Dim HideGrp1Undefined As Boolean
+    HideGrp1Undefined = True
     
     Set This.ViewModel = NewRibbonViewModel(RibbonUI, Me)
     With This.ViewModel.RibbonFactory
         Dim Discard As Object
         
         Set Strings = .NewResourceLoader
-'        Dim v As Variant
-'        v = Strings.AddControlStrings(ControlId:="TabPGSolutions", Label:="Sample App #1")
-'        Dim w As Variant
-'        Set w = .NewRibbonGroup(v)
         Set This.RibbonTab = .NewRibbonGroup( _
             Strings.AddControlStrings(ControlId:="TabPGSolutions", _
                 Label:="Sample App #1"))
@@ -134,6 +132,7 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
                 SuperTip:="These buttons are always visible on this ribbon."), _
             Visible:=True, Enabled:=True)
             
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonToggle( _
             Strings.AddControlStrings(ControlId:="Group1Toggle1", _
                 Label:="Show Group #2"), _
@@ -162,9 +161,11 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonDropDown( _
             Strings.AddControlStrings(ControlId:="Group1Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonDropDown( _
             Strings.AddControlStrings(ControlId:="Group1Dropdown3", Label:=""), _
             Visible:=False, Enabled:=False)
@@ -191,11 +192,14 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
             ImageMso:="Refresh", _
             ShowImage:=True, _
             ShowLabel:=True)
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonButtonMso("Group1Button3", False, False, rdRegular)
         
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
             Strings.AddControlStrings(ControlId:="Group1Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
             Strings.AddControlStrings(ControlId:="Group1Checkbox2", Label:=""), _
             Visible:=False, Enabled:=False)
@@ -209,10 +213,12 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
                 AlternateLabel:=""), _
             Visible:=True, Enabled:=True)
         
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonToggle( _
             Strings.AddControlStrings(ControlId:="Group1Toggle2", Label:=""), _
             Visible:=False, Enabled:=False)
 #Else
+        If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
             Strings.AddControlStrings(ControlId:="Group1Checkbox3", Label:=""), _
             Visible:=False, Enabled:=False)
@@ -267,7 +273,7 @@ Public Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
-If HideUndefined Then
+If HideGrp2Undefined Then
         Set Discard = .NewRibbonDropDown( _
             Strings.AddControlStrings(ControlId:="Group2Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
@@ -310,7 +316,7 @@ End If
             ShowImage:=True, _
             ShowLabel:=True)
         
-If HideUndefined Then
+If HideGrp2Undefined Then
         Set Discard = .NewRibbonCheckBox( _
             Strings.AddControlStrings(ControlId:="Group2Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)

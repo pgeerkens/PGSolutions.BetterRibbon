@@ -1,6 +1,6 @@
 <Project
   Name='RibbonLibrary'
-  FileName='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.RibbonDispatcher\RIbbonLibrary Add-In\RibbonLibrary.xlsm'
+  FileName='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.RibbonDispatcher\RIbbonLibrary Add-In\RibbonLibrary.xlsb'
   HelpContextID='0'
   HelpFile=''
   Protection='0'
@@ -45,7 +45,7 @@
     />
     <Reference
       Description='Generic dispatcher for the EXCEL fluent ribbon'
-      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.RibbonDispatcher\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
+      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.RibbonDispatcher\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.tlb'
       Guid='{69E19408-44F1-3B33-B105-9B8188A6F040}'
       Major='0'
       Minor='5'
