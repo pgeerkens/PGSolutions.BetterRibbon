@@ -37,10 +37,10 @@
     <ApplicationVersion>1.0.0.2</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateInterval>7</UpdateInterval>
+    <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>ExcelRibbon2013</ProductName>
-    <PublisherName />
+    <PublisherName>PGSolutions</PublisherName>
     <SupportUrl />
     <FriendlyName>ExcelRibbon2013</FriendlyName>
     <OfficeApplicationDescription />
@@ -128,10 +128,6 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="PGSolutions.RibbonDispatcher, Version=0.5.6820.9810, Culture=neutral, PublicKeyToken=40b33cb1020f71ac, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -205,8 +201,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="..\Sample Workbook\SampleWkBk.xlsb">
+      <Link>Workbooks\SampleWkBk.xlsb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="C:\Users\pgeer\AppData\Roaming\Microsoft\AddIns\RibbonLibrary.xlam">
+      <Link>Workbooks\RibbonLibrary.xlam</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="ExcelRibbon2013_1_TemporaryKey.pfx" />
     <None Include="ExcelRibbon2013_TemporaryKey.pfx" />
+    <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -237,6 +242,12 @@
   <ItemGroup>
     <None Include="Properties\RD-AboutWindow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
+      <Project>{132427f1-7441-4bfb-ae4f-886d926abf24}</Project>
+      <Name>RibbonDispatcher</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -249,6 +260,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>269C233E0A5D57BBA108244428F54295C66987A1</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>PGSolutionsStrongKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

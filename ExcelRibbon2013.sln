@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelRibbon2013", "ExcelRibbon2013\ExcelRibbon2013.csproj", "{5056E803-B7EA-49B7-B77C-B270DE3FF822}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcher", "RibbonDispatcher\RibbonDispatcher.csproj", "{132427F1-7441-4BFB-AE4F-886D926ABF24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132427F1-7441-4BFB-AE4F-886D926ABF24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
