@@ -2,7 +2,7 @@ Attribute VB_Name = "RibbonUtilities"
 Option Explicit
 Option Private Module
 
-Private Const mModuleName   As String = "RibbonUtilities."
+Private Const MModuleName   As String = "RibbonUtilities."
 
 Public Enum ControlSize
     rdRegular = RdControlSize_rdRegular
@@ -39,16 +39,7 @@ Public Function ToggleCustomSize(ByVal IsLarge As Boolean, ParamArray Buttons())
         Buttons(i).Size = IIf(IsLarge, rdLarge, rdRegular)
     Next i
     ToggleCustomSize = Not IsLarge
-XT: Exit Property
-EH: ReraiseError Err, ModuleName & "AddInHandle"
+XT: Exit Function
+EH: ReraiseError Err, ModuleName & "ToggleCustomSize"
     Resume      ' for debugging only
 End Function
-
-Public Property Get AddInHandle() As Main
-    On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("RibbonDispatcher2013").Object
-    
-XT: Exit Property
-EH: ReraiseError Err, ModuleName & "AddInHandle"
-    Resume      ' for debugging only
-End Property

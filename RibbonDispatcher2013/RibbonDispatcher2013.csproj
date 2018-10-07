@@ -28,18 +28,18 @@
     <AssemblyName>RibbonDispatcher2013</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>..\..\Publish\RibbonDispatcher2013\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateInterval>7</UpdateInterval>
+    <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <IsWebBootstrapper>False</IsWebBootstrapper>
     <ProductName>PGSolutions.RibbonDispatcher2013</ProductName>
-    <PublisherName />
+    <PublisherName>PGSolutions</PublisherName>
     <SupportUrl />
     <FriendlyName>PGSolutions.RibbonDispatcher2013</FriendlyName>
     <OfficeApplicationDescription />
@@ -122,6 +122,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.1</LangVersion>
     <CodeAnalysisRuleSet>RibbonDispatcher2013.ruleset</CodeAnalysisRuleSet>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -243,12 +244,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="c:\users\pgeer\appdata\roaming\microsoft\addins\RibbonLibrary.xlam">
-      <Link>Workbooks\RibbonLibrary.xlam</Link>
+    <Content Include="..\Sample Workbook\SampleWkBk.xlsb">
+      <Link>Workbooks\SampleWkBk.xlsb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\sample workbook\SampleWkBk.xlsb">
-      <Link>Workbooks\SampleWkBk.xlsb</Link>
+    <Content Include="C:\Users\pgeer\AppData\Roaming\Microsoft\AddIns\RibbonLibrary.xlam">
+      <Link>Workbooks\RibbonLibrary.xlam</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
@@ -301,8 +302,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Excel" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Excel" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Excel\InstallRoot\Path#excel.exe" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="Excel" GeneratedCodeNamespace="RibbonDispatcher2013" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        <Host Name="Excel" GeneratedCodeNamespace="RibbonDispatcher2013" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="F38B85FB4E2F00B8AE2EFEBCE9FF17740F86B35B" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

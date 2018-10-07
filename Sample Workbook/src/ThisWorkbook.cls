@@ -9,19 +9,29 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
 
+''' <summary>Returns whether or not to display popups during load, for debugging ease.</summary>
+Private Const ShowAlerts     As Boolean = True
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''   DON'T EDIT THIS MODULE   '''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Private MRibbonModel    As RibbonModel
 
 Implements IRibbonWorkbook
 
-''' <summary>Returns the RibbonViewModel for this workbook.</summary>
 Private Property Get IRibbonWorkbook_ViewModel() As RibbonViewModel
     Set IRibbonWorkbook_ViewModel = MRibbonModel.ViewModel
 End Property
 
-''' <summary>Initializes the RobbonModel for this workbook, and activates its RibbonTab.</summary>
-Friend Property Set RibbonModel(ByVal Value As RibbonModel)
-    Set MRibbonModel = Value
+Private Sub IRibbonWorkbook_InitializeRibbonModel(ByVal ribbonUI As Office.IRibbonUI)
+    With New RibbonModel
+        Set MRibbonModel = .Initialize(ribbonUI)
+    End With
     MRibbonModel.ActivateTab    ' Must follow the assignment aobve - for obvious reasons
+End Sub
+
+Private Property Get IRibbonWorkbook_Path() As String
+    IRibbonWorkbook_Path = ThisWorkbook.Path
 End Property
 
 Private Sub Workbook_Open()

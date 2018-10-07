@@ -5,7 +5,7 @@ Public Const ModuleName   As String = "RibbonCallbacksAdapter."
 Public Const DefaultImage As String = "MacroSecurity"
 
 Private Function ViewModelFor(ByVal Control As IRibbonControl _
-) As PGSolutions_RibbonDispatcher.RibbonViewModel
+) As RibbonDispatcher2013.RibbonViewModel
     On Error Resume Next
     Dim WkBk As IRibbonWorkbook
     Set WkBk = Control.Context.Parent
@@ -17,6 +17,15 @@ XT: Exit Function
 EH: If Err.Number <> 438 Then ReraiseError Err, ModuleName & "NewRibbonModel"
     Resume XT
 End Function
+
+Public Property Get AddInHandle() As Main
+    On Error GoTo EH
+    Set AddInHandle = Application.COMAddIns("RibbonDispatcher2013").Object
+    
+XT: Exit Property
+EH: ReraiseError Err, ModuleName & "AddInHandle"
+    Resume      ' for debugging only
+End Property
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''                         Common to Many Controls

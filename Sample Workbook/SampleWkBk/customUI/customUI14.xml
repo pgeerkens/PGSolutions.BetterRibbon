@@ -4,7 +4,7 @@
 <mso:customUI xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui" onLoad="OnRibbonLoad">
   <mso:ribbon>
     <mso:tabs>
-      <mso:tab id="TabPGSolutions" getLabel="getLabel">
+      <mso:tab id="TabPGSolutionsSampleWorkbook" getLabel="getLabel">
         <mso:group id="BrandingGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
           <mso:button id="BrandingButton" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"

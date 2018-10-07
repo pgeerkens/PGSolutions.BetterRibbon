@@ -50,8 +50,6 @@ Attribute CustomSizeToggle.VB_VarHelpID = -1
 Private WithEvents Group2Options        As RibbonDropDown
 Attribute Group2Options.VB_VarHelpID = -1
 
-Implements IResourceManager
-
 Private Sub BrandingButton_Clicked()
     MsgBox "Canadien, eh!", vbOKOnly Or vbInformation, "PGSolutions Ribbon Refresh"
 End Sub
@@ -78,7 +76,7 @@ Private Sub StandardButton1_Clicked()
     DefaultButtonAction StandardButton1
 End Sub
 Private Sub StandardButton2_Clicked()
-    RibbonLoader.InitializeRibbon
+    RibbonLoader.ReInitializeRibbon
 End Sub
 Private Sub StandardOptions_SelectionMade(ByVal ItemId As String, ByVal ItemIndex As Long)
     SetButtonView ItemIndex, StandardButton1, StandardButton2
@@ -87,20 +85,20 @@ Private Sub ShowAdvancedToggle_Toggled(ByVal IsPressed As Boolean)
     SecondGroup.IsVisible = IsPressed
 End Sub
 
-Friend Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
+Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
     On Error GoTo EH
     Dim HideGrp2Undefined   As Boolean    ' When true hides the undefined controls in Group2
     HideGrp2Undefined = True
     Dim HideGrp1Undefined As Boolean
     HideGrp1Undefined = True
     
-    Set MViewModel = AddInHandle.NewRibbonViewModel(RibbonUI)
+    Set MViewModel = AddInHandle.NewRibbonViewModel(ribbonUI)
     With MViewModel.RibbonFactory
         Dim Discard As Object
         
         Set Strings = .NewResourceLoader
         Set RibbonTab = .NewRibbonGroup( _
-            Strings.AddControlStrings(ControlId:="TabPGSolutions", _
+            Strings.AddControlStrings(ControlId:="TabPGSolutionsSampleWorkbook", _
                 Label:="Sample App #1"))
     
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -355,19 +353,3 @@ End Property
 Friend Sub ActivateTab()
     MViewModel.ActivateTab RibbonTab.ID
 End Sub
-
-Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As IRibbonTextLanguageControl
-    On Error GoTo EH
-    Set IResourceManager_GetControlStrings = Strings.Item(ControlId)
-XT: Exit Function
-EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_GetCurrentUIString"
-    Resume          ' for debugging only
-End Function
-
-Private Function IResourceManager_GetImage(ByVal ImageId As String)
-    On Error GoTo EH
-    Set IResourceManager_GetImage = Nothing ' Sheet1.Pictures(ImageId)
-XT: Exit Function
-EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_LoadImage"
-    Resume          ' for debugging only
-End Function
