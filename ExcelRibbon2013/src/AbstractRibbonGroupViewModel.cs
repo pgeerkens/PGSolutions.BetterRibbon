@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
-using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
 
 namespace PGSolutions.ExcelRibbon2013 {
     internal abstract class AbstractRibbonGroupViewModel {

@@ -2,7 +2,6 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.AbstractCOM {

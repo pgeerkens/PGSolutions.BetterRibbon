@@ -31,6 +31,5 @@ Public Sub InitializeRibbon()
     End With
 XT: Exit Sub
 EH: ReraiseError Err, mModuleName & "InitializeRibbon"
-    Resume XT
     Resume      ' for debugging only
 End Sub

@@ -11,10 +11,10 @@ Option Explicit
 
 Private MRibbonModel    As RibbonModel
 
-Implements PGSolutions_RibbonDispatcher.IRibbonWorkbook
+Implements IRibbonWorkbook
 
 ''' <summary>Returns the RibbonViewModel for this workbook.</summary>
-Private Property Get IRibbonWorkbook_ViewModel() As PGSolutions_RibbonDispatcher.RibbonViewModel
+Private Property Get IRibbonWorkbook_ViewModel() As RibbonViewModel
     Set IRibbonWorkbook_ViewModel = MRibbonModel.ViewModel
 End Property
 

@@ -8,8 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
-using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher2013.ControlMixins;
 using System.Collections.Generic;
 
 namespace PGSolutions.ExcelRibbon2013 {

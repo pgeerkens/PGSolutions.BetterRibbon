@@ -7,8 +7,7 @@ Public Sub ReraiseError(ByVal Err As ErrObject, _
     Optional ByVal Details As String _
 )
     If Not IsMissing(Details) Then MethodName = MethodName & "(" & Details & ")"
-    Err.Raise Err.Number, Err.Source & vbNewLine & _
-        MethodName, _
+    Err.Raise Err.Number, Err.Source & vbNewLine & MethodName, _
         Err.Description
 End Sub
 

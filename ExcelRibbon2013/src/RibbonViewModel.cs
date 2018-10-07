@@ -9,8 +9,8 @@ using stdole;
 
 using Office = Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.Concrete;
-using PGSolutions.RibbonDispatcher.Utilities;
+using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
+using PGSolutions.RibbonDispatcher2013.Utilities;
 using ExcelRibbon2013.Properties;
 
 namespace PGSolutions.ExcelRibbon2013 {

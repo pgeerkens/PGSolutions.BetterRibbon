@@ -202,14 +202,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="..\Sample Workbook\SampleWkBk.xlsb">
-      <Link>Workbooks\SampleWkBk.xlsb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="C:\Users\pgeer\AppData\Roaming\Microsoft\AddIns\RibbonLibrary.xlam">
-      <Link>Workbooks\RibbonLibrary.xlam</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -242,9 +234,9 @@
     <None Include="Properties\RD-AboutWindow.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
-      <Project>{132427f1-7441-4bfb-ae4f-886d926abf24}</Project>
-      <Name>RibbonDispatcher</Name>
+    <ProjectReference Include="..\RibbonDispatcher2013\RibbonDispatcher2013.csproj">
+      <Project>{7663f500-4362-4b79-b5bc-d641591dbf9b}</Project>
+      <Name>RibbonDispatcher2013</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

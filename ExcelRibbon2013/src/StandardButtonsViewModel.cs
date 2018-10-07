@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
-using PGSolutions.RibbonDispatcher.Concrete;
-using PGSolutions.RibbonDispatcher.ControlMixins;
-using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
+using PGSolutions.RibbonDispatcher2013.ControlMixins;
+using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
 
 namespace PGSolutions.ExcelRibbon2013 {
     internal class StandardButtonsViewModel : AbstractRibbonGroupViewModel {

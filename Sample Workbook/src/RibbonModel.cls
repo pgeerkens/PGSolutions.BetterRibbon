@@ -11,7 +11,7 @@ Option Explicit
 
 #Const UseCheckBox = False
 
-Private Strings                         As PGSolutions_RibbonDispatcher.ResourceLoader
+Private Strings                         As ResourceLoader
 
 Private MViewModel                      As RibbonViewModel
 Private RibbonTab                       As RibbonCommon
@@ -50,7 +50,7 @@ Attribute CustomSizeToggle.VB_VarHelpID = -1
 Private WithEvents Group2Options        As RibbonDropDown
 Attribute Group2Options.VB_VarHelpID = -1
 
-Implements PGSolutions_RibbonDispatcher.IResourceManager
+Implements IResourceManager
 
 Private Sub BrandingButton_Clicked()
     MsgBox "Canadien, eh!", vbOKOnly Or vbInformation, "PGSolutions Ribbon Refresh"
@@ -342,7 +342,6 @@ End If
     Set Initialize = Me
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".Initialize"
-    Resume XT
     Resume          ' for debugging only
 End Function
 
@@ -357,12 +356,12 @@ Friend Sub ActivateTab()
     MViewModel.ActivateTab RibbonTab.ID
 End Sub
 
-Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IRibbonTextLanguageControl
+Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As IRibbonTextLanguageControl
     On Error GoTo EH
     Set IResourceManager_GetControlStrings = Strings.Item(ControlId)
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_GetCurrentUIString"
-    Resume XT
+    Resume          ' for debugging only
 End Function
 
 Private Function IResourceManager_GetImage(ByVal ImageId As String)
@@ -370,6 +369,5 @@ Private Function IResourceManager_GetImage(ByVal ImageId As String)
     Set IResourceManager_GetImage = Nothing ' Sheet1.Pictures(ImageId)
 XT: Exit Function
 EH: ReraiseError Err, TypeName(Me) & ".IResourceManager_LoadImage"
-    Set IResourceManager_GetImage = Nothing
-    Resume XT
+    Resume          ' for debugging only
 End Function

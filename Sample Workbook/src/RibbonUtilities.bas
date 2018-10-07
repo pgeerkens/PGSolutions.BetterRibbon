@@ -33,19 +33,22 @@ End Sub
 ''' <param name="IsLarge">True if Buttons should be resized Large; else false.</param>
 ''' <param name="Buttons">The ParamArray of Buttons to be resized.</param>
 Public Function ToggleCustomSize(ByVal IsLarge As Boolean, ParamArray Buttons()) As Boolean
+    On Error GoTo EH
     Dim i As Long
     For i = LBound(Buttons) To UBound(Buttons)
         Buttons(i).Size = IIf(IsLarge, rdLarge, rdRegular)
     Next i
     ToggleCustomSize = Not IsLarge
+XT: Exit Property
+EH: ReraiseError Err, ModuleName & "AddInHandle"
+    Resume      ' for debugging only
 End Function
 
-Public Property Get AddInHandle() As PGSolutions_RibbonDispatcher.Main
+Public Property Get AddInHandle() As Main
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("ExcelRibbon2013").Object
+    Set AddInHandle = Application.COMAddIns("RibbonDispatcher2013").Object
     
 XT: Exit Property
 EH: ReraiseError Err, ModuleName & "AddInHandle"
-    Resume XT
     Resume      ' for debugging only
 End Property
