@@ -3,12 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.Concrete;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher {
 
@@ -25,7 +26,6 @@ namespace PGSolutions.RibbonDispatcher {
                 new Lazy<Dictionary<string, IRibbonUI>>( () => new Dictionary<string, IRibbonUI>() );
 
         /// <inheritdoc/>
-        [Description("Returns a new RibbonViewModel associated with the supplied IRibbonUI and IResourceManager.")]
         public IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI)
             => new RibbonViewModel(ribbonUI);
 

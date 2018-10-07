@@ -10,10 +10,11 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.AbstractCOM;
-using PGSolutions.RibbonDispatcher.Concrete;
+using PGSolutions.RibbonDispatcher.Utilities;
+
 using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.Concrete {
 
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>
@@ -51,7 +52,8 @@ namespace PGSolutions.RibbonDispatcher {
         }
 
         internal IResourceLoader  ResourceLoader  { get; }
-        public   IResourceManager ResourceManager { get; }
+        /// <inheritdoc/>
+        public IResourceManager   ResourceManager { get; }
 
         private  readonly IRibbonUI                             _ribbonUI;
         private  readonly IDictionary<string, IRibbonCommon>    _controls;

@@ -4,6 +4,8 @@
 using System;
 using System.Runtime.InteropServices;
 
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]

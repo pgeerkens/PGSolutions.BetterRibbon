@@ -14,4 +14,8 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         [DispId(DispIds.Clicked)]
         void Clicked();
     }
+
+    internal static partial class DispIds {
+        public const int Clicked = 1;
+    }
 }

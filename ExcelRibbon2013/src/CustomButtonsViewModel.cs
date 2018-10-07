@@ -39,7 +39,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         private IList<IRibbonButton> Buttons => new List<IRibbonButton>() { CustomButton1, CustomButton2, CustomButton3 };
 
-        public  void SetVisible(bool isPressed) => CustomGroup.IsVisible = isPressed;
+        public  void SetVisible(bool isVisible) => CustomGroup.IsVisible = isVisible;
 
         private void OnToggled(bool isPressed) {
             var _isLarge = !isPressed;

@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.Concrete {
     /// <summary>Static clas of ProgIds</summary>
     public static class ProgIds {
         private const string BaseNamespace              = "PGSolutions.";

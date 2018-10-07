@@ -5,8 +5,9 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.Concrete {
 

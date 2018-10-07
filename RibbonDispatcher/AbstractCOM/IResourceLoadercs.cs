@@ -25,4 +25,9 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
             [Optional]string Description,
             [Optional]string KeyTip);
     }
+
+    internal static partial class DispIds {
+        public const int ControlStringsIndexer = 1;
+        public const int AddControlStrings     = 1 + ControlStringsIndexer;
+    }
 }

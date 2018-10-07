@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.Concrete;
 using PGSolutions.RibbonDispatcher.AbstractCOM;
 using System.Resources;
 
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.Concrete {
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for COM clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 

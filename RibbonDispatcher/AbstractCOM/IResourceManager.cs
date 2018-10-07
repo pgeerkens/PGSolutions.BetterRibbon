@@ -19,4 +19,9 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         [Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]
         object GetImage(string Name);
     }
+
+    internal static partial class DispIds {
+        public const int GetControlStrings = 1;
+        public const int GetImage          = 1 + GetControlStrings;
+    }
 }

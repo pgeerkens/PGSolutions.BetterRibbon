@@ -5,7 +5,7 @@ using System.Resources;
 using System.Windows.Forms;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.Utilities {
     /// <summary>TODO</summary>
     public static class ResourceManagerExtensions {
         /// <summary>TODO</summary>

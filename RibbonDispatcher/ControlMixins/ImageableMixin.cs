@@ -1,6 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using stdole;
 
+using PGSolutions.RibbonDispatcher.Concrete;
+
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The mixin implementation for IImageable ribbon controls.</summary>
     internal static class ImageableMixin {

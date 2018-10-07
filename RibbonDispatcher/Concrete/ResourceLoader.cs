@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.Concrete {
     /// <summary>TODO</summary>
@@ -59,8 +60,10 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
             return ImageId;
         }
 
+        /// <inheritdoc/>
         public IRibbonTextLanguageControl GetControlStrings(string ControlId) =>
             _controls.FirstOrDefault(i => i.Key == ControlId).Value;
+        /// <inheritdoc/>
         public object GetImage(string Name) =>
             _images.FirstOrDefault(i => i.Key == Name).Value;
 

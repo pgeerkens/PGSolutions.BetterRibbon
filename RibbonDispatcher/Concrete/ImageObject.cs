@@ -4,7 +4,7 @@
 using stdole;
 using System;
 
-namespace PGSolutions.RibbonDispatcher.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.Concrete {
     /// <summary>TODO</summary>
     [Serializable]
     internal class ImageObject {

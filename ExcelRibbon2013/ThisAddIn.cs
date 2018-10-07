@@ -6,8 +6,7 @@ using PGSolutions.RibbonDispatcher;
 
 namespace PGSolutions.ExcelRibbon2013 {
     [CLSCompliant(false)]
-    public partial class ThisAddIn
-    {
+    public partial class ThisAddIn {
         private RibbonViewModel _viewModel;
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }
@@ -17,9 +16,9 @@ namespace PGSolutions.ExcelRibbon2013 {
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => _viewModel = new RibbonViewModel();
 
-        private Lazy<Main> Entries = new Lazy<Main> ( () => new Main() );
+        private Lazy<Main> ComEntry = new Lazy<Main> ( () => new Main() );
 
-        protected override object RequestComAddInAutomationService() => Entries.Value;
+        protected override object RequestComAddInAutomationService() => ComEntry.Value;
 
         #region VSTO generated code
 

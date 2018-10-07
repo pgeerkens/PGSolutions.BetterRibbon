@@ -3,10 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
 using PGSolutions.RibbonDispatcher.Concrete;
 
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     using static RdControlSize;
 
     /// <summary>The factory interface for the Ribbon Dispatcher.</summary>
@@ -15,6 +14,7 @@ namespace PGSolutions.RibbonDispatcher {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonFactory)]
     public interface IRibbonFactory {
+        /// <summary>TODO</summary>
         IResourceManager ResourceManager { get; }
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
@@ -83,5 +83,18 @@ namespace PGSolutions.RibbonDispatcher {
         /// <summary>Returns a new {ResourceLoader} object.</summary>
         [DispId(DispIds.NewResourceLoader)]
         IResourceLoader NewResourceLoader();
+    }
+
+    internal static partial class DispIds {
+        public const int NewRibbonGroup         = 1;
+        public const int NewRibbonButton        = 1 + NewRibbonGroup;
+        public const int NewRibbonButtonMso     = 1 + NewRibbonButton;
+        public const int NewRibbonToggle        = 1 + NewRibbonButtonMso;
+        public const int NewRibbonToggleMso     = 1 + NewRibbonToggle;
+        public const int NewRibbonCheckBox      = 1 + NewRibbonToggleMso;
+        public const int NewRibbonDropDown      = 1 + NewRibbonCheckBox;
+        public const int NewSelectableItem      = 1 + NewRibbonDropDown;
+        public const int NewSelectableItemMso   = 1 + NewSelectableItem;
+        public const int NewResourceLoader      = 1 + NewSelectableItemMso;
     }
 }

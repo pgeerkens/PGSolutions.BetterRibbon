@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
+using PGSolutions.RibbonDispatcher.Concrete;
+
 namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>Interface exposed by an Excel workbook to the RibbonDispatcher.</summary>
     [ComVisible(true)]

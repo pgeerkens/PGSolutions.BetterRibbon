@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using stdole;
 
-using PGSolutions.RibbonDispatcher;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 using PGSolutions.RibbonDispatcher.Concrete;
 using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
