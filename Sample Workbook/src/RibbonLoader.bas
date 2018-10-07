@@ -13,7 +13,7 @@ Public Sub OnRibbonLoad(ByVal RibbonUI As Office.IRibbonUI)
     On Error GoTo EH
     If ShowAlerts Then DisplayAlert "OnRibbonLoad"
     
-    Set MRibbonUI = SetRibbonUI(RibbonUI)
+    Set MRibbonUI = AddInHandle.SetRibbonUI(RibbonUI, ThisWorkbook.Path)
     InitializeRibbon
     
 XT: Exit Sub
@@ -24,8 +24,8 @@ End Sub
 
 Public Sub InitializeRibbon()
     On Error GoTo EH
-    If MRibbonUI Is Nothing Then Set MRibbonUI = GetRibbonUI()
-    If MRibbonUI Is Nothing Then Err.Raise -1, "", "RibbonUI is Nothing"
+    If MRibbonUI Is Nothing Then Set MRibbonUI = AddInHandle.GetRibbonUI(ThisWorkbook.Path)
+    If MRibbonUI Is Nothing Then Err.Raise 4, ThisWorkbook.Name, "RibbonUI is Nothing"
     With New RibbonModel
         Set ThisWorkbook.RibbonModel = .Initialize(MRibbonUI)
     End With

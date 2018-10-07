@@ -1,7 +1,10 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System.Collections.Generic;
+
 using PGSolutions.RibbonDispatcher.AbstractCOM;
+using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
 namespace PGSolutions.ExcelRibbon2013 {
     internal abstract class AbstractRibbonGroupViewModel {
@@ -9,7 +12,11 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         public IRibbonFactory Factory { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public string NoImage => "MacroSecurity";
+        public static string NoImage => "MacroSecurity";
+
+        protected bool ToggleButtonSize(bool isLarge, IList<IRibbonButton> buttons) {
+            foreach (var b in buttons) { b.Size = isLarge ? rdLarge : rdRegular; }
+            return !isLarge;
+        }
     }
 }

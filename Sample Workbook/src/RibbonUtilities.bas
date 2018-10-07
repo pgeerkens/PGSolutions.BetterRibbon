@@ -4,6 +4,11 @@ Option Private Module
 
 Private Const mModuleName   As String = "RibbonUtilities."
 
+Public Enum ControlSize
+    rdRegular = RdControlSize_rdRegular
+    rdLarge = RdControlSize_rdLarge
+End Enum
+
 ''' <summary>EventHandler for RibbonLoad, initializing the ViewModel and Model.</summary>
 Public Const MsgBoxTitle    As String = "PGSolutions Sample Ribbon"
 
@@ -35,41 +40,12 @@ Public Function ToggleCustomSize(ByVal IsLarge As Boolean, ParamArray Buttons())
     ToggleCustomSize = Not IsLarge
 End Function
 
-''' <summary>EventHandler for RibbonLoad, initializing the ViewModel and Model.</summary>
-''' <param name="RibbonUI">An IRibbonUI for the ribbon just loaded.</param>
-''' <param name="ResourceManager">An IResourceManager for the ribbon just loaded.</param>
-Public Function NewRibbonViewModel(ByVal RibbonUI As Office.IRibbonUI) As RibbonViewModel
+Public Property Get AddInHandle() As PGSolutions_RibbonDispatcher.Main
     On Error GoTo EH
-    With Application.COMAddIns("ExcelRibbon2013").Object
-        Set NewRibbonViewModel = .NewRibbonViewModel(RibbonUI)
-    End With
+    Set AddInHandle = Application.COMAddIns("ExcelRibbon2013").Object
     
-XT: Exit Function
-EH: ReraiseError Err, ModuleName & "NewRibbonViewModel"
+XT: Exit Property
+EH: ReraiseError Err, ModuleName & "AddInHandle"
     Resume XT
     Resume      ' for debugging only
-End Function
-
-Public Function SetRibbonUI(RibbonUI As IRibbonUI) As IRibbonUI
-    On Error GoTo EH
-    With Application.COMAddIns("ExcelRibbon2013").Object
-        Set SetRibbonUI = .SetRibbonUI(RibbonUI, ThisWorkbook.Path)
-    End With
-    
-XT: Exit Function
-EH: ReraiseError Err, ModuleName & "SetRibbonUI"
-    Resume XT
-    Resume      ' for debugging only
-End Function
-
-Public Function GetRibbonUI() As IRibbonUI
-    On Error GoTo EH
-    With Application.COMAddIns("ExcelRibbon2013").Object
-        Set GetRibbonUI = .GetRibbonUI(ThisWorkbook.Path)
-    End With
-    
-XT: Exit Function
-EH: ReraiseError Err, ModuleName & "GetRibbonUI"
-    Resume XT
-    Resume      ' for debugging only
-End Function
+End Property

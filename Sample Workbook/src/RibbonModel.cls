@@ -11,18 +11,10 @@ Option Explicit
 
 #Const UseCheckBox = False
 
-Public Enum ControlSize
-    rdRegular = RdControlSize_rdRegular
-    rdLarge = RdControlSize_rdLarge
-End Enum
-
-Private Type TRibbonModel
-    ViewModel       As RibbonViewModel
-    RibbonTab       As RibbonCommon
-End Type
-Private This As TRibbonModel
-
 Private Strings                         As PGSolutions_RibbonDispatcher.ResourceLoader
+
+Private MViewModel                      As RibbonViewModel
+Private RibbonTab                       As RibbonCommon
 
 Private BrandingGroup                   As RibbonGroup
 Attribute BrandingGroup.VB_VarHelpID = -1
@@ -102,12 +94,12 @@ Friend Function Initialize(ByVal RibbonUI As IRibbonUI) As RibbonModel
     Dim HideGrp1Undefined As Boolean
     HideGrp1Undefined = True
     
-    Set This.ViewModel = NewRibbonViewModel(RibbonUI)
-    With This.ViewModel.RibbonFactory
+    Set MViewModel = AddInHandle.NewRibbonViewModel(RibbonUI)
+    With MViewModel.RibbonFactory
         Dim Discard As Object
         
         Set Strings = .NewResourceLoader
-        Set This.RibbonTab = .NewRibbonGroup( _
+        Set RibbonTab = .NewRibbonGroup( _
             Strings.AddControlStrings(ControlId:="TabPGSolutions", _
                 Label:="Sample App #1"))
     
@@ -345,7 +337,7 @@ End If
         Group2Options.SelectedItemId = "Group2Dropdown1_LabelAndImage"
         Group2Options.IsEnabled = CustomSizeToggle.IsPressed
     End With
-    This.ViewModel.Invalidate
+    MViewModel.Invalidate
     
     Set Initialize = Me
 XT: Exit Function
@@ -358,11 +350,11 @@ End Function
 ''''''''''''''''''''''''''''   DON'T EDIT THESE ROUTINES   '''''''''''''''''''''''
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Friend Property Get ViewModel() As RibbonViewModel
-    Set ViewModel = This.ViewModel
+    Set ViewModel = MViewModel
 End Property
 
 Friend Sub ActivateTab()
-    This.ViewModel.ActivateTab This.RibbonTab.ID
+    MViewModel.ActivateTab RibbonTab.ID
 End Sub
 
 Private Function IResourceManager_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IRibbonTextLanguageControl

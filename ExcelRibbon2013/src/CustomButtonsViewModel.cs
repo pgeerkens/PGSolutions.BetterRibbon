@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.AbstractCOM;
 using PGSolutions.RibbonDispatcher.Concrete;
 using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
@@ -41,10 +40,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         public  void SetVisible(bool isVisible) => CustomGroup.IsVisible = isVisible;
 
-        private void OnToggled(bool isPressed) {
-            var _isLarge = !isPressed;
-            foreach (var b in Buttons) { b.Size = _isLarge ? rdLarge : rdRegular; }
-        }
+        private void OnToggled(bool isPressed) => ButtonOptions.IsEnabled = ToggleButtonSize(!isPressed, Buttons);
 
         private void OnSelectionMade(string selectedId, int selectedIndex) => Buttons.SetView(selectedIndex);
     }

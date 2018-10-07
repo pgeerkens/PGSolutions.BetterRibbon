@@ -149,12 +149,12 @@ namespace PGSolutions.RibbonDispatcher.Concrete {
         /// <inheritdoc/>
         public IRibbonTextLanguageControl GetControlStrings(string ControlId) =>
             new RibbonTextLanguageControl(
-                    GetCurrentUIString($"{ControlId}_Label")            ?? Unknown(ControlId),
-                    GetCurrentUIString($"{ControlId}_ScreenTip")        ?? Unknown(ControlId, "ScreenTip"),
-                    GetCurrentUIString($"{ControlId}_SuperTip")         ?? Unknown(ControlId, "SuperTip"),
-                    GetCurrentUIString($"{ControlId}_KeyTip")           ?? "",
-                    GetCurrentUIString($"{ControlId}_AlternativeLabel") ?? Unknown(ControlId, "Alternate"),
-                    GetCurrentUIString($"{ControlId}_Description")      ?? Unknown(ControlId, "Description")
+                    GetCurrentUIString($"{ControlId}_Label")          ?? Unknown(ControlId),
+                    GetCurrentUIString($"{ControlId}_ScreenTip")      ?? Unknown(ControlId, "ScreenTip"),
+                    GetCurrentUIString($"{ControlId}_SuperTip")       ?? Unknown(ControlId, "SuperTip"),
+                    GetCurrentUIString($"{ControlId}_KeyTip")         ?? "",
+                    GetCurrentUIString($"{ControlId}_AlternateLabel") ?? Unknown(ControlId, "Alternate"),
+                    GetCurrentUIString($"{ControlId}_Description")    ?? Unknown(ControlId, "Description")
             );
 
         /// <inheritdoc/>
