@@ -53,8 +53,8 @@ namespace PGSolutions.ExcelRibbon2013 {
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public static void ExtractOpenProject(Workbook WkBk, bool DestIsSrc) =>
-            ExtractModulesByProject(WkBk.VBProject, CreateDirectory(WkBk.FullName, DestIsSrc));
+        public static void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
+            ExtractModulesByProject(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 
 }

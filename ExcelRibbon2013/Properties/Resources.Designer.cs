@@ -251,7 +251,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Advanced Controls.
+        ///   Looks up a localized string similar to Use &apos;SRC&apos; folder.
         /// </summary>
         internal static string ShowAdvancedToggle_Label {
             get {
@@ -260,7 +260,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Advanced Controls.
+        ///   Looks up a localized string similar to Toggles use of folder-name SRC.
         /// </summary>
         internal static string ShowAdvancedToggle_ScreenTip {
             get {
@@ -269,7 +269,9 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles display of the advanced controls.
+        ///   Looks up a localized string similar to By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+        ///
+        ///When this toggle is pressed export is instead to a directory &apos;SRC&apos;, and Multi-Select is disabled..
         /// </summary>
         internal static string ShowAdvancedToggle_SuperTip {
             get {
@@ -332,7 +334,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports all VBA code from a selected Excel workbook..
+        ///   Looks up a localized string similar to Exports all VBA code from selected Excel workbook(s)..
         /// </summary>
         internal static string StandardButton1_SuperTip {
             get {

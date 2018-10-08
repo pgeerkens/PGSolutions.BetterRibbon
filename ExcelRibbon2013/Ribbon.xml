@@ -15,6 +15,11 @@
                      />
         </mso:group>
         <mso:group id="StandardButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
+          <mso:toggleButton id="ShowAdvancedToggle" getImage="getImage"
+                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                      getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                     />
           <mso:button id="StandardButton1" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                       onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
@@ -41,10 +46,6 @@
                       supertip="Always displays both the button label and image."
                       imageMso = "MacroSecurity"/>
           </mso:dropDown>
-          <mso:checkBox id="ShowAdvancedToggle"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                     />
         </mso:group>
         <mso:group id="CustomButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
           <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >

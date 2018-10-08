@@ -44,7 +44,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
             BrandingViewModel        = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             CustomButtonsViewModel   = new CustomButtonsViewModel(RibbonFactory);
-            StandardButtonsViewModel = new StandardButtonsViewModel(RibbonFactory, CustomButtonsViewModel.SetVisible);
+            StandardButtonsViewModel = new StandardButtonsViewModel(RibbonFactory);
         }
 
         private static IPictureDisp GetBrandingIcon() => Resources.RD_AboutWindow.ImageToPictureDisp();

@@ -65,7 +65,7 @@ namespace PGSolutions.ExcelRibbon2013 {
         /// <param name="DestIsSrc">True if the destination folder is to be named 'src' (rather than being eponymous with the project).</param>
         protected static string CreateDirectory(string path, bool destIsSrc) {
             var basePath = destIsSrc ? Path.Combine(Path.GetDirectoryName(path), "src")
-                                     : Path.GetFileNameWithoutExtension(path);
+                                     : Path.Combine(Path.GetDirectoryName(path),Path.GetFileNameWithoutExtension(path) + "VBA");
 
             if (Directory.Exists(basePath)) Directory.Delete(basePath,true);
 

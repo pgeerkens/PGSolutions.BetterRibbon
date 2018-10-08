@@ -179,13 +179,15 @@
     <value>..\ribbon.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="ShowAdvancedToggle_Label" xml:space="preserve">
-    <value>Show Advanced Controls</value>
+    <value>Use 'SRC' folder</value>
   </data>
   <data name="ShowAdvancedToggle_ScreenTip" xml:space="preserve">
-    <value>Show Advanced Controls</value>
+    <value>Toggles use of folder-name SRC</value>
   </data>
   <data name="ShowAdvancedToggle_SuperTip" xml:space="preserve">
-    <value>Toggles display of the advanced controls</value>
+    <value>By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+
+When this toggle is pressed export is instead to a directory 'SRC', and Multi-Select is disabled.</value>
   </data>
   <data name="SizeToggle_AlternateLabel" xml:space="preserve">
     <value>Prefer Large</value>
@@ -206,7 +208,7 @@
     <value>Export VBA Files</value>
   </data>
   <data name="StandardButton1_SuperTip" xml:space="preserve">
-    <value>Exports all VBA code from a selected Excel workbook.</value>
+    <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
   <data name="StandardButton2_Label" xml:space="preserve">
     <value>Export VBA Current</value>

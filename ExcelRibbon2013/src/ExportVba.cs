@@ -8,22 +8,6 @@ using Microsoft.Office.Core;
 namespace PGSolutions.ExcelRibbon2013 {
     internal static class ExportVba {
 
-        /// <summary>Exports all VBA modules in the current workbook to a sibling directory named 'src'.</summary>
-        /// <remarks>
-        /// The module files are saved in a subdirectory 'src'
-        ///
-        /// Requires that access to the VBA project object model be trusted (Macro Security).
-        /// </remarks>
-        public static ClickedEventHandler ExportVbaModulesCurrent() => () => ExportModulesCurrentProject();
-
-        /// <summary>Exports all VBA modules in a selected workbook to eponymous files.</summary>
-        /// <remarks>
-        /// The module files are saved in a subdirectory 'src'.
-        ///
-        /// Requires that access to the VBA project object model be trusted (Macro Security).
-        /// </remarks>
-        public static ClickedEventHandler ExportVbaModules() => () => ExportModules(false);
-
         /// <summary>Extracts VBA modules from current EXCEL workbook to the sibling directory 'src'.</summary>
         public static void ExportModulesCurrentProject() => ExportModulesCurrentProject(true);
 
@@ -73,6 +57,5 @@ namespace PGSolutions.ExcelRibbon2013 {
                 Globals.ThisAddIn.Application.AutomationSecurity = securitySaved;
             }
         }
-        
     }
 }
