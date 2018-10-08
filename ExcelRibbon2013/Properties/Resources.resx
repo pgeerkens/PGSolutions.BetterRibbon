@@ -202,24 +202,24 @@ When this toggle is pressed export is instead to a directory 'SRC', and Multi-Se
     <value>Toggles between large and small (preferred size for) buttons for this ribbon group.</value>
   </data>
   <data name="StandardButton1_Label" xml:space="preserve">
-    <value>Export VBA Files</value>
+    <value>Selected Workbooks</value>
   </data>
   <data name="StandardButton1_ScreenTip" xml:space="preserve">
-    <value>Export VBA Files</value>
+    <value>Export VBA from Selected</value>
   </data>
   <data name="StandardButton1_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
   <data name="StandardButton2_Label" xml:space="preserve">
-    <value>Export VBA Current</value>
+    <value>Current Workbook</value>
   </data>
   <data name="StandardButton2_ScreenTip" xml:space="preserve">
-    <value>Exports VBA Current</value>
+    <value>Export VBA from Current</value>
   </data>
   <data name="StandardButton2_SuperTIp" xml:space="preserve">
     <value>Exports all VBA code from the current Excel workbook.</value>
   </data>
   <data name="StandardButtonsGroup_Label" xml:space="preserve">
-    <value>Standard Buttons</value>
+    <value>VBA Source Code Export</value>
   </data>
 </root>

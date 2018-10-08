@@ -12,16 +12,12 @@ namespace PGSolutions.ExcelRibbon2013 {
     internal class StandardButtonsViewModel : AbstractRibbonGroupViewModel {
         public StandardButtonsViewModel(IRibbonFactory factory) : base(factory) {
             StandardButtonsGroup = Factory.NewRibbonGroup("StandardButtonsGroup");
+            ShowAdvancedToggle   = Factory.NewRibbonCheckBox("ShowAdvancedToggle", true, true);
             StandardButton1      = Factory.NewRibbonButtonMso("StandardButton1",   true, true, rdLarge, "RefreshAll", false, true);
             StandardButton2      = Factory.NewRibbonButtonMso("StandardButton2",   true, true, rdLarge, "Refresh",    false, true);
-            ShowAdvancedToggle   = Factory.NewRibbonCheckBox("ShowAdvancedToggle", true, true);
-            ButtonOptions        = factory.NewRibbonDropDown("ButtonOptions",      true, true);
 
             StandardButton1.Clicked     += ExportVbaModules();
             StandardButton2.Clicked     += ExportVbaModulesCurrent();
-            ButtonOptions.SelectionMade += OnSelectionMade;
-
-            ButtonOptions.OnActionDropDown(null,2);
         }
 
         public RibbonGroup    StandardButtonsGroup { get; }

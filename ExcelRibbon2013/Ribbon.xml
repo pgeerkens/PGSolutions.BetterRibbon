@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 Pieter Geerkens -->
+<!-- Copyright 2018 Pieter Geerkens -->
 <!-- When debugging, remember to check: Options -> Advanced -> General -> Show_Add-In_user_interface_errors. -->
 <mso:customUI xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui"
               xmlns:rd="ExcelRibbon2013"
@@ -15,37 +15,23 @@
                      />
         </mso:group>
         <mso:group id="StandardButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
-          <mso:toggleButton id="ShowAdvancedToggle" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                      getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
-                     />
-          <mso:button id="StandardButton1" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                      getShowImage="getShowImage" getShowLabel="getShowLabel"
-                     />
-          <mso:button id="StandardButton2" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                      getShowImage="getShowImage" getShowLabel="getShowLabel"
-                     />
-          <!-- Use this DropDown template when the item list will be statically defined in this file. -->
-          <mso:dropDown id="ButtonOptions"
+          <mso:box id="StandardButtonsBox" getVisible="getVisible" boxStyle="vertical">
+            <mso:toggleButton id="ShowAdvancedToggle" getVisible="getVisible" getEnabled="getEnabled"
                         getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        getVisible="getVisible" getEnabled="getEnabled"
-                        onAction="onActionDropDown" getSelectedItemIndex="getSelectedItemIndex"
-                      >
-            <mso:item id="LabelOnly" label="Label Only" screentip="Display Button Label Only"
-                      supertip="Displays just the button label when its size is Regular; else both."
-                      imageMso = "MacroSecurity"/>
-            <mso:item id="ImageOnly" label="Image Only" screentip="Display Button Image Only"
-                      supertip="Displays just the button image when its size is Regular; else both."
-                      imageMso = "MacroSecurity"/>
-            <mso:item id="LabelAndImage" label="Label &amp; Image" screentip="Display Label &amp; Image"
-                      supertip="Always displays both the button label and image."
-                      imageMso = "MacroSecurity"/>
-          </mso:dropDown>
+                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                        onAction="onActionToggle" getPressed="getPressed"
+                       />
+            <mso:button id="StandardButton1" getVisible="getVisible" getEnabled="getEnabled"
+                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                        onAction="onAction"
+                       />
+            <mso:button id="StandardButton2" getVisible="getVisible" getEnabled="getEnabled"
+                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                        onAction="onAction"
+                       />
+          </mso:box>
         </mso:group>
         <mso:group id="CustomButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
           <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >

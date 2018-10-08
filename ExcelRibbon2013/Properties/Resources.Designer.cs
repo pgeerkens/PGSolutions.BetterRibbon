@@ -316,7 +316,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export VBA Files.
+        ///   Looks up a localized string similar to Selected Workbooks.
         /// </summary>
         internal static string StandardButton1_Label {
             get {
@@ -325,7 +325,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export VBA Files.
+        ///   Looks up a localized string similar to Export VBA from Selected.
         /// </summary>
         internal static string StandardButton1_ScreenTip {
             get {
@@ -343,7 +343,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export VBA Current.
+        ///   Looks up a localized string similar to Current Workbook.
         /// </summary>
         internal static string StandardButton2_Label {
             get {
@@ -352,7 +352,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports VBA Current.
+        ///   Looks up a localized string similar to Export VBA from Current.
         /// </summary>
         internal static string StandardButton2_ScreenTip {
             get {
@@ -370,7 +370,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Standard Buttons.
+        ///   Looks up a localized string similar to VBA Source Code Export.
         /// </summary>
         internal static string StandardButtonsGroup_Label {
             get {
