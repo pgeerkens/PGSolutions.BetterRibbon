@@ -76,13 +76,12 @@ namespace PGSolutions.ExcelRibbon2013 {
         public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
 
         /// <summary>Returns an appropriate file extension (prefixed with '.') for the supplied moduleType ordinal.</summary>
-        private static string TypeExtension(VbExt_ct moduleType) {
-            return moduleType == VbExt_ct.vbext_ct_StdModule ? "bas"
-                :  moduleType == VbExt_ct.vbext_ct_MSForm    ? "frm"
-                : (moduleType == VbExt_ct.vbext_ct_ClassModule
-                || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"
-                                                             : "unk";
-        }
+        private static string TypeExtension(VbExt_ct moduleType) =>
+               moduleType == VbExt_ct.vbext_ct_StdModule ? "bas"
+            :  moduleType == VbExt_ct.vbext_ct_MSForm    ? "frm"
+            : (moduleType == VbExt_ct.vbext_ct_ClassModule
+            || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"
+                                                         : "unk";
 
         public enum VbExt_ct {
             vbext_ct_StdModule      = 1,
