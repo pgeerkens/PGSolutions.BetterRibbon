@@ -39,6 +39,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1E95C80D49CD4813A011CE31DC21D762"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3CA9937D05909DEE02E372863C16A9E4"
         "OwnerKey" = "8:_0FCC58541AF8488FA853B3AD2294DC53"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,12 +100,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_057DF66FECEF0E37F4C885A7B850A5D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0FCC58541AF8488FA853B3AD2294DC53"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -137,6 +137,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_548FF50C0515A136D62DF70CE3AA9F43"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_057DF66FECEF0E37F4C885A7B850A5D7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -304,6 +310,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E95C80D49CD4813A011CE31DC21D762"
+            {
+            "SourcePath" = "8:C:\\Users\\pgeer\\AppData\\Roaming\\Microsoft\\AddIns\\RibbonLibrary.xlam"
+            "TargetName" = "8:RibbonLibrary.xlam"
+            "Tag" = "8:"
+            "Folder" = "8:_F0CBF917A10C4624A42B57691B75A4AE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:TRUE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3CA9937D05909DEE02E372863C16A9E4"
@@ -490,7 +516,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_1380EE4668764E7CA9A648E67BA12892"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -502,7 +528,7 @@
             {
             "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -510,15 +536,48 @@
                 {
                 }
             }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_B1DBACAC38914D12B3247C5AB48C6EE0"
+            "{1525181F-901A-416C-8A58-119130FE478E}:_BF0BAB0CE7F54392829137A4CD4DACA8"
             {
-            "Name" = "8:#1921"
+            "Name" = "8:#1912"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
-            "Property" = "8:StartMenuFolder"
+            "Property" = "8:ProgramFilesFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_7C4BDCFB5AF34B8999896D5602EB6A60"
+                    {
+                    "Name" = "8:Microsoft"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_CF0948957D9748B3821EDAD7B8F672FE"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_6A961E16825C4AA985859DBD1E48095A"
+                            {
+                            "Name" = "8:root"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_EDA0AE35BE6642EE9B803C4F5D82C142"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F0CBF917A10C4624A42B57691B75A4AE"
+                                    {
+                                    "Name" = "8:XLSTART"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_2BD7BF15F7AD4A52A1C2D101FF8AC3F6"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -538,7 +597,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.RibbonDispatcher"
         "ProductCode" = "8:{CA0DAF85-79DA-47D3-9A2F-C50E2491DACB}"
-        "PackageCode" = "8:{D6926E15-9C67-4278-A926-8BDBEA4BF324}"
+        "PackageCode" = "8:{2C106270-F526-4B27-B0C5-4B73FF1D3BC8}"
         "UpgradeCode" = "8:{29C7E5C8-FF18-40DF-86D1-E44B03F568B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1059,7 +1118,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0FCC58541AF8488FA853B3AD2294DC53"
             {
-            "SourcePath" = "8:..\\RibbonDispatcher2013\\obj\\Debug\\RibbonDispatcher2013.dll"
+            "SourcePath" = "8:..\\RibbonDispatcher2013\\obj\\Release\\RibbonDispatcher2013.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
@@ -1079,34 +1138,6 @@
             "ProjectOutputGroupRegister" = "3:2"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{7663F500-4362-4B79-B5BC-D641591DBF9B}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4E108959B62249EEA3C37A0C397C7547"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{7663F500-4362-4B79-B5BC-D641591DBF9B}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
@@ -1141,7 +1172,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AD15418547B14C408D243F1E74FE028E"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A309D8E39E5D4ED0A78AED2465368CB3"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"
@@ -1161,7 +1192,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Debug|Any CPU"
             "OutputGroupCanonicalName" = "8:Symbols"
             "OutputProjectGuid" = "8:{7663F500-4362-4B79-B5BC-D641591DBF9B}"
             "ShowKeyOutput" = "11:TRUE"

@@ -31,6 +31,7 @@ namespace PGSolutions.RibbonDispatcher2013 {
 
         /// <inheritdoc/>
         public IRibbonUI SetRibbonUI(IRibbonUI ribbonUI, string workbookPath) {
+            if (RibbonCollection.Value.ContainsKey(workbookPath)) RibbonCollection.Value.Remove(workbookPath);
             RibbonCollection.Value.AddNotNull(workbookPath,ribbonUI);
             return ribbonUI;
         }

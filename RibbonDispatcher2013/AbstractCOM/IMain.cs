@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
         [Description("Returns a new instance of {RibbonViewModel} for the supplied {IRibbonUI} and {IResourceManager}.")]
         IRibbonViewModel NewRibbonViewModel(IRibbonUI ribbonUI);
 
-        /// <summary>Adds the supplied {IRibbonUI} to an in-memory cache using supplied workbookPath as a key.</summary>
+        /// <summary>Adds/replaces the supplied {IRibbonUI} to in-memory cache using workbookPath as its key.</summary>
         [DispId(DispIds.SetRibbonUI)]
         [Description("Adds the supplied {IRibbonUI} to an in-memory cache using supplied workbookPath as a key.")]
         IRibbonUI SetRibbonUI(IRibbonUI ribbonUI, string workbookPath);

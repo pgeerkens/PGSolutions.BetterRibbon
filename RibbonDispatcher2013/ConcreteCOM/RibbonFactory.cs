@@ -99,16 +99,19 @@ namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
         }
 
         /// <summary>TODO</summary>
-        internal void Invalidate()                            => _ribbonUI.Invalidate();
+        internal void Invalidate()                              => _ribbonUI.Invalidate();
 
         /// <summary>TODO</summary>
-        internal void InvalidateControl(string ControlId)     => _ribbonUI.InvalidateControl(ControlId);
+        internal void InvalidateControl(string ControlId)       => _ribbonUI.InvalidateControl(ControlId);
 
         /// <summary>TODO</summary>
-        internal void InvalidateControlMso(string ControlId)  => _ribbonUI.InvalidateControlMso(ControlId);
+        internal void InvalidateControlMso(string ControlId)    => _ribbonUI.InvalidateControlMso(ControlId);
 
         /// <summary>TODO</summary>
-        internal void ActivateTab(string ControlId)           => _ribbonUI.ActivateTab(ControlId);
+        internal void ActivateTab(string ControlId)             => _ribbonUI.ActivateTab(ControlId);
+
+        /// <summary>TODO</summary>
+        internal void ActivateTabQ(string ControlId, string ns) => _ribbonUI.ActivateTabQ(ControlId,ns);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]

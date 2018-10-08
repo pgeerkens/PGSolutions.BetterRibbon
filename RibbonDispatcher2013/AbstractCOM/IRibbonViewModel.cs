@@ -39,6 +39,11 @@ namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
         [Description("Actiavtes the specified ribbon tab.")]
         void ActivateTab(string ControlId);
 
+        /// <summary>Actiavtes the specified ribbon tab.</summary>
+        [DispId(DispIds.ActivateTabQ)]
+        [Description("Actiavtes the specified ribbon tab.")]
+        void ActivateTabQ(string ControlId, string ns);
+
         /// <summary>Loads an image, making it accessible by name to ribbon controls via an 'image' tag.</summary>
         [DispId(DispIds.LoadImage)]
         [Description("Loads an image, making it accessible by name to ribbon controls via an 'image' tag.")]

@@ -7,6 +7,6 @@ namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
         private const string BaseNamespace              = "PGSolutions.";
 
         /// <summary>ProgID for the Ribbon dispatcher.</summary>
-        public const string RibbonDispatcherProgId      = BaseNamespace + "RibbonDispatcher";
+        public const string RibbonDispatcherProgId      = BaseNamespace + "RibbonDispatcher2013";
     }
 }

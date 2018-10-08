@@ -11,7 +11,7 @@ Option Explicit
 
 #Const UseCheckBox = False
 
-Private Strings                         As ResourceLoader
+Private Loader                          As ResourceLoader
 
 Private MViewModel                      As RibbonViewModel
 Private RibbonTab                       As RibbonCommon
@@ -96,20 +96,20 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
     With MViewModel.RibbonFactory
         Dim Discard As Object
         
-        Set Strings = .NewResourceLoader
+        Set Loader = .NewResourceLoader
         Set RibbonTab = .NewRibbonGroup( _
-            Strings.AddControlStrings(ControlId:="TabPGSolutionsSampleWorkbook", _
+            Loader.AddControlStrings(ControlId:="TabPGSolutionsSampleWorkbook", _
                 Label:="Sample App #1"))
     
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         ''' Branding Group
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Set BrandingGroup = .NewRibbonGroup( _
-            Strings.AddControlStrings(ControlId:="BrandingGroup", _
+            Loader.AddControlStrings(ControlId:="BrandingGroup", _
                 Label:="PGSolutions", _
                 ScreenTip:="Tools for VBA Development"))
         Set BrandingButton = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="BrandingButton", _
+            Loader.AddControlStrings(ControlId:="BrandingButton", _
                 Label:="About Ribbon", _
                 ScreenTip:="A Sample Pre-Plumbed Ribbon", _
                 SuperTip:="An example of a pre-plumbed ribbon with improved error handling"), _
@@ -120,7 +120,7 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
         ''' Group 1
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Set FirstGroup = .NewRibbonGroup( _
-            Strings.AddControlStrings(ControlId:="Group1", _
+            Loader.AddControlStrings(ControlId:="Group1", _
                 Label:="Standard Buttons", _
                 ScreenTip:="Buttons Always Visible", _
                 SuperTip:="These buttons are always visible on this ribbon."), _
@@ -128,11 +128,11 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
             
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControlStrings(ControlId:="Group1Toggle1", _
+            Loader.AddControlStrings(ControlId:="Group1Toggle1", _
                 Label:="Show Group #2"), _
             Visible:=False, Enabled:=False)
         Set StandardOptions = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group1Dropdown1", _
+            Loader.AddControlStrings(ControlId:="Group1Dropdown1", _
                 Label:="Options", _
                 ScreenTip:="Controls Button Display", _
                 SuperTip:="Display options for Standard Buttons:" & _
@@ -141,31 +141,31 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
                         vbNewLine & "Label & Image"), _
             Visible:=True, Enabled:=True)
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_LabelOnly", _
+            Loader.AddControlStrings(ControlId:="Grp1Dropdown1_LabelOnly", _
                 Label:="Label Only", _
                 ScreenTip:="Display Label Only", _
                 SuperTip:="Displays just the button label when its size is Regular; else both."))
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_ImageOnly", _
+            Loader.AddControlStrings(ControlId:="Grp1Dropdown1_ImageOnly", _
                 Label:="Image Only", _
                 ScreenTip:="Display Image Only", _
                 SuperTip:="Displays just the button image when its size is Regular; else both."))
         StandardOptions.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Grp1Dropdown1_LabelAndImage", _
+            Loader.AddControlStrings(ControlId:="Grp1Dropdown1_LabelAndImage", _
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group1Dropdown2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group1Dropdown3", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Dropdown3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set StandardButton1 = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="Group1Button1", _
+            Loader.AddControlStrings(ControlId:="Group1Button1", _
                 Label:="1st Std Button", _
                 ScreenTip:="First Std Button", _
                 SuperTip:="Demonstration of a 'standard button'; one that is always visible on the ribbon."), _
@@ -176,7 +176,7 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
             ShowImage:=True, _
             ShowLabel:=True)
         Set StandardButton2 = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="Group1Button2", _
+            Loader.AddControlStrings(ControlId:="Group1Button2", _
                 Label:="Refresh Ribbon", _
                 ScreenTip:="Reinitializes Ribbon", _
                 SuperTip:="Reinitializees the ribbon, as long as the original RibbonUI value is valid."), _
@@ -191,16 +191,16 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
         
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group1Checkbox1", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group1Checkbox2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Checkbox2", Label:=""), _
             Visible:=False, Enabled:=False)
             
 #If UseCheckBox Then
         Set ShowAdvancedToggle = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group1Checkbox3", _
+            Loader.AddControlStrings(ControlId:="Group1Checkbox3", _
                 Label:="Show Group #2", _
                 ScreenTip:="Toggles Display of Group #2 Buttons", _
                 SuperTip:="Alternates between setting the Group #2 buttons visible and hidden.", _
@@ -209,16 +209,16 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
         
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControlStrings(ControlId:="Group1Toggle2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Toggle2", Label:=""), _
             Visible:=False, Enabled:=False)
 #Else
         If HideGrp1Undefined Then _
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group1Checkbox3", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group1Checkbox3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set ShowAdvancedToggle = .NewRibbonToggle( _
-            Strings.AddControlStrings(ControlId:="Group1Toggle2", _
+            Loader.AddControlStrings(ControlId:="Group1Toggle2", _
                 Label:="Show Group #2", _
                 ScreenTip:="Toggles Display of Group #2 Buttons", _
                 SuperTip:="Alternates between setting the Group #2 buttons visible and hidden.", _
@@ -230,13 +230,13 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
         ''' Group 2
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Set SecondGroup = .NewRibbonGroup( _
-            Strings.AddControlStrings(ControlId:="Group2", _
+            Loader.AddControlStrings(ControlId:="Group2", _
                 Label:="Group #2 Controls", _
                 ScreenTip:="Buttons Optionally Visible", _
                 SuperTip:="These buttons are visible on this ribbon only when requested."), _
             True)
         Set CustomSizeToggle = .NewRibbonToggleMso( _
-            Strings.AddControlStrings(ControlId:="Group2Toggle1", _
+            Loader.AddControlStrings(ControlId:="Group2Toggle1", _
                 Label:="Prefer Small", _
                 ScreenTip:="Toggles Button Size", _
                 SuperTip:="Toggles between large and small (preferred size for) buttons for this ribbon group.", _
@@ -244,7 +244,7 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
             True, True, rdLarge, DefaultImage, False, True)
         
         Set Group2Options = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown1", _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown1", _
                 Label:="Display Options", _
                 ScreenTip:="Group #2 Button Options", _
                 SuperTip:="Display options for Group #2 Buttons:" & _
@@ -253,31 +253,31 @@ Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
                         vbNewLine & "Label & Image"), _
             Visible:=True, Enabled:=False)
         Group2Options.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown1_LabelOnly", _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown1_LabelOnly", _
                 Label:="Label Only", _
                 ScreenTip:="Display Label Only", _
                 SuperTip:="Displays just the button label when its size is Regular; else both."))
         Group2Options.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown1_ImageOnly", _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown1_ImageOnly", _
                 Label:="Image Only", _
                 ScreenTip:="Display Image Only", _
                 SuperTip:="Displays just the button image when its size is Regular; else both."))
         Group2Options.AddItem .NewSelectableItem( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown1_LabelAndImage", _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown1_LabelAndImage", _
                 Label:="Label & Image", _
                 ScreenTip:="Display Label & Image", _
                 SuperTip:="Always displays both the button label and image."))
 If HideGrp2Undefined Then
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown2", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonDropDown( _
-            Strings.AddControlStrings(ControlId:="Group2Dropdown3", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Dropdown3", Label:=""), _
             Visible:=False, Enabled:=False)
 End If
         
         Set Group2Button1 = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="Group2Button1", _
+            Loader.AddControlStrings(ControlId:="Group2Button1", _
                 Label:="Group #2 1st Button", _
                 ScreenTip:="First Group #2 Button", _
                 SuperTip:="First example of a custom button."), _
@@ -288,7 +288,7 @@ End If
             ShowImage:=True, _
             ShowLabel:=True)
         Set Group2Button2 = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="Group2Button2", _
+            Loader.AddControlStrings(ControlId:="Group2Button2", _
                 Label:="Group #2 2nd Button", _
                 ScreenTip:="Seccond Group #2 Button", _
                 SuperTip:="Second example of a custom button."), _
@@ -299,7 +299,7 @@ End If
             ShowImage:=True, _
             ShowLabel:=True)
         Set Group2Button3 = .NewRibbonButtonMso( _
-            Strings.AddControlStrings(ControlId:="Group2Button3", _
+            Loader.AddControlStrings(ControlId:="Group2Button3", _
                 Label:="Group #2 3rd Button", _
                 ScreenTip:="Third Group #2 Button", _
                 SuperTip:="Third example of a custom button."), _
@@ -312,17 +312,17 @@ End If
         
 If HideGrp2Undefined Then
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group2Checkbox1", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Checkbox1", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group2Checkbox2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Checkbox2", Label:=""), _
             Visible:=False, Enabled:=False)
         Set Discard = .NewRibbonCheckBox( _
-            Strings.AddControlStrings(ControlId:="Group2Checkbox3", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Checkbox3", Label:=""), _
             Visible:=False, Enabled:=False)
         
         Set Discard = .NewRibbonToggle( _
-            Strings.AddControlStrings(ControlId:="Group2Toggle2", Label:=""), _
+            Loader.AddControlStrings(ControlId:="Group2Toggle2", Label:=""), _
             Visible:=False, Enabled:=False)
 End If
 

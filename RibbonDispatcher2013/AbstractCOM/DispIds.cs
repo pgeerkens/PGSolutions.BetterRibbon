@@ -58,6 +58,7 @@ namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
         public const int InvalidateControl      = 42;
         public const int InvalidateControlMso   = 43;
         public const int ActivateTab            = 44;
+        public const int ActivateTabQ           = 46;
 
         public const int AlternateLabel         = 45;
     }

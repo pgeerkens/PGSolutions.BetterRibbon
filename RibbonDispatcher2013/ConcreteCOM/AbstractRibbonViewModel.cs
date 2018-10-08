@@ -33,13 +33,15 @@ namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
         public IRibbonFactory RibbonFactory => _ribbonFactory; private RibbonFactory _ribbonFactory;
 
         /// <inheritdoc/>
-        public void Invalidate()                            => _ribbonFactory.Invalidate();
+        public void Invalidate()                                => _ribbonFactory.Invalidate();
         /// <inheritdoc/>
-        public void InvalidateControl(string ControlId)     => _ribbonFactory.InvalidateControl(ControlId);
+        public void InvalidateControl(string ControlId)         => _ribbonFactory.InvalidateControl(ControlId);
         /// <inheritdoc/>
-        public void InvalidateControlMso(string ControlId)  => _ribbonFactory.InvalidateControlMso(ControlId);
+        public void InvalidateControlMso(string ControlId)      => _ribbonFactory.InvalidateControlMso(ControlId);
         /// <inheritdoc/>
-        public void ActivateTab(string ControlId)           => _ribbonFactory.ActivateTab(ControlId);
+        public void ActivateTab(string ControlId)               => _ribbonFactory.ActivateTab(ControlId);
+        /// <inheritdoc/>
+        public void ActivateTabQ(string ControlId, string ns)   => _ribbonFactory.ActivateTabQ(ControlId, ns);
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
