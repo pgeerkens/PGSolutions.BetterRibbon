@@ -14,15 +14,25 @@ namespace PGSolutions.ExcelRibbon2013 {
             Extensions  = extensions;
         }
 
-        protected static void ExtractModulesByProject(VBProject project, string path) {
-            foreach (VBComponent component in project.VBComponents) {
-                Globals.ThisAddIn.Application.StatusBar = "Exporting " + project.Name + "." + component.Name + " ...";
-                var newPath = Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type));
-                component.Export(Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type)));
-                // DoEvents
-            }
+        /// <inheritdoc/>
+        public string Description { get; }
 
-            File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
+        /// <inheritdoc/>
+        public string Extensions  { get; }
+
+        protected static void ExtractModulesByProject(VBProject project, string path) {
+            try {
+                foreach (VBComponent component in project.VBComponents) {
+                    Globals.ThisAddIn.Application.StatusBar = "Exporting " + project.Name + "." + component.Name + " ...";
+                    var newPath = Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type));
+                    component.Export(Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type)));
+                    // DoEvents
+                }
+
+                File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
+            } finally {
+                Globals.ThisAddIn.Application.StatusBar = false;
+            }
         }
 
         private static string GetProjectDefinitionXml(VBProject project) {
@@ -50,22 +60,6 @@ namespace PGSolutions.ExcelRibbon2013 {
             return sb.AppendLine("</Project>").ToString();
         }
 
-        public enum VbExt_ct {
-            vbext_ct_StdModule      = 1,
-            vbext_ct_ClassModule    = 2,
-            vbext_ct_MSForm         = 3,
-            vbext_ct_Document       = 100
-        }
-
-        /// <summary>Returns an appropriate file extension (prefixed with '.') for the supplied moduleType ordinal.</summary>
-        private static string TypeExtension(VbExt_ct moduleType) {
-            return moduleType == VbExt_ct.vbext_ct_StdModule ? "bas"    // Standard module
-                :  moduleType == VbExt_ct.vbext_ct_MSForm    ? "frm"    // MS Form module
-                : (moduleType == VbExt_ct.vbext_ct_ClassModule          // Class module
-                || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"    // Document module
-                                                             : "unk";   // Unknown
-        }
-
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
         /// <param name="Path">Full (absolute) path-name for the project being exported.</param>
         /// <param name="DestIsSrc">True if the destination folder is to be named 'src' (rather than being eponymous with the project).</param>
@@ -79,12 +73,22 @@ namespace PGSolutions.ExcelRibbon2013 {
         }
 
         /// <inheritdoc/>
-        public string Description { get; }
-
-        /// <inheritdoc/>
-        public string Extensions  { get; }
-
-        /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
+
+        /// <summary>Returns an appropriate file extension (prefixed with '.') for the supplied moduleType ordinal.</summary>
+        private static string TypeExtension(VbExt_ct moduleType) {
+            return moduleType == VbExt_ct.vbext_ct_StdModule ? "bas"
+                :  moduleType == VbExt_ct.vbext_ct_MSForm    ? "frm"
+                : (moduleType == VbExt_ct.vbext_ct_ClassModule
+                || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"
+                                                             : "unk";
+        }
+
+        public enum VbExt_ct {
+            vbext_ct_StdModule      = 1,
+            vbext_ct_ClassModule    = 2,
+            vbext_ct_MSForm         = 3,
+            vbext_ct_Document       = 100
+        }
     }
 }

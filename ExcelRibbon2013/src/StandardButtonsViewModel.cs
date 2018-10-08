@@ -12,8 +12,8 @@ namespace PGSolutions.ExcelRibbon2013 {
     internal class StandardButtonsViewModel : AbstractRibbonGroupViewModel {
         public StandardButtonsViewModel(IRibbonFactory factory, ToggledEventHandler showAdvancedAction) : base(factory) {
             StandardButtonsGroup = Factory.NewRibbonGroup("StandardButtonsGroup");
-            StandardButton1      = Factory.NewRibbonButtonMso("StandardButton1",   true, true, rdRegular, "RefreshAll", false, true);
-            StandardButton2      = Factory.NewRibbonButtonMso("StandardButton2",   true, true, rdRegular, "Refresh",    false, true);
+            StandardButton1      = Factory.NewRibbonButtonMso("StandardButton1",   true, true, rdLarge, "RefreshAll", false, true);
+            StandardButton2      = Factory.NewRibbonButtonMso("StandardButton2",   true, true, rdLarge, "Refresh",    false, true);
             ShowAdvancedToggle   = Factory.NewRibbonCheckBox("ShowAdvancedToggle", true, true);
             ButtonOptions        = factory.NewRibbonDropDown("ButtonOptions",      true, true);
 

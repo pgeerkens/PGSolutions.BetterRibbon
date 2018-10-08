@@ -45,11 +45,14 @@ namespace PGSolutions.ExcelRibbon2013 {
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
         /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>
         public static void ExportModules(bool destIsSrc) {
+            var securitySaved = Globals.ThisAddIn.Application.AutomationSecurity;
+            Globals.ThisAddIn.Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+
             try {
                 var fd = Globals.ThisAddIn.Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
-                fd.AllowMultiSelect = false;
+                fd.AllowMultiSelect = ! destIsSrc;   // MultiSelect requires eponymous naming
                 fd.ButtonName = "Export";
-                fd.Title = "Select VBA Project(s) to Export From";
+                fd.Title = "Select VBA Workbook(s) to Export From";
                 fd.Filters.Clear();
 
                 var list = new ProjectFilters();
@@ -59,13 +62,15 @@ namespace PGSolutions.ExcelRibbon2013 {
                  if (fd.Show() != 0) {
                     Globals.ThisAddIn.Application.Cursor = XlMousePointer.xlWait;
                     Globals.ThisAddIn.Application.ScreenUpdating = false;
+                    Globals.ThisAddIn.Application.DisplayAlerts = false;
                     list[fd.FilterIndex].ExtractProjects(fd.SelectedItems, destIsSrc);
                 }
 
             } finally {
-                Globals.ThisAddIn.Application.StatusBar = false;
+                Globals.ThisAddIn.Application.DisplayAlerts = true;
                 Globals.ThisAddIn.Application.ScreenUpdating = true;
                 Globals.ThisAddIn.Application.Cursor = XlMousePointer.xlDefault;
+                Globals.ThisAddIn.Application.AutomationSecurity = securitySaved;
             }
         }
         
