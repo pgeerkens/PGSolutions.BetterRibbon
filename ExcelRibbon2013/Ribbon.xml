@@ -7,14 +7,16 @@
   <mso:ribbon>
     <mso:tabs>
       <mso:tab idQ="rd:TabPGSolutions" label="PGSolutions" >
-        <mso:group id="BrandingGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
+        <mso:group id="BrandingGroup" getVisible="getVisible"
+                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:button id="BrandingButton" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                       onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
                       getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
         </mso:group>
-        <mso:group id="StandardButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
+        <mso:group id="StandardButtonsGroup" getVisible="getVisible"
+                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:box id="StandardButtonsBox" getVisible="getVisible" boxStyle="vertical">
             <mso:toggleButton id="ShowAdvancedToggle" getVisible="getVisible" getEnabled="getEnabled"
                         getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
@@ -33,7 +35,8 @@
                        />
           </mso:box>
         </mso:group>
-        <mso:group id="CustomButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
+        <mso:group id="CustomButtonsGroup" getVisible="getVisible"
+                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >
             <mso:toggleButton id="SizeToggle" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
@@ -68,7 +71,8 @@
                        />
           </mso:box>
         </mso:group>
-        <mso:group id="UnknownGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
+        <mso:group id="UnknownGroup" getVisible="getVisible"
+                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:button id="UnknownButton" imageMso="MacroPlay"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                       onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"

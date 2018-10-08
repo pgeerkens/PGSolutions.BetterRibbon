@@ -124,6 +124,26 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pretty (Darn) Good Solutions.
+        /// </summary>
+        internal static string BrandingButton_ScreenTip {
+            get {
+                return ResourceManager.GetString("BrandingButton_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple robust solutions to complex problems, by Pieter Geerkens
+        ///
+        ///https://github.com/pgeerkens/RibbonDispatcher.
+        /// </summary>
+        internal static string BrandingButton_SuperTip {
+            get {
+                return ResourceManager.GetString("BrandingButton_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PGSolutions.
         /// </summary>
         internal static string BrandingGroup_Label {
@@ -234,7 +254,7 @@ namespace ExcelRibbon2013.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-        ///&lt;!-- Copyright 2017 Pieter Geerkens --&gt;
+        ///&lt;!-- Copyright 2018 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
         ///&lt;mso:customUI xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
         ///              xmlns:rd=&quot;ExcelRibbon2013&quot;
@@ -325,7 +345,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export VBA from Selected.
+        ///   Looks up a localized string similar to Export from Selected Workbook(s).
         /// </summary>
         internal static string StandardButton1_ScreenTip {
             get {
@@ -352,7 +372,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export VBA from Current.
+        ///   Looks up a localized string similar to Export VBA from Current Workbook.
         /// </summary>
         internal static string StandardButton2_ScreenTip {
             get {
@@ -363,9 +383,9 @@ namespace ExcelRibbon2013.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
         /// </summary>
-        internal static string StandardButton2_SuperTIp {
+        internal static string StandardButton2_SuperTip {
             get {
-                return ResourceManager.GetString("StandardButton2_SuperTIp", resourceCulture);
+                return ResourceManager.GetString("StandardButton2_SuperTip", resourceCulture);
             }
         }
         
@@ -375,6 +395,30 @@ namespace ExcelRibbon2013.Properties {
         internal static string StandardButtonsGroup_Label {
             get {
                 return ResourceManager.GetString("StandardButtonsGroup_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string StandardButtonsGroup_ScreenTip {
+            get {
+                return ResourceManager.GetString("StandardButtonsGroup_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports all VBA code to a sibling direcctory of each workbook, by module type:
+        ///
+        ///Class modules as .CLS
+        ///Standard modules as .BAS
+        ///MSForm modules as .FRM
+        ///
+        ///Project references as .XML.
+        /// </summary>
+        internal static string StandardButtonsGroup_SuperTip {
+            get {
+                return ResourceManager.GetString("StandardButtonsGroup_SuperTip", resourceCulture);
             }
         }
     }

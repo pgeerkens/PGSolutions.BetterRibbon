@@ -138,6 +138,14 @@
   <data name="BrandingButton_Label" xml:space="preserve">
     <value>PGSolutions</value>
   </data>
+  <data name="BrandingButton_ScreenTip" xml:space="preserve">
+    <value>Pretty (Darn) Good Solutions</value>
+  </data>
+  <data name="BrandingButton_SuperTip" xml:space="preserve">
+    <value>Simple robust solutions to complex problems, by Pieter Geerkens
+
+https://github.com/pgeerkens/RibbonDispatcher</value>
+  </data>
   <data name="BrandingGroup_Label" xml:space="preserve">
     <value>PGSolutions</value>
   </data>
@@ -205,7 +213,7 @@ When this toggle is pressed export is instead to a directory 'SRC', and Multi-Se
     <value>Selected Workbooks</value>
   </data>
   <data name="StandardButton1_ScreenTip" xml:space="preserve">
-    <value>Export VBA from Selected</value>
+    <value>Export from Selected Workbook(s)</value>
   </data>
   <data name="StandardButton1_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from selected Excel workbook(s).</value>
@@ -214,12 +222,24 @@ When this toggle is pressed export is instead to a directory 'SRC', and Multi-Se
     <value>Current Workbook</value>
   </data>
   <data name="StandardButton2_ScreenTip" xml:space="preserve">
-    <value>Export VBA from Current</value>
+    <value>Export VBA from Current Workbook</value>
   </data>
-  <data name="StandardButton2_SuperTIp" xml:space="preserve">
+  <data name="StandardButton2_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from the current Excel workbook.</value>
   </data>
   <data name="StandardButtonsGroup_Label" xml:space="preserve">
     <value>VBA Source Code Export</value>
+  </data>
+  <data name="StandardButtonsGroup_ScreenTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StandardButtonsGroup_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
+
+Class modules as .CLS
+Standard modules as .BAS
+MSForm modules as .FRM
+
+Project references as .XML</value>
   </data>
 </root>
