@@ -18,7 +18,7 @@ Private Const ShowAlerts     As Boolean = True
 Private MRibbonModel    As RibbonModel
 
 Implements IRibbonWorkbook
-
+ 
 Private Property Get IRibbonWorkbook_ViewModel() As RibbonViewModel
     Set IRibbonWorkbook_ViewModel = MRibbonModel.ViewModel
 End Property

@@ -411,7 +411,7 @@ namespace ExcelRibbon2013.Properties {
         ///   Looks up a localized string similar to Exports all VBA code to a sibling direcctory of each workbook, by module type:
         ///
         ///Class modules as .CLS
-        ///Standard modules as .BAS
+        ///Standard modules as .VBA
         ///MSForm modules as .FRM
         ///
         ///Project references as .XML.

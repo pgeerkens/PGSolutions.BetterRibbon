@@ -237,7 +237,7 @@ When this toggle is pressed export is instead to a directory 'SRC', and Multi-Se
     <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
 
 Class modules as .CLS
-Standard modules as .BAS
+Standard modules as .VBA
 MSForm modules as .FRM
 
 Project references as .XML</value>
