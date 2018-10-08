@@ -2,6 +2,7 @@
 using Microsoft.Office.Tools.Excel;
 using Office = Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
+
 using PGSolutions.RibbonDispatcher2013;
 
 namespace PGSolutions.ExcelRibbon2013 {
@@ -11,7 +12,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }
 
-        private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
+        private void ThisAddIn_Shutdown(object sender, EventArgs e) { var a = Application.Workbooks; }
 
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => _viewModel = new RibbonViewModel();

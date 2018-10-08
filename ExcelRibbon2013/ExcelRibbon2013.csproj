@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon2013\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.9</ApplicationVersion>
+    <ApplicationVersion>1.0.0.10</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -128,7 +128,11 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Microsoft.Vbe.Interop, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -185,9 +189,9 @@
   -->
   <ItemGroup>
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
-    <Compile Include="src\AddInUtilities.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\CustomButtonsViewModel.cs" />
+    <Compile Include="src\ExportVba.cs" />
     <Compile Include="src\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -212,6 +216,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\IProjectFilter.cs" />
+    <Compile Include="src\ProjectFilter.cs" />
+    <Compile Include="src\ProjectFilterExcel.cs" />
+    <Compile Include="src\ProjectFilters.cs" />
     <Compile Include="src\RibbonViewModel.cs" />
     <Compile Include="src\StandardButtonsViewModel.cs" />
     <Compile Include="ThisAddIn.cs">

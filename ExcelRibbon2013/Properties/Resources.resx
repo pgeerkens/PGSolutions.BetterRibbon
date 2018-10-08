@@ -200,22 +200,22 @@
     <value>Toggles between large and small (preferred size for) buttons for this ribbon group.</value>
   </data>
   <data name="StandardButton1_Label" xml:space="preserve">
-    <value>Button #1</value>
+    <value>Export VBA Files</value>
   </data>
   <data name="StandardButton1_ScreenTip" xml:space="preserve">
-    <value>First Standard Button</value>
+    <value>Export VBA Files</value>
   </data>
   <data name="StandardButton1_SuperTip" xml:space="preserve">
-    <value>Demonstration of a "standard button"; one that is always visible on the ribbon.</value>
+    <value>Exports all VBA code from a selected Excel workbook.</value>
   </data>
   <data name="StandardButton2_Label" xml:space="preserve">
-    <value>Button #2</value>
+    <value>Export VBA Current</value>
   </data>
   <data name="StandardButton2_ScreenTip" xml:space="preserve">
-    <value>Second Standard Button</value>
+    <value>Exports VBA Current</value>
   </data>
   <data name="StandardButton2_SuperTIp" xml:space="preserve">
-    <value>Another demonstration of a "standard button"; one that is always visible on the ribbon.</value>
+    <value>Exports all VBA code from the current Excel workbook.</value>
   </data>
   <data name="StandardButtonsGroup_Label" xml:space="preserve">
     <value>Standard Buttons</value>

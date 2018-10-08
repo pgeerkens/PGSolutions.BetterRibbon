@@ -314,7 +314,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Button #1.
+        ///   Looks up a localized string similar to Export VBA Files.
         /// </summary>
         internal static string StandardButton1_Label {
             get {
@@ -323,7 +323,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First Standard Button.
+        ///   Looks up a localized string similar to Export VBA Files.
         /// </summary>
         internal static string StandardButton1_ScreenTip {
             get {
@@ -332,7 +332,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Demonstration of a &quot;standard button&quot;; one that is always visible on the ribbon..
+        ///   Looks up a localized string similar to Exports all VBA code from a selected Excel workbook..
         /// </summary>
         internal static string StandardButton1_SuperTip {
             get {
@@ -341,7 +341,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Button #2.
+        ///   Looks up a localized string similar to Export VBA Current.
         /// </summary>
         internal static string StandardButton2_Label {
             get {
@@ -350,7 +350,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Second Standard Button.
+        ///   Looks up a localized string similar to Exports VBA Current.
         /// </summary>
         internal static string StandardButton2_ScreenTip {
             get {
@@ -359,7 +359,7 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Another demonstration of a &quot;standard button&quot;; one that is always visible on the ribbon..
+        ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
         /// </summary>
         internal static string StandardButton2_SuperTIp {
             get {

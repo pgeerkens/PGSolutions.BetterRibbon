@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                Copyright (c) 2017 Pieter Geerkens                              //
+//                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
@@ -17,8 +17,8 @@ namespace PGSolutions.ExcelRibbon2013 {
             ShowAdvancedToggle   = Factory.NewRibbonCheckBox("ShowAdvancedToggle", true, true);
             ButtonOptions        = factory.NewRibbonDropDown("ButtonOptions",      true, true);
 
-            StandardButton1.Clicked     += StandardButton1.DefaultButtonAction();
-            StandardButton2.Clicked     += StandardButton2.DefaultButtonAction();
+            StandardButton1.Clicked     += ExportVba.ExportVbaModules();
+            StandardButton2.Clicked     += ExportVba.ExportVbaModulesCurrent();
             ShowAdvancedToggle.Toggled  += showAdvancedAction;
             ButtonOptions.SelectionMade += OnSelectionMade;
 
