@@ -43,15 +43,15 @@
           </mso:dropDown>
           <mso:checkBox id="ShowAdvancedToggle"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled"
+                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
                      />
         </mso:group>
         <mso:group id="CustomButtonsGroup" getLabel="getLabel" getKeytip="getKeytip" getVisible="getVisible">
           <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >
             <mso:toggleButton id="SizeToggle" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                      getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                      getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
             <!-- Use this DropDown template when the item list will be dynamically defined through callbacks. -->
             <mso:dropDown id="ButtonOptions2"
