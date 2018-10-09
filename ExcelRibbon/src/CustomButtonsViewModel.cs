@@ -12,11 +12,11 @@ namespace PGSolutions.ExcelRibbon {
     internal class CustomButtonsViewModel : AbstractRibbonGroupViewModel {
         public CustomButtonsViewModel(IRibbonFactory factory) : base(factory) {
             CustomGroup   = factory.NewRibbonGroup("CustomButtonsGroup", true);
-            CustomButton1 = factory.NewRibbonButtonMso("AppLaunchButton1", true, true, rdLarge, "RefreshAll", true,  true);
-            CustomButton2 = factory.NewRibbonButtonMso("AppLaunchButton2", true, true, rdLarge, "Refresh",    true,  true);
-            CustomButton3 = factory.NewRibbonButtonMso("AppLaunchButton3", true, true, rdLarge, "MacroPlay",  true,  true);
-            SizeToggle    = factory.NewRibbonToggleMso("SizeToggle",       true, true, rdLarge, NoImage,      false, true);
-            ButtonOptions = factory.NewRibbonDropDown("ButtonOptions2",    true, true);
+            CustomButton1 = factory.NewRibbonButtonMso("AppLaunchButton1", Size:rdLarge, ImageMso:"RefreshAll", ShowImage:true);
+            CustomButton2 = factory.NewRibbonButtonMso("AppLaunchButton2", Size:rdLarge, ImageMso:"Refresh",    ShowImage:true);
+            CustomButton3 = factory.NewRibbonButtonMso("AppLaunchButton3", Size:rdLarge, ImageMso:"MacroPlay",  ShowImage:true);
+            SizeToggle    = factory.NewRibbonToggleMso("SizeToggle",       Size:rdLarge, ImageMso:NoImage,      ShowImage:true);
+            ButtonOptions = factory.NewRibbonDropDown("ButtonOptions2");
             ButtonOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
                          .AddItem(factory.NewSelectableItem("ImageOnly"))
                          .AddItem(factory.NewSelectableItem("LabelAndImage"));
@@ -28,6 +28,7 @@ namespace PGSolutions.ExcelRibbon {
             ButtonOptions.SelectionMade += OnSelectionMade;
 
             ButtonOptions.SelectedItemId = "LabelAndImage";
+            ButtonOptions.IsEnabled      = SizeToggle.IsPressed;
         }
 
         public RibbonGroup        CustomGroup   { get; }

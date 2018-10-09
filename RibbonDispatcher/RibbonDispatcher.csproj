@@ -21,28 +21,27 @@
     <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5056E803-B7EA-49B7-B77C-B270DE3FF822}</ProjectGuid>
+    <ProjectGuid>{7663F500-4362-4B79-B5BC-D641591DBF9B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>ExcelRibbon2013</RootNamespace>
-    <AssemblyName>ExcelRibbon2013</AssemblyName>
+    <RootNamespace>RibbonDispatcher</RootNamespace>
+    <AssemblyName>RibbonDispatcher</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
-    <TargetFrameworkProfile />
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>..\..\Publish\ExcelRibbon2013\</PublishUrl>
+    <PublishUrl>..\..\Publish\RibbonDispatcher\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.10</ApplicationVersion>
+    <ApplicationVersion>1.0.0.5</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <ProductName>ExcelRibbon2013</ProductName>
+    <ProductName>PGSolutions.RibbonDispatcher</ProductName>
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl />
-    <FriendlyName>ExcelRibbon2013</FriendlyName>
+    <FriendlyName>PGSolutions.RibbonDispatcher</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
@@ -92,10 +91,11 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>RibbonDispatcher.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.1</LangVersion>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -118,29 +118,18 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.1</LangVersion>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>RibbonDispatcher.ruleset</CodeAnalysisRuleSet>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="Microsoft.Office.interop.access.dao1">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.interop.access.dao.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Access1">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Access.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Microsoft.Vbe.Interop, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -196,15 +185,58 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
-    <Compile Include="src\BrandingViewModel.cs" />
-    <Compile Include="src\CustomButtonsViewModel.cs" />
-    <Compile Include="VbaSourceExport\AccessWrapper.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
-    <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />
+    <Compile Include="AbstractCOM\DispIds.cs" />
+    <Compile Include="AbstractCOM\Guids.cs" />
+    <Compile Include="AbstractCOM\IClickedEvents.cs" />
+    <Compile Include="AbstractCOM\IControlChangedEventArgs.cs" />
+    <Compile Include="AbstractCOM\IMain.cs" />
+    <Compile Include="AbstractCOM\IResourceLoadercs.cs" />
+    <Compile Include="AbstractCOM\IResourceManager.cs" />
+    <Compile Include="AbstractCOM\IRibbonButton.cs" />
+    <Compile Include="AbstractCOM\IRibbonCheckBox.cs" />
+    <Compile Include="AbstractCOM\IRibbonCommon.cs" />
+    <Compile Include="AbstractCOM\IRibbonDropDown.cs" />
+    <Compile Include="AbstractCOM\IRibbonFactory.cs" />
+    <Compile Include="AbstractCOM\IRibbonGroup.cs" />
+    <Compile Include="AbstractCOM\IRibbonImageable.cs" />
+    <Compile Include="AbstractCOM\IRibbonTextLanguageControl.cs" />
+    <Compile Include="AbstractCOM\IRibbonToggleButton.cs" />
+    <Compile Include="AbstractCOM\IRibbonViewModel.cs" />
+    <Compile Include="AbstractCOM\IRibbonWorkbook.cs" />
+    <Compile Include="AbstractCOM\ISelectableItem.cs" />
+    <Compile Include="AbstractCOM\ISelectionMadeEvents.cs" />
+    <Compile Include="AbstractCOM\IToggledEvents.cs" />
+    <Compile Include="ConcreteCOM\AbstractRibbonViewModel.cs" />
+    <Compile Include="ConcreteCOM\ControlChangedEventArgs.cs" />
+    <Compile Include="ConcreteCOM\ImageObject.cs" />
+    <Compile Include="ConcreteCOM\ProgIds.cs" />
+    <Compile Include="ConcreteCOM\ResourceLoader.cs" />
+    <Compile Include="ConcreteCOM\RibbonButton.cs" />
+    <Compile Include="ConcreteCOM\RibbonCheckBox.cs" />
+    <Compile Include="ConcreteCOM\RibbonCommon.cs" />
+    <Compile Include="ConcreteCOM\RibbonDropdown.cs" />
+    <Compile Include="ConcreteCOM\RibbonFactory.cs" />
+    <Compile Include="ConcreteCOM\RibbonGroup.cs" />
+    <Compile Include="ConcreteCOM\RibbonTextLanguageControl.cs" />
+    <Compile Include="ConcreteCOM\RibbonToggleButton.cs" />
+    <Compile Include="ConcreteCOM\RibbonViewModel.cs" />
+    <Compile Include="ConcreteCOM\SelectableItem.cs" />
+    <Compile Include="ControlMixins\ClickableMixin.cs" />
+    <Compile Include="ControlMixins\IClickableMixin.cs" />
+    <Compile Include="ControlMixins\IImageableMixin.cs" />
+    <Compile Include="ControlMixins\ImageableMixin.cs" />
+    <Compile Include="ControlMixins\ISelectableMixin.cs" />
+    <Compile Include="ControlMixins\ISizeableMixin.cs" />
+    <Compile Include="ControlMixins\IToggleableMixin.cs" />
+    <Compile Include="ControlMixins\SizeableMixin.cs" />
+    <Compile Include="ControlMixins\ToggleableMixin.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\DictionaryExtensions.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\ResourceManagerExtensions.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -213,8 +245,15 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="..\Sample Workbook\SampleWkBk.xlsb">
+      <Link>Workbooks\SampleWkBk.xlsb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="C:\Users\pgeer\AppData\Roaming\Microsoft\AddIns\RibbonLibrary.xlam">
+      <Link>Workbooks\RibbonLibrary.xlam</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -223,14 +262,8 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="VbaSourceExport\IProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilters.cs" />
-    <Compile Include="src\RibbonViewModel.cs" />
-    <Compile Include="VbaSourceExport\VbaSourceExportViewModel.cs" />
+    <Compile Include="AbstractCOM\RdControlSize.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -242,85 +275,28 @@
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Ribbon.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\RD-AboutWindow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcher2013\RibbonDispatcher2013.csproj">
-      <Project>{7663f500-4362-4b79-b5bc-d641591dbf9b}</Project>
-      <Name>RibbonDispatcher2013</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="ADODB">
-      <Guid>{00000205-0000-0010-8000-00AA006D2EA4}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Access">
-      <Guid>{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}</Guid>
-      <VersionMajor>9</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Access.Dao">
-      <Guid>{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}</Guid>
-      <VersionMajor>12</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>ExcelRibbon2013_1_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>269C233E0A5D57BBA108244428F54295C66987A1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>PGSolutionsStrongKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PGSolutionsStrongKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>712231978478D16F3E04EDE6B3176BAB69944968</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -331,8 +307,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Excel" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Excel" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Excel\InstallRoot\Path#excel.exe" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="Excel" GeneratedCodeNamespace="ExcelAddIn1" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="1E75D1EAF7979DD126B5DA9ED9A95ADDF6D9D9D5" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        <Host Name="Excel" GeneratedCodeNamespace="RibbonDispatcher" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="F38B85FB4E2F00B8AE2EFEBCE9FF17740F86B35B" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

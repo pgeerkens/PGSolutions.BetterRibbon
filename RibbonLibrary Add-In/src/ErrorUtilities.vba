@@ -15,7 +15,7 @@ Public Sub DisplayError(ByVal MyError As ErrObject, _
     Optional ByVal Details As String _
 )
     Const Indent As String = vbNewLine & "    "
-       
+
     If Not IsMissing(Details) Then MethodName = MethodName & "(" & Details & ")"
     MsgBox "Error #" & Err.Number & ": " & Err.Description & vbNewLine & _
             "From:" & vbNewLine & _

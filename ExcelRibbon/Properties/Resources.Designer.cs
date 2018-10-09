@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelRibbon2013.Properties {
+namespace PGSolutions.ExcelRibbon.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ExcelRibbon2013.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExcelRibbon2013.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExcelRibbon.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -284,7 +284,7 @@ namespace ExcelRibbon2013.Properties {
         ///&lt;!-- Copyright 2018 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
         ///&lt;mso:customUI xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
-        ///              xmlns:rd=&quot;ExcelRibbon2013&quot;
+        ///              xmlns:rd=&quot;ExcelRibbon&quot;
         ///              onLoad=&quot;OnRibbonLoad&quot; loadImage=&quot;Ribbon_LoadImage&quot;&gt;
         ///  &lt;mso:ribbon&gt;
         ///    &lt;mso:tabs&gt;

@@ -4,7 +4,7 @@
 
 namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>Static class of Guids.</summary>
-    internal static class Guids     {
+    public static class Guids     {
         private const string GuidSpace  = "-44F2-3B33-B105-9B8188A6F040";
         public const string IClickedEvents              = "69E19400" + GuidSpace;
         public const string IClickedEventArgs           = "69E19401" + GuidSpace;

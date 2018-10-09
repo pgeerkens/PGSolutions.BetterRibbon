@@ -12,7 +12,7 @@ using Office = Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ConcreteCOM;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.ExcelRibbon.VbaSourceExport;
-using ExcelRibbon2013.Properties;
+using PGSolutions.ExcelRibbon.Properties;
 
 namespace PGSolutions.ExcelRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -29,7 +29,7 @@ namespace PGSolutions.ExcelRibbon {
     [CLSCompliant(true)]
     [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, Office.IRibbonExtensibility {
-        const string _AssemblyName  = "ExcelRibbon2013";
+        const string _AssemblyName  = "ExcelRibbon";
 
         public RibbonViewModel() {;}
 
@@ -46,6 +46,7 @@ namespace PGSolutions.ExcelRibbon {
             BrandingViewModel        = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             CustomButtonsViewModel   = new CustomButtonsViewModel(RibbonFactory);
             StandardButtonsViewModel = new VbaSourceExportViewModel(RibbonFactory);
+            Invalidate();
         }
 
         private static IPictureDisp GetBrandingIcon() => Resources.RD_AboutWindow.ImageToPictureDisp();

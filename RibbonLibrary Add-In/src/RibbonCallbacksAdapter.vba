@@ -5,7 +5,7 @@ Public Const ModuleName   As String = "RibbonCallbacksAdapter."
 Public Const DefaultImage As String = "MacroSecurity"
 
 Private Function ViewModelFor(ByVal Control As IRibbonControl _
-) As RibbonDispatcher2013.RibbonViewModel
+) As RibbonViewModel
     On Error Resume Next
     Dim WkBk As IRibbonWorkbook
     Set WkBk = Control.Context.Parent
@@ -20,7 +20,7 @@ End Function
 
 Public Property Get AddInHandle() As Main
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("RibbonDispatcher2013").Object
+    Set AddInHandle = Application.COMAddIns("RibbonDispatcher").Object
     
 XT: Exit Property
 EH: ReraiseError Err, ModuleName & "AddInHandle"

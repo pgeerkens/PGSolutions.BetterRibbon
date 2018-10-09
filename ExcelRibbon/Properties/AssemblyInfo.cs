@@ -1,31 +1,29 @@
-﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                Copyright (c) 2018 Pieter Geerkens                              //
-////////////////////////////////////////////////////////////////////////////////////////////////////
+﻿using System.Resources;
 using System;
 using System.Reflection;
-using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 using PGSolutions.RibbonDispatcher.AbstractCOM;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PGSolutions Ribbon Dispatcher2013")]
-[assembly: AssemblyDescription("PGSolutions Dispatcher for Office Fluent Ribbon")]
+[assembly: AssemblyTitle("ExcelRibbon")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
-[assembly: AssemblyProduct("PGSolutions Ribbon Dispatcher")]
-[assembly: AssemblyCopyright("Copyright © 2018 Pieter Geerkens")]
+[assembly: AssemblyProduct("ExcelRibbon")]
+[assembly: AssemblyCopyright("Copyright © 2017 Pieter Geerkens")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("en-US")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-[assembly: CLSCompliant(false)]
+[assembly: CLSCompliant(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid(Guids.Typelib)]
@@ -40,6 +38,7 @@ using PGSolutions.RibbonDispatcher.AbstractCOM;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.5.*")]
-[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
