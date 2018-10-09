@@ -15,20 +15,20 @@
                       getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
         </mso:group>
-        <mso:group id="StandardButtonsGroup" getVisible="getVisible"
+        <mso:group id="VbASourceExportGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:box id="StandardButtonsBox" getVisible="getVisible" boxStyle="vertical">
-            <mso:toggleButton id="ShowAdvancedToggle" getVisible="getVisible" getEnabled="getEnabled"
+          <mso:box id="VbaExportBox" getVisible="getVisible" boxStyle="vertical">
+            <mso:toggleButton id="UseSrcFolderToggle" getVisible="getVisible" getEnabled="getEnabled"
                         getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                         getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
                         onAction="onActionToggle" getPressed="getPressed"
                        />
-            <mso:button id="StandardButton1" getVisible="getVisible" getEnabled="getEnabled"
+            <mso:button id="SelectedProjectButton" getVisible="getVisible" getEnabled="getEnabled"
                         getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                         getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
                         onAction="onAction"
                        />
-            <mso:button id="StandardButton2" getVisible="getVisible" getEnabled="getEnabled"
+            <mso:button id="CurrentProjecctButton" getVisible="getVisible" getEnabled="getEnabled"
                         getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                         getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
                         onAction="onAction"

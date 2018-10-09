@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
-using PGSolutions.RibbonDispatcher2013.Utilities;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.Utilities;
 
-namespace PGSolutions.RibbonDispatcher2013 {
+namespace PGSolutions.RibbonDispatcher {
 
     /// <summary>The publicly available entry points to the library.</summary>
     [Serializable]

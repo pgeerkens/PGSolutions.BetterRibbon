@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Office.Core;
 using Microsoft.Vbe.Interop;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon.VbaSourceExport {
     internal abstract class ProjectFilter : IProjectFilter {
         public ProjectFilter(string description, string extensions) {
             Description = description;
@@ -20,10 +20,10 @@ namespace PGSolutions.ExcelRibbon2013 {
         /// <inheritdoc/>
         public string Extensions  { get; }
 
-        protected static void ExtractModulesByProject(VBProject project, string path) {
+        protected static void ExtractProjectModules(VBProject project, string path) {
             try {
                 foreach (VBComponent component in project.VBComponents) {
-                    Globals.ThisAddIn.Application.StatusBar = "Exporting " + project.Name + "." + component.Name + " ...";
+                    SetStatusBarText(project.Name, component.Name);
                     var newPath = Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type));
                     component.Export(Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type)));
                     // DoEvents
@@ -34,6 +34,9 @@ namespace PGSolutions.ExcelRibbon2013 {
                 Globals.ThisAddIn.Application.StatusBar = false;
             }
         }
+
+        protected static void SetStatusBarText(string projectName, string componentName) =>
+            Globals.ThisAddIn.Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
 
         private static string GetProjectDefinitionXml(VBProject project) {
             var sb = new StringBuilder()

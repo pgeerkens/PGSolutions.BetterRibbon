@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Office = Microsoft.Office.Core;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>COM-visible alias for the OFFICE enumeration <see cref="Office.RibbonControlSize"/>.</summary>
     /// <remarks>
     /// This enumeration exists because COM Interop claims that (though it should)

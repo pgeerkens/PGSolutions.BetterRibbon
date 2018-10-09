@@ -3,9 +3,9 @@ using Microsoft.Office.Tools.Excel;
 using Office = Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonDispatcher2013;
+using PGSolutions.RibbonDispatcher;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         private RibbonViewModel _viewModel;

@@ -8,13 +8,13 @@ using stdole;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher2013.ControlMixins;
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using PGSolutions.RibbonDispatcher2013.Utilities;
+using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.Utilities;
 
-using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
+using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
 
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PGSolutions.RibbonDispatcher2013.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
     public delegate void ClickedEventHandler();

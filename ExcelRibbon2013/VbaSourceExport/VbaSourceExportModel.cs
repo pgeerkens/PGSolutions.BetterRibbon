@@ -2,18 +2,24 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Interop.Excel;
-using PGSolutions.RibbonDispatcher2013.ControlMixins;
+using PGSolutions.RibbonDispatcher.ControlMixins;
 using Microsoft.Office.Core;
 
-namespace PGSolutions.ExcelRibbon2013 {
-    internal static class ExportVba {
+namespace PGSolutions.ExcelRibbon.VbaSourceExport {
+    internal static class VbaSourceExportModel {
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to the sibling directory 'src'.</summary>
-        public static void ExportModulesCurrentProject() => ExportModulesCurrentProject(true);
+        /// <remarks>
+        /// Requires that access to the VBA project object model be trusted (Macro Security).
+        /// </remarks>
+        public static void ExportCurrentProject() => ExportCurrentProject(true);
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
         /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>
-        public static void ExportModulesCurrentProject(bool destIsSrc) {
+        /// <remarks>
+        /// Requires that access to the VBA project object model be trusted (Macro Security).
+        /// </remarks>
+        public static void ExportCurrentProject(bool destIsSrc) {
             try {
                 Globals.ThisAddIn.Application.Cursor = XlMousePointer.xlWait;
                 Globals.ThisAddIn.Application.ScreenUpdating = false;
@@ -28,7 +34,10 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
         /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>
-        public static void ExportModules(bool destIsSrc) {
+        /// <remarks>
+        /// Requires that access to the VBA project object model be trusted (Macro Security).
+        /// </remarks>
+        public static void ExportSelectedProject(bool destIsSrc) {
             var securitySaved = Globals.ThisAddIn.Application.AutomationSecurity;
             Globals.ThisAddIn.Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 

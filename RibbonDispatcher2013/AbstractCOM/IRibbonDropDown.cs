@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>The total interface (required to be) exposed externally by RibbonDropDown objects; 
     /// composition of IRibbonCommon, IDropDownItem &amp; IImageableItem</summary>
     [ComVisible(true)]

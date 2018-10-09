@@ -4,11 +4,10 @@
 using System.Windows.Forms;
 
 using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace PGSolutions.ExcelRibbon2013 {
-    internal partial class ProjectFilterExcel : ProjectFilter  {
+namespace PGSolutions.ExcelRibbon.VbaSourceExport {
+    internal class ProjectFilterExcel : ProjectFilter  {
         public ProjectFilterExcel() : this("", "") { }
 
         public ProjectFilterExcel(string description, string extensions) : base(description, extensions) { }
@@ -31,7 +30,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         private void ExtractProject(Excel.Application app, string filename, bool destIsSrc) {
-            Workbook wkbk = null;
+            Excel.Workbook wkbk = null;
             try {
                 wkbk = Globals.ThisAddIn.Application.Workbooks.Open(filename, null, true);
                 ExtractOpenProject(wkbk, destIsSrc);
@@ -53,8 +52,8 @@ namespace PGSolutions.ExcelRibbon2013 {
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public static void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
-            ExtractModulesByProject(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
+        public static void ExtractOpenProject(Excel.Workbook wkbk, bool destIsSrc) =>
+            ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 
 }

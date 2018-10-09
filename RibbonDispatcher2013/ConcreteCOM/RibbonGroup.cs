@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     /// <summary>TODO</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
        Justification = "Public, Non-Creatable, class.")]

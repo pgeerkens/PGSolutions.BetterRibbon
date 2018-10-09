@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The mixin implementation for ISizeable ribbon controls.</summary>
     internal static class SizeableMixin {
         static ConditionalWeakTable<ISizeableMixin,Fields> _table = new ConditionalWeakTable<ISizeableMixin, Fields>();

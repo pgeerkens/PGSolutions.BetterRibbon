@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 using System.Resources;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for COM clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 

@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>Interface exposed by an Excel workbook to the RibbonDispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

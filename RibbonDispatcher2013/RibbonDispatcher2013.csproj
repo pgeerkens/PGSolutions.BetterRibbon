@@ -198,6 +198,7 @@
     <Compile Include="AbstractCOM\IRibbonDropDown.cs" />
     <Compile Include="AbstractCOM\IRibbonFactory.cs" />
     <Compile Include="AbstractCOM\IRibbonGroup.cs" />
+    <Compile Include="AbstractCOM\IRibbonImageable.cs" />
     <Compile Include="AbstractCOM\IRibbonTextLanguageControl.cs" />
     <Compile Include="AbstractCOM\IRibbonToggleButton.cs" />
     <Compile Include="AbstractCOM\IRibbonViewModel.cs" />
@@ -234,6 +235,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\DictionaryExtensions.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\ResourceManagerExtensions.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

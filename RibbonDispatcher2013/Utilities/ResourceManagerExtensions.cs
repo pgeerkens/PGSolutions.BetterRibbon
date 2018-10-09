@@ -1,11 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2017 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Resources;
 using System.Windows.Forms;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher2013.Utilities {
+namespace PGSolutions.RibbonDispatcher.Utilities {
     /// <summary>TODO</summary>
     public static class ResourceManagerExtensions {
         /// <summary>TODO</summary>

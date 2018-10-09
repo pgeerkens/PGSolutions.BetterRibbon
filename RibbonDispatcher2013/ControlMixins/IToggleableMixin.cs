@@ -1,7 +1,7 @@
 ﻿using System;
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The interface for controls that can be toggled.</summary>
     [CLSCompliant(true)]
     internal interface IToggleableMixin {

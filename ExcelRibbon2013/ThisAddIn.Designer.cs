@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 #pragma warning disable 414
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     
     
     /// 

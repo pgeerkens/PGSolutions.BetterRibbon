@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     using static RdControlSize;
 
     /// <summary>The factory interface for the Ribbon Dispatcher.</summary>
@@ -88,7 +88,7 @@ namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
         IResourceLoader NewResourceLoader();
     }
 }
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     internal static partial class DispIds {
         public const int NewRibbonGroup         = 1;
         public const int NewRibbonButton        = 1 + NewRibbonGroup;

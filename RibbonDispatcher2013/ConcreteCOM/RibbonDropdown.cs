@@ -7,10 +7,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher2013.ControlMixins;
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
       Justification = "Public, Non-Creatable, class with exported Events.")]

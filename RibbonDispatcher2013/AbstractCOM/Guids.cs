@@ -2,7 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>Static class of Guids.</summary>
     internal static class Guids     {
         private const string GuidSpace  = "-44F2-3B33-B105-9B8188A6F040";

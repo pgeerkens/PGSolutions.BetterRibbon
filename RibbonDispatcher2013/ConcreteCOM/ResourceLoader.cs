@@ -5,10 +5,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using PGSolutions.RibbonDispatcher2013.Utilities;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.Utilities;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     /// <summary>TODO</summary>
     /// <remarks>
     /// </remarks>

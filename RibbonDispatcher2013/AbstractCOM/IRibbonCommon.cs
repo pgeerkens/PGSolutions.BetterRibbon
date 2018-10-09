@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>The base interface for Ribbnon controls.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

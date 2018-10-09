@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     internal interface IProjectFilter {
         /// <summary>Returns the Description for this filter.</summary>
         string Description { get; }

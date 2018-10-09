@@ -4,7 +4,7 @@
 using stdole;
 using System;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     /// <summary>TODO</summary>
     [Serializable]
     internal class ImageObject {

@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     internal abstract class AbstractRibbonGroupViewModel {
         protected AbstractRibbonGroupViewModel(IRibbonFactory factory) => Factory = factory;
 

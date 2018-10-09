@@ -3,11 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
-using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using static PGSolutions.RibbonDispatcher.Extensions;
+using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     internal class CustomButtonsViewModel : AbstractRibbonGroupViewModel {
         public CustomButtonsViewModel(IRibbonFactory factory) : base(factory) {
             CustomGroup   = factory.NewRibbonGroup("CustomButtonsGroup", true);
@@ -42,6 +43,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
         private void OnToggled(bool isPressed) => ButtonOptions.IsEnabled = ToggleButtonSize(!isPressed, Buttons);
 
-        private void OnSelectionMade(string selectedId, int selectedIndex) => Buttons.SetView(selectedIndex);
+        private void OnSelectionMade(string selectedId, int selectedIndex) =>
+            Buttons.SetDisplay((LabelImageDisplay)(selectedIndex + 1));
     }
 }

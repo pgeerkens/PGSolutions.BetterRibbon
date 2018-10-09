@@ -1,15 +1,18 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2017-8 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.AbstractCOM {
     /// <summary>The total interface (required to be) exposed externally by RibbonButton objects.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButton)]
-    public interface IRibbonButton {
+    public interface IRibbonButton : IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
@@ -61,22 +64,22 @@ namespace PGSolutions.RibbonDispatcher2013.AbstractCOM {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]
-        object Image            { get; }
+        new object Image        { get; }
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
         [DispId(DispIds.ShowImage)]
         [Description("Gets or sets whether to show the control's image; ignored by Large controls.")]
-        bool ShowImage          { get; set; }
+        new bool ShowImage      { get; set; }
         /// <summary>Gets or sets whether to show the control's label; ignored by Large controls.</summary>
         [DispId(DispIds.ShowLabel)]
         [Description("Gets or sets whether to show the control's label; ignored by Large controls.")]
-        bool ShowLabel          { get; set; }
+        new bool ShowLabel      { get; set; }
         /// <summary>Sets the current Image for the control as an {IPictureDisp}.</summary>
         [DispId(DispIds.SetImageDisp)]
         [Description("Sets the current Image for the control as an {IPictureDisp}.")]
-        void SetImageDisp(IPictureDisp Image);
+        new void SetImageDisp(IPictureDisp Image);
         /// <summary>Sets the current Image for the control as a {string} naming an MsoImage.</summary>
         [DispId(DispIds.SetImageMso)]
         [Description("Sets the current Image for the control as a {string} naming an MsoImage.")]
-        void SetImageMso(string ImageMso);
+        new void SetImageMso(string ImageMso);
     }
 }

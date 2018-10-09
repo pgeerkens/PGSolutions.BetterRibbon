@@ -1,9 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
 
-namespace PGSolutions.RibbonDispatcher2013.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The mixin implementation for IImageable ribbon controls.</summary>
     internal static class ImageableMixin {
         static ConditionalWeakTable<IImageableMixin, Fields> _table = new ConditionalWeakTable<IImageableMixin, Fields>();

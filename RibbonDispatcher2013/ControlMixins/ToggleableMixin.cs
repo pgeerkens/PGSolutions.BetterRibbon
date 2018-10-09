@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace PGSolutions.RibbonDispatcher2013.ControlMixins {
+namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>Delegate type for </summary>
     [CLSCompliant(true)]
     public delegate void ToggledEventHandler(bool IsPressed);

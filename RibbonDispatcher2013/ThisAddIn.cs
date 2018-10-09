@@ -7,7 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 
-using PGSolutions.RibbonDispatcher2013;
+using PGSolutions.RibbonDispatcher;
 
 namespace RibbonDispatcher {
     public partial class ThisAddIn {

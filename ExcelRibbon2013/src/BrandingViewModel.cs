@@ -6,11 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using stdole;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
-using static PGSolutions.RibbonDispatcher2013.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     internal class BrandingViewModel : AbstractRibbonGroupViewModel {
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons)")]

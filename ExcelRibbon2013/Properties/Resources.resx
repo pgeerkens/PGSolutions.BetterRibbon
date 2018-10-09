@@ -149,6 +149,15 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="BrandingGroup_Label" xml:space="preserve">
     <value>PGSolutions</value>
   </data>
+  <data name="CurrentProjecctButton_Label" xml:space="preserve">
+    <value>Current Workbook</value>
+  </data>
+  <data name="CurrentProjecctButton_ScreenTip" xml:space="preserve">
+    <value>Export VBA from Current Workbook</value>
+  </data>
+  <data name="CurrentProjecctButton_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from the current Excel workbook.</value>
+  </data>
   <data name="CustomButtonsGroup_Label" xml:space="preserve">
     <value>Custom Buttons</value>
   </data>
@@ -186,16 +195,14 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="Ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ribbon.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="ShowAdvancedToggle_Label" xml:space="preserve">
-    <value>Use 'SRC' folder</value>
+  <data name="SelectedProjectButton_Label" xml:space="preserve">
+    <value>Selected Workbooks</value>
   </data>
-  <data name="ShowAdvancedToggle_ScreenTip" xml:space="preserve">
-    <value>Toggles use of folder-name SRC</value>
+  <data name="SelectedProjectButton_ScreenTip" xml:space="preserve">
+    <value>Export from Selected Workbook(s)</value>
   </data>
-  <data name="ShowAdvancedToggle_SuperTip" xml:space="preserve">
-    <value>By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
-
-When this toggle is pressed export is instead to a directory 'SRC', and Multi-Select is disabled.</value>
+  <data name="SelectedProjectButton_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
   <data name="SizeToggle_AlternateLabel" xml:space="preserve">
     <value>Prefer Large</value>
@@ -209,31 +216,24 @@ When this toggle is pressed export is instead to a directory 'SRC', and Multi-Se
   <data name="SizeToggle_SuperTIp" xml:space="preserve">
     <value>Toggles between large and small (preferred size for) buttons for this ribbon group.</value>
   </data>
-  <data name="StandardButton1_Label" xml:space="preserve">
-    <value>Selected Workbooks</value>
+  <data name="UseSrcFolderToggle_Label" xml:space="preserve">
+    <value>Use 'SRC' folder</value>
   </data>
-  <data name="StandardButton1_ScreenTip" xml:space="preserve">
-    <value>Export from Selected Workbook(s)</value>
+  <data name="UseSrcFolderToggle_ScreenTip" xml:space="preserve">
+    <value>Toggles use of folder-name SRC</value>
   </data>
-  <data name="StandardButton1_SuperTip" xml:space="preserve">
-    <value>Exports all VBA code from selected Excel workbook(s).</value>
+  <data name="UseSrcFolderToggle_SuperTip" xml:space="preserve">
+    <value>By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+
+When this toggle is pressed export is instead to a directory 'SRC', and Multi-Select is disabled.</value>
   </data>
-  <data name="StandardButton2_Label" xml:space="preserve">
-    <value>Current Workbook</value>
-  </data>
-  <data name="StandardButton2_ScreenTip" xml:space="preserve">
-    <value>Export VBA from Current Workbook</value>
-  </data>
-  <data name="StandardButton2_SuperTip" xml:space="preserve">
-    <value>Exports all VBA code from the current Excel workbook.</value>
-  </data>
-  <data name="StandardButtonsGroup_Label" xml:space="preserve">
+  <data name="VbASourceExportGroup_Label" xml:space="preserve">
     <value>VBA Source Code Export</value>
   </data>
-  <data name="StandardButtonsGroup_ScreenTip" xml:space="preserve">
-    <value />
+  <data name="VbASourceExportGroup_ScreenTip" xml:space="preserve">
+    <value>VBA Source Export Controls</value>
   </data>
-  <data name="StandardButtonsGroup_SuperTip" xml:space="preserve">
+  <data name="VbASourceExportGroup_SuperTip" xml:space="preserve">
     <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
 
 Class modules as .CLS

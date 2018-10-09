@@ -153,6 +153,33 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Workbook.
+        /// </summary>
+        internal static string CurrentProjecctButton_Label {
+            get {
+                return ResourceManager.GetString("CurrentProjecctButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export VBA from Current Workbook.
+        /// </summary>
+        internal static string CurrentProjecctButton_ScreenTip {
+            get {
+                return ResourceManager.GetString("CurrentProjecctButton_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
+        /// </summary>
+        internal static string CurrentProjecctButton_SuperTip {
+            get {
+                return ResourceManager.GetString("CurrentProjecctButton_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Buttons.
         /// </summary>
         internal static string CustomButtonsGroup_Label {
@@ -271,31 +298,29 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use &apos;SRC&apos; folder.
+        ///   Looks up a localized string similar to Selected Workbooks.
         /// </summary>
-        internal static string ShowAdvancedToggle_Label {
+        internal static string SelectedProjectButton_Label {
             get {
-                return ResourceManager.GetString("ShowAdvancedToggle_Label", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButton_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles use of folder-name SRC.
+        ///   Looks up a localized string similar to Export from Selected Workbook(s).
         /// </summary>
-        internal static string ShowAdvancedToggle_ScreenTip {
+        internal static string SelectedProjectButton_ScreenTip {
             get {
-                return ResourceManager.GetString("ShowAdvancedToggle_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButton_ScreenTip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
-        ///
-        ///When this toggle is pressed export is instead to a directory &apos;SRC&apos;, and Multi-Select is disabled..
+        ///   Looks up a localized string similar to Exports all VBA code from selected Excel workbook(s)..
         /// </summary>
-        internal static string ShowAdvancedToggle_SuperTip {
+        internal static string SelectedProjectButton_SuperTip {
             get {
-                return ResourceManager.GetString("ShowAdvancedToggle_SuperTip", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButton_SuperTip", resourceCulture);
             }
         }
         
@@ -336,74 +361,49 @@ namespace ExcelRibbon2013.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected Workbooks.
+        ///   Looks up a localized string similar to Use &apos;SRC&apos; folder.
         /// </summary>
-        internal static string StandardButton1_Label {
+        internal static string UseSrcFolderToggle_Label {
             get {
-                return ResourceManager.GetString("StandardButton1_Label", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggle_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export from Selected Workbook(s).
+        ///   Looks up a localized string similar to Toggles use of folder-name SRC.
         /// </summary>
-        internal static string StandardButton1_ScreenTip {
+        internal static string UseSrcFolderToggle_ScreenTip {
             get {
-                return ResourceManager.GetString("StandardButton1_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggle_ScreenTip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports all VBA code from selected Excel workbook(s)..
+        ///   Looks up a localized string similar to By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+        ///
+        ///When this toggle is pressed export is instead to a directory &apos;SRC&apos;, and Multi-Select is disabled..
         /// </summary>
-        internal static string StandardButton1_SuperTip {
+        internal static string UseSrcFolderToggle_SuperTip {
             get {
-                return ResourceManager.GetString("StandardButton1_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current Workbook.
-        /// </summary>
-        internal static string StandardButton2_Label {
-            get {
-                return ResourceManager.GetString("StandardButton2_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export VBA from Current Workbook.
-        /// </summary>
-        internal static string StandardButton2_ScreenTip {
-            get {
-                return ResourceManager.GetString("StandardButton2_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
-        /// </summary>
-        internal static string StandardButton2_SuperTip {
-            get {
-                return ResourceManager.GetString("StandardButton2_SuperTip", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggle_SuperTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to VBA Source Code Export.
         /// </summary>
-        internal static string StandardButtonsGroup_Label {
+        internal static string VbASourceExportGroup_Label {
             get {
-                return ResourceManager.GetString("StandardButtonsGroup_Label", resourceCulture);
+                return ResourceManager.GetString("VbASourceExportGroup_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to VBA Source Export Controls.
         /// </summary>
-        internal static string StandardButtonsGroup_ScreenTip {
+        internal static string VbASourceExportGroup_ScreenTip {
             get {
-                return ResourceManager.GetString("StandardButtonsGroup_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("VbASourceExportGroup_ScreenTip", resourceCulture);
             }
         }
         
@@ -416,9 +416,9 @@ namespace ExcelRibbon2013.Properties {
         ///
         ///Project references as .XML.
         /// </summary>
-        internal static string StandardButtonsGroup_SuperTip {
+        internal static string VbASourceExportGroup_SuperTip {
             get {
-                return ResourceManager.GetString("StandardButtonsGroup_SuperTip", resourceCulture);
+                return ResourceManager.GetString("VbASourceExportGroup_SuperTip", resourceCulture);
             }
         }
     }

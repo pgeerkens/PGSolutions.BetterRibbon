@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher2013.AbstractCOM;
-using LanguageStrings = PGSolutions.RibbonDispatcher2013.AbstractCOM.IRibbonTextLanguageControl;
+using PGSolutions.RibbonDispatcher.AbstractCOM;
+using LanguageStrings = PGSolutions.RibbonDispatcher.AbstractCOM.IRibbonTextLanguageControl;
 
-namespace PGSolutions.RibbonDispatcher2013.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
 
     /// <summary>TODO</summary>
     [Serializable]

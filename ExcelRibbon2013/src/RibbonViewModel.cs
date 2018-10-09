@@ -9,11 +9,12 @@ using stdole;
 
 using Office = Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher2013.ConcreteCOM;
-using PGSolutions.RibbonDispatcher2013.Utilities;
+using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.Utilities;
+using PGSolutions.ExcelRibbon.VbaSourceExport;
 using ExcelRibbon2013.Properties;
 
-namespace PGSolutions.ExcelRibbon2013 {
+namespace PGSolutions.ExcelRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226">For more information about adding callback methods.</a>
@@ -33,7 +34,7 @@ namespace PGSolutions.ExcelRibbon2013 {
         public RibbonViewModel() {;}
 
         internal BrandingViewModel        BrandingViewModel        { get; private set; }
-        internal StandardButtonsViewModel StandardButtonsViewModel { get; private set; }
+        internal VbaSourceExportViewModel StandardButtonsViewModel { get; private set; }
         internal CustomButtonsViewModel   CustomButtonsViewModel   { get; private set; }
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
@@ -44,7 +45,7 @@ namespace PGSolutions.ExcelRibbon2013 {
 
             BrandingViewModel        = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             CustomButtonsViewModel   = new CustomButtonsViewModel(RibbonFactory);
-            StandardButtonsViewModel = new StandardButtonsViewModel(RibbonFactory);
+            StandardButtonsViewModel = new VbaSourceExportViewModel(RibbonFactory);
         }
 
         private static IPictureDisp GetBrandingIcon() => Resources.RD_AboutWindow.ImageToPictureDisp();
