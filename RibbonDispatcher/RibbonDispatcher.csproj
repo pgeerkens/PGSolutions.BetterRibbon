@@ -33,7 +33,7 @@
     <PublishUrl>..\..\Publish\RibbonDispatcher\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.5</ApplicationVersion>
+    <ApplicationVersion>1.0.0.6</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -199,6 +199,7 @@
     <Compile Include="AbstractCOM\IRibbonFactory.cs" />
     <Compile Include="AbstractCOM\IRibbonGroup.cs" />
     <Compile Include="AbstractCOM\IRibbonImageable.cs" />
+    <Compile Include="AbstractCOM\IRibbonModel.cs" />
     <Compile Include="AbstractCOM\IRibbonTextLanguageControl.cs" />
     <Compile Include="AbstractCOM\IRibbonToggleButton.cs" />
     <Compile Include="AbstractCOM\IRibbonViewModel.cs" />

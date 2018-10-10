@@ -7,7 +7,7 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using stdole;
 
-using Office = Microsoft.Office.Core;
+using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ConcreteCOM;
 using PGSolutions.RibbonDispatcher.Utilities;
@@ -28,7 +28,7 @@ namespace PGSolutions.ExcelRibbon {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
-    public sealed class RibbonViewModel : AbstractRibbonViewModel, Office.IRibbonExtensibility {
+    public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _AssemblyName  = "ExcelRibbon";
 
         public RibbonViewModel() {;}
@@ -40,7 +40,7 @@ namespace PGSolutions.ExcelRibbon {
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
         [CLSCompliant(false)]
-        public  void OnRibbonLoad(Office.IRibbonUI ribbonUI) {
+        public  void OnRibbonLoad(IRibbonUI ribbonUI) {
             Initialize(ribbonUI, this);
 
             BrandingViewModel        = new BrandingViewModel(RibbonFactory, GetBrandingIcon);

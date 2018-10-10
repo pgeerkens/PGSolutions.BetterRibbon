@@ -45,5 +45,6 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         public const string ControlStrings              = "69E19423" + GuidSpace;
         public const string IResourceLoader             = "69E19424" + GuidSpace;
         public const string ResourceLoader              = "69E19425" + GuidSpace;
+        public const string IRibbonModel                = "69E19426" + GuidSpace;
     }
 }

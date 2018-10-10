@@ -50,6 +50,8 @@ Attribute CustomSizeToggle.VB_VarHelpID = -1
 Private WithEvents Group2Options        As RibbonDropDown
 Attribute Group2Options.VB_VarHelpID = -1
 
+Implements IRibbonModel
+
 Private Sub BrandingButton_Clicked()
     MsgBox "Canadien, eh!", vbOKOnly Or vbInformation, "PGSolutions Ribbon Refresh"
 End Sub
@@ -85,7 +87,7 @@ Private Sub ShowAdvancedToggle_Toggled(ByVal IsPressed As Boolean)
     SecondGroup.IsVisible = IsPressed
 End Sub
 
-Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As RibbonModel
+Friend Function Initialize(ByVal ribbonUI As IRibbonUI) As IRibbonModel
     On Error GoTo EH
     Dim HideGrp2Undefined   As Boolean    ' When true hides the undefined controls in Group2
     HideGrp2Undefined = True
@@ -346,10 +348,10 @@ End Function
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ''''''''''''''''''''''''''''   DON'T EDIT THESE ROUTINES   '''''''''''''''''''''''
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Friend Property Get ViewModel() As RibbonViewModel
-    Set ViewModel = MViewModel
+Friend Property Get IRibbonModel_RibbonViewModel() As IRibbonViewModel
+    Set IRibbonModel_RibbonViewModel = MViewModel
 End Property
 
-Friend Sub ActivateTab()
+Friend Sub IRibbonModel_ActivateTab()
     MViewModel.ActivateTab RibbonTab.ID
 End Sub

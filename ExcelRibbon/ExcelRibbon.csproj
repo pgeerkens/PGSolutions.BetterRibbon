@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.12</ApplicationVersion>
+    <ApplicationVersion>1.0.0.13</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -298,9 +298,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
-      <Project>{7663f500-4362-4b79-b5bc-d641591dbf9b}</Project>
-      <Name>RibbonDispatcher</Name>
+    <ProjectReference Include="..\RibbonDispatcherX\RibbonDispatcherX.csproj">
+      <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
+      <Name>RibbonDispatcherX</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

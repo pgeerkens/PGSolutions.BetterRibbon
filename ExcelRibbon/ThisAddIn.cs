@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
-using Office = Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher;
@@ -12,9 +12,9 @@ namespace PGSolutions.ExcelRibbon {
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }
 
-        private void ThisAddIn_Shutdown(object sender, EventArgs e) { var a = Application.Workbooks; }
+        private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
-        protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject() 
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => _viewModel = new RibbonViewModel();
 
         private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
