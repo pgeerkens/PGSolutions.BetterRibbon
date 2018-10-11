@@ -40,7 +40,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event ToggledEventHandler Toggled;
 
         /// <summary>TODO</summary>
-        public bool IsPressed {
+        public virtual bool IsPressed {
             get => this.GetPressed();
             set => this.SetPressed(value);
         }
@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public override string Label     => this.GetLabel();
 
         /// <summary>TODO</summary>
-        public void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
+        public virtual void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
 
         /// <summary>TODO</summary>
         IRibbonTextLanguageControl IToggleableMixin.LanguageStrings => LanguageStrings;

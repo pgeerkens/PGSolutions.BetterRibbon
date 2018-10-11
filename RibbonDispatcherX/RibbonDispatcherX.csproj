@@ -143,6 +143,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RibbonButtonAdaptor.cs" />
     <Compile Include="Utilities\DictionaryExtensions.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\AbstractResourceManager.cs" />

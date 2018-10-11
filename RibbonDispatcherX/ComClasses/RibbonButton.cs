@@ -42,7 +42,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event ClickedEventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public void OnClicked() => Clicked?.Invoke();
+        public virtual void OnClicked() => Clicked?.Invoke();
         #endregion
 
         #region Publish IImageableMixin to class default interface

@@ -55,7 +55,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private bool _enabled;
 
         /// <inheritdoc/>
-        public bool IsVisible {
+        public virtual bool IsVisible {
             get => _visible;
             set { _visible = value; OnChanged(); }
         }
@@ -68,7 +68,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <inheritdoc/>
-        public void OnChanged() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
+        public virtual void OnChanged() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
 
         private static LanguageStrings GetLanguageStrings(string controlId, IResourceManager mgr)
             => mgr.GetControlStrings(controlId);
