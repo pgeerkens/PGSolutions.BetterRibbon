@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

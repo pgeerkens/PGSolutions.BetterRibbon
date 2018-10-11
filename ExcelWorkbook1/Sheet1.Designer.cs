@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 #pragma warning disable 414
-namespace PGSolutions.SampleRibbon {
+namespace PGSolutions.ExampleRibbon {
 
     /// 
     [Microsoft.VisualStudio.Tools.Applications.Runtime.StartupObjectAttribute(1)]

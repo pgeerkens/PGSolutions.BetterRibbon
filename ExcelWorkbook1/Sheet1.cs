@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 
-namespace PGSolutions.SampleRibbon {
+namespace PGSolutions.ExampleRibbon {
     public partial class Sheet1
     {
         private void Sheet1_Startup(object sender, System.EventArgs e)

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PGSolutions.ExcelRibbon.Properties {
+namespace ExcelRibbon.Properties {
     using System;
     
     
@@ -115,7 +115,7 @@ namespace PGSolutions.ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PGSolutions.
+        ///   Looks up a localized string similar to PGSolutions .
         /// </summary>
         internal static string BrandingButton_Label {
             get {
@@ -153,29 +153,56 @@ namespace PGSolutions.ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Workbook.
+        ///   Looks up a localized string similar to Export Current.
         /// </summary>
-        internal static string CurrentProjecctButton_Label {
+        internal static string CurrentProjectButtonMS_Label {
             get {
-                return ResourceManager.GetString("CurrentProjecctButton_Label", resourceCulture);
+                return ResourceManager.GetString("CurrentProjectButtonMS_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Export VBA from Current Workbook.
         /// </summary>
-        internal static string CurrentProjecctButton_ScreenTip {
+        internal static string CurrentProjectButtonMS_ScreenTip {
             get {
-                return ResourceManager.GetString("CurrentProjecctButton_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("CurrentProjectButtonMS_ScreenTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
         /// </summary>
-        internal static string CurrentProjecctButton_SuperTip {
+        internal static string CurrentProjectButtonMS_SuperTip {
             get {
-                return ResourceManager.GetString("CurrentProjecctButton_SuperTip", resourceCulture);
+                return ResourceManager.GetString("CurrentProjectButtonMS_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Current.
+        /// </summary>
+        internal static string CurrentProjectButtonPG_Label {
+            get {
+                return ResourceManager.GetString("CurrentProjectButtonPG_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export VBA from Current Workbook.
+        /// </summary>
+        internal static string CurrentProjectButtonPG_ScreenTip {
+            get {
+                return ResourceManager.GetString("CurrentProjectButtonPG_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports all VBA code from the current Excel workbook..
+        /// </summary>
+        internal static string CurrentProjectButtonPG_SuperTip {
+            get {
+                return ResourceManager.GetString("CurrentProjectButtonPG_SuperTip", resourceCulture);
             }
         }
         
@@ -288,8 +315,8 @@ namespace PGSolutions.ExcelRibbon.Properties {
         ///              onLoad=&quot;OnRibbonLoad&quot; loadImage=&quot;Ribbon_LoadImage&quot;&gt;
         ///  &lt;mso:ribbon&gt;
         ///    &lt;mso:tabs&gt;
-        ///      &lt;mso:tab idQ=&quot;rd:TabPGSolutions&quot; label=&quot;PGSolutions&quot; &gt;
-        ///        &lt;mso:group id=&quot;BrandingGro [rest of string was truncated]&quot;;.
+        ///        &lt;mso:tab idMso=&quot;TabDeveloper&quot; &gt;
+        ///            &lt;mso:group id=&quot;VbaExportGroupMS&quot; getVisible=&quot;ge [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Ribbon {
             get {
@@ -298,29 +325,56 @@ namespace PGSolutions.ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected Workbooks.
+        ///   Looks up a localized string similar to Export Selected.
         /// </summary>
-        internal static string SelectedProjectButton_Label {
+        internal static string SelectedProjectButtonMS_Label {
             get {
-                return ResourceManager.GetString("SelectedProjectButton_Label", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButtonMS_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Export from Selected Workbook(s).
         /// </summary>
-        internal static string SelectedProjectButton_ScreenTip {
+        internal static string SelectedProjectButtonMS_ScreenTip {
             get {
-                return ResourceManager.GetString("SelectedProjectButton_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButtonMS_ScreenTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Exports all VBA code from selected Excel workbook(s)..
         /// </summary>
-        internal static string SelectedProjectButton_SuperTip {
+        internal static string SelectedProjectButtonMS_SuperTip {
             get {
-                return ResourceManager.GetString("SelectedProjectButton_SuperTip", resourceCulture);
+                return ResourceManager.GetString("SelectedProjectButtonMS_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Selected.
+        /// </summary>
+        internal static string SelectedProjectButtonPG_Label {
+            get {
+                return ResourceManager.GetString("SelectedProjectButtonPG_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export from Selected Workbook(s).
+        /// </summary>
+        internal static string SelectedProjectButtonPG_ScreenTip {
+            get {
+                return ResourceManager.GetString("SelectedProjectButtonPG_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports all VBA code from selected Excel workbook(s)..
+        /// </summary>
+        internal static string SelectedProjectButtonPG_SuperTip {
+            get {
+                return ResourceManager.GetString("SelectedProjectButtonPG_SuperTip", resourceCulture);
             }
         }
         
@@ -363,47 +417,76 @@ namespace PGSolutions.ExcelRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Use &apos;SRC&apos; folder.
         /// </summary>
-        internal static string UseSrcFolderToggle_Label {
+        internal static string UseSrcFolderToggleMS_Label {
             get {
-                return ResourceManager.GetString("UseSrcFolderToggle_Label", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggleMS_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Toggles use of folder-name SRC.
         /// </summary>
-        internal static string UseSrcFolderToggle_ScreenTip {
+        internal static string UseSrcFolderToggleMS_ScreenTip {
             get {
-                return ResourceManager.GetString("UseSrcFolderToggle_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggleMS_ScreenTip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+        ///   Looks up a localized string similar to By default VBAExport is to a directory &apos;SRC&apos; sibling to the workbook. and Multi-Select is disabled..
         ///
-        ///When this toggle is pressed export is instead to a directory &apos;SRC&apos;, and Multi-Select is disabled..
+        ///When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled..
         /// </summary>
-        internal static string UseSrcFolderToggle_SuperTip {
+        internal static string UseSrcFolderToggleMS_SuperTip {
             get {
-                return ResourceManager.GetString("UseSrcFolderToggle_SuperTip", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderToggleMS_SuperTip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VBA Source Code Export.
+        ///   Looks up a localized string similar to Use &apos;SRC&apos; folder.
         /// </summary>
-        internal static string VbASourceExportGroup_Label {
+        internal static string UseSrcFolderTogglePG_Label {
             get {
-                return ResourceManager.GetString("VbASourceExportGroup_Label", resourceCulture);
+                return ResourceManager.GetString("UseSrcFolderTogglePG_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggles use of folder-name SRC.
+        /// </summary>
+        internal static string UseSrcFolderTogglePG_ScreenTip {
+            get {
+                return ResourceManager.GetString("UseSrcFolderTogglePG_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By default VBAExport is to a directory &apos;SRC&apos; sibling to the workbook. and Multi-Select is disabled..
+        ///
+        ///When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled..
+        /// </summary>
+        internal static string UseSrcFolderTogglePG_SuperTip {
+            get {
+                return ResourceManager.GetString("UseSrcFolderTogglePG_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VBA by PGSolutions.
+        /// </summary>
+        internal static string VbaExportGroupMS_Label {
+            get {
+                return ResourceManager.GetString("VbaExportGroupMS_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to VBA Source Export Controls.
         /// </summary>
-        internal static string VbASourceExportGroup_ScreenTip {
+        internal static string VbaExportGroupMS_ScreenTip {
             get {
-                return ResourceManager.GetString("VbASourceExportGroup_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("VbaExportGroupMS_ScreenTip", resourceCulture);
             }
         }
         
@@ -416,9 +499,42 @@ namespace PGSolutions.ExcelRibbon.Properties {
         ///
         ///Project references as .XML.
         /// </summary>
-        internal static string VbASourceExportGroup_SuperTip {
+        internal static string VbaExportGroupMS_SuperTip {
             get {
-                return ResourceManager.GetString("VbASourceExportGroup_SuperTip", resourceCulture);
+                return ResourceManager.GetString("VbaExportGroupMS_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VBA Source Code Export.
+        /// </summary>
+        internal static string VbaExportGroupPG_Label {
+            get {
+                return ResourceManager.GetString("VbaExportGroupPG_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VBA Source Export Controls.
+        /// </summary>
+        internal static string VbaExportGroupPG_ScreenTip {
+            get {
+                return ResourceManager.GetString("VbaExportGroupPG_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports all VBA code to a sibling direcctory of each workbook, by module type:
+        ///
+        ///Class modules as .CLS
+        ///Standard modules as .VBA
+        ///MSForm modules as .FRM
+        ///
+        ///Project references as .XML.
+        /// </summary>
+        internal static string VbaExportGroupPG_SuperTip {
+            get {
+                return ResourceManager.GetString("VbaExportGroupPG_SuperTip", resourceCulture);
             }
         }
     }

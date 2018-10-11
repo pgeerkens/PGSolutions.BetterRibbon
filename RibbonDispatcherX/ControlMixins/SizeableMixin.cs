@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The mixin implementation for ISizeable ribbon controls.</summary>

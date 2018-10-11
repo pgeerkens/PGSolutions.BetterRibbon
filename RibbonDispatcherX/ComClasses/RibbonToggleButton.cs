@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon ToggleButton objects.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
        Justification = "Public, Non-Creatable, class with exported Events.")]
@@ -40,7 +40,10 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
         public event ToggledEventHandler Toggled;
 
         /// <summary>TODO</summary>
-        public          bool   IsPressed => this.GetPressed();
+        public bool IsPressed {
+            get => this.GetPressed();
+            set => this.SetPressed(value);
+        }
 
         /// <summary>TODO</summary>
         public override string Label     => this.GetLabel();

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IRibbonImageable {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]

@@ -136,7 +136,7 @@
     <value>PGSolutions Ribbon</value>
   </data>
   <data name="BrandingButton_Label" xml:space="preserve">
-    <value>PGSolutions</value>
+    <value>PGSolutions </value>
   </data>
   <data name="BrandingButton_ScreenTip" xml:space="preserve">
     <value>Pretty (Darn) Good Solutions</value>
@@ -149,13 +149,22 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="BrandingGroup_Label" xml:space="preserve">
     <value>PGSolutions</value>
   </data>
-  <data name="CurrentProjecctButton_Label" xml:space="preserve">
-    <value>Current Workbook</value>
+  <data name="CurrentProjectButtonMS_Label" xml:space="preserve">
+    <value>Export Current</value>
   </data>
-  <data name="CurrentProjecctButton_ScreenTip" xml:space="preserve">
+  <data name="CurrentProjectButtonMS_ScreenTip" xml:space="preserve">
     <value>Export VBA from Current Workbook</value>
   </data>
-  <data name="CurrentProjecctButton_SuperTip" xml:space="preserve">
+  <data name="CurrentProjectButtonMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from the current Excel workbook.</value>
+  </data>
+  <data name="CurrentProjectButtonPG_Label" xml:space="preserve">
+    <value>Export Current</value>
+  </data>
+  <data name="CurrentProjectButtonPG_ScreenTip" xml:space="preserve">
+    <value>Export VBA from Current Workbook</value>
+  </data>
+  <data name="CurrentProjectButtonPG_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from the current Excel workbook.</value>
   </data>
   <data name="CustomButtonsGroup_Label" xml:space="preserve">
@@ -195,13 +204,22 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="Ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ribbon.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="SelectedProjectButton_Label" xml:space="preserve">
-    <value>Selected Workbooks</value>
+  <data name="SelectedProjectButtonMS_Label" xml:space="preserve">
+    <value>Export Selected</value>
   </data>
-  <data name="SelectedProjectButton_ScreenTip" xml:space="preserve">
+  <data name="SelectedProjectButtonMS_ScreenTip" xml:space="preserve">
     <value>Export from Selected Workbook(s)</value>
   </data>
-  <data name="SelectedProjectButton_SuperTip" xml:space="preserve">
+  <data name="SelectedProjectButtonMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from selected Excel workbook(s).</value>
+  </data>
+  <data name="SelectedProjectButtonPG_Label" xml:space="preserve">
+    <value>Export Selected</value>
+  </data>
+  <data name="SelectedProjectButtonPG_ScreenTip" xml:space="preserve">
+    <value>Export from Selected Workbook(s)</value>
+  </data>
+  <data name="SelectedProjectButtonPG_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
   <data name="SizeToggle_AlternateLabel" xml:space="preserve">
@@ -216,24 +234,50 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="SizeToggle_SuperTIp" xml:space="preserve">
     <value>Toggles between large and small (preferred size for) buttons for this ribbon group.</value>
   </data>
-  <data name="UseSrcFolderToggle_Label" xml:space="preserve">
+  <data name="UseSrcFolderToggleMS_Label" xml:space="preserve">
     <value>Use 'SRC' folder</value>
   </data>
-  <data name="UseSrcFolderToggle_ScreenTip" xml:space="preserve">
+  <data name="UseSrcFolderToggleMS_ScreenTip" xml:space="preserve">
     <value>Toggles use of folder-name SRC</value>
   </data>
-  <data name="UseSrcFolderToggle_SuperTip" xml:space="preserve">
-    <value>By default VBAExport is to a directory eponymous with the workbook, suffixed by VBA.
+  <data name="UseSrcFolderToggleMS_SuperTip" xml:space="preserve">
+    <value>By default VBAExport is to a directory 'SRC' sibling to the workbook. and Multi-Select is disabled..
 
-When this toggle is pressed export is instead to a directory 'SRC', and Multi-Select is disabled.</value>
+When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled.</value>
   </data>
-  <data name="VbASourceExportGroup_Label" xml:space="preserve">
-    <value>VBA Source Code Export</value>
+  <data name="VbaExportGroupMS_Label" xml:space="preserve">
+    <value>VBA by PGSolutions</value>
   </data>
-  <data name="VbASourceExportGroup_ScreenTip" xml:space="preserve">
+  <data name="VbaExportGroupMS_ScreenTip" xml:space="preserve">
     <value>VBA Source Export Controls</value>
   </data>
-  <data name="VbASourceExportGroup_SuperTip" xml:space="preserve">
+  <data name="VbaExportGroupMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
+
+Class modules as .CLS
+Standard modules as .VBA
+MSForm modules as .FRM
+
+Project references as .XML</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_Label" xml:space="preserve">
+    <value>Use 'SRC' folder</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_ScreenTip" xml:space="preserve">
+    <value>Toggles use of folder-name SRC</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_SuperTip" xml:space="preserve">
+    <value>By default VBAExport is to a directory 'SRC' sibling to the workbook. and Multi-Select is disabled..
+
+When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled.</value>
+  </data>
+  <data name="VbaExportGroupPG_Label" xml:space="preserve">
+    <value>VBA Source Code Export</value>
+  </data>
+  <data name="VbaExportGroupPG_ScreenTip" xml:space="preserve">
+    <value>VBA Source Export Controls</value>
+  </data>
+  <data name="VbaExportGroupPG_SuperTip" xml:space="preserve">
     <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
 
 Class modules as .CLS

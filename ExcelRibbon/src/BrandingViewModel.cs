@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
-using PGSolutions.RibbonDispatcher.ConcreteCOM;
-using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
+using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
+using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
 
 namespace PGSolutions.ExcelRibbon {
     internal class BrandingViewModel : AbstractRibbonGroupViewModel {

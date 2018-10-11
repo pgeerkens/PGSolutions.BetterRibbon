@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ConcreteCOM
+namespace PGSolutions.RibbonDispatcher.ComClasses
 {
     /// <summary>TODO</summary>
     [Serializable]

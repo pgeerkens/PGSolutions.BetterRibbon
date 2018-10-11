@@ -4,10 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using System.ComponentModel;
 
-namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton objects.</summary>
     [Description("The ViewModel for Ribbon Button objects.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",

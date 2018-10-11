@@ -6,7 +6,29 @@
               onLoad="OnRibbonLoad" loadImage="Ribbon_LoadImage">
   <mso:ribbon>
     <mso:tabs>
-      <mso:tab idQ="rd:TabPGSolutions" label="PGSolutions" >
+        <mso:tab idMso="TabDeveloper" >
+            <mso:group id="VbaExportGroupMS" getVisible="getVisible" insertAfterMso="XmlExport"
+                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:box id="VbaExportBoxMS" getVisible="getVisible" boxStyle="vertical">
+                    <mso:toggleButton id="UseSrcFolderToggleMS" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onActionToggle" getPressed="getPressed"
+                       />
+                    <mso:button id="SelectedProjectButtonMS" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                    <mso:button id="CurrentProjectButtonMS" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                </mso:box>
+            </mso:group>
+        </mso:tab>
+        <mso:tab idQ="rd:TabPGSolutions" label="PGSolutions" >
         <mso:group id="BrandingGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:button id="BrandingButton" getImage="getImage"
@@ -15,27 +37,27 @@
                       getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
         </mso:group>
-        <mso:group id="VbASourceExportGroup" getVisible="getVisible"
-                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:box id="VbaExportBox" getVisible="getVisible" boxStyle="vertical">
-            <mso:toggleButton id="UseSrcFolderToggle" getVisible="getVisible" getEnabled="getEnabled"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        onAction="onActionToggle" getPressed="getPressed"
+            <mso:group id="VbaExportGroupPG" getVisible="getVisible"
+                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:box id="VbaExportBoxPG" getVisible="getVisible" boxStyle="vertical">
+                    <mso:toggleButton id="UseSrcFolderTogglePG" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onActionToggle" getPressed="getPressed"
                        />
-            <mso:button id="SelectedProjectButton" getVisible="getVisible" getEnabled="getEnabled"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        onAction="onAction"
+                    <mso:button id="SelectedProjectButtonPG" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
                        />
-            <mso:button id="CurrentProjecctButton" getVisible="getVisible" getEnabled="getEnabled"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        onAction="onAction"
+                    <mso:button id="CurrentProjectButtonPG" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
                        />
-          </mso:box>
-        </mso:group>
-        <mso:group id="CustomButtonsGroup" getVisible="getVisible"
+                </mso:box>
+            </mso:group>
+            <mso:group id="CustomButtonsGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
           <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >
             <mso:toggleButton id="SizeToggle" getImage="getImage"

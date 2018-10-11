@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

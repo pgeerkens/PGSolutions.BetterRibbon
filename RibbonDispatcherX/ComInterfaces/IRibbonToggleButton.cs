@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
@@ -56,7 +56,7 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         /// <summary>Returns whether the control is pressed.</summary>
         [DispId(DispIds.IsPressed)]
         [Description("Returns whether the control is pressed.")]
-        bool IsPressed          { get; }
+        bool IsPressed          { get; set; }
         /// <summary>Callback for the Pressed event on the control.</summary>
         [DispId(DispIds.OnToggled)]
         [Description("Callback for the Pressed event on the control.")]

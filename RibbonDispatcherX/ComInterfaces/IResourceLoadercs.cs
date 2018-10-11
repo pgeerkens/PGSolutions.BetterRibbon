@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The default COM interface exposed by {ResourceLoader} objects.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

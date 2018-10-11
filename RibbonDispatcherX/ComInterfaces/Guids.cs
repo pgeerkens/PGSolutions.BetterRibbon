@@ -2,7 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>Static class of Guids.</summary>
     public static class Guids     {
         private const string GuidSpace  = "-44F3-3B33-B105-9B8188A6F040";
@@ -46,5 +46,6 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         public const string IResourceLoader             = "69E19424" + GuidSpace;
         public const string ResourceLoader              = "69E19425" + GuidSpace;
         public const string IRibbonModel                = "69E19426" + GuidSpace;
+        public const string IRibbonLoader               = "69E19427" + GuidSpace;
     }
 }

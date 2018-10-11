@@ -121,6 +121,7 @@
     <Compile Include="ComInterfaces\IRibbonFactory.cs" />
     <Compile Include="ComInterfaces\IRibbonGroup.cs" />
     <Compile Include="ComInterfaces\IRibbonImageable.cs" />
+    <Compile Include="ComInterfaces\IRibbonLoader.cs" />
     <Compile Include="ComInterfaces\IRibbonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonTextLanguageControl.cs" />
     <Compile Include="ComInterfaces\IRibbonToggleButton.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\DictionaryExtensions.cs" />
     <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\AbstractResourceManager.cs" />
     <Compile Include="Utilities\ResourceManagerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

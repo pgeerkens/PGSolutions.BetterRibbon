@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Resources;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.Utilities {
@@ -31,8 +32,20 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
             using (var image = resourceManager?.GetObject(imageName, CultureInfo.InvariantCulture) as Image) {
                 return (image == null) ? null : PictureConverter.ImageToPictureDisp(image);
             }
-
         }
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with ' Unknown'.</summary>
+        public static string Unknown(this IRibbonControl Control) => Unknown(Control?.Id, "Unknown");
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with ' Unknown'.</summary>
+        public static string Unknown(this string controlId) => Unknown(controlId, "Unknown");
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with the supplied string.</summary>
+        public static string Unknown(this IRibbonControl Control, string suffix) => Unknown(Control?.Id, suffix);
+
+        /// <summary>Returns a string as the ID of the supplied control suffixed with the supplied string.</summary>
+        public static string Unknown(this string controlId, string suffix)
+            => string.Format(CultureInfo.InvariantCulture, $"'{controlId ?? ""}' {suffix}");
 
         /// <summary>TODO</summary>
         public static IPictureDisp ImageToPictureDisp(this Image image)

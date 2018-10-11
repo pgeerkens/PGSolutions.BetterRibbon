@@ -1,4 +1,4 @@
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     internal static partial class DispIds {
         public const int RibbonFactory          =  1;
         public const int ControlId              =  1;

@@ -1,5 +1,5 @@
 ﻿using System;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The interface for controls that can be toggled.</summary>

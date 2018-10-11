@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>TODO</summary>

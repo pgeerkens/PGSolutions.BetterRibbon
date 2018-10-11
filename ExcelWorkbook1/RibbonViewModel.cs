@@ -4,38 +4,37 @@
 using System;
 using System.IO;
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
-using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.Utilities;
 
-namespace PGSolutions.SampleRibbon {
+namespace PGSolutions.ExampleRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
     [Serializable]
     [ComVisible(true)]
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonExtensibility))]
-   // [ProgId("PGSolutions.ExampleRibbon")]
-    [ProgId("ExampleRibbon")]
+    [ComDefaultInterface(typeof(IRibbonViewModel))]
     public class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
-        public RibbonViewModel() { }
+        public RibbonViewModel(IRibbonUI ribbonUI) : this() => OnRibbonLoad(ribbonUI);
+        public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
-        const string _AssemblyName = "ExampleRibbon";
+        const string _assemblyName = "PGSolutions.ExampleRibbon";
 
-        public string GetCustomUI(string RibbonID) => GetResourceText("PGSolutions.ExampleRibbon.SampleRibbon.xml");
+        public string GetCustomUI(string RibbonID) => GetResourceText($"{_assemblyName}.SampleRibbon.xml");
 
-        public void OnRibbonLoad(IRibbonUI ribbonUI) {
-            Initialize(ribbonUI, this);
-            ReinitializeRibbon();
+        public override void OnRibbonLoad(IRibbonUI ribbonUI) {
+            base.OnRibbonLoad(ribbonUI);
+            InitializeModel();
         }
 
         /// <inheritdoc/>
-        public void ReinitializeRibbon() =>
+        public void InitializeModel() =>
             RibbonModel = Globals.ThisWorkbook.Application.Run("RibbonLoader.NewRibbonModel");
 
-        public  IRibbonModel RibbonModel { get; private set; }
+        internal  IRibbonModel RibbonModel { get; private set; }
 
         #region Helpers
 
@@ -55,9 +54,5 @@ namespace PGSolutions.SampleRibbon {
         }
 
         #endregion
-
-        protected override Lazy<ResourceManager> ResourceManager => new Lazy<ResourceManager>(
-            () => new ResourceManager($"{_AssemblyName}.Properties.Resources", Assembly.GetExecutingAssembly())
-        );
     }
 }

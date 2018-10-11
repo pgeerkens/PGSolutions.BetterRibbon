@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.13</ApplicationVersion>
+    <ApplicationVersion>1.0.0.15</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -199,6 +199,7 @@
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\CustomButtonsViewModel.cs" />
+    <Compile Include="src\LocalResourceManager.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />

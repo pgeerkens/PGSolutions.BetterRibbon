@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
@@ -30,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.AbstractCOM {
         IRibbonUI GetRibbonUI(string WorkbookPath);
     }
 }
-namespace PGSolutions.RibbonDispatcher.AbstractCOM {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     internal static partial class DispIds {
         public const int NewRibbonViewModel   = 1;
         public const int SetRibbonUI          = 1 + NewRibbonViewModel;

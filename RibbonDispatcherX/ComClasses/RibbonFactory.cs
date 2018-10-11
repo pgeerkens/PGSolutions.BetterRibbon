@@ -1,4 +1,7 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2018 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,12 +12,12 @@ using stdole;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
-using PGSolutions.RibbonDispatcher.AbstractCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
-using static PGSolutions.RibbonDispatcher.AbstractCOM.RdControlSize;
+using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
 
-namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>
@@ -34,18 +37,17 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
     public class RibbonFactory : IRibbonFactory {
-        internal RibbonFactory(IRibbonUI ribbonUI) : this(ribbonUI, new ResourceLoader(), null) { ; }
+        internal RibbonFactory() : this(new ResourceLoader(), null) { ; }
 
-        internal RibbonFactory(IRibbonUI ribbonUI, IResourceManager manager) : this(ribbonUI, null, manager) { ; }
+        internal RibbonFactory(IResourceManager manager) : this(null, manager) { ; }
 
-        internal RibbonFactory(IRibbonUI ribbonUI, ResourceLoader loader, IResourceManager manager) {
-            _ribbonUI        = ribbonUI;
+        internal RibbonFactory(ResourceLoader loader, IResourceManager manager) {
             ResourceLoader   = loader;
             ResourceManager  = manager ?? loader;
 
             _controls    = new Dictionary<string, IRibbonCommon>();
             _sizeables   = new Dictionary<string, ISizeableMixin>();
-            _actionables = new Dictionary<string, IClickableMixin>();
+            _clickables  = new Dictionary<string, IClickableMixin>();
             _toggleables = new Dictionary<string, IToggleableMixin>();
             _selectables = new Dictionary<string, ISelectableMixin>();
             _imageables  = new Dictionary<string, IImageableMixin>();
@@ -55,10 +57,9 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
-        private  readonly IRibbonUI                             _ribbonUI;
         private  readonly IDictionary<string, IRibbonCommon>    _controls;
         private  readonly IDictionary<string, ISizeableMixin>   _sizeables;
-        private  readonly IDictionary<string, IClickableMixin> _actionables;
+        private  readonly IDictionary<string, IClickableMixin> _clickables;
         private  readonly IDictionary<string, ISelectableMixin> _selectables;
         private  readonly IDictionary<string, IImageableMixin>  _imageables;
         private  readonly IDictionary<string, IToggleableMixin> _toggleables;
@@ -72,7 +73,7 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
         internal IReadOnlyDictionary<string, ISizeableMixin>   Sizeables   => new ReadOnlyDictionary<string, ISizeableMixin>(_sizeables);
 
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IClickableMixin> Actionables => new ReadOnlyDictionary<string, IClickableMixin>(_actionables);
+        internal IReadOnlyDictionary<string, IClickableMixin>  Clickables => new ReadOnlyDictionary<string, IClickableMixin>(_clickables);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, ISelectableMixin> Selectables => new ReadOnlyDictionary<string, ISelectableMixin>(_selectables);
@@ -83,12 +84,18 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IToggleableMixin> Toggleables => new ReadOnlyDictionary<string, IToggleableMixin>(_toggleables);
 
-        private void PropertyChanged(object sender, IControlChangedEventArgs e) => _ribbonUI.InvalidateControl(e.ControlId);
+        private void PropertyChanged(object sender, IControlChangedEventArgs e) => OnChanged(sender,e);
+
+        /// <summary>TODO</summary>
+        internal event ChangedEventHandler Changed;
+
+        /// <inheritdoc/>
+        internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         private T Add<T>(T ctrl) where T:RibbonCommon {
             _controls.Add(ctrl.Id, ctrl);
 
-            _actionables.AddNotNull(ctrl.Id, ctrl as IClickableMixin);
+            _clickables.AddNotNull(ctrl.Id, ctrl as IClickableMixin);
             _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeableMixin);
             _selectables.AddNotNull(ctrl.Id, ctrl as ISelectableMixin);
             _imageables.AddNotNull(ctrl.Id, ctrl as IImageableMixin);
@@ -97,21 +104,6 @@ namespace PGSolutions.RibbonDispatcher.ConcreteCOM {
             ctrl.Changed += PropertyChanged;
             return ctrl;
         }
-
-        /// <summary>TODO</summary>
-        internal void Invalidate()                              => _ribbonUI.Invalidate();
-
-        /// <summary>TODO</summary>
-        internal void InvalidateControl(string ControlId)       => _ribbonUI.InvalidateControl(ControlId);
-
-        /// <summary>TODO</summary>
-        internal void InvalidateControlMso(string ControlId)    => _ribbonUI.InvalidateControlMso(ControlId);
-
-        /// <summary>TODO</summary>
-        internal void ActivateTab(string ControlId)             => _ribbonUI.ActivateTab(ControlId);
-
-        /// <summary>TODO</summary>
-        internal void ActivateTabQ(string ControlId, string ns) => _ribbonUI.ActivateTabQ(ControlId,ns);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]

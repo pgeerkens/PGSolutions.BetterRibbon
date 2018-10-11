@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeskSetup", "DeskSetup\DeskSetup.vdproj", "{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcher", "RibbonDispatcher\RibbonDispatcher.csproj", "{7663F500-4362-4B79-B5BC-D641591DBF9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelRibbon", "ExcelRibbon\ExcelRibbon.csproj", "{5056E803-B7EA-49B7-B77C-B270DE3FF822}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcherX", "RibbonDispatcherX\RibbonDispatcherX.csproj", "{BD438F48-A571-4ACE-979A-804179456324}"
@@ -17,14 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Debug|Any CPU.ActiveCfg = Debug
-		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Debug|Any CPU.Build.0 = Debug
-		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Release|Any CPU.ActiveCfg = Release
-		{62C65E7B-791C-4D92-B5F9-3AF1655D79A2}.Release|Any CPU.Build.0 = Release
-		{7663F500-4362-4B79-B5BC-D641591DBF9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7663F500-4362-4B79-B5BC-D641591DBF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7663F500-4362-4B79-B5BC-D641591DBF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7663F500-4362-4B79-B5BC-D641591DBF9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Release|Any CPU.ActiveCfg = Release|Any CPU

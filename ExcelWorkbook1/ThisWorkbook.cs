@@ -2,22 +2,19 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Data;
-using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Core;
-using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.SampleRibbon {
+namespace PGSolutions.ExampleRibbon {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("ExampleRibbon")]
-    public partial class ThisWorkbook {
+    public partial class ThisWorkbook : IRibbonLoader {
         private void ThisWorkbook_Startup(object sender, EventArgs e) { }
 
         private void ThisWorkbook_Shutdown(object sender, EventArgs e) { }
@@ -26,7 +23,14 @@ namespace PGSolutions.SampleRibbon {
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => _viewModel.Value;
 
-        protected override object GetAutomationObject() => _viewModel.Value;
+        protected override object GetAutomationObject() => this;
+
+        void IRibbonLoader.ReinitializeRibbon() {
+            _viewModel = new Lazy<RibbonViewModel>(() => new RibbonViewModel(_viewModel.Value.RibbonUI));
+            _viewModel.Value.InitializeModel();
+        }
+
+        IRibbonViewModel IRibbonLoader.RibbonViewModel => _viewModel.Value;
 
         #region VSTO Designer generated code
 
@@ -41,6 +45,5 @@ namespace PGSolutions.SampleRibbon {
         }
 
         #endregion
-
     }
 }

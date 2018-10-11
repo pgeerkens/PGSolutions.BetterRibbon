@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ConcreteCOM;
+using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.RibbonDispatcher.ControlMixins {
     /// <summary>The mixin implementation for IImageable ribbon controls.</summary>
