@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.18</ApplicationVersion>
+    <ApplicationVersion>1.0.0.20</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -139,6 +139,10 @@
     <Reference Include="Microsoft.Vbe.Interop, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="RibbonDispatcherX, Version=1.0.0.0, Culture=neutral, PublicKeyToken=11da6f70766e2f35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\RibbonDispatcherX.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
@@ -196,7 +200,7 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="src\Main.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\CustomButtonsViewModel.cs" />
@@ -217,6 +221,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="..\RibbonDemonstration.xlsb">
+      <Link>Extra Files\RibbonDemonstration.xlsb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.tlb">
+      <Link>Extra Files\RibbonDispatcherX.tlb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -300,10 +312,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcherX\RibbonDispatcherX.csproj">
-      <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
-      <Name>RibbonDispatcherX</Name>
-    </ProjectReference>
+    <None Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.dll">
+      <Link>Extra Files\RibbonDispatcherX.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.pdb">
+      <Link>Extra Files\RibbonDispatcherX.pdb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

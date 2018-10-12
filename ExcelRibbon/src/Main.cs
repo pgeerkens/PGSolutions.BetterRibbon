@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Excel = Microsoft.Office.Interop.Excel;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.ExcelRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
@@ -21,7 +22,7 @@ namespace PGSolutions.ExcelRibbon {
     [Guid(Guids.Main)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public class Main : IMain {
-        private IDictionary<string, ActivatableControl<IRibbonCommon>> AdaptorControls =>
+        private IDictionary<string, IActivatableControl<IRibbonCommon>> AdaptorControls =>
                 Globals.ThisAddIn.ViewModel.AdaptorControls;
 
         internal void WorkbookDeactivate(Excel.Workbook wb) =>
@@ -36,10 +37,10 @@ namespace PGSolutions.ExcelRibbon {
         public IRibbonFactory RibbonFactory => Globals.ThisAddIn.ViewModel.RibbonFactory;
 
         public IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings) =>
-            (AdaptorControls.FirstOrDefault(kv => kv.Key==controlId).Value as RibbonButtonAdaptor)?.Attach(strings);
+            (AdaptorControls.FirstOrDefault(kv => kv.Key==controlId).Value as RibbonButton)?.Attach(strings);
 
         public void DetachProxy(string controlId) =>
-            (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButtonAdaptor)?.Detach();
+            (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton)?.Detach();
 
         /// <inheritdoc/>
         public void InvalidateControl(string ControlId) => Globals.ThisAddIn.ViewModel.InvalidateControl(ControlId);

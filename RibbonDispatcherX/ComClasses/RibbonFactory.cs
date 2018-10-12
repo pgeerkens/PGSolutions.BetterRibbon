@@ -9,8 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using Microsoft.Office.Core;
-
 using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
@@ -173,23 +171,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "") =>
             new RibbonTextLanguageControl(label, screenTip, superTip, keyTip, alternateLabel, description);
-
-        /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public RibbonButtonAdaptor NewRibbonButtonAdaptor(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize Size = rdLarge,
-            IPictureDisp Image = null,
-            bool ShowImage = true,
-            bool ShowLabel = true
-        ) => Add(new RibbonButtonAdaptor(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(Image), ShowImage, ShowLabel));
-
-        /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public RibbonButtonAdaptor NewRibbonButtonAdaptorMso(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize Size = rdLarge,
-            string ImageMso = "Unknown",
-            bool ShowImage = true,
-            bool ShowLabel = true
-        ) => Add(new RibbonButtonAdaptor(ItemId, ResourceManager, Visible, Enabled, Size, new ImageObject(ImageMso), ShowImage, ShowLabel));
     }
 }

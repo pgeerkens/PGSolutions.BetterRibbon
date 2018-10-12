@@ -29,32 +29,18 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButton)]
         RibbonButton NewRibbonButton(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize   Size            = rdLarge,
-            IPictureDisp    Image           = null,
-            bool            ShowImage       = false,
-            bool            ShowLabel       = true
+            RdControlSize   Size        = rdLarge,
+            IPictureDisp    Image       = null,
+            bool            ShowImage   = false,
+            bool            ShowLabel   = true
         );
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses an Office built-in Image.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButtonMso)]
         RibbonButton NewRibbonButtonMso(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize   Size            = rdLarge,
-            string          ImageMso        = "MacroSecurity",  // This one get's people's attention ;-)
-            bool            ShowImage       = false,
-            bool            ShowLabel       = true
-        );
-
-        RibbonButtonAdaptor NewRibbonButtonAdaptor(string ItemId, bool Visible = true, bool Enabled = true,
             RdControlSize   Size        = rdLarge,
-            IPictureDisp    Image       = null,
-            bool            ShowImage   = true,
-            bool            ShowLabel   = true
-        );
-
-        RibbonButtonAdaptor NewRibbonButtonAdaptorMso(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize   Size        = rdLarge,
-            string          ImageMso    = "Unknown",
-            bool            ShowImage   = true,
+            string          ImageMso    = "MacroSecurity",  // This one get's people's attention ;-)
+            bool            ShowImage   = false,
             bool            ShowLabel   = true
         );
 

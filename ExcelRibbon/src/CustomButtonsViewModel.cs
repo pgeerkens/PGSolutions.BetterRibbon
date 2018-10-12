@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using static PGSolutions.RibbonDispatcher.Extensions;
 using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
+using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.ExcelRibbon {
     internal class CustomButtonsViewModel : AbstractRibbonGroupViewModel {
@@ -31,9 +31,9 @@ namespace PGSolutions.ExcelRibbon {
             ButtonOptions.IsEnabled      = SizeToggle.IsPressed;
 
             CustomizableGroup   = factory.NewRibbonGroup("CustomizableGroup", true);
-            CustomizableButton1 = factory.NewRibbonButtonAdaptorMso("CustomizableButton1", ImageMso:"MacroSecurity");
-            CustomizableButton2 = factory.NewRibbonButtonAdaptorMso("CustomizableButton2", ImageMso:"MacroSecurity");
-            CustomizableButton3 = factory.NewRibbonButtonAdaptorMso("CustomizableButton3", ImageMso:"MacroSecurity");
+            CustomizableButton1 = factory.NewRibbonButtonMso("CustomizableButton1", ImageMso:"MacroSecurity");
+            CustomizableButton2 = factory.NewRibbonButtonMso("CustomizableButton2", ImageMso:"MacroSecurity");
+            CustomizableButton3 = factory.NewRibbonButtonMso("CustomizableButton3", ImageMso:"MacroSecurity");
         }
 
         public RibbonGroup        CustomGroup   { get; }
@@ -43,10 +43,10 @@ namespace PGSolutions.ExcelRibbon {
         public RibbonToggleButton SizeToggle    { get; }
         public RibbonDropDown     ButtonOptions { get; }
 
-        public RibbonGroup         CustomizableGroup   { get; }
-        public RibbonButtonAdaptor CustomizableButton1 { get; }
-        public RibbonButtonAdaptor CustomizableButton2 { get; }
-        public RibbonButtonAdaptor CustomizableButton3 { get; }
+        public RibbonGroup  CustomizableGroup   { get; }
+        public RibbonButton CustomizableButton1 { get; }
+        public RibbonButton CustomizableButton2 { get; }
+        public RibbonButton CustomizableButton3 { get; }
 
         private IList<IRibbonButton> Buttons => new List<IRibbonButton>() { CustomButton1, CustomButton2, CustomButton3 };
 

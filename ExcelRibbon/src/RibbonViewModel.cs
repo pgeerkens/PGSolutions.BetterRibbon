@@ -34,12 +34,13 @@ namespace PGSolutions.ExcelRibbon {
         public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
         internal BrandingViewModel        BrandingViewModel        { get; private set; }
-        internal VbaSourceExportViewModel VbaExportGroupMS         { get; private set; }
-        internal VbaSourceExportViewModel VbaExportGroupPG         { get; private set; }
+        //internal VbaSourceExportViewModel VbaExportGroupMS         { get; private set; }
+        //internal VbaSourceExportViewModel VbaExportGroupPG         { get; private set; }
+        internal VbaSourceExportModel     VbaSourceExportModel     { get; private set; }
         internal VbaSourceExportViewModel StandardButtonsViewModel { get; private set; }
         internal CustomButtonsViewModel   CustomButtonsViewModel   { get; private set; }
 
-        internal IDictionary<string, ActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
+        internal IDictionary<string, IActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
@@ -49,10 +50,11 @@ namespace PGSolutions.ExcelRibbon {
 
             BrandingViewModel       = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             CustomButtonsViewModel  = new CustomButtonsViewModel(RibbonFactory);
-            VbaExportGroupMS        = new VbaSourceExportViewModel(RibbonFactory, "MS");
-            VbaExportGroupPG        = new VbaSourceExportViewModel(RibbonFactory, "PG");
+            VbaSourceExportModel    = new VbaSourceExportModel(RibbonFactory);
+            //VbaExportGroupMS        = new VbaSourceExportViewModel(RibbonFactory, "MS");
+            //VbaExportGroupPG        = new VbaSourceExportViewModel(RibbonFactory, "PG");
 
-            AdaptorControls = new Dictionary<string, ActivatableControl<IRibbonCommon>>() {
+            AdaptorControls = new Dictionary<string, IActivatableControl<IRibbonCommon>>() {
                 { CustomButtonsViewModel.CustomizableButton1.Id, CustomButtonsViewModel.CustomizableButton1 },
                 { CustomButtonsViewModel.CustomizableButton2.Id, CustomButtonsViewModel.CustomizableButton2 },
                 { CustomButtonsViewModel.CustomizableButton3.Id, CustomButtonsViewModel.CustomizableButton3 }

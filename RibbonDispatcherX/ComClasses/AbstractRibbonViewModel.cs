@@ -2,8 +2,6 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Globalization;
-using System.Resources;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;

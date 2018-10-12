@@ -1,11 +1,15 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2018 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using System.ComponentModel;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton objects.</summary>
@@ -19,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButton))]
     [Guid(Guids.RibbonButton)]
-    public class RibbonButton : RibbonCommon, IRibbonButton,
+    public class RibbonButton : RibbonCommon, IRibbonButton, IActivatableControl<IRibbonCommon>,
         ISizeableMixin, IClickableMixin, IImageableMixin {
         internal RibbonButton(string itemId, IResourceManager mgr, bool visible, bool enabled, RdControlSize size,
                 ImageObject image, bool showImage, bool showLabel) : base(itemId, mgr, visible, enabled) {
@@ -27,7 +31,38 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             this.SetImage(image);
             this.SetShowImage(showImage);
             this.SetShowLabel(showLabel);
+            _preferredSize = size;
         }
+
+        #region IActivable implementation
+        private bool _isAttached    = false;
+        private bool _enableVisible = true;
+        private readonly RdControlSize _preferredSize;
+
+        public override bool IsEnabled => base.IsEnabled && _isAttached;
+        public override bool IsVisible => base.IsEnabled && _enableVisible;
+
+        public IRibbonButton Attach(IRibbonTextLanguageControl strings) {
+            this.SetSize(_preferredSize);
+            if (strings != null) SetLanguageStrings(strings);
+            _isAttached = true;
+            _enableVisible = true;
+            return this;
+        }
+
+        public void Detach() => Detach(true);
+        public void Detach(bool enableVisible) {
+            _enableVisible = enableVisible;
+            _isAttached = false;
+            SetLanguageStrings(RibbonTextLanguageControl.Empty);
+            SetImageMso("MacroSecurity");
+            this.SetSize(RdControlSize.rdRegular);
+        }
+
+        IRibbonCommon IActivatableControl<IRibbonCommon>.Attach(IRibbonTextLanguageControl strings) =>
+            Attach(strings) as IRibbonCommon;
+        void IActivatableControl<IRibbonCommon>.Detach() => Detach();
+        #endregion
 
         #region Publish ISizeableMixin to class default interface
         /// <inheritdoc/>

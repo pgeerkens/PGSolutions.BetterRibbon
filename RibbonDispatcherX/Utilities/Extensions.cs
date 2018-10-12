@@ -12,7 +12,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ControlMixins;
 using System.Collections.Generic;
 
-namespace PGSolutions.RibbonDispatcher {
+namespace PGSolutions.RibbonDispatcher.Utilities {
     public static class Extensions {
         /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
         public static ClickedEventHandler DefaultButtonAction(this IRibbonButton sender) => sender.MsgBoxShow;
