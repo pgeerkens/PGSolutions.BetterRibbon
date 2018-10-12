@@ -5,22 +5,25 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.ExcelRibbon
-{
+namespace PGSolutions.ExcelRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         internal RibbonViewModel ViewModel { get; private set; }
 
-        private void ThisAddIn_Startup(object sender, EventArgs e) { }
+        private void ThisAddIn_Startup(object sender, EventArgs e) {
+            Application.WorkbookDeactivate += ComEntry.Value.WorkbookDeactivate;
+            Application.WindowDeactivate   += ComEntry.Value.WindowDeactivate;
+        }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => ViewModel = new RibbonViewModel();
 
-        private Lazy<IMain> ComEntry = new Lazy<IMain>(() => new Main());
+        private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
 
-        protected override object RequestComAddInAutomationService() => ComEntry.Value;
+        protected override object RequestComAddInAutomationService() =>
+            ComEntry.Value as IMain;
 
         #region VSTO generated code
 

@@ -9,8 +9,9 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PGSolutions.ExcelRibbon
-{
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace PGSolutions.ExcelRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
     [Serializable]
     [ComVisible(true)]
@@ -20,12 +21,22 @@ namespace PGSolutions.ExcelRibbon
     [Guid(Guids.Main)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public class Main : IMain {
-        private IDictionary<string, object> AdaptorControls => Globals.ThisAddIn.ViewModel.AdaptorControls;
+        private IDictionary<string, ActivatableControl<IRibbonCommon>> AdaptorControls =>
+                Globals.ThisAddIn.ViewModel.AdaptorControls;
+
+        internal void WorkbookDeactivate(Excel.Workbook wb) =>
+            DeactivateActivatableControls();
+        internal void WindowDeactivate(Excel.Workbook wb, Excel.Window wn) =>
+            DeactivateActivatableControls();
+
+        private void DeactivateActivatableControls() {
+            foreach (var c in AdaptorControls) c.Value.Detach();
+        }
 
         public IRibbonFactory RibbonFactory => Globals.ThisAddIn.ViewModel.RibbonFactory;
 
-        public IRibbonButton AttachProxy(string controlId, IClickableRibbonButton proxy, IRibbonTextLanguageControl strings) =>
-            (AdaptorControls.FirstOrDefault(kv => kv.Key==controlId).Value as RibbonButtonAdaptor)?.Attach(proxy, strings);
+        public IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings) =>
+            (AdaptorControls.FirstOrDefault(kv => kv.Key==controlId).Value as RibbonButtonAdaptor)?.Attach(strings);
 
         public void DetachProxy(string controlId) =>
             (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButtonAdaptor)?.Detach();

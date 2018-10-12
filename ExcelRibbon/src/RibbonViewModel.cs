@@ -8,6 +8,7 @@ using stdole;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.ExcelRibbon.VbaSourceExport;
 using ExcelRibbon.Properties;
@@ -38,7 +39,7 @@ namespace PGSolutions.ExcelRibbon {
         internal VbaSourceExportViewModel StandardButtonsViewModel { get; private set; }
         internal CustomButtonsViewModel   CustomButtonsViewModel   { get; private set; }
 
-        internal IDictionary<string,object> AdaptorControls { get; private set; }
+        internal IDictionary<string, ActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
@@ -51,8 +52,10 @@ namespace PGSolutions.ExcelRibbon {
             VbaExportGroupMS        = new VbaSourceExportViewModel(RibbonFactory, "MS");
             VbaExportGroupPG        = new VbaSourceExportViewModel(RibbonFactory, "PG");
 
-            AdaptorControls = new Dictionary<string, object>() {
-                { CustomButtonsViewModel.UnknownButton.Id, CustomButtonsViewModel.UnknownButton }
+            AdaptorControls = new Dictionary<string, ActivatableControl<IRibbonCommon>>() {
+                { CustomButtonsViewModel.CustomizableButton1.Id, CustomButtonsViewModel.CustomizableButton1 },
+                { CustomButtonsViewModel.CustomizableButton2.Id, CustomButtonsViewModel.CustomizableButton2 },
+                { CustomButtonsViewModel.CustomizableButton3.Id, CustomButtonsViewModel.CustomizableButton3 }
             };
 
             Invalidate();

@@ -93,12 +93,22 @@
                        />
           </mso:box>
         </mso:group>
-        <mso:group id="UnknownGroup" getVisible="getVisible"
+        <mso:group id="CustomizableGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:button id="UnknownButton" getImage="getImage"
+          <mso:button id="CustomizableButton1" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                       onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
                       getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+            <mso:button id="CustomizableButton2" getImage="getImage"
+                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                        getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+            <mso:button id="CustomizableButton3" getImage="getImage"
+                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                        getShowImage="getShowImage" getShowLabel="getShowLabel"
                       />
         </mso:group>
       </mso:tab>

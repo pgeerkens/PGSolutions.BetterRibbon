@@ -216,6 +216,33 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customizable Controls.
+        /// </summary>
+        internal static string CustomizableGroup_Label {
+            get {
+                return ResourceManager.GetString("CustomizableGroup_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application-Customizable Controls.
+        /// </summary>
+        internal static string CustomizableGroup_ScreenTip {
+            get {
+                return ResourceManager.GetString("CustomizableGroup_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBAcode for a workbook. The controls automatically deactivate when a workkbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus..
+        /// </summary>
+        internal static string CustomizableGroup_SuperTip {
+            get {
+                return ResourceManager.GetString("CustomizableGroup_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Only.
         /// </summary>
         internal static string ImageOnly_Label {

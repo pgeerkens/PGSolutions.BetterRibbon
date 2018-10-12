@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
-using PGSolutions.RibbonDispatcher.ComClasses;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -16,12 +15,23 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IMain)]
     public interface IMain {
+        /// <summary>TODO</summary>
+        [Description("")]
         IRibbonFactory RibbonFactory { get; }
 
-        IRibbonButton AttachProxy(string controlId, IClickableRibbonButton proxy, IRibbonTextLanguageControl strings);
+        /// <summary>TODO</summary>
+        /// <param name="controlId"></param>
+        /// <param name="strings"></param>
+        /// <returns></returns>
+        [Description("")]
+        IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings);
 
+        /// <summary>TODO</summary>
+        [Description("")]
         void DetachProxy(string controlId);
 
+        /// <summary>TODO</summary>
+        [Description("")]
         /// <inheritdoc/>
         void InvalidateControl(string ControlId);
     }
@@ -42,10 +52,3 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IPictureDisp GetImage(string ControlId);
     }
 }
-//namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-//    internal static partial class DispIds {
-//        public const int NewRibbonViewModel   = 1;
-//        public const int SetRibbonUI          = 1 + NewRibbonViewModel;
-//        public const int GetRibbonUI          = 1 + SetRibbonUI;
-//    }
-//}

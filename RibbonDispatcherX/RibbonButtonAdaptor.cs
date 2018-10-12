@@ -19,32 +19,34 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvents))]
+    [ComSourceInterfaces(typeof(IClickableRibbonButton))]
     [ComDefaultInterface(typeof(IRibbonButton))]
     [Guid(Guids.RibbonButtonAdaptor)]
-    public class RibbonButtonAdaptor : RibbonButton, IRibbonButton {
+    public class RibbonButtonAdaptor : RibbonButton, IRibbonButton, ActivatableControl<IRibbonCommon> {
         internal RibbonButtonAdaptor(string itemId, IResourceManager mgr, bool visible, bool enabled,
                 RdControlSize size, ImageObject image, bool showImage, bool showLabel)
             : base(itemId, mgr, visible, enabled, size, image, showImage, showLabel) {
         }
 
-        public override bool IsVisible => base.IsVisible && Proxy != null;
+        private bool _isAttached = false;
 
-        private IClickableRibbonButton Proxy { get; set; }
+        public override bool IsEnabled => base.IsEnabled && _isAttached;
 
-        public IRibbonButton Attach(IClickableRibbonButton proxy, IRibbonTextLanguageControl strings) {
+        public IRibbonButton Attach(IRibbonTextLanguageControl strings) {
             SetLanguageStrings(strings);
-            Proxy = proxy;
+            _isAttached = true;
             return this;
         }
 
         public void Detach() {
-            Proxy = null;
+            _isAttached = false;
             SetLanguageStrings(RibbonTextLanguageControl.Empty);
+            SetImageMso("MacroSecurity");
         }
 
-        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public override void OnClicked() => Proxy.OnClicked();
+        IRibbonCommon ActivatableControl<IRibbonCommon>.Attach(IRibbonTextLanguageControl strings) =>
+            Attach(strings) as IRibbonCommon;
+        void ActivatableControl<IRibbonCommon>.Detach() => Detach();
     }
 
     [CLSCompliant(true)]
@@ -52,5 +54,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IClickableRibbonButton {
         void OnClicked();
+    }
+
+    public interface ActivatableControl<TCtl> where TCtl:IRibbonCommon {
+        TCtl Attach(IRibbonTextLanguageControl strings);
+        void Detach();
     }
 }

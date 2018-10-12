@@ -30,7 +30,10 @@ namespace PGSolutions.ExcelRibbon {
             ButtonOptions.SelectedItemId = "LabelAndImage";
             ButtonOptions.IsEnabled      = SizeToggle.IsPressed;
 
-            UnknownButton = factory.NewRibbonButtonAdaptorMso("UnknownButton",ImageMso:"MacroSecurity");
+            CustomizableGroup   = factory.NewRibbonGroup("CustomizableGroup", true);
+            CustomizableButton1 = factory.NewRibbonButtonAdaptorMso("CustomizableButton1", ImageMso:"MacroSecurity");
+            CustomizableButton2 = factory.NewRibbonButtonAdaptorMso("CustomizableButton2", ImageMso:"MacroSecurity");
+            CustomizableButton3 = factory.NewRibbonButtonAdaptorMso("CustomizableButton3", ImageMso:"MacroSecurity");
         }
 
         public RibbonGroup        CustomGroup   { get; }
@@ -40,7 +43,10 @@ namespace PGSolutions.ExcelRibbon {
         public RibbonToggleButton SizeToggle    { get; }
         public RibbonDropDown     ButtonOptions { get; }
 
-        public RibbonButtonAdaptor UnknownButton { get; }
+        public RibbonGroup         CustomizableGroup   { get; }
+        public RibbonButtonAdaptor CustomizableButton1 { get; }
+        public RibbonButtonAdaptor CustomizableButton2 { get; }
+        public RibbonButtonAdaptor CustomizableButton3 { get; }
 
         private IList<IRibbonButton> Buttons => new List<IRibbonButton>() { CustomButton1, CustomButton2, CustomButton3 };
 

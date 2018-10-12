@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected LanguageStrings LanguageStrings { get; private set; }
 
         /// <inheritdoc/>
-        public bool IsEnabled {
+        public virtual bool IsEnabled {
             get => _enabled;
             set { _enabled = value; OnChanged(); }
         }
