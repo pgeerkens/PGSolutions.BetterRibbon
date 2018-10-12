@@ -14,33 +14,32 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
-                    Size: defaultSize, ImageMso:"MacroSecurity");
-            UseSrcFolderToggle.Toggled += UseSrcFolderToggled;
-
+                                        Size:defaultSize, ImageMso:"MacroSecurity");
             SelectedProjectButton = Factory.NewRibbonButtonMso($"SelectedProjectButton{suffix}",
-                    Size: defaultSize, ImageMso:"RefreshAll", ShowImage:true);
-            SelectedProjectButton.Clicked += SelectedProjectsClicked;
-
+                                        Size:defaultSize, ImageMso:"RefreshAll", ShowImage:true);
             CurrentProjectButton = Factory.NewRibbonButtonMso($"CurrentProjectButton{suffix}",
-                    Size: defaultSize, ImageMso:"Refresh", ShowImage:true);
-            CurrentProjectButton.Clicked  += CurrentProjectClicked;
-        }
-
-        public void Detach() {
-            //UseSrcFolderToggle.IsPressed = srcToggleSource(); // .Toggled -= UseSrcFolderToggled;
-            SelectedProjectButton.Detach(); // .Clicked -= SelectedProjectsClicked; ;
-            CurrentProjectButton.Detach(); // .Clicked  -= CurrentProjectClicked;
+                                        Size:defaultSize, ImageMso:"Refresh", ShowImage:true);
         }
 
         public void Attach(Func<bool> srcToggleSource) {
-            UseSrcFolderToggle.IsPressed = srcToggleSource(); // .Toggled += UseSrcFolderToggled;
-            SelectedProjectButton.Attach(null); // .Clicked += SelectedProjectsClicked; ;
-            CurrentProjectButton.Attach(null); // .Clicked  += CurrentProjectClicked;
+            UseSrcFolderToggle.Attach(srcToggleSource); UseSrcFolderToggle.Toggled    += OnToggled;
+            SelectedProjectButton.Attach();             SelectedProjectButton.Clicked += OnExportSelected;
+            CurrentProjectButton.Attach();              CurrentProjectButton.Clicked  += OnExportCurrent;
+        }
+
+        public void Detach() {
+            UseSrcFolderToggle.Detach();       UseSrcFolderToggle.Toggled    -= OnToggled;
+            SelectedProjectButton.Detach();    SelectedProjectButton.Clicked -= OnExportSelected;
+            CurrentProjectButton.Detach();     CurrentProjectButton.Clicked  -= OnExportCurrent;
         }
 
         public event ToggledEventHandler UseSrcFolderToggled;
         public event ClickedEventHandler SelectedProjectsClicked;
         public event ClickedEventHandler CurrentProjectClicked;
+
+        private void OnToggled(bool isPressed) => UseSrcFolderToggled(isPressed);
+        private void OnExportSelected() => SelectedProjectsClicked();
+        private void OnExportCurrent() => CurrentProjectClicked();
 
         private RibbonGroup        VbASourceExportGroup  { get; }
         private RibbonToggleButton UseSrcFolderToggle    { get; }

@@ -21,7 +21,7 @@ namespace PGSolutions.ExcelRibbon {
             BrandingButton.Clicked += () =>
                 MessageBox.Show("Quack, eh!\n\n" + typeof(BrandingViewModel).Assembly.GetName().Version.ToString(),
                         "PGSolutions - VBA Tools", MessageBoxButtons.OK);
-            BrandingButton.Attach(null);
+            BrandingButton.Attach();
         }
 
         public RibbonGroup  BrandingGroup  { get; }

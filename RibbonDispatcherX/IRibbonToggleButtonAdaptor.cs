@@ -37,10 +37,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>TODO</summary>
-        public override bool IsPressed {
-            get => this.GetPressed();
-            set => this.SetPressed(value);
-        }
+        public override bool IsPressed => this.GetPressed();
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
         public override void OnToggled(bool isPressed) => Proxy.OnToggled(isPressed);

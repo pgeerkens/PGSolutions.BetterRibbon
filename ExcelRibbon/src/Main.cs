@@ -36,8 +36,12 @@ namespace PGSolutions.ExcelRibbon {
 
         public IRibbonFactory RibbonFactory => Globals.ThisAddIn.ViewModel.RibbonFactory;
 
-        public IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings) =>
-            (AdaptorControls.FirstOrDefault(kv => kv.Key==controlId).Value as RibbonButton)?.Attach(strings);
+        public IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings) {
+            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton;
+            ctrl?.SetLanguageStrings(strings);
+            ctrl?.Attach();
+            return ctrl;
+        }
 
         public void DetachProxy(string controlId) =>
             (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton)?.Detach();

@@ -141,7 +141,7 @@
     </Reference>
     <Reference Include="RibbonDispatcherX, Version=1.0.0.0, Culture=neutral, PublicKeyToken=11da6f70766e2f35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\RibbonDispatcherX.dll</HintPath>
+      <HintPath>Extra Files\RibbonDispatcherX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
@@ -226,6 +226,10 @@
       <Link>Extra Files\RibbonDemonstration.xlsb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.dll">
+      <Link>Extra Files\RibbonDispatcherX.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.tlb">
       <Link>Extra Files\RibbonDispatcherX.tlb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -313,10 +317,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.dll">
-      <Link>Extra Files\RibbonDispatcherX.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.pdb">
       <Link>Extra Files\RibbonDispatcherX.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

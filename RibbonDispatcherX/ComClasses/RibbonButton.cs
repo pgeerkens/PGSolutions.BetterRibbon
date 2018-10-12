@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _preferredSize = size;
         }
 
-        #region IActivable implementation
+        #region IActivatable implementation
         private bool _isAttached    = false;
         private bool _enableVisible = true;
         private readonly RdControlSize _preferredSize;
@@ -42,9 +42,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public override bool IsEnabled => base.IsEnabled && _isAttached;
         public override bool IsVisible => base.IsEnabled && _enableVisible;
 
-        public IRibbonButton Attach(IRibbonTextLanguageControl strings) {
+        public IRibbonButton Attach() {
             this.SetSize(_preferredSize);
-            if (strings != null) SetLanguageStrings(strings);
             _isAttached = true;
             _enableVisible = true;
             return this;
@@ -59,8 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             this.SetSize(RdControlSize.rdRegular);
         }
 
-        IRibbonCommon IActivatableControl<IRibbonCommon>.Attach(IRibbonTextLanguageControl strings) =>
-            Attach(strings) as IRibbonCommon;
+        IRibbonCommon IActivatableControl<IRibbonCommon>.Attach() => Attach() as IRibbonCommon;
         void IActivatableControl<IRibbonCommon>.Detach() => Detach();
         #endregion
 

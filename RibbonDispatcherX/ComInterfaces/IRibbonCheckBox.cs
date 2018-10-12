@@ -52,7 +52,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns whether the control is pressed.</summary>
         [DispId(DispIds.IsPressed)]
         [Description("Returns whether the control is pressed.")]
-        bool IsPressed          { get; set; }
+        bool IsPressed          { get; /*set;*/ }
         /// <summary>Callback for the Pressed event on the control.</summary>
         [DispId(DispIds.OnToggled)]
         [Description("Callback for the Pressed event on the control.")]
