@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.15</ApplicationVersion>
+    <ApplicationVersion>1.0.0.18</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -196,6 +196,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Main.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\CustomButtonsViewModel.cs" />

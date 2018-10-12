@@ -1,4 +1,7 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2018 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -11,6 +14,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [ComDefaultInterface(typeof(IRibbonTextLanguageControl))]
     [Guid(Guids.RibbonTextLanguageControl)]
     public class RibbonTextLanguageControl : IRibbonTextLanguageControl {
+        public static RibbonTextLanguageControl Empty { get; } = new RibbonTextLanguageControl();
+        private RibbonTextLanguageControl() : this("", "", "", "", "", "") { }
+
         /// <summary>TODO</summary>
         public RibbonTextLanguageControl(
             string label,

@@ -15,11 +15,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
-        string Id          { get; }
+        string Id           { get; }
         /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
         [DispId(DispIds.Description)]
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        string Description { get; }
+        string Description  { get; }
         /// <summary>Returns the KeyTip string for this control.</summary>
         [DispId(DispIds.KeyTip)]
         [Description("Returns the KeyTip string for this control.")]

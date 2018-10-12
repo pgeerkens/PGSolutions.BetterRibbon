@@ -44,23 +44,37 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             bool            ShowLabel       = true
         );
 
+        RibbonButtonAdaptor NewRibbonButtonAdaptor(string ItemId, bool Visible = true, bool Enabled = true,
+            RdControlSize   Size        = rdLarge,
+            IPictureDisp    Image       = null,
+            bool            ShowImage   = true,
+            bool            ShowLabel   = true
+        );
+
+        RibbonButtonAdaptor NewRibbonButtonAdaptorMso(string ItemId, bool Visible = true, bool Enabled = true,
+            RdControlSize   Size        = rdLarge,
+            string          ImageMso    = "Unknown",
+            bool            ShowImage   = true,
+            bool            ShowLabel   = true
+        );
+
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggle)]
         RibbonToggleButton NewRibbonToggle(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize   Size            = rdLarge,
-            IPictureDisp    Image           = null,
-            bool            ShowImage       = false,
-            bool            ShowLabel       = true
+            RdControlSize   Size        = rdLarge,
+            IPictureDisp    Image       = null,
+            bool            ShowImage   = false,
+            bool            ShowLabel   = true
         );
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses an Office built-in Image.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggleMso)]
         RibbonToggleButton NewRibbonToggleMso(string ItemId, bool Visible = true, bool Enabled = true,
-            RdControlSize   Size            = rdLarge,
-            string          ImageMso        = "MacroSecurity",  // This one gets people's attention ;-)
-            bool            ShowImage       = false,
-            bool            ShowLabel       = true
+            RdControlSize   Size        = rdLarge,
+            string          ImageMso    = "MacroSecurity",  // This one gets people's attention ;-)
+            bool            ShowImage   = false,
+            bool            ShowLabel   = true
         );
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
@@ -86,6 +100,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns a new {ResourceLoader} object.</summary>
         [DispId(DispIds.NewResourceLoader)]
         IResourceLoader NewResourceLoader();
+
+        IRibbonTextLanguageControl NewLanguageControl(string label,
+                string screenTip = "", string superTip = "",
+                string keyTip = "", string alternateLabel = "", string description = "");
     }
 }
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {

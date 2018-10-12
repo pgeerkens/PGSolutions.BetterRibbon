@@ -7,10 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using System.ComponentModel;
-using stdole;
+using PGSolutions.RibbonDispatcher.ControlMixins;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses
-{
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton adapters.</summary>
     [Description("The ViewModel for Ribbon Button adapters.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
@@ -19,38 +18,47 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvents))]
-    [ComDefaultInterface(typeof(IRibbonButton))]
-    [Guid(Guids.RibbonButtonAdaptor)]
-    public class RibbonButtonAdaptor : RibbonButton, IRibbonButton {
-        internal RibbonButtonAdaptor(string itemId, IResourceManager mgr, bool visible, bool enabled,
+    [ComSourceInterfaces(typeof(IToggledEvents))]
+    [ComDefaultInterface(typeof(IRibbonToggleButtonAdaptor))]
+    [Guid(Guids.RibbonToggleButtonAdaptor)]
+    public class RibbonToggleButtonAdaptor : RibbonToggleButton, IToggleableMixin, IRibbonToggleButtonAdaptor {
+        internal RibbonToggleButtonAdaptor(string itemId, IResourceManager mgr, bool visible, bool enabled,
                 RdControlSize size, ImageObject image, bool showImage, bool showLabel)
             : base(itemId, mgr, visible, enabled, size, image, showImage, showLabel) {
         }
 
         public override bool IsVisible => base.IsVisible && Proxy != null;
 
-        private IClickableRibbonButton Proxy { get; set; }
+        private IToggleableRibbonToggleButton Proxy { get; set; }
 
-        public IRibbonButton Attach(IClickableRibbonButton proxy, IRibbonTextLanguageControl strings) {
-            SetLanguageStrings(strings);
-            Proxy = proxy;
-            return this;
+        public IToggleableRibbonToggleButton SetProxy(IToggleableRibbonToggleButton proxy) {
+            proxy.SetViewModel(this);
+            return Proxy = proxy;
         }
 
-        public void Detach() {
-            Proxy = null;
-            SetLanguageStrings(RibbonTextLanguageControl.Empty);
+        /// <summary>TODO</summary>
+        public override bool IsPressed {
+            get => this.GetPressed();
+            set => this.SetPressed(value);
         }
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public override void OnClicked() => Proxy.OnClicked();
+        public override void OnToggled(bool isPressed) => Proxy.OnToggled(isPressed);
     }
 
     [CLSCompliant(true)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    public interface IClickableRibbonButton {
-        void OnClicked();
+    public interface IToggleableRibbonToggleButton {
+        IRibbonToggleButton ViewModel { get; }
+        void OnToggled(bool isPressed);
+        void SetViewModel(IRibbonToggleButton viewModel);
+    }
+
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    public interface IRibbonToggleButtonAdaptor {
+        IToggleableRibbonToggleButton SetProxy(IToggleableRibbonToggleButton proxy);
     }
 }

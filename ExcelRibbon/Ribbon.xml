@@ -95,7 +95,7 @@
         </mso:group>
         <mso:group id="UnknownGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:button id="UnknownButton" imageMso="MacroPlay"
+          <mso:button id="UnknownButton" getImage="getImage"
                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                       onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
                       getShowImage="getShowImage" getShowLabel="getShowLabel"

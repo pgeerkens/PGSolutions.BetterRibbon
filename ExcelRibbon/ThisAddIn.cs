@@ -3,21 +3,22 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonDispatcher;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.ExcelRibbon {
+namespace PGSolutions.ExcelRibbon
+{
     [CLSCompliant(false)]
     public partial class ThisAddIn {
-        private RibbonViewModel _viewModel;
+        internal RibbonViewModel ViewModel { get; private set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
-            => _viewModel = new RibbonViewModel();
+            => ViewModel = new RibbonViewModel();
 
-        private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
+        private Lazy<IMain> ComEntry = new Lazy<IMain>(() => new Main());
 
         protected override object RequestComAddInAutomationService() => ComEntry.Value;
 

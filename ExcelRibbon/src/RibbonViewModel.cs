@@ -11,6 +11,7 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.ExcelRibbon.VbaSourceExport;
 using ExcelRibbon.Properties;
+using System.Collections.Generic;
 
 namespace PGSolutions.ExcelRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -29,13 +30,15 @@ namespace PGSolutions.ExcelRibbon {
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "ExcelRibbon";
 
-        public RibbonViewModel() :base(new LocalResourceManager(_assemblyName)) { }
+        public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
         internal BrandingViewModel        BrandingViewModel        { get; private set; }
         internal VbaSourceExportViewModel VbaExportGroupMS         { get; private set; }
         internal VbaSourceExportViewModel VbaExportGroupPG         { get; private set; }
         internal VbaSourceExportViewModel StandardButtonsViewModel { get; private set; }
         internal CustomButtonsViewModel   CustomButtonsViewModel   { get; private set; }
+
+        internal IDictionary<string,object> AdaptorControls { get; private set; }
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
@@ -47,6 +50,11 @@ namespace PGSolutions.ExcelRibbon {
             CustomButtonsViewModel  = new CustomButtonsViewModel(RibbonFactory);
             VbaExportGroupMS        = new VbaSourceExportViewModel(RibbonFactory, "MS");
             VbaExportGroupPG        = new VbaSourceExportViewModel(RibbonFactory, "PG");
+
+            AdaptorControls = new Dictionary<string, object>() {
+                { CustomButtonsViewModel.UnknownButton.Id, CustomButtonsViewModel.UnknownButton }
+            };
+
             Invalidate();
         }
 
