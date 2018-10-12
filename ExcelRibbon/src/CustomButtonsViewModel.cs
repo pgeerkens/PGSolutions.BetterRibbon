@@ -30,7 +30,11 @@ namespace PGSolutions.ExcelRibbon {
             ButtonOptions.SelectedItemId = "LabelAndImage";
             ButtonOptions.IsEnabled      = SizeToggle.IsPressed;
 
-            CustomizableGroup   = factory.NewRibbonGroup("CustomizableGroup", true);
+            CustomButton1.Attach(null);
+            CustomButton2.Attach(null);
+            CustomButton3.Attach(null);
+
+            CustomizableGroup = factory.NewRibbonGroup("CustomizableGroup", true);
             CustomizableButton1 = factory.NewRibbonButtonMso("CustomizableButton1", ImageMso:"MacroSecurity");
             CustomizableButton2 = factory.NewRibbonButtonMso("CustomizableButton2", ImageMso:"MacroSecurity");
             CustomizableButton3 = factory.NewRibbonButtonMso("CustomizableButton3", ImageMso:"MacroSecurity");

@@ -206,6 +206,7 @@
     <Compile Include="src\CustomButtonsViewModel.cs" />
     <Compile Include="src\LocalResourceManager.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
+    <Compile Include="VbaSourceExport\IVbaSourceExportGroupModel.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

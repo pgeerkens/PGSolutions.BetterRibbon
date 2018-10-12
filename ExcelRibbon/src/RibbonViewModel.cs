@@ -33,12 +33,10 @@ namespace PGSolutions.ExcelRibbon {
 
         public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
-        internal BrandingViewModel        BrandingViewModel        { get; private set; }
-        //internal VbaSourceExportViewModel VbaExportGroupMS         { get; private set; }
-        //internal VbaSourceExportViewModel VbaExportGroupPG         { get; private set; }
-        internal VbaSourceExportModel     VbaSourceExportModel     { get; private set; }
-        internal VbaSourceExportViewModel StandardButtonsViewModel { get; private set; }
-        internal CustomButtonsViewModel   CustomButtonsViewModel   { get; private set; }
+        internal BrandingViewModel      BrandingViewModel        { get; private set; }
+        internal VbaSourceExportModel   VbaSourceExportModel     { get; private set; }
+        internal VbaSourceExportModel   StandardButtonsViewModel { get; private set; }
+        internal CustomButtonsViewModel CustomButtonsViewModel   { get; private set; }
 
         internal IDictionary<string, IActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
 
@@ -50,9 +48,11 @@ namespace PGSolutions.ExcelRibbon {
 
             BrandingViewModel       = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             CustomButtonsViewModel  = new CustomButtonsViewModel(RibbonFactory);
-            VbaSourceExportModel    = new VbaSourceExportModel(RibbonFactory);
-            //VbaExportGroupMS        = new VbaSourceExportViewModel(RibbonFactory, "MS");
-            //VbaExportGroupPG        = new VbaSourceExportViewModel(RibbonFactory, "PG");
+            VbaSourceExportModel    = new VbaSourceExportModel(
+                new List<IVbaSourceExportGroupModel> {
+                    new VbaSourceExportViewModel(RibbonFactory, "MS"),
+                    new VbaSourceExportViewModel(RibbonFactory, "PG")
+                } );
 
             AdaptorControls = new Dictionary<string, IActivatableControl<IRibbonCommon>>() {
                 { CustomButtonsViewModel.CustomizableButton1.Id, CustomButtonsViewModel.CustomizableButton1 },
