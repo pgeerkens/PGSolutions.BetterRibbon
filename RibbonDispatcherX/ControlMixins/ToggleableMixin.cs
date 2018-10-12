@@ -24,9 +24,9 @@ namespace PGSolutions.RibbonDispatcher.ControlMixins {
             mixin.OnChanged();
         }
 
-        public  static void   SetGetter (this IToggleableMixin mixin, Func<bool> getter) => mixin.Mixin().Getter = getter;
-        public  static bool   GetPressed(this IToggleableMixin mixin)             => mixin.Mixin().IsPressed;
-        public  static string GetLabel(this IToggleableMixin mixin)               => mixin.GetLabel(mixin.Mixin());
+        public  static void SetGetter (this IToggleableMixin mixin, Func<bool> getter) => mixin.Mixin().Getter = getter;
+        public  static bool GetPressed(this IToggleableMixin mixin) => mixin.Mixin().IsPressed;
+        public  static string GetLabel(this IToggleableMixin mixin) => mixin.GetLabel(mixin.Mixin());
         private static string GetLabel(this IToggleableMixin mixin, Fields fields)
             => fields.IsPressed && ! string.IsNullOrEmpty(mixin.Label2()) ? mixin.Label2()
                                                                          : mixin.Label1();

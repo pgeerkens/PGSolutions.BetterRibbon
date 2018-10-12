@@ -33,10 +33,11 @@ namespace PGSolutions.ExcelRibbon {
 
         public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
-        internal BrandingViewModel      BrandingViewModel        { get; private set; }
-        internal VbaSourceExportModel   VbaSourceExportModel     { get; private set; }
-        internal VbaSourceExportModel   StandardButtonsViewModel { get; private set; }
-        internal CustomButtonsViewModel CustomButtonsViewModel   { get; private set; }
+        internal BrandingViewModel            BrandingViewModel        { get; private set; }
+        internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
+
+        internal DemonstrationModel           DemonstrationModel       { get; private set; }
+        internal CustomizableButtonsViewModel CustomButtonsViewMode    { get; private set; }
 
         internal IDictionary<string, IActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
 
@@ -46,18 +47,20 @@ namespace PGSolutions.ExcelRibbon {
         public override void OnRibbonLoad(IRibbonUI ribbonUI) {
             base.OnRibbonLoad(ribbonUI);
 
-            BrandingViewModel       = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
-            CustomButtonsViewModel  = new CustomButtonsViewModel(RibbonFactory);
-            VbaSourceExportModel    = new VbaSourceExportModel(
+            BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
+            CustomButtonsViewMode  = new CustomizableButtonsViewModel(RibbonFactory);
+
+            DemonstrationModel     = new DemonstrationModel(new DemonstrationViewModel(RibbonFactory));
+            VbaSourceExportModel   = new VbaSourceExportModel(
                 new List<IVbaSourceExportGroupModel> {
                     new VbaSourceExportViewModel(RibbonFactory, "MS"),
                     new VbaSourceExportViewModel(RibbonFactory, "PG")
                 } );
 
             AdaptorControls = new Dictionary<string, IActivatableControl<IRibbonCommon>>() {
-                { CustomButtonsViewModel.CustomizableButton1.Id, CustomButtonsViewModel.CustomizableButton1 },
-                { CustomButtonsViewModel.CustomizableButton2.Id, CustomButtonsViewModel.CustomizableButton2 },
-                { CustomButtonsViewModel.CustomizableButton3.Id, CustomButtonsViewModel.CustomizableButton3 }
+                { CustomButtonsViewMode.CustomizableButton1.Id, CustomButtonsViewMode.CustomizableButton1 },
+                { CustomButtonsViewMode.CustomizableButton2.Id, CustomButtonsViewMode.CustomizableButton2 },
+                { CustomButtonsViewMode.CustomizableButton3.Id, CustomButtonsViewMode.CustomizableButton3 }
             };
 
             Invalidate();

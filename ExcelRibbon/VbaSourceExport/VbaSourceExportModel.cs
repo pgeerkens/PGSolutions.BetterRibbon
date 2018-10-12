@@ -14,7 +14,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
                 model.SelectedProjectsClicked += ExportSelectedProject;
                 model.CurrentProjectClicked   += ExportCurrentProject;
                 model.UseSrcFolderToggled     += UseSrcFolderToggled;
-                model.Attach(() => DestIsSrc);
+                model.Attach(()=>DestIsSrc);
             }
         }
 

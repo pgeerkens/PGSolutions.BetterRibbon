@@ -29,14 +29,14 @@
             </mso:group>
         </mso:tab>
         <mso:tab idQ="rd:TabPGSolutions" label="PGSolutions" >
-        <mso:group id="BrandingGroup" getVisible="getVisible"
-                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:button id="BrandingButton" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                      getShowImage="getShowImage" getShowLabel="getShowLabel"
+            <mso:group id="BrandingGroup" getVisible="getVisible"
+                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:button id="BrandingButton" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
-        </mso:group>
+            </mso:group>
             <mso:group id="VbaExportGroupPG" getVisible="getVisible"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                 <mso:box id="VbaExportBoxPG" getVisible="getVisible" boxStyle="vertical">
@@ -56,6 +56,24 @@
                                 onAction="onAction"
                        />
                 </mso:box>
+            </mso:group>
+            <mso:group id="CustomizableGroup" getVisible="getVisible"
+                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:button id="CustomizableButton1" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+                <mso:button id="CustomizableButton2" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+                <mso:button id="CustomizableButton3" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
             </mso:group>
             <mso:group id="CustomButtonsGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
@@ -92,24 +110,6 @@
                         getShowImage="getShowImage" getShowLabel="getShowLabel"
                        />
           </mso:box>
-        </mso:group>
-        <mso:group id="CustomizableGroup" getVisible="getVisible"
-                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:button id="CustomizableButton1" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                      getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
-            <mso:button id="CustomizableButton2" getImage="getImage"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                        getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
-            <mso:button id="CustomizableButton3" getImage="getImage"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                        getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
         </mso:group>
       </mso:tab>
     </mso:tabs>

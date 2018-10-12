@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\ExcelRibbon\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.20</ApplicationVersion>
+    <ApplicationVersion>1.0.0.21</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -200,10 +200,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="src\CustomizableButtonsViewModel.cs" />
+    <Compile Include="src\DemonstrationModel.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
-    <Compile Include="src\CustomButtonsViewModel.cs" />
+    <Compile Include="src\DemonstrationViewModel.cs" />
     <Compile Include="src\LocalResourceManager.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
     <Compile Include="VbaSourceExport\IVbaSourceExportGroupModel.cs" />
@@ -224,15 +226,15 @@
     </Compile>
     <Content Include="..\RibbonDemonstration.xlsb">
       <Link>Extra Files\RibbonDemonstration.xlsb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.dll">
       <Link>Extra Files\RibbonDispatcherX.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.tlb">
       <Link>Extra Files\RibbonDispatcherX.tlb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
@@ -319,7 +321,7 @@
   <ItemGroup>
     <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.pdb">
       <Link>Extra Files\RibbonDispatcherX.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <PropertyGroup>
