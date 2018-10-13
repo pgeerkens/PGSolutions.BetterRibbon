@@ -122,7 +122,7 @@
     <Compile Include="ComInterfaces\IRibbonCheckBox.cs" />
     <Compile Include="ComInterfaces\IRibbonCommon.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDown.cs" />
-    <Compile Include="ComInterfaces\IRibbonFactory.cs" />
+    <Compile Include="ComClasses\IRibbonFactory.cs" />
     <Compile Include="ComInterfaces\IRibbonGroup.cs" />
     <Compile Include="ComInterfaces\IRibbonImageable.cs" />
     <Compile Include="ComInterfaces\IRibbonLoader.cs" />

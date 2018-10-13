@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     using static RdControlSize;
 
     /// <summary>The factory interface for the Ribbon Dispatcher.</summary>

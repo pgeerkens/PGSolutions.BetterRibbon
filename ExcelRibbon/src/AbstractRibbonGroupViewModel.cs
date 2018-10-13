@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
+using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
 

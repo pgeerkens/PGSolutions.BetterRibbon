@@ -14,11 +14,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonViewModel)]
     public interface IRibbonViewModel {
-        /// <summary>Returns the RibbonControl factory instance for this {RibbonViewModel}.</summary>
-        [Description("Returns the RibbonControl factory instance for this RibbonViewModel.")]
-        [DispId(DispIds.RibbonFactory)]
-        IRibbonFactory RibbonFactory { get; }
-
         /// <summary>Invalidates the entire Fluent Ribbon.</summary>
         [Description("Invalidates the entire Fluent Ribbon.")]
         [DispId(DispIds.Invalidate)]

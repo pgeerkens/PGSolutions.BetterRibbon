@@ -44,7 +44,7 @@
    />
    <References
       Description='PGSolutions Dispatcher (DLL) for Office Fluent Ribbon'
-      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\RibbonDispatcherX\bin\Debug\RibbonDispatcherX.tlb'
+      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\RibbonDispatcherX\bin\Release\RibbonDispatcherX.tlb'
       Guid='{BD438F48-A571-4ACE-979A-804179456324}'
       Major='1'
       Minor='0'
