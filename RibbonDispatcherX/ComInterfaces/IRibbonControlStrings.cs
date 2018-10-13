@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonTextLanguageControl)]
-    public interface IRibbonTextLanguageControl {
+    public interface IRibbonControlStrings {
         /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
         [DispId(DispIds.Description)]
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]

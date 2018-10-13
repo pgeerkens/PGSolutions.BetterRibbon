@@ -25,37 +25,32 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonButton)]
     public class RibbonButton : RibbonCommon, IRibbonButton, IActivatableControl<IRibbonCommon>,
         ISizeableMixin, IClickableMixin, IImageableMixin {
-        internal RibbonButton(string itemId, IResourceManager mgr, bool visible, bool enabled, RdControlSize size,
-                ImageObject image, bool showImage, bool showLabel) : base(itemId, mgr, visible, enabled) {
+        internal RibbonButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
+                RdControlSize size, ImageObject image, bool showImage, bool showLabel
+        ) : base(itemId, strings, visible, enabled) {
             this.SetSize(size);
             this.SetImage(image);
             this.SetShowImage(showImage);
             this.SetShowLabel(showLabel);
-            _preferredSize = size;
         }
 
         #region IActivatable implementation
         private bool _isAttached    = false;
-        private bool _enableVisible = true;
-        private readonly RdControlSize _preferredSize;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible && _enableVisible;
+        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+
+        public bool ShowWhenInactive { get; set; } = true;
 
         public IRibbonButton Attach() {
-            this.SetSize(_preferredSize);
             _isAttached = true;
-            _enableVisible = true;
             return this;
         }
 
-        public void Detach() => Detach(true);
-        public void Detach(bool enableVisible) {
-            _enableVisible = enableVisible;
+        public void Detach() {
             _isAttached = false;
             SetLanguageStrings(RibbonTextLanguageControl.Empty);
             SetImageMso("MacroSecurity");
-            this.SetSize(RdControlSize.rdRegular);
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon>.Attach() => Attach() as IRibbonCommon;

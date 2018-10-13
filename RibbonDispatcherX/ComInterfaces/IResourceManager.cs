@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
         [DispId(DispIds.GetControlStrings)]
         [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
-        IRibbonTextLanguageControl GetControlStrings(string ControlId);
+        IRibbonControlStrings GetControlStrings(string ControlId);
 
         /// <summary>Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.</summary>
         [DispId(DispIds.GetImage)]

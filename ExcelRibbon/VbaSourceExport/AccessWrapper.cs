@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                Copyright (c) 2017 Pieter Geerkens                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Runtime.InteropServices;
 
 using Microsoft.Vbe.Interop;
-using Microsoft.Office.Interop.Access;
-using Microsoft.Office.Interop.Access.Dao;
 using Access = Microsoft.Office.Interop.Access;
 
 namespace PGSolutions.ExcelRibbon.VbaSourceExport {
@@ -18,7 +18,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
 
                 returnValue = new AccessWrapper();
             } finally {
-                Globals.ThisAddIn.Application.DisplayAlerts = false;
+                Globals.ThisAddIn.Application.DisplayAlerts = true;
             }
             return returnValue;
         }
@@ -39,9 +39,6 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             AccessApp.OpenCurrentDatabase(path, exclusive);
 
         public void CloseCurrentDb() => AccessApp?.CloseCurrentDatabase();
-
-        private string FullPath(string folder, string filename, string extension) =>
-            Path.Combine(folder, Path.ChangeExtension(filename, extension));
 
         #region Standard IDisposable baseclass implementation
         private bool _isDisposed = false;
@@ -67,23 +64,27 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
     }
 
     internal static partial class Extensions {
+        public static void InvokeWithShiftKey(this Action action) {
 
-        public static void InvokeWithShiftKey(this Action action) =>
-            InvokeWithShiftKey<object>(() => {action(); return null;});
-
-        public static T InvokeWithShiftKey<T>(this Func<T> func) {
-
-            const byte VK_LSHIFT                = 0xA0;  // left shift key
-            const uint KEYEVENTF_KEYUP          = 0x2;
+            const byte VK_LSHIFT = 0xA0;  // left shift key
             try {
-                keybd_event(VK_LSHIFT, 0x10, 0, 0);
-                return func();
+                VK_LSHIFT.KeyDown();
+                action();
             } finally {
-                keybd_event(VK_LSHIFT, 0x10, KEYEVENTF_KEYUP, 0);
+                VK_LSHIFT.KeyUp();
             }
         }
+    }
+    internal static class NativeMethods {
+        public static void KeyDown(this byte Vk) => Vk.keybd_event(0x10, KEYEVENTF_KEYDOWN, 0);
+        public static void KeyUp(this byte Vk)   => Vk.keybd_event(0x10, KEYEVENTF_KEYUP, 0);
+
+        private const uint KEYEVENTF_KEYDOWN = 0x0;
+        private const uint KEYEVENTF_KEYUP   = 0x2;
 
         [DllImport("user32.dll")]
-        private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+        #pragma warning disable IDE1006 // Naming Styles - Matches name in external DLL
+        private static extern void keybd_event(this byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+        #pragma warning restore IDE1006 // Naming Styles
     }
 }

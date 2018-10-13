@@ -24,7 +24,6 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     SetStatusBarText(project.Name, component.Name);
-                    var newPath = Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type));
                     component.Export(Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type)));
                     // DoEvents
                 }

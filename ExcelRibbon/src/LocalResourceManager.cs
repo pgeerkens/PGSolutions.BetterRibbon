@@ -11,7 +11,7 @@ namespace PGSolutions.ExcelRibbon {
         public  LocalResourceManager(string assemblyName) : base(assemblyName) { }
 
         protected override Lazy<ResourceManager> ResourceManager => new Lazy<ResourceManager>(
-            () => new ResourceManager($"{_assemblyName}.Properties.Resources", Assembly.GetExecutingAssembly())
+            () => new ResourceManager($"{AssemblyName}.Properties.Resources", Assembly.GetExecutingAssembly())
         );
     }
 }

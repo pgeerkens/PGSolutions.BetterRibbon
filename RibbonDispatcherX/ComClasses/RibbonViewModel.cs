@@ -17,6 +17,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonViewModel)]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonViewModel {
         /// <summary>TODO</summary>
-        internal RibbonViewModel(IRibbonUI RibbonUI) : base() { }
+        internal RibbonViewModel() : base() { }
     }
 }

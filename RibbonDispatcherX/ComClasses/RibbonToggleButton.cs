@@ -25,40 +25,34 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonToggleButton)]
     public class RibbonToggleButton : RibbonCommon, IRibbonToggleButton, IActivatableControl<IRibbonCommon, bool>,
         ISizeableMixin, IToggleableMixin, IImageableMixin {
-        internal RibbonToggleButton(string itemId, IResourceManager mgr,
-                bool visible, bool enabled, RdControlSize size,
-                ImageObject image, bool showImage, bool showLabel
-        ) : base(itemId, mgr, visible, enabled) {
+        internal RibbonToggleButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
+            RdControlSize size, ImageObject image, bool showImage, bool showLabel
+        ) : base(itemId, strings, visible, enabled) {
             this.SetSize(size);
             this.SetImage(image);
             this.SetShowImage(showImage);
             this.SetShowLabel(showLabel);
-            _preferredSize = size;
         }
 
         #region IToggleable implementation
         private bool _isAttached    = false;
-        private bool _enableVisible = true;
-        private readonly RdControlSize _preferredSize;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible && _enableVisible;
+        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+
+        public bool ShowWhenInactive { get; set; } = true;
 
         public IRibbonToggleButton Attach(Func<bool> getter) {
-            this.SetSize(_preferredSize);
             _isAttached = true;
-            _enableVisible = true;
             this.SetGetter(getter);
             return this;
         }
 
-        public void Detach() => Detach(true);
-        public void Detach(bool enableVisible) {
-            _enableVisible = enableVisible;
+        public void Detach() {
             _isAttached = false;
+            this.SetGetter(() => false);
             SetLanguageStrings(RibbonTextLanguageControl.Empty);
             SetImageMso("MacroSecurity");
-            this.SetSize(RdControlSize.rdRegular);
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon, bool>.Attach(Func<bool> getter) =>
@@ -80,7 +74,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public virtual void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
 
         /// <summary>TODO</summary>
-        IRibbonTextLanguageControl IToggleableMixin.LanguageStrings => LanguageStrings;
+        IRibbonControlStrings IToggleableMixin.LanguageStrings => Strings;
         #endregion
 
         #region Publish ISizeableMixin to class default interface

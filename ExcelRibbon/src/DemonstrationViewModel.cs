@@ -14,10 +14,10 @@ namespace PGSolutions.ExcelRibbon {
     internal class DemonstrationViewModel : AbstractRibbonGroupViewModel, IDemonstrationViewModel {
         public DemonstrationViewModel(IRibbonFactory factory) : base(factory) {
             CustomGroup   = factory.NewRibbonGroup("CustomButtonsGroup", true);
-            CustomButton1 = factory.NewRibbonButtonMso("AppLaunchButton1", ShowImage: true, ImageMso:"RefreshAll");
-            CustomButton2 = factory.NewRibbonButtonMso("AppLaunchButton2", ShowImage: true, ImageMso:"Refresh");
-            CustomButton3 = factory.NewRibbonButtonMso("AppLaunchButton3", ShowImage: true, ImageMso:"MacroPlay");
-            IsLargeToggle = factory.NewRibbonToggleMso("SizeToggle",       ShowImage: true, ImageMso:NoImage);
+            CustomButton1 = factory.NewRibbonButtonMso("AppLaunchButton1", showImage: true, imageMso:"RefreshAll");
+            CustomButton2 = factory.NewRibbonButtonMso("AppLaunchButton2", showImage: true, imageMso:"Refresh");
+            CustomButton3 = factory.NewRibbonButtonMso("AppLaunchButton3", showImage: true, imageMso:"MacroPlay");
+            IsLargeToggle = factory.NewRibbonToggleMso("SizeToggle",       showImage: true, imageMso:NoImage);
             DisplayOptions = factory.NewRibbonDropDown("ButtonOptions2");
             DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
                           .AddItem(factory.NewSelectableItem("ImageOnly"))

@@ -12,6 +12,6 @@ namespace PGSolutions.RibbonDispatcher.ControlMixins {
         void OnToggled(bool IsPressed);
             
         /// <summary>TODO</summary>
-        IRibbonTextLanguageControl LanguageStrings { get; }
+        IRibbonControlStrings LanguageStrings { get; }
     }
 }

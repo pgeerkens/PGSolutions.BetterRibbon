@@ -34,24 +34,24 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         }
 
         [Flags]
-        public enum LabelImageDisplay {
-            ShowNone  = 0x0,
+        public enum LabelImageOptions {
+            None      = 0x0,
             ShowLabel = 0x1,
             ShowImage = 0x2,
             ShowBoth  = ShowLabel | ShowImage
         }
-        public static int IndexFromLabelImageDisplay(this LabelImageDisplay value) => (int)(value - 1);
-        public static LabelImageDisplay IndexToLabelImageDisplay(this int value) => (LabelImageDisplay)(value + 1);
+        public static int IndexFromLabelImageDisplay(this LabelImageOptions value) => (int)(value - 1);
+        public static LabelImageOptions IndexToLabelImageDisplay(this int value) => (LabelImageOptions)(value + 1);
 
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
         public static void SetDisplay<T>(this IList<T> buttons, int index) where T : IRibbonImageable
             => buttons.SetDisplay(index.IndexToLabelImageDisplay());
 
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
-        public static void SetDisplay<T>(this IList<T> buttons, LabelImageDisplay displayFlags) where T: IRibbonImageable {
+        public static void SetDisplay<T>(this IList<T> buttons, LabelImageOptions displayOptions) where T: IRibbonImageable {
             foreach (var b in buttons) {
-                b.ShowLabel = displayFlags.HasFlag(LabelImageDisplay.ShowLabel);
-                b.ShowImage = displayFlags.HasFlag(LabelImageDisplay.ShowImage);
+                b.ShowLabel = displayOptions.HasFlag(LabelImageOptions.ShowLabel);
+                b.ShowImage = displayOptions.HasFlag(LabelImageOptions.ShowImage);
             }
         }
     }

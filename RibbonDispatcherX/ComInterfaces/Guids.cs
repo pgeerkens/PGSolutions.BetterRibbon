@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         public const string IRibbonModel                = "69E19426" + GuidSpace;
         public const string IRibbonLoader               = "69E19427" + GuidSpace;
 
-        public const string RibbonButtonAdaptor         = "69E19428" + GuidSpace;
-        public const string RibbonToggleButtonAdaptor   = "69E19429" + GuidSpace;
+        public const string IBooleanSource              = "69E19428" + GuidSpace;
+        public const string IIntegerSource              = "69E19429" + GuidSpace;
     }
 }

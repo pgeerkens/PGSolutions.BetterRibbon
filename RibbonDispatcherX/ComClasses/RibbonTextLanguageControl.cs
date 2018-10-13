@@ -11,9 +11,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [Serializable]
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonTextLanguageControl))]
+    [ComDefaultInterface(typeof(IRibbonControlStrings))]
     [Guid(Guids.RibbonTextLanguageControl)]
-    public class RibbonTextLanguageControl : IRibbonTextLanguageControl {
+    public class RibbonTextLanguageControl : IRibbonControlStrings {
         public static RibbonTextLanguageControl Empty { get; } = new RibbonTextLanguageControl();
         private RibbonTextLanguageControl() : this("", "", "", "", "", "") { }
 

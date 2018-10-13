@@ -16,7 +16,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             if ( IsProjectModelTrusted) {
                 foreach (string selectedItem in items) {
-                    ExtractProject(Globals.ThisAddIn.Application, selectedItem, destIsSrc);
+                    ExtractProject(selectedItem, destIsSrc);
                     // DoEvents
                 }
             } else {
@@ -26,10 +26,10 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         }
 
         /// <summary>Returns true exactly when the Project Object Model is trusted.</summary>
-        private bool IsProjectModelTrusted => Globals.ThisAddIn.Application.VBE != null;
+        private static bool IsProjectModelTrusted => Globals.ThisAddIn.Application.VBE != null;
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private void ExtractProject(Excel.Application app, string filename, bool destIsSrc) {
+        private static void ExtractProject(string filename, bool destIsSrc) {
             Excel.Workbook wkbk = null;
             try {
                 wkbk = Globals.ThisAddIn.Application.Workbooks.Open(filename, null, true);
@@ -41,7 +41,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             }
         }
 
-        private void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
+        private static void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
             var wkbk = app.Workbooks.Open(filename, UpdateLinks:false, ReadOnly:true, AddToMru:false, Editable:false);
 
             try {

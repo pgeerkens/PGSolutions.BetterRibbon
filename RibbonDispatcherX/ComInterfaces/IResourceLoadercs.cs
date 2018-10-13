@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the specified {ControlStrings} object.</summary>
         [DispId(DispIds.ControlStringsIndexer)]
         [Description("Returns the specified ControlStrings object.")]
-        IRibbonTextLanguageControl this[string ControlId] { get; }
+        IRibbonControlStrings this[string ControlId] { get; }
 
         /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
         [DispId(DispIds.AddControlStrings)]

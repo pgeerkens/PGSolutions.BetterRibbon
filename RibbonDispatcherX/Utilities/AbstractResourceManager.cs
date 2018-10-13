@@ -8,14 +8,14 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public abstract class AbstractResourceManager : IResourceManager {
-        public AbstractResourceManager(string assemblyName) => _assemblyName = assemblyName;
+        protected AbstractResourceManager(string assemblyName) => AssemblyName = assemblyName;
 
-        protected readonly string _assemblyName;
+        protected string AssemblyName { get; }
 
         protected abstract Lazy<ResourceManager> ResourceManager { get; }
         
         /// <inheritdoc/>
-        public IRibbonTextLanguageControl GetControlStrings(string ControlId) =>
+        public IRibbonControlStrings GetControlStrings(string ControlId) =>
             new RibbonTextLanguageControl(
                     GetCurrentUIString($"{ControlId}_Label")          ?? ControlId.Unknown(),
                     GetCurrentUIString($"{ControlId}_ScreenTip")      ?? ControlId.Unknown("ScreenTip"),

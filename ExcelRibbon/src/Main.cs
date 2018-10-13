@@ -36,11 +36,39 @@ namespace PGSolutions.ExcelRibbon {
 
         public IRibbonFactory RibbonFactory => Globals.ThisAddIn.ViewModel.RibbonFactory;
 
-        public IRibbonButton AttachProxy(string controlId, IRibbonTextLanguageControl strings) {
+        public IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton;
             ctrl?.SetLanguageStrings(strings);
             ctrl?.Attach();
             return ctrl;
+        }
+
+        public IRibbonToggleButton AttachToggle(string controlId, IRibbonControlStrings strings,
+                IBooleanSource source) {
+            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonToggleButton;
+            ctrl?.SetLanguageStrings(strings);
+            ctrl?.Attach(source.Getter);
+            return ctrl;
+        }
+
+        public IRibbonCheckBox AttachCheckBox(string controlId, IRibbonControlStrings strings,
+                IBooleanSource source) {
+            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonCheckBox;
+            ctrl?.SetLanguageStrings(strings);
+            ctrl?.Attach(source.Getter);
+            return ctrl;
+        }
+
+        public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
+                IIntegerSource source) {
+            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonDropDown;
+            ctrl?.SetLanguageStrings(strings);
+            ctrl?.Attach(source.Getter);
+            return ctrl;
+        }
+
+        public void ShowInactive(bool showWhenInactive) {
+            foreach (var ctrl in AdaptorControls) ctrl.Value.ShowWhenInactive = showWhenInactive;
         }
 
         public void DetachProxy(string controlId) =>

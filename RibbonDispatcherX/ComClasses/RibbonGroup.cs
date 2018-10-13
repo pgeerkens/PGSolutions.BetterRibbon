@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonGroup)]
     public class RibbonGroup : RibbonCommon, IRibbonGroup
     {
-        internal RibbonGroup(string itemId, IResourceManager mgr, bool visible, bool enabled)
-            : base(itemId, mgr, visible, enabled) {; }
+        internal RibbonGroup(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
+            : base(itemId, strings, visible, enabled) {; }
     }
 }

@@ -14,11 +14,11 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
-                                            Size:defaultSize, ImageMso:"MacroSecurity");
+                                            size:defaultSize, imageMso:"MacroSecurity");
             SelectedProjectButton = Factory.NewRibbonButtonMso($"SelectedProjectButton{suffix}",
-                                            Size:defaultSize, ImageMso:"RefreshAll", ShowImage:true);
+                                            size:defaultSize, imageMso:"RefreshAll", showImage:true);
             CurrentProjectButton = Factory.NewRibbonButtonMso($"CurrentProjectButton{suffix}",
-                                            Size:defaultSize, ImageMso:"Refresh", ShowImage:true);
+                                            size:defaultSize, imageMso:"Refresh", showImage:true);
         }
 
         public void Attach(Func<bool> srcToggleSource) {

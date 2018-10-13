@@ -18,8 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.SelectableItem)]
     public class SelectableItem : RibbonCommon, ISelectableItem, IImageableMixin {
         /// <summary>TODO</summary>
-        internal SelectableItem(string ItemId, IResourceManager ResourceManager, ImageObject Image) 
-            : base(ItemId, ResourceManager, true, true)
+        internal SelectableItem(string ItemId, IRibbonControlStrings strings, ImageObject Image) 
+            : base(ItemId, strings, true, true)
             => this.SetImage(Image);
 
         #region Publish IImageableMixin to class default interface

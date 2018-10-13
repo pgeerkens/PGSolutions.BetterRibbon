@@ -51,11 +51,11 @@ End Sub
 Friend Sub Activate()
     On Error GoTo EH
     With AddInHandle
-        Set Button1 = .AttachProxy("CustomizableButton1", Button1Strings)
+        Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
         Button1.SetImageMso "RefreshAll"
-        Set Button2 = .AttachProxy("CustomizableButton2", Button2Strings)
+        Set Button2 = .AttachButton("CustomizableButton2", Button2Strings)
         Button2.SetImageMso "Refresh"
-        Set Button3 = .AttachProxy("CustomizableButton3", Button3Strings)
+        Set Button3 = .AttachButton("CustomizableButton3", Button3Strings)
         Button3.SetImageMso "MacroPlay"
     End With
 XT: Exit Sub
@@ -67,12 +67,12 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With AddInHandle
-        Set Button1Strings = .RibbonFactory.NewLanguageControl(Label:="This is cool!", _
+        Set Button1Strings = .RibbonFactory.NewControlStrings(Label:="This is cool!", _
                  ScreenTip:="Button1 Screentip", _
                  SuperTip:="Lots of good things" & vbNewLine & _
                             "can be done here to" & vbNewLine & _
                             "show off a bit.", KeyTip:="", AlternateLabel:="", Description:="")
-        Set Button2Strings = .RibbonFactory.NewLanguageControl(Label:="This is cooler!", _
+        Set Button2Strings = .RibbonFactory.NewControlStrings(Label:="This is cooler!", _
                  ScreenTip:="Button2 Screentip", _
                  SuperTip:="Lots of good things" & vbNewLine & _
                             "can be done from hither" & vbNewLine & _
@@ -84,7 +84,7 @@ Private Sub Class_Initialize()
                             " " & vbNewLine & _
                             "... all the way to yon." & vbNewLine & _
                             "to show off a bit more.")
-        Set Button3Strings = .RibbonFactory.NewLanguageControl(Label:="This is coolest!", _
+        Set Button3Strings = .RibbonFactory.NewControlStrings(Label:="This is coolest!", _
                  ScreenTip:="Button3 Screentip", _
                  SuperTip:="What's the weather like where you are?.")
     End With

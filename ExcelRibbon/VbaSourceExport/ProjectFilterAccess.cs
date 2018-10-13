@@ -38,7 +38,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         private static void ExtractProject(AccessWrapper app, string filename, bool destIsSrc) {
             try {
                 app.OpenDbWithuotAutoexec(filename);
-                ExtractOpenProject(app, app.VBE.VBProjects.Item(1), destIsSrc);
+                ExtractOpenProject(app, destIsSrc);
             //} catch (IOException ex) {
             //    ExtractClosedProject(app, filename, destIsSrc);
             } finally {
@@ -47,9 +47,9 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private static void ExtractOpenProject(AccessWrapper app, VBProject project, bool destIsSrc) {
+        private static void ExtractOpenProject(AccessWrapper app, bool destIsSrc) {
             var exportPath = CreateDirectory(app.CurrentProjectName, destIsSrc);
-            ExportDaoDatabase(app.AccessApp,exportPath);
+            ExportDaoDatabase(app.AccessApp, exportPath);
         }
 
         private const int    dbSqlPassThrough = 112;

@@ -24,28 +24,26 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonCheckBox)]
     public class RibbonCheckBox : RibbonCommon, IRibbonCheckBox, IActivatableControl<IRibbonCommon, bool>,
         IToggleableMixin {
-        internal RibbonCheckBox(string itemId, IResourceManager mgr, bool visible, bool enabled)
-            : base(itemId, mgr, visible, enabled) {
-        }
+        internal RibbonCheckBox(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
+        ) : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
         private bool _isAttached    = false;
-        private bool _enableVisible = true;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible && _enableVisible;
+        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+
+        public bool ShowWhenInactive { get; set; } = true;
 
         public IRibbonCheckBox Attach(Func<bool> getter) {
             _isAttached = true;
-            _enableVisible = true;
             this.SetGetter(getter);
             return this;
         }
 
-        public void Detach() => Detach(true);
-        public void Detach(bool enableVisible) {
-            _enableVisible = enableVisible;
+        public void Detach() {
             _isAttached = false;
+            this.SetGetter(()=>false);
             SetLanguageStrings(RibbonTextLanguageControl.Empty);
         }
 
@@ -68,7 +66,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
 
         /// <summary>TODO</summary>
-        IRibbonTextLanguageControl IToggleableMixin.LanguageStrings => LanguageStrings;
+        IRibbonControlStrings IToggleableMixin.LanguageStrings => Strings;
         #endregion
     }
 }

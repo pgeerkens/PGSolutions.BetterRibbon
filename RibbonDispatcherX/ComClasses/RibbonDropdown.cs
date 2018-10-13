@@ -24,29 +24,27 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonDropDown)]
     public class RibbonDropDown : RibbonCommon, IRibbonDropDown, IActivatableControl<IRibbonCommon, int>,
         ISelectableMixin {
-        internal RibbonDropDown(string itemId, IResourceManager mgr, bool visible, bool enabled)
-            : base(itemId, mgr, visible, enabled) {
-        }
+        internal RibbonDropDown(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
+        ) : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
         private bool _isAttached    = false;
-        private bool _enableVisible = true;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible && _enableVisible;
+        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+
+        public bool ShowWhenInactive { get; set; } = true;
 
         private Func<int> Getter { get; set; }
 
         public IRibbonDropDown Attach(Func<int> getter) {
             _isAttached = true;
-            _enableVisible = true;
             Getter = getter;
             return this;
         }
 
-        public void Detach() => Detach(true);
-        public void Detach(bool enableVisible) {
-            _enableVisible = enableVisible;
+        public void Detach() {
+            Getter = ()=>0;
             _isAttached = false;
             SetLanguageStrings(RibbonTextLanguageControl.Empty);
         }

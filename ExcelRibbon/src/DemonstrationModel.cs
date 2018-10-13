@@ -11,7 +11,7 @@ namespace PGSolutions.ExcelRibbon {
     internal class DemonstrationModel {
         public DemonstrationModel(IDemonstrationViewModel viewmodel) {
             IsRegular     = true;
-            DisplayOption = LabelImageDisplay.ShowBoth;
+            DisplayOption = LabelImageOptions.ShowBoth;
             ViewModel     = viewmodel;
 
             ViewModel.IsLargeToggled        += OnIsLargeToggled;
@@ -21,7 +21,7 @@ namespace PGSolutions.ExcelRibbon {
             ViewModel.Invalidate();
         }
         private bool                    IsRegular     { get; set; }
-        private LabelImageDisplay       DisplayOption { get; set; }
+        private LabelImageOptions       DisplayOption { get; set; }
         private IDemonstrationViewModel ViewModel     { get; set; }
 
         private void OnIsLargeToggled(bool isPressed) {

@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Sets the {IRibbonTextLanguageControl} source for the control</summary>
         [DispId(DispIds.SetLanguageStrings)]
         [Description("Sets the {IRibbonTextLanguageControl} source for the control.")]
-        void SetLanguageStrings(IRibbonTextLanguageControl languageStrings);
+        void SetLanguageStrings(IRibbonControlStrings strings);
 
         /// <summary>Gets or sets whether or not the control is enabled.</summary>
         [DispId(DispIds.IsEnabled)]

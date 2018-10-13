@@ -83,6 +83,6 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             }
         }
 
-        private Application Application => Globals.ThisAddIn.Application;
+        private static Application Application => Globals.ThisAddIn.Application;
     }
 }
