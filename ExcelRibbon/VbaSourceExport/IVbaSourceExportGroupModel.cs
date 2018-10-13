@@ -12,5 +12,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
 
         void Attach(Func<bool> useSrcFolderSource);
         void Detach();
+
+        void Invalidate();
     }
 }

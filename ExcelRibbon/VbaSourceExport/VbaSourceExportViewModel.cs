@@ -33,6 +33,8 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             CurrentProjectButton.Detach();     CurrentProjectButton.Clicked  -= OnExportCurrent;
         }
 
+        public void Invalidate() =>UseSrcFolderToggle.OnChanged();
+
         public event ToggledEventHandler UseSrcFolderToggled;
         public event ClickedEventHandler SelectedProjectsClicked;
         public event ClickedEventHandler CurrentProjectClicked;

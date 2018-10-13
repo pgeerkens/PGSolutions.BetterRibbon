@@ -28,12 +28,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             : base(itemId, mgr, visible, enabled) {
         }
 
-        #region IToggleable implementation
+        #region IActivatable implementation
         private bool _isAttached    = false;
         private bool _enableVisible = true;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsEnabled && _enableVisible;
+        public override bool IsVisible => base.IsVisible && _enableVisible;
 
         public IRibbonCheckBox Attach(Func<bool> getter) {
             _isAttached = true;

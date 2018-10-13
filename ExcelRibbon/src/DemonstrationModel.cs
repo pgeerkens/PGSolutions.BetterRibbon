@@ -11,13 +11,13 @@ namespace PGSolutions.ExcelRibbon {
     internal class DemonstrationModel {
         public DemonstrationModel(IDemonstrationViewModel viewmodel) {
             IsRegular     = true;
-            DisplayOption = LabelImageDisplay.ShowImage | LabelImageDisplay.ShowLabel;
+            DisplayOption = LabelImageDisplay.ShowBoth;
             ViewModel     = viewmodel;
 
             ViewModel.IsLargeToggled        += OnIsLargeToggled;
-            ViewModel.DisplayOptionSelected += null;
+            ViewModel.DisplayOptionSelected += OnDisplaySelection;
             ViewModel.ButtonClicked         += OnButtonClicked;
-            viewmodel.Attach(()=> IsRegular, ()=>DisplayOption);
+            viewmodel.Attach(()=> IsRegular, ()=>DisplayOption.IndexFromLabelImageDisplay());
             ViewModel.Invalidate();
         }
         private bool                    IsRegular     { get; set; }
@@ -29,7 +29,7 @@ namespace PGSolutions.ExcelRibbon {
             ViewModel.Invalidate();
         }
         private void OnDisplaySelection(string itemId, int itemIndex) {
-            DisplayOption = (LabelImageDisplay)itemIndex;
+            DisplayOption = itemIndex.IndexToLabelImageDisplay();
             ViewModel.Invalidate();
         }
         private void OnButtonClicked(object sender, IRibbonButton button) => button.MsgBoxShow(button.Id);
@@ -40,7 +40,7 @@ namespace PGSolutions.ExcelRibbon {
         event SelectedEventHandler DisplayOptionSelected;
         event EventHandler<IRibbonButton> ButtonClicked;
 
-        void Attach(Func<bool> isLargeSource, Func<LabelImageDisplay> displayOption);
+        void Attach(Func<bool> isLargeSource, Func<int> displayOption);
         void Detach();
 
         void Invalidate();

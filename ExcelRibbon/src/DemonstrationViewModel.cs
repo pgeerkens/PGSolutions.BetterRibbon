@@ -42,9 +42,8 @@ namespace PGSolutions.ExcelRibbon {
         private void OnButton2Clicked() => ButtonClicked(CustomButton2, CustomButton2);
         private void OnButton3Clicked() => ButtonClicked(CustomButton3, CustomButton3);
 
-        public void Attach(Func<bool> isLargeSource, Func<LabelImageDisplay> displayOptionSource) {
-            //DisplayOptions.Attach(displayOptionSource);
-            DisplayOptions.SelectionMade += OnSelectionMade;
+        public void Attach(Func<bool> isLargeSource, Func<int> displayOptionSource) {
+            DisplayOptions.Attach(displayOptionSource); DisplayOptions.SelectionMade += OnSelectionMade;
             IsLargeToggle.Attach(isLargeSource); IsLargeToggle.Toggled += OnIsLargeToggled;
             CustomButton1.Attach(); CustomButton1.Clicked += OnButton1Clicked;
             CustomButton2.Attach(); CustomButton2.Clicked += OnButton2Clicked;
@@ -56,13 +55,12 @@ namespace PGSolutions.ExcelRibbon {
             CustomButton1.Detach(); CustomButton1.Clicked -= OnButton1Clicked;
             IsLargeToggle.Detach(); IsLargeToggle.Toggled -= OnIsLargeToggled;
 
-            //DisplayOptions.Detach();
-            DisplayOptions.SelectionMade -= OnSelectionMade;
+            DisplayOptions.Detach(); DisplayOptions.SelectionMade -= OnSelectionMade;
         }
 
         public void Invalidate() {
             DisplayOptions.IsEnabled = ToggleButtonSize(!IsLargeToggle.IsPressed, Buttons);
-            Buttons.SetDisplay((LabelImageDisplay)DisplayOptions.SelectedItemIndex);
+            Buttons.SetDisplay(DisplayOptions.SelectedItemIndex);
         }
 
         private IList<IRibbonButton> Buttons => new List<IRibbonButton>() { CustomButton1, CustomButton2, CustomButton3 };

@@ -54,11 +54,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the ID of the current selected item.</summary>
         [Description("Returns the ID of the current selected item.")]
         [DispId(DispIds.SelectedItemId)]
-        string      SelectedItemId      { get; set; }
+        string      SelectedItemId      { get; }
         /// <summary>Returns the index of the current selected item.</summary>
         [Description("Returns the index of the current selected item.")]
         [DispId(DispIds.SelectedItemIndex)]
-        int         SelectedItemIndex   { get; set; }
+        int         SelectedItemIndex   { get; }
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         [Description("Call back for OnAction events from the drop-down ribbon elements.")]
         [DispId(DispIds.OnActionDropDown)]

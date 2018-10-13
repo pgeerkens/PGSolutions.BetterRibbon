@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
@@ -21,31 +22,54 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDown))]
     [Guid(Guids.RibbonDropDown)]
-    public class RibbonDropDown : RibbonCommon, IRibbonDropDown, ISelectableMixin {
+    public class RibbonDropDown : RibbonCommon, IRibbonDropDown, IActivatableControl<IRibbonCommon, int>,
+        ISelectableMixin {
         internal RibbonDropDown(string itemId, IResourceManager mgr, bool visible, bool enabled)
-            : base(itemId, mgr, visible, enabled) {}
+            : base(itemId, mgr, visible, enabled) {
+        }
+
+        #region IActivatable implementation
+        private bool _isAttached    = false;
+        private bool _enableVisible = true;
+
+        public override bool IsEnabled => base.IsEnabled && _isAttached;
+        public override bool IsVisible => base.IsVisible && _enableVisible;
+
+        private Func<int> Getter { get; set; }
+
+        public IRibbonDropDown Attach(Func<int> getter) {
+            _isAttached = true;
+            _enableVisible = true;
+            Getter = getter;
+            return this;
+        }
+
+        public void Detach() => Detach(true);
+        public void Detach(bool enableVisible) {
+            _enableVisible = enableVisible;
+            _isAttached = false;
+            SetLanguageStrings(RibbonTextLanguageControl.Empty);
+        }
+
+        IRibbonCommon IActivatableControl<IRibbonCommon, int>.Attach(Func<int> getter) =>
+            Attach(getter) as IRibbonCommon;
+        void IActivatableControl<IRibbonCommon, int>.Detach() => Detach();
+        #endregion
 
         /// <summary>TODO</summary>
         public event SelectedEventHandler SelectionMade;
 
-        private int                     _selectedItemIndex;
         private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
 
         /// <inheritdoc/>
-        public string   SelectedItemId {
-            get => _items[_selectedItemIndex].Id;
-            set { _selectedItemIndex = _items.IndexOf(_items.FirstOrDefault(t => t.Id==value));
-                  OnActionDropDown(value, _selectedItemIndex);
-                }
-        }
+        public string   SelectedItemId => _items[SelectedItemIndex].Id;
+
         /// <inheritdoc/>
-        public int      SelectedItemIndex {
-            get => _selectedItemIndex;
-            set => OnActionDropDown(SelectedItemId, value);
-        }
+        public int      SelectedItemIndex => Getter();
+
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         public void OnActionDropDown(string SelectedId, int SelectedIndex) {
-            _selectedItemIndex = SelectedIndex;
+            //_selectedItemIndex = SelectedIndex;
             SelectionMade?.Invoke(SelectedId, SelectedIndex);
             OnChanged();
         }

@@ -286,13 +286,16 @@ MSForm modules as .FRM
 
 Project references as .XML</value>
   </data>
-  <data name="CustomizableGroup_Label" xml:space="preserve">
-    <value>Customizable Controls</value>
-  </data>
   <data name="CustomizableGroup_ScreenTip" xml:space="preserve">
     <value>Application-Customizable Controls</value>
   </data>
   <data name="CustomizableGroup_SuperTip" xml:space="preserve">
     <value>These controls can be dynamically customized, both in behaviour and appearance, within the VBAcode for a workbook. The controls automatically deactivate when a workkbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus.</value>
+  </data>
+  <data name="ButtonOptions2_Label" xml:space="preserve">
+    <value>Display Options</value>
+  </data>
+  <data name="CustomizableGroup_Label" xml:space="preserve">
+    <value>Controls Customizable in VBA</value>
   </data>
 </root>

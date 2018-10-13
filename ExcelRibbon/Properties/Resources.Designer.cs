@@ -153,6 +153,15 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display Options.
+        /// </summary>
+        internal static string ButtonOptions2_Label {
+            get {
+                return ResourceManager.GetString("ButtonOptions2_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Current.
         /// </summary>
         internal static string CurrentProjectButtonMS_Label {
@@ -216,7 +225,7 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customizable Controls.
+        ///   Looks up a localized string similar to Controls Customizable in VBA.
         /// </summary>
         internal static string CustomizableGroup_Label {
             get {

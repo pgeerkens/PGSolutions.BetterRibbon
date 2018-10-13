@@ -37,8 +37,15 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         public enum LabelImageDisplay {
             ShowNone  = 0x0,
             ShowLabel = 0x1,
-            ShowImage = 0x2
+            ShowImage = 0x2,
+            ShowBoth  = ShowLabel | ShowImage
         }
+        public static int IndexFromLabelImageDisplay(this LabelImageDisplay value) => (int)(value - 1);
+        public static LabelImageDisplay IndexToLabelImageDisplay(this int value) => (LabelImageDisplay)(value + 1);
+
+        /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
+        public static void SetDisplay<T>(this IList<T> buttons, int index) where T : IRibbonImageable
+            => buttons.SetDisplay(index.IndexToLabelImageDisplay());
 
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
         public static void SetDisplay<T>(this IList<T> buttons, LabelImageDisplay displayFlags) where T: IRibbonImageable {

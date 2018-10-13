@@ -42,7 +42,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private readonly RdControlSize _preferredSize;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsEnabled && _enableVisible;
+        public override bool IsVisible => base.IsVisible && _enableVisible;
 
         public IRibbonToggleButton Attach(Func<bool> getter) {
             this.SetSize(_preferredSize);

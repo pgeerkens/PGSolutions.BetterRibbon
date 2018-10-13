@@ -7,21 +7,24 @@ using Microsoft.Office.Interop.Excel;
 
 namespace PGSolutions.ExcelRibbon.VbaSourceExport {
     internal sealed class VbaSourceExportModel {
-        internal VbaSourceExportModel(IList<IVbaSourceExportGroupModel> models ) {
-            DestIsSrc = true;
-            Models    = models;
-            foreach (var model in Models) {
-                model.SelectedProjectsClicked += ExportSelectedProject;
-                model.CurrentProjectClicked   += ExportCurrentProject;
-                model.UseSrcFolderToggled     += UseSrcFolderToggled;
-                model.Attach(()=>DestIsSrc);
+        internal VbaSourceExportModel(IList<IVbaSourceExportGroupModel> viewModels ) {
+            DestIsSrc  = true;
+            ViewModels = viewModels;
+            foreach (var viewModel in ViewModels) {
+                viewModel.SelectedProjectsClicked += ExportSelectedProject;
+                viewModel.CurrentProjectClicked   += ExportCurrentProject;
+                viewModel.UseSrcFolderToggled     += UseSrcFolderToggled;
+                viewModel.Attach(()=>DestIsSrc);
             }
         }
 
-        private bool                              DestIsSrc { get; set; }
-        private IList<IVbaSourceExportGroupModel> Models    { get; set; }
+        private bool                              DestIsSrc  { get; set; }
+        private IList<IVbaSourceExportGroupModel> ViewModels { get; set; }
 
-        private void UseSrcFolderToggled(bool isPressed) => DestIsSrc = isPressed;
+        private void UseSrcFolderToggled(bool isPressed) {
+            DestIsSrc = isPressed;
+            foreach (var viewModel in ViewModels) {  viewModel.Invalidate(); }
+        }
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
         /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>

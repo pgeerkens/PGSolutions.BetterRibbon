@@ -59,58 +59,90 @@
             </mso:group>
             <mso:group id="CustomizableGroup" getVisible="getVisible"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-                <mso:button id="CustomizableButton1" getImage="getImage"
-                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                            getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
-                <mso:button id="CustomizableButton2" getImage="getImage"
-                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                            getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
-                <mso:button id="CustomizableButton3" getImage="getImage"
-                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                            getShowImage="getShowImage" getShowLabel="getShowLabel"
-                      />
-            </mso:group>
-            <mso:group id="CustomButtonsGroup" getVisible="getVisible"
-                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-          <mso:box id="CustomButtonsBox1" boxStyle="horizontal" visible="true" >
-            <mso:toggleButton id="SizeToggle" getImage="getImage"
-                      getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                      onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                      getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true" >
+                    <mso:checkBox id="CheckBox1"
+                              getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                              onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
                      />
-            <!-- Use this DropDown template when the item list will be dynamically defined through callbacks. -->
-            <mso:dropDown id="ButtonOptions2"
+                    <mso:checkBox id="CheckBox2"
+                              getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                              onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                     />
+                    <mso:checkBox id="CheckBox3"
+                              getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                              onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                     />
+                </mso:box>
+                <mso:box id="CustomVbaBox2" boxStyle="vertical" visible="true" >
+                    <mso:button id="CustomizableButton1" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+                    <mso:button id="CustomizableButton2" getImage="getImage"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+                    <mso:button id="CustomizableButton3" getImage="getImage"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel"
+                      />
+                </mso:box>
+            </mso:group>
+            <mso:group id="CSharpDemoGroup" getVisible="getVisible"
+                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:toggleButton id="SizeToggle" getImage="getImage"
                           getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                          getVisible="getVisible" getEnabled="getEnabled"
-                          getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
-                          getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
-                          onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                          onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                          getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                     />
+                <mso:box id="CSharpDemoBox1" boxStyle="vertical" visible="true" >
+                    <!-- Use this DropDown template when the item list will be dynamically defined through callbacks. -->
+                    <mso:dropDown id="ButtonOptions2"
+                                  getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                  getVisible="getVisible" getEnabled="getEnabled"
+                                  getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
+                                  getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
+                                  onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
                           >
-            </mso:dropDown>
-          </mso:box>
-          <mso:box id="CustomButtonsBox2" boxStyle="vertical" visible="true" >
-            <mso:button id="AppLaunchButton1" getImage="getImage"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                        getShowImage="getShowImage" getShowLabel="getShowLabel"
+                    </mso:dropDown>
+                    <mso:dropDown id="Dropdown2"
+                                  getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                  getVisible="getVisible" getEnabled="getEnabled"
+                                  getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
+                                  getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
+                                  onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                          >
+                    </mso:dropDown>
+                    <mso:dropDown id="Dropdown3"
+                                  getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                  getVisible="getVisible" getEnabled="getEnabled"
+                                  getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
+                                  getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
+                                  onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                          >
+                    </mso:dropDown>
+                </mso:box>
+                <mso:box id="CSharpDemoBox2" boxStyle="vertical" visible="true" >
+                    <mso:button id="AppLaunchButton1" getImage="getImage"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel"
                        />
-            <mso:button id="AppLaunchButton2" getImage="getImage"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                        getShowImage="getShowImage" getShowLabel="getShowLabel"
+                    <mso:button id="AppLaunchButton2" getImage="getImage"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel"
                        />
-            <mso:button id="AppLaunchButton3" getImage="getImage"
-                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                        onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                        getShowImage="getShowImage" getShowLabel="getShowLabel"
+                    <mso:button id="AppLaunchButton3" getImage="getImage"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel"
                        />
-          </mso:box>
-        </mso:group>
+                </mso:box>
+            </mso:group>
       </mso:tab>
     </mso:tabs>
   </mso:ribbon>
