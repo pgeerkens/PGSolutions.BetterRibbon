@@ -2,25 +2,23 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using Microsoft.Vbe.Interop;
 using Access = Microsoft.Office.Interop.Access;
 
 namespace PGSolutions.ExcelRibbon.VbaSourceExport {
     internal class AccessWrapper : IDisposable {
         public static bool IsAccessSupported => true;
 
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public static AccessWrapper New() {
-            AccessWrapper returnValue = null;
             try {
                 Globals.ThisAddIn.Application.DisplayAlerts = false;
-
-                returnValue = new AccessWrapper();
+                return new AccessWrapper();
             } finally {
                 Globals.ThisAddIn.Application.DisplayAlerts = true;
             }
-            return returnValue;
         }
 
         private AccessWrapper() => AccessApp = new Access.Application();
@@ -30,7 +28,6 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         /// <summary>Returns true exactly when the Project Object Model is trusted.</summary>
         public bool   IsProjectModelTrusted => AccessApp.VBE != null;
         public string CurrentProjectName    => AccessApp.CurrentProject.Name;
-        public VBE    VBE                   => AccessApp.VBE;
 
         public void OpenDbWithuotAutoexec(string path, bool exclusive = false) =>
             Extensions.InvokeWithShiftKey(() => OpenDbAsCurrent(path,exclusive));
@@ -82,6 +79,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         private const uint KEYEVENTF_KEYDOWN = 0x0;
         private const uint KEYEVENTF_KEYUP   = 0x2;
 
+        [SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "3")]
         [DllImport("user32.dll")]
         #pragma warning disable IDE1006 // Naming Styles - Matches name in external DLL
         private static extern void keybd_event(this byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);

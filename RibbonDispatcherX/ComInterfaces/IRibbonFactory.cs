@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.NewRibbonButtonMso)]
         RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
             RdControlSize size      = rdLarge,
-            string        imageMso  = "Unknown",  // This one gets people's attention ;-)
+            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
         );
@@ -58,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.NewRibbonToggleMso)]
         RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
             RdControlSize size      = rdLarge,
-            string        imageMso  = "Unknown",  // This one gets people's attention ;-)
+            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
         );

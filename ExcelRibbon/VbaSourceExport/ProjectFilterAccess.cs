@@ -2,13 +2,13 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Access;
 using Microsoft.Office.Interop.Access.Dao;
-using Microsoft.Vbe.Interop;
 using Access = Microsoft.Office.Interop.Access;
 
 namespace PGSolutions.ExcelRibbon.VbaSourceExport {
@@ -18,6 +18,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
         /// <remarks>
         /// </remarks>
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             using (var app = AccessWrapper.New()) {
                 if (!AccessWrapper.IsAccessSupported) { throw new NotSupportedException("MS-Access not available on this machine."); }
@@ -29,7 +30,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
                     }
                 } else {
                     MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
         }

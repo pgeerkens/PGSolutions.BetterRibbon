@@ -69,8 +69,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             OnChanged();
         }
 
+        public void SetLanguageStrings() => SetLanguageStrings(RibbonControlStrings.Default(Id));
+
         /// <inheritdoc/>
         public virtual void OnChanged() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
+
+        /// <inheritdoc/>
+        public void Invalidate() => OnChanged();
 
         //private static LanguageStrings GetLanguageStrings(string controlId, IResourceManager mgr)
         //    => mgr.GetControlStrings(controlId);

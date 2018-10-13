@@ -2,6 +2,8 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ControlMixins;
@@ -43,6 +45,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         private void OnExportSelected() => SelectedProjectsClicked();
         private void OnExportCurrent() => CurrentProjectClicked();
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        VbASourceExportGroup  { get; }
         private RibbonToggleButton UseSrcFolderToggle    { get; }
         private RibbonButton       SelectedProjectButton { get; }

@@ -14,7 +14,7 @@ namespace PGSolutions.ExcelRibbon {
 
         public static string NoImage => "MacroSecurity";
 
-        protected bool ToggleButtonSize(bool isLarge, IList<IRibbonButton> buttons) {
+        protected static bool ToggleButtonSize(bool isLarge, IList<IRibbonButton> buttons) {
             foreach (var b in buttons) { b.Size = isLarge ? rdLarge : rdRegular; }
             return !isLarge;
         }

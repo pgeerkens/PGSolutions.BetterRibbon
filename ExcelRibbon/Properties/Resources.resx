@@ -222,9 +222,6 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
   <data name="SelectedProjectButtonPG_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
-  <data name="SizeToggle_AlternateLabel" xml:space="preserve">
-    <value>Prefer Large</value>
-  </data>
   <data name="SizeToggle_Label" xml:space="preserve">
     <value>Prefer Small</value>
   </data>
@@ -252,7 +249,7 @@ When this toggle is raised the export is instead to a directory eponymous with t
     <value>VBA Source Export Controls</value>
   </data>
   <data name="VbaExportGroupMS_SuperTip" xml:space="preserve">
-    <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
+    <value>Exports all VBA code to a sibling directory of each workbook, by module type:
 
 Class modules as .CLS
 Standard modules as .VBA
@@ -278,7 +275,7 @@ When this toggle is raised the export is instead to a directory eponymous with t
     <value>VBA Source Export Controls</value>
   </data>
   <data name="VbaExportGroupPG_SuperTip" xml:space="preserve">
-    <value>Exports all VBA code to a sibling direcctory of each workbook, by module type:
+    <value>Exports all VBA code to a sibling directory of each workbook, by module type:
 
 Class modules as .CLS
 Standard modules as .VBA
@@ -290,7 +287,7 @@ Project references as .XML</value>
     <value>Application-Customizable Controls</value>
   </data>
   <data name="CustomizableGroup_SuperTip" xml:space="preserve">
-    <value>These controls can be dynamically customized, both in behaviour and appearance, within the VBAcode for a workbook. The controls automatically deactivate when a workkbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus.</value>
+    <value>These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus.</value>
   </data>
   <data name="ButtonOptions2_Label" xml:space="preserve">
     <value>Display Options</value>

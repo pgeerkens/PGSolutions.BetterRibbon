@@ -7,15 +7,17 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public interface IActivatable {
         bool ShowWhenInactive { get; set; }
+        void Detach();
+        void Invalidate();
     }
     public interface IActivatableControl<TCtl> : IActivatable where TCtl : IRibbonCommon {
         TCtl Attach();
-        void Detach();
+        new void Detach();
         new bool ShowWhenInactive { get; set; }
     }
     public interface IActivatableControl<TCtl, TSource> : IActivatable where TCtl:IRibbonCommon {
         TCtl Attach(Func<TSource> getter);
-        void Detach();
+        new void Detach();
         new bool ShowWhenInactive { get; set; }
     }
 }

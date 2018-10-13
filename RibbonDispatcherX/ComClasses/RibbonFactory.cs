@@ -89,7 +89,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         private T Add<T>(T ctrl) where T:RibbonCommon {
-            _controls.Add(ctrl.Id, ctrl);
+            if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
             _clickables.AddNotNull(ctrl.Id, ctrl as IClickableMixin);
             _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeableMixin);
@@ -121,7 +121,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
             RdControlSize size      = rdLarge,
-            string        imageMso  = "Unknown",
+            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
         ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(imageMso), showImage, showLabel));
@@ -139,7 +139,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
             RdControlSize size      = rdLarge,
-            string        imageMso  = "Unknown",
+            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
         ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(imageMso), showImage, showLabel));
@@ -171,6 +171,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "") =>
-            new RibbonTextLanguageControl(label, screenTip, superTip, keyTip, alternateLabel, description);
+            new RibbonControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
     }
 }

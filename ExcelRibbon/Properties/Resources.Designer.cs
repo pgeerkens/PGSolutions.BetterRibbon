@@ -243,7 +243,7 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBAcode for a workbook. The controls automatically deactivate when a workkbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus..
+        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus..
         /// </summary>
         internal static string CustomizableGroup_SuperTip {
             get {
@@ -415,15 +415,6 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prefer Large.
-        /// </summary>
-        internal static string SizeToggle_AlternateLabel {
-            get {
-                return ResourceManager.GetString("SizeToggle_AlternateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Prefer Small.
         /// </summary>
         internal static string SizeToggle_Label {
@@ -527,7 +518,7 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports all VBA code to a sibling direcctory of each workbook, by module type:
+        ///   Looks up a localized string similar to Exports all VBA code to a sibling directory of each workbook, by module type:
         ///
         ///Class modules as .CLS
         ///Standard modules as .VBA
@@ -560,7 +551,7 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports all VBA code to a sibling direcctory of each workbook, by module type:
+        ///   Looks up a localized string similar to Exports all VBA code to a sibling directory of each workbook, by module type:
         ///
         ///Class modules as .CLS
         ///Standard modules as .VBA

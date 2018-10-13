@@ -65,15 +65,15 @@
                           getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
                      />
                 <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true" >
-                    <mso:checkBox id="CheckBox1"
+                    <mso:checkBox id="CustomVbaCheckBox1"
                               getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                               onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
                      />
-                    <mso:checkBox id="CheckBox2"
+                    <mso:checkBox id="CustomVbaCheckBox2"
                               getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                               onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
                      />
-                    <mso:checkBox id="CheckBox3"
+                    <mso:checkBox id="CustomVbaCheckBox3"
                               getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                               onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
                      />

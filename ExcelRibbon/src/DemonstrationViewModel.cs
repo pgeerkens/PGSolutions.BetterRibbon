@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -28,6 +29,7 @@ namespace PGSolutions.ExcelRibbon {
         public event SelectedEventHandler        DisplayOptionSelected;
         public event EventHandler<IRibbonButton> ButtonClicked;
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        CustomGroup    { get; }
         private RibbonButton       CustomButton1  { get; }
         private RibbonButton       CustomButton2  { get; }

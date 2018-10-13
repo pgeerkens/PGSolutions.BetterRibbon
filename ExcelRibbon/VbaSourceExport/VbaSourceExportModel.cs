@@ -68,7 +68,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             }
         }
 
-        private void SilentAction(System.Action action) {
+        private static void SilentAction(System.Action action) {
             try {
                 Application.Cursor = XlMousePointer.xlWait;
                 Application.ScreenUpdating = false;

@@ -13,20 +13,20 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonControlStrings))]
     [Guid(Guids.RibbonTextLanguageControl)]
-    public class RibbonTextLanguageControl : IRibbonControlStrings {
-        public static RibbonTextLanguageControl Empty { get; } = new RibbonTextLanguageControl();
-        private RibbonTextLanguageControl() : this("", "", "", "", "", "") { }
+    public class RibbonControlStrings : IRibbonControlStrings {
+        public static RibbonControlStrings Empty { get; } = new RibbonControlStrings();
+        private RibbonControlStrings() : this("", "", "", "", "", "") { }
 
         /// <summary>TODO</summary>
-        public RibbonTextLanguageControl(
+        public RibbonControlStrings(
             string label,
-            string screenTip,
-            string superTip,
-            string keyTip,
-            string alternateLabel,
-            string description
+            string screenTip      = null,
+            string superTip       = null,
+            string keyTip         = null,
+            string alternateLabel = null,
+            string description    = null
         ) {
-            Label           = label         ?? throw new ArgumentNullException(nameof(label)); 
+            Label           = label         ?? "Missing";
             ScreenTip       = screenTip     ?? Label; 
             SuperTip        = superTip      ?? "SuperTip text for " + Label; 
             KeyTip          = keyTip        ?? "";
@@ -50,5 +50,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
 
         /// <inheritdoc/>
         public string Description { get; }
+
+        public static RibbonControlStrings Default(string Id) => new RibbonControlStrings(Id);
     }
 }

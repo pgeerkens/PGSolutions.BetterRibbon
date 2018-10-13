@@ -8,43 +8,52 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-Private Const ModuleName    As String = "ThisWorkbook."
-
 Private WithEvents Button1  As RibbonDispatcherX.RibbonButton
 Attribute Button1.VB_VarHelpID = -1
 Private WithEvents Button2  As RibbonDispatcherX.RibbonButton
 Attribute Button2.VB_VarHelpID = -1
 Private WithEvents Button3  As RibbonDispatcherX.RibbonButton
 Attribute Button3.VB_VarHelpID = -1
+Private WithEvents Toggle   As RibbonDemonstration.RibbonToggleModel
+Attribute Toggle.VB_VarHelpID = -1
 
-Private Button1Strings      As RibbonDispatcherX.IRibbonTextLanguageControl
-Private Button2Strings      As RibbonDispatcherX.IRibbonTextLanguageControl
-Private Button3Strings      As RibbonDispatcherX.IRibbonTextLanguageControl
+Private Button1Strings      As RibbonDispatcherX.IRibbonControlStrings
+Private Button2Strings      As RibbonDispatcherX.IRibbonControlStrings
+Private Button3Strings      As RibbonDispatcherX.IRibbonControlStrings
+Private ToggleStrings       As RibbonDispatcherX.IRibbonControlStrings
 
 Private Sub Button1_Clicked()
     On Error GoTo EH
-    MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, ModuleName
+    MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
 Private Sub Button2_Clicked()
     On Error GoTo EH
-    MsgBox "Activation message from Button2!", vbOKOnly Or vbInformation, ModuleName
+    MsgBox "Activation message from Button2!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
 Private Sub Button3_Clicked()
     On Error GoTo EH
-    MsgBox "Activation message from Button3!", vbOKOnly Or vbInformation, ModuleName
+    MsgBox "Activation message from Button3!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
     Resume XT
+    Resume          ' for debugging only
+End Sub
+
+Private Sub Toggle_Toggled(ByVal IsPressed As Boolean)
+    On Error GoTo EH
+    AddInHandle.ShowInactive IsPressed
+XT: Exit Sub
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & "SetStrings"
     Resume          ' for debugging only
 End Sub
 
@@ -58,8 +67,11 @@ Friend Sub Activate()
         Set Button3 = .AttachButton("CustomizableButton3", Button3Strings)
         Button3.SetImageMso "MacroPlay"
     End With
+    With New RibbonToggleModel
+        Set Toggle = .Attach("CustomVbaToggle", ToggleStrings)
+    End With
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "Workbook_Activate", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
@@ -67,29 +79,34 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With AddInHandle
-        Set Button1Strings = .RibbonFactory.NewControlStrings(Label:="This is cool!", _
-                 ScreenTip:="Button1 Screentip", _
-                 SuperTip:="Lots of good things" & vbNewLine & _
-                            "can be done here to" & vbNewLine & _
-                            "show off a bit.", KeyTip:="", AlternateLabel:="", Description:="")
-        Set Button2Strings = .RibbonFactory.NewControlStrings(Label:="This is cooler!", _
-                 ScreenTip:="Button2 Screentip", _
-                 SuperTip:="Lots of good things" & vbNewLine & _
-                            "can be done from hither" & vbNewLine & _
-                            " " & vbNewLine & _
-                            " " & vbNewLine & _
-                            " " & vbNewLine & _
-                            " " & vbNewLine & _
-                            " " & vbNewLine & _
-                            " " & vbNewLine & _
-                            "... all the way to yon." & vbNewLine & _
-                            "to show off a bit more.")
-        Set Button3Strings = .RibbonFactory.NewControlStrings(Label:="This is coolest!", _
-                 ScreenTip:="Button3 Screentip", _
-                 SuperTip:="What's the weather like where you are?.")
+        Set Button1Strings = .NewControlStrings(Label:="This is cool!", _
+                ScreenTip:="Button1 Screentip", _
+                SuperTip:="Lots of good things" & vbNewLine & _
+                          "can be done here to" & vbNewLine & _
+                          "show off a bit.", KeyTip:="", AlternateLabel:="", Description:="")
+        Set Button2Strings = .NewControlStrings(Label:="This is cooler!", _
+                ScreenTip:="Button2 Screentip", _
+                SuperTip:="Lots of good things" & vbNewLine & _
+                          "can be done from hither" & vbNewLine & _
+                          " " & vbNewLine & _
+                          " " & vbNewLine & _
+                          " " & vbNewLine & _
+                          " " & vbNewLine & _
+                          " " & vbNewLine & _
+                          " " & vbNewLine & _
+                          "... all the way to yon." & vbNewLine & _
+                          "to show off a bit more.")
+        Set Button3Strings = .NewControlStrings(Label:="This is coolest!", _
+                ScreenTip:="Button3 Screentip", _
+                SuperTip:="What's the weather like where you are?.")
+        Set ToggleStrings = .NewControlStrings(Label:="Show Inactive", _
+                ScreenTip:="Toggles Display of Inactive", _
+                SuperTip:="Toggles on/off the display of customizable ribbon controls" & _
+                          " that are currently unattached to a Data Source and/or" & _
+                          "event sink.")
     End With
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "Workbook_Activate", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub

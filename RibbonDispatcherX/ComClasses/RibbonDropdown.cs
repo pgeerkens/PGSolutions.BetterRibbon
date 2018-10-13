@@ -31,9 +31,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private bool _isAttached    = false;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+        public override bool IsVisible => (base.IsVisible && _isAttached)
+                                       || (ShowWhenInactive);
 
-        public bool ShowWhenInactive { get; set; } = true;
+        public bool ShowWhenInactive { get; set; } //= true;
 
         private Func<int> Getter { get; set; }
 
@@ -46,7 +47,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void Detach() {
             Getter = ()=>0;
             _isAttached = false;
-            SetLanguageStrings(RibbonTextLanguageControl.Empty);
+            SetLanguageStrings(RibbonControlStrings.Empty);
+            Invalidate();
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon, int>.Attach(Func<int> getter) =>

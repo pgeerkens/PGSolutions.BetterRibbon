@@ -49,5 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.IsVisible)]
         [Description("Gets or sets whether or not the control is visible..")]
         bool IsVisible      { get; set; }
+
+        void Invalidate();
     }
 }

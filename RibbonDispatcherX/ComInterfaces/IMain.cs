@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
@@ -17,13 +18,33 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IMain {
         /// <summary>TODO</summary>
         [Description("")]
-        IRibbonFactory RibbonFactory { get; }
+        [DispId(1)]
+        void InvalidateControl(string ControlId);
+
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(2)]
+        IRibbonControlStrings NewControlStrings(string label,
+                string screenTip = "", string superTip = "",
+                string keyTip = "", string alternateLabel = "", string description = "");
+
+        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
+        /// <param name="controlId">The ID of the control to be detached.</param>
+        [Description("Deactivate the specified control, detaching any attached data source.")]
+        [DispId(3)]
+        void DetachProxy(string controlId);
+
+        /// <summary>Sets ehether or not inactive controls should be visible on the Ribbon.</summary>
+        /// <param name="showWhenInactive"></param>
+        [Description("Sets ehether or not inactive controls should be visible on the Ribbon.")]
+        [DispId(4)]
+        void ShowInactive(bool showWhenInactive);
 
         /// <summary>Attaches and activates the specified Button control.</summary>
         /// <param name="controlId">The </param>
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches and activates the specified Button control.")]
+        [DispId(5)]
         IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings);
 
         /// <summary>Attaches an {IBooleanSource} to the specified ToggleButton control.</summary>
@@ -31,6 +52,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified ToggleButton control.")]
+        [DispId(6)]
         IRibbonToggleButton AttachToggle(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
@@ -39,6 +61,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified CheckBox control.")]
+        [DispId(7)]
         IRibbonCheckBox AttachCheckBox(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
@@ -47,23 +70,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IIntegerSource} to the specified DropDown control.")]
+        [DispId(8)]
         IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
                 IIntegerSource source);
-
-        /// <summary>Sets ehether or not inactive controls should be visible on the Ribbon.</summary>
-        /// <param name="showWhenInactive"></param>
-        [Description("Sets ehether or not inactive controls should be visible on the Ribbon.")]
-        void ShowInactive(bool showWhenInactive);
-
-        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
-        /// <param name="controlId">The ID of the control to be detached.</param>
-        [Description("Deactivate the specified control, detaching any attached data source.")]
-        void DetachProxy(string controlId);
-
-        /// <summary>TODO</summary>
-        [Description("")]
-        /// <inheritdoc/>
-        void InvalidateControl(string ControlId);
     }
 
     [CLSCompliant(true)]

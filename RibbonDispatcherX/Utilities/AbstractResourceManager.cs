@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         
         /// <inheritdoc/>
         public IRibbonControlStrings GetControlStrings(string ControlId) =>
-            new RibbonTextLanguageControl(
+            new RibbonControlStrings(
                     GetCurrentUIString($"{ControlId}_Label")          ?? ControlId.Unknown(),
                     GetCurrentUIString($"{ControlId}_ScreenTip")      ?? ControlId.Unknown("ScreenTip"),
                     GetCurrentUIString($"{ControlId}_SuperTip")       ?? ControlId.Unknown("SuperTip"),

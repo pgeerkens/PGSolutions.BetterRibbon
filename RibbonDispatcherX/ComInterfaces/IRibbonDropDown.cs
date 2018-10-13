@@ -12,44 +12,47 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonDropDown)]
-    public interface IRibbonDropDown {
+    public interface IRibbonDropDown : IRibbonCommon {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
-        string      Id                  { get; }
+        new string      Id         { get; }
         /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
         [DispId(DispIds.Description)]
-        string      Description         { get; }
+        new string Description     { get; }
         /// <summary>Returns the KeyTip string for this control.</summary>
         [Description("Returns the KeyTip string for this control.")]
         [DispId(DispIds.KeyTip)]
-        string      KeyTip              { get; }
+        new string KeyTip          { get; }
         /// <summary>Returns the Label string for this control.</summary>
         [Description("Returns the Label string for this control.")]
         [DispId(DispIds.Label)]
-        string      Label               { get; }
+        new string Label           { get; }
         /// <summary>Returns the screenTip string for this control.</summary>
         [Description("Returns the screenTip string for this control.")]
         [DispId(DispIds.ScreenTip)]
-        string      ScreenTip           { get; }
+        new string ScreenTip       { get; }
         /// <summary>Returns the SuperTip string for this control.</summary>
         [Description("Returns the SuperTip string for this control.")]
         [DispId(DispIds.SuperTip)]
-        string      SuperTip            { get; }
+        new string SuperTip        { get; }
         /// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
         [Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
         [DispId(DispIds.SetLanguageStrings)]
-        void        SetLanguageStrings(IRibbonControlStrings LanguageStrings);
+        new void SetLanguageStrings(IRibbonControlStrings LanguageStrings);
 
         /// <summary>TODO</summary>
         [Description("")]
         [DispId(DispIds.IsEnabled)]
-        bool        IsEnabled           { get; set; }
+        new bool IsEnabled       { get; set; }
         /// <summary>TODO</summary>
         [Description("")]
         [DispId(DispIds.IsVisible)]
-        bool        IsVisible           { get; set; }
+        new bool IsVisible       { get; set; }
+
+        /// <inheritdoc/>
+        new void Invalidate();
 
         /// <summary>Returns the ID of the current selected item.</summary>
         [Description("Returns the ID of the current selected item.")]

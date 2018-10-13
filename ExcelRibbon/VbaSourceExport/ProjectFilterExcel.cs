@@ -2,6 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Windows.Forms;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -13,6 +14,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
         public ProjectFilterExcel(string description, string extensions) : base(description, extensions) { }
 
         /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             if ( IsProjectModelTrusted) {
                 foreach (string selectedItem in items) {
@@ -21,7 +23,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
                 }
             } else {
                 MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -41,6 +43,7 @@ namespace PGSolutions.ExcelRibbon.VbaSourceExport {
             }
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private static void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
             var wkbk = app.Workbooks.Open(filename, UpdateLinks:false, ReadOnly:true, AddToMru:false, Editable:false);
 

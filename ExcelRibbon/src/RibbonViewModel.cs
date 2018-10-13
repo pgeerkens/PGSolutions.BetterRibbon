@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
@@ -33,18 +34,24 @@ namespace PGSolutions.ExcelRibbon {
 
         public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal BrandingViewModel            BrandingViewModel        { get; private set; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal DemonstrationModel           DemonstrationModel       { get; private set; }
         internal CustomizableButtonsViewModel CustomButtonsViewMode    { get; private set; }
 
-        internal IDictionary<string, IActivatableControl<IRibbonCommon>> AdaptorControls { get; private set; }
+        internal IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
+                CustomButtonsViewMode.AdaptorControls;
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
+        [SuppressMessage("Microsoft.Design", "CA1061:DoNotHideBaseClassMethods",
+            Justification="False positive - parameter types are identical.")]
         [CLSCompliant(false)]
-        public override void OnRibbonLoad(IRibbonUI ribbonUI) {
+        public sealed override void OnRibbonLoad(IRibbonUI ribbonUI) {
             base.OnRibbonLoad(ribbonUI);
 
             BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
@@ -56,12 +63,6 @@ namespace PGSolutions.ExcelRibbon {
                     new VbaSourceExportViewModel(RibbonFactory, "MS"),
                     new VbaSourceExportViewModel(RibbonFactory, "PG")
                 } );
-
-            AdaptorControls = new Dictionary<string, IActivatableControl<IRibbonCommon>>() {
-                { CustomButtonsViewMode.CustomizableButton1.Id, CustomButtonsViewMode.CustomizableButton1 },
-                { CustomButtonsViewMode.CustomizableButton2.Id, CustomButtonsViewMode.CustomizableButton2 },
-                { CustomButtonsViewMode.CustomizableButton3.Id, CustomButtonsViewMode.CustomizableButton3 }
-            };
 
             Invalidate();
         }

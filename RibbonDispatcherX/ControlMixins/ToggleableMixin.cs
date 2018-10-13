@@ -24,13 +24,12 @@ namespace PGSolutions.RibbonDispatcher.ControlMixins {
             mixin.OnChanged();
         }
 
-        public  static void SetGetter (this IToggleableMixin mixin, Func<bool> getter) => mixin.Mixin().Getter = getter;
-        public  static bool GetPressed(this IToggleableMixin mixin) => mixin.Mixin().IsPressed;
-        public  static string GetLabel(this IToggleableMixin mixin) => mixin.GetLabel(mixin.Mixin());
-        private static string GetLabel(this IToggleableMixin mixin, Fields fields)
-            => fields.IsPressed && ! string.IsNullOrEmpty(mixin.Label2()) ? mixin.Label2()
-                                                                         : mixin.Label1();
-        private static string Label2(this IToggleableMixin mixin) => mixin.LanguageStrings.AlternateLabel;
-        private static string Label1(this IToggleableMixin mixin) => mixin.LanguageStrings.Label;
+        public static void SetGetter (this IToggleableMixin mixin, Func<bool> getter) => mixin.Mixin().Getter = getter;
+        public static bool GetPressed(this IToggleableMixin mixin) => mixin.Mixin().IsPressed;
+        public static string GetLabel(this IToggleableMixin mixin)
+            => mixin.Mixin().IsPressed && ! string.IsNullOrEmpty(mixin?.AlternateLabel())
+                        ? mixin.AlternateLabel()
+                        : mixin.LanguageStrings.Label ?? "";
+        private static string AlternateLabel(this IToggleableMixin mixin) => mixin.LanguageStrings.AlternateLabel;
     }
 }

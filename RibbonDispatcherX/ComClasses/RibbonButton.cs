@@ -38,9 +38,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private bool _isAttached    = false;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => base.IsVisible || ShowWhenInactive;
+        public override bool IsVisible => (base.IsVisible && _isAttached)
+                                       || (ShowWhenInactive);
 
-        public bool ShowWhenInactive { get; set; } = true;
+        public bool ShowWhenInactive { get; set; } //= true;
 
         public IRibbonButton Attach() {
             _isAttached = true;
@@ -49,8 +50,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public void Detach() {
             _isAttached = false;
-            SetLanguageStrings(RibbonTextLanguageControl.Empty);
+            SetLanguageStrings(RibbonControlStrings.Empty);
             SetImageMso("MacroSecurity");
+            Invalidate();
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon>.Attach() => Attach() as IRibbonCommon;

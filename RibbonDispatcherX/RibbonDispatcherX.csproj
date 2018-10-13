@@ -107,7 +107,7 @@
     <Compile Include="ComClasses\RibbonDropdown.cs" />
     <Compile Include="ComClasses\RibbonFactory.cs" />
     <Compile Include="ComClasses\RibbonGroup.cs" />
-    <Compile Include="ComClasses\RibbonTextLanguageControl.cs" />
+    <Compile Include="ComClasses\RibbonControlStrings.cs" />
     <Compile Include="ComClasses\RibbonToggleButton.cs" />
     <Compile Include="ComClasses\RibbonViewModel.cs" />
     <Compile Include="ComClasses\SelectableItem.cs" />
@@ -136,12 +136,8 @@
     <Compile Include="ComInterfaces\IToggledEvents.cs" />
     <Compile Include="ComInterfaces\RdControlSize.cs" />
     <Compile Include="ControlMixins\ClickableMixin.cs" />
-    <Compile Include="ControlMixins\IClickableMixin.cs" />
-    <Compile Include="ControlMixins\IImageableMixin.cs" />
+    <Compile Include="ControlMixins\MixinInterfaces.cs" />
     <Compile Include="ControlMixins\ImageableMixin.cs" />
-    <Compile Include="ControlMixins\ISelectableMixin.cs" />
-    <Compile Include="ControlMixins\ISizeableMixin.cs" />
-    <Compile Include="ControlMixins\IToggleableMixin.cs" />
     <Compile Include="ControlMixins\SizeableMixin.cs" />
     <Compile Include="ControlMixins\ToggleableMixin.cs" />
     <Compile Include="GlobalSuppressions.cs" />

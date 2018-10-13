@@ -42,7 +42,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             string KeyTip           = null
         )
         {
-            _controls.Add(ControlId, new RibbonTextLanguageControl(
+            _controls.Add(ControlId, new RibbonControlStrings(
                     Label           ?? ControlId,
                     ScreenTip       ?? ControlId + " ScreenTip",
                     SuperTip        ?? ControlId + " SuperTip",

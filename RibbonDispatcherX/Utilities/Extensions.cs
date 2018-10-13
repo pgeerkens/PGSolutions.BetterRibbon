@@ -22,7 +22,7 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
 
         public static void MsgBoxShow<TControl>(this TControl control, string details) where TControl : IRibbonButton =>
             MessageBox.Show($"{control?.Id ?? "Unknown Button"} pressed {details??""}.", "PGSolutions Ribbon Dispatcher",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 0);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 
         /// <summary>Returns the text for the resource named <paramref name="resourceName"/>; else null if not found.</summary>
         public static string GetResourceText(this string resourceName) {
