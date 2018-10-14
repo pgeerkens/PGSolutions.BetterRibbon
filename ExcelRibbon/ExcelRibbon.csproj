@@ -196,6 +196,13 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
+    <Compile Include="LinksAnalyzer\ExternaLinks.cs" />
+    <Compile Include="LinksAnalyzer\ExternalNamedRef.cs" />
+    <Compile Include="LinksAnalyzer\InternalCellRef.cs" />
+    <Compile Include="LinksAnalyzer\LinksLexer.cs" />
+    <Compile Include="LinksAnalyzer\ParseError.cs" />
+    <Compile Include="LinksAnalyzer\ParseErrors.cs" />
     <Compile Include="src\CustomizableButtonsViewModel.cs" />
     <Compile Include="src\DemonstrationModel.cs" />
     <Compile Include="src\Main.cs" />
