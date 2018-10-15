@@ -196,13 +196,6 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
-    <Compile Include="LinksAnalyzer\ExternaLinks.cs" />
-    <Compile Include="LinksAnalyzer\ExternalNamedRef.cs" />
-    <Compile Include="LinksAnalyzer\InternalCellRef.cs" />
-    <Compile Include="LinksAnalyzer\LinksLexer.cs" />
-    <Compile Include="LinksAnalyzer\ParseError.cs" />
-    <Compile Include="LinksAnalyzer\ParseErrors.cs" />
     <Compile Include="src\CustomizableButtonsViewModel.cs" />
     <Compile Include="src\DemonstrationModel.cs" />
     <Compile Include="src\Main.cs" />
@@ -331,6 +324,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LinksAnalyzer\LinksAnalyzer.csproj">
+      <Project>{fab5de05-0232-4053-b4ce-ce9a1a312750}</Project>
+      <Name>LinksAnalyzer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RibbonDispatcherX\RibbonDispatcherX.csproj">
       <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
       <Name>RibbonDispatcherX</Name>

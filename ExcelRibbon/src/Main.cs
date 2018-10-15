@@ -2,16 +2,21 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+using Excel     = Microsoft.Office.Interop.Excel;
+using Workbook  = Microsoft.Office.Interop.Excel.Workbook;
+using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComClasses;
-using System.Collections.Generic;
-using System.Linq;
-
-using Excel = Microsoft.Office.Interop.Excel;
 using PGSolutions.RibbonDispatcher.Utilities;
-using System.Diagnostics.CodeAnalysis;
+
+using PGSolutions.LinksAnalyzer;
+using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.ExcelRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
@@ -22,14 +27,14 @@ namespace PGSolutions.ExcelRibbon {
     [ComDefaultInterface(typeof(IMain))]
     [Guid(Guids.Main)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
-    public class Main : IMain {
+    public class Main : IMain, ILinksAnalyzer {
         private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 Globals.ThisAddIn.ViewModel.AdaptorControls;
         private static RibbonViewModel ViewModel = Globals.ThisAddIn.ViewModel;
 
-        internal void WorkbookDeactivate(Excel.Workbook wb) =>
+        internal void WorkbookDeactivate(Workbook wb) =>
             DeactivateActivatableControls();
-        internal void WindowDeactivate(Excel.Workbook wb, Excel.Window wn) =>
+        internal void WindowDeactivate(Workbook wb, Excel.Window wn) =>
             DeactivateActivatableControls();
 
         private static void DeactivateActivatableControls() {
@@ -87,5 +92,25 @@ namespace PGSolutions.ExcelRibbon {
             ctrl?.Attach(source.Getter);
             return ctrl;
         }
+
+        #region ILinksAnalyzer
+        ILinksLexer ILinksAnalyzer.NewLinksLexer(ISourceCellRef cellRef, string formula) =>
+             new LinksLexer(cellRef, formula);
+
+        ISourceCellRef ILinksAnalyzer.NewSourceCellRef(Workbook wkbk, string tabName, string cellName) =>
+            new SourceCellRef( wkbk, tabName, cellName );
+
+        ISourceCellRef ILinksAnalyzer.NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName, string cellName,
+            bool isNamedRange = false
+        ) => new SourceCellRef( wkBkPath, wkBkName, tabName, cellName );
+
+        IExternalLinks ILinksAnalyzer.NewExternalLinksWB(Workbook wb, string excludedName) =>
+            new ExternalLinks(wb, excludedName);
+
+        IExternalLinks ILinksAnalyzer.NewExternalLinksWS(Worksheet ws) => new ExternalLinks(ws);
+
+        IExternalLinks ILinksAnalyzer.Parse(ISourceCellRef cellRef, string formula) =>
+            new ExternalLinks(cellRef, formula);
+        #endregion
     }
 }
