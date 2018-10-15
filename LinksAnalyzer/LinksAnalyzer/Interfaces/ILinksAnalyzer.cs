@@ -34,6 +34,8 @@ namespace PGSolutions.LinksAnalyzer {
         ISourceCellRef NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName, string cellName,
             bool isNamedRange = false);
 
+        IExternalLinks NewExternalLinks(Excel.Application excel, VBA.Collection nameList);
+
         IExternalLinks NewExternalLinksWB(Excel.Workbook wb, string excludedName);
 
         IExternalLinks NewExternalLinksWS(Excel.Worksheet ws);

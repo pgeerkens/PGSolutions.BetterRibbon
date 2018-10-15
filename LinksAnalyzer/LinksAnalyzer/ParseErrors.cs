@@ -15,8 +15,7 @@ namespace PGSolutions.LinksAnalyzer {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IParseErrors))]
     public class ParseErrors : IParseErrors, IReadOnlyList<IParseError> { 
-        public ParseErrors() =>
-            Errors = new List<IParseError>();
+        public ParseErrors() => Errors = new List<IParseError>();
 
         public int          Count => Errors.Count;
         public IParseError  this[int index] => Errors[index];
@@ -31,6 +30,6 @@ namespace PGSolutions.LinksAnalyzer {
         }
 
         public IEnumerator<IParseError> GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();
+                IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();
     }
 }

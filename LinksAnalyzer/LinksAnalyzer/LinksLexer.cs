@@ -85,7 +85,6 @@ namespace PGSolutions.LinksAnalyzer {
             var rv = text.IsWordOperator() ? new Token(EToken.BinOp, start, text)
                                            : new Token(token, start, text);
             Tokens.Add(rv);
-            if (rv.Value == EToken.ScanError) ;
             return rv;
         }
 

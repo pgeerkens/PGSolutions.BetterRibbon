@@ -13,21 +13,21 @@ namespace PGSolutions.LinksAnalyzer {
             new LinksLexer(cellRef, formula);
 
         [CLSCompliant(false)]
-        public static void ListExternalLinksActiveWorkbook(Excel.Workbook workbook,
+        public static void ListExternalLinksActiveWorkbook(Excel.Workbook wb,
             bool showErrors, bool IncludeHyperLinks) {
 
-            if( workbook == null) return;
+            if( wb == null) return;
 
-            workbook.Application.ScreenUpdating = false;
-            bool protectStructure = workbook.ProtectStructure;
+            wb.Application.ScreenUpdating = false;
+            bool protectStructure = wb.ProtectStructure;
             try {
-                if (workbook.ProtectStructure) workbook.Protect(null, false);
+                if (wb.ProtectStructure) wb.Protect(null, false);
 
-                var externalLinks = new ExternalLinks(workbook, "Links Analysis");
+                var externalLinks = new ExternalLinks(wb.Application, wb, "Links Analysis");
                 
             } finally {
-                workbook.Protect(null, protectStructure);
-                workbook.Application.ScreenUpdating = true;
+                wb.Protect(null, protectStructure);
+                wb.Application.ScreenUpdating = true;
             }
         }
     }

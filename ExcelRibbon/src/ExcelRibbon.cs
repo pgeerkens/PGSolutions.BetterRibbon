@@ -100,17 +100,21 @@ namespace PGSolutions.ExcelRibbon {
         ISourceCellRef ILinksAnalyzer.NewSourceCellRef(Workbook wkbk, string tabName, string cellName) =>
             new SourceCellRef( wkbk, tabName, cellName );
 
-        ISourceCellRef ILinksAnalyzer.NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName, string cellName,
-            bool isNamedRange = false
-        ) => new SourceCellRef( wkBkPath, wkBkName, tabName, cellName );
+        ISourceCellRef ILinksAnalyzer.NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName,
+                string cellName, bool isNamedRange)
+            => new SourceCellRef( wkBkPath, wkBkName, tabName, cellName );
 
-        IExternalLinks ILinksAnalyzer.NewExternalLinksWB(Workbook wb, string excludedName) =>
-            new ExternalLinks(wb, excludedName);
+        IExternalLinks ILinksAnalyzer.NewExternalLinks(Excel.Application excel, VBA.Collection nameList)
+            => new ExternalLinks(Globals.ThisAddIn.Application, nameList);
 
-        IExternalLinks ILinksAnalyzer.NewExternalLinksWS(Worksheet ws) => new ExternalLinks(ws);
+        IExternalLinks ILinksAnalyzer.NewExternalLinksWB(Workbook wb, string excludedName)
+            => new ExternalLinks(Globals.ThisAddIn.Application, wb, excludedName);
 
-        IExternalLinks ILinksAnalyzer.Parse(ISourceCellRef cellRef, string formula) =>
-            new ExternalLinks(cellRef, formula);
+        IExternalLinks ILinksAnalyzer.NewExternalLinksWS(Worksheet ws)
+            => new ExternalLinks(Globals.ThisAddIn.Application, ws);
+
+        IExternalLinks ILinksAnalyzer.Parse(ISourceCellRef cellRef, string formula)
+            => new ExternalLinks(cellRef, formula);
         #endregion
     }
 }

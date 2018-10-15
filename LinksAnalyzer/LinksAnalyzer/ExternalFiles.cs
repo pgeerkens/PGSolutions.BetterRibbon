@@ -17,7 +17,7 @@ namespace PGSolutions.LinksAnalyzer {
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalFiles))]
-    public class ExternalFiles : IExternalFiles, IReadOnlyList<string> {
+    public class ExternalFiles : IExternalFiles{ //, IReadOnlyList<string> {
         public ExternalFiles() => List = new List<string>();
 
         private List<string> List { get; }
@@ -30,6 +30,6 @@ namespace PGSolutions.LinksAnalyzer {
         }
 
         public IEnumerator<string> GetEnumerator() => ((IReadOnlyList<string>)List).GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<string>)List).GetEnumerator();
+        //IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<string>)List).GetEnumerator();
     }
 }

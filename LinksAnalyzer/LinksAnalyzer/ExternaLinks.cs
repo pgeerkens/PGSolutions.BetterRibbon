@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -16,17 +17,37 @@ namespace PGSolutions.LinksAnalyzer {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalLinks))]
     public sealed class ExternalLinks : IExternalLinks, IReadOnlyList<ICellRef> {
-        public ExternalLinks(ISourceCellRef cellRef, string formula) : this() => ParseFormula(cellRef, formula);
-        public ExternalLinks(Excel.Worksheet ws) : this() => ExtendFromWorksheet(ws);
-        public ExternalLinks(Excel.Workbook wb, string excludedName) : this() {
-            if (wb == null) return;
+        public ExternalLinks(ISourceCellRef cellRef, string formula) : this()
+            => ParseFormula(cellRef, formula);
+        public ExternalLinks(Excel.Application excel, Excel.Worksheet ws) : this()
+            => ExtendFromWorksheet(ws);
+        public ExternalLinks(Excel.Application excel, Excel.Workbook wb, string excludedName) : this()
+            => ExtendFromWorkbook(wb, excludedName);
+        public ExternalLinks(Excel.Application excel, VBA.Collection nameList) : this() {
 
-            foreach(Excel.Worksheet ws in wb.Worksheets) {
-                if ( ! excludedName.Equals(ws.Name) ) { ExtendFromWorksheet(ws); }
-                // DoEvents
+            foreach ( var item in nameList ) {
+                if ( item is string path) {
+                    if(!File.Exists(path)) {
+                        Errors.AddFileAccessError(path,"File not found.");
+                        continue;
+                    }
+
+                    excel.Application.StatusBar = $"Opening {path}";
+                    Excel.Workbook wb = null;
+                    try {
+                        excel.Application.DisplayAlerts = false;
+                        wb = excel.Application.Workbooks.Open(path,UpdateLinks:false,ReadOnly:true,AddToMru:false);
+
+                        ExtendFromWorkbook(wb,"");
+                    } catch(IOException ex) {
+                        Errors.AddFileAccessError(path,$"IOException: '{ex.Message}'");
+                    } finally {
+                        wb?.Close(SaveChanges:false);
+                        excel.Application.DisplayAlerts = false;
+                    }
+                    // DoEvents
+                }
             }
-
-            ExtendFromNamedRanges(wb);
         }
         private ExternalLinks() {
             Links   = new List<ICellRef>();
@@ -42,6 +63,17 @@ namespace PGSolutions.LinksAnalyzer {
 
         public IEnumerator<ICellRef> GetEnumerator() => ((IReadOnlyList<ICellRef>)Links).GetEnumerator();
              IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<ICellRef>)Links).GetEnumerator();
+
+        private void ExtendFromWorkbook(Excel.Workbook wb, string excludedName) {
+            if (wb == null) return;
+
+            foreach(Excel.Worksheet ws in wb.Worksheets) {
+                if ( ! excludedName.Equals(ws.Name) ) { ExtendFromWorksheet(ws); }
+                // DoEvents
+            }
+
+            ExtendFromNamedRanges(wb);
+        }
 
         private void ExtendFromWorksheet(Excel.Worksheet ws) {
             if (ws == null) return;
