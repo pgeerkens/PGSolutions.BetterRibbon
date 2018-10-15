@@ -1,6 +1,6 @@
 Attribute VB_Name = "ErrorUtils"
 Option Explicit
-
+ 
 Public Enum ErrorNum
     InvalidProcedureCall = 5
     SubscriptOutOfRange = 9
@@ -44,4 +44,8 @@ End Sub
 Public Sub RaiseError5AbstractClass(ByVal MethodName As String)
     Err.Raise ErrorNum.InvalidProcedureCall, MethodName, _
         "Invalid procedure call or argument - Cannot instantiate abstract class."
+End Sub
+
+Public Sub ClearCollection(ByVal col As Collection)
+    Do While col.Count > 0: col.Remove 1:  Loop
 End Sub

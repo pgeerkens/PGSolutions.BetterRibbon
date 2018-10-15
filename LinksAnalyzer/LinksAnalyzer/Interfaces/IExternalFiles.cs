@@ -12,8 +12,8 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IExternalFiles)]
     public interface IExternalFiles {
-        int Count               { get; }
-        string this[int index]  { get; }
+        int     Count   { get; }
+        string  Item(int index);
     }
 
     /// <summary>TODO</summary>
@@ -45,9 +45,9 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IExternalLinks)]
     public interface IExternalLinks {
-        int         Count           { get; }
-        ICellRef    this[int index] { get; }
-
-        IEnumerator<ICellRef> GetEnumerator();
+        int             Count           { get; }
+        ICellRef        this[int index] { get; }
+        IParseErrors    Errors          { get; }
+        IExternalFiles  Files           { get; }
     }
 }

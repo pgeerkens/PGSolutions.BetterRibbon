@@ -223,16 +223,32 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\LinksAnalyzer\bin\Release\LinksAnalyzer.dll">
+      <Link>Extra Files\LinksAnalyzer.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\LinksAnalyzer\bin\Release\LinksAnalyzer.pdb">
+      <Link>Extra Files\LinksAnalyzer.pdb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\RibbonDemonstration.xlsb">
       <Link>Extra Files\RibbonDemonstration.xlsb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="..\PGSolutions\bin\Release\PGSolutions.tlb">
+      <Link>Extra Files\PGSolutions.tlb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.dll">
       <Link>Extra Files\RibbonDispatcherX.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="..\RibbonDispatcherX\bin\Release\RibbonDispatcherX.tlb">
       <Link>Extra Files\RibbonDispatcherX.tlb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestLinksAnalysis.xlsb">
+      <Link>Extra Files\TestLinksAnalysis.xlsb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="PGSolutionsStrongKey.pfx" />

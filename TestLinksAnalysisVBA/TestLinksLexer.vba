@@ -1,12 +1,15 @@
 Attribute VB_Name = "TestLinksLexer"
 Option Explicit
-'Option Private Module   ' Comment this line to expose tests as macros
 
 Private Const mModuleName As String = "TestLexer."
 
+Public Sub ActiveWkbkLinks()
+    LinksManager.ListExternalLinksActiveWkbk False, False
+End Sub
+
 Public Sub TestAll()
     TestAddinConnection
-    
+        
     SimpleOperatorTest
     SimpleConcatTest
     SimpleParensTest
@@ -36,7 +39,7 @@ Private Sub SimpleOperatorTest()
         ScanCheckEOT MethodName, Lexer
     MsgBox "Successfully scanned: " & vbNewLine & Formula, vbOKOnly, MethodName
 XT: Exit Sub
-EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
+EH: Select Case MsgBoxAbortRetryIgnore(Err, mModuleName & "SimpleOperatorTest")
         Case vbRetry:  Resume
         Case vbIgnore: Resume Next
     End Select

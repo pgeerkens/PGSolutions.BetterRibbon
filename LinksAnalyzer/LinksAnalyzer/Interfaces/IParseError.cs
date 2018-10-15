@@ -12,9 +12,19 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IParseError)]
     public interface IParseError {
-        ISourceCellRef CellRef      {  get; }
+        ISourceCellRef CellRef        { get; }
         string           Formula      { get; }
         int              CharPosition { get; }
-        string           Condition    {  get; }
+        string           Condition    { get; }
+    }
+    /// <summary>TODO</summary>
+    [ComVisible(true)]
+    [CLSCompliant(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid(Guids.ITwoDimensionalLookup)]
+    public interface ITwoDimensionalLookup {
+        string   Item(int row, int col);
+        int      RowsCount { get; }
+        int      ColsCount { get; }
     }
 }

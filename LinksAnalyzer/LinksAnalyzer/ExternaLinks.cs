@@ -16,19 +16,18 @@ namespace PGSolutions.LinksAnalyzer {
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalLinks))]
-    public sealed class ExternalLinks : IExternalLinks, IReadOnlyList<ICellRef> {
-        public ExternalLinks(ISourceCellRef cellRef, string formula) : this()
-            => ParseFormula(cellRef, formula);
+    public sealed class ExternalLinks : IExternalLinks, ITwoDimensionalLookup, IReadOnlyList<ICellRef> {
+        public ExternalLinks(ISourceCellRef cellRef, string formula) : this() 
+            => RunAndBuildFiles(() => ParseFormula(cellRef, formula));
         public ExternalLinks(Excel.Application excel, Excel.Worksheet ws) : this()
-            => ExtendFromWorksheet(ws);
+            => RunAndBuildFiles(() => ExtendFromWorksheet(ws));
         public ExternalLinks(Excel.Application excel, Excel.Workbook wb, string excludedName) : this()
-            => ExtendFromWorkbook(wb, excludedName);
+            => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
         public ExternalLinks(Excel.Application excel, VBA.Collection nameList) : this() {
-
             foreach ( var item in nameList ) {
                 if ( item is string path) {
                     if(!File.Exists(path)) {
-                        Errors.AddFileAccessError(path,"File not found.");
+                        _errors.AddFileAccessError(path,"File not found.");
                         continue;
                     }
 
@@ -40,7 +39,7 @@ namespace PGSolutions.LinksAnalyzer {
 
                         ExtendFromWorkbook(wb,"");
                     } catch(IOException ex) {
-                        Errors.AddFileAccessError(path,$"IOException: '{ex.Message}'");
+                        _errors.AddFileAccessError(path,$"IOException: '{ex.Message}'");
                     } finally {
                         wb?.Close(SaveChanges:false);
                         excel.Application.DisplayAlerts = false;
@@ -48,18 +47,46 @@ namespace PGSolutions.LinksAnalyzer {
                     // DoEvents
                 }
             }
+            Files = _files.OrderedList;
         }
         private ExternalLinks() {
             Links   = new List<ICellRef>();
-            Errors  = new ParseErrors();
+            _errors = new ParseErrors();
+            _files  = new FilesDictionary();
+        }
+        private void RunAndBuildFiles(Action action) {
+            action();
+            Files = _files.OrderedList;
         }
 
-        public   int             Count => Links.Count;
+        public   int             Count      => Links.Count;
         public   ICellRef        this[int index] => Links[index];
-        private  IList<ICellRef> Links;
+        public   IParseErrors    Errors     => _errors;
+        public   IExternalFiles  Files      { get; private set; }
 
-        internal ParseErrors     Errors   { get; }
-        internal ExternalFiles   Files    { get; private set; }
+        int     ITwoDimensionalLookup.RowsCount => Count;
+        int     ITwoDimensionalLookup.ColsCount => 12;
+        string  ITwoDimensionalLookup.Item(int row, int col) {
+            switch (col) {
+                case  0: return Path.Combine(this[row].TargetPath,this[row].TargetFile);
+                case  1: return this[row].TargetPath;
+                case  2: return this[row].TargetFile;
+                case  3: return this[row].TargetTab;
+                case  4: return this[row].TargetCell;
+                case  5: return "Cell";
+                case  6: return Path.Combine(this[row].SourcePath,this[row].SourceFile);
+                case  7: return this[row].SourcePath;
+                case  8: return this[row].SourceFile;
+                case  9: return this[row].SourceTab;
+                case 10: return this[row].SourceCell;
+                case 11: return $"'{this[row].Formula}";
+                default: throw new IndexOutOfRangeException("Column index out of bounds.");
+            }
+        }
+
+        private  IList<ICellRef> Links;
+        private  ParseErrors     _errors    { get; }
+        private  FilesDictionary _files     { get; }
 
         public IEnumerator<ICellRef> GetEnumerator() => ((IReadOnlyList<ICellRef>)Links).GetEnumerator();
              IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<ICellRef>)Links).GetEnumerator();
@@ -86,7 +113,8 @@ namespace PGSolutions.LinksAnalyzer {
 
                 var lastRowNo = ws.Cells[ws.Rows.Count, colNo].End(Excel.XlDirection.xlUp).Row;
                 for(long rowNo = 1; rowNo <= lastRowNo; rowNo++) {
-                    var cell    = ws.Cells[rowNo, colNo];
+                    //var cell    = ws.Cells[rowNo, colNo];
+                    var cell    = usedRange[rowNo, colNo];
                     if ( cell.Formula is string formula && formula.Length > 0 && formula[0] == '=' ) {
                         var cellRef = NewCellRef(ws,cell);
                         ParseFormula(cellRef,formula);
@@ -124,19 +152,19 @@ namespace PGSolutions.LinksAnalyzer {
             for (var token = lexer.Scan(); token.Value != EToken.EOT; token = lexer.Scan()) {
                 switch (token.Value) {
                     case EToken.ScanError:
-                        Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                        _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
                                 $"Scan error at position {lexer.CharPosition}; found: '{token.Text}'"));
                         break;
                     case EToken.ExternRef:
                         var path = token.Text;
                         if((token = lexer.Scan()).Value != EToken.Bang) {
-                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
                                 $"Expected '!' found '{token.Name()}' at position {lexer.CharPosition}"));
                         } else if((token = lexer.Scan()).Value != EToken.Identifier) {
-                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
                                 $"Expected Identifier, found '{token.Name()}' at position {lexer.CharPosition}"));
                         } else if (! ParseExternRef(path,token.Text,formula,sourceCell)) {
-                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
                                 $"Expected a cell reference at position {lexer.CharPosition}; found '{token.Text}'"));
                         } else {
                             break;
@@ -162,7 +190,10 @@ namespace PGSolutions.LinksAnalyzer {
         }
 
         private bool Add(ICellRef cell) {
-            if(cell != null) { Links.Add(cell); }
+            if(cell != null) {
+                Links.Add(cell);
+                _files.Add(Path.Combine(cell.TargetPath, cell.TargetFile));
+            }
             return cell != null;
         }
     }
