@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Excel;
 namespace PGSolutions.ExcelRibbon.VbaSourceExport {
     internal sealed class VbaSourceExportModel {
         internal VbaSourceExportModel(IList<IVbaSourceExportGroupModel> viewModels ) {
-            DestIsSrc  = true;
+            DestIsSrc  = false;
             ViewModels = viewModels;
             foreach (var viewModel in ViewModels) {
                 viewModel.SelectedProjectsClicked += ExportSelectedProject;

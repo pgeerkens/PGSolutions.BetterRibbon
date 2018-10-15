@@ -2,9 +2,6 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Text;
-using System.Threading.Tasks;
-using Excel = Microsoft.Office.Interop.Excel;
 
 using System.Runtime.InteropServices;
 

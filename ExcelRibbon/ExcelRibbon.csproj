@@ -198,7 +198,7 @@
   <ItemGroup>
     <Compile Include="src\CustomizableButtonsViewModel.cs" />
     <Compile Include="src\DemonstrationModel.cs" />
-    <Compile Include="src\Main.cs" />
+    <Compile Include="src\ExcelRibbon.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\DemonstrationViewModel.cs" />

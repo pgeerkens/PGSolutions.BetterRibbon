@@ -3,7 +3,7 @@ Option Explicit
 Option Private Module
 Private Const ModuleName As String = "RibbonUtilities."
 
-Public Function NewLinksLexer(CellRef As ISourceCellRef, Formula As String) As LinksAnalyzer2.ILinksLexer
+Public Function NewLinksLexer(CellRef As ISourceCellRef, Formula As String) As ILinksLexer
     On Error GoTo EH
     With AddInHandle
         Set NewLinksLexer = .NewLinksLexer(CellRef, Formula)
@@ -13,7 +13,7 @@ EH: ErrorUtils.ReRaiseError Err, ModuleName & "NewLinksLexer"
     Resume          ' for debugging only
 End Function
 
-Public Function NewCellRef() As LinksAnalyzer2.ISourceCellRef
+Public Function NewCellRef() As ISourceCellRef
     On Error GoTo EH
     With AddInHandle
         Set NewCellRef = .NewSourceCellRef(ThisWorkbook, "MyTab", "A1")
@@ -23,7 +23,7 @@ EH: ErrorUtils.ReRaiseError Err, ModuleName & "NewCellRef"
     Resume          ' for debugging only
 End Function
 
-Public Function AddInHandle() As LinksAnalyzer2.ILinksAnalyzer
+Public Function AddInHandle() As ILinksAnalyzer
     On Error GoTo EH
     Set AddInHandle = Application.COMAddIns("ExcelRibbon").Object
 XT: Exit Function

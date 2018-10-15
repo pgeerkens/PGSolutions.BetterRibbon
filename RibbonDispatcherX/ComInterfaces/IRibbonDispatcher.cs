@@ -14,8 +14,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IMain)]
-    public interface IMain {
+    [Guid(Guids.IRibbonDispatcher)]
+    public interface IRibbonDispatcher {
         /// <summary>TODO</summary>
         [Description("")]
         [DispId(1)]

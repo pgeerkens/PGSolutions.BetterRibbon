@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILinksAnalyzer.cs" />
+    <Compile Include="Interfaces\EToken.cs" />
     <Compile Include="LinksAnalyzer\Extensions.cs" />
     <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
     <Compile Include="LinksAnalyzer\ExternaLinks.cs" />

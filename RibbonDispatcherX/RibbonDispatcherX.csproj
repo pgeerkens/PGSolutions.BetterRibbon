@@ -115,7 +115,7 @@
     <Compile Include="ComInterfaces\Guids.cs" />
     <Compile Include="ComInterfaces\IClickedEvents.cs" />
     <Compile Include="ComInterfaces\IControlChangedEventArgs.cs" />
-    <Compile Include="ComInterfaces\IMain.cs" />
+    <Compile Include="ComInterfaces\IRibbonDispatcher.cs" />
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IRibbonButton.cs" />

@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using Excel = Microsoft.Office.Interop.Excel;
-
 namespace PGSolutions.LinksAnalyzer.Interfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
@@ -22,7 +20,7 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IInternalCellRef)]
+    [Guid(Guids.ISourceCellRef)]
     public interface ISourceCellRef {
         bool   IsNamedRange { get;}
         string CellName     { get; }
@@ -51,7 +49,5 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
         ICellRef    this[int index] { get; }
 
         IEnumerator<ICellRef> GetEnumerator();
-
-        //IExternalLinks Parse(ISourceCellRef cellRef, string formula);
     }
 }

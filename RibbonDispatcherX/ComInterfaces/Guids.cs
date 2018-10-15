@@ -18,8 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         public const string IResourceManager            = "69E19409" + GuidSpace;
         public const string IAbstractDispatcher         = "69E1940A" + GuidSpace;
         public const string AbstractDispatcher          = "69E1940B" + GuidSpace;
-        public const string IMain                       = "69E1940C" + GuidSpace;
-        public const string Main                        = "69E1940D" + GuidSpace;
+        public const string IRibbonDispatcher           = "69E1940C" + GuidSpace;
+        public const string ExcelRibbon                 = "69E1940D" + GuidSpace;
         public const string IRibbonFactory              = "69E1940E" + GuidSpace;
         public const string RibbonFactory               = "69E1940F" + GuidSpace;
         public const string IRibbonViewModel            = "69E19410" + GuidSpace;
