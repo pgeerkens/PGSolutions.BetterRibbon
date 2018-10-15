@@ -92,16 +92,20 @@ namespace PGSolutions.LinksAnalyzer {
             for (var token = lexer.Scan(); token.Value != EToken.EOT; token = lexer.Scan()) {
                 switch (token.Value) {
                     case EToken.ScanError:
-                        Errors.Add(lexer.RaiseError(sourceCell, "Unknown token found"));
+                        Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Scan error at position {lexer.CharPosition}; found: '{token.Text}'"));
                         break;
                     case EToken.ExternRef:
                         var path = token.Text;
                         if((token = lexer.Scan()).Value != EToken.Bang) {
-                            Errors.Add(lexer.RaiseError(token, sourceCell, "Unexpected token found;"));
+                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected '!' found '{token.Name()}' at position {lexer.CharPosition}"));
                         } else if((token = lexer.Scan()).Value != EToken.Identifier) {
-                            Errors.Add(lexer.RaiseError(token, sourceCell, "Unexpected token found;"));
-                        } else if (! Add(ParseExternRef(path,token.Text,formula,sourceCell)) ) {
-                            Errors.Add(lexer.RaiseError(sourceCell, "Failure constructing CellRef;"));
+                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected Identifier, found '{token.Name()}' at position {lexer.CharPosition}"));
+                        } else if (! ParseExternRef(path,token.Text,formula,sourceCell)) {
+                            Errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected a cell reference at position {lexer.CharPosition}; found '{token.Text}'"));
                         } else {
                             break;
                         }
@@ -113,16 +117,16 @@ namespace PGSolutions.LinksAnalyzer {
             return this;
         }
 
-        private ICellRef ParseExternRef(string path, string cell, string formula, ISourceCellRef source) {
-            var indexBra  = path.IndexOf('[',       0); if (indexBra < 0) return null;
-            var indexKet  = path.IndexOf(']',indexBra); if (indexKet < 0) return null;
-            return new ExternalRef(formula,source,
-                new SourceCellRef(
-                    path.Substring(         1, indexBra - 1),               // omoi "'" leading
-                    path.Substring(indexBra+1, indexKet - indexBra - 1),    // omit "'['
-                    path.Substring(indexKet+1, path.Length - indexKet - 2), // omit ']' trailing
-                    cell
-            ) );
+        private bool ParseExternRef(string path, string cell, string formula, ISourceCellRef source) {
+            var indexBra  = path.IndexOf('[',       0); if (indexBra < 0) return false;
+            var indexKet  = path.IndexOf(']',indexBra); if (indexKet < 0) return false;
+            return Add(new ExternalRef(formula,source,
+                       new SourceCellRef(
+                           path.Substring(         1, indexBra - 1),               // omoi "'" leading
+                           path.Substring(indexBra+1, indexKet - indexBra - 1),    // omit "'['
+                           path.Substring(indexKet+1, path.Length - indexKet - 2), // omit ']' trailing
+                           cell
+            ) ) );
         }
 
         private bool Add(ICellRef cell) {

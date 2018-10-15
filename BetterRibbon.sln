@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcherX", "Ribbon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinksAnalyzer", "LinksAnalyzer\LinksAnalyzer.csproj", "{FAB5DE05-0232-4053-B4CE-CE9A1A312750}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGSolutions", "PGSolutions\PGSolutions.csproj", "{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

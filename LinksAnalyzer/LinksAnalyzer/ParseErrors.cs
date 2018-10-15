@@ -23,14 +23,11 @@ namespace PGSolutions.LinksAnalyzer {
 
         private List<IParseError> Errors { get; }
 
-        public IToken Add(IParseError parseError) {
-            Errors.Add(parseError);
-            return EToken.ScanError.Set(parseError.CharPosition-1, "");
-        }
+        public void Add(IParseError parseError) => Errors.Add(parseError);
 
         public void AddFileAccessError(string fullPath, string action) {
             var cellRef = new SourceCellRef(fullPath, "", "", "");
-            Add(new ParseError(cellRef, fullPath, 0, "File not found"));
+            Errors.Add(new ParseError(cellRef, fullPath, 0, "File not found"));
         }
 
         public IEnumerator<IParseError> GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();

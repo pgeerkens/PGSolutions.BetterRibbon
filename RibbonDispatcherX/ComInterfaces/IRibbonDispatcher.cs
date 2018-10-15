@@ -12,7 +12,7 @@ using stdole;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
-    [CLSCompliant(true)]
+    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonDispatcher)]
     public interface IRibbonDispatcher {
@@ -83,7 +83,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IRibbonControlStrings GetStrings(string ControlId);
     }
 
-    [CLSCompliant(true)]
+    [CLSCompliant(false)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IImageLoader

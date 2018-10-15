@@ -8,8 +8,8 @@ using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by RibbonButton objects.</summary>
+    [CLSCompliant(false)]
     [ComVisible(true)]
-    [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButton)]
     public interface IRibbonButton : IRibbonCommon, IRibbonImageable {

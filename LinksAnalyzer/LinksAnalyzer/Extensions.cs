@@ -27,14 +27,6 @@ namespace PGSolutions.LinksAnalyzer {
         public static bool IsWordOperator(this string text) => 
             LinksLexer.WordOperators.FirstOrDefault(s => s == text) != null;
 
-        public static IParseError RaiseError(this ILinksLexer lexer, ISourceCellRef cellRef, string expected) =>
-            new ParseError(cellRef, lexer.Formula, lexer.CharPosition,
-                        $"Expected '{expected}' at position {lexer.CharPosition}");
-
-        public static IParseError RaiseError(this ILinksLexer lexer, IToken token, ISourceCellRef cellRef, string expected) =>
-            new ParseError(cellRef, lexer.Formula, lexer.CharPosition,
-                        $"Expected '{expected}' found '{token.Name()}' at position {lexer.CharPosition}");
-
         public static string Name(this IToken token) {
             switch (token.Value) {
                 case EToken.ScanError:     return "<ScanError>";

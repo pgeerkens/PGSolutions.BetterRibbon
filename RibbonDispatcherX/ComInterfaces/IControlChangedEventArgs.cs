@@ -5,9 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Necessary for COM Interop.")]
-    [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    internal interface IControlChangedEventArgs {
+    public interface IControlChangedEventArgs {
         /// <summary>The</summary>
         [DispId(DispIds.ControlId)]
         string ControlId { get; }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAB5DE05-0232-4053-B4CE-CE9A1A312750}</ProjectGuid>
+    <ProjectGuid>{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LinksAnalyzer</RootNamespace>
-    <AssemblyName>LinksAnalyzer</AssemblyName>
+    <RootNamespace>PGSolutions</RootNamespace>
+    <AssemblyName>PGSolutions</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -87,6 +86,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Office.dll</HintPath>
     </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -97,30 +99,103 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinksAnalyzer\Interfaces\ILinksAnalyzer.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\EToken.cs" />
-    <Compile Include="LinksAnalyzer\Extensions.cs" />
-    <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
-    <Compile Include="LinksAnalyzer\ExternaLinks.cs" />
-    <Compile Include="LinksAnalyzer\ExternalRef.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\Guids.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IExternalNamedRef.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IExternalFiles.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IParseError.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IToken.cs" />
-    <Compile Include="LinksAnalyzer\SourceCellRef.cs" />
-    <Compile Include="LinksAnalyzer\LinksAnalyzer.cs" />
-    <Compile Include="LinksAnalyzer\LinksLexer.cs" />
-    <Compile Include="LinksAnalyzer\ParseError.cs" />
-    <Compile Include="LinksAnalyzer\ParseErrors.cs" />
-    <Compile Include="LinksAnalyzer\Token.cs" />
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\EToken.cs">
+      <Link>LinksAnalyzer\EToken.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\Guids.cs">
+      <Link>LinksAnalyzer\Guids.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\IExternalFiles.cs">
+      <Link>LinksAnalyzer\IExternalFiles.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\IExternalNamedRef.cs">
+      <Link>LinksAnalyzer\IExternalNamedRef.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\ILinksAnalyzer.cs">
+      <Link>LinksAnalyzer\ILinksAnalyzer.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\IParseError.cs">
+      <Link>LinksAnalyzer\IParseError.cs</Link>
+    </Compile>
+    <Compile Include="..\LinksAnalyzer\LinksAnalyzer\Interfaces\IToken.cs">
+      <Link>LinksAnalyzer\IToken.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\DispIds.cs">
+      <Link>RibbonDispatcher\DispIds.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\Guids.cs">
+      <Link>RibbonDispatcher\Guids.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IBooleanSource.cs">
+      <Link>RibbonDispatcher\IBooleanSource.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IClickedEvents.cs">
+      <Link>RibbonDispatcher\IClickedEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IControlChangedEventArgs.cs">
+      <Link>RibbonDispatcher\IControlChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IIntegerSource.cs">
+      <Link>RibbonDispatcher\IIntegerSource.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IResourceLoadercs.cs">
+      <Link>RibbonDispatcher\IResourceLoadercs.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IResourceManager.cs">
+      <Link>RibbonDispatcher\IResourceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonButton.cs">
+      <Link>RibbonDispatcher\IRibbonButton.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonCheckBox.cs">
+      <Link>RibbonDispatcher\IRibbonCheckBox.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonCommon.cs">
+      <Link>RibbonDispatcher\IRibbonCommon.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonControlStrings.cs">
+      <Link>RibbonDispatcher\IRibbonControlStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonDispatcher.cs">
+      <Link>RibbonDispatcher\IRibbonDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonDropDown.cs">
+      <Link>RibbonDispatcher\IRibbonDropDown.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonGroup.cs">
+      <Link>RibbonDispatcher\IRibbonGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonImageable.cs">
+      <Link>RibbonDispatcher\IRibbonImageable.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonLoader.cs">
+      <Link>RibbonDispatcher\IRibbonLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonModel.cs">
+      <Link>RibbonDispatcher\IRibbonModel.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonToggleButton.cs">
+      <Link>RibbonDispatcher\IRibbonToggleButton.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonViewModel.cs">
+      <Link>RibbonDispatcher\IRibbonViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IRibbonWorkbook.cs">
+      <Link>RibbonDispatcher\IRibbonWorkbook.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\ISelectableItem.cs">
+      <Link>RibbonDispatcher\ISelectableItem.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\ISelectionMadeEvents.cs">
+      <Link>RibbonDispatcher\ISelectionMadeEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\IToggledEvents.cs">
+      <Link>RibbonDispatcher\IToggledEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\RibbonDispatcherX\ComInterfaces\RdControlSize.cs">
+      <Link>RibbonDispatcher\RdControlSize.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcherX\RibbonDispatcherX.csproj">
-      <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
-      <Name>RibbonDispatcherX</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="PGSolutionsStrongKey.pfx" />

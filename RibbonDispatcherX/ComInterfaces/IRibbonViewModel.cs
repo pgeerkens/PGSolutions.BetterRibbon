@@ -10,7 +10,7 @@ using Microsoft.Office.Core;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
-    [CLSCompliant(true)]
+    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonViewModel)]
     public interface IRibbonViewModel {

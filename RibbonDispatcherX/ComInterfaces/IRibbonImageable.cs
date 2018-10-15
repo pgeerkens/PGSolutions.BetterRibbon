@@ -1,11 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+    [CLSCompliant(false)]
     public interface IRibbonImageable {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
