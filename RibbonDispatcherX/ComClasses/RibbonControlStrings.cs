@@ -2,6 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -18,6 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
         private RibbonControlStrings() : this("", "", "", "", "", "") { }
 
         /// <summary>TODO</summary>
+        [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage." )]
         public RibbonControlStrings(
             string label,
             string screenTip      = null,

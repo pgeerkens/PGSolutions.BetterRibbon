@@ -27,7 +27,7 @@ namespace PGSolutions.ExcelRibbon {
     [ComDefaultInterface(typeof(IRibbonDispatcher))]
     [Guid(Guids.ExcelRibbon)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
-    public class ExcelRibbon : IRibbonDispatcher, ILinksAnalyzer {
+    public sealed class ExcelRibbon : IRibbonDispatcher, ILinksAnalyzer {
         private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 Globals.ThisAddIn.ViewModel.AdaptorControls;
         private static RibbonViewModel ViewModel = Globals.ThisAddIn.ViewModel;

@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
+    [Serializable]
     public class FilesDictionary : Dictionary<string,string> {
         public FilesDictionary() : base() { }
 
