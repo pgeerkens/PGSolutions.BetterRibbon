@@ -90,22 +90,15 @@ namespace PGSolutions.LinksAnalyzer {
         }
 
         private IToken ScanClosedExternalRef(int start) {
-            while ( Advancable() ) {
-                 if (CurrentCharacter != '\'') {
-                    continue;
-                } else if (NextCharacterIs('!')) {
-                    return Add(EToken.ExternRef, start, GetText(start));
-                } else {
-                    return Add(EToken.ScanError, start, this);
-                }
-            }
-            return Add(EToken.ScanError, start, this);
+            while ( Advancable()  && CurrentCharacter != '\'') { }
+            return NextCharacterIs('!') ? Add(EToken.ExternRef, start, GetText(start))
+                                        : Add(EToken.ScanError, start, this);
         }
 
         private IToken ScanOpenExternalRef(int start) {
             while ( Advancable()  &&  CurrentCharacter != ']') { }
             while ( Advancable()  &&  CurrentCharacter != '!') {
-                 // https://www.accountingweb.com/technology/excel/seven-characters-you-cant-use-in-worksheet-names
+                // https://www.accountingweb.com/technology/excel/seven-characters-you-cant-use-in-worksheet-names
                 switch (CurrentCharacter) {
                     case '/': case '*':
                     case '[': case ']': 
