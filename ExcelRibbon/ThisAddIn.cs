@@ -23,7 +23,7 @@ namespace PGSolutions.ExcelRibbon {
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => ViewModel = new RibbonViewModel();
 
-        private Lazy<ExcelRibbon> ComEntry = new Lazy<ExcelRibbon>(() => new ExcelRibbon());
+        private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
 
         protected override object RequestComAddInAutomationService() =>
             ComEntry.Value as IRibbonDispatcher;

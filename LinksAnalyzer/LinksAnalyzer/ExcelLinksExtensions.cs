@@ -120,9 +120,7 @@ namespace PGSolutions.LinksAnalyzer {
 
         private static void InitializeTargetWorksheet(this Worksheet ws, long lastRow, IList<string> columnHeaders) {
             var colNo = 0;
-            foreach(var columnHeader in columnHeaders) {
-                ws.Cells[2,++colNo].Value = columnHeader;
-            }
+            foreach(var columnHeader in columnHeaders) { ws.Cells[2,++colNo].Value = columnHeader; }
 
             ws.Range[ws.Cells[2,1], ws.Cells[lastRow,columnHeaders.Count]].Columns.AutoFit();
 
@@ -130,17 +128,18 @@ namespace PGSolutions.LinksAnalyzer {
             ws.Range["A1"].Formula = $"Link analysis run on {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}";
 
             ws.Range["$A$2", ws.Cells[lastRow, columnHeaders.Count]].AutoFilter();
-            // *** TODO: *** the Select() call occasionally fails here - reason TBD
-            //ws.Application.ActiveWindow.FreezePanes = false;
-            //(ws.Rows["$3:$3"].EntireRow as Excel.Range)?.Select();
-            //ws.Application.ActiveWindow.FreezePanes = true;
+            ws.Select();
+            ws.Application.ActiveWindow.FreezePanes = false;
+            ws.Application.ActiveWindow.SplitColumn = 0;
+            ws.Application.ActiveWindow.SplitRow = 2;
+            ws.Application.ActiveWindow.FreezePanes = true;
         }
 
         private static void DeleteTargetWorksheet(this Workbook wb, string sheetName) {
             try {
                 wb.Application.DisplayAlerts = false;
                 wb.Worksheets[sheetName].Delete();
-            } catch ( COMException ex ) {
+            } catch (COMException) {
                 /*  NO-OP: Sheet doesn't exist so delete not needed */
             } finally {
                 wb.Application.DisplayAlerts = true;

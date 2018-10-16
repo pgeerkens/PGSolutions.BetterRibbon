@@ -6,13 +6,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-
+using System.Runtime.Serialization;
 using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
     [Serializable]
     public class FilesDictionary : Dictionary<string,string> {
         public FilesDictionary() : base() { }
+        protected FilesDictionary(SerializationInfo info, StreamingContext context) : base() { }
 
         internal void Add(string fileName) {
             if(!Keys.Contains(fileName)) { Add(fileName,fileName); }

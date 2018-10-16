@@ -41,6 +41,7 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
             ShowBoth  = ShowLabel | ShowImage
         }
         public static int IndexFromLabelImageDisplay(this LabelImageOptions value) => (int)(value - 1);
+        [SuppressMessage( "Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "value+1")]
         public static LabelImageOptions IndexToLabelImageDisplay(this int value) => (LabelImageOptions)(value + 1);
 
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>

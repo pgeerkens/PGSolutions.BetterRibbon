@@ -27,7 +27,7 @@ namespace PGSolutions.ExcelRibbon {
     [ComDefaultInterface(typeof(IRibbonDispatcher))]
     [Guid(Guids.ExcelRibbon)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
-    public sealed class ExcelRibbon : IRibbonDispatcher, ILinksAnalyzer {
+    public sealed class Main : IRibbonDispatcher, ILinksAnalyzer {
         #region IRibbonDispatcher methods
         private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 Globals.ThisAddIn.ViewModel.AdaptorControls;
@@ -97,8 +97,8 @@ namespace PGSolutions.ExcelRibbon {
 
         #region ILinksAnalyzer methods
         /// <inheritdoc/>
-        ILinksLexer ILinksAnalyzer.NewLinksLexer(ISourceCellRef cellRef, string formula) =>
-             new LinksLexer(cellRef, formula);
+        ILinksLexer ILinksAnalyzer.NewLinksLexer(ISourceCellRef cellRef, string formula)
+             => new LinksLexer(cellRef, formula);
 
         /// <inheritdoc/>
         IExternalLinks ILinksAnalyzer.NewExternalLinks(Excel.Application excel, VBA.Collection nameList)
