@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinksAnalyzer", "LinksAnaly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGSolutions", "PGSolutions\PGSolutions.csproj", "{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeskSetup", "DeskSetup\DeskSetup.vdproj", "{15FB8432-B7C6-41A0-A917-520E71EFF703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.ActiveCfg = Debug
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.Build.0 = Debug
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.ActiveCfg = Release
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
