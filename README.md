@@ -1,5 +1,5 @@
 # PGSolutions.BetterRibbon
-The Fluent Ribbon - done right. Generic dispatcher to greatly ease Ribbon development in both .NET &amp; VBA
+**The Fluent Ribbon - done right.  A generic dispatcher greatly easing Ribbon development in both .NET &amp; VBA**
 
 Tied up in knots programming the Fluent Ribbon? Wondering why you bought an MS-Office with no wiring at the front desk? Here is
 an example of how the Fluent Ribbon was **meant** to be delivered.
@@ -71,7 +71,11 @@ focus. So the preprogrammed customizable controls from the Add-In are all availa
 Also included:
 
 1. VBA Source Exporter that unloads all VBA code for an MS-Excel or MS-Access project to a directory sibling to the workbook/database;
- named either eponymously with the suffix VBA or *.\src*.
+ named either eponymously with the suffix VBA or *.\src*. A great time saver for managing VBA code in source control. There is a Ribbon Group in the Add-In with three controls accessing this functionality:
+
+ - A **Toggle** between use of the directory *'\src* and a directory eponymouswith the workbook/database name.
+ - A **Selected Projects** (Action)Button for exporting VBA code from a directory of projects.
+ - A **Current Workbook** (Action)Button that immediately exports the VBA code from the current workbook.
 
 1. External Links Analyzer that collects details on all External Links in a list of Workbooks, and reports them to three worksheets in
 the current worlkbook: *Links Analysis*, *Externally Linked Files List*, and *Parsing Failures*.
