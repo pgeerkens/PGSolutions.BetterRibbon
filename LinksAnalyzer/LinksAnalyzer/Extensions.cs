@@ -2,6 +2,9 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Linq;
+
+using Excel = Microsoft.Office.Interop.Excel;
+
 using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
@@ -28,5 +31,16 @@ namespace PGSolutions.LinksAnalyzer {
             LinksLexer.WordOperators.FirstOrDefault(s => s == text) != null;
 
         public static string Name(this IToken token) => token.Value.Name();
+
+        public static void FastCopyToRange(this ITwoDimensionalLookup source, Excel.Range target) {
+            var rowsCount = target.Rows.Count;
+            var colsCount = target.Columns.Count;
+            var data      = new object[rowsCount,colsCount];
+
+            for(var row=0; row<rowsCount; row++)
+                for(var col=0; col<colsCount; col++)
+                    data[row,col] = source.Item(row, col);
+            target.Value = data;
+        }
     }
 }

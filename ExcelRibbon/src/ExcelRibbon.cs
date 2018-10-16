@@ -28,6 +28,7 @@ namespace PGSolutions.ExcelRibbon {
     [Guid(Guids.ExcelRibbon)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class ExcelRibbon : IRibbonDispatcher, ILinksAnalyzer {
+        #region IRibbonDispatcher methods
         private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 Globals.ThisAddIn.ViewModel.AdaptorControls;
         private static RibbonViewModel ViewModel = Globals.ThisAddIn.ViewModel;
@@ -92,29 +93,36 @@ namespace PGSolutions.ExcelRibbon {
             ctrl?.Attach(source.Getter);
             return ctrl;
         }
+        #endregion
 
-        #region ILinksAnalyzer
+        #region ILinksAnalyzer methods
+        /// <inheritdoc/>
         ILinksLexer ILinksAnalyzer.NewLinksLexer(ISourceCellRef cellRef, string formula) =>
              new LinksLexer(cellRef, formula);
 
-        ISourceCellRef ILinksAnalyzer.NewSourceCellRef(Workbook wkbk, string tabName, string cellName) =>
-            new SourceCellRef( wkbk, tabName, cellName );
-
-        ISourceCellRef ILinksAnalyzer.NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName,
-                string cellName, bool isNamedRange)
-            => new SourceCellRef( wkBkPath, wkBkName, tabName, cellName );
-
+        /// <inheritdoc/>
         IExternalLinks ILinksAnalyzer.NewExternalLinks(Excel.Application excel, VBA.Collection nameList)
             => new ExternalLinks(Globals.ThisAddIn.Application, nameList);
 
+        /// <inheritdoc/>
         IExternalLinks ILinksAnalyzer.NewExternalLinksWB(Workbook wb, string excludedName)
-            => new ExternalLinks(Globals.ThisAddIn.Application, wb, excludedName);
+            => new ExternalLinks(wb, excludedName);
 
+        /// <inheritdoc/>
         IExternalLinks ILinksAnalyzer.NewExternalLinksWS(Worksheet ws)
-            => new ExternalLinks(Globals.ThisAddIn.Application, ws);
+            => new ExternalLinks(ws);
 
+        /// <inheritdoc/>
         IExternalLinks ILinksAnalyzer.Parse(ISourceCellRef cellRef, string formula)
             => new ExternalLinks(cellRef, formula);
+
+        /// <inheritdoc/>
+        void ILinksAnalyzer.WriteLinksAnalysisWB(Excel.Workbook wb)
+            => wb.WriteLinks();
+
+        /// <inheritdoc/>
+        void ILinksAnalyzer.WriteLinksAnalysisFiles(Workbook wb, VBA.Collection nameList)
+            => wb.WriteLinks(nameList);
         #endregion
     }
 }

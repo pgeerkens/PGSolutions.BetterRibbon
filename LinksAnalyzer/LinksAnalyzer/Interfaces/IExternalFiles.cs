@@ -11,9 +11,9 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IExternalFiles)]
-    public interface IExternalFiles {
-        int     Count   { get; }
-        string  Item(int index);
+    public interface IExternalFiles : IReadOnlyList<string> {
+        new int     Count           { get; }
+        new string  this[int index] { get; }
     }
 
     /// <summary>TODO</summary>
@@ -34,9 +34,9 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IParseErrors)]
-    public interface IParseErrors {
-        int          Count           { get; }
-        IParseError  this[int index] { get; }
+    public interface IParseErrors : IReadOnlyList<IParseError> {
+        new int          Count           { get; }
+        new IParseError  this[int index] { get; }
     }
 
     /// <summary>TODO</summary>

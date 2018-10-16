@@ -12,16 +12,17 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IExternalNamedRef)]
     public interface ICellRef {
-        string Formula    { get; }
-        string TargetPath { get; }
-        string TargetFile { get; }
-        string TargetTab  { get; }
-        string TargetCell { get; }
+        string Formula      { get; }
+        string TargetPath   { get; }
+        string TargetFile   { get; }
+        string TargetTab    { get; }
+        string TargetCell   { get; }
 
-        string SourcePath { get; }
-        string SourceFile { get; }
-        string SourceTab  { get; }
-        string SourceCell { get; }
+        bool   IsNamedRange { get; }
+        string SourcePath   { get; }
+        string SourceFile   { get; }
+        string SourceTab    { get; }
+        string SourceCell   { get; }
     }
 
     /// <summary>TODO</summary>

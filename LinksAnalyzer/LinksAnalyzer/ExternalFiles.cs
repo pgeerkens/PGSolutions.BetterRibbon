@@ -2,6 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,18 +32,16 @@ namespace PGSolutions.LinksAnalyzer {
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalFiles))]
-    public class ExternalFiles : IExternalFiles{ //, IReadOnlyList<string> {
+    public class ExternalFiles : IExternalFiles{
         public ExternalFiles() => List = new List<string>();
 
-        public int      Count => List.Count;
-        public string   Item(int index) => List[index];
-//        public string this[int index] => List.Keys.OrderBy(i=>i).Skip(index).Take(1).FirstOrDefault();
+        public int    Count           => List.Count;
+        public string this[int index] => List[index];
 
         private List<string> List { get; }
 
         internal void Add(string fileName) => List.Add(fileName);
-
-//        public IEnumerator<string> GetEnumerator() => ((IReadOnlyList<string>)List).GetEnumerator();
-//        IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<string>)List).GetEnumerator();
+        public IEnumerator<string> GetEnumerator() => List.GetEnumerator();
+           IEnumerator IEnumerable.GetEnumerator() => List.GetEnumerator();
     }
 }

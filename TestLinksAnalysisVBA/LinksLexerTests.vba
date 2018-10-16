@@ -1,39 +1,16 @@
-Attribute VB_Name = "TestLinksLexer"
+Attribute VB_Name = "LinksLexerTests"
 Option Explicit
+Option Private Module
 
-Private Const mModuleName As String = "TestLexer."
+Private Const mModuleName As String = "LinksLexerTests."
 
-Public Sub ActiveWkbkLinks()
-    LinksManager.ListExternalLinksActiveWkbk False, False
-End Sub
-
-Public Sub TestAll()
-    TestAddinConnection
-        
-    SimpleOperatorTest
-    SimpleConcatTest
-    SimpleParensTest
-    StringLiteralTest
-    ComplexRefTest
-    OpenExternRefTest
-
-    SimpleParseLinkTest
-    ComplexParseLinkTest
-    CellParseLinkTest
-    ArrayNamedRangeTest
-End Sub
-
-Private Property Get CellRef() As ISourceCellRef
-    Set CellRef = AddInHandle.NewSourceCellRef(ThisWorkbook, "MyTab", "A1")
-End Property
-
-Private Sub SimpleOperatorTest()
+Public Sub SimpleOperatorTest()
     Const MethodName As String = mModuleName & "SimpleOperatorTest"
     
     On Error GoTo EH
     Const Formula As String = "4 + 5"
     
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Number, "4"
         ScanCheck MethodName, Lexer, EToken_Unop, "+"
         ScanCheck MethodName, Lexer, EToken_Number, "5"
@@ -48,13 +25,13 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, mModuleName & "SimpleOperatorTest")
     Resume
 End Sub
 
-Private Sub SimpleConcatTest()
+Public Sub SimpleConcatTest()
     Const MethodName As String = mModuleName & "SimpleConcatTest"
     
     On Error GoTo EH
     Const Formula As String = "B4&"" YTD"""
     
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Identifier, "B4"
         ScanCheck MethodName, Lexer, EToken_BinOp, "&"
         ScanCheck MethodName, Lexer, EToken_StringLiteral, """ YTD"""
@@ -69,13 +46,13 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub SimpleParensTest()
+Public Sub SimpleParensTest()
     Const MethodName As String = mModuleName & "SimpleParensTest"
     
     On Error GoTo EH
     Const Formula As String = "(4+5)"
     
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
         ScanCheck MethodName, Lexer, EToken_Number, "4"
         ScanCheck MethodName, Lexer, EToken_Unop, "+"
@@ -92,13 +69,13 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub StringLiteralTest()
+Public Sub StringLiteralTest()
     Const MethodName As String = mModuleName & "StringLiteralTest"
     
     On Error GoTo EH
     Const Formula As String = "=MID(C2, FIND("" '"", C2, 1)+1,  FIND(""]"", C2, 1)-FIND(""'"", C2, 1))"
     
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Equals, "="
         ScanCheck MethodName, Lexer, EToken_Identifier, "MID"
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
@@ -148,14 +125,14 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub ComplexRefTest()
+Public Sub ComplexRefTest()
     Const MethodName As String = mModuleName & "ComplexRefTest"
     
     On Error GoTo EH
     Const Formula As String = _
         "=VLOOKUP(A18,'G:\can\Income Stmt Mapping\[IS Mapping.xlsx]IS_line names'!$A$6:$B$400,2,FALSE)"
     
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Equals, "="
         ScanCheck MethodName, Lexer, EToken_Identifier, "VLOOKUP"
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
@@ -184,13 +161,13 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub OpenExternRefTest()
+Public Sub OpenExternRefTest()
     Const MethodName As String = mModuleName & "OpenExternRefTest"
     
     On Error GoTo EH
     Const Formula As String = "=[RibbonDemonstration.xlsb]Sheet1!$A$2+1"
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyLocation, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
     With ExtLinks.Item(0)
         If .TargetPath <> "open workbook w/o a path" Then _
              Err.Raise 1, MethodName, "Incorrect Path found"
@@ -219,7 +196,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub SimpleParseLinkTest()
+Public Sub SimpleParseLinkTest()
     Const MethodName As String = mModuleName & "SimpleParseLinkTest"
     
     On Error GoTo EH
@@ -227,7 +204,7 @@ Private Sub SimpleParseLinkTest()
         "=VLOOKUP(A18,'S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\[IS Mapping.xlsx]IS_line names'!$A$6:$B$400,2,FALSE)"
                 
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyLocation, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
     With ExtLinks.Item(0)
         If .TargetPath <> "S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\" Then _
              Err.Raise 1, MethodName, "Incorrect Path found"
@@ -256,7 +233,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub ComplexParseLinkTest()
+Public Sub ComplexParseLinkTest()
     Const MethodName As String = mModuleName & "ComplexParseLinkTest"
     Const PathPrefix As String = "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\"
     Const Formula As String = _
@@ -267,7 +244,7 @@ Private Sub ComplexParseLinkTest()
                 
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyLocation, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
     With ExtLinks
         If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
         Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
@@ -306,7 +283,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub CellParseLinkTest()
+Public Sub CellParseLinkTest()
     Const MethodName As String = mModuleName & "CellParseLinkTest"
     Const PathPrefix As String = "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\"
     Const Formula As String = _
@@ -317,7 +294,7 @@ Private Sub CellParseLinkTest()
     
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyLocation, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
     With ExtLinks
         If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
         Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
@@ -356,8 +333,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
-Private Sub ArrayNamedRangeTest()
-#If Not IncludeExternal Then
+Public Sub ArrayNamedRangeTest()
     Const MethodName As String = mModuleName & "ArrayNamedRangeTest", _
           Literal1   As String = """Written Quote Out""", _
           Literal2   As String = """Accepted Quotes""", _
@@ -368,7 +344,7 @@ Private Sub ArrayNamedRangeTest()
         ";#N/A,#N/A,FALSE," & Literal3 & "}"
     
     On Error GoTo EH
-    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(CellRef, Formula)
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
     VerifyToken Lexer, EToken_Equals, "="
     VerifyToken Lexer, EToken_OpenBrace, "{"
     VerifyToken Lexer, EToken_Identifier, "#N/A":      VerifyToken Lexer, EToken_Comma, ","
@@ -400,12 +376,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     End Select
     Resume XT
     Resume
-#End If
 End Sub
-
-Private Property Get DummyLocation() As ISourceCellRef
-    Set DummyLocation = NewCellRef()
-End Property
 
 Private Sub ScanCheck(ByVal Test As String, ByVal Lexer As ILinksLexer, _
     ByVal TokenExpected As EToken, ByVal Expected As String _

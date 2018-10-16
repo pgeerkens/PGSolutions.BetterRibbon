@@ -17,12 +17,16 @@ namespace PGSolutions.LinksAnalyzer {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalLinks))]
     public sealed class ExternalLinks : IExternalLinks, ITwoDimensionalLookup, IReadOnlyList<ICellRef> {
+        /// <summary>Returns all the external links found in the supplied formula.</summary>
         public ExternalLinks(ISourceCellRef cellRef, string formula) : this() 
             => RunAndBuildFiles(() => ParseFormula(cellRef, formula));
-        public ExternalLinks(Excel.Application excel, Excel.Worksheet ws) : this()
+        /// <summary>Returns all the external links found in the supplied {Excel.Worksheet}.</summary>
+        public ExternalLinks(Excel.Worksheet ws) : this()
             => RunAndBuildFiles(() => ExtendFromWorksheet(ws));
-        public ExternalLinks(Excel.Application excel, Excel.Workbook wb, string excludedName) : this()
+        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
+        public ExternalLinks(Excel.Workbook wb, string excludedName) : this()
             => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
+        /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
         public ExternalLinks(Excel.Application excel, VBA.Collection nameList) : this() {
             foreach ( var item in nameList ) {
                 if ( item is string path) {
@@ -73,7 +77,7 @@ namespace PGSolutions.LinksAnalyzer {
                 case  2: return this[row].TargetFile;
                 case  3: return this[row].TargetTab;
                 case  4: return this[row].TargetCell;
-                case  5: return "Cell";
+                case  5: return this[row].IsNamedRange ? "Named Range" : "Cell";
                 case  6: return Path.Combine(this[row].SourcePath,this[row].SourceFile);
                 case  7: return this[row].SourcePath;
                 case  8: return this[row].SourceFile;

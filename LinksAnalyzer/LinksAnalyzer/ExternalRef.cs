@@ -3,8 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
-using Excel = Microsoft.Office.Interop.Excel;
 
 using PGSolutions.LinksAnalyzer.Interfaces;
 
@@ -27,6 +25,7 @@ namespace PGSolutions.LinksAnalyzer {
         public string TargetTab  => Target.TabName;
         public string TargetCell => Target.CellName;
 
+        public bool   IsNamedRange { get; }
         public string SourcePath => Source.FullPath;
         public string SourceFile => Source.FileName;
         public string SourceTab  => Source.TabName;

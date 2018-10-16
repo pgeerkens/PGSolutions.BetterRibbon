@@ -13,8 +13,7 @@ namespace PGSolutions.LinksAnalyzer {
             new LinksLexer(cellRef, formula);
 
         [CLSCompliant(false)]
-        public static void ListExternalLinksActiveWorkbook(Excel.Workbook wb,
-            bool showErrors, bool IncludeHyperLinks) {
+        public static void ListExternalLinksActiveWorkbook(Excel.Workbook wb, bool IncludeHyperLinks) {
 
             if( wb == null) return;
 
@@ -23,7 +22,7 @@ namespace PGSolutions.LinksAnalyzer {
             try {
                 if (wb.ProtectStructure) wb.Protect(null, false);
 
-                var externalLinks = new ExternalLinks(wb.Application, wb, "Links Analysis");
+                var externalLinks = new ExternalLinks(wb, "Links Analysis");
                 
             } finally {
                 wb.Protect(null, protectStructure);

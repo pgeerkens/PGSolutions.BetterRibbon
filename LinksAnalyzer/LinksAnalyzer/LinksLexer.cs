@@ -21,7 +21,7 @@ namespace PGSolutions.LinksAnalyzer {
             ParenDepth   = 0;
             BraceDepth   = 0;
             CharPosition = 0;
-            Tokens = new List<IToken>();
+            Tokens       = new List<IToken>();
         }
 
         public static IReadOnlyList<string> WordOperators = new List<string> { "AND", "OR" };
@@ -41,6 +41,7 @@ namespace PGSolutions.LinksAnalyzer {
         string GetText(int start) => Formula.Substring(start-1, CharPosition + 1 - start);
 
         public IToken Scan() {
+            if (CharPosition==1 && CurrentCharacter=='\'') { return Add(EToken.StringLiteral, 1, Formula); }
             while ( Advancable() ) {
                 if ( ! CurrentCharacter.IsWhiteSpace() ) {
                     var start = CharPosition;

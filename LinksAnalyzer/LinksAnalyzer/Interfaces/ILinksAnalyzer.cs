@@ -5,6 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using Workbook  = Microsoft.Office.Interop.Excel.Workbook;
+using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
 using PGSolutions.LinksAnalyzer.Interfaces;
 
@@ -23,23 +25,21 @@ namespace PGSolutions.LinksAnalyzer {
         [DispId(1)]
         ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula);
 
-        /// <summary>Attaches an {IIntegerSource} to the specified DropDown control.</summary>
-        /// <param name="controlId">The ID of the control to be attached to the specified data source.</param>
-        /// <param name="strings">The text strings to be displayed for this control.</param>
-        /// <returns></returns>
-        [Description( "Attaches an {IIntegerSource} to the specified DropDown control." )]
-        [DispId( 2 )]
-        ISourceCellRef NewSourceCellRef(Excel.Workbook wkbk, string tabName, string cellName);
-
-        ISourceCellRef NewSourceCellRef2(string wkBkPath, string wkBkName, string tabName, string cellName,
-            bool isNamedRange = false);
-
         IExternalLinks NewExternalLinks(Excel.Application excel, VBA.Collection nameList);
 
-        IExternalLinks NewExternalLinksWB(Excel.Workbook wb, string excludedName);
+        IExternalLinks NewExternalLinksWB(Workbook wb, string excludedName);
 
-        IExternalLinks NewExternalLinksWS(Excel.Worksheet ws);
+        IExternalLinks NewExternalLinksWS(Worksheet ws);
 
         IExternalLinks Parse(ISourceCellRef cellRef, string formula);
+
+        /// <summary></summary>
+        /// <param name="wb"></param>
+        void WriteLinksAnalysisWB(Workbook wb);
+
+        /// <summary></summary>
+        /// <param name="wb"></param>
+        /// <param name="nameList"></param>
+        void WriteLinksAnalysisFiles(Workbook wb, VBA.Collection nameList);
     }
 }
