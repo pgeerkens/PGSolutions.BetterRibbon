@@ -170,6 +170,21 @@ namespace PGSolutions.LinksAnalyzer {
                             break;
                         }
                         break;
+                    case EToken.OpenExternRef:
+                        path = token.Text;
+                        if((token = lexer.Scan()).Value != EToken.Bang) {
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected '!' found '{token.Name()}' at position {lexer.CharPosition}"));
+                        } else if((token = lexer.Scan()).Value != EToken.Identifier) {
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected Identifier, found '{token.Name()}' at position {lexer.CharPosition}"));
+                        } else if (! ParseOpenExternRef(path,token.Text,formula,sourceCell)) {
+                            _errors.Add(new ParseError(sourceCell, lexer.Formula, lexer.CharPosition,
+                                $"Expected a cell reference at position {lexer.CharPosition}; found '{token.Text}'"));
+                        } else {
+                            break;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -182,9 +197,20 @@ namespace PGSolutions.LinksAnalyzer {
             var indexKet  = path.IndexOf(']',indexBra); if (indexKet < 0) return false;
             return Add(new ExternalRef(formula,source,
                        new SourceCellRef(
-                           path.Substring(         1, indexBra - 1),               // omoi "'" leading
+                           path.Substring(         1, indexBra - 1),               // omit "'" leading
                            path.Substring(indexBra+1, indexKet - indexBra - 1),    // omit "'['
                            path.Substring(indexKet+1, path.Length - indexKet - 2), // omit ']' trailing
+                           cell
+            ) ) );
+        }
+
+        private bool ParseOpenExternRef(string path, string cell, string formula, ISourceCellRef source) {
+            var indexKet  = path.IndexOf(']',0); if (indexKet < 0) return false;
+            return Add(new ExternalRef(formula,source,
+                       new SourceCellRef(
+                           "open workbook w/o a path",
+                           path.Substring(         1, indexKet - 1),               // omit "'['
+                           path.Substring(indexKet+1, path.Length - indexKet - 1), // omit ']' trailing
                            cell
             ) ) );
         }

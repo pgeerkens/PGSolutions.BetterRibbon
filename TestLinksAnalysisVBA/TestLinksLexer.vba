@@ -15,6 +15,7 @@ Public Sub TestAll()
     SimpleParensTest
     StringLiteralTest
     ComplexRefTest
+    OpenExternRefTest
 
     SimpleParseLinkTest
     ComplexParseLinkTest
@@ -175,6 +176,41 @@ Private Sub ComplexRefTest()
         ScanCheckEOT MethodName, Lexer
     MsgBox "Successfully scanned+: " & vbNewLine & Formula, vbOKOnly, MethodName
 XT: Exit Sub
+EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
+        Case vbRetry:  Resume
+        Case vbIgnore: Resume Next
+    End Select
+    Resume XT
+    Resume
+End Sub
+
+Private Sub OpenExternRefTest()
+    Const MethodName As String = mModuleName & "OpenExternRefTest"
+    
+    On Error GoTo EH
+    Const Formula As String = "=[RibbonDemonstration.xlsb]Sheet1!$A$2+1"
+    Dim ExtLinks As IExternalLinks
+    Set ExtLinks = AddInHandle.Parse(DummyLocation, Formula)
+    With ExtLinks.Item(0)
+        If .TargetPath <> "open workbook w/o a path" Then _
+             Err.Raise 1, MethodName, "Incorrect Path found"
+        
+        If .TargetFile <> "RibbonDemonstration.xlsb" Then _
+            Err.Raise 1, MethodName, "Incorrect FileName found"
+
+        If .TargetTab <> "Sheet1" Then _
+            Err.Raise 1, MethodName, "Incorrect TabName found"
+
+        If .TargetCell <> "$A$2" Then _
+            Err.Raise 1, MethodName, "Incorrect Cell found"
+    End With
+    MsgBox "Successfully parsed: " & _
+        vbNewLine & Formula & "as" & _
+        vbNewLine & _
+        vbNewLine & "Path: " & ExtLinks.Item(0).TargetPath, vbOKOnly, MethodName
+    
+XT: Exit Sub
+    
 EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
         Case vbRetry:  Resume
         Case vbIgnore: Resume Next

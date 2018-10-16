@@ -66,7 +66,8 @@ namespace PGSolutions.LinksAnalyzer {
                         case '}': BraceDepth--; return Add(EToken.CloseBrace, start, GetText(start));
                         case '#': return ScanErrorIdent(start);
                         case '"': return ScanStringLiteral(start);
-                        case '\'': return ScanExternalRef(start);
+                        case '\'': return ScanClosedExternalRef(start);
+                        case '[': return ScanOpenExternalRef(start);
                         default:
                             if (CurrentCharacter.IsNumeric()) { return ScanNumber(start); }
                             if ( CurrentCharacter.IsAlpha() ) { return ScanIdentifier(start); }
@@ -88,7 +89,7 @@ namespace PGSolutions.LinksAnalyzer {
             return rv;
         }
 
-        private IToken ScanExternalRef(int start) {
+        private IToken ScanClosedExternalRef(int start) {
             while ( Advancable() ) {
                  if (CurrentCharacter != '\'') {
                     continue;
@@ -99,6 +100,23 @@ namespace PGSolutions.LinksAnalyzer {
                 }
             }
             return Add(EToken.ScanError, start, this);
+        }
+
+        private IToken ScanOpenExternalRef(int start) {
+            while ( Advancable()  &&  CurrentCharacter != ']') { }
+            while ( Advancable()  &&  CurrentCharacter != '!') {
+                 // https://www.accountingweb.com/technology/excel/seven-characters-you-cant-use-in-worksheet-names
+                switch (CurrentCharacter) {
+                    case '/': case '*':
+                    case '[': case ']': 
+                    case ':': case '?': 
+                    case '\'': return Add(EToken.ScanError, start, this);
+                    default: break;
+                }
+            }
+            return CurrentCharacter == '!'
+                    ? Add(EToken.OpenExternRef, start, Formula.Substring(start-1, CharPosition-- - start))
+                    : Add(EToken.ScanError, start, this);
         }
 
         private IToken ScanStringLiteral(int start) {
