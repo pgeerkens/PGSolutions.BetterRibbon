@@ -67,7 +67,7 @@ namespace PGSolutions.ExcelRibbon {
             Invalidate();
         }
 
-        private static IPictureDisp GetBrandingIcon() => Resources.RD_AboutWindow.ImageToPictureDisp();
+        private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();
 
         public static string MsgBoxTitle => Resources.ApplicationName;
     }

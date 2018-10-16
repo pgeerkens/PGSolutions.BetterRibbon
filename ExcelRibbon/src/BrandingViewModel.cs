@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
 
 namespace PGSolutions.ExcelRibbon {

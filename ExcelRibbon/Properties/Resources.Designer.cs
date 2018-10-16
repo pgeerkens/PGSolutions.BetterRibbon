@@ -115,7 +115,7 @@ namespace ExcelRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PGSolutions .
+        ///   Looks up a localized string similar to A Better Ribbon.
         /// </summary>
         internal static string BrandingButton_Label {
             get {
@@ -135,7 +135,7 @@ namespace ExcelRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Simple robust solutions to complex problems, by Pieter Geerkens
         ///
-        ///https://github.com/pgeerkens/RibbonDispatcher.
+        ///https://github.com/pgeerkens/PGSolutions.BetterRibbon.
         /// </summary>
         internal static string BrandingButton_SuperTip {
             get {
@@ -335,9 +335,9 @@ namespace ExcelRibbon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap RD_AboutWindow {
+        internal static System.Drawing.Bitmap PGeerkens {
             get {
-                object obj = ResourceManager.GetObject("RD_AboutWindow", resourceCulture);
+                object obj = ResourceManager.GetObject("PGeerkens", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

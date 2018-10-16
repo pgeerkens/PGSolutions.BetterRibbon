@@ -136,7 +136,7 @@
     <value>PGSolutions Ribbon</value>
   </data>
   <data name="BrandingButton_Label" xml:space="preserve">
-    <value>PGSolutions </value>
+    <value>A Better Ribbon</value>
   </data>
   <data name="BrandingButton_ScreenTip" xml:space="preserve">
     <value>Pretty (Darn) Good Solutions</value>
@@ -144,7 +144,7 @@
   <data name="BrandingButton_SuperTip" xml:space="preserve">
     <value>Simple robust solutions to complex problems, by Pieter Geerkens
 
-https://github.com/pgeerkens/RibbonDispatcher</value>
+https://github.com/pgeerkens/PGSolutions.BetterRibbon</value>
   </data>
   <data name="BrandingGroup_Label" xml:space="preserve">
     <value>PGSolutions</value>
@@ -198,9 +198,6 @@ https://github.com/pgeerkens/RibbonDispatcher</value>
     <value>Displays just the button label when its size is Regular; else both.</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="RD_AboutWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RD-AboutWindow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ribbon.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -294,5 +291,8 @@ Project references as .XML</value>
   </data>
   <data name="CustomizableGroup_Label" xml:space="preserve">
     <value>Controls Customizable in VBA</value>
+  </data>
+  <data name="PGeerkens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PGeerkens.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
