@@ -695,6 +695,28 @@
                 {
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_5B5871D2BF4048C79E40C297D753D867"
+            {
+            "Name" = "8:#1912"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramFilesFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_843D946475A745F48F596AA19327174C"
+            {
+            "Name" = "8:#1935"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramFiles64Folder"
+                "Folders"
+                {
+                }
+            }
         }
         "LaunchCondition"
         {
@@ -712,18 +734,18 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.BetterRibbon"
         "ProductCode" = "8:{CA0DAF85-79DA-47D3-9A2F-C50E2491DACB}"
-        "PackageCode" = "8:{B54CB28B-5C2C-47AC-9E5C-286B7F75990B}"
+        "PackageCode" = "8:{BA198C77-005A-4A85-A21D-DF22828BD16F}"
         "UpgradeCode" = "8:{29C7E5C8-FF18-40DF-86D1-E44B03F568B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
+        "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:PGSolutions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues"
-        "Title" = "8:Setup Current User Only"
+        "Title" = "8:Single package Setup "
         "Subject" = "8:"
         "ARPCONTACT" = "8:Pieter Geerkens"
         "Keywords" = "8:"
@@ -792,7 +814,7 @@
                                                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_E0EB662B26DC42978B83321AF1B089C1"
                                                             {
                                                             "Name" = "8:PGSolutions.BetterRibbon"
-                                                            "Condition" = "8:MSIINSTALLPERUSER<>1"
+                                                            "Condition" = "8:"
                                                             "AlwaysCreate" = "11:FALSE"
                                                             "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
@@ -804,7 +826,7 @@
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_129565878A4B40D487838962D30AC1AE"
                                                                     {
                                                                     "Name" = "8:Manifest"
-                                                                    "Condition" = "8:"
+                                                                    "Condition" = "8:MSIINSTALLPERUSER=\"\""
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
                                                                     "Value" = "8:file:///[TARGETDIR]PGSolutions.BetterRibbon.vsto|vstolocal"
@@ -812,7 +834,7 @@
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_AF230804762D4452A8E16ADE9843D1C7"
                                                                     {
                                                                     "Name" = "8:LoadBehavior"
-                                                                    "Condition" = "8:"
+                                                                    "Condition" = "8:MSIINSTALLPERUSER=\"\""
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:3"
                                                                     "Value" = "3:3"
@@ -820,7 +842,7 @@
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BA94EB8E0B264AC4BA69CBEA30EC9319"
                                                                     {
                                                                     "Name" = "8:FriendlyName"
-                                                                    "Condition" = "8:"
+                                                                    "Condition" = "8:MSIINSTALLPERUSER=\"\""
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
                                                                     "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
@@ -828,7 +850,7 @@
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_D7C194C5A49C477EB5B0D1F2AE3498DC"
                                                                     {
                                                                     "Name" = "8:Description"
-                                                                    "Condition" = "8:"
+                                                                    "Condition" = "8:MSIINSTALLPERUSER=\"\""
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
                                                                     "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
@@ -917,7 +939,7 @@
                                                                     "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_CBC7855D6488425FA47ABE779711E089"
                                                                     {
                                                                     "Name" = "8:PGSolutions.BetterRibbon"
-                                                                    "Condition" = "8:MSIINSTALLPERUSER<>1 AND (Intel64<>\"\" OR Msix64<>\"\")"
+                                                                    "Condition" = "8:"
                                                                     "AlwaysCreate" = "11:FALSE"
                                                                     "DeleteAtUninstall" = "11:FALSE"
                                                                     "Transitive" = "11:FALSE"
@@ -929,7 +951,7 @@
                                                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_2DAA864E4AB64F87935C4DD7DCA3605F"
                                                                             {
                                                                             "Name" = "8:Manifest"
-                                                                            "Condition" = "8:"
+                                                                            "Condition" = "8:MSIINSTALLPERUSER=\"\" AND (Intel64<>\"\" OR Msix64<>\"\")"
                                                                             "Transitive" = "11:FALSE"
                                                                             "ValueTypes" = "3:1"
                                                                             "Value" = "8:file:///[TARGETDIR]PGSolutions.BetterRibbon.vsto|vstolocal"
@@ -937,7 +959,7 @@
                                                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3B5C49DEEA994137BBEBB4C6A0D8272A"
                                                                             {
                                                                             "Name" = "8:LoadBehavior"
-                                                                            "Condition" = "8:"
+                                                                            "Condition" = "8:MSIINSTALLPERUSER=\"\" AND (Intel64<>\"\" OR Msix64<>\"\")"
                                                                             "Transitive" = "11:FALSE"
                                                                             "ValueTypes" = "3:3"
                                                                             "Value" = "3:3"
@@ -945,7 +967,7 @@
                                                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_530F03E5F3624613B084F4D5FE942D1A"
                                                                             {
                                                                             "Name" = "8:Description"
-                                                                            "Condition" = "8:"
+                                                                            "Condition" = "8:MSIINSTALLPERUSER=\"\" AND (Intel64<>\"\" OR Msix64<>\"\")"
                                                                             "Transitive" = "11:FALSE"
                                                                             "ValueTypes" = "3:1"
                                                                             "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
@@ -953,7 +975,7 @@
                                                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_D4843AC5F9DC40699492C2959F071049"
                                                                             {
                                                                             "Name" = "8:FriendlyName"
-                                                                            "Condition" = "8:"
+                                                                            "Condition" = "8:MSIINSTALLPERUSER=\"\" AND (Intel64<>\"\" OR Msix64<>\"\")"
                                                                             "Transitive" = "11:FALSE"
                                                                             "ValueTypes" = "3:1"
                                                                             "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
@@ -996,7 +1018,7 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_ED4A82C4511A4A338A8774C8F7429CE8"
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_779B5254DCA04A6BB7A11A43267A5318"
                     {
                     "Name" = "8:Software"
                     "Condition" = "8:"
@@ -1005,9 +1027,9 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_632F20772A9A4317A0D91FB026936C37"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_1A547FAE50EA4234B9ACB28F8BD91A60"
                             {
-                            "Name" = "8:[Manufacturer]"
+                            "Name" = "8:Microsoft"
                             "Condition" = "8:"
                             "AlwaysCreate" = "11:FALSE"
                             "DeleteAtUninstall" = "11:FALSE"
@@ -1019,103 +1041,15 @@
                                 {
                                 }
                             }
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_6D006629E3754B029D75E9059A7372A4"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D305051F3F2D4121ABD68FC01663A634"
                             {
-                            "Name" = "8:Microsoft"
+                            "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
                             "AlwaysCreate" = "11:FALSE"
                             "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
-                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9B8130C4999E4694A5088AA46EC4D59B"
-                                    {
-                                    "Name" = "8:Office"
-                                    "Condition" = "8:"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "DeleteAtUninstall" = "11:FALSE"
-                                    "Transitive" = "11:FALSE"
-                                        "Keys"
-                                        {
-                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7D33ABBE9B6940F79F0BBB36CF395909"
-                                            {
-                                            "Name" = "8:Excel"
-                                            "Condition" = "8:"
-                                            "AlwaysCreate" = "11:FALSE"
-                                            "DeleteAtUninstall" = "11:FALSE"
-                                            "Transitive" = "11:FALSE"
-                                                "Keys"
-                                                {
-                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_038F56AAF9B14CFFB40FFC22E6DBF56F"
-                                                    {
-                                                    "Name" = "8:Addins"
-                                                    "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:FALSE"
-                                                    "DeleteAtUninstall" = "11:FALSE"
-                                                    "Transitive" = "11:FALSE"
-                                                        "Keys"
-                                                        {
-                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_4D0C1D7EA4F94176AC73501CACED33D1"
-                                                            {
-                                                            "Name" = "8:PGSolutions.BetterRibbon"
-                                                            "Condition" = "8:MSIINSTALLPERUSER=1"
-                                                            "AlwaysCreate" = "11:FALSE"
-                                                            "DeleteAtUninstall" = "11:FALSE"
-                                                            "Transitive" = "11:FALSE"
-                                                                "Keys"
-                                                                {
-                                                                }
-                                                                "Values"
-                                                                {
-                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_28CDC79C3F454D16824618D165099E76"
-                                                                    {
-                                                                    "Name" = "8:Manifest"
-                                                                    "Condition" = "8:"
-                                                                    "Transitive" = "11:FALSE"
-                                                                    "ValueTypes" = "3:1"
-                                                                    "Value" = "8:file:///[TARGETDIR]PGSolutions.BetterRibbon.vsto|vstolocal"
-                                                                    }
-                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_2CFC9D4268EB4DA98720497ED2AA9B27"
-                                                                    {
-                                                                    "Name" = "8:FriendlyName"
-                                                                    "Condition" = "8:"
-                                                                    "Transitive" = "11:FALSE"
-                                                                    "ValueTypes" = "3:1"
-                                                                    "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
-                                                                    }
-                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BE695C824C21444BAA564CD3B230B4DA"
-                                                                    {
-                                                                    "Name" = "8:LoadBehavior"
-                                                                    "Condition" = "8:"
-                                                                    "Transitive" = "11:FALSE"
-                                                                    "ValueTypes" = "3:3"
-                                                                    "Value" = "3:3"
-                                                                    }
-                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_F738F90E43F449B6B23A26B6508DC290"
-                                                                    {
-                                                                    "Name" = "8:Description"
-                                                                    "Condition" = "8:"
-                                                                    "Transitive" = "11:FALSE"
-                                                                    "ValueTypes" = "3:1"
-                                                                    "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        "Values"
-                                                        {
-                                                        }
-                                                    }
-                                                }
-                                                "Values"
-                                                {
-                                                }
-                                            }
-                                        }
-                                        "Values"
-                                        {
-                                        }
-                                    }
                                 }
                                 "Values"
                                 {

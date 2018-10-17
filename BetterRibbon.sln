@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterRibbon", "BetterRibbo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcher", "RibbonDispatcher\RibbonDispatcher.csproj", "{BD438F48-A571-4ACE-979A-804179456324}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-AllUsers-x86Windows", "Setup-AllUsers-32BitOffice\Setup-AllUsers-32BitOffice.vdproj", "{F86722F8-B2E4-48B4-8545-64789EDD43F6}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-AllUsers-x64Windows", "Setup-AllUsers-64BitOffice\Setup-AllUsers-64BitOffice.vdproj", "{EB46ACEB-DD89-44BC-A747-2C1185CA28B1}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-SinglePackage", "Setup-SinglePackage\Setup-SinglePackage.vdproj", "{F7CA4E62-B72F-4E85-899D-D999CFB03F11}"
 EndProject
 Global
@@ -33,14 +29,6 @@ Global
 		{BD438F48-A571-4ACE-979A-804179456324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD438F48-A571-4ACE-979A-804179456324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD438F48-A571-4ACE-979A-804179456324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F86722F8-B2E4-48B4-8545-64789EDD43F6}.Debug|Any CPU.ActiveCfg = Debug
-		{F86722F8-B2E4-48B4-8545-64789EDD43F6}.Debug|Any CPU.Build.0 = Debug
-		{F86722F8-B2E4-48B4-8545-64789EDD43F6}.Release|Any CPU.ActiveCfg = Release
-		{F86722F8-B2E4-48B4-8545-64789EDD43F6}.Release|Any CPU.Build.0 = Release
-		{EB46ACEB-DD89-44BC-A747-2C1185CA28B1}.Debug|Any CPU.ActiveCfg = Debug
-		{EB46ACEB-DD89-44BC-A747-2C1185CA28B1}.Debug|Any CPU.Build.0 = Debug
-		{EB46ACEB-DD89-44BC-A747-2C1185CA28B1}.Release|Any CPU.ActiveCfg = Release
-		{EB46ACEB-DD89-44BC-A747-2C1185CA28B1}.Release|Any CPU.Build.0 = Release
 		{F7CA4E62-B72F-4E85-899D-D999CFB03F11}.Debug|Any CPU.ActiveCfg = Debug
 		{F7CA4E62-B72F-4E85-899D-D999CFB03F11}.Debug|Any CPU.Build.0 = Debug
 		{F7CA4E62-B72F-4E85-899D-D999CFB03F11}.Release|Any CPU.ActiveCfg = Release
