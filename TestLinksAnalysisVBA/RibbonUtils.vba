@@ -19,7 +19,7 @@ End Property
 
 Public Function AddInHandle() As ILinksAnalyzer
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("BetterRibbon").Object
+    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, ModuleName & "AddInHandle"
     Resume          ' for debugging only
@@ -28,26 +28,40 @@ End Function
 Public Sub TestAddinConnection()
     On Error GoTo EH
     Dim StepName    As String, _
-        obj         As Object, _
+        objAddIns   As Object, _
+        objHandle   As Object, _
+        Handle      As ILinksAnalyzer, _
+        objLexer    As Object, _
+        Lexer       As ILinksLexer, _
         Messages    As String
         
-    StepName = "Get AddInHandle"
-    With AddInHandle
-    Messages = Messages & StepName & " - success" & vbNewLine
+    StepName = "Get COMAddIns as Object"
+    Set objAddIns = Application.COMAddIns("PGSolutions.BetterRibbon")
+    Messages = Messages & vbNewLine & "Success - " & StepName
     
-        StepName = "Get LinksLexer to Object"
-        Set obj = .NewLinksLexer(DummyCellRef, "Formula")
-        Messages = Messages & StepName & " - success" & vbNewLine
+    StepName = "Get AddInHandle as Object"
+    Set objHandle = objAddIns.Object
+    Messages = Messages & vbNewLine & "Success - " & StepName
+    
+    StepName = "Get AddInHandle as ILinksAnalyzer"
+    Set Handle = objAddIns.Object
+    Messages = Messages & vbNewLine & "Success - " & StepName
+    
+    With Handle
+    Messages = Messages & vbNewLine & "Success - " & StepName
         
         StepName = "Get LinksLexer to Object"
-        Dim Lexer As ILinksLexer
+        Set objLexer = .NewLinksLexer(DummyCellRef, "Formula")
+        Messages = Messages & vbNewLine & "Success - " & StepName
+        
+        StepName = "Get LinksLexer to ILinksLexer"
         Set Lexer = .NewLinksLexer(DummyCellRef, "Formula")
-        Messages = Messages & StepName & " - success" & vbNewLine
+        Messages = Messages & vbNewLine & "Success - " & StepName
     End With
     MsgBox Messages, vbOKOnly, "TestAddinConnection"
     
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, StepName
+EH: ErrorUtils.DisplayError Err, Messages & vbNewLine & "Failure - " & StepName
     Resume XT
     Resume          ' for debugging only
 End Sub

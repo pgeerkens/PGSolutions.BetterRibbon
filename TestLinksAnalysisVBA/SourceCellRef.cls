@@ -57,4 +57,3 @@ Private Sub Class_Initialize()
     This.CellName = "$A$1"
     This.IsNamedRange = False
 End Sub
-

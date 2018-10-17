@@ -25,7 +25,7 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>ExcelRibbon</RootNamespace>
-    <AssemblyName>BetterRibbon</AssemblyName>
+    <AssemblyName>PGSolutions.BetterRibbon</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <TargetFrameworkProfile />
@@ -34,15 +34,15 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.35</ApplicationVersion>
+    <ApplicationVersion>1.0.0.36</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <ProductName>PGSolutions ExcelRibbon</ProductName>
+    <ProductName>PGSolutionsBetterRibbon</ProductName>
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl />
-    <FriendlyName>PGSolutions ExcelRibbon</FriendlyName>
+    <FriendlyName>PGSolutions BetterRibbon</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>

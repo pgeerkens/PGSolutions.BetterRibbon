@@ -14,7 +14,7 @@ End Sub
 
 Public Sub TestAll()
     RibbonUtils.TestAddinConnection
-        
+    
     LinksLexerTests.SimpleOperatorTest
     LinksLexerTests.SimpleConcatTest
     LinksLexerTests.SimpleParensTest

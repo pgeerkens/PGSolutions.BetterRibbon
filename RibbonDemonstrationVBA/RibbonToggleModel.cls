@@ -9,12 +9,12 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 Private MIsPressed              As Boolean
-Private WithEvents MViewModel   As RibbonDispatcherX.RibbonToggleButton
+Private WithEvents MViewModel   As PGSolutions_RibbonDispatcher.RibbonToggleButton
 Attribute MViewModel.VB_VarHelpID = -1
 
 Public Event Toggled(ByVal IsPressed As Boolean)
 
-Implements RibbonDispatcherX.IBooleanSource
+Implements IBooleanSource
 
 Friend Function IBooleanSource_Getter() As Boolean
     IBooleanSource_Getter = MIsPressed
@@ -31,7 +31,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & "MViewModel_Toggled", vbOKOnly O
     Resume          ' for debugging only
 End Sub
 
-Friend Property Get ViewModel() As RibbonDispatcherX.RibbonToggleButton
+Friend Property Get ViewModel() As PGSolutions_RibbonDispatcher.RibbonToggleButton
     Set ViewModel = MViewModel
 End Property
 
@@ -44,8 +44,8 @@ Friend Property Let IsPressed(ByVal IsPressed As Boolean)
 End Property
 
 Friend Function Attach(ByVal ControlId As String, _
-        ByVal Strings As RibbonDispatcherX.IRibbonControlStrings _
-) As RibbonDemonstration.RibbonToggleModel
+        ByVal Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings _
+) As RibbonToggleModel
     On Error GoTo EH
     Set MViewModel = AddInHandle.AttachToggle(ControlId, Strings, Me)
     AddInHandle.InvalidateControl ViewModel.ID

@@ -8,11 +8,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
-Private MRibbonModel            As RibbonDemonstration.RibbonModel
+Private MRibbonModel            As RibbonModel
 
 Private Sub Workbook_Activate()
     On Error GoTo EH
-    Set MRibbonModel = New RibbonModel
+    If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
     MRibbonModel.Activate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation

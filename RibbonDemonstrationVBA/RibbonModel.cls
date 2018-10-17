@@ -8,19 +8,19 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-Private WithEvents Button1  As RibbonDispatcherX.RibbonButton
+Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button1.VB_VarHelpID = -1
-Private WithEvents Button2  As RibbonDispatcherX.RibbonButton
+Private WithEvents Button2  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button2.VB_VarHelpID = -1
-Private WithEvents Button3  As RibbonDispatcherX.RibbonButton
+Private WithEvents Button3  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button3.VB_VarHelpID = -1
-Private WithEvents Toggle   As RibbonDemonstration.RibbonToggleModel
+Private WithEvents Toggle   As RibbonToggleModel
 Attribute Toggle.VB_VarHelpID = -1
 
-Private Button1Strings      As RibbonDispatcherX.IRibbonControlStrings
-Private Button2Strings      As RibbonDispatcherX.IRibbonControlStrings
-Private Button3Strings      As RibbonDispatcherX.IRibbonControlStrings
-Private ToggleStrings       As RibbonDispatcherX.IRibbonControlStrings
+Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private Button2Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private Button3Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private ToggleStrings       As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 
 Private Sub Button1_Clicked()
     On Error GoTo EH
