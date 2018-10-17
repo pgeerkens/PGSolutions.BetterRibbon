@@ -25,7 +25,7 @@ namespace PGSolutions.LinksAnalyzer {
         [DispId(1)]
         ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula);
 
-        IExternalLinks NewExternalLinks(Excel.Application excel, VBA.Collection nameList);
+        IExternalLinks NewExternalLinks(Excel.Application excel, INameList nameList);
 
         IExternalLinks NewExternalLinksWB(Workbook wb, string excludedName);
 
@@ -40,6 +40,6 @@ namespace PGSolutions.LinksAnalyzer {
         /// <summary></summary>
         /// <param name="wb"></param>
         /// <param name="nameList"></param>
-        void WriteLinksAnalysisFiles(Workbook wb, VBA.Collection nameList);
+        void WriteLinksAnalysisFiles(Workbook wb, INameList nameList);
     }
 }

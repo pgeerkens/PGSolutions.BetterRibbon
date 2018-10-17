@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelRibbon", "ExcelRibbon\ExcelRibbon.csproj", "{5056E803-B7EA-49B7-B77C-B270DE3FF822}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcherX", "RibbonDispatcherX\RibbonDispatcherX.csproj", "{BD438F48-A571-4ACE-979A-804179456324}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinksAnalyzer", "LinksAnalyzer\LinksAnalyzer.csproj", "{FAB5DE05-0232-4053-B4CE-CE9A1A312750}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGSolutions", "PGSolutions\PGSolutions.csproj", "{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeskSetup", "DeskSetup\DeskSetup.vdproj", "{15FB8432-B7C6-41A0-A917-520E71EFF703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterRibbon", "BetterRibbon\BetterRibbon.csproj", "{5056E803-B7EA-49B7-B77C-B270DE3FF822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDispatcher", "RibbonDispatcher\RibbonDispatcher.csproj", "{BD438F48-A571-4ACE-979A-804179456324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +17,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.ActiveCfg = Debug
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.Build.0 = Debug
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.ActiveCfg = Release
+		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.Build.0 = Release
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5056E803-B7EA-49B7-B77C-B270DE3FF822}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,18 +33,6 @@ Global
 		{BD438F48-A571-4ACE-979A-804179456324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD438F48-A571-4ACE-979A-804179456324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD438F48-A571-4ACE-979A-804179456324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAB5DE05-0232-4053-B4CE-CE9A1A312750}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3797EA50-4CE5-42E9-8BE0-30FF6F8D58A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.ActiveCfg = Debug
-		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Debug|Any CPU.Build.0 = Debug
-		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.ActiveCfg = Release
-		{15FB8432-B7C6-41A0-A917-520E71EFF703}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

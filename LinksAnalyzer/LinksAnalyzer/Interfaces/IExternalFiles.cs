@@ -50,4 +50,14 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
         IParseErrors    Errors          { get; }
         IExternalFiles  Files           { get; }
     }
+
+    /// <summary>TODO</summary>
+    [ComVisible(true)]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid(Guids.INameList)]
+    public interface INameList {
+        int     Count { get; }
+        string  Item(int index);
+    }
 }

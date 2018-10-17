@@ -27,8 +27,9 @@ namespace PGSolutions.LinksAnalyzer {
         public ExternalLinks(Excel.Workbook wb, string excludedName) : this()
             => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public ExternalLinks(Excel.Application excel, VBA.Collection nameList) : this() {
-            foreach ( var item in nameList ) {
+        public ExternalLinks(Excel.Application excel, INameList nameList) : this() {
+            for(var i=0; i<nameList.Count; i++) {
+                var item = nameList.Item(i);
                 if ( item is string path) {
                     if(!File.Exists(path)) {
                         _errors.AddFileAccessError(path,"File not found.");

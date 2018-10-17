@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms; //  *** TODO *** THis needs to be moved into ExcelRibbon.
+using System.Windows.Forms; //  *** TODO *** THis needs to be moved into BetterRibbon.
 
 using Excel = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
@@ -24,7 +24,7 @@ namespace PGSolutions.LinksAnalyzer {
             wb.WriteLinks(new ExternalLinks(wb, ""));
         }
 
-        public static void WriteLinks(this Workbook wb, VBA.Collection nameList) {
+        public static void WriteLinks(this Workbook wb, INameList nameList) {
             wb.DeleteTargetWorksheet(LinksSheetName);
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);

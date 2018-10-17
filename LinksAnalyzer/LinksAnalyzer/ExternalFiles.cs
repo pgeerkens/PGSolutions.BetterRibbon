@@ -11,9 +11,11 @@ using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
     [Serializable]
+    [ComVisible(false)]
     public class FilesDictionary : Dictionary<string,string> {
         public FilesDictionary() : base() { }
-        protected FilesDictionary(SerializationInfo info, StreamingContext context) : base() { }
+        protected FilesDictionary(SerializationInfo info, StreamingContext context)
+            : base(info,context) { }
 
         internal void Add(string fileName) {
             if(!Keys.Contains(fileName)) { Add(fileName,fileName); }

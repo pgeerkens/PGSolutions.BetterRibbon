@@ -19,7 +19,7 @@ End Property
 
 Public Function AddInHandle() As ILinksAnalyzer
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("ExcelRibbon").Object
+    Set AddInHandle = Application.COMAddIns("BetterRibbon").Object
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, ModuleName & "AddInHandle"
     Resume          ' for debugging only
