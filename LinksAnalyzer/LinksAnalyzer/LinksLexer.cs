@@ -10,6 +10,7 @@ using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
     /// <summary>TODO</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
@@ -24,7 +25,7 @@ namespace PGSolutions.LinksAnalyzer {
             Tokens       = new List<IToken>();
         }
 
-        public static IReadOnlyList<string> WordOperators = new List<string> { "AND", "OR" };
+        public static readonly IReadOnlyList<string> WordOperators = new List<string> { "AND", "OR" };
 
         public  ISourceCellRef  CellRef      { get; }
         public  string          Formula      { get; }
@@ -40,6 +41,7 @@ namespace PGSolutions.LinksAnalyzer {
 
         string GetText(int start) => Formula.Substring(start-1, CharPosition + 1 - start);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity" )]
         public IToken Scan() {
             if (CharPosition==1 && CurrentCharacter=='\'') { return Add(EToken.StringLiteral, 1, Formula); }
             while ( Advancable() ) {
@@ -49,18 +51,18 @@ namespace PGSolutions.LinksAnalyzer {
                         case '!': return Add(EToken.Bang, start, GetText(start));
                         case '=': return Add(EToken.Equals, start, GetText(start));
                         case ',': return Add(EToken.Comma, start, GetText(start));
-                        case ';': return Add(EToken.SemiColon, start, GetText(start));
+                        case ';': return Add(EToken.Semicolon, start, GetText(start));
                         case '+':
                         case '-':
-                        case '%': return Add(EToken.Unop, start, GetText(start));
+                        case '%': return Add(EToken.UnaryOperator, start, GetText(start));
                         case '*':
                         case '/':
                         case '&':
-                        case '^': return Add(EToken.BinOp, start, GetText(start));
+                        case '^': return Add(EToken.BinaryOperator, start, GetText(start));
                         case '<':
                         case '>': if ( IsEOT ) { break; }
                                   if (NextCharacterIs('=')) { CharPosition++; }
-                                  return Add(EToken.BinOp, start, GetText(start));
+                                  return Add(EToken.BinaryOperator, start, GetText(start));
                         case '(': ParenDepth++; return Add(EToken.OpenParen, start, GetText(start));
                         case ')': ParenDepth--; return Add(EToken.CloseParen, start, GetText(start));
                         case '{': BraceDepth++; return Add(EToken.OpenBrace, start, GetText(start));
@@ -84,7 +86,7 @@ namespace PGSolutions.LinksAnalyzer {
             Add(token, start, lexer.Formula.Substring(start-1, lexer.CharPosition - start));
 
         private IToken Add(EToken token, int start, string text) {
-            var rv = text.IsWordOperator() ? new Token(EToken.BinOp, start, text)
+            var rv = text.IsWordOperator() ? new Token(EToken.BinaryOperator, start, text)
                                            : new Token(token, start, text);
             Tokens.Add(rv);
             return rv;

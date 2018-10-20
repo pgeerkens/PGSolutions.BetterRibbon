@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
+using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.BetterRibbon {
     internal class BrandingViewModel : AbstractRibbonGroupViewModel {
@@ -15,9 +15,9 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
         public BrandingViewModel(IRibbonFactory factory, Func<IPictureDisp> logo) : base(factory) {
             BrandingGroup  = Factory.NewRibbonGroup("BrandingGroup", true);
-            BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, rdLarge, logo(), false, false);
+            BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, RibbonControlSizeLarge, logo(), false, false);
 
-            BrandingButton.Clicked += () =>
+            BrandingButton.Clicked += (s) =>
                 MessageBox.Show("Quack, eh!\n\n" + typeof(BrandingViewModel).Assembly.GetName().Version.ToString(),
                         "PGSolutions - VBA Tools", MessageBoxButtons.OK, MessageBoxIcon.Information);
             BrandingButton.Attach();

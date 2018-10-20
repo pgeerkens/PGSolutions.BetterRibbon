@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -17,11 +16,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IRibbonDispatcher)]
     public interface IRibbonDispatcher {
         /// <summary>TODO</summary>
-        [Description("")]
-        [DispId(1)]
+        [Description( "" )]
+        [DispId( 1 )]
         void InvalidateControl(string ControlId);
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
+                Justification = "Matches COM usage.")]
         [DispId(2)]
         IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
@@ -53,7 +53,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified ToggleButton control.")]
         [DispId(6)]
-        IRibbonToggleButton AttachToggle(string controlId, IRibbonControlStrings strings,
+        IRibbonToggle AttachToggle(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
         /// <summary>Attaches an {IBooleanSource} to the specified CheckBox control.</summary>
@@ -62,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified CheckBox control.")]
         [DispId(7)]
-        IRibbonCheckBox AttachCheckBox(string controlId, IRibbonControlStrings strings,
+        IRibbonToggle AttachCheckBox(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
         /// <summary>Attaches an {IIntegerSource} to the specified DropDown control.</summary>

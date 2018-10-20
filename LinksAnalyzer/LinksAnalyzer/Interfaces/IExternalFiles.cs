@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace PGSolutions.LinksAnalyzer.Interfaces {
     /// <summary>TODO</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
@@ -30,6 +31,7 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     }
 
     /// <summary>TODO</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]

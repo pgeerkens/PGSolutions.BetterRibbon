@@ -13,11 +13,13 @@ Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button1.VB_VarHelpID = -1
 Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 
-Private Sub Button1_Clicked()
+Private Sub Button1_Clicked(ByVal sender As Variant)
     MsgBox "Button1 clicked.", vbOKOnly Or vbInformation, TypeName(Me)
 End Sub
 
 Friend Sub Activate()
+    Dim obj As Object
+    Set obj = AddInHandle.AttachButton("CustomizableButton1", Button1Strings)
     With AddInHandle
         Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
         Button1.SetImageMso "RefreshAll"
@@ -36,5 +38,5 @@ Private Sub Class_Initialize()
 End Sub
 
 Private Function AddInHandle() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object
+    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").object
 End Function

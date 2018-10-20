@@ -4,26 +4,27 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    /// <summary>TODO</summary>
+    /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonToggleButton)]
-    public interface IRibbonToggleButton : IRibbonCommon, IRibbonImageable {
+    public interface IRibbonToggle : IRibbonCommon, IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
-        new string Id               { get; }
+        new string Id           { get; }
         /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
         [DispId(DispIds.Description)]
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        new string Description      { get; }
+        new string Description  { get; }
         /// <summary>Returns the KeyTip string for this control.</summary>
         [DispId(DispIds.KeyTip)]
         [Description("Returns the KeyTip string for this control.")]
-        new string KeyTip           { get; }
+        new string KeyTip       { get; }
         /// <summary>Returns the Label string for this control.</summary>
         [DispId(DispIds.Label)]
         [Description("Returns the Label string for this control.")]
@@ -52,19 +53,23 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <inheritdoc/>
         new void Invalidate();
 
-        /// <summary>TODO</summary>
-        [DispId(DispIds.Size)]
-        RdControlSize Size      { get; set; }
-
         /// <summary>Returns whether the control is pressed.</summary>
         [DispId(DispIds.IsPressed)]
         [Description("Returns whether the control is pressed.")]
-        bool IsPressed          { get; /*set;*/ }
+        bool IsPressed          { get; }
         /// <summary>Callback for the Pressed event on the control.</summary>
         [DispId(DispIds.OnToggled)]
         [Description("Callback for the Pressed event on the control.")]
-        void OnToggled(bool IsPressed);
+        void OnToggled(object sender, bool IsPressed);
 
+        /// <summary>TODO</summary>
+        bool         IsSizeable { get; }
+        /// <summary>TODO</summary>
+        [DispId(DispIds.Size)]
+        RibbonControlSize Size  { get; set; }
+
+        /// <summary>TODO</summary>
+        bool        IsImageable { get; }
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]

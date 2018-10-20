@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
+using static Microsoft.Office.Core.RibbonControlSize;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
@@ -96,50 +96,49 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Controls(Control?.Id)?.IsVisible ?? true;
         #endregion
 
-        #region ISizeableMixin implementation
-        /// <summary>All of the defined controls implementing the {ISizeableMixin} interface.</summary>
-        private ISizeableMixin Sizeables(string controlId) => _ribbonFactory.Sizeables.GetOrDefault(controlId);
+        #region ISizeable implementation
+        /// <summary>All of the defined controls implementing the {ISizeable} interface.</summary>
+        private ISizeable Sizeables(string controlId) => _ribbonFactory.Sizeables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public RdControlSize GetSize(IRibbonControl Control)
-            => Sizeables(Control?.Id)?.GetSize() ?? RdControlSize.rdLarge;
+        public RibbonControlSize GetSize(IRibbonControl Control)
+            => Sizeables(Control?.Id)?.Size ?? RibbonControlSizeLarge;
         #endregion
 
-        #region IImageableMixin implementation
-        /// <summary>All of the defined controls implementing the {IImageableMixin} interface.</summary>
-        private IImageableMixin Imageables (string controlId) => _ribbonFactory.Imageables.GetOrDefault(controlId);
+        #region IImageable implementation
+        /// <summary>All of the defined controls implementing the {IImageable} interface.</summary>
+        private IImageable Imageables (string controlId) => _ribbonFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public object GetImage(IRibbonControl Control)
-            => Imageables(Control?.Id)?.GetImage().Image ?? "MacroSecurity";
+            => Imageables(Control?.Id)?.Image ?? "MacroSecurity";
         /// <inheritdoc/>
         public bool   GetShowImage(IRibbonControl Control)
-            => Imageables(Control?.Id)?.GetShowImage() ?? true;
+            => Imageables(Control?.Id)?.ShowImage ?? false;
         /// <inheritdoc/>
         public bool   GetShowLabel(IRibbonControl Control)
-            => Imageables(Control?.Id)?.GetShowLabel() ?? true;
+            => Imageables(Control?.Id)?.ShowLabel ?? true;
         #endregion
 
-        #region IToggleableMixin implementation
-        /// <summary>All of the defined controls implementing the {IToggleableMixin} interface.</summary>
-        private IToggleableMixin Toggleables(string controlId) => _ribbonFactory.Toggleables.GetOrDefault(controlId);
+        #region IToggleable implementation
+        /// <summary>All of the defined controls implementing the {IToggleable} interface.</summary>
+        private IToggleable Toggleables(string controlId) => _ribbonFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool   GetPressed(IRibbonControl Control)
-            => Toggleables(Control?.Id)?.GetPressed() ?? false;
+            => Toggleables(Control?.Id)?.IsPressed ?? false;
         /// <inheritdoc/>
         public void   OnActionToggle(IRibbonControl Control, bool Pressed)
-            => Toggleables(Control?.Id)?.OnActionToggle(Pressed);
+            => Toggleables(Control?.Id)?.OnToggled(this, Pressed);
         #endregion
 
-        #region IClickableMixin implementation
-        /// <summary>All of the defined controls implementing the {IClickableMixin} interface.</summary>
-        private IClickableMixin Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
+        #region IClickable implementation
+        /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
+        private IClickable Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public void   OnAction(IRibbonControl Control)
-            => Actionables(Control?.Id)?.Clicked();
+        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(this);
         #endregion
 
         #region ISelectableMixin implementation
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
-        private ISelectableMixin Selectables (string controlId) => _ribbonFactory.Selectables.GetOrDefault(controlId);
+        private ISelectable Selectables (string controlId) => _ribbonFactory.Selectables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public int    GetItemCount(IRibbonControl Control)
             => Selectables(Control?.Id)?.ItemCount ?? 0;

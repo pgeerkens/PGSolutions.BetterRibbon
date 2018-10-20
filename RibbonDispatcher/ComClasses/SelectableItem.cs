@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
@@ -16,30 +15,38 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
-    public class SelectableItem : RibbonCommon, ISelectableItem, IImageableMixin {
+    public class SelectableItem : RibbonCommon, ISelectableItem, IImageable {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId, IRibbonControlStrings strings, ImageObject Image) 
             : base(ItemId, strings, true, true)
-            => this.SetImage(Image);
+            => _image = Image;
 
-        #region Publish IImageableMixin to class default interface
+        #region IImageable implementation
         /// <inheritdoc/>
-        public object Image => this.GetImage();
+        public bool IsImageable => true;
+        /// <inheritdoc/>
+        public object Image => _image.Image;
+        private ImageObject _image;
+
         /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
         public bool ShowImage {
-            get => this.GetShowImage();
-            set => this.SetShowImage(value);
+            get => _showImage;
+            set { _showImage = value; Invalidate(); }
         }
-        /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
+        private bool _showImage;
+
+        /// <inheritdoc/>
         public bool ShowLabel {
-            get => this.GetShowLabel();
-            set => this.SetShowLabel(value);
+            get => _showLabel;
+            set { _showLabel = value; Invalidate(); }
         }
+        private bool _showLabel;
 
         /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
-        public void SetImageDisp(IPictureDisp Image) => this.SetImage(Image);
+        public void SetImageDisp(IPictureDisp Image) => _image = new ImageObject(Image);
+
         /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
-        public void SetImageMso(string ImageMso)     => this.SetImage(ImageMso);
+        public void SetImageMso(string ImageMso)     => _image = new ImageObject(ImageMso);
         #endregion
     }
 }

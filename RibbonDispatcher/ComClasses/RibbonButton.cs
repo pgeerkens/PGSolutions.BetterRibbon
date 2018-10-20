@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton objects.</summary>
@@ -23,79 +23,71 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButton))]
     [Guid(Guids.RibbonButton)]
-    public class RibbonButton : RibbonCommon, IRibbonButton, IActivatableControl<IRibbonCommon>,
-        ISizeableMixin, IClickableMixin, IImageableMixin {
+    public class RibbonButton : RibbonCommon, IRibbonButton, IActivatableControl<IRibbonButton>,
+        ISizeable, IClickable, IImageable {
         internal RibbonButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
-                RdControlSize size, ImageObject image, bool showImage, bool showLabel
+                RibbonControlSize size, ImageObject image, bool showImage, bool showLabel
         ) : base(itemId, strings, visible, enabled) {
-            this.SetSize(size);
-            this.SetImage(image);
-            this.SetShowImage(showImage);
-            this.SetShowLabel(showLabel);
+            _size      = size;
+            _image     = image;
+            _showImage = showImage;
+            _showLabel = showLabel;
         }
 
         #region IActivatable implementation
-        private bool _isAttached    = false;
-
-        public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => (base.IsVisible && _isAttached)
-                                       || (ShowWhenInactive);
-
-        public bool ShowWhenInactive { get; set; } //= true;
-
-        public IRibbonButton Attach() {
-            _isAttached = true;
-            return this;
-        }
-
-        public void Detach() {
-            _isAttached = false;
-            SetLanguageStrings(RibbonControlStrings.Empty);
+        public override void Detach() {
+            Clicked = null;
             SetImageMso("MacroSecurity");
-            Invalidate();
+            base.Detach();
         }
 
-        IRibbonCommon IActivatableControl<IRibbonCommon>.Attach() => Attach() as IRibbonCommon;
-        void IActivatableControl<IRibbonCommon>.Detach() => Detach();
+        IRibbonButton IActivatableControl<IRibbonButton>.Attach() => Attach() as IRibbonButton;
+        void IActivatableControl<IRibbonButton>.Detach() => Detach();
         #endregion
 
-        #region Publish ISizeableMixin to class default interface
-        /// <inheritdoc/>
-        public RdControlSize Size {
-            get => this.GetSize();
-            set => this.SetSize(value);
-        }
-        #endregion
-
-        #region Publish IClickableMixin to class default interface
+        #region IClickable implementation
         /// <summary>The Clicked event source for COM clients</summary>
         public event ClickedEventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked() => Clicked?.Invoke();
+        public virtual void OnClicked(object sender) => Clicked?.Invoke(this);
         #endregion
 
-        #region Publish IImageableMixin to class default interface
+        #region ISizeable implementation
         /// <inheritdoc/>
-        public object Image => this.GetImage();
-
-        /// <inheritdoc/>
-        public bool ShowImage {
-            get => this.GetShowImage();
-            set => this.SetShowImage(value);
+        public RibbonControlSize Size {
+            get => _size;
+            set { _size = value; Invalidate(); }
         }
+        private RibbonControlSize _size;
+        #endregion
+
+        #region IImageable implementation
+        /// <inheritdoc/>
+        public bool IsImageable => true;
+        /// <inheritdoc/>
+        public object Image => _image.Image;
+        private ImageObject _image;
+
+        /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
+        public bool ShowImage {
+            get => _showImage;
+            set { _showImage = value; Invalidate(); }
+        }
+        private bool _showImage;
 
         /// <inheritdoc/>
         public bool ShowLabel {
-            get => this.GetShowLabel();
-            set => this.SetShowLabel(value);
+            get => _showLabel;
+            set { _showLabel = value; Invalidate(); }
         }
+        private bool _showLabel;
 
-        /// <inheritdoc/>
-        public void SetImageDisp(IPictureDisp Image) => this.SetImage(Image);
+        /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
+        public void SetImageDisp(IPictureDisp Image) => _image = new ImageObject(Image);
 
-        /// <inheritdoc/>
-        public void SetImageMso(string ImageMso)     => this.SetImage(ImageMso);
+        /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
+        public void SetImageMso(string ImageMso)     => _image = new ImageObject(ImageMso);
         #endregion
     }
 }

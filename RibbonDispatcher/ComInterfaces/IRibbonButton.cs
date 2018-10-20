@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -54,15 +55,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <inheritdoc/>
         new void Invalidate();
 
-        /// <summary>Gets or sets the preferred {RdControlSize} for the control.</summary>
+        /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
         [DispId(DispIds.Size)]
         [Description("Gets or sets the preferred {RdControlSize} for the control.")]
-        RdControlSize Size      { get; set; }
+        RibbonControlSize Size      { get; set; }
 
         /// <summary>Callback for the Clicked event on the control.</summary>
         [DispId(DispIds.OnClicked)]
         [Description("Callback for the Clicked event on the control.")]
-        void OnClicked();
+        void OnClicked(object sender);
 
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]

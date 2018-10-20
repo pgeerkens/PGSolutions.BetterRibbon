@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Windows.Forms;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.ComClasses;
 using System.Collections.Generic;
 
 namespace PGSolutions.RibbonDispatcher.Utilities {
@@ -17,7 +17,8 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
         public static ClickedEventHandler DefaultButtonAction(this IRibbonButton sender) => sender.MsgBoxShow;
 
-        public static void MsgBoxShow<TControl>(this TControl control) where TControl : IRibbonButton => MsgBoxShow(control, null);
+        public static void MsgBoxShow<TControl>(this TControl control, object sender) where TControl : IRibbonButton
+            => MsgBoxShow(control, null);
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
 
         public static void MsgBoxShow<TControl>(this TControl control, string details) where TControl : IRibbonButton =>

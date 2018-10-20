@@ -1,9 +1,11 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-
+using System.Windows.Forms;
 using Microsoft.Office.Core;
 using Microsoft.Vbe.Interop;
 
@@ -24,11 +26,14 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     SetStatusBarText(project.Name, component.Name);
-                    component.Export(Path.ChangeExtension(Path.Combine(path, component.Name), TypeExtension((VbExt_ct)component.Type)));
+                    component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),
+                            TypeExtension((VbExt_ct)component.Type)));
                     // DoEvents
                 }
 
                 File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
+            } catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)) {
+                MessageBox.Show($"Directory conflict occurred. Please retry.");
             } finally {
                 Globals.ThisAddIn.Application.StatusBar = false;
             }

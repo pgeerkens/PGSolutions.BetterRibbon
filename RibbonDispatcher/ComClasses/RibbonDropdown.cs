@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
@@ -23,32 +22,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonDropDown))]
     [Guid(Guids.RibbonDropDown)]
     public class RibbonDropDown : RibbonCommon, IRibbonDropDown, IActivatableControl<IRibbonCommon, int>,
-        ISelectableMixin {
+        ISelectable {
         internal RibbonDropDown(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
         ) : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
-        private bool _isAttached    = false;
-
-        public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => (base.IsVisible && _isAttached)
-                                       || (ShowWhenInactive);
-
-        public bool ShowWhenInactive { get; set; } //= true;
-
         private Func<int> Getter { get; set; }
 
         public IRibbonDropDown Attach(Func<int> getter) {
-            _isAttached = true;
+            base.Attach();
             Getter = getter;
             return this;
         }
 
-        public void Detach() {
+        public override void Detach() {
             Getter = ()=>0;
-            _isAttached = false;
-            SetLanguageStrings(RibbonControlStrings.Empty);
-            Invalidate();
+            SelectionMade = null;
+            base.Detach();
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon, int>.Attach(Func<int> getter) =>
@@ -56,6 +46,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         void IActivatableControl<IRibbonCommon, int>.Detach() => Detach();
         #endregion
 
+        #region ISelectable
         /// <summary>TODO</summary>
         public event SelectedEventHandler SelectionMade;
 
@@ -71,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void OnActionDropDown(string SelectedId, int SelectedIndex) {
             //_selectedItemIndex = SelectedIndex;
             SelectionMade?.Invoke(SelectedId, SelectedIndex);
-            OnChanged();
+            Invalidate();
         }
 
         /// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
@@ -101,5 +92,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool     ItemShowImage(int Index) => _items[Index].ShowImage;
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         public bool     ItemShowLabel(int Index) => _items[Index].ShowImage;
+        #endregion
     }
 }

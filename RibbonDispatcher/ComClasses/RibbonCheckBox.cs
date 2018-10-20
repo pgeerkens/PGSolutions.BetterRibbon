@@ -5,10 +5,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using stdole;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
+using static Microsoft.Office.Core.RibbonControlSize;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon CheckBox objects.</summary>
@@ -20,33 +23,29 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvents))]
-    [ComDefaultInterface(typeof(IRibbonCheckBox))]
+    [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonCheckBox)]
-    public class RibbonCheckBox : RibbonCommon, IRibbonCheckBox, IActivatableControl<IRibbonCommon, bool>,
-        IToggleableMixin {
+    public class RibbonCheckBox : RibbonCommon, IRibbonToggle, IActivatableControl<IRibbonCommon, bool>, IToggleable {
         internal RibbonCheckBox(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
         ) : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
-        private bool _isAttached    = false;
+        private bool _isAttached {get; set; }   = false;
 
         public override bool IsEnabled => base.IsEnabled && _isAttached;
         public override bool IsVisible => (base.IsVisible && _isAttached)
                                        || (ShowWhenInactive);
 
-        public bool ShowWhenInactive { get; set; } //= true;
-
-        public IRibbonCheckBox Attach(Func<bool> getter) {
-            _isAttached = true;
-            this.SetGetter(getter);
+        public IRibbonToggle Attach(Func<bool> getter) {
+            base.Attach();
+            Getter = getter;
             return this;
         }
 
-        public void Detach() {
-            _isAttached = false;
-            this.SetGetter(()=>false);
-            SetLanguageStrings(RibbonControlStrings.Empty);
-            Invalidate();
+        public override void Detach() {
+            Toggled = null;
+            Getter = () => false;
+            base.Detach();
         }
 
         IRibbonCommon IActivatableControl<IRibbonCommon, bool>.Attach(Func<bool> getter) =>
@@ -54,21 +53,53 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         void IActivatableControl<IRibbonCommon, bool>.Detach() => Detach();
         #endregion
 
-        #region Publish IToggleableMixin to class default interface
+        #region IToggleable implementation
         /// <summary>TODO</summary>
         public event ToggledEventHandler Toggled;
 
-        /// <summary>TODO</summary>
-        public bool IsPressed           => this.GetPressed();
+        /// <inheritdoc/>>
+        public bool IsPressed => Getter?.Invoke() ?? false;
+
+        /// <inheritdoc/>>
+        public virtual void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(this,isPressed);
 
         /// <summary>TODO</summary>
-        public override string Label    => this.GetLabel();
+        private Func<bool> Getter { get; set; }
+        #endregion
 
-        /// <summary>TODO</summary>
-        public void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
+        #region ISizeable implementation
+        /// <inheritdoc/>>
+        public virtual bool IsSizeable => false;
+        /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
+        public virtual RibbonControlSize Size {
+            get => RibbonControlSizeRegular;
+            set { /* NO-OP */ }
+        }
+        #endregion
 
-        /// <summary>TODO</summary>
-        IRibbonControlStrings IToggleableMixin.LanguageStrings => Strings;
+        #region IImageable implementation
+        /// <inheritdoc/>
+        public virtual bool IsImageable => false;
+        /// <inheritdoc/>
+        public virtual object Image => null;
+
+        /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
+        public virtual bool ShowImage {
+            get => false;
+            set { /* NO-OP */ }
+        }
+
+        /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
+        public virtual bool ShowLabel {
+            get => true;
+            set { /* NO-OP */ }
+        }
+
+        /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
+        public virtual void SetImageDisp(IPictureDisp Image) { /* NO-OP */ }
+
+        /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
+        public virtual void SetImageMso(string ImageMso)     { /* NO-OP */ }
         #endregion
     }
 }

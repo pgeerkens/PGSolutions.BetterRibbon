@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComClasses\RibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IBooleanSource.cs" />
     <Compile Include="ComInterfaces\IIntegerSource.cs" />
     <Compile Include="Utilities\IActivatableControl.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IRibbonButton.cs" />
-    <Compile Include="ComInterfaces\IRibbonCheckBox.cs" />
     <Compile Include="ComInterfaces\IRibbonCommon.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDown.cs" />
     <Compile Include="ComClasses\IRibbonFactory.cs" />
@@ -128,18 +128,13 @@
     <Compile Include="ComInterfaces\IRibbonLoader.cs" />
     <Compile Include="ComInterfaces\IRibbonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonControlStrings.cs" />
-    <Compile Include="ComInterfaces\IRibbonToggleButton.cs" />
+    <Compile Include="ComInterfaces\IRibbonToggle.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\IRibbonWorkbook.cs" />
     <Compile Include="ComInterfaces\ISelectableItem.cs" />
     <Compile Include="ComInterfaces\ISelectionMadeEvents.cs" />
     <Compile Include="ComInterfaces\IToggledEvents.cs" />
-    <Compile Include="ComInterfaces\RdControlSize.cs" />
-    <Compile Include="ControlMixins\ClickableMixin.cs" />
-    <Compile Include="ControlMixins\MixinInterfaces.cs" />
-    <Compile Include="ControlMixins\ImageableMixin.cs" />
-    <Compile Include="ControlMixins\SizeableMixin.cs" />
-    <Compile Include="ControlMixins\ToggleableMixin.cs" />
+    <Compile Include="ComClasses\MixinInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\DictionaryExtensions.cs" />
@@ -151,7 +146,10 @@
     <None Include="PGSolutionsStrongKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="CustomDictionary.xml" />
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

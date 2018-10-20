@@ -21,7 +21,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         private bool                              DestIsSrc  { get; set; }
         private IList<IVbaSourceExportGroupModel> ViewModels { get; set; }
 
-        private void UseSrcFolderToggled(bool isPressed) {
+        private void UseSrcFolderToggled(object sender, bool isPressed) {
             DestIsSrc = isPressed;
             foreach (var viewModel in ViewModels) {  viewModel.Invalidate(); }
         }
@@ -31,7 +31,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportCurrentProject() => SilentAction(() => 
+        private void ExportCurrentProject(object sender) => SilentAction(() => 
                 ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc));
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
@@ -39,7 +39,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportSelectedProject() {
+        private void ExportSelectedProject(object sender) {
             var securitySaved = Application.AutomationSecurity;
             Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 

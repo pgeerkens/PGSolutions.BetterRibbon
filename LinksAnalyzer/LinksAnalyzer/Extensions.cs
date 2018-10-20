@@ -32,6 +32,7 @@ namespace PGSolutions.LinksAnalyzer {
 
         public static string Name(this IToken token) => token.Value.Name();
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Body" )]
         public static void FastCopyToRange(this ITwoDimensionalLookup source, Excel.Range target) {
             var rowsCount = target.Rows.Count;
             var colsCount = target.Columns.Count;

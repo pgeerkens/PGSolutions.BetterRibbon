@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.BetterRibbon {
@@ -37,24 +36,22 @@ namespace PGSolutions.BetterRibbon {
         private RibbonToggleButton IsLargeToggle  { get; }
         private RibbonDropDown     DisplayOptions { get; }
 
-        private void OnIsLargeToggled(bool isPressed) => IsLargeToggled(isPressed);
+        private void OnIsLargeToggled(object sender, bool isPressed) => IsLargeToggled(sender,isPressed);
         private void OnSelectionMade(string selectedId, int selectedIndex) => DisplayOptionSelected(selectedId, selectedIndex);
 
-        private void OnButton1Clicked() => ButtonClicked(CustomButton1, CustomButton1);
-        private void OnButton2Clicked() => ButtonClicked(CustomButton2, CustomButton2);
-        private void OnButton3Clicked() => ButtonClicked(CustomButton3, CustomButton3);
+        private void OnButtonClicked(object sender) => ButtonClicked(sender, sender as IRibbonButton);
 
         public void Attach(Func<bool> isLargeSource, Func<int> displayOptionSource) {
             DisplayOptions.Attach(displayOptionSource); DisplayOptions.SelectionMade += OnSelectionMade;
             IsLargeToggle.Attach(isLargeSource); IsLargeToggle.Toggled += OnIsLargeToggled;
-            CustomButton1.Attach(); CustomButton1.Clicked += OnButton1Clicked;
-            CustomButton2.Attach(); CustomButton2.Clicked += OnButton2Clicked;
-            CustomButton3.Attach(); CustomButton3.Clicked += OnButton3Clicked;
+            CustomButton1.Attach(); CustomButton1.Clicked += OnButtonClicked;
+            CustomButton2.Attach(); CustomButton2.Clicked += OnButtonClicked;
+            CustomButton3.Attach(); CustomButton3.Clicked += OnButtonClicked;
         }
         public void Detach() {
-            CustomButton3.Detach(); CustomButton3.Clicked -= OnButton3Clicked;
-            CustomButton2.Detach(); CustomButton2.Clicked -= OnButton2Clicked;
-            CustomButton1.Detach(); CustomButton1.Clicked -= OnButton1Clicked;
+            CustomButton3.Detach(); CustomButton3.Clicked -= OnButtonClicked;
+            CustomButton2.Detach(); CustomButton2.Clicked -= OnButtonClicked;
+            CustomButton1.Detach(); CustomButton1.Clicked -= OnButtonClicked;
             IsLargeToggle.Detach(); IsLargeToggle.Toggled -= OnIsLargeToggled;
 
             DisplayOptions.Detach(); DisplayOptions.SelectionMade -= OnSelectionMade;

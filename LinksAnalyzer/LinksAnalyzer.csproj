@@ -100,6 +100,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalyzer\ExcelLinksExtensions.cs" />
     <Compile Include="LinksAnalyzer\Extensions.cs" />
     <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
@@ -122,6 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PGSolutionsStrongKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

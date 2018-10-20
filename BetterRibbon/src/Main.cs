@@ -20,30 +20,30 @@ using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
-    [Serializable]
+    [SuppressMessage( "Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable" )]
+    [Serializable, CLSCompliant(false)]
     [ComVisible(true)]
-    [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonDispatcher))]
-    [Guid(RibbonDispatcher.Guids.BetterRibbon)]
+    [Guid(RibbonDispatcher.Guids.BettterRibbon)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class Main : IRibbonDispatcher, ILinksAnalyzer {
-        #region IRibbonDispatcher methods
-        private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
-                Globals.ThisAddIn.ViewModel.AdaptorControls;
+        internal Main() { }
+
         private static RibbonViewModel ViewModel = Globals.ThisAddIn.ViewModel;
+        private static IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
+                ViewModel.AdaptorControls;
 
-        internal void WorkbookDeactivate(Workbook wb) =>
-            DeactivateActivatableControls();
-        internal void WindowDeactivate(Workbook wb, Excel.Window wn) =>
-            DeactivateActivatableControls();
+        internal void WorkbookDeactivate(Workbook wb) => DetachActivatableControls();
+        internal void WindowDeactivate(Workbook wb, Excel.Window wn) => DetachActivatableControls();
 
-        private static void DeactivateActivatableControls() {
+        private static void DetachActivatableControls() {
             foreach (var c in AdaptorControls) c.Value.Detach();
         }
 
+        #region IRibbonDispatcher methods
         /// <inheritdoc/>
-        public void InvalidateControl(string ControlId) => Globals.ThisAddIn.ViewModel.InvalidateControl(ControlId);
+        public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl( ControlId );
 
         public void DetachProxy(string controlId) =>
             (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton)?.Detach();
@@ -56,11 +56,12 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.InvalidateControl(ViewModel.CustomButtonsViewMode.GroupId);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
+                Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "") =>
-            Globals.ThisAddIn.ViewModel.RibbonFactory.NewControlStrings(label,
+            ViewModel.RibbonFactory.NewControlStrings(label,
                     screenTip, superTip, keyTip, alternateLabel, description);
 
         public IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings) {
@@ -70,7 +71,7 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
-        public IRibbonToggleButton AttachToggle(string controlId, IRibbonControlStrings strings,
+        public IRibbonToggle AttachToggle(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonToggleButton;
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
@@ -78,7 +79,7 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
-        public IRibbonCheckBox AttachCheckBox(string controlId, IRibbonControlStrings strings,
+        public IRibbonToggle AttachCheckBox(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonCheckBox;
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));

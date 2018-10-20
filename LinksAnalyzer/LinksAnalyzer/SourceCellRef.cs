@@ -15,13 +15,14 @@ namespace PGSolutions.LinksAnalyzer {
     [ComDefaultInterface(typeof(ISourceCellRef))]
     public class SourceCellRef : ISourceCellRef {
         [CLSCompliant(false)]
-        public SourceCellRef(Excel.Workbook wkbk, string tabName, string cellName) 
-            : this(wkbk.Path, wkbk.Name, tabName, cellName) { }
-        public SourceCellRef(string wkBkPath, string wkBkName, string tabName, string cellName,
+        public SourceCellRef(Excel.Workbook workbook, string tabName, string cellName) 
+            : this(workbook?.Path, workbook?.Name, tabName, cellName) { }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed" )]
+        public SourceCellRef(string workbookPath, string workbookName, string tabName, string cellName,
             bool isNamedRange = false
         ) {
-            FullPath = wkBkPath;
-            FileName = wkBkName;
+            FullPath = workbookPath;
+            FileName = workbookName;
             TabName  = tabName;
             CellName = cellName;
             IsNamedRange = isNamedRange;

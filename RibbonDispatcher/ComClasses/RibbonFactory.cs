@@ -9,11 +9,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
-using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
+using static Microsoft.Office.Core.RibbonControlSize;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 
@@ -44,43 +44,43 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ResourceManager  = manager ?? loader;
 
             _controls    = new Dictionary<string, IRibbonCommon>();
-            _sizeables   = new Dictionary<string, ISizeableMixin>();
-            _clickables  = new Dictionary<string, IClickableMixin>();
-            _toggleables = new Dictionary<string, IToggleableMixin>();
-            _selectables = new Dictionary<string, ISelectableMixin>();
-            _imageables  = new Dictionary<string, IImageableMixin>();
+            _sizeables   = new Dictionary<string, ISizeable>();
+            _clickables  = new Dictionary<string, IClickable>();
+            _toggleables = new Dictionary<string, IToggleable>();
+            _selectables = new Dictionary<string, ISelectable>();
+            _imageables  = new Dictionary<string, IImageable>();
         }
 
         internal IResourceLoader  ResourceLoader  { get; }
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
-        private  readonly IDictionary<string, IRibbonCommon>    _controls;
-        private  readonly IDictionary<string, ISizeableMixin>   _sizeables;
-        private  readonly IDictionary<string, IClickableMixin>  _clickables;
-        private  readonly IDictionary<string, ISelectableMixin> _selectables;
-        private  readonly IDictionary<string, IImageableMixin>  _imageables;
-        private  readonly IDictionary<string, IToggleableMixin> _toggleables;
+        private  readonly IDictionary<string, IRibbonCommon> _controls;
+        private  readonly IDictionary<string, ISizeable>    _sizeables;
+        private  readonly IDictionary<string, IClickable>   _clickables;
+        private  readonly IDictionary<string, ISelectable>  _selectables;
+        private  readonly IDictionary<string, IImageable>   _imageables;
+        private  readonly IDictionary<string, IToggleable>  _toggleables;
 
         internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IRibbonCommon>    Controls    => new ReadOnlyDictionary<string, IRibbonCommon>(_controls);
+        internal IReadOnlyDictionary<string, IRibbonCommon> Controls    => new ReadOnlyDictionary<string, IRibbonCommon>(_controls);
  
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISizeableMixin>   Sizeables   => new ReadOnlyDictionary<string, ISizeableMixin>(_sizeables);
+        internal IReadOnlyDictionary<string, ISizeable>     Sizeables   => new ReadOnlyDictionary<string, ISizeable>(_sizeables);
 
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IClickableMixin>  Clickables => new ReadOnlyDictionary<string, IClickableMixin>(_clickables);
+        internal IReadOnlyDictionary<string, IClickable>    Clickables  => new ReadOnlyDictionary<string, IClickable>(_clickables);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISelectableMixin> Selectables => new ReadOnlyDictionary<string, ISelectableMixin>(_selectables);
+        internal IReadOnlyDictionary<string, ISelectable>   Selectables => new ReadOnlyDictionary<string, ISelectable>(_selectables);
 
         /// <summary>Returns a readonly collection of all Ribbon Imageable Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IImageableMixin>  Imageables  => new ReadOnlyDictionary<string, IImageableMixin>(_imageables);
+        internal IReadOnlyDictionary<string, IImageable>    Imageables  => new ReadOnlyDictionary<string, IImageable>(_imageables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IToggleableMixin> Toggleables => new ReadOnlyDictionary<string, IToggleableMixin>(_toggleables);
+        internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
 
         /// <summary>TODO</summary>
         internal event ChangedEventHandler Changed;
@@ -91,11 +91,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private T Add<T>(T ctrl) where T:RibbonCommon {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
-            _clickables.AddNotNull(ctrl.Id, ctrl as IClickableMixin);
-            _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeableMixin);
-            _selectables.AddNotNull(ctrl.Id, ctrl as ISelectableMixin);
-            _imageables.AddNotNull(ctrl.Id, ctrl as IImageableMixin);
-            _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleableMixin);
+            _clickables.AddNotNull(ctrl.Id, ctrl as IClickable);
+            _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeable);
+            _selectables.AddNotNull(ctrl.Id, ctrl as ISelectable);
+            _imageables.AddNotNull(ctrl.Id, ctrl as IImageable);
+            _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleable);
 
             ctrl.Changed += OnChanged;
             return ctrl;
@@ -111,7 +111,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonButton NewRibbonButton(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -120,7 +120,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
@@ -129,7 +129,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonToggleButton NewRibbonToggle(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -138,7 +138,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true

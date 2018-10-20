@@ -12,7 +12,7 @@ Private MIsPressed              As Boolean
 Private WithEvents MViewModel   As PGSolutions_RibbonDispatcher.RibbonToggleButton
 Attribute MViewModel.VB_VarHelpID = -1
 
-Public Event Toggled(ByVal IsPressed As Boolean)
+Public Event Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
 
 Implements IBooleanSource
 
@@ -20,10 +20,10 @@ Friend Function IBooleanSource_Getter() As Boolean
     IBooleanSource_Getter = MIsPressed
 End Function
 
-Private Sub MViewModel_Toggled(ByVal IsPressed As Boolean)
+Private Sub MViewModel_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
     MIsPressed = IsPressed
-    RaiseEvent Toggled(IsPressed)
+    RaiseEvent Toggled(Sender, IsPressed)
     MViewModel.Invalidate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & "MViewModel_Toggled", vbOKOnly Or vbInformation
@@ -40,7 +40,7 @@ Friend Property Get IsPressed() As Boolean
 End Property
 Friend Property Let IsPressed(ByVal IsPressed As Boolean)
     MIsPressed = IsPressed
-    AddInHandle.InvalidateControl ViewModel.ID
+    MViewModel.Invalidate
 End Property
 
 Friend Function Attach(ByVal ControlId As String, _
@@ -48,7 +48,6 @@ Friend Function Attach(ByVal ControlId As String, _
 ) As RibbonToggleModel
     On Error GoTo EH
     Set MViewModel = AddInHandle.AttachToggle(ControlId, Strings, Me)
-    AddInHandle.InvalidateControl ViewModel.ID
     Set Attach = Me
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & "Activate"

@@ -34,14 +34,14 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.36</ApplicationVersion>
+    <ApplicationVersion>1.0.0.37</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>PGSolutionsBetterRibbon</ProductName>
     <PublisherName>PGSolutions</PublisherName>
-    <SupportUrl />
+    <SupportUrl>https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues</SupportUrl>
     <FriendlyName>PGSolutions BetterRibbon</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
@@ -96,7 +96,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.1</LangVersion>
     <CodeAnalysisRuleSet>..\BetterRibbon.ruleset</CodeAnalysisRuleSet>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -119,11 +119,12 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DefineConstants>VSTO40</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.1</LangVersion>
     <CodeAnalysisRuleSet>..\BetterRibbon.ruleset</CodeAnalysisRuleSet>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DocumentationFile>bin\Release\PGSolutions.BetterRibbon.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -212,7 +213,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <CodeAnalysisDictionary Include="..\RibbonDispatcherX\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Content Include="..\Lookup2.xlsb">
@@ -311,10 +312,12 @@
     <ProjectReference Include="..\LinksAnalyzer\LinksAnalyzer.csproj">
       <Project>{fab5de05-0232-4053-b4ce-ce9a1a312750}</Project>
       <Name>LinksAnalyzer</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
       <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
       <Name>RibbonDispatcher</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

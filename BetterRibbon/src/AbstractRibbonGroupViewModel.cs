@@ -3,9 +3,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
+using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
+using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.BetterRibbon {
     internal abstract class AbstractRibbonGroupViewModel {
@@ -16,7 +18,7 @@ namespace PGSolutions.BetterRibbon {
         public static string NoImage => "MacroSecurity";
 
         protected static bool ToggleButtonSize(bool isLarge, IList<IRibbonButton> buttons) {
-            foreach (var b in buttons) { b.Size = isLarge ? rdLarge : rdRegular; }
+            foreach (var b in buttons) { b.Size = isLarge ? RibbonControlSizeLarge : RibbonControlSizeRegular; }
             return !isLarge;
         }
     }

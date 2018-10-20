@@ -4,7 +4,7 @@
 
 using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.ComClasses;
 using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.BetterRibbon {
@@ -24,7 +24,7 @@ namespace PGSolutions.BetterRibbon {
         private LabelImageOptions       DisplayOption { get; set; }
         private IDemonstrationViewModel ViewModel     { get; set; }
 
-        private void OnIsLargeToggled(bool isPressed) {
+        private void OnIsLargeToggled(object sender, bool isPressed) {
             IsRegular = isPressed;
             ViewModel.Invalidate();
         }
@@ -32,7 +32,8 @@ namespace PGSolutions.BetterRibbon {
             DisplayOption = itemIndex.IndexToLabelImageDisplay();
             ViewModel.Invalidate();
         }
-        private void OnButtonClicked(object sender, IRibbonButton button) => button.MsgBoxShow(button.Id);
+        private void OnButtonClicked(object sender, IRibbonButton button)
+            => button.MsgBoxShow(button.Id);
     }
 
     internal interface IDemonstrationViewModel {

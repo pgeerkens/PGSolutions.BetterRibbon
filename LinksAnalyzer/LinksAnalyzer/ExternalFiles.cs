@@ -4,6 +4,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -31,12 +33,16 @@ namespace PGSolutions.LinksAnalyzer {
     }
 
     /// <summary>TODO</summary>
+    [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
+    [Description("")]
+    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
+        Justification = "Public, Non-Creatable, class with exported Events.")]
     [Serializable]
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalFiles))]
     public class ExternalFiles : IExternalFiles{
-        public ExternalFiles() => List = new List<string>();
+        internal ExternalFiles() => List = new List<string>();
 
         public int    Count           => List.Count;
         public string this[int index] => List[index];

@@ -2,6 +2,8 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
@@ -12,7 +14,6 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.BetterRibbon.VbaSourceExport;
 using BetterRibbon.Properties;
-using System.Collections.Generic;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -25,20 +26,19 @@ namespace PGSolutions.BetterRibbon {
     /// 
     /// This class MUST be ComVisible for the ribbon to launch properly.
     /// </remarks>
+    [Description("The (top-level) ViewModel for the ribbon interface.")]
     [ComVisible(true)]
     [CLSCompliant(true)]
+    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
+        Justification = "Public, Non-Creatable, class with exported Events.")]
     [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "ExcelRibbon";
 
-        public RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
+        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal BrandingViewModel            BrandingViewModel        { get; private set; }
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal DemonstrationModel           DemonstrationModel       { get; private set; }
         internal CustomizableButtonsViewModel CustomButtonsViewMode    { get; private set; }
 
@@ -48,20 +48,21 @@ namespace PGSolutions.BetterRibbon {
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
         [SuppressMessage("Microsoft.Design", "CA1061:DoNotHideBaseClassMethods",
-            Justification="False positive - parameter types are identical.")]
+                Justification="False positive - parameter types are identical.")]
         [CLSCompliant(false)]
         public sealed override void OnRibbonLoad(IRibbonUI ribbonUI) {
             base.OnRibbonLoad(ribbonUI);
 
-            BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
-            CustomButtonsViewMode  = new CustomizableButtonsViewModel(RibbonFactory);
-
-            DemonstrationModel     = new DemonstrationModel(new DemonstrationViewModel(RibbonFactory));
-            VbaSourceExportModel   = new VbaSourceExportModel(
+            BrandingViewModel    = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
+            VbaSourceExportModel = new VbaSourceExportModel(
                 new List<IVbaSourceExportGroupModel> {
                     new VbaSourceExportViewModel(RibbonFactory, "MS"),
                     new VbaSourceExportViewModel(RibbonFactory, "PG")
                 } );
+
+            CustomButtonsViewMode = new CustomizableButtonsViewModel( RibbonFactory );
+
+            DemonstrationModel = new DemonstrationModel( new DemonstrationViewModel( RibbonFactory ) );
 
             Invalidate();
         }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 
@@ -16,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonCommon))]
     [Guid(Guids.RibbonCommon)]
-    public abstract class RibbonCommon : IRibbonCommon {
+    public abstract class RibbonCommon : IRibbonCommon, IActivatableControl<IRibbonCommon> {
         /// <summary>TODO</summary>
         protected RibbonCommon(string itemId, IRibbonControlStrings strings, bool visible, bool enabled) {
             Id       = itemId;
@@ -45,39 +46,53 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
         public virtual string SuperTip    => Strings?.SuperTip ?? "";
+        /// <inheritdoc/>
+        [Description("Returns the SuperTip string for this control.")]
+        public virtual string AlternateLabel => Strings?.AlternateLabel ?? "";
 
         /// <inheritdoc/>
         protected IRibbonControlStrings Strings { get; private set; }
 
+        #region IActivatable implementation
+        protected bool IsAttached { get; private set; }
+
+        public bool ShowWhenInactive { get; set; }
+
+        public virtual IRibbonCommon Attach() {
+            IsAttached = true;
+            return this;
+        }
+
+        public virtual void Detach() {
+            IsAttached = false;
+            SetLanguageStrings(RibbonControlStrings.Empty);
+            Invalidate();
+        }
+
         /// <inheritdoc/>
         public virtual bool IsEnabled {
-            get => _enabled;
-            set { _enabled = value; OnChanged(); }
+            get => _enabled  && IsAttached;
+            set { _enabled = value; Invalidate(); }
         }
         private bool _enabled;
 
         /// <inheritdoc/>
         public virtual bool IsVisible {
-            get => _visible;
-            set { _visible = value; OnChanged(); }
+            get => (_visible && IsAttached)  || ShowWhenInactive;
+            set { _visible = value; Invalidate(); }
         }
         private bool _visible;
+        #endregion
 
         /// <inheritdoc/>
         public void SetLanguageStrings(IRibbonControlStrings strings) {
             Strings = strings;
-            OnChanged();
+            Invalidate();
         }
 
         public void SetLanguageStrings() => SetLanguageStrings(RibbonControlStrings.Default(Id));
 
         /// <inheritdoc/>
-        public virtual void OnChanged() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
-
-        /// <inheritdoc/>
-        public void Invalidate() => OnChanged();
-
-        //private static LanguageStrings GetLanguageStrings(string controlId, IResourceManager mgr)
-        //    => mgr.GetControlStrings(controlId);
+        public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
     }
 }

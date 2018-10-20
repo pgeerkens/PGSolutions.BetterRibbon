@@ -3,50 +3,74 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Runtime.InteropServices;
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using stdole;
 
-namespace PGSolutions.RibbonDispatcher.ControlMixins {
-    /// <summary>The interface for controls that are Clickable.</summary>
+namespace PGSolutions.RibbonDispatcher.ComClasses {
+    /// <summary>TODO</summary>
+    [CLSCompliant( true )]
+    public delegate void ClickedEventHandler(object sender);
+
+    /// <summary>Delegate type for </summary>
     [CLSCompliant(true)]
-    public interface IClickableMixin {
-        /// <summary>TODO</summary>
-        void OnClicked();
-    }
-
-    /// <summary>The interface for controls that are Imageable.</summary>
-    [CLSCompliant(true)]
-    public interface IImageableMixin {
-        /// <summary>TODO</summary>
-        void OnChanged();
-    }
-
-    /// <summary>The interface for controls that can be sized.</summary>
-    [CLSCompliant(true)]
-    public interface ISizeableMixin {
-        /// <summary>TODO</summary>
-        void OnChanged();
-    }
-
-    /// <summary>The interface for controls that can be toggled.</summary>
-    [CLSCompliant(true)]
-    internal interface IToggleableMixin {
-        /// <summary>TODO</summary>
-        void OnChanged();
-
-        /// <summary>TODO</summary>
-        void OnToggled(bool IsPressed);
-
-        /// <summary>TODO</summary>
-        IRibbonControlStrings LanguageStrings { get; }
-    }
+    public delegate void ToggledEventHandler(object sender, bool IsPressed);
 
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
     public delegate void SelectedEventHandler(string ItemId, int ItemIndex);
 
-    /// <summary>TODO</summary>
+    /// <summary>The interface for controls that can be clicked.</summary>
     [CLSCompliant(true)]
-    public interface ISelectableMixin {
+    internal interface IClickable {
+        /// <summary>TODO</summary>
+        void OnClicked(object sender);
+    }
+
+    /// <summary>The interface for controls that can have images.</summary>
+    [CLSCompliant(true)]
+    internal interface IImageable {
+        /// <summary>TODO</summary>
+        void Invalidate();
+
+        /// <summary>Sets or gets whether to display the Image for this control.</summary>
+        bool ShowImage { get; set; }
+        /// <summary>Sets or gets whether to display the Label for this control.</summary>
+        bool ShowLabel { get; set; }
+
+        object Image { get; }
+
+        /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
+        void SetImageDisp(IPictureDisp Image);
+
+        /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
+        void SetImageMso(string ImageMso);
+    }
+
+    /// <summary>The interface for controls that can be sized.</summary>
+    [CLSCompliant(true)]
+    internal interface ISizeable {
+        /// <summary>TODO</summary>
+        void Invalidate();
+
+        RibbonControlSize Size { get; set; }
+    }
+
+    /// <summary>The interface for controls that can be toggled.</summary>
+    [CLSCompliant(true)]
+    internal interface IToggleable {
+        /// <summary>TODO</summary>
+        void Invalidate();
+
+        /// <summary>TODO</summary>
+        void OnToggled(object sender, bool isPressed);
+
+        bool IsPressed { get; }
+    }
+
+    /// <summary>The interface for controls that have a selectable list of items.</summary>
+    [CLSCompliant(true)]
+    internal interface ISelectable {
         /// <summary>ID of the selected item.</summary>
         [DispId(DispIds.SelectedItemId)]
         string SelectedItemId { get; }

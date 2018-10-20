@@ -14,6 +14,7 @@
         <Word>z</Word>
         <Word>lhs</Word><Word>rhs</Word>
         <Word>ctl</Word>
+        <Word>wb</Word><Word>ws</Word>
 
         <Word>actionables</Word>
         <Word>activatable</Word>
@@ -25,10 +26,10 @@
         <Word>github</Word>
         <Word>imageable</Word>
         <Word>imageables</Word>
-        <Word>mixin</Word>
-        <Word>mixins</Word>
+        <Word>Lexer</Word>
         <Word>mso</Word>        <!-- Inherited usage from Fluent Ribbon interface spec. -->
         <Word>msg</Word>
+        <Word>paren</Word>
         <Word>pg</Word>         <!-- Prefix for PGSolutions enum types. -->
         <Word>pgeerkens</Word>
         <Word>PGSolutions</Word>

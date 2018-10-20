@@ -11,6 +11,7 @@ Option Explicit
 Private MRibbonModel    As SingleButton.RibbonModel
 
 Private Sub Workbook_Activate()
+    If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
     MRibbonModel.Activate
 End Sub
 

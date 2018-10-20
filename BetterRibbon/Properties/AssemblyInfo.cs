@@ -11,7 +11,7 @@ using PGSolutions.LinksAnalyzer;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "PGSolutions Better Ribbon" )]
-[assembly: AssemblyDescription( "PGSolutions Ribbon Utilities for MS-Excel" )]
+[assembly: AssemblyDescription( "PGSolutions Better Ribbon & Utilities for MS-Excel" )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
 [assembly: AssemblyProduct( "BetterRibbon" )]
@@ -27,7 +27,7 @@ using PGSolutions.LinksAnalyzer;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid(Guids.LinksAnalyzerTypelib)]
+[assembly: Guid("fab5de05-0232-4053-b4ce-ce9a1a312750")]
 
 // Version information for an assembly consists of the following four values:
 //

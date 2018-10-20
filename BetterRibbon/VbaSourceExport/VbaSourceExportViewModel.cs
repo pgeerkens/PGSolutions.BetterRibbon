@@ -6,13 +6,12 @@ using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ControlMixins;
-using static PGSolutions.RibbonDispatcher.ComInterfaces.RdControlSize;
+using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
     internal class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportGroupModel {
         public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
-            var defaultSize = suffix=="MS" ? rdRegular : rdLarge;
+            var defaultSize = suffix=="MS" ? RibbonControlSizeRegular : RibbonControlSizeLarge;
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
@@ -35,15 +34,15 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             CurrentProjectButton.Detach();     CurrentProjectButton.Clicked  -= OnExportCurrent;
         }
 
-        public void Invalidate() =>UseSrcFolderToggle.OnChanged();
+        public void Invalidate() =>UseSrcFolderToggle.Invalidate();
 
         public event ToggledEventHandler UseSrcFolderToggled;
         public event ClickedEventHandler SelectedProjectsClicked;
         public event ClickedEventHandler CurrentProjectClicked;
 
-        private void OnToggled(bool isPressed) => UseSrcFolderToggled(isPressed);
-        private void OnExportSelected() => SelectedProjectsClicked();
-        private void OnExportCurrent() => CurrentProjectClicked();
+        private void OnToggled(object sender, bool isPressed) => UseSrcFolderToggled(sender,isPressed);
+        private void OnExportSelected(object sender) => SelectedProjectsClicked(sender);
+        private void OnExportCurrent(object sender) => CurrentProjectClicked(sender);
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        VbASourceExportGroup  { get; }

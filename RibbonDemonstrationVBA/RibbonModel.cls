@@ -22,7 +22,7 @@ Private Button2Strings      As PGSolutions_RibbonDispatcher.IRibbonControlString
 Private Button3Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 Private ToggleStrings       As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 
-Private Sub Button1_Clicked()
+Private Sub Button1_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
     MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
@@ -31,7 +31,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly O
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button2_Clicked()
+Private Sub Button2_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
     MsgBox "Activation message from Button2!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
@@ -40,7 +40,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly O
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button3_Clicked()
+Private Sub Button3_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
     MsgBox "Activation message from Button3!", vbOKOnly Or vbInformation, TypeName(Me)
 XT: Exit Sub
@@ -49,7 +49,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly O
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle_Toggled(ByVal IsPressed As Boolean)
+Private Sub Toggle_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
     AddInHandle.ShowInactive IsPressed
 XT: Exit Sub

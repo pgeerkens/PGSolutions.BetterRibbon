@@ -2,7 +2,7 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using PGSolutions.RibbonDispatcher.ControlMixins;
+using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
     internal interface IVbaSourceExportGroupModel {

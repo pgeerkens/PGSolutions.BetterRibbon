@@ -7,9 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ControlMixins;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon ToggleButton objects.</summary>
@@ -21,93 +20,67 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvents))]
-    [ComDefaultInterface(typeof(IRibbonToggleButton))]
+    [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonToggleButton)]
-    public class RibbonToggleButton : RibbonCommon, IRibbonToggleButton, IActivatableControl<IRibbonCommon, bool>,
-        ISizeableMixin, IToggleableMixin, IImageableMixin {
+    public class RibbonToggleButton : RibbonCheckBox, IRibbonToggle, ISizeable, IImageable {
         internal RibbonToggleButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
-            RdControlSize size, ImageObject image, bool showImage, bool showLabel
+            RibbonControlSize size, ImageObject image, bool showImage, bool showLabel
         ) : base(itemId, strings, visible, enabled) {
-            this.SetSize(size);
-            this.SetImage(image);
-            this.SetShowImage(showImage);
-            this.SetShowLabel(showLabel);
+            _size      = size;
+            _image     = image;
+            _showImage = showImage;
+            _showLabel = showLabel;
         }
 
-        #region IToggleable implementation
-        private bool _isAttached    = false;
-
-        public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => (base.IsVisible && _isAttached)
-                                       || (ShowWhenInactive);
-
-        public bool ShowWhenInactive { get; set; } //= true;
-
-        public IRibbonToggleButton Attach(Func<bool> getter) {
-            _isAttached = true;
-            this.SetGetter(getter);
-            return this;
-        }
-
-        public void Detach() {
-            _isAttached = false;
-            this.SetGetter(() => false);
-            SetLanguageStrings(RibbonControlStrings.Empty);
+        #region IActivatable implementation
+        public override void Detach() {
             SetImageMso("MacroSecurity");
-            Invalidate();
-        }
-
-        IRibbonCommon IActivatableControl<IRibbonCommon, bool>.Attach(Func<bool> getter) =>
-            Attach(getter) as IRibbonCommon;
-        void IActivatableControl<IRibbonCommon, bool>.Detach() => Detach();
-        #endregion
-
-        #region Publish IToggleableMixin to class default interface
-        /// <summary>TODO</summary>
-        public event ToggledEventHandler Toggled;
-
-        /// <summary>TODO</summary>
-        public virtual bool IsPressed   => this.GetPressed();
-
-        /// <summary>TODO</summary>
-        public override string Label    => this.GetLabel();
-
-        /// <summary>TODO</summary>
-        public virtual void OnToggled(bool IsPressed) => Toggled?.Invoke(IsPressed);
-
-        /// <summary>TODO</summary>
-        IRibbonControlStrings IToggleableMixin.LanguageStrings => Strings;
-        #endregion
-
-        #region Publish ISizeableMixin to class default interface
-        /// <summary>Gets or sets the preferred {RdControlSize} for the control.</summary>
-        public RdControlSize Size {
-            get => this.GetSize();
-            set => this.SetSize(value);
+            base.Detach();;
         }
         #endregion
 
-        #region Publish IImageableMixin to class default interface
+        /// <inheritdoc/>>
+        public override string Label => IsPressed || string.IsNullOrEmpty(AlternateLabel)
+                                     ? base.Label ?? Id
+                                     : AlternateLabel;
+
+        #region ISizeable implementation
+        /// <inheritdoc/>>
+        public override bool IsSizeable => true;
+        /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
+        public override RibbonControlSize Size {
+            get => _size;
+            set { _size = value; Invalidate(); }
+        }
+        private RibbonControlSize _size;
+        #endregion
+
+        #region IImageable implementation
         /// <inheritdoc/>
-        public object Image => this.GetImage();
+        public override bool IsImageable => true;
+        /// <inheritdoc/>
+        public override object Image => _image.Image;
+        private ImageObject _image;
 
         /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        public bool ShowImage {
-            get => this.GetShowImage();
-            set => this.SetShowImage(value);
+        public override bool ShowImage {
+            get => _showImage;
+            set { _showImage = value; Invalidate(); }
         }
+        private bool _showImage;
 
-        /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        public bool ShowLabel {
-            get => this.GetShowLabel();
-            set => this.SetShowLabel(value);
+        /// <inheritdoc/>
+        public override bool ShowLabel {
+            get => _showLabel;
+            set { _showLabel = value; Invalidate(); }
         }
+        private bool _showLabel;
 
         /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
-        public void SetImageDisp(IPictureDisp Image) => this.SetImage(Image);
+        public override void SetImageDisp(IPictureDisp Image) => _image = new ImageObject(Image);
 
         /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
-        public void SetImageMso(string ImageMso)     => this.SetImage(ImageMso);
+        public override void SetImageMso(string ImageMso)     => _image = new ImageObject(ImageMso);
         #endregion
     }
 }

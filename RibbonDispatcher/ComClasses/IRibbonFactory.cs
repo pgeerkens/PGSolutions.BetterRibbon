@@ -6,11 +6,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
+using Microsoft.Office.Core;
+using static Microsoft.Office.Core.RibbonControlSize;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using static RdControlSize;
-
     /// <summary>The factory interface for the Ribbon Dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
@@ -29,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButton)]
         RibbonButton NewRibbonButton(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size      = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -38,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButtonMso)]
         RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size      = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
@@ -48,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggle)]
         RibbonToggleButton NewRibbonToggle(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size      = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -57,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggleMso)]
         RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
-            RdControlSize size      = rdLarge,
+            RibbonControlSize size      = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true

@@ -2,6 +2,7 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms; //  *** TODO *** THis needs to be moved into BetterRibbon.
@@ -29,16 +30,18 @@ namespace PGSolutions.LinksAnalyzer {
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);
 
-            wb.WriteLinks(new ExternalLinks(wb.Application, nameList));
+            wb.WriteLinks(new ExternalLinks(wb?.Application, nameList));
         }
 
         public const string LinksSheetName  = "Links Analysis";
         public const string FilesSheetName  = "Linked Files";
         public const string ErrorsSheetName = "Links Errors";
 
+        [SuppressMessage( "Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)" )]
         internal static void WriteLinks(this Workbook wb, IExternalLinks links) {
             if(links.Count == 0  && links.Errors.Count == 0) {
-                MessageBox.Show("No external links found!", "", MessageBoxButtons.OK);
+                MessageBox.Show("No external links found!", "", MessageBoxButtons.OK,MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,MessageBoxOptions.DefaultDesktopOnly);
             } else {
                 var wsLinks = wb.CreateTargetWorksheet(LinksSheetName);
                 var wsFiles = wb.CreateTargetWorksheet(FilesSheetName);

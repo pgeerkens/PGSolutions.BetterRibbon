@@ -12,6 +12,7 @@ using PGSolutions.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.LinksAnalyzer {
     /// <summary>TODO</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
@@ -28,6 +29,8 @@ namespace PGSolutions.LinksAnalyzer {
             => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
         public ExternalLinks(Excel.Application excel, INameList nameList) : this() {
+            if(excel==null)throw new ArgumentNullException("excel","Supplied argument may not be null.");
+            if(nameList==null) return;
             for(var i=0; i<nameList.Count; i++) {
                 var item = nameList.Item(i);
                 if ( item is string path) {
@@ -85,7 +88,7 @@ namespace PGSolutions.LinksAnalyzer {
                 case  9: return this[row].SourceTab;
                 case 10: return this[row].SourceCell;
                 case 11: return $"'{this[row].Formula}";
-                default: throw new IndexOutOfRangeException("Column index out of bounds.");
+                default: throw new ArgumentOutOfRangeException($"Column index {col} out of bounds.");
             }
         }
 
@@ -140,10 +143,10 @@ namespace PGSolutions.LinksAnalyzer {
             }
         }
 
-        private SourceCellRef NewCellRef(Excel.Worksheet ws, Excel.Range cl) =>
+        private static SourceCellRef NewCellRef(Excel.Worksheet ws, Excel.Range cl) =>
             new SourceCellRef(ws.Parent.Path, ws.Parent.Name, ws.Name, cl.Address);
 
-        private SourceCellRef NewWorkbookNameRef(Excel.Workbook wb, Excel.Name namedRange) {
+        private static SourceCellRef NewWorkbookNameRef(Excel.Workbook wb, Excel.Name namedRange) {
             string sheetName = (namedRange.Parent == wb)
                              ? wb.Name
                              : $"[{namedRange.Parent.name}]";
