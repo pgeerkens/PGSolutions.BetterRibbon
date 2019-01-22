@@ -39,10 +39,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
         #endregion
 
+        #region IToggleable implementation
         /// <inheritdoc/>>
         public override string Label => IsPressed || string.IsNullOrEmpty(AlternateLabel)
                                      ? base.Label ?? Id
                                      : AlternateLabel;
+        #endregion
 
         #region ISizeable implementation
         /// <inheritdoc/>>

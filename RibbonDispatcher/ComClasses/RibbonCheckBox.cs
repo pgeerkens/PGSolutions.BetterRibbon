@@ -30,12 +30,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         ) : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
-        private bool _isAttached {get; set; }   = false;
-
-        public override bool IsEnabled => base.IsEnabled && _isAttached;
-        public override bool IsVisible => (base.IsVisible && _isAttached)
-                                       || (ShowWhenInactive);
-
         public IRibbonToggle Attach(Func<bool> getter) {
             base.Attach();
             Getter = getter;

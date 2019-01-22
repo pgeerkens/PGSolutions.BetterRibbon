@@ -2,7 +2,7 @@
 <!-- Copyright 2018 Pieter Geerkens -->
 <!-- When debugging, remember to check: Options -> Advanced -> General -> Show_Add-In_user_interface_errors. -->
 <mso:customUI xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui"
-              xmlns:rd="ExcelRibbon"
+              xmlns:rd="BetterRibbon"
               onLoad="OnRibbonLoad" loadImage="Ribbon_LoadImage">
   <mso:ribbon>
     <mso:tabs>

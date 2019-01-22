@@ -39,7 +39,7 @@ namespace BetterRibbon.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExcelRibbon.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BetterRibbon.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -162,6 +162,15 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Buttons.
+        /// </summary>
+        internal static string CSharpDemoGroup_Label {
+            get {
+                return ResourceManager.GetString("CSharpDemoGroup_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Current.
         /// </summary>
         internal static string CurrentProjectButtonMS_Label {
@@ -212,15 +221,6 @@ namespace BetterRibbon.Properties {
         internal static string CurrentProjectButtonPG_SuperTip {
             get {
                 return ResourceManager.GetString("CurrentProjectButtonPG_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Custom Buttons.
-        /// </summary>
-        internal static string CustomButtonsGroup_Label {
-            get {
-                return ResourceManager.GetString("CustomButtonsGroup_Label", resourceCulture);
             }
         }
         
@@ -347,7 +347,7 @@ namespace BetterRibbon.Properties {
         ///&lt;!-- Copyright 2018 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
         ///&lt;mso:customUI xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
-        ///              xmlns:rd=&quot;ExcelRibbon&quot;
+        ///              xmlns:rd=&quot;BetterRibbon&quot;
         ///              onLoad=&quot;OnRibbonLoad&quot; loadImage=&quot;Ribbon_LoadImage&quot;&gt;
         ///  &lt;mso:ribbon&gt;
         ///    &lt;mso:tabs&gt;

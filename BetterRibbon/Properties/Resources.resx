@@ -167,7 +167,7 @@ https://github.com/pgeerkens/PGSolutions.BetterRibbon</value>
   <data name="CurrentProjectButtonPG_SuperTip" xml:space="preserve">
     <value>Exports all VBA code from the current Excel workbook.</value>
   </data>
-  <data name="CustomButtonsGroup_Label" xml:space="preserve">
+  <data name="CSharpDemoGroup_Label" xml:space="preserve">
     <value>Custom Buttons</value>
   </data>
   <data name="ImageOnly_Label" xml:space="preserve">

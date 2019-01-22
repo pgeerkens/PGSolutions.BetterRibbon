@@ -151,8 +151,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true)
-            => Add(new RibbonDropDown(itemId, GetStrings(itemId), visible, enabled));
+        public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true,
+            Func<int> getter = null)
+            => Add(new RibbonDropDown(itemId, GetStrings(itemId), visible, enabled, getter));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

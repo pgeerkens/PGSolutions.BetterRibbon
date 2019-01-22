@@ -53,7 +53,7 @@ namespace PGSolutions.BetterRibbon {
                 ctrl.Value.ShowWhenInactive = showWhenInactive;
                 ctrl.Value.Invalidate();
             }
-            ViewModel.InvalidateControl(ViewModel.CustomButtonsViewMode.GroupId);
+            ViewModel.InvalidateControl(ViewModel.CustomButtonsViewModel.GroupId);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",

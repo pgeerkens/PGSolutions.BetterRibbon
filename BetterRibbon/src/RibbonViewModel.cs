@@ -33,17 +33,18 @@ namespace PGSolutions.BetterRibbon {
         Justification = "Public, Non-Creatable, class with exported Events.")]
     [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
-        const string _assemblyName  = "ExcelRibbon";
+        const string _assemblyName  = "BetterRibbon";
 
-        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) { }
+        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {}
 
         internal BrandingViewModel            BrandingViewModel        { get; private set; }
         internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
-        internal DemonstrationModel           DemonstrationModel       { get; private set; }
-        internal CustomizableButtonsViewModel CustomButtonsViewMode    { get; private set; }
+        //internal DemonstrationModel           DemonstrationModel       { get; private set; }
+        internal DemonstrationViewModel       DemonstrationModel       { get; private set; }
+        internal CustomizableButtonsViewModel CustomButtonsViewModel   { get; private set; }
 
         internal IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
-                CustomButtonsViewMode.AdaptorControls;
+                CustomButtonsViewModel.AdaptorControls;
 
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
@@ -60,9 +61,10 @@ namespace PGSolutions.BetterRibbon {
                     new VbaSourceExportViewModel(RibbonFactory, "PG")
                 } );
 
-            CustomButtonsViewMode = new CustomizableButtonsViewModel( RibbonFactory );
+            CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
 
-            DemonstrationModel = new DemonstrationModel( new DemonstrationViewModel( RibbonFactory ) );
+            //DemonstrationModel = new DemonstrationModel( new DemonstrationViewModel(RibbonFactory) );
+            DemonstrationModel = new DemonstrationViewModel(RibbonFactory);
 
             Invalidate();
         }

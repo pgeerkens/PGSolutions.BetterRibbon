@@ -30,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButton)]
         RibbonButton NewRibbonButton(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size      = RibbonControlSizeLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonButtonMso)]
         RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size      = RibbonControlSizeLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggle)]
         RibbonToggleButton NewRibbonToggle(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size      = RibbonControlSizeLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             IPictureDisp  image     = null,
             bool          showImage = true,
             bool          showLabel = true
@@ -58,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonToggleMso)]
         RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size      = RibbonControlSizeLarge,
+            RibbonControlSize size  = RibbonControlSizeLarge,
             string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool          showImage = true,
             bool          showLabel = true
@@ -72,7 +72,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(DispIds.NewRibbonDropDown)]
-        RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true);
+        RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true,
+            Func<int> getter = null);
 
         /// <summary>Returns a new {SelectableItem} from a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

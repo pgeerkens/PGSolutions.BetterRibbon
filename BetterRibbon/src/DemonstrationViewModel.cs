@@ -11,22 +11,23 @@ using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.BetterRibbon {
 
-    internal class DemonstrationViewModel : AbstractRibbonGroupViewModel, IDemonstrationViewModel {
+    internal class DemonstrationViewModel : AbstractRibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory) : base(factory) {
-            CustomGroup   = factory.NewRibbonGroup("CustomButtonsGroup", true);
-            CustomButton1 = factory.NewRibbonButtonMso("AppLaunchButton1", showImage: true, imageMso:"RefreshAll");
-            CustomButton2 = factory.NewRibbonButtonMso("AppLaunchButton2", showImage: true, imageMso:"Refresh");
-            CustomButton3 = factory.NewRibbonButtonMso("AppLaunchButton3", showImage: true, imageMso:"MacroPlay");
-            IsLargeToggle = factory.NewRibbonToggleMso("SizeToggle",       showImage: true, imageMso:NoImage);
+            CustomGroup    = factory.NewRibbonGroup("CSharpDemoGroup", true);
+            CustomButton1  = factory.NewRibbonButtonMso("AppLaunchButton1", showImage:true, imageMso:"RefreshAll");
+            CustomButton2  = factory.NewRibbonButtonMso("AppLaunchButton2", showImage:true, imageMso:"Refresh");
+            CustomButton3  = factory.NewRibbonButtonMso("AppLaunchButton3", showImage:true, imageMso:"MacroPlay");
+            IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       showImage:true, imageMso:NoImage, visible:true, enabled:true);
             DisplayOptions = factory.NewRibbonDropDown("ButtonOptions2");
             DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
                           .AddItem(factory.NewSelectableItem("ImageOnly"))
                           .AddItem(factory.NewSelectableItem("LabelAndImage"));
-        }
 
-        public event ToggledEventHandler         IsLargeToggled;
-        public event SelectedEventHandler        DisplayOptionSelected;
-        public event EventHandler<IRibbonButton> ButtonClicked;
+            IsLarge        = true;
+            DisplayOption  = LabelImageOptions.ShowBoth;
+
+            Attach( () => IsLarge, () => DisplayOption.IndexFromLabelImageDisplay() );
+        }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        CustomGroup    { get; }
@@ -34,15 +35,24 @@ namespace PGSolutions.BetterRibbon {
         private RibbonButton       CustomButton2  { get; }
         private RibbonButton       CustomButton3  { get; }
         private RibbonToggleButton IsLargeToggle  { get; }
+        private bool               IsLarge        { get; set; }
         private RibbonDropDown     DisplayOptions { get; }
+        private LabelImageOptions  DisplayOption  { get; set; }
 
-        private void OnIsLargeToggled(object sender, bool isPressed) => IsLargeToggled(sender,isPressed);
-        private void OnSelectionMade(string selectedId, int selectedIndex) => DisplayOptionSelected(selectedId, selectedIndex);
+        private void OnIsLargeToggled(object sender, bool ispressed) {
+            IsLarge = !ispressed;
+            Invalidate();
+        }
+        private void OnDisplaySelection(string itemid, int itemindex) {
+            DisplayOption = itemindex.IndexToLabelImageDisplay();
+            Invalidate();
+        }
 
-        private void OnButtonClicked(object sender) => ButtonClicked(sender, sender as IRibbonButton);
+        private void OnButtonClicked(object sender) => OnButtonClicked(sender as IRibbonButton);
+        private void OnButtonClicked(IRibbonButton button) => button?.MsgBoxShow(button?.Id);
 
         public void Attach(Func<bool> isLargeSource, Func<int> displayOptionSource) {
-            DisplayOptions.Attach(displayOptionSource); DisplayOptions.SelectionMade += OnSelectionMade;
+            DisplayOptions.Attach(displayOptionSource); DisplayOptions.SelectionMade += OnDisplaySelection;
             IsLargeToggle.Attach(isLargeSource); IsLargeToggle.Toggled += OnIsLargeToggled;
             CustomButton1.Attach(); CustomButton1.Clicked += OnButtonClicked;
             CustomButton2.Attach(); CustomButton2.Clicked += OnButtonClicked;
@@ -53,8 +63,7 @@ namespace PGSolutions.BetterRibbon {
             CustomButton2.Detach(); CustomButton2.Clicked -= OnButtonClicked;
             CustomButton1.Detach(); CustomButton1.Clicked -= OnButtonClicked;
             IsLargeToggle.Detach(); IsLargeToggle.Toggled -= OnIsLargeToggled;
-
-            DisplayOptions.Detach(); DisplayOptions.SelectionMade -= OnSelectionMade;
+            DisplayOptions.Detach(); DisplayOptions.SelectionMade -= OnDisplaySelection;
         }
 
         public void Invalidate() {
@@ -62,6 +71,7 @@ namespace PGSolutions.BetterRibbon {
             Buttons.SetDisplay(DisplayOptions.SelectedItemIndex);
         }
 
-        private IList<IRibbonButton> Buttons => new List<IRibbonButton>() { CustomButton1, CustomButton2, CustomButton3 };
+        private IList<IRibbonButton> Buttons => new List<IRibbonButton>()
+                { CustomButton1, CustomButton2, CustomButton3 };
     }
 }
