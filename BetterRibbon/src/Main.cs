@@ -46,7 +46,7 @@ namespace PGSolutions.BetterRibbon {
         public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl(ControlId);
 
         /// <inheritdoc/>
-        public void Invalidate() => ViewModel.Invalidate();
+        public void Invalidate() => ViewModel.InvalidateTab();
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId) =>

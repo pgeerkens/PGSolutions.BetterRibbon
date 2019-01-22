@@ -35,7 +35,7 @@
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
     <ApplicationVersion>1.0.0.40</ApplicationVersion>
-    <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>

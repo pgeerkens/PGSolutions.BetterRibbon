@@ -17,6 +17,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonViewModel)]
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonViewModel {
         /// <summary>TODO</summary>
-        internal RibbonViewModel() : base() { }
+        internal RibbonViewModel() : base()
+            => _id = "TabPGSolutions";
+
+        protected override string Id => _id; private readonly string _id;
     }
 }

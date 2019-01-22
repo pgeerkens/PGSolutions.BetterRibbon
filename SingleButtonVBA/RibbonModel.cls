@@ -23,6 +23,7 @@ Friend Sub Activate()
     With AddInHandle
         Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
         Button1.SetImageMso "RefreshAll"
+        .Invalidate
     End With
 End Sub
 

@@ -16,5 +16,6 @@ Private Sub Workbook_Activate()
 End Sub
 
 Private Sub Workbook_Open()
+    MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
     Set MRibbonModel = New RibbonModel
 End Sub

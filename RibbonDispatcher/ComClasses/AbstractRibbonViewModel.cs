@@ -62,6 +62,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public void Invalidate()                                => RibbonUI?.Invalidate();
         /// <inheritdoc/>
+        public void InvalidateTab()                             => RibbonUI?.InvalidateControl(Id);
+        /// <inheritdoc/>
         public void InvalidateControl(string ControlId)         => RibbonUI?.InvalidateControl(ControlId);
         /// <inheritdoc/>
         public void InvalidateControlMso(string ControlId)      => RibbonUI?.InvalidateControlMso(ControlId);
@@ -69,6 +71,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void ActivateTab(string ControlId)               => RibbonUI?.ActivateTab(ControlId);
         /// <inheritdoc/>
         public void ActivateTabQ(string ControlId, string ns)   => RibbonUI?.ActivateTabQ(ControlId, ns);
+
+        protected abstract string Id { get; }
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>

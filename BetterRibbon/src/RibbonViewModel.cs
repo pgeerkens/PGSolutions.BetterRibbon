@@ -35,8 +35,9 @@ namespace PGSolutions.BetterRibbon {
     public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "BetterRibbon";
 
-        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {}
-
+        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName))
+            => _id = "TabPGSolutions";    
+        
         internal BrandingViewModel            BrandingViewModel        { get; private set; }
         internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
         internal DemonstrationViewModel       DemonstrationModel       { get; private set; }
@@ -68,6 +69,8 @@ namespace PGSolutions.BetterRibbon {
 
             Invalidate();
         }
+
+        protected override string Id => _id; private readonly string _id;
 
         private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();
 
