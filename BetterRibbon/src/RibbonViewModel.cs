@@ -39,15 +39,16 @@ namespace PGSolutions.BetterRibbon {
 
         internal BrandingViewModel            BrandingViewModel        { get; private set; }
         internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
-        //internal DemonstrationModel           DemonstrationModel       { get; private set; }
         internal DemonstrationViewModel       DemonstrationModel       { get; private set; }
         internal CustomizableButtonsViewModel CustomButtonsViewModel   { get; private set; }
 
         internal IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 CustomButtonsViewModel.AdaptorControls;
 
+        /// <summary>.</summary>
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
+        /// <summary>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1061:DoNotHideBaseClassMethods",
                 Justification="False positive - parameter types are identical.")]
         [CLSCompliant(false)]
@@ -63,7 +64,6 @@ namespace PGSolutions.BetterRibbon {
 
             CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
 
-            //DemonstrationModel = new DemonstrationModel( new DemonstrationViewModel(RibbonFactory) );
             DemonstrationModel = new DemonstrationViewModel(RibbonFactory);
 
             Invalidate();
@@ -71,6 +71,7 @@ namespace PGSolutions.BetterRibbon {
 
         private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();
 
+        /// <summary>.</summary>
         public static string MsgBoxTitle => Resources.ApplicationName;
     }
 }

@@ -43,11 +43,16 @@ namespace PGSolutions.BetterRibbon {
 
         #region IRibbonDispatcher methods
         /// <inheritdoc/>
-        public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl( ControlId );
+        public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl(ControlId);
 
+        /// <inheritdoc/>
+        public void Invalidate() => ViewModel.Invalidate();
+
+        /// <inheritdoc/>
         public void DetachProxy(string controlId) =>
             (AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton)?.Detach();
 
+        /// <inheritdoc/>
         public void ShowInactive(bool showWhenInactive) {
             foreach (var ctrl in AdaptorControls) {
                 ctrl.Value.ShowWhenInactive = showWhenInactive;
@@ -56,6 +61,7 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.InvalidateControl(ViewModel.CustomButtonsViewModel.GroupId);
         }
 
+        /// <summary>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
                 Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
@@ -64,6 +70,7 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.RibbonFactory.NewControlStrings(label,
                     screenTip, superTip, keyTip, alternateLabel, description);
 
+        /// <summary>.</summary>
         public IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton;
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
@@ -71,6 +78,7 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
+        /// <summary>.</summary>
         public IRibbonToggle AttachToggle(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonToggleButton;
@@ -79,6 +87,7 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
+        /// <summary>.</summary>
         public IRibbonToggle AttachCheckBox(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonCheckBox;
@@ -87,6 +96,7 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
+        /// <summary>.</summary>
         public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
                 IIntegerSource source) {
             var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonDropDown;

@@ -68,8 +68,8 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
-        /// <param name="Path">Full (absolute) path-name for the project being exported.</param>
-        /// <param name="DestIsSrc">True if the destination folder is to be named 'src' (rather than being eponymous with the project).</param>
+        /// <param name="path">Full (absolute) path-name for the project being exported.</param>
+        /// <param name="destIsSrc">True if the destination folder is to be named 'src' (rather than being eponymous with the project).</param>
         protected static string CreateDirectory(string path, bool destIsSrc) {
             var basePath = destIsSrc ? Path.Combine(Path.GetDirectoryName(path), "src")
                                      : Path.Combine(Path.GetDirectoryName(path),Path.GetFileNameWithoutExtension(path) + "VBA");

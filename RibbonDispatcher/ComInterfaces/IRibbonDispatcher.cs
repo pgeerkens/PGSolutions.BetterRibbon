@@ -17,8 +17,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IRibbonDispatcher {
         /// <summary>TODO</summary>
         [Description( "" )]
-        [DispId( 1 )]
+        [DispId(1)]
         void InvalidateControl(string ControlId);
+
+        /// <summary>TODO</summary>
+        [Description( "" )]
+        //[DispId(1)]
+        void Invalidate();
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
                 Justification = "Matches COM usage.")]

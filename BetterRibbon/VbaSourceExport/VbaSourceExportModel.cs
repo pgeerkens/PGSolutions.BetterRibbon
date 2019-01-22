@@ -27,7 +27,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
-        /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>
+        /// <param name="sender">The object that initiated the event.</param>
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
@@ -35,7 +35,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc));
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
-        /// <param name="destIsSrc"> If true writes output to 'src'; else to a directory eponymous with the workbook.</param>
+        /// <param name="sender">The object that initiated the event.</param>
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>

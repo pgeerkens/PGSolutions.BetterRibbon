@@ -20,11 +20,13 @@ namespace PGSolutions.BetterRibbon {
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
+        /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
             => ViewModel = new RibbonViewModel();
 
         private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
 
+        /// <summary>.</summary>
         protected override object RequestComAddInAutomationService() =>
             ComEntry.Value as IRibbonDispatcher;
 
