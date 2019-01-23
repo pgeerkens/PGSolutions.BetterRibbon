@@ -13,8 +13,10 @@ Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button1.VB_VarHelpID = -1
 Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 
+Private RibbonDispatcher As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+
 Private Sub Button1_Clicked(ByVal sender As Variant)
-    MsgBox "Button1 clicked.", vbOKOnly Or vbInformation, TypeName(Me)
+    MsgBox "VBA CustomButton clicked.", vbOKOnly Or vbInformation, TypeName(Me)
 End Sub
 
 Friend Sub Activate()
@@ -30,14 +32,19 @@ End Sub
 Private Sub Class_Initialize()
     With AddInHandle
         Set Button1Strings = .NewControlStrings(Label:="This is cool!", _
-                ScreenTip:="Button1 Screentip", _
-                SuperTip:="Lots of good things" & vbNewLine & _
-                          "can be done here to" & vbNewLine & _
-                          "show off a bit.", keyTip:="", _
+                ScreenTip:="VBA-Customized Button Screentip", _
+                SuperTip:="This button is completely" & vbNewLine & _
+                          "customized within the VBA" & vbNewLine & _
+                          "workbook.", keyTip:="", _
                 AlternateLabel:="", Description:="")
     End With
 End Sub
 
 Private Function AddInHandle() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").object
+    If RibbonDispatcher Is Nothing Then Set RibbonDispatcher = NewHandle.NewBetterRibbon()
+    Set AddInHandle = RibbonDispatcher
+End Function
+
+Private Function NewHandle() As PGSolutions_RibbonDispatcher.IBetterRibbon
+    Set NewHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object
 End Function

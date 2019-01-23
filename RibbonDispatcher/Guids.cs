@@ -13,15 +13,16 @@ namespace PGSolutions.RibbonDispatcher {
         public const string ISelectedEvents             = "69E19404" + RibbonDispatcherGuidSpace;
         public const string ISelectedEventArgs          = "69E19405" + RibbonDispatcherGuidSpace;
         public const string IRibbonWorkbook             = "69E19406" + RibbonDispatcherGuidSpace;
-        public const string BettterRibbon               = "69E19407" + RibbonDispatcherGuidSpace;
-        public const string RibbonDispatcherTypelib     = "69E19408" + RibbonDispatcherGuidSpace;
-        public const string IResourceManager            = "69E19409" + RibbonDispatcherGuidSpace;
-        public const string IAbstractDispatcher         = "69E1940A" + RibbonDispatcherGuidSpace;
-        public const string AbstractDispatcher          = "69E1940B" + RibbonDispatcherGuidSpace;
-        public const string IRibbonDispatcher           = "69E1940C" + RibbonDispatcherGuidSpace;
-//        public const string RibbonDispatcher            = "69E1940D" + RibbonDispatcherGuidSpace;
+        public const string IBetterRibbon               = "69E19407" + RibbonDispatcherGuidSpace;
+        public const string BetterRibbon                = "69E19408" + RibbonDispatcherGuidSpace;
+        public const string RibbonDispatcherTypelib     = "69E19409" + RibbonDispatcherGuidSpace;
+        public const string IResourceManager            = "69E1940A" + RibbonDispatcherGuidSpace;
+        public const string IAbstractDispatcher         = "69E1940B" + RibbonDispatcherGuidSpace;
+        public const string AbstractDispatcher          = "69E1940C" + RibbonDispatcherGuidSpace;
+        public const string IRibbonDispatcher           = "69E1940D" + RibbonDispatcherGuidSpace;
         public const string IRibbonFactory              = "69E1940E" + RibbonDispatcherGuidSpace;
         public const string RibbonFactory               = "69E1940F" + RibbonDispatcherGuidSpace;
+
         public const string IRibbonViewModel            = "69E19410" + RibbonDispatcherGuidSpace;
         public const string RibbonViewModel             = "69E19411" + RibbonDispatcherGuidSpace;
         public const string IRibbonCommon               = "69E19412" + RibbonDispatcherGuidSpace;
@@ -38,6 +39,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string RibbonTextLanguageControl   = "69E1941D" + RibbonDispatcherGuidSpace;
         public const string IRibbonToggleButton         = "69E1941E" + RibbonDispatcherGuidSpace;
         public const string RibbonToggleButton          = "69E1941F" + RibbonDispatcherGuidSpace;
+
         public const string ISelectableItem             = "69E19420" + RibbonDispatcherGuidSpace;
         public const string SelectableItem              = "69E19421" + RibbonDispatcherGuidSpace;
 

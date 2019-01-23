@@ -23,11 +23,18 @@ namespace PGSolutions.BetterRibbon {
                           .AddItem(factory.NewSelectableItem("ImageOnly"))
                           .AddItem(factory.NewSelectableItem("LabelAndImage"));
 
-            IsLarge        = true;
-            DisplayOption  = LabelImageOptions.ShowBoth;
-
-            Attach( () => IsLarge, () => DisplayOption.IndexFromLabelImageDisplay() );
+            DisplayOptions.SelectionMade += OnDisplaySelection;
+            IsLargeToggle.Toggled += OnIsLargeToggled;
+            CustomButton1.Clicked += OnButton1Clicked;
+            CustomButton2.Clicked += OnButton2Clicked;
+            CustomButton3.Clicked += OnButton3Clicked;
         }
+
+        public event ToggledEventHandler  IsLargeToggled;
+        public event SelectedEventHandler DisplaySelection;
+        public event ClickedEventHandler  Button1Clicked;
+        public event ClickedEventHandler  Button2Clicked;
+        public event ClickedEventHandler  Button3Clicked;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        CustomGroup    { get; }
@@ -35,43 +42,47 @@ namespace PGSolutions.BetterRibbon {
         private RibbonButton       CustomButton2  { get; }
         private RibbonButton       CustomButton3  { get; }
         private RibbonToggleButton IsLargeToggle  { get; }
-        private bool               IsLarge        { get; set; }
         private RibbonDropDown     DisplayOptions { get; }
-        private LabelImageOptions  DisplayOption  { get; set; }
 
-        private void OnIsLargeToggled(object sender, bool ispressed) {
-            IsLarge = !ispressed;
-            Invalidate();
-        }
-        private void OnDisplaySelection(string itemid, int itemindex) {
-            DisplayOption = itemindex.IndexToLabelImageDisplay();
-            Invalidate();
-        }
+        public IList<IRibbonButton> Buttons => new List<IRibbonButton>()
+                { CustomButton1, CustomButton2, CustomButton3 };
 
-        private void OnButtonClicked(object sender) => OnButtonClicked(sender as IRibbonButton);
-        private void OnButtonClicked(IRibbonButton button) => button?.MsgBoxShow(button?.Id);
+        private void OnIsLargeToggled(object sender, bool ispressed) =>
+            IsLargeToggled?.Invoke(sender, ispressed);
+        private void OnDisplaySelection(string itemid, int itemindex) =>
+            DisplaySelection?.Invoke(itemid, itemindex);
 
-        public void Attach(Func<bool> isLargeSource, Func<int> displayOptionSource) {
-            DisplayOptions.Attach(displayOptionSource); DisplayOptions.SelectionMade += OnDisplaySelection;
-            IsLargeToggle.Attach(isLargeSource); IsLargeToggle.Toggled += OnIsLargeToggled;
-            CustomButton1.Attach(); CustomButton1.Clicked += OnButtonClicked;
-            CustomButton2.Attach(); CustomButton2.Clicked += OnButtonClicked;
-            CustomButton3.Attach(); CustomButton3.Clicked += OnButtonClicked;
+        private void OnButton1Clicked(object sender) => Button1Clicked?.Invoke(sender);
+        private void OnButton2Clicked(object sender) => Button2Clicked?.Invoke(sender);
+        private void OnButton3Clicked(object sender) => Button3Clicked?.Invoke(sender);
+
+        public void SetButtonSize(bool isLarge) =>
+            DisplayOptions.IsEnabled = ! Buttons.SetButtonSize(isLarge);
+
+        public void SetButtonDisplay(LabelImageOptions displayOption) =>
+            Buttons.SetDisplay(displayOption);
+
+        public void Attach(Func<bool> isLargeSource, Func<int> selectedItemSource) {
+            IsLargeToggle.Attach(isLargeSource);
+            DisplayOptions.Attach(selectedItemSource);
+            CustomButton1.Attach();
+            CustomButton2.Attach();
+            CustomButton3.Attach();
         }
         public void Detach() {
-            CustomButton3.Detach(); CustomButton3.Clicked -= OnButtonClicked;
-            CustomButton2.Detach(); CustomButton2.Clicked -= OnButtonClicked;
-            CustomButton1.Detach(); CustomButton1.Clicked -= OnButtonClicked;
-            IsLargeToggle.Detach(); IsLargeToggle.Toggled -= OnIsLargeToggled;
-            DisplayOptions.Detach(); DisplayOptions.SelectionMade -= OnDisplaySelection;
+            CustomButton3.Detach();
+            CustomButton2.Detach();
+            CustomButton1.Detach();
+            DisplayOptions.Detach();
+            IsLargeToggle.Detach();
         }
-
         public void Invalidate() {
-            DisplayOptions.IsEnabled = ToggleButtonSize(!IsLargeToggle.IsPressed, Buttons);
-            Buttons.SetDisplay(DisplayOptions.SelectedItemIndex);
+            IsLargeToggle.Invalidate();
+            DisplayOptions.Invalidate();
+            CustomButton3.Invalidate();
+            CustomButton2.Invalidate();
+            CustomButton1.Invalidate();
+            CustomGroup.Invalidate();
         }
-
-        private IList<IRibbonButton> Buttons => new List<IRibbonButton>()
-                { CustomButton1, CustomButton2, CustomButton3 };
     }
 }

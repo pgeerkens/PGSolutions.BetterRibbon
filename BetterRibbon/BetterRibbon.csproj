@@ -199,7 +199,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="src\BetterRibbonModel.cs" />
+    <Compile Include="src\BrandingModel.cs" />
+    <Compile Include="src\CustomButtonsModel.cs" />
     <Compile Include="src\CustomizableButtonsViewModel.cs" />
+    <Compile Include="src\DemonstrationModel.cs" />
+    <Compile Include="src\LinksAnalyzer.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
@@ -257,7 +262,7 @@
     <Compile Include="VbaSourceExport\ProjectFilter.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
     <Compile Include="VbaSourceExport\ProjectFilters.cs" />
-    <Compile Include="src\RibbonViewModel.cs" />
+    <Compile Include="src\BetterRibbonViewModel.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExportViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>

@@ -41,6 +41,19 @@ namespace PGSolutions.BetterRibbon {
 
         public IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
         public string             GroupId => CustomizableGroup.Id;
+        public void Invalidate() {
+            CustomizableToggle.Invalidate();
+            CustomizableButton1.Invalidate();
+            CustomizableButton2.Invalidate();
+            CustomizableButton3.Invalidate();
+            CustomizableCheckBox1.Invalidate();
+            CustomizableCheckBox2.Invalidate();
+            CustomizableCheckBox3.Invalidate();
+            CustomizableDropDown1.Invalidate();
+            CustomizableDropDown2.Invalidate();
+            CustomizableDropDown3.Invalidate();
+            CustomizableGroup.Invalidate();
+        }
 
         private RibbonGroup        CustomizableGroup     { get; }
         private RibbonToggleButton CustomizableToggle    { get; }

@@ -4,31 +4,40 @@
 using System;
 using Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
+
 using Excel = Microsoft.Office.Interop.Excel;
+using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
-        internal RibbonViewModel ViewModel { get; private set; }
+        internal BetterRibbonViewModel ViewModel { get; private set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
-            Application.WorkbookDeactivate += ComEntry.Value.WorkbookDeactivate;
-            Application.WindowDeactivate   += ComEntry.Value.WindowDeactivate;
+            //Application.WorkbookDeactivate += WorkbookDeactivate;
+            Application.WindowDeactivate += WindowDeactivate;
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
-            => ViewModel = new RibbonViewModel();
+            => ViewModel = new BetterRibbonViewModel();
 
         private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
 
         /// <summary>.</summary>
         protected override object RequestComAddInAutomationService() =>
-            ComEntry.Value as IRibbonDispatcher;
+            ComEntry.Value as IBetterRibbon;
+
+        private void WorkbookDeactivate(Workbook wb) => DetachControls();
+        private void WindowDeactivate(Workbook wb, Excel.Window wn) => DetachControls();
+
+        private void DetachControls() {
+            foreach (var c in ViewModel.AdaptorControls) c.Value.Detach();
+        }
 
         #region VSTO generated code
 

@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using Microsoft.Office.Core;
-
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.BetterRibbon.VbaSourceExport;
@@ -32,16 +31,24 @@ namespace PGSolutions.BetterRibbon {
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
         Justification = "Public, Non-Creatable, class with exported Events.")]
     [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
-    public sealed class RibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
+    public sealed class BetterRibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "BetterRibbon";
 
-        internal RibbonViewModel() : base(new LocalResourceManager(_assemblyName))
-            => _id = "TabPGSolutions";    
-        
-        internal BrandingViewModel            BrandingViewModel        { get; private set; }
-        internal VbaSourceExportModel         VbaSourceExportModel     { get; private set; }
-        internal DemonstrationViewModel       DemonstrationModel       { get; private set; }
-        internal CustomizableButtonsViewModel CustomButtonsViewModel   { get; private set; }
+        internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
+            _id = "TabPGSolutions";    
+
+            BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
+            VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
+            VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
+            CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
+            DemonstrationModel     = new DemonstrationViewModel(RibbonFactory);
+        }
+
+        internal BrandingViewModel            BrandingViewModel      { get; private set; }
+        internal VbaSourceExportViewModel     VbaExportViewModel_MS  { get; private set; }
+        internal VbaSourceExportViewModel     VbaExportViewModel_PG  { get; private set; }
+        internal DemonstrationViewModel       DemonstrationModel     { get; private set; }
+        internal CustomizableButtonsViewModel CustomButtonsViewModel { get; private set; }
 
         internal IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
                 CustomButtonsViewModel.AdaptorControls;
@@ -50,26 +57,31 @@ namespace PGSolutions.BetterRibbon {
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;
 
         /// <summary>.</summary>
+        public event EventHandler Initialized;
+
+         /// <summary>.</summary>
+       public bool IsInitialized => RibbonUI != null;
+
+        /// <summary>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1061:DoNotHideBaseClassMethods",
                 Justification="False positive - parameter types are identical.")]
         [CLSCompliant(false)]
         public sealed override void OnRibbonLoad(IRibbonUI ribbonUI) {
             base.OnRibbonLoad(ribbonUI);
 
-            BrandingViewModel    = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
-            VbaSourceExportModel = new VbaSourceExportModel(
-                new List<IVbaSourceExportGroupModel> {
-                    new VbaSourceExportViewModel(RibbonFactory, "MS"),
-                    new VbaSourceExportViewModel(RibbonFactory, "PG")
-                } );
+            //BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
+            //VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
+            //VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
+            //CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
 
-            CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
+            //DemonstrationModel = new DemonstrationViewModel(RibbonFactory);
 
-            DemonstrationModel = new DemonstrationViewModel(RibbonFactory);
+            Initialized?.Invoke(this, EventArgs.Empty);
 
             Invalidate();
         }
 
+        /// <summary>.</summary>
         protected override string Id => _id; private readonly string _id;
 
         private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();

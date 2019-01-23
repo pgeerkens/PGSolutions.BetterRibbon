@@ -12,6 +12,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using System.Collections.Generic;
 
+using static Microsoft.Office.Core.RibbonControlSize;
+
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public static class Extensions {
         /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
@@ -32,6 +34,11 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
                                   where string.Compare(resourceName, r, StringComparison.OrdinalIgnoreCase) == 0
                                   select new StreamReader(asm.GetManifestResourceStream(r))
                                 ).FirstOrDefault() ) { return reader?.ReadToEnd(); }
+        }
+
+        public static bool SetButtonSize(this IList<IRibbonButton> buttons, bool isLarge) {
+            foreach (var b in buttons) { b.Size = isLarge ? RibbonControlSizeLarge : RibbonControlSizeRegular; }
+            return isLarge;
         }
 
         [Flags]

@@ -220,7 +220,7 @@ https://github.com/pgeerkens/PGSolutions.BetterRibbon</value>
     <value>Exports all VBA code from selected Excel workbook(s).</value>
   </data>
   <data name="SizeToggle_Label" xml:space="preserve">
-    <value>Prefer Small</value>
+    <value>Prefer Large</value>
   </data>
   <data name="SizeToggle_ScreenTip" xml:space="preserve">
     <value>Toggles Button Size</value>

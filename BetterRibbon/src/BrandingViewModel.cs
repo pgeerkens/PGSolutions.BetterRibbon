@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Windows.Forms;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -17,14 +16,18 @@ namespace PGSolutions.BetterRibbon {
             BrandingGroup  = Factory.NewRibbonGroup("BrandingGroup", true);
             BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, RibbonControlSizeLarge, logo(), false, false);
 
-            BrandingButton.Clicked += (s) =>
-                MessageBox.Show("Quack, eh!\n\n" + typeof(BrandingViewModel).Assembly.GetName().Version.ToString(),
-                        "PGSolutions - VBA Tools", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BrandingButton.Clicked += OnButtonClicked;
             BrandingButton.Attach();
         }
+
+        public event ClickedEventHandler  ButtonClicked;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public RibbonGroup  BrandingGroup  { get; }
         public RibbonButton BrandingButton { get; }
+
+        public void Invalidate() => BrandingButton.Invalidate();
+
+        private void OnButtonClicked(object sender) => ButtonClicked?.Invoke(sender);
     }
 }

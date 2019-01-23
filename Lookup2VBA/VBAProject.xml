@@ -1,6 +1,6 @@
 <Project
-  Name='TestLinksAnalysis'
-  FileName='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\TestLinksAnalysis.xlsb'
+  Name='VBAProject'
+  FileName='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\Lookup2.xlsb'
   HelpContextID='0'
   HelpFile=''
   Protection='vbext_pp_none'
@@ -40,15 +40,6 @@
       Major='2'
       Minor='8'
       Name='Office'
-      Type='vbext_rk_TypeLib'
-   />
-   <References
-      Description='PGSolutions External Links Analyzer for MS-Excel'
-      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\LinksAnalyzer\bin\Debug\PGSolutions.LinksAnalyzer.tlb'
-      Guid='{69E19418-56F4-3B33-B105-9B8188A6F040}'
-      Major='1'
-      Minor='0'
-      Name='PGSolutions_LinksAnalyzer'
       Type='vbext_rk_TypeLib'
    />
 </Project>

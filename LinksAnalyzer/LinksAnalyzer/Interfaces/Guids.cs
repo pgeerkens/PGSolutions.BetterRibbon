@@ -13,6 +13,7 @@ namespace PGSolutions.LinksAnalyzer {
         public const string IParseErrors            = "69E1940A" + LinksAnalyzerGuidSpace;
         public const string IExternalLinks          = "69E1940C" + LinksAnalyzerGuidSpace;
         public const string ILinksAnalyzer          = "69E1940E" + LinksAnalyzerGuidSpace;
+        public const string LinksAnalyzer           = "69E1940F" + LinksAnalyzerGuidSpace;
 
         public const string IExternalNamedRef       = "69E19410" + LinksAnalyzerGuidSpace;
         public const string ILinksLexer             = "69E19412" + LinksAnalyzerGuidSpace;

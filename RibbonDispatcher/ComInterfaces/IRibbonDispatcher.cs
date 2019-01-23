@@ -5,8 +5,9 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-
 using stdole;
+
+using PGSolutions.LinksAnalyzer;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
@@ -17,17 +18,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IRibbonDispatcher {
         /// <summary>TODO</summary>
         [Description( "" )]
-        [DispId(1)]
+        //[DispId(1)]
         void InvalidateControl(string ControlId);
 
         /// <summary>TODO</summary>
         [Description( "" )]
-        //[DispId(1)]
+        //[DispId(2)]
         void Invalidate();
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
                 Justification = "Matches COM usage.")]
-        [DispId(2)]
+        //[DispId(3)]
         IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "");
@@ -35,13 +36,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>
         [Description("Deactivate the specified control, detaching any attached data source.")]
-        [DispId(3)]
+        //[DispId(4)]
         void DetachProxy(string controlId);
 
         /// <summary>Sets ehether or not inactive controls should be visible on the Ribbon.</summary>
         /// <param name="showWhenInactive"></param>
         [Description("Sets ehether or not inactive controls should be visible on the Ribbon.")]
-        [DispId(4)]
+        //[DispId(5)]
         void ShowInactive(bool showWhenInactive);
 
         /// <summary>Attaches and activates the specified Button control.</summary>
@@ -49,7 +50,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches and activates the specified Button control.")]
-        [DispId(5)]
+        //[DispId(6)]
         IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings);
 
         /// <summary>Attaches an {IBooleanSource} to the specified ToggleButton control.</summary>
@@ -57,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified ToggleButton control.")]
-        [DispId(6)]
+        //[DispId(7)]
         IRibbonToggle AttachToggle(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
@@ -66,7 +67,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IBooleanSource} to the specified CheckBox control.")]
-        [DispId(7)]
+        //[DispId(8)]
         IRibbonToggle AttachCheckBox(string controlId, IRibbonControlStrings strings,
                 IBooleanSource source);
 
@@ -75,7 +76,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description("Attaches an {IIntegerSource} to the specified DropDown control.")]
-        [DispId(8)]
+        //[DispId(9)]
         IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
                 IIntegerSource source);
     }
@@ -83,16 +84,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    public interface IStringLoader
-    {
+    public interface IStringLoader {
         IRibbonControlStrings GetStrings(string ControlId);
     }
 
     [CLSCompliant(false)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    public interface IImageLoader
-    {
+    public interface IImageLoader {
         IPictureDisp GetImage(string ControlId);
     }
 }

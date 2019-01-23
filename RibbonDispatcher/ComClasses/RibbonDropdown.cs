@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         void IActivatableControl<IRibbonCommon, int>.Detach() => Detach();
         #endregion
 
-        #region ISelectable
+        #region ISelectable implementation
         /// <summary>TODO</summary>
         public event SelectedEventHandler SelectionMade;
 
@@ -59,11 +59,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string   SelectedItemId => _items[SelectedItemIndex].Id;
 
         /// <inheritdoc/>
-        public int      SelectedItemIndex => Getter();
+        public int      SelectedItemIndex => Getter?.Invoke() ?? 0;
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         public void OnActionDropDown(string SelectedId, int SelectedIndex) {
-            //_selectedItemIndex = SelectedIndex;
             SelectionMade?.Invoke(SelectedId, SelectedIndex);
             Invalidate();
         }

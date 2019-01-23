@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
+    <Compile Include="ComInterfaces\IBetterRibbon.cs" />
     <Compile Include="ComInterfaces\IBooleanSource.cs" />
     <Compile Include="ComInterfaces\IIntegerSource.cs" />
     <Compile Include="Utilities\IActivatableControl.cs" />
@@ -150,6 +151,11 @@
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LinksAnalyzer\LinksAnalyzer.csproj">
+      <Project>{FAB5DE05-0232-4053-B4CE-CE9A1A312750}</Project>
+      <Name>LinksAnalyzer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

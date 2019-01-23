@@ -352,7 +352,7 @@ namespace BetterRibbon.Properties {
         ///  &lt;mso:ribbon&gt;
         ///    &lt;mso:tabs&gt;
         ///        &lt;mso:tab idMso=&quot;TabDeveloper&quot; &gt;
-        ///            &lt;mso:group id=&quot;VbaExportGroupMS&quot; getVisible=&quot;ge [rest of string was truncated]&quot;;.
+        ///            &lt;mso:group id=&quot;VbaExportGroupMS&quot; getVisible=&quot;g [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Ribbon {
             get {
@@ -415,7 +415,7 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prefer Small.
+        ///   Looks up a localized string similar to Prefer Large.
         /// </summary>
         internal static string SizeToggle_Label {
             get {
