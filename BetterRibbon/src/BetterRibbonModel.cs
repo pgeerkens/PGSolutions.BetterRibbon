@@ -64,6 +64,7 @@ namespace PGSolutions.BetterRibbon {
         private BetterRibbonViewModel ViewModel            { get; set; }
 
         private BrandingModel         BrandingModel        { get; set; }
+        [SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
         private VbaSourceExportModel  VbaSourceExportModel { get; set; }
         private CustomButtonsModel    CustomButtonsModel   { get; set; }
         private DemonstrationModel    DemonstrationModel   { get; set; }
@@ -131,7 +132,7 @@ namespace PGSolutions.BetterRibbon {
         private TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
             CustomButtonsModel.GetControl<TControl>(controlId);
 
-        private TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings) where TControl:RibbonCommon {
+        private static TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings) where TControl:RibbonCommon {
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
             return ctrl;
         }

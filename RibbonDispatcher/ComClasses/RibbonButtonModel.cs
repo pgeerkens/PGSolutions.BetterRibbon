@@ -31,9 +31,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private RibbonGroup    _viewModel     { get; set; }
         private ViewModelStore ViewModelStore { get; }
 
-        public void Attach(string controlId, IRibbonControlStrings strings) {
+        public void Attach(string controlId, IRibbonControlStrings strings) =>
             _viewModel = ViewModelStore.AttachGroup(controlId, strings);
-        }
     }
 
     /// <summary></summary>
