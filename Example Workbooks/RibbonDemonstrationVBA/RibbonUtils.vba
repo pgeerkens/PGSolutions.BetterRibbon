@@ -1,19 +1,17 @@
 Attribute VB_Name = "RibbonUtils"
 Option Explicit
 Option Private Module
-Private Const ModuleName As String = "RibbonUtilities."
+Private Const ModuleName    As String = "RibbonUtilities."
 
-Private RibbonDispatcher As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private MRibbonDispatcher   As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 
-Public Property Get AddInHandle() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-    If RibbonDispatcher Is Nothing Then Set RibbonDispatcher = NewHandle.NewBetterRibbon()
-    Set AddInHandle = RibbonDispatcher
-End Property
-
-Private Function NewHandle() As PGSolutions_RibbonDispatcher.IBetterRibbon
+Public Property Get RibbonDispatcher() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
     On Error GoTo EH
-    Set NewHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object
-XT: Exit Function
-EH: ErrorUtils.ReRaiseError Err, ModuleName & "NewHandle"
+    If MRibbonDispatcher Is Nothing Then
+        Set MRibbonDispatcher = Application.COMAddIns("PGSolutions.BetterRibbon").Object.NewBetterRibbon()
+    End If
+    Set RibbonDispatcher = MRibbonDispatcher
+XT: Exit Property
+EH: ErrorUtils.ReRaiseError Err, ModuleName & ".RibbonDispatcher"
     Resume          ' for debugging only
-End Function
+End Property

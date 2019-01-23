@@ -8,6 +8,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private Button2Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private Button3Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Private ToggleStrings       As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButton
 Attribute Button1.VB_VarHelpID = -1
 Private WithEvents Button2  As PGSolutions_RibbonDispatcher.RibbonButton
@@ -17,49 +22,44 @@ Attribute Button3.VB_VarHelpID = -1
 Private WithEvents Toggle   As RibbonToggleModel
 Attribute Toggle.VB_VarHelpID = -1
 
-Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
-Private Button2Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
-Private Button3Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
-Private ToggleStrings       As PGSolutions_RibbonDispatcher.IRibbonControlStrings
-
 Private Sub Button1_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, TypeName(Me)
+    ButtonProcessing.Button1_Processing ThisWorkbook.Name
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
 Private Sub Button2_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    MsgBox "Activation message from Button2!", vbOKOnly Or vbInformation, TypeName(Me)
+    ButtonProcessing.Button2_Processing ThisWorkbook.Name
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
 Private Sub Button3_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    MsgBox "Activation message from Button3!", vbOKOnly Or vbInformation, TypeName(Me)
+    ButtonProcessing.Button3_Processing ThisWorkbook.Name
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "AppButton1_Clicked", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
 Private Sub Toggle_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
-    AddInHandle.ShowInactive IsPressed
+    RibbonDispatcher.ShowInactive IsPressed
 XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & "SetStrings"
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle_Toggled", vbOKOnly Or vbInformation
     Resume          ' for debugging only
 End Sub
 
 Friend Sub Activate()
     On Error GoTo EH
-    With AddInHandle
+    With RibbonDispatcher
         Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
         Button1.SetImageMso "RefreshAll"
         Set Button2 = .AttachButton("CustomizableButton2", Button2Strings)
@@ -70,16 +70,15 @@ Friend Sub Activate()
     With New RibbonToggleModel
         Set Toggle = .Attach("CustomVbaToggle", ToggleStrings)
     End With
-    AddInHandle.InvalidateCustomControlsGroup
+    RibbonDispatcher.InvalidateCustomControlsGroup
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
-    Resume XT
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Activate"
     Resume          ' for debugging only
 End Sub
 
 Private Sub Class_Initialize()
     On Error GoTo EH
-    With AddInHandle
+    With RibbonDispatcher
         Set Button1Strings = .NewControlStrings(Label:="This is cool!", _
                 ScreenTip:="Button1 Screentip", _
                 SuperTip:="Lots of good things" & vbNewLine & _
@@ -107,7 +106,6 @@ Private Sub Class_Initialize()
                           "event sink.")
     End With
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
-    Resume XT
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Class_Initialize"
     Resume          ' for debugging only
 End Sub

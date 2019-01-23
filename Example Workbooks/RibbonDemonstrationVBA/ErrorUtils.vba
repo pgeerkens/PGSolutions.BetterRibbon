@@ -1,5 +1,6 @@
 Attribute VB_Name = "ErrorUtils"
 Option Explicit
+Option Private Module
 
 Public Enum ErrorNum
     InvalidProcedureCall = 5

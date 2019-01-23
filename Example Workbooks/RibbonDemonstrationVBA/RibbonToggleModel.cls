@@ -8,11 +8,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+Public Event Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
+
 Private MIsPressed              As Boolean
 Private WithEvents MViewModel   As PGSolutions_RibbonDispatcher.RibbonToggleButton
 Attribute MViewModel.VB_VarHelpID = -1
-
-Public Event Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
 
 Implements IBooleanSource
 
@@ -47,7 +47,7 @@ Friend Function Attach(ByVal ControlId As String, _
         ByVal Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings _
 ) As RibbonToggleModel
     On Error GoTo EH
-    Set MViewModel = AddInHandle.AttachToggle(ControlId, Strings, Me)
+    Set MViewModel = RibbonDispatcher.AttachToggle(ControlId, Strings, Me)
     Set Attach = Me
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & "Activate"

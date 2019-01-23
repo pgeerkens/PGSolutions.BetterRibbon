@@ -15,7 +15,7 @@ Private Sub Workbook_Activate()
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
     MRibbonModel.Activate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Activate", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
@@ -23,9 +23,8 @@ End Sub
 Private Sub Workbook_Open()
     On Error GoTo EH
     MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
-    Set MRibbonModel = New RibbonModel
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Open", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Open", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
