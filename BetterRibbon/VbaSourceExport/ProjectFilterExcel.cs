@@ -1,11 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System.Windows.Forms;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
 
 using Microsoft.Office.Core;
-using Excel = Microsoft.Office.Interop.Excel;
+using Excel    = Microsoft.Office.Interop.Excel;
+using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
     internal class ProjectFilterExcel : ProjectFilter  {
@@ -19,7 +21,6 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             if ( IsProjectModelTrusted) {
                 foreach (string selectedItem in items) {
                     ExtractProject(selectedItem, destIsSrc);
-                    // DoEvents
                 }
             } else {
                 MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
@@ -32,14 +33,19 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         private static void ExtractProject(string filename, bool destIsSrc) {
-            Excel.Workbook wkbk = null;
+            var appOpen   = Globals.ThisAddIn.Application;
+            var appClosed = new Lazy<Excel.Application>(() => new Excel.Application());
             try {
-                wkbk = Globals.ThisAddIn.Application.Workbooks.Open(filename, null, true);
-                ExtractOpenProject(wkbk, destIsSrc);
-            //} catch (IOException ex) {
-            //    ExtractClosedProject(app, filename, destIsSrc);
+                if (filename == appOpen.ActiveWorkbook.FullName) {
+                    ExtractOpenProject(appOpen.ActiveWorkbook, destIsSrc);
+                } else {
+                    appClosed.Value.Visible = false;
+                    appClosed.Value.DisplayAlerts = false;
+                    appClosed.Value.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+                    ExtractClosedProject(appClosed.Value, filename, destIsSrc);
+                }
             } finally {
-                wkbk?.Close();
+                if (appClosed.IsValueCreated) { appClosed.Value.Quit(); }
             }
         }
 
@@ -55,7 +61,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public static void ExtractOpenProject(Excel.Workbook wkbk, bool destIsSrc) =>
+        public static void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
             ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 

@@ -31,7 +31,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportCurrentProject(object sender) => SilentAction(() => 
+        private void ExportCurrentProject(object sender) => PerformSilently(() => 
                 ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc));
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
@@ -47,16 +47,17 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
                 fd.AllowMultiSelect = !DestIsSrc;   // MultiSelect requires eponymous naming
                 fd.ButtonName = "Export";
-                fd.Title = "Select VBA Workbook(s) to Export From";
+                fd.Title = "Select VBA Project(s) to Export From";
                 fd.Filters.Clear();
+                fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
                 var list = new ProjectFilters();
                 foreach (var item in list) {
                     fd.Filters.Add(item.Description, item.Extensions);
                 }
                  if (fd.Show() != 0) {
-                    SilentAction(
-                        () => list[fd.FilterIndex].ExtractProjects(fd.SelectedItems, DestIsSrc)
+                    PerformSilently(
+                        () => list[fd.FilterIndex-1].ExtractProjects(fd.SelectedItems, DestIsSrc)
                     );
                 }
 
@@ -68,7 +69,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             }
         }
 
-        private static void SilentAction(System.Action action) {
+        private static void PerformSilently(System.Action action) {
             try {
                 Application.Cursor = XlMousePointer.xlWait;
                 Application.ScreenUpdating = false;
