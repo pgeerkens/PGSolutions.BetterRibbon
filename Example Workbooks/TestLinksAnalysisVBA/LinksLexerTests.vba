@@ -12,7 +12,7 @@ Public Sub SimpleOperatorTest()
     
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Number, "4"
-        ScanCheck MethodName, Lexer, EToken_Unop, "+"
+        ScanCheck MethodName, Lexer, EToken_UnaryOperator, "+"
         ScanCheck MethodName, Lexer, EToken_Number, "5"
         ScanCheckEOT MethodName, Lexer
     MsgBox "Successfully scanned: " & vbNewLine & Formula, vbOKOnly, MethodName
@@ -33,7 +33,7 @@ Public Sub SimpleConcatTest()
     
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Identifier, "B4"
-        ScanCheck MethodName, Lexer, EToken_BinOp, "&"
+        ScanCheck MethodName, Lexer, EToken_BinaryOperator, "&"
         ScanCheck MethodName, Lexer, EToken_StringLiteral, """ YTD"""
         ScanCheckEOT MethodName, Lexer
     MsgBox "Successfully scanned: " & vbNewLine & Formula, vbOKOnly, MethodName
@@ -55,7 +55,7 @@ Public Sub SimpleParensTest()
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
         ScanCheck MethodName, Lexer, EToken_Number, "4"
-        ScanCheck MethodName, Lexer, EToken_Unop, "+"
+        ScanCheck MethodName, Lexer, EToken_UnaryOperator, "+"
         ScanCheck MethodName, Lexer, EToken_Number, "5"
         ScanCheck MethodName, Lexer, EToken_CloseParen, ")"
         ScanCheckEOT MethodName, Lexer
@@ -90,7 +90,7 @@ Public Sub StringLiteralTest()
         ScanCheck MethodName, Lexer, EToken_Comma, ","
         ScanCheck MethodName, Lexer, EToken_Number, "1"
         ScanCheck MethodName, Lexer, EToken_CloseParen, ")"
-        ScanCheck MethodName, Lexer, EToken_Unop, "+"
+        ScanCheck MethodName, Lexer, EToken_UnaryOperator, "+"
         ScanCheck MethodName, Lexer, EToken_Number, "1"
         ScanCheck MethodName, Lexer, EToken_Comma, ","
         ScanCheck MethodName, Lexer, EToken_Identifier, "FIND"
@@ -102,7 +102,7 @@ Public Sub StringLiteralTest()
         ScanCheck MethodName, Lexer, EToken_Comma, ","
         ScanCheck MethodName, Lexer, EToken_Number, "1"
         ScanCheck MethodName, Lexer, EToken_CloseParen, ")"
-        ScanCheck MethodName, Lexer, EToken_Unop, "-"
+        ScanCheck MethodName, Lexer, EToken_UnaryOperator, "-"
         ScanCheck MethodName, Lexer, EToken_Identifier, "FIND"
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
         ScanCheck MethodName, Lexer, EToken_StringLiteral, """'"""

@@ -19,14 +19,15 @@ End Property
 
 Public Function AddInHandle() As ILinksAnalyzer
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object
+    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object.NewLinksAnalyzer
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, ModuleName & "AddInHandle"
     Resume          ' for debugging only
 End Function
 
-Public Sub TestAddinConnection()
+Public Function TestAddinConnection() As Boolean
     On Error GoTo EH
+    TestAddinConnection = False
     Dim StepName    As String, _
         objAddIns   As Object, _
         objHandle   As Object, _
@@ -34,7 +35,7 @@ Public Sub TestAddinConnection()
         objLexer    As Object, _
         Lexer       As ILinksLexer, _
         Messages    As String
-        
+    
     StepName = "Get COMAddIns as Object"
     Set objAddIns = Application.COMAddIns("PGSolutions.BetterRibbon")
     Messages = Messages & vbNewLine & "Success - " & StepName
@@ -44,11 +45,11 @@ Public Sub TestAddinConnection()
     Messages = Messages & vbNewLine & "Success - " & StepName
     
     StepName = "Get AddInHandle as ILinksAnalyzer"
-    Set Handle = objAddIns.Object
+    Set Handle = AddInHandle
     Messages = Messages & vbNewLine & "Success - " & StepName
     
     With Handle
-    Messages = Messages & vbNewLine & "Success - " & StepName
+        Messages = Messages & vbNewLine & "Success - " & StepName
         
         StepName = "Get LinksLexer to Object"
         Set objLexer = .NewLinksLexer(DummyCellRef, "Formula")
@@ -58,10 +59,11 @@ Public Sub TestAddinConnection()
         Set Lexer = .NewLinksLexer(DummyCellRef, "Formula")
         Messages = Messages & vbNewLine & "Success - " & StepName
     End With
-    MsgBox Messages, vbOKOnly, "TestAddinConnection"
+    TestAddinConnection = True
     
-XT: Exit Sub
+XT: MsgBox Messages, vbOKOnly, "TestAddinConnection"
+    Exit Function
 EH: ErrorUtils.DisplayError Err, Messages & vbNewLine & "Failure - " & StepName
     Resume XT
     Resume          ' for debugging only
-End Sub
+End Function

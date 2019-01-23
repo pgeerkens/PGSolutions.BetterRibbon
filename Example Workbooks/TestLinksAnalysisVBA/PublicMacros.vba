@@ -13,17 +13,17 @@ EH: ErrorUtils.DisplayError Err, ModuleName & "NewLinksLexer", vbOKOnly Or vbExc
 End Sub
 
 Public Sub TestAll()
-    RibbonUtils.TestAddinConnection
+    If RibbonUtils.TestAddinConnection Then
+        LinksLexerTests.SimpleOperatorTest
+        LinksLexerTests.SimpleConcatTest
+        LinksLexerTests.SimpleParensTest
+        LinksLexerTests.StringLiteralTest
+        LinksLexerTests.ComplexRefTest
+        LinksLexerTests.OpenExternRefTest
     
-    LinksLexerTests.SimpleOperatorTest
-    LinksLexerTests.SimpleConcatTest
-    LinksLexerTests.SimpleParensTest
-    LinksLexerTests.StringLiteralTest
-    LinksLexerTests.ComplexRefTest
-    LinksLexerTests.OpenExternRefTest
-
-    LinksLexerTests.SimpleParseLinkTest
-    LinksLexerTests.ComplexParseLinkTest
-    LinksLexerTests.CellParseLinkTest
-    LinksLexerTests.ArrayNamedRangeTest
+        LinksLexerTests.SimpleParseLinkTest
+        LinksLexerTests.ComplexParseLinkTest
+        LinksLexerTests.CellParseLinkTest
+        LinksLexerTests.ArrayNamedRangeTest
+    End If
 End Sub
