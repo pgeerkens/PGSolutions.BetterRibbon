@@ -5,9 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using stdole;
-
-using PGSolutions.LinksAnalyzer;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
@@ -26,8 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //[DispId(2)]
         void Invalidate();
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-                Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         //[DispId(3)]
         IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
@@ -39,9 +35,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //[DispId(4)]
         void DetachProxy(string controlId);
 
-        /// <summary>Sets ehether or not inactive controls should be visible on the Ribbon.</summary>
+        /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
         /// <param name="showWhenInactive"></param>
-        [Description("Sets ehether or not inactive controls should be visible on the Ribbon.")]
+        [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
         //[DispId(5)]
         void ShowInactive(bool showWhenInactive);
 
@@ -79,19 +75,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //[DispId(9)]
         IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
                 IIntegerSource source);
-    }
-
-    [CLSCompliant(true)]
-    [ComVisible(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    public interface IStringLoader {
-        IRibbonControlStrings GetStrings(string ControlId);
-    }
-
-    [CLSCompliant(false)]
-    [ComVisible(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    public interface IImageLoader {
-        IPictureDisp GetImage(string ControlId);
     }
 }

@@ -16,7 +16,7 @@ namespace PGSolutions.BetterRibbon {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IBetterRibbon))]
-    [Guid(RibbonDispatcher.Guids.BetterRibbon)]
+    [Guid(RibbonDispatcher.Guids.BetterRibbonMain)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class Main : IBetterRibbon {
         internal Main() { }

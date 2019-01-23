@@ -5,13 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.InteropServices;
 
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
-
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.BetterRibbon.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -83,11 +79,6 @@ namespace PGSolutions.BetterRibbon {
             BrandingModel.Detach();
         }
 
-        private void DetachControls(Workbook wb) {
-            foreach (var c in ViewModel.AdaptorControls) c.Value.Detach();
-            Detach();
-        }
- 
         #region IRibbonDispatcher methods
          /// <inheritdoc/>
         public void Invalidate() {
@@ -99,43 +90,27 @@ namespace PGSolutions.BetterRibbon {
         public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl(ControlId);
 
          /// <inheritdoc/>
-        public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) {
-            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonButton;
-            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
-            ctrl?.Attach();
-            return ctrl;
-        }
+        public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) =>
+            SetStrings(GetControl<RibbonButton>(controlId),strings).Attach() as IRibbonButton;
 
          /// <inheritdoc/>
         public IRibbonToggle   AttachCheckBox(string controlId, IRibbonControlStrings strings,
-                IBooleanSource source) {
-            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonCheckBox;
-            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
-            ctrl?.Attach(source.Getter);
-            return ctrl;
-        }
+                IBooleanSource source) =>
+            SetStrings(GetControl<RibbonCheckBox>(controlId),strings).Attach(source.Getter);
 
          /// <inheritdoc/>
         public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
-                IIntegerSource source) {
-            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonDropDown;
-            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
-            ctrl?.Attach(source.Getter);
-            return ctrl;
-        }
+                IIntegerSource source) =>
+            SetStrings(GetControl<RibbonDropDown>(controlId),strings).Attach(source.Getter);
 
          /// <inheritdoc/>
         public IRibbonToggle   AttachToggle(string controlId, IRibbonControlStrings strings,
-                IBooleanSource source) {
-            var ctrl = AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as RibbonToggleButton;
-            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(controlId));
-            ctrl?.Attach(source.Getter);
-            return ctrl;
-        }
+                IBooleanSource source) =>
+            SetStrings(GetControl<RibbonToggleButton>(controlId),strings).Attach(source.Getter);
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId) =>
-            (AdaptorControls.FirstOrDefault( kv => kv.Key == controlId ).Value as RibbonButton)?.Detach();
+            CustomButtonsModel.GetControl<RibbonCommon>(controlId)?.Detach();
 
         /// <inheritdoc/>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
@@ -148,15 +123,17 @@ namespace PGSolutions.BetterRibbon {
 
         /// <inheritdoc/>
         public void ShowInactive(bool showWhenInactive) {
-            foreach ( var ctrl in AdaptorControls ) {
-                ctrl.Value.ShowWhenInactive = showWhenInactive;
-                ctrl.Value.Invalidate();
-            }
+            CustomButtonsModel.SetShowWhenInactive(showWhenInactive);
             ViewModel.InvalidateControl( ViewModel.CustomButtonsViewModel.GroupId );
         }
-
-        private IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
-                ViewModel.AdaptorControls;
         #endregion
+
+        private TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
+            CustomButtonsModel.GetControl<TControl>(controlId);
+
+        private TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings) where TControl:RibbonCommon {
+            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
+            return ctrl;
+        }
     }
 }

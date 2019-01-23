@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
+using System.Linq;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
@@ -39,9 +40,8 @@ namespace PGSolutions.BetterRibbon {
             };
         }
 
-        public IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
-        public string             GroupId => CustomizableGroup.Id;
-        public void Invalidate() {
+        public string   GroupId => CustomizableGroup.Id;
+        public void     Invalidate() {
             CustomizableToggle.Invalidate();
             CustomizableButton1.Invalidate();
             CustomizableButton2.Invalidate();
@@ -55,6 +55,20 @@ namespace PGSolutions.BetterRibbon {
             CustomizableGroup.Invalidate();
         }
 
+        public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
+            AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
+
+        public void     DetachControls() {
+            foreach (var c in AdaptorControls) c.Value.Detach();
+        }
+
+        public void     SetShowWhenInactive(bool showWhenInactive) {
+            foreach ( var ctrl in AdaptorControls ) {
+                ctrl.Value.ShowWhenInactive = showWhenInactive;
+                ctrl.Value.Invalidate();
+            }
+        }
+
         private RibbonGroup        CustomizableGroup     { get; }
         private RibbonToggleButton CustomizableToggle    { get; }
         private RibbonButton       CustomizableButton1   { get; }
@@ -66,5 +80,7 @@ namespace PGSolutions.BetterRibbon {
         private RibbonDropDown     CustomizableDropDown1 { get; }
         private RibbonDropDown     CustomizableDropDown2 { get; }
         private RibbonDropDown     CustomizableDropDown3 { get; }
-    }
+
+        private IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
+   }
 }

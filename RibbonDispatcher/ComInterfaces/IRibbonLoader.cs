@@ -2,8 +2,8 @@
 //                                Copyright (c) 2018 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-
 using System.Runtime.InteropServices;
+using stdole;
 
 using System.ComponentModel;
 
@@ -25,5 +25,19 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the {IRibbonViewModel} for this workbook.</summary>
         [Description("Returns the {IRibbonViewModel} for this workbook.")]
         IRibbonViewModel RibbonViewModel { get; }
+    }
+
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    public interface IStringLoader {
+        IRibbonControlStrings GetStrings(string ControlId);
+    }
+
+    [CLSCompliant(false)]
+    [ComVisible(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    public interface IImageLoader {
+        IPictureDisp GetImage(string ControlId);
     }
 }

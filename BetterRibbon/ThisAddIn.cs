@@ -32,12 +32,8 @@ namespace PGSolutions.BetterRibbon {
         protected override object RequestComAddInAutomationService() =>
             ComEntry.Value as IBetterRibbon;
 
-        private void WorkbookDeactivate(Workbook wb) => DetachControls();
-        private void WindowDeactivate(Workbook wb, Excel.Window wn) => DetachControls();
-
-        private void DetachControls() {
-            foreach (var c in ViewModel.AdaptorControls) c.Value.Detach();
-        }
+        private void WorkbookDeactivate(Workbook wb) => ViewModel.DetachControls();
+        private void WindowDeactivate(Workbook wb, Excel.Window wn) => ViewModel.DetachControls();
 
         #region VSTO generated code
 

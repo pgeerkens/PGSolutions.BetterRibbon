@@ -2,7 +2,6 @@
 //                                Copyright (c) 2017 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
@@ -50,8 +49,7 @@ namespace PGSolutions.BetterRibbon {
         internal DemonstrationViewModel       DemonstrationModel     { get; private set; }
         internal CustomizableButtonsViewModel CustomButtonsViewModel { get; private set; }
 
-        internal IReadOnlyDictionary<string, IActivatable> AdaptorControls =>
-                CustomButtonsViewModel.AdaptorControls;
+        internal void DetachControls() => CustomButtonsViewModel.DetachControls();
 
         /// <summary>.</summary>
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;

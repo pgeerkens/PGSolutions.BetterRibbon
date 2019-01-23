@@ -15,7 +15,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IRibbonWorkbook             = "69E19406" + RibbonDispatcherGuidSpace;
         public const string IBetterRibbon               = "69E19407" + RibbonDispatcherGuidSpace;
         public const string BetterRibbon                = "69E19408" + RibbonDispatcherGuidSpace;
-        public const string RibbonDispatcherTypelib     = "69E19409" + RibbonDispatcherGuidSpace;
+        public const string BetterRibbonMain            = "69E19409" + RibbonDispatcherGuidSpace;
         public const string IResourceManager            = "69E1940A" + RibbonDispatcherGuidSpace;
         public const string IAbstractDispatcher         = "69E1940B" + RibbonDispatcherGuidSpace;
         public const string AbstractDispatcher          = "69E1940C" + RibbonDispatcherGuidSpace;
