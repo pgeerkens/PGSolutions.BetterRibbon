@@ -66,8 +66,8 @@ namespace PGSolutions.BetterRibbon {
         private BrandingModel         BrandingModel        { get; set; }
         [SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
         private VbaSourceExportModel  VbaSourceExportModel { get; set; }
-        private CustomButtonsModel    CustomButtonsModel   { get; set; }
         private DemonstrationModel    DemonstrationModel   { get; set; }
+        private CustomButtonsModel    CustomButtonsModel   { get; set; }
 
          /// <inheritdoc/>
         public void Attach() {
@@ -85,10 +85,14 @@ namespace PGSolutions.BetterRibbon {
         public void Invalidate() {
             BrandingModel?.Invalidate();
             DemonstrationModel?.Invalidate();
+            CustomButtonsModel?.Invalidate();
         }
 
          /// <inheritdoc/>
-        public void InvalidateControl(string ControlId) => ViewModel.InvalidateControl(ControlId);
+        public void InvalidateCustomControlsGroup() => CustomButtonsModel?.Invalidate();
+
+         /// <inheritdoc/>
+        public void InvalidateControl(string ControlId) => ViewModel?.InvalidateControl(ControlId);
 
          /// <inheritdoc/>
         public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) =>
@@ -119,13 +123,13 @@ namespace PGSolutions.BetterRibbon {
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip    = "", string alternateLabel = "", string description = "") =>
-            ViewModel.RibbonFactory.NewControlStrings( label,
-                    screenTip, superTip, keyTip, alternateLabel, description );
+            ViewModel.RibbonFactory.NewControlStrings(label,
+                    screenTip, superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
         public void ShowInactive(bool showWhenInactive) {
             CustomButtonsModel.SetShowWhenInactive(showWhenInactive);
-            ViewModel.InvalidateControl( ViewModel.CustomButtonsViewModel.GroupId );
+            InvalidateCustomControlsGroup();
         }
         #endregion
 

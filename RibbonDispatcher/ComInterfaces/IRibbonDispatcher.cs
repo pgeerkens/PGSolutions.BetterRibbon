@@ -13,13 +13,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonDispatcher)]
     public interface IRibbonDispatcher {
-        /// <summary>TODO</summary>
-        [Description( "" )]
+        /// <summary>Queues a refresh of the specified control.</summary>
+        [Description("Queues a refresh of the specified control.")]
         //[DispId(1)]
         void InvalidateControl(string ControlId);
 
-        /// <summary>TODO</summary>
-        [Description( "" )]
+        /// <summary>Queues a refresh of the Custom Controls Ribbon Group.</summary>
+        [Description("Queues a refresh of the Custom Controls Ribbon Group.")]
+        void InvalidateCustomControlsGroup();
+
+        /// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
+        [Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
         //[DispId(2)]
         void Invalidate();
 

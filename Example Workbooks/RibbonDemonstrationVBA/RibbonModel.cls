@@ -70,7 +70,7 @@ Friend Sub Activate()
     With New RibbonToggleModel
         Set Toggle = .Attach("CustomVbaToggle", ToggleStrings)
     End With
-    AddInHandle.Invalidate
+    AddInHandle.InvalidateCustomControlsGroup
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & "Workbook_Activate", vbOKOnly Or vbInformation
     Resume XT
