@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.41</ApplicationVersion>
+    <ApplicationVersion>1.0.0.42</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -220,12 +220,16 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <Content Include="..\Lookup2.xlsb">
-      <Link>Extra Files\Lookup2.xlsb</Link>
+    <Content Include="Extra Files\Lookup2.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\SingleButton.xlsb">
-      <Link>Extra Files\SingleButton.xlsb</Link>
+    <Content Include="Extra Files\RibbonDemonstration.xlsb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Extra Files\SingleButton.xlsb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Extra Files\TestLinksAnalysis.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\PGeerkens1.bmp" />
@@ -240,14 +244,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="..\RibbonDemonstration.xlsb">
-      <Link>Extra Files\RibbonDemonstration.xlsb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\TestLinksAnalysis.xlsb">
-      <Link>Extra Files\TestLinksAnalysis.xlsb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
