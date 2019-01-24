@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using stdole;
 
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using static Microsoft.Office.Core.RibbonControlSize;
 

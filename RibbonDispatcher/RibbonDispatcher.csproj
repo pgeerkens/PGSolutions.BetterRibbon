@@ -135,7 +135,7 @@
     <Compile Include="ComInterfaces\ISelectableItem.cs" />
     <Compile Include="ComInterfaces\ISelectionMadeEvents.cs" />
     <Compile Include="ComInterfaces\IToggledEvents.cs" />
-    <Compile Include="ComClasses\MixinInterfaces.cs" />
+    <Compile Include="ComInterfaces\MixinInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\DictionaryExtensions.cs" />

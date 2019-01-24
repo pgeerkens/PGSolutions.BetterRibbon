@@ -58,9 +58,19 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public bool ShowWhenInactive { get; set; }
 
+        public virtual IRibbonCommon Attach2() {
+            IsAttached = true;
+            return this;
+        }
+
         public virtual IRibbonCommon Attach() {
             IsAttached = true;
             return this;
+        }
+
+        public virtual T Attach<T>() where T : RibbonCommon {
+            IsAttached = true;
+            return this as T;
         }
 
         public virtual void Detach() {

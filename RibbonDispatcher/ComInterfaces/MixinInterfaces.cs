@@ -4,10 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [CLSCompliant( true )]
     public delegate void ClickedEventHandler(object sender);

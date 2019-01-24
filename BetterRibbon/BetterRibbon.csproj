@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.46</ApplicationVersion>
+    <ApplicationVersion>1.0.0.47</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -212,7 +212,7 @@
     <Compile Include="src\LocalResourceManager.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
     <Compile Include="src\Extensions.cs" />
-    <Compile Include="VbaSourceExport\IVbaSourceExportGroupModel.cs" />
+    <Compile Include="VbaSourceExport\IVbaSourceExportViewModel.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

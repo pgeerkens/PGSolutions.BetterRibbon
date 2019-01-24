@@ -1,18 +1,19 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
-    internal interface IVbaSourceExportGroupModel {
+    internal interface IVbaSourceExportViewModel {
         event ToggledEventHandler UseSrcFolderToggled;
         event ClickedEventHandler SelectedProjectsClicked;
         event ClickedEventHandler CurrentProjectClicked;
 
-        void Attach(Func<bool> useSrcFolderSource);
-        void Detach();
+        IRibbonToggle UseSrcFolderToggle  { get; }
+        IRibbonButton SelectedProjectButton { get; }
+        IRibbonButton CurrentProjectButton  { get; }
 
+        void Attach(IBooleanSource srcToggleSource);
         void Invalidate();
     }
 }

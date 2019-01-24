@@ -4,26 +4,33 @@
 using System.Collections.Generic;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
-    internal sealed class VbaSourceExportModel {
-        internal VbaSourceExportModel(IList<IVbaSourceExportGroupModel> viewModels ) {
+    internal sealed class VbaSourceExportModel : IBooleanSource {
+        internal VbaSourceExportModel(IList<IVbaSourceExportViewModel> viewModels ) {
             DestIsSrc  = false;
             ViewModels = viewModels;
             foreach (var viewModel in ViewModels) {
                 viewModel.SelectedProjectsClicked += ExportSelectedProject;
                 viewModel.CurrentProjectClicked   += ExportCurrentProject;
                 viewModel.UseSrcFolderToggled     += UseSrcFolderToggled;
-                viewModel.Attach(()=>DestIsSrc);
+                viewModel.Attach(this);
             }
         }
 
-        private bool                              DestIsSrc  { get; set; }
-        private IList<IVbaSourceExportGroupModel> ViewModels { get; set; }
+        bool IBooleanSource.Getter() => DestIsSrc;
+
+        /// <summary>Fakse => file destination is eponymous directory; else directory named "SRC".</summary>
+        private bool                             DestIsSrc  { get; set; }
+        private IList<IVbaSourceExportViewModel> ViewModels { get; }
 
         private void UseSrcFolderToggled(object sender, bool isPressed) {
             DestIsSrc = isPressed;
-            foreach (var viewModel in ViewModels) {  viewModel.Invalidate(); }
+            foreach (var viewModel in ViewModels) {
+                viewModel.SelectedProjectButton.IsEnabled = ! DestIsSrc;
+                viewModel.Invalidate();
+            }
         }
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
@@ -45,7 +52,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
 
             try {
                 var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
-                fd.AllowMultiSelect = !DestIsSrc;   // MultiSelect requires eponymous naming
+                fd.AllowMultiSelect = ! DestIsSrc;   // MultiSelect requires eponymous naming
                 fd.ButtonName = "Export";
                 fd.Title = "Select VBA Project(s) to Export From";
                 fd.Filters.Clear();

@@ -40,13 +40,13 @@ namespace PGSolutions.BetterRibbon {
             VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
             VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
             CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
-            DemonstrationModel     = new DemonstrationViewModel(RibbonFactory);
+            DemonstrationViewModel = new DemonstrationViewModel(RibbonFactory);
         }
 
         internal BrandingViewModel            BrandingViewModel      { get; private set; }
         internal VbaSourceExportViewModel     VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel     VbaExportViewModel_PG  { get; private set; }
-        internal DemonstrationViewModel       DemonstrationModel     { get; private set; }
+        internal DemonstrationViewModel       DemonstrationViewModel { get; private set; }
         internal CustomizableButtonsViewModel CustomButtonsViewModel { get; private set; }
 
         internal void DetachControls() => CustomButtonsViewModel.DetachControls();
@@ -66,13 +66,6 @@ namespace PGSolutions.BetterRibbon {
         [CLSCompliant(false)]
         public sealed override void OnRibbonLoad(IRibbonUI ribbonUI) {
             base.OnRibbonLoad(ribbonUI);
-
-            //BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
-            //VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
-            //VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
-            //CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
-
-            //DemonstrationModel = new DemonstrationViewModel(RibbonFactory);
 
             Initialized?.Invoke(this, EventArgs.Empty);
 

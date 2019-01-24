@@ -51,13 +51,13 @@ namespace PGSolutions.BetterRibbon {
         private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel.BrandingViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
-                new List<IVbaSourceExportGroupModel> {
+                new List<IVbaSourceExportViewModel> {
                     ViewModel.VbaExportViewModel_MS,
                     ViewModel.VbaExportViewModel_PG
                 } );
 
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);
-            DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationModel);
+            DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationViewModel);
             Attach();
         }
 
