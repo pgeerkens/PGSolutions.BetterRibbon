@@ -4,7 +4,6 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
 using Microsoft.Office.Core;
 using Microsoft.Vbe.Interop;
 
@@ -21,18 +20,20 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <inheritdoc/>
         public string Extensions  { get; }
 
+        /// <inheritdoc/>
+        public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
+
         protected static void ExtractProjectModules(VBProject project, string path) {
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     SetStatusBarText(project.Name, component.Name);
                     component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),
                             TypeExtension((VbExt_ct)component.Type)));
-                    // DoEvents
                 }
 
                 File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
             } catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)) {
-                MessageBox.Show($"Directory conflict occurred. Please retry.");
+                $"Directory conflict occurred. Please retry.".ShowMsgString();
             } finally {
                 Globals.ThisAddIn.Application.StatusBar = false;
             }
@@ -40,31 +41,6 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
 
         protected static void SetStatusBarText(string projectName, string componentName) =>
             Globals.ThisAddIn.Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
-
-        private static string GetProjectDefinitionXml(VBProject project) {
-            var sb = new StringBuilder()
-                    .AppendLine("<Project")
-                    .AppendLine("  Name='" + project.Name + "'")
-                    .AppendLine("  FileName='" + project.FileName + "'")
-                    .AppendLine("  HelpContextID='" + project.HelpContextID + "'")
-                    .AppendLine("  HelpFile='" + project.HelpFile + "'")
-                    .AppendLine("  Protection='" + project.Protection + "'")
-                    .AppendLine("  Type='" + project.Type + "'")
-                    .AppendLine(">");
-            foreach (Reference r in project.References) {
-                  sb.AppendLine("   <References")
-                    .AppendLine("      Description='" + r.Description + "'")
-                    .AppendLine("      FullPath='" + r.FullPath + "'")
-                    .AppendLine("      Guid='" + r.Guid + "'")
-                    .AppendLine("      Major='" + r.Major + "'")
-                    .AppendLine("      Minor='" + r.Minor + "'")
-                    .AppendLine("      Name='" + r.Name + "'")
-                    .AppendLine("      Type='" + r.Type + "'")
-                    .AppendLine("   />");
-            }
-
-            return sb.AppendLine("</Project>").ToString();
-        }
 
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
         /// <param name="path">Full (absolute) path-name for the project being exported.</param>
@@ -78,8 +54,37 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             return Directory.CreateDirectory(basePath).FullName;
         }
 
-        /// <inheritdoc/>
-        public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
+        private enum VbExt_ct {
+            vbext_ct_StdModule      = 1,
+            vbext_ct_ClassModule    = 2,
+            vbext_ct_MSForm         = 3,
+            vbext_ct_Document       = 100
+        }
+
+        private static string GetProjectDefinitionXml(VBProject project) {
+            var sb = new StringBuilder()
+                    .AppendLine($"<Project")
+                    .AppendLine($"  Name='{project.Name}'")
+                    .AppendLine($"  FileName='{project.FileName}'")
+                    .AppendLine($"  HelpContextID='{project.HelpContextID}'")
+                    .AppendLine($"  HelpFile='{project.HelpFile}'")
+                    .AppendLine($"  Protection='{project.Protection}'")
+                    .AppendLine($"  Type='{project.Type}'")
+                    .AppendLine($">");
+            foreach (Reference r in project.References) {
+                  sb.AppendLine($"   <References")
+                    .AppendLine($"      Description='{r.Description}'")
+                    .AppendLine($"      FullPath='{r.FullPath}'")
+                    .AppendLine($"      Guid='{r.Guid}'")
+                    .AppendLine($"      Major='{r.Major}'")
+                    .AppendLine($"      Minor='{r.Minor}'")
+                    .AppendLine($"      Name='{r.Name}'")
+                    .AppendLine($"      Type='{r.Type}'")
+                    .AppendLine($"   />");
+            }
+
+            return sb.AppendLine("</Project>").ToString();
+        }
 
         /// <summary>Returns an appropriate file extension (prefixed with '.') for the supplied moduleType ordinal.</summary>
         private static string TypeExtension(VbExt_ct moduleType) =>
@@ -88,12 +93,5 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             : (moduleType == VbExt_ct.vbext_ct_ClassModule
             || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"
                                                          : "unk";
-
-        public enum VbExt_ct {
-            vbext_ct_StdModule      = 1,
-            vbext_ct_ClassModule    = 2,
-            vbext_ct_MSForm         = 3,
-            vbext_ct_Document       = 100
-        }
     }
 }

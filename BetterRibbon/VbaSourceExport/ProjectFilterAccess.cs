@@ -18,7 +18,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
         /// <remarks>
         /// </remarks>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
+        [SuppressMessage( "Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)" )]
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             using (var app = AccessWrapper.New()) {
                 if (!AccessWrapper.IsAccessSupported) { throw new NotSupportedException("MS-Access not available on this machine."); }

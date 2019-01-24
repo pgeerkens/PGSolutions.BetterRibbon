@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {

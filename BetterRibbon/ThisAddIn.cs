@@ -2,6 +2,8 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 
@@ -32,7 +34,10 @@ namespace PGSolutions.BetterRibbon {
         protected override object RequestComAddInAutomationService() =>
             ComEntry.Value as IBetterRibbon;
 
+        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         private void WorkbookDeactivate(Workbook wb) => ViewModel.DetachControls();
+        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
+        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wn" )]
         private void WindowDeactivate(Workbook wb, Excel.Window wn) => ViewModel.DetachControls();
 
         #region VSTO generated code
