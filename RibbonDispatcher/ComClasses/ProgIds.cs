@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                Copyright (c) 2018 Pieter Geerkens                              //
+//                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>Static clas of ProgIds</summary>

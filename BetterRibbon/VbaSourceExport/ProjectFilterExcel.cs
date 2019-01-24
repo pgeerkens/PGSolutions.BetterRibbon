@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                Copyright (c) 2018 Pieter Geerkens                              //
+//                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -11,8 +11,6 @@ using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace PGSolutions.BetterRibbon.VbaSourceExport {
     internal class ProjectFilterExcel : ProjectFilter  {
-        public ProjectFilterExcel() : this("", "") { }
-
         public ProjectFilterExcel(string description, string extensions) : base(description, extensions) { }
 
         /// <inheritdoc/>
@@ -41,6 +39,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 } else {
                     appClosed.Value.Visible = false;
                     appClosed.Value.DisplayAlerts = false;
+                    appClosed.Value.ScreenUpdating = false;
                     appClosed.Value.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
                     ExtractClosedProject(appClosed.Value, filename, destIsSrc);
                 }
