@@ -45,7 +45,8 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
 
         /// <summary>Returns a string as the ID of the supplied control suffixed with the supplied string.</summary>
         public static string Unknown(this string controlId, string suffix)
-            => string.Format(CultureInfo.InvariantCulture, $"'{controlId ?? ""}' {suffix}");
+            //=> string.Format(CultureInfo.InvariantCulture, $"'{controlId ?? ""}' {suffix}");
+            => $"'{controlId ?? ""}' {suffix}";
 
         /// <summary>TODO</summary>
         public static IPictureDisp ImageToPictureDisp(this Image image)

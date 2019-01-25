@@ -15,6 +15,6 @@ namespace PGSolutions.BetterRibbon {
         private BrandingViewModel ViewModel { get; set; }
 
         private void ButtonClicked(object sender) =>
-            $"Canadian, eh!\n\nVersion: {Globals.ThisAddIn.VersionNo}".MsgBoxShow();
+            $"Canadian, eh!\n\nVersion: {Globals.ThisAddIn.VersionNo3}".MsgBoxShow();
     }
 }

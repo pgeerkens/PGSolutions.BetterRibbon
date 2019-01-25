@@ -41,7 +41,14 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         }
 
         public static string FormatVersion(this Version version) =>
-            string.Format($"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}");
+            $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}\nat " +
+            $"{version.Build.FormatVersionDate()} " +
+            $"{version.Revision.FormatVersionTime()} (UTC)";
+        private static string FormatVersionDate(this int dayNo) =>
+            new DateTime(2000,1,1).AddDays(dayNo).ToUniversalTime().ToString("yyyy-MM-dd");// .ToLongDateString();
+        private static string FormatVersionTime(this int halfSeconds) =>
+            new DateTime(2000,1,1).AddSeconds(2 * halfSeconds).ToUniversalTime().ToString("HH:mm:ss");// .ToLongTimeString();
+
 
         [Flags]
         public enum LabelImageOptions {

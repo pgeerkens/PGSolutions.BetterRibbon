@@ -20,6 +20,8 @@ namespace PGSolutions.BetterRibbon {
         public string VersionNo => ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion.FormatVersion()
             : null;
+        public string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
+        public string VersionNo3 => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.FormatVersion();
 
         internal BetterRibbonViewModel ViewModel { get; private set; }
 
