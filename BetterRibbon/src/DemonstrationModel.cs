@@ -1,7 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -29,9 +28,8 @@ namespace PGSolutions.BetterRibbon {
             DisplayOption = itemindex.IndexToLabelImageDisplay();
             Invalidate();
         }
-        private void ButtonClicked(object sender) => ButtonClicked(sender as IRibbonButton);
-        private void ButtonClicked(IRibbonButton button) {
-            button?.MsgBoxShow(button?.Id);
+        private void ButtonClicked(object sender) {
+            (sender as IRibbonButton).DefaultButtonAction();
             Invalidate();
         }
 

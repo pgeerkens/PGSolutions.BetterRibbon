@@ -15,16 +15,16 @@ using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public static class Extensions {
-        /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
-        public static ClickedEventHandler DefaultButtonAction(this IRibbonButton sender) => sender.MsgBoxShow;
+        private const string Caption = "PGSolutions Ribbon Dispatcher";
 
-        public static void MsgBoxShow<TControl>(this TControl control, object sender) where TControl : IRibbonButton
-            => MsgBoxShow(control, null);
+        /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
+        public static ClickedEventHandler DefaultButtonAction(this IRibbonButton button, string captio = Caption) =>
+            (s) => $"{button?.Id ?? "Unknown Button"} pressed.".MsgBoxShow(Caption);
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
-        public static void MsgBoxShow<TControl>(this TControl control, string details) where TControl : IRibbonButton =>
-            MessageBox.Show($"{control?.Id ?? "Unknown Button"} pressed {details??""}.", "PGSolutions Ribbon Dispatcher",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        public static void MsgBoxShow(this string message, string caption = Caption)  =>
+            MessageBox.Show($"{message}.", caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         /// <summary>Returns the text for the resource named <paramref name="resourceName"/>; else null if not found.</summary>
         public static string GetResourceText(this string resourceName) {
@@ -39,6 +39,9 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
             foreach (var b in buttons) { b.Size = isLarge ? RibbonControlSizeLarge : RibbonControlSizeRegular; }
             return isLarge;
         }
+
+        public static string FormatVersion(this Version version) =>
+            string.Format($"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}");
 
         [Flags]
         public enum LabelImageOptions {

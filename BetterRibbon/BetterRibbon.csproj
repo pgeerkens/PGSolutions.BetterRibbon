@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.49</ApplicationVersion>
+    <ApplicationVersion>1.0.0.50</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -145,6 +145,7 @@
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />

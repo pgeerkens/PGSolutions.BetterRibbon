@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Deployment.Application;
 using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
@@ -11,10 +12,15 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
+        public string VersionNo => ApplicationDeployment.IsNetworkDeployed
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion.FormatVersion()
+            : null;
+
         internal BetterRibbonViewModel ViewModel { get; private set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {

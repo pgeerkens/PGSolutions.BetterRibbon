@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System.Windows.Forms;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel {
@@ -14,10 +14,7 @@ namespace PGSolutions.BetterRibbon {
 
         private BrandingViewModel ViewModel { get; set; }
 
-        private string VersionNo => GetType().Assembly.GetName().Version.ToString();
         private void ButtonClicked(object sender) =>
-            MessageBox.Show("Quack, eh!\n\n" + VersionNo,
-                    "PGSolutions - VBA Tools",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            $"Canadian, eh!\n\nVersion: {Globals.ThisAddIn.VersionNo}".MsgBoxShow();
     }
 }
