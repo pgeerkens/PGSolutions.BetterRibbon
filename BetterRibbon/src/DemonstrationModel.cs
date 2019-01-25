@@ -28,23 +28,22 @@ namespace PGSolutions.BetterRibbon {
             DisplayOption = itemindex.IndexToLabelImageDisplay();
             Invalidate();
         }
-        private void ButtonClicked(object sender) {
-            (sender as IRibbonButton).DefaultButtonAction();
-            Invalidate();
-        }
+        //private void ButtonClicked(object sender) {
+        //    DefaultButtonAction(sender);
+        //}
 
         public void Attach() {
             ViewModel.Attach(()=>IsLarge, ()=>DisplayOption.IndexFromLabelImageDisplay());
             ViewModel.IsLargeToggled   += IsLargeToggled;
             ViewModel.DisplaySelection += DisplaySelection;
-            ViewModel.Button1Clicked   += ButtonClicked;
-            ViewModel.Button2Clicked   += ButtonClicked;
-            ViewModel.Button3Clicked   += ButtonClicked;
+            ViewModel.Button1Clicked   += DefaultButtonAction;
+            ViewModel.Button2Clicked   += DefaultButtonAction;
+            ViewModel.Button3Clicked   += DefaultButtonAction;
         }
         public void Detach() {
-            ViewModel.Button3Clicked   -= ButtonClicked;
-            ViewModel.Button2Clicked   -= ButtonClicked;
-            ViewModel.Button1Clicked   -= ButtonClicked;
+            ViewModel.Button3Clicked   -= DefaultButtonAction;
+            ViewModel.Button2Clicked   -= DefaultButtonAction;
+            ViewModel.Button1Clicked   -= DefaultButtonAction;
             ViewModel.DisplaySelection -= DisplaySelection;
             ViewModel.IsLargeToggled   -= IsLargeToggled;
         }
