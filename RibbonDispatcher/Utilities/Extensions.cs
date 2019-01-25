@@ -19,9 +19,9 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
 
         /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
-        public static ClickedEventHandler DefaultButtonAction(this IRibbonButton button, string captio = Caption) =>
-            (s) => $"{button?.Id ?? "Unknown Button"} pressed.".MsgBoxShow(Caption);
-
+        public static void DefaultButtonAction(object sender) =>
+            $"{(sender as IRibbonButton)?.Id ?? "Unknown Button"} pressed.".MsgBoxShow();
+        
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public static void MsgBoxShow(this string message, string caption = Caption)  =>
             MessageBox.Show($"{message}.", caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
