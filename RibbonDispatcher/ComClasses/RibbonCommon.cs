@@ -54,14 +54,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected IRibbonControlStrings Strings { get; private set; }
 
         #region IActivatable implementation
-        protected bool IsAttached { get; private set; }
-
-        public bool ShowWhenInactive { get; set; }
-
-        public virtual IRibbonCommon Attach2() {
-            IsAttached = true;
-            return this;
-        }
+        public bool ShowWhenInactive { get; set; } = false;
 
         public virtual IRibbonCommon Attach() {
             IsAttached = true;
@@ -91,6 +84,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             get => (_visible && IsAttached)  || ShowWhenInactive;
             set { _visible = value; Invalidate(); }
         }
+
+        protected bool IsAttached { get; private set; } = false;
+
         private bool _visible;
         #endregion
 

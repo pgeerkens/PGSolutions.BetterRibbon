@@ -62,12 +62,11 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 foreach (var item in list) {
                     fd.Filters.Add(item.Description, item.Extensions);
                 }
-                 if (fd.Show() != 0) {
+                if (fd.Show() != 0) {
                     PerformSilently(
                         () => list[fd.FilterIndex-1].ExtractProjects(fd.SelectedItems, DestIsSrc)
                     );
                 }
-
             } finally {
                 Application.DisplayAlerts = true;
                 Application.ScreenUpdating = true;

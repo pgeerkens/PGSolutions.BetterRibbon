@@ -11,8 +11,9 @@ namespace PGSolutions.BetterRibbon {
     internal sealed class DemonstrationModel {
         internal DemonstrationModel(DemonstrationViewModel viewModel) {
             ViewModel      = viewModel;
-            IsLarge        = true;
+            IsLarge        = false;
             DisplayOption  = LabelImageOptions.ShowBoth;
+            Invalidate();
         }
 
         private DemonstrationViewModel ViewModel  { get; set; }
@@ -55,5 +56,5 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.SetButtonDisplay(DisplayOption);
             ViewModel.Invalidate();
         }
-   }
+    }
 }

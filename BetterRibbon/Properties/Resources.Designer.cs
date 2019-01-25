@@ -153,16 +153,7 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display Options.
-        /// </summary>
-        internal static string ButtonOptions2_Label {
-            get {
-                return ResourceManager.GetString("ButtonOptions2_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Custom Buttons.
+        ///   Looks up a localized string similar to Controls Customized in C#.
         /// </summary>
         internal static string CSharpDemoGroup_Label {
             get {
@@ -248,6 +239,37 @@ namespace BetterRibbon.Properties {
         internal static string CustomizableGroup_SuperTip {
             get {
                 return ResourceManager.GetString("CustomizableGroup_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Options.
+        /// </summary>
+        internal static string Dropdown1_Label {
+            get {
+                return ResourceManager.GetString("Dropdown1_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Options for Custom Buttons.
+        /// </summary>
+        internal static string Dropdown1_ScreenTip {
+            get {
+                return ResourceManager.GetString("Dropdown1_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select button display options from:
+        ///- Image Only
+        ///- Label Only
+        ///-Image &amp; Label
+        ///Enabled only when button size is Regular, as large buttons always display both..
+        /// </summary>
+        internal static string Dropdown1_SuperTip {
+            get {
+                return ResourceManager.GetString("Dropdown1_SuperTip", resourceCulture);
             }
         }
         

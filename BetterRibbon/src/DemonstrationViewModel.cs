@@ -13,15 +13,20 @@ namespace PGSolutions.BetterRibbon {
 
     internal class DemonstrationViewModel : AbstractRibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory) : base(factory) {
-            CustomGroup    = factory.NewRibbonGroup("CSharpDemoGroup", true);
-            CustomButton1  = factory.NewRibbonButtonMso("AppLaunchButton1", showImage:true, imageMso:"RefreshAll");
-            CustomButton2  = factory.NewRibbonButtonMso("AppLaunchButton2", showImage:true, imageMso:"Refresh");
-            CustomButton3  = factory.NewRibbonButtonMso("AppLaunchButton3", showImage:true, imageMso:"MacroPlay");
-            IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       showImage:true, imageMso:NoImage, visible:true, enabled:true);
-            DisplayOptions = factory.NewRibbonDropDown("ButtonOptions2");
+            CustomGroup    = factory.NewRibbonGroup("CSharpDemoGroup");
+            IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       imageMso:NoImage);
+            CheckBox1      = factory.NewRibbonCheckBox("CheckBox1", false);
+            CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);
+            CheckBox3      = factory.NewRibbonCheckBox("CheckBox3", false);
+            DisplayOptions = factory.NewRibbonDropDown("Dropdown1");
             DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
                           .AddItem(factory.NewSelectableItem("ImageOnly"))
                           .AddItem(factory.NewSelectableItem("LabelAndImage"));
+            Dropdown2      = factory.NewRibbonDropDown("Dropdown2", false);
+            Dropdown3      = factory.NewRibbonDropDown("Dropdown3", false);
+            CustomButton1  = factory.NewRibbonButtonMso("AppLaunchButton1", imageMso:"RefreshAll");
+            CustomButton2  = factory.NewRibbonButtonMso("AppLaunchButton2", imageMso:"Refresh");
+            CustomButton3  = factory.NewRibbonButtonMso("AppLaunchButton3", imageMso:"MacroPlay");
 
             DisplayOptions.SelectionMade += OnDisplaySelection;
             IsLargeToggle.Toggled += OnIsLargeToggled;
@@ -38,11 +43,16 @@ namespace PGSolutions.BetterRibbon {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        CustomGroup    { get; }
+        private RibbonToggleButton IsLargeToggle  { get; }
+        private RibbonCheckBox     CheckBox1      { get; }
+        private RibbonCheckBox     CheckBox2      { get; }
+        private RibbonCheckBox     CheckBox3      { get; }
+        private RibbonDropDown     DisplayOptions { get; }
+        private RibbonDropDown     Dropdown2      { get; }
+        private RibbonDropDown     Dropdown3      { get; }
         private RibbonButton       CustomButton1  { get; }
         private RibbonButton       CustomButton2  { get; }
         private RibbonButton       CustomButton3  { get; }
-        private RibbonToggleButton IsLargeToggle  { get; }
-        private RibbonDropDown     DisplayOptions { get; }
 
         public IList<IRibbonButton> Buttons => new List<IRibbonButton>()
                 { CustomButton1, CustomButton2, CustomButton3 };
