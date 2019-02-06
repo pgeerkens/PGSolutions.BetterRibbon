@@ -37,6 +37,7 @@ namespace PGSolutions.BetterRibbon {
             _id = "TabPGSolutions";    
 
             BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
+            LinksAnalysisViewModel = new LinksAnalysisViewModel(RibbonFactory);
             VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
             VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
             CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
@@ -44,6 +45,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         internal BrandingViewModel            BrandingViewModel      { get; private set; }
+        internal LinksAnalysisViewModel       LinksAnalysisViewModel { get; private set; }
         internal VbaSourceExportViewModel     VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel     VbaExportViewModel_PG  { get; private set; }
         internal DemonstrationViewModel       DemonstrationViewModel { get; private set; }

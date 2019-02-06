@@ -2,10 +2,12 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using Excel = Microsoft.Office.Interop.Excel;
+using Range = Microsoft.Office.Interop.Excel.Range;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -51,8 +53,8 @@ namespace PGSolutions.BetterRibbon {
             => wb.WriteLinks();
 
         /// <inheritdoc/>
-        public void WriteLinksAnalysisFiles(Workbook wb, INameList nameList)
-            => wb.WriteLinks(nameList);
+        public void WriteLinksAnalysisFiles(Workbook wb, Range range)
+            => wb.WriteLinks(range.GetNameList());
         #endregion
     }
 }

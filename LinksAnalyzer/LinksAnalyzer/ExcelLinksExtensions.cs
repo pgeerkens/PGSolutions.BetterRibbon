@@ -25,7 +25,7 @@ namespace PGSolutions.LinksAnalyzer {
             wb.WriteLinks(new ExternalLinks(wb, ""));
         }
 
-        public static void WriteLinks(this Workbook wb, INameList nameList) {
+        public static void WriteLinks(this Workbook wb, IReadOnlyList<string> nameList) {
             wb.DeleteTargetWorksheet(LinksSheetName);
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);
@@ -41,7 +41,7 @@ namespace PGSolutions.LinksAnalyzer {
         internal static void WriteLinks(this Workbook wb, IExternalLinks links) {
             if(links.Count == 0  && links.Errors.Count == 0) {
                 MessageBox.Show("No external links found!", "", MessageBoxButtons.OK,MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1,MessageBoxOptions.DefaultDesktopOnly);
+                        MessageBoxDefaultButton.Button1);
             } else {
                 var wsLinks = wb.CreateTargetWorksheet(LinksSheetName);
                 var wsFiles = wb.CreateTargetWorksheet(FilesSheetName);

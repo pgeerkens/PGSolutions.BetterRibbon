@@ -305,4 +305,27 @@ Project references as .XML</value>
 -Image &amp; Label
 Enabled only when button size is Regular, as large buttons always display both.</value>
   </data>
+  <data name="AnalyzeLinksCurrent_Label" xml:space="preserve">
+    <value>Analyze Current WB</value>
+  </data>
+  <data name="AnalyzeLinksCurrent_ScreenTip" xml:space="preserve">
+    <value>Analyze Links in Current WB</value>
+  </data>
+  <data name="AnalyzeLinksCurrent_SuperTip" xml:space="preserve">
+    <value>Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences.</value>
+  </data>
+  <data name="AnalyzeLinksSelected_Label" xml:space="preserve">
+    <value>Analyze Listed WBs</value>
+  </data>
+  <data name="AnalyzeLinksSelected_ScreenTip" xml:space="preserve">
+    <value>Analyze Links in Listed WBs</value>
+  </data>
+  <data name="AnalyzeLinksSelected_SuperTip" xml:space="preserve">
+    <value>Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences.
+
+All valid WB names in the currently selected Range are analyzed.</value>
+  </data>
+  <data name="LinksAnalysisGroup_Label" xml:space="preserve">
+    <value>External Links Analysis</value>
+  </data>
 </root>

@@ -58,8 +58,5 @@ namespace PGSolutions.LinksAnalyzer.Interfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.INameList)]
-    public interface INameList {
-        int     Count { get; }
-        string  Item(int index);
-    }
+    public interface INameList : IReadOnlyList<string> { }
 }

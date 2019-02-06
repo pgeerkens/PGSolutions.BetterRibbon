@@ -57,6 +57,21 @@
                        />
                 </mso:box>
             </mso:group>
+            <mso:group id="LinksAnalysisGroup" getVisible="getVisible"
+                       getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
+                <mso:box id="LinksAnalysisBox" getVisible="getVisible" boxStyle="vertical">
+                    <mso:button id="AnalyzeLinksCurrent" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                    <mso:button id="AnalyzeLinksSelected" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                </mso:box>
+            </mso:group>
             <mso:group id="CSharpDemoGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                 <mso:toggleButton id="SizeToggle" getImage="getImage"

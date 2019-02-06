@@ -61,6 +61,62 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze Current WB.
+        /// </summary>
+        internal static string AnalyzeLinksCurrent_Label {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksCurrent_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze Links in Current WB.
+        /// </summary>
+        internal static string AnalyzeLinksCurrent_ScreenTip {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksCurrent_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences..
+        /// </summary>
+        internal static string AnalyzeLinksCurrent_SuperTip {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksCurrent_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze Listed WBs.
+        /// </summary>
+        internal static string AnalyzeLinksSelected_Label {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksSelected_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze Links in Listed WBs.
+        /// </summary>
+        internal static string AnalyzeLinksSelected_ScreenTip {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksSelected_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences.
+        ///
+        ///All valid WB names in the currently selected Range are analyzed..
+        /// </summary>
+        internal static string AnalyzeLinksSelected_SuperTip {
+            get {
+                return ResourceManager.GetString("AnalyzeLinksSelected_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Button #1.
         /// </summary>
         internal static string AppLaunchButton1_Label {
@@ -351,6 +407,15 @@ namespace BetterRibbon.Properties {
         internal static string LabelOnly_SuperTip {
             get {
                 return ResourceManager.GetString("LabelOnly_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External Links Analysis.
+        /// </summary>
+        internal static string LinksAnalysisGroup_Label {
+            get {
+                return ResourceManager.GetString("LinksAnalysisGroup_Label", resourceCulture);
             }
         }
         

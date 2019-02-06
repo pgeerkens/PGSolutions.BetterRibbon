@@ -205,6 +205,8 @@
     <Compile Include="src\CustomButtonsModel.cs" />
     <Compile Include="src\CustomizableButtonsViewModel.cs" />
     <Compile Include="src\DemonstrationModel.cs" />
+    <Compile Include="src\LinksAnalysisModel.cs" />
+    <Compile Include="src\LinksAnalysisViewModel.cs" />
     <Compile Include="src\LinksAnalyzer.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\AbstractRibbonGroupViewModel.cs" />

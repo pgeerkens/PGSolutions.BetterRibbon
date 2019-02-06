@@ -50,6 +50,7 @@ namespace PGSolutions.BetterRibbon {
 
         private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel.BrandingViewModel);
+            LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
                 new List<IVbaSourceExportViewModel> {
                     ViewModel.VbaExportViewModel_MS,
@@ -64,6 +65,7 @@ namespace PGSolutions.BetterRibbon {
         private BetterRibbonViewModel ViewModel            { get; set; }
 
         private BrandingModel         BrandingModel        { get; set; }
+        private LinksAnalysisModel    LinksAnalysisModel   { get; set; }
         [SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
         private VbaSourceExportModel  VbaSourceExportModel { get; set; }
         private DemonstrationModel    DemonstrationModel   { get; set; }
