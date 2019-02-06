@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
@@ -12,8 +11,8 @@ using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
-using PGSolutions.LinksAnalyzer;
-using PGSolutions.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The publicly available entry points to the library.</summary>

@@ -6,11 +6,12 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
-    internal sealed class VbaSourceExportModel : IBooleanSource {
-        internal VbaSourceExportModel(IList<IVbaSourceExportViewModel> viewModels ) {
-            DestIsSrc  = false;
-            ViewModels = viewModels;
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    public sealed class VbaSourceExportModel : IBooleanSource {
+        public VbaSourceExportModel(Application application, IList<IVbaSourceExportViewModel> viewModels ) {
+            DestIsSrc   = false;
+            Application = application;
+            ViewModels  = viewModels;
             foreach (var viewModel in ViewModels) {
                 viewModel.SelectedProjectsClicked += ExportSelectedProject;
                 viewModel.CurrentProjectClicked   += ExportCurrentProject;
@@ -21,9 +22,11 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
 
         bool IBooleanSource.Getter() => DestIsSrc;
 
+        private Application                      Application { get; }
+
         /// <summary>Fakse => file destination is eponymous directory; else directory named "SRC".</summary>
-        private bool                             DestIsSrc  { get; set; }
-        private IList<IVbaSourceExportViewModel> ViewModels { get; }
+        private bool                             DestIsSrc   { get; set; }
+        private IList<IVbaSourceExportViewModel> ViewModels  { get; }
 
         private void UseSrcFolderToggled(object sender, bool isPressed) {
             DestIsSrc = isPressed;
@@ -39,7 +42,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
         private void ExportCurrentProject(object sender) => PerformSilently(() => 
-                ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc));
+                new ProjectFilterExcel(Application).ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc));
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
         /// <param name="sender">The object that initiated the event.</param>
@@ -58,7 +61,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 fd.Filters.Clear();
                 fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-                var list = new ProjectFilters();
+                var list = new ProjectFilters(Application);
                 foreach (var item in list) {
                     fd.Filters.Add(item.Description, item.Extensions);
                 }
@@ -75,7 +78,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
             }
         }
 
-        private static void PerformSilently(System.Action action) {
+        private void PerformSilently(System.Action action) {
             try {
                 Application.Cursor = XlMousePointer.xlWait;
                 Application.ScreenUpdating = false;
@@ -89,7 +92,5 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 Application.Cursor = XlMousePointer.xlDefault;
             }
         }
-
-        private static Application Application => Globals.ThisAddIn.Application;
     }
 }

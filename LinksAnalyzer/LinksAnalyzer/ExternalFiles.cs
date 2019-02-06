@@ -9,9 +9,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using PGSolutions.LinksAnalyzer.Interfaces;
 
-namespace PGSolutions.LinksAnalyzer {
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     [Serializable]
     [ComVisible(false)]
     public class FilesDictionary : Dictionary<string,string> {

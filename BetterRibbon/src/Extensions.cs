@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Windows.Forms;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     internal static partial class Extensions {
         public static void ShowMsgString(this string message, string caption = "",
                 MessageBoxIcon icon = MessageBoxIcon.None) =>

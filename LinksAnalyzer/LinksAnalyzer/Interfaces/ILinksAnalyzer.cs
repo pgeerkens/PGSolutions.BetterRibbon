@@ -4,15 +4,15 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
 using Excel = Microsoft.Office.Interop.Excel;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using Workbook  = Microsoft.Office.Interop.Excel.Workbook;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
-using PGSolutions.LinksAnalyzer.Interfaces;
-using System.Collections.Generic;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]

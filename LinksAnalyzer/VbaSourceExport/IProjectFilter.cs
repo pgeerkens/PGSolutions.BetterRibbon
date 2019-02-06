@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal interface IProjectFilter {
         /// <summary>Returns the Description for this filter.</summary>
         string Description { get; }

@@ -2,14 +2,16 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
+
 using Microsoft.Office.Core;
 using Microsoft.Vbe.Interop;
+using Application = Microsoft.Office.Interop.Excel.Application;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal abstract class ProjectFilter : IProjectFilter {
-        public ProjectFilter(string description, string extensions) {
+        public ProjectFilter(Application application, string description, string extensions) {
+            Application = application;
             Description = description;
             Extensions  = extensions;
         }
@@ -20,10 +22,12 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         /// <inheritdoc/>
         public string Extensions  { get; }
 
+        protected Application Application { get; }
+
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
 
-        protected static void ExtractProjectModules(VBProject project, string path) {
+        protected void ExtractProjectModules(VBProject project, string path) {
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     SetStatusBarText(project.Name, component.Name);
@@ -32,15 +36,15 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
                 }
 
                 File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
-            } catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)) {
-                $"Directory conflict occurred. Please retry.".ShowMsgString();
+            //} catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)) {
+            //    $"Directory conflict occurred. Please retry.".ShowMsgString();
             } finally {
-                Globals.ThisAddIn.Application.StatusBar = false;
+                Application.StatusBar = false;
             }
         }
 
-        protected static void SetStatusBarText(string projectName, string componentName) =>
-            Globals.ThisAddIn.Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
+        protected void SetStatusBarText(string projectName, string componentName) =>
+            Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
 
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
         /// <param name="path">Full (absolute) path-name for the project being exported.</param>

@@ -5,9 +5,9 @@ using System;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     //public class LinksAnalyzer {
     //    public static ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula) => 
     //        new LinksLexer(cellRef, formula);

@@ -10,7 +10,8 @@ using stdole;
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
-using PGSolutions.BetterRibbon.VbaSourceExport;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.VbaSourceExport;
 using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {

@@ -6,7 +6,6 @@ using System.Deployment.Application;
 using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
-using Microsoft.Office.Tools.Excel;
 
 using Excel = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;

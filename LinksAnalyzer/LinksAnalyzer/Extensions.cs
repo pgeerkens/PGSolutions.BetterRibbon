@@ -9,9 +9,10 @@ using System.Collections.Generic;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     public static partial class Extensions {
         /// <summary>.</summary>
         /// <param name="range"></param>

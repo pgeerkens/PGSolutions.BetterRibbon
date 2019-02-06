@@ -86,13 +86,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComClasses\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IBetterRibbon.cs" />
     <Compile Include="ComInterfaces\IBooleanSource.cs" />
@@ -150,12 +149,6 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LinksAnalyzer\LinksAnalyzer.csproj">
-      <Project>{FAB5DE05-0232-4053-B4CE-CE9A1A312750}</Project>
-      <Name>LinksAnalyzer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

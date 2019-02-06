@@ -2,7 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     public static class Guids {
         private const string LinksAnalyzerGuidSpace = "-56F4-3B33-B105-9B8188A6F040";
         public const string IToken                  = "69E19400" + LinksAnalyzerGuidSpace;

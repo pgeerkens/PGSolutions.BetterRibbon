@@ -3,13 +3,17 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal class ProjectFilters : List<ProjectFilter> {
-        public ProjectFilters() {
-            Add(new ProjectFilterExcel("MS-Excel Projects", "*.xlsm;*.xlsb;*.xlam;*.xls;*.xla"));
+        public ProjectFilters(Excel.Application application) {
+            Add(new ProjectFilterExcel(application, 
+                    "MS-Excel Projects", "*.xlsm;*.xlsb;*.xlam;*.xls;*.xla"));
 
             if (AccessWrapper.IsAccessSupported) {
-                Add(new ProjectFilterAccess("MS-Access Projects", "*.accdb;*.accda;*.mdb;*.mda"));
+                Add(new ProjectFilterAccess(application, 
+                        "MS-Access Projects", "*.accdb;*.accda;*.mdb;*.mda"));
             }
         }
     }

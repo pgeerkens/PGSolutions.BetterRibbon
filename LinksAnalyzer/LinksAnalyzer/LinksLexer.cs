@@ -6,9 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using PGSolutions.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     /// <summary>TODO</summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]

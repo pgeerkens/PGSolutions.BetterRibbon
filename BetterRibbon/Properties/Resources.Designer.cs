@@ -191,7 +191,7 @@ namespace BetterRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Simple robust solutions to complex problems, by Pieter Geerkens
         ///
-        ///https://github.com/pgeerkens/PGSolutions.BetterRibbon.
+        ///https://github.com/pgeerkens/PGSolutions.RibbonUtilities.LinksAnalyzer.
         /// </summary>
         internal static string BrandingButton_SuperTip {
             get {

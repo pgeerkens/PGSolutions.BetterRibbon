@@ -144,14 +144,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
@@ -209,15 +207,10 @@
     <Compile Include="src\LinksAnalysisViewModel.cs" />
     <Compile Include="src\LinksAnalyzer.cs" />
     <Compile Include="src\Main.cs" />
-    <Compile Include="src\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="src\BrandingViewModel.cs" />
     <Compile Include="src\DemonstrationViewModel.cs" />
     <Compile Include="src\LocalResourceManager.cs" />
-    <Compile Include="VbaSourceExport\AccessWrapper.cs" />
     <Compile Include="src\Extensions.cs" />
-    <Compile Include="VbaSourceExport\IVbaSourceExportViewModel.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
-    <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -258,12 +251,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="VbaSourceExport\IProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilters.cs" />
     <Compile Include="src\BetterRibbonViewModel.cs" />
-    <Compile Include="VbaSourceExport\VbaSourceExportViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -313,9 +301,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LinksAnalyzer\LinksAnalyzer.csproj">
+    <ProjectReference Include="..\LinksAnalyzer\RibbonUtilities.csproj">
       <Project>{fab5de05-0232-4053-b4ce-ce9a1a312750}</Project>
-      <Name>LinksAnalyzer</Name>
+      <Name>RibbonUtilities</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
@@ -323,6 +311,9 @@
       <Name>RibbonDispatcher</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VbaSourceExport\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

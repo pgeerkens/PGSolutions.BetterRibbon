@@ -3,12 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ComClasses;
 using static Microsoft.Office.Core.RibbonControlSize;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
-    internal class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportViewModel {
+using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses;
+
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    public class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportViewModel {
         public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
             var defaultSize = suffix=="MS" ? RibbonControlSizeRegular : RibbonControlSizeLarge;
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");

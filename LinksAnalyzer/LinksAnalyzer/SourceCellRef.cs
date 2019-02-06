@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
 
-namespace PGSolutions.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     /// <summary>TODO</summary>
     [Serializable]
     [CLSCompliant(true)]

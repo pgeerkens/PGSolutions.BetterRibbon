@@ -1,10 +1,9 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using PGSolutions.RibbonDispatcher.ComClasses;
 
-namespace PGSolutions.BetterRibbon {
-    internal abstract class AbstractRibbonGroupViewModel {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
+    public abstract class AbstractRibbonGroupViewModel {
         protected AbstractRibbonGroupViewModel(IRibbonFactory factory) => Factory = factory;
 
         protected IRibbonFactory Factory { get; }

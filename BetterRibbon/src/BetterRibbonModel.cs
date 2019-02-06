@@ -8,8 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.BetterRibbon.VbaSourceExport;
+using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -52,6 +53,7 @@ namespace PGSolutions.BetterRibbon {
             BrandingModel        = new BrandingModel(ViewModel.BrandingViewModel);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
+                Globals.ThisAddIn.Application,
                 new List<IVbaSourceExportViewModel> {
                     ViewModel.VbaExportViewModel_MS,
                     ViewModel.VbaExportViewModel_PG

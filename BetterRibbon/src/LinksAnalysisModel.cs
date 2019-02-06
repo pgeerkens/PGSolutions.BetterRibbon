@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Interop.Excel;
 
-using PGSolutions.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class LinksAnalysisModel {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.LinksAnalyzer.Interfaces {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces {
     /// <summary>TODO</summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [ComVisible(true)]

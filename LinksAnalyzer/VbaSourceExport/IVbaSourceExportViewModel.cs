@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
-    internal interface IVbaSourceExportViewModel {
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    public interface IVbaSourceExportViewModel {
         event ToggledEventHandler UseSrcFolderToggled;
         event ClickedEventHandler SelectedProjectsClicked;
         event ClickedEventHandler CurrentProjectClicked;

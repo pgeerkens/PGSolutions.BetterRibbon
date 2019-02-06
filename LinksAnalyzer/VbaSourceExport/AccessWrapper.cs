@@ -5,19 +5,20 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
+using Microsoft.Office.Interop.Excel;
 using Access = Microsoft.Office.Interop.Access;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal class AccessWrapper : IDisposable {
         public static bool IsAccessSupported => true;
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        public static AccessWrapper New() {
+        public static AccessWrapper New(Application application) {
             try {
-                Globals.ThisAddIn.Application.DisplayAlerts = false;
+                application.DisplayAlerts = false;
                 return new AccessWrapper();
             } finally {
-                Globals.ThisAddIn.Application.DisplayAlerts = true;
+                application.DisplayAlerts = true;
             }
         }
 
@@ -61,7 +62,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
     }
 
     internal static partial class Extensions {
-        public static void InvokeWithShiftKey(this Action action) {
+        public static void InvokeWithShiftKey(this System.Action action) {
 
             const byte VK_LSHIFT = 0xA0;  // left shift key
             try {

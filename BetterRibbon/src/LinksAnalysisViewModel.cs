@@ -6,10 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
     internal class LinksAnalysisViewModel : AbstractRibbonGroupViewModel {
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon)")]
-        [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
         public LinksAnalysisViewModel(IRibbonFactory factory) : base(factory) {
             LinksAnalysisGroup    = Factory.NewRibbonGroup("LinksAnalysisGroup", true);
             AnalyzeCurrentButton  = Factory.NewRibbonButtonMso(itemId:"AnalyzeLinksCurrent",  imageMso:"Refresh");

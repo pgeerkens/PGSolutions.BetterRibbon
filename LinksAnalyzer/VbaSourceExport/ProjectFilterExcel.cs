@@ -9,9 +9,13 @@ using Microsoft.Office.Core;
 using Excel    = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
-namespace PGSolutions.BetterRibbon.VbaSourceExport {
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal class ProjectFilterExcel : ProjectFilter  {
-        public ProjectFilterExcel(string description, string extensions) : base(description, extensions) { }
+        internal ProjectFilterExcel(Excel.Application application)
+        : this(application, "", "") { }
+
+        public ProjectFilterExcel(Excel.Application application, string description, string extensions)
+        : base(application, description, extensions) { }
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
@@ -27,11 +31,11 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         /// <summary>Returns true exactly when the Project Object Model is trusted.</summary>
-        private static bool IsProjectModelTrusted => Globals.ThisAddIn.Application.VBE != null;
+        private bool IsProjectModelTrusted => Application.VBE != null;
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private static void ExtractProject(string filename, bool destIsSrc) {
-            var appOpen   = Globals.ThisAddIn.Application;
+        private void ExtractProject(string filename, bool destIsSrc) {
+            var appOpen   = Application;
             var appClosed = new Lazy<Excel.Application>(() => new Excel.Application());
             try {
                 if (filename == appOpen.ActiveWorkbook.FullName) {
@@ -49,7 +53,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private static void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
+        private void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
             var wkbk = app.Workbooks.Open(filename, UpdateLinks:false, ReadOnly:true, AddToMru:false, Editable:false);
 
             try {
@@ -60,7 +64,7 @@ namespace PGSolutions.BetterRibbon.VbaSourceExport {
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public static void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
+        public void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
             ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 
