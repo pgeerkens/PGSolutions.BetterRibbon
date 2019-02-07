@@ -7,7 +7,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
-    internal class LinksAnalysisViewModel : AbstractRibbonGroupViewModel {
+    public class LinksAnalysisViewModel : AbstractRibbonGroupViewModel, ILinksAnalysisViewModel {
         public LinksAnalysisViewModel(IRibbonFactory factory) : base(factory) {
             LinksAnalysisGroup    = Factory.NewRibbonGroup("LinksAnalysisGroup", true);
             AnalyzeCurrentButton  = Factory.NewRibbonButtonMso(itemId:"AnalyzeLinksCurrent",  imageMso:"Refresh");

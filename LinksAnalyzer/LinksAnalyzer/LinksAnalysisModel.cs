@@ -1,28 +1,29 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
-
-namespace PGSolutions.BetterRibbon {
-    internal sealed class LinksAnalysisModel {
-        public LinksAnalysisModel(LinksAnalysisViewModel viewModel) {
-            ViewModel = viewModel;
+namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+    [CLSCompliant(false)]
+    public sealed class LinksAnalysisModel {
+        public LinksAnalysisModel(Application application, ILinksAnalysisViewModel viewModel) {
+            Application = application;
+            ViewModel   = viewModel;
             ViewModel.AnalyzeCurrentClicked  += OnAnalyzeCurrentClicked;
             ViewModel.AnalyzeSelectedClicked += OnAnalyzeSelectedClicked;
         }
 
         public void Invalidate() => ViewModel.Invalidate();
 
-        private LinksAnalysisViewModel ViewModel { get; set; }
+        private Application Application { get; }
+
+        private ILinksAnalysisViewModel ViewModel { get; set; }
 
         private void OnAnalyzeCurrentClicked(object sender) 
-        => new LinksAnalyzer().WriteLinksAnalysisWB(Application.ActiveWorkbook);
+        => new LinksAnalyzer(Application).WriteLinksAnalysisWB(Application.ActiveWorkbook);
 
         private void OnAnalyzeSelectedClicked(object sender)
         => Application.ActiveWorkbook.WriteLinks((Application.Selection as Range).GetNameList());
-
-        static Application Application => Globals.ThisAddIn.Application;
     }
 }

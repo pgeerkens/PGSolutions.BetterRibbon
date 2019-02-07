@@ -3,14 +3,17 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonUtilities.LinksAnalyzer;
 
-namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+namespace PGSolutions.BetterRibbon {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IBetterRibbon)]
+  //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
         IRibbonDispatcher NewBetterRibbon();
+        ILinksAnalyzer    NewLinksAnalyzer();
     }
 }

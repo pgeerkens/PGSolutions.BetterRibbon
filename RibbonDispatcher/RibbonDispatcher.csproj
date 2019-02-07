@@ -93,7 +93,6 @@
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
-    <Compile Include="ComInterfaces\IBetterRibbon.cs" />
     <Compile Include="ComInterfaces\IBooleanSource.cs" />
     <Compile Include="ComInterfaces\IIntegerSource.cs" />
     <Compile Include="Utilities\IActivatableControl.cs" />

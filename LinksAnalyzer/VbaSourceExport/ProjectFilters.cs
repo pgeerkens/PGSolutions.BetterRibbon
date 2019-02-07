@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    internal class ProjectFilters : List<ProjectFilter> {
-        public ProjectFilters(Excel.Application application) {
+    public class ProjectFilters : List<ProjectFilter> {
+        public ProjectFilters(IApplication application) {
             Add(new ProjectFilterExcel(application, 
                     "MS-Excel Projects", "*.xlsm;*.xlsb;*.xlam;*.xls;*.xla"));
 

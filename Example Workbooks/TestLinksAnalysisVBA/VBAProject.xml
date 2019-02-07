@@ -53,11 +53,11 @@
    />
    <References
       Description='PGSolutions External Links Analyzer for MS-Excel'
-      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\LinksAnalyzer\bin\Debug\PGSolutions.LinksAnalyzer.tlb'
+      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\LinksAnalyzer\bin\Debug\PGSolutions.RibbonUtilities.tlb'
       Guid='{69E19418-56F4-3B33-B105-9B8188A6F040}'
       Major='1'
       Minor='0'
-      Name='PGSolutions_LinksAnalyzer'
+      Name='PGSolutions_RibbonUtilities'
       Type='vbext_rk_TypeLib'
    />
 </Project>

@@ -1,16 +1,18 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.IO;
 using System.Text;
 
 using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Vbe.Interop;
-using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    internal abstract class ProjectFilter : IProjectFilter {
-        public ProjectFilter(Application application, string description, string extensions) {
+    [CLSCompliant(false)]
+    public abstract class ProjectFilter : IProjectFilter {
+        public ProjectFilter(IApplication application, string description, string extensions) {
             Application = application;
             Description = description;
             Extensions  = extensions;
@@ -22,7 +24,16 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public string Extensions  { get; }
 
-        protected Application Application { get; }
+        /// <inheritdoc/>
+        public IApplication Application { get; }
+
+        /// <nheritdoc/>
+        public virtual void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
+            ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
+
+        /// <nheritdoc/>
+        public virtual void ExtractOpenProject(bool destIsSrc) =>
+            ExtractOpenProject(Application.ActiveWorkbook,destIsSrc);
 
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);

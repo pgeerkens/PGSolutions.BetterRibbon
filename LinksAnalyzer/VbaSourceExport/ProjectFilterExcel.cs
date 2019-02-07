@@ -10,36 +10,27 @@ using Excel    = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    internal class ProjectFilterExcel : ProjectFilter  {
-        internal ProjectFilterExcel(Excel.Application application)
-        : this(application, "", "") { }
+    [CLSCompliant(false)]
+    public class ProjectFilterExcel : ProjectFilter  {
+        public ProjectFilterExcel(IApplication application)
+        : this(application, null, null) { }
 
-        public ProjectFilterExcel(Excel.Application application, string description, string extensions)
+        public ProjectFilterExcel(IApplication application, string description, string extensions)
         : base(application, description, extensions) { }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
-            if ( IsProjectModelTrusted) {
-                foreach (string selectedItem in items) {
-                    ExtractProject(selectedItem, destIsSrc);
-                }
-            } else {
-                MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            foreach (string selectedItem in items) {
+                ExtractProject(selectedItem, destIsSrc);
             }
         }
 
-        /// <summary>Returns true exactly when the Project Object Model is trusted.</summary>
-        private bool IsProjectModelTrusted => Application.VBE != null;
-
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         private void ExtractProject(string filename, bool destIsSrc) {
-            var appOpen   = Application;
             var appClosed = new Lazy<Excel.Application>(() => new Excel.Application());
             try {
-                if (filename == appOpen.ActiveWorkbook.FullName) {
-                    ExtractOpenProject(appOpen.ActiveWorkbook, destIsSrc);
+                if (filename == Application.ActiveWorkbook.FullName) {
+                    ExtractOpenProject(Application.ActiveWorkbook, destIsSrc);
                 } else {
                     appClosed.Value.Visible = false;
                     appClosed.Value.DisplayAlerts = false;
@@ -62,10 +53,23 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 wkbk?.Close();
             }
         }
-
-        /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
-            ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 
+    /// <summary>.</summary>
+    [CLSCompliant(false)]
+    public interface IApplication {
+        Workbook ActiveWorkbook         { get; }
+
+        bool     DisplayAlerts          { get; set; }
+
+        dynamic  StatusBar              { get; set; }
+
+        MsoAutomationSecurity AutomationSecurity { get; set; }
+    }
+
+    public static partial class Extensions {
+        /// <summary>.</summary>
+        /// <param name="this"></param>
+        internal static AccessWrapper NewAccessWrapper(this IApplication @this) => AccessWrapper.New(@this);
+    }
 }

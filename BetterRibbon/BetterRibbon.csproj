@@ -198,25 +198,25 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="src\BetterRibbonModel.cs" />
-    <Compile Include="src\BrandingModel.cs" />
-    <Compile Include="src\CustomButtonsModel.cs" />
-    <Compile Include="src\CustomizableButtonsViewModel.cs" />
-    <Compile Include="src\DemonstrationModel.cs" />
-    <Compile Include="src\LinksAnalysisModel.cs" />
-    <Compile Include="src\LinksAnalysisViewModel.cs" />
-    <Compile Include="src\LinksAnalyzer.cs" />
-    <Compile Include="src\Main.cs" />
-    <Compile Include="src\BrandingViewModel.cs" />
-    <Compile Include="src\DemonstrationViewModel.cs" />
-    <Compile Include="src\LocalResourceManager.cs" />
-    <Compile Include="src\Extensions.cs" />
+    <Compile Include="BetterRibbonModel.cs" />
+    <Compile Include="BrandingModel.cs" />
+    <Compile Include="CustomButtonsModel.cs" />
+    <Compile Include="CustomizableButtonsViewModel.cs" />
+    <Compile Include="DemonstrationModel.cs" />
+    <Compile Include="IBetterRibbon.cs" />
+    <Compile Include="LinksAnalysisViewModel.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="BrandingViewModel.cs" />
+    <Compile Include="DemonstrationViewModel.cs" />
+    <Compile Include="LocalResourceManager.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="VbaSourceExportViewModel.cs" />
     <Content Include="Extra Files\Lookup2.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -251,7 +251,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="src\BetterRibbonViewModel.cs" />
+    <Compile Include="BetterRibbonViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -312,9 +312,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VbaSourceExport\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -3,15 +3,6 @@ Option Explicit
 
 Private Const ModuleName   As String = "PublicMacros."
 
-''' <summary>Performs Links Analysis on ActiveWorkbook and reports the results on worksheets.</summary>
-Public Sub ActiveWkbkLinks()
-    On Error GoTo EH
-    AddInHandle.WriteLinksAnalysisWB ActiveWorkbook
-XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, ModuleName & "NewLinksLexer", vbOKOnly Or vbExclamation
-    Resume          ' for debugging only
-End Sub
-
 Public Sub TestAll()
     If RibbonUtils.TestAddinConnection Then
         LinksLexerTests.SimpleOperatorTest

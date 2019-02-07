@@ -2,32 +2,57 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
-using Excel = Microsoft.Office.Interop.Excel;
+using Range = Microsoft.Office.Interop.Excel.Range;
+using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+using Application = Microsoft.Office.Interop.Excel.Application;
+using PGSolutions.RibbonDispatcher.ComClasses;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
-    //public class LinksAnalyzer {
-    //    public static ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula) => 
-    //        new LinksLexer(cellRef, formula);
+    /// <summary>The publicly available entry points to the library.</summary>
+    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
+    [Serializable, CLSCompliant(false)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComDefaultInterface(typeof(ILinksAnalyzer))]
+    [Guid(Guids.LinksAnalyzer)]
+    [ProgId(ProgIds.RibbonDispatcherProgId)]
+    public sealed class LinksAnalyzer : ILinksAnalyzer {
+        public LinksAnalyzer(Application application) => Application = application;
 
-    //    [CLSCompliant(false)]
-    //    public static void ListExternalLinksActiveWorkbook(Excel.Workbook wb, bool IncludeHyperLinks) {
+        Application Application { get; }
 
-    //        if( wb == null) return;
+        /// <inheritdoc/>
+        public ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula)
+             => new LinksLexer(cellRef, formula);
 
-    //        wb.Application.ScreenUpdating = false;
-    //        bool protectStructure = wb.ProtectStructure;
-    //        try {
-    //            if (wb.ProtectStructure) wb.Protect(null, false);
+        /// <inheritdoc/>
+        public IExternalLinks NewExternalLinks(Application excel, INameList nameList)
+            => new ExternalLinks(Application, nameList);
 
-    //            var externalLinks = new ExternalLinks(wb, "Links Analysis");
-                
-    //        } finally {
-    //            wb.Protect(null, protectStructure);
-    //            wb.Application.ScreenUpdating = true;
-    //        }
-    //    }
-    //}
+        /// <inheritdoc/>
+        public IExternalLinks NewExternalLinksWB(Workbook wb, string excludedName)
+            => new ExternalLinks(wb, excludedName);
+
+        /// <inheritdoc/>
+        public IExternalLinks NewExternalLinksWS(Worksheet ws)
+            => new ExternalLinks(ws);
+
+        /// <inheritdoc/>
+        public IExternalLinks Parse(ISourceCellRef cellRef, string formula)
+            => new ExternalLinks(cellRef, formula);
+
+        /// <inheritdoc/>
+        public void WriteLinksAnalysisWB(Workbook wb)
+            => wb.WriteLinks();
+
+        /// <inheritdoc/>
+        public void WriteLinksAnalysisFiles(Workbook wb, Range range)
+            => wb.WriteLinks(range.GetNameList());
+    }
 }
