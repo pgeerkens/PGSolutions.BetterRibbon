@@ -12,10 +12,10 @@ using static Microsoft.Office.Core.RibbonControlSize;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.BetterRibbon;
-using Application = Microsoft.Office.Interop.Excel.Application;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    using Application           = Microsoft.Office.Interop.Excel.Application;
     using VbaExportEventHandler = EventHandler<VbaExportEventArgs>;
 
     /// <summary>.</summary>
@@ -68,7 +68,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                     var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
                     fd.Title = "Select VBA Project(s) to Export From";
                     fd.ButtonName = "Export";
-                    fd.AllowMultiSelect = true;     // MultiSelect requires eponymous naming
+                    fd.AllowMultiSelect = true;
                     fd.Filters.Clear();
                     fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
@@ -83,34 +83,26 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                         ) );
                     }
                 } finally {
-                    Application.DisplayAlerts = true;
-                    Application.ScreenUpdating = true;
-                    Application.Cursor = XlMousePointer.xlDefault;
                     Application.AutomationSecurity = securitySaved;
                 }
-            } catch (COMException) { PleaseEnableTrust(); }
-        }
-
-        private void PleaseEnableTrust() {
-            MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            } catch (COMException ex) { PleaseEnableTrust(); }
         }
 
         private void PerformSilently(System.Action action) {
             try {
                 Application.Cursor = XlMousePointer.xlWait;
-                Application.ScreenUpdating = false;
-                Application.DisplayAlerts = false;
 
                 action();
             } finally {
                 Application.StatusBar = false;
 
-                Application.DisplayAlerts = true;
-                Application.ScreenUpdating = true;
                 Application.Cursor = XlMousePointer.xlDefault;
             }
         }
+
+        private void PleaseEnableTrust()
+        => MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
         static Application Application => Globals.ThisAddIn.Application;
 
@@ -128,12 +120,21 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         public Workbook ActiveWorkbook => Application.ActiveWorkbook;
 
         /// <inheritfoc/>
-        public bool     DisplayAlerts { get => Application.DisplayAlerts; set => Application.DisplayAlerts = value; }
+        public bool     DisplayAlerts {
+            get => Application.DisplayAlerts;
+            set => Application.DisplayAlerts = value;
+        }
 
         /// <inheritfoc/>
-        public dynamic  StatusBar { get => Application.StatusBar; set => Application.StatusBar = value; }
+        public dynamic  StatusBar {
+            get => Application.StatusBar;
+            set => Application.StatusBar = value;
+        }
 
         /// <inheritfoc/>
-        public MsoAutomationSecurity AutomationSecurity { get => Application.AutomationSecurity; set => Application.AutomationSecurity = value; }
+        public MsoAutomationSecurity AutomationSecurity {
+            get => Application.AutomationSecurity;
+            set => Application.AutomationSecurity = value;
+        }
     }
 }

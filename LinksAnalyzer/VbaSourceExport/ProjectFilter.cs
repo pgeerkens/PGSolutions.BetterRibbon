@@ -27,16 +27,16 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public IApplication Application { get; }
 
-        /// <nheritdoc/>
-        public virtual void ExtractOpenProject(Workbook wkbk, bool destIsSrc) =>
-            ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
-
-        /// <nheritdoc/>
-        public virtual void ExtractOpenProject(bool destIsSrc) =>
-            ExtractOpenProject(Application.ActiveWorkbook,destIsSrc);
-
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
+
+        /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
+        public virtual void ExtractOpenProject(bool destIsSrc)
+        => ExtractOpenProject(Application.ActiveWorkbook,destIsSrc);
+
+        /// <inheritdoc/>
+        protected virtual void ExtractOpenProject(Workbook wkbk, bool destIsSrc)
+        => ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
 
         protected void ExtractProjectModules(VBProject project, string path) {
             try {
@@ -54,8 +54,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
         }
 
-        protected void SetStatusBarText(string projectName, string componentName) =>
-            Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
+        protected void SetStatusBarText(string projectName, string componentName)
+        => Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
 
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
         /// <param name="path">Full (absolute) path-name for the project being exported.</param>

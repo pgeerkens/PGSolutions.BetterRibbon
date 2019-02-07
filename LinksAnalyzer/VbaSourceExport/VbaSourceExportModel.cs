@@ -41,7 +41,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
         private void ExportCurrentProject(object sender, VbaExportEventArgs e)
-        => e.ProjectFilter.ExtractOpenProject(DestIsSrc);
+        => (e.ProjectFilter as ProjectFilterExcel)?.ExtractOpenProject(DestIsSrc);
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
         /// <param name="sender">The object that initiated the event.</param>

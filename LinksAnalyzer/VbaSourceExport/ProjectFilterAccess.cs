@@ -2,14 +2,11 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Access;
 using Microsoft.Office.Interop.Access.Dao;
-using Access = Microsoft.Office.Interop.Access;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal class ProjectFilterAccess : ProjectFilter {
@@ -19,20 +16,11 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
         /// <remarks>
         /// </remarks>
-        [SuppressMessage( "Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)" )]
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
-            //using (var app = AccessWrapper.New(Application)) {
             using (var app = Application.NewAccessWrapper()) {
                 if (app == null) { throw new NotSupportedException("MS-Access not available on this machine."); }
 
-                if (app.IsProjectModelTrusted) {
-                    foreach (string item in items) {
-                        ExtractProject(app, item, destIsSrc);
-                    }
-                } else {
-                    MessageBox.Show("Please enable trust of the Access Project Object Model", "Access Project Model Not Trusted",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-                }
+                foreach (string item in items) { ExtractProject(app, item, destIsSrc); }
             }
         }
 
@@ -55,8 +43,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         private const int    dbSqlPassThrough = 112;
         private const string indent           = ",\n    ";
 
-        private static void ExportDaoDatabase(Access.Application app, string exportPath) => ExportDaoDatabase(app, exportPath, true);
-        private static void ExportDaoDatabase(Access.Application app, string exportPath, bool queriesAsSql) {
+        private static void ExportDaoDatabase(Application app, string exportPath) => ExportDaoDatabase(app, exportPath, true);
+        private static void ExportDaoDatabase(Application app, string exportPath, bool queriesAsSql) {
             if (queriesAsSql) {
                 foreach (QueryDef qd in app.CurrentDb().QueryDefs) {
                     var sql = qd.Type == dbSqlPassThrough ? qd.SQL
@@ -82,7 +70,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
         }
 
-        private static string FullPath(string folder, string filename, string extension) =>
-            Path.Combine(folder, Path.ChangeExtension(filename, extension));
+        private static string FullPath(string folder, string filename, string extension)
+        => Path.Combine(folder, Path.ChangeExtension(filename, extension));
     }
 }

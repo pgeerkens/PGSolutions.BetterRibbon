@@ -31,8 +31,7 @@ namespace PGSolutions.BetterRibbon {
     [Guid(RibbonDispatcher.Guids.BetterRibbon)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-        Justification = "Public, Non-Creatable, class with exported Events.")]
-    //[Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
+            Justification = "Public, Non-Creatable, class with exported Events.")]
     public sealed class BetterRibbonModel : IRibbonDispatcher {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel) {
             ViewModel   = viewModel;
@@ -62,7 +61,7 @@ namespace PGSolutions.BetterRibbon {
 
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);
             DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationViewModel);
-            Attach();
+            BrandingModel.Attach();
         }
 
         private BetterRibbonViewModel ViewModel            { get; set; }
@@ -75,15 +74,9 @@ namespace PGSolutions.BetterRibbon {
         private CustomButtonsModel    CustomButtonsModel   { get; set; }
 
          /// <inheritdoc/>
-        public void Attach() {
-            BrandingModel.Attach();
-            DemonstrationModel.Attach();
-        }
+        public void Attach() => DemonstrationModel.Attach();
          /// <inheritdoc/>
-        public void Detach() {
-            DemonstrationModel.Detach();
-            BrandingModel.Detach();
-        }
+        public void Detach() => DemonstrationModel.Detach();
 
         #region IRibbonDispatcher methods
          /// <inheritdoc/>

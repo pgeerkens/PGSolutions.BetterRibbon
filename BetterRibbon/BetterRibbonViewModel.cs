@@ -30,7 +30,7 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(true)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
         Justification = "Public, Non-Creatable, class with exported Events.")]
-    [Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
+    //[Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class BetterRibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "BetterRibbon";
 

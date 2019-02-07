@@ -3,13 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Windows.Forms;
 
 using Microsoft.Office.Core;
-using Excel    = Microsoft.Office.Interop.Excel;
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    using Application = Microsoft.Office.Interop.Excel.Application;
+    
     [CLSCompliant(false)]
     public class ProjectFilterExcel : ProjectFilter  {
         public ProjectFilterExcel(IApplication application)
@@ -20,31 +19,31 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <inheritdoc/>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
-            foreach (string selectedItem in items) {
-                ExtractProject(selectedItem, destIsSrc);
+            var app = new Lazy<Application>(() => new Application());
+            try {
+                foreach (string selectedItem in items) {
+                    ExtractProject(app, selectedItem, destIsSrc);
+                }
+            } finally {
+                if (app.IsValueCreated) { app.Value.Quit(); }
             }
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private void ExtractProject(string filename, bool destIsSrc) {
-            var appClosed = new Lazy<Excel.Application>(() => new Excel.Application());
-            try {
-                if (filename == Application.ActiveWorkbook.FullName) {
-                    ExtractOpenProject(Application.ActiveWorkbook, destIsSrc);
-                } else {
-                    appClosed.Value.Visible = false;
-                    appClosed.Value.DisplayAlerts = false;
-                    appClosed.Value.ScreenUpdating = false;
-                    appClosed.Value.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
-                    ExtractClosedProject(appClosed.Value, filename, destIsSrc);
-                }
-            } finally {
-                if (appClosed.IsValueCreated) { appClosed.Value.Quit(); }
+        private void ExtractProject(Lazy<Application> app, string filename, bool destIsSrc) {
+            if (filename == Application.ActiveWorkbook.FullName) {
+                ExtractOpenProject(Application.ActiveWorkbook, destIsSrc);
+            } else {
+                app.Value.Visible = false;
+                app.Value.DisplayAlerts = false;
+                app.Value.ScreenUpdating = false;
+                app.Value.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+                ExtractClosedProject(app.Value, filename, destIsSrc);
             }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private void ExtractClosedProject(Excel.Application app, string filename, bool destIsSrc) {
+        private void ExtractClosedProject(Application app, string filename, bool destIsSrc) {
             var wkbk = app.Workbooks.Open(filename, UpdateLinks:false, ReadOnly:true, AddToMru:false, Editable:false);
 
             try {
@@ -53,23 +52,9 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 wkbk?.Close();
             }
         }
-    }
 
-    /// <summary>.</summary>
-    [CLSCompliant(false)]
-    public interface IApplication {
-        Workbook ActiveWorkbook         { get; }
-
-        bool     DisplayAlerts          { get; set; }
-
-        dynamic  StatusBar              { get; set; }
-
-        MsoAutomationSecurity AutomationSecurity { get; set; }
-    }
-
-    public static partial class Extensions {
-        /// <summary>.</summary>
-        /// <param name="this"></param>
-        internal static AccessWrapper NewAccessWrapper(this IApplication @this) => AccessWrapper.New(@this);
+        ///// <inheritdoc/>
+        //private void ExtractOpenProject(Excel.Workbook wkbk, bool destIsSrc)
+        //=> ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
     }
 }
