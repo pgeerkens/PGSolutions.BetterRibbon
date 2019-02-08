@@ -40,6 +40,7 @@ namespace PGSolutions.BetterRibbon {
             };
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public string   GroupId => CustomizableGroup.Id;
         public void     Invalidate() {
             CustomizableToggle.Invalidate();

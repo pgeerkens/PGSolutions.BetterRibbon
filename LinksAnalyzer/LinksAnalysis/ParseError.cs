@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>TODO</summary>
     [Serializable]
     [CLSCompliant(true)]

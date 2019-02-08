@@ -7,11 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using static Microsoft.Office.Core.RibbonControlSize;
-
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon CheckBox objects.</summary>
@@ -19,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
         Justification = "Public, Non-Creatable, class with exported Events.")]
     [Serializable]
-    [CLSCompliant(true)]
+    [CLSCompliant(false)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvents))]
@@ -64,9 +61,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #region ISizeable implementation
         /// <inheritdoc/>>
         public virtual bool IsSizeable => false;
+
         /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
-        public virtual RibbonControlSize Size {
-            get => RibbonControlSizeRegular;
+        public virtual bool IsLarge {
+            get => false;
             set { /* NO-OP */ }
         }
         #endregion

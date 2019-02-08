@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -67,6 +67,7 @@ namespace PGSolutions.BetterRibbon {
         private BetterRibbonViewModel ViewModel            { get; set; }
 
         private BrandingModel         BrandingModel        { get; set; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private LinksAnalysisModel    LinksAnalysisModel   { get; set; }
         [SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
         private VbaSourceExportModel  VbaSourceExportModel { get; set; }

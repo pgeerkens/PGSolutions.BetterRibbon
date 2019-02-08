@@ -1,12 +1,12 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using PGSolutions.RibbonDispatcher.ComInterfaces;
+using System;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public interface ILinksAnalysisViewModel {
-        event ClickedEventHandler  AnalyzeCurrentClicked;
-        event ClickedEventHandler  AnalyzeSelectedClicked;
+        event EventHandler  AnalyzeCurrentClicked;
+        event EventHandler  AnalyzeSelectedClicked;
 
         void Invalidate();
     }

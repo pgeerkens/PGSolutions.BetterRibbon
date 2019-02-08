@@ -11,10 +11,10 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
         public static void WriteLinks(this Workbook wb) {

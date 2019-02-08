@@ -35,20 +35,25 @@ namespace PGSolutions.BetterRibbon {
             CustomButton3.Clicked += OnButton3Clicked;
         }
 
-        public event ToggledEventHandler  IsLargeToggled;
-        public event SelectedEventHandler DisplaySelection;
-        public event ClickedEventHandler  Button1Clicked;
-        public event ClickedEventHandler  Button2Clicked;
-        public event ClickedEventHandler  Button3Clicked;
+        public event EventHandler<bool>  IsLargeToggled;
+        public event EventHandler<int>   DisplaySelection;
+        public event ClickedEventHandler Button1Clicked;
+        public event ClickedEventHandler Button2Clicked;
+        public event ClickedEventHandler Button3Clicked;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonGroup        CustomGroup    { get; }
         private RibbonToggleButton IsLargeToggle  { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonCheckBox     CheckBox1      { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonCheckBox     CheckBox2      { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonCheckBox     CheckBox3      { get; }
         private RibbonDropDown     DisplayOptions { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonDropDown     Dropdown2      { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonDropDown     Dropdown3      { get; }
         private RibbonButton       CustomButton1  { get; }
         private RibbonButton       CustomButton2  { get; }
@@ -59,8 +64,8 @@ namespace PGSolutions.BetterRibbon {
 
         private void OnIsLargeToggled(object sender, bool ispressed) =>
             IsLargeToggled?.Invoke(sender, ispressed);
-        private void OnDisplaySelection(string itemid, int itemindex) =>
-            DisplaySelection?.Invoke(itemid, itemindex);
+        private void OnDisplaySelection(object sender, int selectedIndex) =>
+            DisplaySelection?.Invoke(sender, selectedIndex);
 
         private void OnButton1Clicked(object sender) => Button1Clicked?.Invoke(sender);
         private void OnButton2Clicked(object sender) => Button2Clicked?.Invoke(sender);
@@ -79,6 +84,7 @@ namespace PGSolutions.BetterRibbon {
             CustomButton2.Attach();
             CustomButton3.Attach();
         }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public void Detach() {
             CustomButton3.Detach();
             CustomButton2.Detach();

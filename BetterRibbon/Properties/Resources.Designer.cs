@@ -79,7 +79,7 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences..
+        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references..
         /// </summary>
         internal static string AnalyzeLinksCurrent_SuperTip {
             get {
@@ -106,7 +106,7 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named reeferences.
+        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references.
         ///
         ///All valid WB names in the currently selected Range are analyzed..
         /// </summary>
@@ -191,7 +191,7 @@ namespace BetterRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Simple robust solutions to complex problems, by Pieter Geerkens
         ///
-        ///https://github.com/pgeerkens/PGSolutions.RibbonUtilities.LinksAnalyzer.
+        ///https://github.com/pgeerkens/PGSolutions.BetterRibbon.
         /// </summary>
         internal static string BrandingButton_SuperTip {
             get {

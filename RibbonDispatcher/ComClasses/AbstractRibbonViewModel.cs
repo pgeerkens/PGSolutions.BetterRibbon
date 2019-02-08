@@ -5,7 +5,6 @@ using System;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
-using static Microsoft.Office.Core.RibbonControlSize;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
@@ -104,8 +103,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>All of the defined controls implementing the {ISizeable} interface.</summary>
         private ISizeable Sizeables(string controlId) => _ribbonFactory.Sizeables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public RibbonControlSize GetSize(IRibbonControl Control)
-            => Sizeables(Control?.Id)?.Size ?? RibbonControlSizeLarge;
+        public bool GetSize(IRibbonControl Control)
+            => (Sizeables(Control?.Id)?.IsLarge ?? true);
         #endregion
 
         #region IImageable implementation

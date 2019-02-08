@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -12,7 +12,7 @@ using PGSolutions.RibbonUtilities.LinksAnalyzer;
 [assembly: AssemblyDescription( "PGSolutions External Links Analyzer for MS-Excel" )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
-[assembly: AssemblyProduct( "LinksAnalyzer" )]
+[assembly: AssemblyProduct( "LinksAnalysis" )]
 [assembly: AssemblyCopyright("Copyright © 2018 Pieter Geerkens")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

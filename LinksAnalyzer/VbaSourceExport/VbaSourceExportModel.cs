@@ -21,8 +21,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         bool IBooleanSource.Getter() => DestIsSrc;
 
-        private IApplication                     Application { get; }
-
         /// <summary>Fakse => file destination is eponymous directory; else directory named "SRC".</summary>
         private bool                             DestIsSrc   { get; set; }
         private IList<IVbaSourceExportViewModel> ViewModels  { get; }

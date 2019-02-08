@@ -8,9 +8,9 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>TODO</summary>
     [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Description("")]

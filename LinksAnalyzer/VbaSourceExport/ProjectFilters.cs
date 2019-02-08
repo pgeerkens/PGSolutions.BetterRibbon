@@ -1,11 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 
-using Excel = Microsoft.Office.Interop.Excel;
-
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [CLSCompliant(false)]
     public class ProjectFilters : List<ProjectFilter> {
         public ProjectFilters(IApplication application) {
             Add(new ProjectFilterExcel(application, 

@@ -26,9 +26,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class RibbonButton : RibbonCommon, IRibbonButton, IActivatableControl<IRibbonButton>,
         ISizeable, IClickable, IImageable {
         internal RibbonButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
-                RibbonControlSize size, ImageObject image, bool showImage, bool showLabel
+                bool isLarge, ImageObject image, bool showImage, bool showLabel
         ) : base(itemId, strings, visible, enabled) {
-            _size      = size;
+            _size      = isLarge.ControlSize();
             _image     = image;
             _showImage = showImage;
             _showLabel = showLabel;
@@ -58,9 +58,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region ISizeable implementation
         /// <inheritdoc/>
-        public RibbonControlSize Size {
-            get => _size;
-            set { _size = value; Invalidate(); }
+        public bool IsLarge {
+            get => _size == RibbonControlSize.RibbonControlSizeLarge;
+            set { _size = value.ControlSize() ; Invalidate(); }
         }
         private RibbonControlSize _size;
         #endregion

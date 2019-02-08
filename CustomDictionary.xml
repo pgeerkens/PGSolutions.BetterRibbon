@@ -20,6 +20,7 @@
         <Word>activatable</Word>
         <Word>behaviour</Word>
         <Word>ctl</Word>
+        <Word>dest</Word>
         <Word>disp</Word>       <!-- Inherited usage in IPictureDisp retained for consistency -->
         <Word>dockable</Word>
         <Word>Geerkens</Word>
@@ -37,9 +38,12 @@
         <Word>selectables</Word>
         <Word>sizeable</Word>
         <Word>sizeables</Word>
+        <Word>src</Word>
         <Word>toggleable</Word>
         <Word>toggleables</Word>
         <Word>typelib</Word>
+        <Word>vba</Word>
+        <Word>wkbk</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate=""></Term>

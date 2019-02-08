@@ -209,7 +209,6 @@
     <Compile Include="BrandingViewModel.cs" />
     <Compile Include="DemonstrationViewModel.cs" />
     <Compile Include="LocalResourceManager.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

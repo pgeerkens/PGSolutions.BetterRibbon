@@ -6,9 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>TODO</summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
@@ -25,7 +25,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
             Tokens       = new List<IToken>();
         }
 
-        public static readonly IReadOnlyList<string> WordOperators = new List<string> { "AND", "OR" };
+        public static IReadOnlyList<string> WordOperators { get; } = new List<string> { "AND", "OR" };
 
         public  ISourceCellRef  CellRef      { get; }
         public  string          Formula      { get; }

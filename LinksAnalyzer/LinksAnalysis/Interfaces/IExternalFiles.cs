@@ -2,10 +2,11 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
     /// <summary>TODO</summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [ComVisible(true)]
@@ -54,6 +55,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces {
     }
 
     /// <summary>TODO</summary>
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]

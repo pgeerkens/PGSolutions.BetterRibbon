@@ -11,8 +11,6 @@ using System.Windows.Forms;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using System.Collections.Generic;
 
-using static Microsoft.Office.Core.RibbonControlSize;
-
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public static class Extensions {
         private const string Caption = "PGSolutions Ribbon Dispatcher";
@@ -22,8 +20,10 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         public static void DefaultButtonAction(object sender) =>
             $"{(sender as IRibbonButton)?.Id ?? "Unknown Button"} pressed.".MsgBoxShow();
         
+        public static void MsgBoxShow(this string message) => message.MsgBoxShow(Caption);
+
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
-        public static void MsgBoxShow(this string message, string caption = Caption)  =>
+        public static void MsgBoxShow(this string message, string caption)  =>
             MessageBox.Show($"{message}.", caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         /// <summary>Returns the text for the resource named <paramref name="resourceName"/>; else null if not found.</summary>
@@ -36,19 +36,18 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
         }
 
         public static bool SetButtonSize(this IList<IRibbonButton> buttons, bool isLarge) {
-            foreach (var b in buttons) { b.Size = isLarge ? RibbonControlSizeLarge : RibbonControlSizeRegular; }
+            foreach (var b in buttons ?? new List<IRibbonButton>()) { b.IsLarge = isLarge; }
             return isLarge;
         }
 
         public static string FormatVersion(this Version version) =>
-            $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}\nat " +
-            $"{version.Build.FormatVersionDate()} " +
-            $"{version.Revision.FormatVersionTime()} (UTC)";
+            $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}\nat " +
+            $"{version?.Build.FormatVersionDate()} " +
+            $"{version?.Revision.FormatVersionTime()} (UTC)";
         private static string FormatVersionDate(this int dayNo) =>
-            new DateTime(2000,1,1).AddDays(dayNo).ToUniversalTime().ToString("yyyy-MM-dd");// .ToLongDateString();
+            new DateTime(2000,1,1).AddDays(dayNo).ToUniversalTime().ToString("yyyy-MM-dd");
         private static string FormatVersionTime(this int halfSeconds) =>
-            new DateTime(2000,1,1).AddSeconds(2 * halfSeconds).ToUniversalTime().ToString("HH:mm:ss");// .ToLongTimeString();
-
+            new DateTime(2000,1,1).AddSeconds(2 * halfSeconds).ToUniversalTime().ToString("HH:mm:ss");
 
         [Flags]
         public enum LabelImageOptions {
@@ -67,7 +66,7 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
 
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
         public static void SetDisplay<T>(this IList<T> buttons, LabelImageOptions displayOptions) where T: IRibbonImageable {
-            foreach (var b in buttons) {
+            foreach (var b in buttons  ?? new List<T>()) {
                 b.ShowLabel = displayOptions.HasFlag(LabelImageOptions.ShowLabel);
                 b.ShowImage = displayOptions.HasFlag(LabelImageOptions.ShowImage);
             }

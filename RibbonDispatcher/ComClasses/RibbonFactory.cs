@@ -12,9 +12,6 @@ using stdole;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
-using static Microsoft.Office.Core.RibbonControlSize;
-using Microsoft.Office.Core;
-
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
@@ -35,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
     public class RibbonFactory : IRibbonFactory {
-        internal RibbonFactory() : this(new ResourceLoader(), null) { ; }
+        public RibbonFactory() : this(new ResourceLoader(), null) { ; }
 
         internal RibbonFactory(IResourceManager manager) : this(null, manager) { ; }
 
@@ -111,38 +108,38 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonButton NewRibbonButton(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size  = RibbonControlSizeLarge,
-            IPictureDisp  image     = null,
-            bool          showImage = true,
-            bool          showLabel = true
-        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(image), showImage, showLabel));
+            bool         isLarge   = true,
+            IPictureDisp image     = null,
+            bool         showImage = true,
+            bool         showLabel = true
+        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(image), showImage, showLabel));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size  = RibbonControlSizeLarge,
-            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
-            bool          showImage = true,
-            bool          showLabel = true
-        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(imageMso), showImage, showLabel));
+            bool         isLarge   = true,
+            string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
+            bool         showImage = true,
+            bool         showLabel = true
+        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(imageMso), showImage, showLabel));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonToggleButton NewRibbonToggle(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size  = RibbonControlSizeLarge,
-            IPictureDisp  image     = null,
-            bool          showImage = true,
-            bool          showLabel = true
-        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(image), showImage, showLabel));
+            bool         isLarge   = true,
+            IPictureDisp image     = null,
+            bool         showImage = true,
+            bool         showLabel = true
+        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(image), showImage, showLabel));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
-            RibbonControlSize size  = RibbonControlSizeLarge,
-            string        imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
-            bool          showImage = true,
-            bool          showLabel = true
-        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, size, new ImageObject(imageMso), showImage, showLabel));
+            bool         isLarge   = true,
+            string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
+            bool         showImage = true,
+            bool         showLabel = true
+        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(imageMso), showImage, showLabel));
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -151,9 +148,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true,
-            Func<int> getter = null)
-            => Add(new RibbonDropDown(itemId, GetStrings(itemId), visible, enabled, getter));
+        public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true)
+            => Add(new RibbonDropDown(itemId, GetStrings(itemId), visible, enabled));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

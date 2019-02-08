@@ -12,7 +12,7 @@ using Microsoft.Vbe.Interop;
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     [CLSCompliant(false)]
     public abstract class ProjectFilter : IProjectFilter {
-        public ProjectFilter(IApplication application, string description, string extensions) {
+        protected ProjectFilter(IApplication application, string description, string extensions) {
             Application = application;
             Description = description;
             Extensions  = extensions;
@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         public IApplication Application { get; }
 
         /// <inheritdoc/>
-        public abstract void ExtractProjects(FileDialogSelectedItems Items, bool destIsSrc);
+        public abstract void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc);
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         public virtual void ExtractOpenProject(bool destIsSrc)
@@ -36,9 +36,10 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <inheritdoc/>
         protected virtual void ExtractOpenProject(Workbook wkbk, bool destIsSrc)
-        => ExtractProjectModules(wkbk.VBProject, CreateDirectory(wkbk.FullName, destIsSrc));
+        => ExtractProjectModules(wkbk?.VBProject, CreateDirectory(wkbk?.FullName, destIsSrc));
 
         protected void ExtractProjectModules(VBProject project, string path) {
+            if (project == null ) throw new ArgumentNullException(nameof(project));
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     SetStatusBarText(project.Name, component.Name);

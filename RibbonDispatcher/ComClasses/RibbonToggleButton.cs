@@ -24,9 +24,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonToggleButton)]
     public class RibbonToggleButton : RibbonCheckBox, IRibbonToggle, ISizeable, IImageable {
         internal RibbonToggleButton(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
-            RibbonControlSize size, ImageObject image, bool showImage, bool showLabel
+            bool isLarge, ImageObject image, bool showImage, bool showLabel
         ) : base(itemId, strings, visible, enabled) {
-            _size      = size;
+            _size      = isLarge.ControlSize();
             _image     = image;
             _showImage = showImage;
             _showLabel = showLabel;
@@ -50,9 +50,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>>
         public override bool IsSizeable => true;
         /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
-        public override RibbonControlSize Size {
-            get => _size;
-            set { _size = value; Invalidate(); }
+        public override bool IsLarge {
+            get => _size == RibbonControlSize.RibbonControlSizeLarge;
+            set { _size = value.ControlSize() ; Invalidate(); }
         }
         private RibbonControlSize _size;
         #endregion

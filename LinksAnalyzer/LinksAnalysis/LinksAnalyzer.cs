@@ -11,9 +11,9 @@ using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 using Application = Microsoft.Office.Interop.Excel.Application;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>The publicly available entry points to the library.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Serializable, CLSCompliant(false)]

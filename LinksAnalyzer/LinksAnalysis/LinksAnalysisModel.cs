@@ -4,7 +4,7 @@
 using System;
 using Microsoft.Office.Interop.Excel;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     public sealed class LinksAnalysisModel {
         public LinksAnalysisModel(Application application, ILinksAnalysisViewModel viewModel) {
@@ -20,10 +20,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
 
         private ILinksAnalysisViewModel ViewModel { get; set; }
 
-        private void OnAnalyzeCurrentClicked(object sender) 
+        private void OnAnalyzeCurrentClicked(object sender, EventArgs e) 
         => new LinksAnalyzer(Application).WriteLinksAnalysisWB(Application.ActiveWorkbook);
 
-        private void OnAnalyzeSelectedClicked(object sender)
+        private void OnAnalyzeSelectedClicked(object sender, EventArgs e)
         => Application.ActiveWorkbook.WriteLinks((Application.Selection as Range).GetNameList());
     }
 }

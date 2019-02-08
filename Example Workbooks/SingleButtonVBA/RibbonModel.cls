@@ -22,7 +22,7 @@ End Sub
 Friend Sub Activate()
     With RibbonDispatcher
         Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
-        Button1.SetImageMso "RefreshAll"
+        Button1.SetImageMso "MacroPlay"
         .InvalidateCustomControlsGroup
     End With
 End Sub

@@ -1,10 +1,12 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    internal interface IProjectFilter {
+    [CLSCompliant(false)]
+    public interface IProjectFilter {
         /// <summary>Returns the Description for this filter.</summary>
         string Description { get; }
 
@@ -14,6 +16,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         IApplication Application { get; }
 
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
-        void   ExtractProjects(FileDialogSelectedItems Items,bool destIsSrc);
+        void   ExtractProjects(FileDialogSelectedItems items,bool destIsSrc);
     }
 }

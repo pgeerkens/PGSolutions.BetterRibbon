@@ -7,7 +7,6 @@ using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
-using static Microsoft.Office.Core.RibbonControlSize;
 
 namespace PGSolutions.BetterRibbon {
     internal class BrandingViewModel : AbstractRibbonGroupViewModel {
@@ -15,7 +14,7 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
         public BrandingViewModel(IRibbonFactory factory, Func<IPictureDisp> logo) : base(factory) {
             BrandingGroup  = Factory.NewRibbonGroup("BrandingGroup", true);
-            BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, RibbonControlSizeLarge, logo(), false, false);
+            BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, true, logo(), false, false);
 
             BrandingButton.Clicked += OnButtonClicked;
             BrandingButton.Attach();

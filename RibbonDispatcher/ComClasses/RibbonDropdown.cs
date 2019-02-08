@@ -23,11 +23,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonDropDown)]
     public class RibbonDropDown : RibbonCommon, IRibbonDropDown, IActivatableControl<IRibbonCommon, int>,
         ISelectable {
-        internal RibbonDropDown(string itemId, IRibbonControlStrings strings, bool visible, bool enabled,
-            Func<int> getter = null
-        ) : base(itemId, strings, visible, enabled) {
-            if (getter != null) { Attach(getter); }
-        }
+        internal RibbonDropDown(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
+        : base(itemId, strings, visible, enabled) { }
 
         #region IActivatable implementation
         private Func<int> Getter { get; set; }
@@ -51,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region ISelectable implementation
         /// <summary>TODO</summary>
-        public event SelectedEventHandler SelectionMade;
+        public event SelectedEventHandler  SelectionMade;
 
         private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
 

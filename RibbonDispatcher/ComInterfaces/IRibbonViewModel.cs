@@ -72,7 +72,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Call back for GetSize events from ribbon elements.</summary>
         [DispId(DispIds.Size)]
         [Description("Call back for GetSize events from ribbon elements.")]
-        RibbonControlSize GetSize       (IRibbonControl Control);
+        bool   GetSize(IRibbonControl Control);
 
         /// <summary>Call back for GetSuperTip events from ribbon elements.</summary>
         [DispId(DispIds.SuperTip)]

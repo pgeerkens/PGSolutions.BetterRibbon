@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

@@ -99,26 +99,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LinksAnalyzer\ExcelLinksExtensions.cs" />
-    <Compile Include="LinksAnalyzer\Extensions.cs" />
-    <Compile Include="LinksAnalyzer\ExternalFiles.cs" />
-    <Compile Include="LinksAnalyzer\ExternaLinks.cs" />
-    <Compile Include="LinksAnalyzer\ExternalRef.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\ILinksAnalysisViewModel.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\EToken.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\Guids.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IExternalFiles.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IExternalNamedRef.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\ILinksAnalyzer.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IParseError.cs" />
-    <Compile Include="LinksAnalyzer\Interfaces\IToken.cs" />
-    <Compile Include="LinksAnalyzer\LinksAnalysisModel.cs" />
-    <Compile Include="LinksAnalyzer\LinksAnalyzer.cs" />
-    <Compile Include="LinksAnalyzer\LinksLexer.cs" />
-    <Compile Include="LinksAnalyzer\ParseError.cs" />
-    <Compile Include="LinksAnalyzer\ParseErrors.cs" />
-    <Compile Include="LinksAnalyzer\SourceCellRef.cs" />
-    <Compile Include="LinksAnalyzer\Token.cs" />
+    <Compile Include="LinksAnalysis\ExcelLinksExtensions.cs" />
+    <Compile Include="LinksAnalysis\Extensions.cs" />
+    <Compile Include="LinksAnalysis\ExternalFiles.cs" />
+    <Compile Include="LinksAnalysis\ExternaLinks.cs" />
+    <Compile Include="LinksAnalysis\ExternalRef.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\ILinksAnalysisViewModel.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\EToken.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\Guids.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\IExternalFiles.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\IExternalNamedRef.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\ILinksAnalyzer.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\IParseError.cs" />
+    <Compile Include="LinksAnalysis\Interfaces\IToken.cs" />
+    <Compile Include="LinksAnalysis\LinksAnalysisModel.cs" />
+    <Compile Include="LinksAnalysis\LinksAnalyzer.cs" />
+    <Compile Include="LinksAnalysis\LinksLexer.cs" />
+    <Compile Include="LinksAnalysis\ParseError.cs" />
+    <Compile Include="LinksAnalysis\ParseErrors.cs" />
+    <Compile Include="LinksAnalysis\SourceCellRef.cs" />
+    <Compile Include="LinksAnalysis\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
     <Compile Include="VbaSourceExport\Extensions.cs" />
@@ -146,6 +146,9 @@
       <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
       <Name>RibbonDispatcher</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LinksAnalyzer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

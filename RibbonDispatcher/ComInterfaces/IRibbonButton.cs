@@ -58,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
         [DispId(DispIds.Size)]
         [Description("Gets or sets the preferred {RdControlSize} for the control.")]
-        RibbonControlSize Size      { get; set; }
+        bool         IsLarge    { get; set; }
 
         /// <summary>Callback for the Clicked event on the control.</summary>
         [DispId(DispIds.OnClicked)]

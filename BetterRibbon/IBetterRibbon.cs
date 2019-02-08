@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
@@ -13,6 +13,7 @@ namespace PGSolutions.BetterRibbon {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
   //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
+        /// <summary>.</summary>
         IRibbonDispatcher NewBetterRibbon();
         ILinksAnalyzer    NewLinksAnalyzer();
     }

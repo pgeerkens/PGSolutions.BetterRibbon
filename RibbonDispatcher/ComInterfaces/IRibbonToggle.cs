@@ -66,7 +66,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool         IsSizeable { get; }
         /// <summary>TODO</summary>
         [DispId(DispIds.Size)]
-        RibbonControlSize Size  { get; set; }
+        bool         IsLarge    { get; set; }
 
         /// <summary>TODO</summary>
         bool        IsImageable { get; }

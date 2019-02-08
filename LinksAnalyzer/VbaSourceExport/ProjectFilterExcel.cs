@@ -19,6 +19,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <inheritdoc/>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
+            if (items == null ) throw new ArgumentNullException(nameof(items));
             var app = new Lazy<Application>(() => new Application());
             try {
                 foreach (string selectedItem in items) {

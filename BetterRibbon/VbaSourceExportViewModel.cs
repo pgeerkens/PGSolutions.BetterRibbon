@@ -7,7 +7,6 @@ using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
-using static Microsoft.Office.Core.RibbonControlSize;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -20,17 +19,17 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
     /// <summary>.</summary>
     [CLSCompliant(false)]
-    public class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportViewModel, IApplication {
+    public sealed class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportViewModel, IApplication {
         public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
-            var defaultSize = suffix=="MS" ? RibbonControlSizeRegular : RibbonControlSizeLarge;
+            var defaultSize = suffix=="MS" ? false : true;
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
-                                            size:defaultSize, imageMso:"MacroSecurity");
+                                            isLarge:defaultSize, imageMso:ToggleImage(false));
             SelectedProjectButton = Factory.NewRibbonButtonMso($"SelectedProjectButton{suffix}",
-                                            size:defaultSize, imageMso:"RefreshAll", showImage:true);
+                                            isLarge:defaultSize, imageMso:"SaveAll", showImage:true);
             CurrentProjectButton  = Factory.NewRibbonButtonMso($"CurrentProjectButton{suffix}",
-                                            size:defaultSize, imageMso:"Refresh", showImage:true);
+                                            isLarge:defaultSize, imageMso:"FileSaveAs", showImage:true);
 
             UseSrcFolderToggle.Toggled    += OnSrcFolderToggled;
             SelectedProjectButton.Attach<RibbonButton>().Clicked += OnExportSelected;
@@ -46,21 +45,28 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         public event VbaExportEventHandler SelectedProjectsClicked;
         public event VbaExportEventHandler CurrentProjectClicked;
 
-        private void OnSrcFolderToggled(object sender, bool isPressed) =>
-            UseSrcFolderToggled?.Invoke(sender,isPressed);
+        private void OnSrcFolderToggled(object sender, bool isPressed) {
+            UseSrcFolderToggle.SetImageMso(ToggleImage(isPressed));
+            UseSrcFolderToggled?.Invoke(sender, isPressed);
+        }
+
+        private static string ToggleImage(bool isPressed)
+        => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         private void OnExportCurrent(object sender) {
             try {
-                if ( Application.VBE == null) { throw new COMException(); }
+                if ( Application.VBE == null) { throw new InvalidOperationException(); }
                 PerformSilently(
                     () => CurrentProjectClicked?.Invoke(this, new VbaExportEventArgs(new ProjectFilterExcel(this) )
                 ) );
-            } catch (COMException) { PleaseEnableTrust(); }
+            }
+            catch (COMException) { PleaseEnableTrust(); }
+            catch (InvalidOperationException) { PleaseEnableTrust(); }
         }
 
         private void OnExportSelected(object sender) {
             try {
-                if ( Application.VBE == null) { throw new COMException(); }
+                if ( Application.VBE == null) { throw new InvalidOperationException(); }
                 var securitySaved = Application.AutomationSecurity;
                 Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
@@ -85,10 +91,12 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 } finally {
                     Application.AutomationSecurity = securitySaved;
                 }
-            } catch (COMException ex) { PleaseEnableTrust(); }
+            }
+            catch (COMException) { PleaseEnableTrust(); }
+            catch (InvalidOperationException) { PleaseEnableTrust(); }
         }
 
-        private void PerformSilently(System.Action action) {
+        private static void PerformSilently(System.Action action) {
             try {
                 Application.Cursor = XlMousePointer.xlWait;
 
@@ -100,7 +108,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
         }
 
-        private void PleaseEnableTrust()
+        private static void PleaseEnableTrust()
         => MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
                     MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 

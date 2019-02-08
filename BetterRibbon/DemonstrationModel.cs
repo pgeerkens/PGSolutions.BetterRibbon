@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
 using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
@@ -19,12 +20,12 @@ namespace PGSolutions.BetterRibbon {
         private bool               IsLarge        { get; set; }
         private LabelImageOptions  DisplayOption  { get; set; }
 
-        private void IsLargeToggled(object sender, bool ispressed) {
-            IsLarge = ispressed;
+        private void IsLargeToggled(object sender, bool isPressed) {
+            IsLarge = isPressed;
             Invalidate();
         }
-        private void DisplaySelection(string itemid, int itemindex) {
-            DisplayOption = itemindex.IndexToLabelImageDisplay();
+        private void DisplaySelection(object sender, int itemIndex) {
+            DisplayOption = itemIndex.IndexToLabelImageDisplay();
             Invalidate();
         }
 

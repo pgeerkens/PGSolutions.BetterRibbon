@@ -17,6 +17,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <remarks>
         /// </remarks>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
+            if (items == null ) throw new ArgumentNullException(nameof(items));
             using (var app = Application.NewAccessWrapper()) {
                 if (app == null) { throw new NotSupportedException("MS-Access not available on this machine."); }
 

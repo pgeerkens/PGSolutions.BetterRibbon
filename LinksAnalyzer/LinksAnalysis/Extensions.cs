@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using Excel = Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonUtilities.LinksAnalyzer.Interfaces;
-using PGSolutions.RibbonUtilities.LinksAnalyzer;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public static partial class Extensions {
         /// <summary>.</summary>
         /// <param name="range"></param>
@@ -43,7 +43,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalyzer {
 
         /// <summary>Returns true IFF current character is a LF, CR, TAB, FF, or SPACE.</summary>
         internal static bool IsWhiteSpace  (this char c) => c == '\n' || c == '\r'
-                                                       || c == '\t' || c == '\f' || c == ' ';
+                                                         || c == '\t' || c == '\f' || c == ' ';
 
         internal static bool IsWordOperator(this string text) => 
             LinksLexer.WordOperators.FirstOrDefault(s => s == text) != null;
