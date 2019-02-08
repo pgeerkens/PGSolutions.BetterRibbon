@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.55</ApplicationVersion>
+    <ApplicationVersion>1.0.0.58</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -216,6 +216,10 @@
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Compile Include="VbaSourceExportViewModel.cs" />
+    <Content Include="..\Example Workbooks\Database1.accdb">
+      <Link>Extra Files\Database1.accdb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Extra Files\Lookup2.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -226,6 +230,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Extra Files\TestLinksAnalysis.xlsb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Example Workbooks\Book1.xlsx">
+      <Link>Extra Files\Book1.xlsx</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\PGeerkens1.bmp" />

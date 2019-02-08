@@ -104,6 +104,7 @@
     <Compile Include="LinksAnalysis\ExternalFiles.cs" />
     <Compile Include="LinksAnalysis\ExternaLinks.cs" />
     <Compile Include="LinksAnalysis\ExternalRef.cs" />
+    <Compile Include="LinksAnalysis\FilesDictionary.cs" />
     <Compile Include="LinksAnalysis\Interfaces\ILinksAnalysisViewModel.cs" />
     <Compile Include="LinksAnalysis\Interfaces\EToken.cs" />
     <Compile Include="LinksAnalysis\Interfaces\Guids.cs" />
@@ -147,8 +148,6 @@
       <Name>RibbonDispatcher</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LinksAnalyzer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

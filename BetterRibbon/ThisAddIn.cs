@@ -15,10 +15,13 @@ using PGSolutions.RibbonDispatcher.Utilities;
 namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
+        /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.FormatVersion()
             : null;
+        /// <summary>.</summary>
         public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
+        /// <summary>.</summary>
         public static string VersionNo3 => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.FormatVersion();
 
         internal BetterRibbonViewModel ViewModel { get; private set; }

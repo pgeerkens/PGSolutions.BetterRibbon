@@ -20,6 +20,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     /// <summary>.</summary>
     [CLSCompliant(false)]
     public sealed class VbaSourceExportViewModel : AbstractRibbonGroupViewModel, IVbaSourceExportViewModel, IApplication {
+        /// <summary>.</summary>
         public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
             var defaultSize = suffix=="MS" ? false : true;
             VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
@@ -36,13 +37,18 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             CurrentProjectButton.Attach<RibbonButton>().Clicked  += OnExportCurrent;
         }
 
+        /// <inheritdoc/>
         public void Attach(IBooleanSource srcToggleSource) =>
             UseSrcFolderToggle.Attach(srcToggleSource.Getter);
 
+        /// <inheritdoc/>
         public void Invalidate() => UseSrcFolderToggle.Invalidate();
 
+        /// <inheritdoc/>
         public event ToggledEventHandler   UseSrcFolderToggled;
+        /// <inheritdoc/>
         public event VbaExportEventHandler SelectedProjectsClicked;
+        /// <inheritdoc/>
         public event VbaExportEventHandler CurrentProjectClicked;
 
         private void OnSrcFolderToggled(object sender, bool isPressed) {
@@ -117,29 +123,31 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private  RibbonGroup        VbASourceExportGroup  { get; }
         private  RibbonToggleButton UseSrcFolderToggle    { get; }
+        /// <inheritdoc/>
         public   RibbonButton       SelectedProjectButton { get; }
+        /// <inheritdoc/>
         public   RibbonButton       CurrentProjectButton  { get; }
 
         IRibbonToggle IVbaSourceExportViewModel.UseSrcFolderToggle    => UseSrcFolderToggle;
         IRibbonButton IVbaSourceExportViewModel.SelectedProjectButton => SelectedProjectButton;
         IRibbonButton IVbaSourceExportViewModel.CurrentProjectButton  => CurrentProjectButton;
 
-        /// <inheritfoc/>
+        /// <inheritdoc/>
         public Workbook ActiveWorkbook => Application.ActiveWorkbook;
 
-        /// <inheritfoc/>
+        /// <inheritdoc/>
         public bool     DisplayAlerts {
             get => Application.DisplayAlerts;
             set => Application.DisplayAlerts = value;
         }
 
-        /// <inheritfoc/>
+        /// <inheritdoc/>
         public dynamic  StatusBar {
             get => Application.StatusBar;
             set => Application.StatusBar = value;
         }
 
-        /// <inheritfoc/>
+        /// <inheritdoc/>
         public MsoAutomationSecurity AutomationSecurity {
             get => Application.AutomationSecurity;
             set => Application.AutomationSecurity = value;

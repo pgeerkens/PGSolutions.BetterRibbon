@@ -6,32 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    [Serializable]
-    [ComVisible(false)]
-    public class FilesDictionary : Dictionary<string,string> {
-        public FilesDictionary() : base() { }
-        protected FilesDictionary(SerializationInfo info, StreamingContext context)
-            : base(info,context) { }
-
-        internal void Add(string fileName) {
-            if(!Keys.Contains(fileName)) { Add(fileName,fileName); }
-        }
-
-        internal ExternalFiles OrderedList {
-            get {
-                var files = new ExternalFiles();
-                foreach(var file in this.OrderBy(i=>i.Key)) files.Add(file.Value);
-                return files;
-            }
-        }
-    }
 
     /// <summary>TODO</summary>
     [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
