@@ -1,6 +1,6 @@
 <Project
-  Name='RibbonDemonstration'
-  FileName='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\Example Workbooks\RibbonDemonstration.xlsb'
+  Name='SingleButton'
+  FileName='D:\Users\Pieter\Source\Git\Publish\BetterRibbon\Example Workbooks\SingleButton.xlsb'
   HelpContextID='0'
   HelpFile=''
   Protection='vbext_pp_none'
@@ -44,7 +44,7 @@
    />
    <References
       Description='PGSolutions Dispatcher for the Office Fluent Ribbon'
-      FullPath='D:\UserData\Pieter\OneDrive\GitHub\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
+      FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
       Guid='{BD438F48-A571-4ACE-979A-804179456324}'
       Major='1'
       Minor='0'

@@ -34,7 +34,7 @@
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
     <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.58</ApplicationVersion>
+    <ApplicationVersion>1.0.0.60</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -216,26 +216,23 @@
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Compile Include="VbaSourceExportViewModel.cs" />
-    <Content Include="..\Example Workbooks\Database1.accdb">
-      <Link>Extra Files\Database1.accdb</Link>
+    <Content Include="Example Workbooks\Database1.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Extra Files\Lookup2.xlsb">
+    <Content Include="Example Workbooks\Lookup2.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Extra Files\RibbonDemonstration.xlsb">
+    <Content Include="Example Workbooks\RibbonDemonstration.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Extra Files\SingleButton.xlsb">
+    <Content Include="Example Workbooks\SingleButton.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Extra Files\TestLinksAnalysis.xlsb">
+    <Content Include="Example Workbooks\TestLinksAnalysis.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Example Workbooks\Book1.xlsx">
-      <Link>Extra Files\Book1.xlsx</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="BetterRibbonKey.snk" />
+    <None Include="Example Workbooks\Book1.xlsx" />
     <None Include="Resources\PGeerkens1.bmp" />
     <None Include="Resources\PGeerkens.bmp" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -248,7 +245,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="PGSolutionsStrongKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -328,16 +324,16 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>PGSolutionsStrongKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>BetterRibbon_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>269C233E0A5D57BBA108244428F54295C66987A1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>EEF29BC682D575D4AEF06258E5AD92364FB8E26D</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>PGSolutionsStrongKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>BetterRibbonKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
