@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -20,22 +19,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IParseErrors))]
-    public class ParseErrors : IParseErrors, IReadOnlyList<IParseError> { 
-        internal ParseErrors() => Errors = new List<IParseError>();
+    public sealed class ParseErrors : List<IParseError>, IParseErrors{
+        internal ParseErrors() : base() { }
 
-        public int          Count => Errors.Count;
-        public IParseError  this[int index] => Errors[index];
+        IParseError IParseErrors.Item(int index) => this[index];
 
-        private List<IParseError> Errors { get; }
-
-        public void Add(IParseError parseError) => Errors.Add(parseError);
-
-        public void AddFileAccessError(string fullPath, string condition) {
-            var cellRef = new SourceCellRef(fullPath, "", "", "");
-            Errors.Add(new ParseError(cellRef, fullPath, 0, condition));
-        }
-
-        public IEnumerator<IParseError> GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();
-                IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<IParseError>)Errors).GetEnumerator();
+        public void AddFileAccessError(string fullPath, string condition)
+        => Add(new ParseError(new SourceCellRef(fullPath, "", "", ""), fullPath, 0, condition));
     }
 }

@@ -18,10 +18,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private ILinksAnalysisViewModel ViewModel { get; set; }
 
         private void OnAnalyzeCurrentClicked(object sender, WorkbookEventArgs e)
-        => ViewModel.DisplayAnalysis(new ExternalLinks(e.Workbook, ""));
+        => ViewModel.DisplayAnalysis(new LinksParser(e.Workbook, ""));
 
         private void OnAnalyzeSelectedClicked(object sender, RangeEventArgs e)
-        => ViewModel.DisplayAnalysis(new ExternalLinks(ViewModel, e.Range));
+        => ViewModel.DisplayAnalysis(new LinksParser(ViewModel, e.Range));
     }
 
     [CLSCompliant(false)]

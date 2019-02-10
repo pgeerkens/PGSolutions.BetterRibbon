@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -21,16 +20,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExternalFiles))]
-    public class ExternalFiles : IExternalFiles{
-        internal ExternalFiles() => List = new List<string>();
+    public sealed class ExternalFiles : List<string>, IExternalFiles{
+        internal ExternalFiles() : base() {}
 
-        public int    Count           => List.Count;
-        public string this[int index] => List[index];
-
-        private List<string> List { get; }
-
-        internal void Add(string fileName) => List.Add(fileName);
-        public IEnumerator<string> GetEnumerator() => List.GetEnumerator();
-           IEnumerator IEnumerable.GetEnumerator() => List.GetEnumerator();
+        string IExternalFiles.Item(int index) => this[index];
     }
 }

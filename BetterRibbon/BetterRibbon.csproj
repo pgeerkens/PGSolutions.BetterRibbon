@@ -233,7 +233,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="BetterRibbonKey.snk" />
-    <None Include="Example Workbooks\Book1.xlsx" />
+    <Content Include="Example Workbooks\Book1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\PGeerkens1.bmp" />
     <None Include="Resources\PGeerkens.bmp" />
     <EmbeddedResource Include="Properties\Resources.resx">

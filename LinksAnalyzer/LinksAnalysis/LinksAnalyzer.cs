@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>The publicly available entry points to the library.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Serializable, CLSCompliant(false)]
-    [ComVisible(true)]
+    [ComVisible(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalyzer))]
     [Guid(Guids.LinksAnalyzer)]
@@ -29,19 +29,19 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
              => new LinksLexer(cellRef, formula);
 
         /// <inheritdoc/>
-        public IExternalLinks NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range)
-            => new ExternalLinks(viewModel, range);
+        public ILinksAnalysis NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range)
+            => new LinksParser(viewModel, range);
 
         /// <inheritdoc/>
-        public IExternalLinks NewExternalLinksWB(Workbook wb, string excludedName)
-            => new ExternalLinks(wb, excludedName);
+        public ILinksAnalysis NewExternalLinksWB(Workbook wb, string excludedName)
+            => new LinksParser(wb, excludedName);
 
         /// <inheritdoc/>
-        public IExternalLinks NewExternalLinksWS(Worksheet ws)
-            => new ExternalLinks(ws);
+        public ILinksAnalysis NewExternalLinksWS(Worksheet ws)
+            => new LinksParser(ws);
 
         /// <inheritdoc/>
-        public IExternalLinks Parse(ISourceCellRef cellRef, string formula)
-            => new ExternalLinks(cellRef, formula);
+        public ILinksAnalysis Parse(ISourceCellRef cellRef, string formula)
+            => new LinksParser(cellRef, formula);
     }
 }

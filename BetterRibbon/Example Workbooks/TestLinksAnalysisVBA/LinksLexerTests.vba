@@ -167,7 +167,7 @@ Public Sub OpenExternRefTest()
     On Error GoTo EH
     Const Formula As String = "=[RibbonDemonstration.xlsb]Sheet1!$A$2+1"
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks.Item(0)
         If .TargetPath <> "open workbook w/o a path" Then _
              Err.Raise 1, MethodName, "Incorrect Path found"
@@ -204,7 +204,7 @@ Public Sub SimpleParseLinkTest()
         "=VLOOKUP(A18,'S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\[IS Mapping.xlsx]IS_line names'!$A$6:$B$400,2,FALSE)"
                 
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks.Item(0)
         If .TargetPath <> "S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\" Then _
              Err.Raise 1, MethodName, "Incorrect Path found"
@@ -244,7 +244,7 @@ Public Sub ComplexParseLinkTest()
                 
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks
         If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
         Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
@@ -294,7 +294,7 @@ Public Sub CellParseLinkTest()
     
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
-    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula)
+    Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks
         If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
         Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
