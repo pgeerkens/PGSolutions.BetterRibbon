@@ -5,6 +5,8 @@ Public Function Env(Value As Variant) As String
     Env = Environ(Value)
 End Function
 
-Public Function DeskTop() As String
-    DeskTop = CreateObject("WScript.Shell").specialfolders("Desktop")
+Public Function DeskTop(Optional ByVal AllUsers As Boolean = False) As String
+    DeskTop = IIf(AllUsers, _
+            CreateObject("WScript.Shell").SpecialFolders("AllUsersDesktop"), _
+            CreateObject("WScript.Shell").SpecialFolders("Desktop"))
 End Function
