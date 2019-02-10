@@ -6,13 +6,14 @@ using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 
-using Range = Microsoft.Office.Interop.Excel.Range;
-using Excel = Microsoft.Office.Interop.Excel;
-
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+    using Excel = Microsoft.Office.Interop.Excel;
+    using Range = Microsoft.Office.Interop.Excel.Range;
+    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+
     public static partial class Extensions {
         /// <summary>.</summary>
         /// <param name="range"></param>
@@ -51,7 +52,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         internal static string Name(this IToken token) => token.Value.Name();
 
         [SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Body" )]
-        internal static void FastCopyToRange(this ITwoDimensionalLookup source, Excel.Range target) {
+        [CLSCompliant(false)]
+        public static void FastCopyToRange(this ITwoDimensionalLookup source, Range target) {
             var rowsCount = target.Rows.Count;
             var colsCount = target.Columns.Count;
             var data      = new object[rowsCount,colsCount];
@@ -61,5 +63,13 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     data[row,col] = source.Item(row, col);
             target.Value = data;
         }
-   }
+
+        /// <summary>.</summary>
+        /// <param name="excel"></param>
+        /// <param name="path"></param>
+        internal static Workbook TryItem(this Excel.Application excel, string path) {
+            foreach(Workbook wb in excel.Workbooks) if (wb.FullName == path) return wb;
+            return null;
+        }
+    }
 }

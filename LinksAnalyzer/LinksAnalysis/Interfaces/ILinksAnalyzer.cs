@@ -5,14 +5,13 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-using Excel = Microsoft.Office.Interop.Excel;
-using Range = Microsoft.Office.Interop.Excel.Range;
-using Workbook  = Microsoft.Office.Interop.Excel.Workbook;
-using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
-
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+    using Range = Microsoft.Office.Interop.Excel.Range;
+    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+    using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
@@ -30,7 +29,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        IExternalLinks NewExternalLinks(Excel.Application excel, INameList nameList);
+        IExternalLinks NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>
@@ -46,14 +45,5 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
         IExternalLinks Parse(ISourceCellRef cellRef, string formula);
-
-        /// <summary></summary>
-        /// <param name="wb"></param>
-        void WriteLinksAnalysisWB(Workbook wb);
-
-        /// <summary></summary>
-        /// <param name="wb"></param>
-        /// <param name="nameList"></param>
-        void WriteLinksAnalysisFiles(Workbook wb, Range range);
     }
 }

@@ -24,7 +24,7 @@ namespace PGSolutions.BetterRibbon {
          /// <inheritdoc/>
         public IRibbonDispatcher NewBetterRibbon() => Model as IRibbonDispatcher;
         /// <inheritdoc/>
-        public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer(Globals.ThisAddIn.Application);
+        public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
 
         private readonly BetterRibbonModel Model = new BetterRibbonModel(Globals.ThisAddIn.ViewModel);
     }

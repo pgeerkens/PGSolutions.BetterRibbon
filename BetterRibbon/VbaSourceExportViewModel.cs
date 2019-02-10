@@ -2,19 +2,27 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
+using Excel = Microsoft.Office.Interop.Excel;
+using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.BetterRibbon;
-using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    using Application           = Microsoft.Office.Interop.Excel.Application;
+    using Application           = Excel.Application;
     using VbaExportEventHandler = EventHandler<VbaExportEventArgs>;
 
     /// <summary>.</summary>
@@ -35,6 +43,10 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             UseSrcFolderToggle.Toggled    += OnSrcFolderToggled;
             SelectedProjectButton.Attach<RibbonButton>().Clicked += OnExportSelected;
             CurrentProjectButton.Attach<RibbonButton>().Clicked  += OnExportCurrent;
+        }
+
+        void DisplayAnalysis(IExternalLinks externalLinks) {
+
         }
 
         /// <inheritdoc/>

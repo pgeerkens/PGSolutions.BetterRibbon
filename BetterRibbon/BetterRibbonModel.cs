@@ -50,9 +50,7 @@ namespace PGSolutions.BetterRibbon {
 
         private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel.BrandingViewModel);
-            LinksAnalysisModel   = new LinksAnalysisModel(
-                    Globals.ThisAddIn.Application,
-                    ViewModel.LinksAnalysisViewModel);
+            LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
                     new List<IVbaSourceExportViewModel> {
                         ViewModel.VbaExportViewModel_MS,

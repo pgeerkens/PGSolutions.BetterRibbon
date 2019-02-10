@@ -91,7 +91,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
@@ -99,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LinksAnalysis\ExcelLinksExtensions.cs" />
     <Compile Include="LinksAnalysis\Extensions.cs" />
     <Compile Include="LinksAnalysis\ExternalFiles.cs" />
     <Compile Include="LinksAnalysis\ExternaLinks.cs" />

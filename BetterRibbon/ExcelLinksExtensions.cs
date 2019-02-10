@@ -2,45 +2,32 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Windows.Forms; //  *** TODO *** THis needs to be moved into BetterRibbon.
-
-using Excel = Microsoft.Office.Interop.Excel;
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
-using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
-
-using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+
+using Microsoft.Office.Interop.Excel;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+    using Excel = Microsoft.Office.Interop.Excel;
+
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
-        public static void WriteLinks(this Workbook wb) {
-            wb.DeleteTargetWorksheet(LinksSheetName);
-            wb.DeleteTargetWorksheet(FilesSheetName);
-            wb.DeleteTargetWorksheet(ErrorsSheetName);
-
-            wb.WriteLinks(new ExternalLinks(wb, ""));
-        }
-
-        public static void WriteLinks(this Workbook wb, IReadOnlyList<string> nameList) {
-            wb.DeleteTargetWorksheet(LinksSheetName);
-            wb.DeleteTargetWorksheet(FilesSheetName);
-            wb.DeleteTargetWorksheet(ErrorsSheetName);
-
-            wb.WriteLinks(new ExternalLinks(wb?.Application, nameList));
-        }
-
         public const string LinksSheetName  = "Links Analysis";
         public const string FilesSheetName  = "Linked Files";
         public const string ErrorsSheetName = "Links Errors";
 
-        [SuppressMessage( "Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)" )]
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         internal static void WriteLinks(this Workbook wb, IExternalLinks links) {
-            if(links.Count == 0  && links.Errors.Count == 0) {
-                MessageBox.Show("No external links found!", "", MessageBoxButtons.OK,MessageBoxIcon.Information,
+            wb.DeleteTargetWorksheet(LinksSheetName);
+            wb.DeleteTargetWorksheet(FilesSheetName);
+            wb.DeleteTargetWorksheet(ErrorsSheetName);
+
+            if (links.Count == 0  && links.Errors.Count == 0) {
+                MessageBox.Show("No external links found!", "", MessageBoxButtons.OK, MessageBoxIcon.Information,
                         MessageBoxDefaultButton.Button1);
             } else {
                 var wsLinks = wb.CreateTargetWorksheet(LinksSheetName);
@@ -56,7 +43,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         internal static void WriteLinksAnalysis(this Worksheet ws, IExternalLinks links) {
-            if(links.Count > 0) {
+            if (links.Count > 0) {
                 var calculation = ws.Application.Calculation;
                 try {
                     ws.Application.Calculation = Excel.XlCalculation.xlCalculationManual;
@@ -71,11 +58,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     ws.Columns[MaxCol].EntireColumn.NumberFormat = "@"; // "Text";  // Formula column
                     links2D.FastCopyToRange(sheetData);
 
-                    ws.InitializeTargetWorksheet(links2D.RowsCount + 2,new List<string>() {
+                    ws.InitializeTargetWorksheet(links2D.RowsCount + 2, new List<string>() {
                             "Links Target",     "External\nPath",   "External\nFileName", "External\nWorksheet",
                             "External\nCell",   "Link\nType",       "Source\nType",       "Source\nPath",
-                            "Source\nFileName", "Source\nWorksheet","Source\nCell",       "Source Formula"} );
-                } finally {
+                            "Source\nFileName", "Source\nWorksheet","Source\nCell",       "Source Formula"});
+                }
+                finally {
                     ws.Application.ScreenUpdating = true;
                     ws.Application.Calculation = calculation;
                 }
@@ -86,46 +74,46 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         internal static void WriteLinksFiles(this Worksheet ws, IExternalFiles files) {
             var lastRow = 2;
             var i       = 0;
-            foreach(var fileName in files.OrderBy(s=>s)) {
+            foreach (var fileName in files.OrderBy(s => s)) {
                 i++; lastRow++;
-                ws.Cells[lastRow,1].Value2 = fileName;
+                ws.Cells[lastRow, 1].Value2 = fileName;
 
-                ws.WritePercentageStatus(ws.Name,100*i/files.Count);
+                ws.WritePercentageStatus(ws.Name, 100*i/files.Count);
                 // DoEvents
             }
-            ws.InitializeTargetWorksheet(lastRow,new List<string>() {"External FIles"} );
+            ws.InitializeTargetWorksheet(lastRow, new List<string>() { "External FIles" });
         }
 
         internal static void WriteLinksErrors(this Worksheet ws, IParseErrors errors) {
             var lastRow = 2;
             var i       = 0;
-            foreach(var error in errors) {
+            foreach (var error in errors) {
                 i++; lastRow++;
                 var col = 0;
-                ws.Cells[lastRow,++col].Value2 = error.CellRef.CellName;
-                ws.Cells[lastRow,++col].Value2 = error.CellRef.TabName;
-                ws.Cells[lastRow,++col].Value2 = error.CellRef.FileName;
-                ws.Cells[lastRow,++col].Value2 = error.Condition;;
-                ws.Cells[lastRow,++col].Value2 = error.CharPosition;
-                ws.Cells[lastRow,++col].Value2 = $"'{error.Formula}";
-                ws.Cells[lastRow,++col].Value2 = error.CellRef.FullPath;
+                ws.Cells[lastRow, ++col].Value2 = error.CellRef.CellName;
+                ws.Cells[lastRow, ++col].Value2 = error.CellRef.TabName;
+                ws.Cells[lastRow, ++col].Value2 = error.CellRef.FileName;
+                ws.Cells[lastRow, ++col].Value2 = error.Condition; ;
+                ws.Cells[lastRow, ++col].Value2 = error.CharPosition;
+                ws.Cells[lastRow, ++col].Value2 = $"'{error.Formula}";
+                ws.Cells[lastRow, ++col].Value2 = error.CellRef.FullPath;
 
-                ws.WritePercentageStatus(ws.Name,100*i/errors.Count);
+                ws.WritePercentageStatus(ws.Name, 100*i/errors.Count);
                 // DoEvents
             }
 
-            ws.InitializeTargetWorksheet(lastRow,new List<string>() {
-                    "Cell Name", "Tab Name", "File Name", "Error Condition", "Position", "Formula", "Path"} );
+            ws.InitializeTargetWorksheet(lastRow, new List<string>() {
+                    "Cell Name", "Tab Name", "File Name", "Error Condition", "Position", "Formula", "Path"});
         }
 
-        private static void WritePercentageStatus(this Worksheet ws, string sheetName, int percentage) 
+        private static void WritePercentageStatus(this Worksheet ws, string sheetName, int percentage)
             => ws.Application.StatusBar = $"Writing worksheet {sheetName}: ({percentage}%) ... ";
 
         private static void InitializeTargetWorksheet(this Worksheet ws, long lastRow, IList<string> columnHeaders) {
             var colNo = 0;
-            foreach(var columnHeader in columnHeaders) { ws.Cells[2,++colNo].Value = columnHeader; }
+            foreach (var columnHeader in columnHeaders) { ws.Cells[2, ++colNo].Value = columnHeader; }
 
-            ws.Range[ws.Cells[2,1], ws.Cells[lastRow,columnHeaders.Count]].Columns.AutoFit();
+            ws.Range[ws.Cells[2, 1], ws.Cells[lastRow, columnHeaders.Count]].Columns.AutoFit();
 
             ws.Range["A1:D1"].Merge();
             ws.Range["A1"].Formula = $"Link analysis run on {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}";
@@ -142,9 +130,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             try {
                 wb.Application.DisplayAlerts = false;
                 wb.Worksheets[sheetName].Delete();
-            } catch (COMException) {
-                /*  NO-OP: Sheet doesn't exist so delete not needed */
-            } finally {
+            }
+            catch (COMException) { /*  NO-OP: Sheet doesn't exist so delete not needed */ }
+            finally {
                 wb.Application.DisplayAlerts = true;
             }
         }

@@ -1,13 +1,17 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System.Diagnostics.CodeAnalysis;
-
-using PGSolutions.RibbonDispatcher.ComClasses;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+
+using PGSolutions.BetterRibbon;
+using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+    using Excel = Microsoft.Office.Interop.Excel;
+
     /// <summary>.</summary>
     [Description("")]
     [CLSCompliant(false)]
@@ -26,9 +30,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         /// <inheritdoc/>
-        public event EventHandler  AnalyzeCurrentClicked;
+        public event EventHandler<WorkbookEventArgs> AnalyzeCurrentClicked;
         /// <inheritdoc/>
-        public event EventHandler  AnalyzeSelectedClicked;
+        public event EventHandler<RangeEventArgs>    AnalyzeSelectedClicked;
+
+        public dynamic StatusBar { set => Application.StatusBar = value; }
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -39,9 +45,18 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public RibbonButton AnalyzeSelectedButton { get; }
 
         /// <inheritdoc/>
+        public void DisplayAnalysis(IExternalLinks externalLinks) {
+            Globals.ThisAddIn.Application.ActiveWorkbook.WriteLinks(externalLinks);
+        }
+
+        /// <inheritdoc/>
         public void Invalidate() => LinksAnalysisGroup.Invalidate();
 
-        private void OnAnalyzeCurrentClicked(object sender) => AnalyzeCurrentClicked?.Invoke(sender, EventArgs.Empty);
-        private void OnAnalyzeSelectedClicked(object sender) => AnalyzeSelectedClicked?.Invoke(sender, EventArgs.Empty);
+        private void OnAnalyzeCurrentClicked(object sender)
+        => AnalyzeCurrentClicked?.Invoke(sender, new WorkbookEventArgs(Application.ActiveWorkbook));
+        private void OnAnalyzeSelectedClicked(object sender)
+        => AnalyzeSelectedClicked?.Invoke(sender, new RangeEventArgs(Application.Selection));
+
+        static Excel.Application Application => Globals.ThisAddIn.Application;
     }
 }

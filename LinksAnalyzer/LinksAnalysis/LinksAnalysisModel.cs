@@ -7,8 +7,7 @@ using Microsoft.Office.Interop.Excel;
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     public sealed class LinksAnalysisModel {
-        public LinksAnalysisModel(Application application, ILinksAnalysisViewModel viewModel) {
-            Application = application;
+        public LinksAnalysisModel(ILinksAnalysisViewModel viewModel) {
             ViewModel   = viewModel;
             ViewModel.AnalyzeCurrentClicked  += OnAnalyzeCurrentClicked;
             ViewModel.AnalyzeSelectedClicked += OnAnalyzeSelectedClicked;
@@ -16,14 +15,24 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         public void Invalidate() => ViewModel.Invalidate();
 
-        private Application Application { get; }
-
         private ILinksAnalysisViewModel ViewModel { get; set; }
 
-        private void OnAnalyzeCurrentClicked(object sender, EventArgs e) 
-        => new LinksAnalyzer(Application).WriteLinksAnalysisWB(Application.ActiveWorkbook);
+        private void OnAnalyzeCurrentClicked(object sender, WorkbookEventArgs e)
+        => ViewModel.DisplayAnalysis(new ExternalLinks(e.Workbook, ""));
 
-        private void OnAnalyzeSelectedClicked(object sender, EventArgs e)
-        => Application.ActiveWorkbook.WriteLinks((Application.Selection as Range).GetNameList());
+        private void OnAnalyzeSelectedClicked(object sender, RangeEventArgs e)
+        => ViewModel.DisplayAnalysis(new ExternalLinks(ViewModel, e.Range));
+    }
+
+    [CLSCompliant(false)]
+    public class RangeEventArgs : EventArgs {
+        public RangeEventArgs(Range range) => Range = range;
+        public Range Range { get; }
+    }
+
+    [CLSCompliant(false)]
+    public class WorkbookEventArgs : EventArgs {
+        public WorkbookEventArgs(Workbook workbook) => Workbook = workbook;
+        public Workbook Workbook{ get; }
     }
 }

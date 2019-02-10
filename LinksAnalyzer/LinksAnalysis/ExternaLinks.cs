@@ -2,17 +2,21 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
+
+using Core = Microsoft.Office.Core;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+    using Excel = Microsoft.Office.Interop.Excel;
+
     /// <summary>TODO</summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
+    [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
@@ -20,43 +24,72 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public sealed class ExternalLinks : IExternalLinks, ITwoDimensionalLookup, IReadOnlyList<ICellRef> {
         /// <summary>Returns all the external links found in the supplied formula.</summary>
         public ExternalLinks(ISourceCellRef cellRef, string formula) : this() 
-            => RunAndBuildFiles(() => ParseFormula(cellRef, formula));
+        => RunAndBuildFiles(() => ParseFormula(cellRef, formula));
+
         /// <summary>Returns all the external links found in the supplied {Excel.Worksheet}.</summary>
         public ExternalLinks(Excel.Worksheet ws) : this()
-            => RunAndBuildFiles(() => ExtendFromWorksheet(ws));
+        => RunAndBuildFiles(() => ExtendFromWorksheet(ws));
+
         /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
         public ExternalLinks(Excel.Workbook wb, string excludedName) : this()
-            => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
+        => RunAndBuildFiles(() => ExtendFromWorkbook(wb, excludedName));
+
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public ExternalLinks(Excel.Application excel, IReadOnlyList<string> nameList) : this() {
-            if(excel==null)throw new ArgumentNullException("excel","Supplied argument may not be null.");
-            if(nameList==null) return;
-            for(var i=0; i<nameList.Count; i++) {
-                var item = nameList[i];
-                if ( item is string path) {
-                    if(!File.Exists(path)) {
-                        _errors.AddFileAccessError(path,"File not found.");
-                        continue;
-                    }
+        public ExternalLinks(ILinksAnalysisViewModel viewModel, Excel.Range range) : this() {
+            if(viewModel==null) throw new ArgumentNullException(nameof(viewModel));
+            if(range==null) return;
 
-                    excel.Application.StatusBar = $"Opening {path}";
-                    Excel.Workbook wb = null;
-                    try {
-                        excel.Application.DisplayAlerts = false;
-                        wb = excel.Application.Workbooks.Open(path,UpdateLinks:false,ReadOnly:true,AddToMru:false);
+            var nameList = range.GetNameList();
+            var excel = range.Application;
+            var @as = excel.AutomationSecurity;
+            try {
+                excel.AutomationSecurity = Core.MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+                excel.DisplayAlerts = false;
+                excel.ScreenUpdating = false;
 
-                        ExtendFromWorkbook(wb,"");
-                    } catch(IOException ex) {
-                        _errors.AddFileAccessError(path,$"IOException: '{ex.Message}'");
-                    } finally {
-                        wb?.Close(SaveChanges:false);
-                        excel.Application.DisplayAlerts = false;
+                foreach (var item in nameList) {
+                    if ( item is string path) {
+                        if(!File.Exists(path)) {
+                            _errors.AddFileAccessError(path,"File not found.");
+                            continue;
+                        }
+
+                        excel.ScreenUpdating = true;
+                        viewModel.StatusBar = $"Opening {path}";
+                        excel.ScreenUpdating = false;
+
+                        try {
+                            var wb = excel.TryItem(item);
+                            if (wb == null ) {
+                                AnalyzeClosedWorkbook(excel, item);
+                            } else {
+                                ExtendFromWorkbook(wb, "");
+                            }
+                        }
+                        catch (IOException ex) { _errors.AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
                     }
-                    // DoEvents
                 }
+            }
+            finally {
+                excel.ScreenUpdating = true;
+                excel.DisplayAlerts = true;
+                excel.AutomationSecurity = @as;
             }
             Files = _files.OrderedList;
         }
+
+        private void AnalyzeClosedWorkbook(Excel.Application excel, string path) {
+            Excel.Workbook wb = null;
+            try {
+                wb = excel.Workbooks.Open(path, UpdateLinks: false, ReadOnly: true, AddToMru: false);
+                ExtendFromWorkbook(wb, "");
+            }
+            catch (IOException ex) { _errors.AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
+            finally {
+                wb?.Close(SaveChanges: false);
+            }
+        }
+
         private ExternalLinks() {
             Links   = new List<ICellRef>();
             _errors = new ParseErrors();
@@ -100,11 +133,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
              IEnumerator IEnumerable.GetEnumerator() => ((IReadOnlyList<ICellRef>)Links).GetEnumerator();
 
         private void ExtendFromWorkbook(Excel.Workbook wb, string excludedName) {
-            if (wb == null) return;
-
             foreach(Excel.Worksheet ws in wb.Worksheets) {
                 if ( ! excludedName.Equals(ws.Name) ) { ExtendFromWorksheet(ws); }
-                // DoEvents
             }
 
             ExtendFromNamedRanges(wb);
@@ -121,13 +151,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
                 var lastRowNo = ws.Cells[ws.Rows.Count, colNo].End(Excel.XlDirection.xlUp).Row;
                 for(long rowNo = 1; rowNo <= lastRowNo; rowNo++) {
-                    //var cell    = ws.Cells[rowNo, colNo];
                     var cell    = usedRange[rowNo, colNo];
                     if ( cell.Formula is string formula && formula.Length > 0 && formula[0] == '=' ) {
                         var cellRef = NewCellRef(ws,cell);
                         ParseFormula(cellRef,formula);
                     }
-                    // DoEvents
                 }
             }
         }
@@ -139,7 +167,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     var cellRef = NewWorkbookNameRef(wb, source);
                     ParseFormula(cellRef,formula);
                 }
-                // DoEvents
             }
         }
 

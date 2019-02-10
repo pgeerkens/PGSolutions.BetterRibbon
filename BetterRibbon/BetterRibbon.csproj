@@ -203,6 +203,7 @@
     <Compile Include="CustomButtonsModel.cs" />
     <Compile Include="CustomizableButtonsViewModel.cs" />
     <Compile Include="DemonstrationModel.cs" />
+    <Compile Include="ExcelLinksExtensions.cs" />
     <Compile Include="IBetterRibbon.cs" />
     <Compile Include="LinksAnalysisViewModel.cs" />
     <Compile Include="Main.cs" />
