@@ -10,11 +10,11 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "PGSolutions Links Analyzer" )]
-[assembly: AssemblyDescription( "PGSolutions External Links Analyzer for MS-Excel" )]
+[assembly: AssemblyTitle("PGSolutions Ribbon Utilities")]
+[assembly: AssemblyDescription("PGSolutions Ribbon Utilities for MS-Excel")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
-[assembly: AssemblyProduct( "LinksAnalysis" )]
+[assembly: AssemblyProduct("RibbonUtilities")]
 [assembly: AssemblyCopyright("Copyright © 2017-2019 Pieter Geerkens")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

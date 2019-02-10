@@ -25,7 +25,7 @@ namespace PGSolutions.BetterRibbon {
             + $"{ViewModel.BrandingButton.SuperTip}"
             ).MsgBoxShow();
 
-        Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
-        Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
+        static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
+        static Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
     }
 }

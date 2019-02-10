@@ -9,11 +9,10 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    using Excel = Microsoft.Office.Interop.Excel;
-
+namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
         public const string LinksSheetName  = "Links Analysis";
@@ -21,12 +20,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public const string ErrorsSheetName = "Links Errors";
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
-        internal static void WriteLinks(this Workbook wb, IExternalLinks links) {
+        internal static void WriteLinks(this Workbook wb, ILinksAnalysis links) {
             wb.DeleteTargetWorksheet(LinksSheetName);
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);
 
-            if (links.Count == 0  && links.Errors.Count == 0) {
+            if (links.Links.Count == 0  && links.Errors.Count == 0) {
                 MessageBox.Show("No external links found!", "", MessageBoxButtons.OK, MessageBoxIcon.Information,
                         MessageBoxDefaultButton.Button1);
             } else {
@@ -42,23 +41,23 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
         }
 
-        internal static void WriteLinksAnalysis(this Worksheet ws, IExternalLinks links) {
-            if (links.Count > 0) {
+        internal static void WriteLinksAnalysis(this Worksheet ws, ILinksAnalysis links) {
+            if (links.Links.Count > 0) {
                 var calculation = ws.Application.Calculation;
                 try {
-                    ws.Application.Calculation = Excel.XlCalculation.xlCalculationManual;
+                    ws.Application.Calculation = XlCalculation.xlCalculationManual;
                     ws.Application.ScreenUpdating = false;
 
-                    var links2D   = links as ITwoDimensionalLookup;
-                    var MaxCol    = links2D.ColsCount;
+                    var links2D   = links.Links;
+                    var MaxCol    = links2D.ColsCount();
                     var firstCell = ws.Cells[3,1];
-                    var lastCell  = ws.Cells[links2D.RowsCount + 2, MaxCol];
-                    var sheetData = ws.Range[firstCell,lastCell] as Excel.Range;
+                    var lastCell  = ws.Cells[links2D.RowsCount() + 2, MaxCol];
+                    var sheetData = ws.Range[firstCell,lastCell] as Range;
 
-                    ws.Columns[MaxCol].EntireColumn.NumberFormat = "@"; // "Text";  // Formula column
+                    ws.Columns[MaxCol].EntireColumn.NumberFormat = "@"; // Formula column
                     links2D.FastCopyToRange(sheetData);
 
-                    ws.InitializeTargetWorksheet(links2D.RowsCount + 2, new List<string>() {
+                    ws.InitializeTargetWorksheet(links2D.RowsCount() + 2, new List<string>() {
                             "Links Target",     "External\nPath",   "External\nFileName", "External\nWorksheet",
                             "External\nCell",   "Link\nType",       "Source\nType",       "Source\nPath",
                             "Source\nFileName", "Source\nWorksheet","Source\nCell",       "Source Formula"});
@@ -79,7 +78,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                 ws.Cells[lastRow, 1].Value2 = fileName;
 
                 ws.WritePercentageStatus(ws.Name, 100*i/files.Count);
-                // DoEvents
             }
             ws.InitializeTargetWorksheet(lastRow, new List<string>() { "External FIles" });
         }
@@ -99,7 +97,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                 ws.Cells[lastRow, ++col].Value2 = error.CellRef.FullPath;
 
                 ws.WritePercentageStatus(ws.Name, 100*i/errors.Count);
-                // DoEvents
             }
 
             ws.InitializeTargetWorksheet(lastRow, new List<string>() {

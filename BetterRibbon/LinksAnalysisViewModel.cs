@@ -45,9 +45,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public RibbonButton AnalyzeSelectedButton { get; }
 
         /// <inheritdoc/>
-        public void DisplayAnalysis(IExternalLinks externalLinks) {
-            Globals.ThisAddIn.Application.ActiveWorkbook.WriteLinks(externalLinks);
-        }
+        public void DisplayAnalysis(ILinksAnalysis externalLinks)
+        => Globals.ThisAddIn.Application.ActiveWorkbook.WriteLinks(externalLinks);
 
         /// <inheritdoc/>
         public void Invalidate() => LinksAnalysisGroup.Invalidate();

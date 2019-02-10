@@ -29,21 +29,21 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        IExternalLinks NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range);
+        ILinksAnalysis NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        IExternalLinks NewExternalLinksWB(Workbook wb, string excludedName);
+        ILinksAnalysis NewExternalLinksWB(Workbook wb, string excludedName);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        IExternalLinks NewExternalLinksWS(Worksheet ws);
+        ILinksAnalysis NewExternalLinksWS(Worksheet ws);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        IExternalLinks Parse(ISourceCellRef cellRef, string formula);
+        ILinksAnalysis Parse(ISourceCellRef cellRef, string formula);
     }
 }

@@ -4,20 +4,21 @@
 using System;
 
 using Microsoft.Office.Core;
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+
     /// <summary>.</summary>
     [CLSCompliant(false)]
     public interface IApplication {
         /// <summary>.</summary>
-        Workbook ActiveWorkbook         { get; }
+        Workbook ActiveWorkbook  { get; }
 
         /// <summary>.</summary>
-        bool     DisplayAlerts          { get; set; }
+        bool     DisplayAlerts   { get; set; }
 
         /// <summary>.</summary>
-        dynamic  StatusBar              { get; set; }
+        dynamic  StatusBar       { get; set; }
 
         /// <summary>.</summary>
         MsoAutomationSecurity AutomationSecurity { get; set; }

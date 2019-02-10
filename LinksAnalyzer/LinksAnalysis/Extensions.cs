@@ -10,9 +10,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    using Excel = Microsoft.Office.Interop.Excel;
     using Range = Microsoft.Office.Interop.Excel.Range;
-    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
     public static partial class Extensions {
         /// <summary>.</summary>
@@ -53,23 +51,20 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         [SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Body" )]
         [CLSCompliant(false)]
-        public static void FastCopyToRange(this ITwoDimensionalLookup source, Range target) {
+        public static void FastCopyToRange(this IReadOnlyList<ICellRef> source, Range target) {
+            if (source==null) throw new ArgumentNullException(nameof(source));
+            if (target==null) throw new ArgumentNullException(nameof(target));
+
             var rowsCount = target.Rows.Count;
             var colsCount = target.Columns.Count;
             var data      = new object[rowsCount,colsCount];
 
-            for(var row=0; row<rowsCount; row++)
-                for(var col=0; col<colsCount; col++)
-                    data[row,col] = source.Item(row, col);
+            for(var row=0; row<rowsCount; row++) {
+                for (var col=0; col<colsCount; col++) {
+                   data[row,col] = source.Item(row, col); 
+                }
+            }
             target.Value = data;
-        }
-
-        /// <summary>.</summary>
-        /// <param name="excel"></param>
-        /// <param name="path"></param>
-        internal static Workbook TryItem(this Excel.Application excel, string path) {
-            foreach(Workbook wb in excel.Workbooks) if (wb.FullName == path) return wb;
-            return null;
         }
     }
 }

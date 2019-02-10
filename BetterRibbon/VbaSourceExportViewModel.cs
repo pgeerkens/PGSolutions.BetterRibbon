@@ -2,9 +2,7 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -12,14 +10,11 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using Excel = Microsoft.Office.Interop.Excel;
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
-using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.BetterRibbon;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     using Application           = Excel.Application;
@@ -45,10 +40,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             CurrentProjectButton.Attach<RibbonButton>().Clicked  += OnExportCurrent;
         }
 
-        void DisplayAnalysis(IExternalLinks externalLinks) {
-
-        }
-
         /// <inheritdoc/>
         public void Attach(IBooleanSource srcToggleSource) =>
             UseSrcFolderToggle.Attach(srcToggleSource.Getter);
@@ -72,46 +63,48 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         private void OnExportCurrent(object sender) {
-            try {
-                if ( Application.VBE == null) { throw new InvalidOperationException(); }
-                PerformSilently(
-                    () => CurrentProjectClicked?.Invoke(this, new VbaExportEventArgs(new ProjectFilterExcel(this) )
-                ) );
-            }
-            catch (COMException) { PleaseEnableTrust(); }
-            catch (InvalidOperationException) { PleaseEnableTrust(); }
+            if (!IsProjectModelTrusted()) { return; }
+            PerformSilently(
+                () => CurrentProjectClicked?.Invoke(this, new VbaExportEventArgs(new ProjectFilterExcel(this))
+            ));
         }
 
         private void OnExportSelected(object sender) {
+            if (!IsProjectModelTrusted()) { return; }
+            var securitySaved = Application.AutomationSecurity;
+            Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+
             try {
-                if ( Application.VBE == null) { throw new InvalidOperationException(); }
-                var securitySaved = Application.AutomationSecurity;
-                Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+                var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
+                fd.Title = "Select VBA Project(s) to Export From";
+                fd.ButtonName = "Export";
+                fd.AllowMultiSelect = true;
+                fd.Filters.Clear();
+                fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-                try {
-                    var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
-                    fd.Title = "Select VBA Project(s) to Export From";
-                    fd.ButtonName = "Export";
-                    fd.AllowMultiSelect = true;
-                    fd.Filters.Clear();
-                    fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
-
-                    var list = new ProjectFilters(this);
-                    foreach (var item in list) {
-                        fd.Filters.Add(item.Description, item.Extensions);
-                    }
-                    if (fd.Show() != 0) {
-                        PerformSilently(
-                            () => SelectedProjectsClicked?.Invoke(this,
-                                    new VbaExportEventArgs(list[fd.FilterIndex-1], fd.SelectedItems)
-                        ) );
-                    }
-                } finally {
-                    Application.AutomationSecurity = securitySaved;
+                var list = new ProjectFilters(this);
+                foreach (var item in list) {
+                    fd.Filters.Add(item.Description, item.Extensions);
                 }
+                if (fd.Show() != 0) {
+                    PerformSilently(
+                        () => SelectedProjectsClicked?.Invoke(this,
+                                new VbaExportEventArgs(list[fd.FilterIndex-1], fd.SelectedItems)
+                    ));
+                }
+            }
+            finally {
+                Application.AutomationSecurity = securitySaved;
+            }
+        }
+
+        private bool IsProjectModelTrusted() {
+            try {
+                return Application.VBE != null;
             }
             catch (COMException) { PleaseEnableTrust(); }
             catch (InvalidOperationException) { PleaseEnableTrust(); }
+            return false;
         }
 
         private static void PerformSilently(System.Action action) {
@@ -127,8 +120,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         }
 
         private static void PleaseEnableTrust()
-        => MessageBox.Show("Please enable trust of the Project Object Model", "Project Model Not Trusted",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        => "Please enable trust of the Project Object Model".MsgBoxShow("Project Model Not Trusted");
 
         static Application Application => Globals.ThisAddIn.Application;
 
