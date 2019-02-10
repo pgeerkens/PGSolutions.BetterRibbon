@@ -17,12 +17,12 @@ namespace PGSolutions.BetterRibbon {
     public partial class ThisAddIn {
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
-            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.FormatVersion()
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
             : null;
         /// <summary>.</summary>
         public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
         /// <summary>.</summary>
-        public static string VersionNo3 => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.FormatVersion();
+        public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
 
         internal BetterRibbonViewModel ViewModel { get; private set; }
 

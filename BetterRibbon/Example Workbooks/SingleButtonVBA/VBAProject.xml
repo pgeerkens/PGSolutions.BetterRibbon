@@ -1,6 +1,6 @@
 <Project
   Name='SingleButton'
-  FileName='D:\Users\Pieter\Source\Git\Publish\BetterRibbon\Example Workbooks\SingleButton.xlsb'
+  FileName='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\BetterRibbon\Example Workbooks\SingleButton.xlsb'
   HelpContextID='0'
   HelpFile=''
   Protection='vbext_pp_none'

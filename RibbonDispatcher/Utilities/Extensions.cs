@@ -40,10 +40,11 @@ namespace PGSolutions.RibbonDispatcher.Utilities {
             return isLarge;
         }
 
-        public static string FormatVersion(this Version version) =>
-            $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}\nat " +
-            $"{version?.Build.FormatVersionDate()} " +
-            $"{version?.Revision.FormatVersionTime()} (UTC)";
+        public static string Format2(this Version version) =>
+            $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}";
+        public static string Format(this Version version) => Format2(version) +
+            $"({version?.Build.FormatVersionDate()} " +
+            $"{version?.Revision.FormatVersionTime()} UTC)";
         private static string FormatVersionDate(this int dayNo) =>
             new DateTime(2000,1,1).AddDays(dayNo).ToUniversalTime().ToString("yyyy-MM-dd");
         private static string FormatVersionTime(this int halfSeconds) =>

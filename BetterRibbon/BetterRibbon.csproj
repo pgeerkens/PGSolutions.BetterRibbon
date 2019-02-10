@@ -43,7 +43,7 @@
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl>https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues</SupportUrl>
     <FriendlyName>PGSolutions BetterRibbon</FriendlyName>
-    <OfficeApplicationDescription />
+    <OfficeApplicationDescription>Ribbon Dispatcher and Utilities for the Office Fluent Ribbon in Excel &amp; Access.</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>

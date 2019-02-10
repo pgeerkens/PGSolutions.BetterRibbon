@@ -1,7 +1,10 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
+using PGSolutions.RibbonUtilities.VbaSourceExport;
+using System;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel {
@@ -15,6 +18,14 @@ namespace PGSolutions.BetterRibbon {
         private BrandingViewModel ViewModel { get; set; }
 
         private void ButtonClicked(object sender) =>
-            $"Canadian, eh!\n\nVersion: {ThisAddIn.VersionNo3}".MsgBoxShow();
+            ( $"PGSolutions Better Ribbon\n\n"
+            + $"Better Ribbon V {Globals.ThisAddIn.VersionNo3}\n"
+            + $"Ribbon Utilities V {UtilitiesVersion.Format2()}\n"
+            + $"Ribbon Dispatcher V {DispatcherVersion.Format2()}\n\n"
+            + $"{ViewModel.BrandingButton.SuperTip}"
+            ).MsgBoxShow();
+
+        Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
+        Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
     }
 }

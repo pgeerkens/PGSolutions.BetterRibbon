@@ -1,6 +1,6 @@
 <Project
   Name='RibbonDemonstration'
-  FileName='D:\Users\Pieter\Source\Git\Publish\BetterRibbon\Example Workbooks\RibbonDemonstration.xlsb'
+  FileName='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\BetterRibbon\Example Workbooks\RibbonDemonstration.xlsb'
   HelpContextID='0'
   HelpFile=''
   Protection='vbext_pp_none'
