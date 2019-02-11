@@ -31,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonFactory))]
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
-    public class RibbonFactory : IRibbonFactory {
+    public partial class RibbonFactory : IRibbonFactory {
         public RibbonFactory() : this(new ResourceLoader(), null) { ; }
 
         internal RibbonFactory(IResourceManager manager) : this(null, manager) { ; }

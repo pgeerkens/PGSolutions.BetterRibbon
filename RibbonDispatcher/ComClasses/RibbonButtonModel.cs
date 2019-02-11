@@ -10,31 +10,31 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 
-    ///// <summary></summary>
-    //[SuppressMessage( "Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable" )]
-    //[Description("")]    
-    //[CLSCompliant(true)]
-    //[ComVisible(true)]
-    //[ClassInterface(ClassInterfaceType.None)]
-    //[ComSourceInterfaces(typeof(IClickedEvents))]
-    //[ComDefaultInterface(typeof(IRibbonButtonModel))]
-    //[Guid(Guids.RibbonButtonModel)]
-    //public sealed class RibbonButtonModel : IRibbonButtonModel {
-    //    internal RibbonButtonModel(Func<string,IRibbonControlStrings,RibbonButton> factory)
-    //        => Factory = factory;
+    /// <summary></summary>
+    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
+    [Description("")]
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComSourceInterfaces(typeof(IClickedEvents))]
+    [ComDefaultInterface(typeof(IRibbonButtonModel))]
+    [Guid(Guids.RibbonButtonModel)]
+    public sealed class RibbonButtonModel : IRibbonButtonModel {
+        public RibbonButtonModel(Func<string,RibbonButton> factory) => Factory = factory;
 
-    //    public event ClickedEventHandler Clicked;
+        public event ClickedEventHandler Clicked;
 
-    //    public IRibbonButton   ViewModel      => _viewModel;
-    //    private RibbonButton   _viewModel     { get; set; }
-    //    private ViewModelStore ViewModelStore { get; }
-    //    private Func<string,IRibbonControlStrings,RibbonButton> Factory { get; }
+        public IRibbonButton ViewModel { get; private set; }
 
-    //    public void OnClicked(object sender) => Clicked(sender);
+        public void Attach(string controlId, IRibbonControlStrings strings) {
+            var viewModel = Factory(controlId);
+            viewModel.Attach().SetLanguageStrings(strings);
+            viewModel.Clicked += OnClicked;
+            ViewModel = viewModel;
+        }
 
-    //    public void Attach(string controlId, IRibbonControlStrings strings) {
-    //        _viewModel = Factory(controlId, strings);
-    //        _viewModel.Clicked += OnClicked;
-    //    }
-    //}
+        private void OnClicked(object sender) => Clicked(sender);
+
+        private Func<string, RibbonButton> Factory { get; }
+    }
 }

@@ -17,18 +17,19 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
-    [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : IRibbonToggleModel, IBooleanSource {
-        public RibbonToggleModel(Func<string,RibbonToggleButton> factory) => Factory = factory;
+    [Guid(Guids.RibbonCheckboxModel)]
+    public sealed class RibbonCheckboxModel : IRibbonToggleModel, IBooleanSource {
+        public RibbonCheckboxModel(Func<string, RibbonCheckBox> factory) => Factory = factory;
 
         public event ToggledEventHandler Toggled;
 
-        public IRibbonToggle ViewModel {get; private set; }
+        public IRibbonToggle ViewModel { get; private set; }
 
         public bool IsPressed {
             get => _isPressed;
             set { _isPressed = value; ViewModel.Invalidate(); }
-        } bool _isPressed;
+        }
+        bool _isPressed;
 
         public bool Getter() => IsPressed;
 
@@ -43,6 +44,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private void OnToggled(object sender, bool isPressed)
         => Toggled?.Invoke(sender, IsPressed = isPressed);
 
-        private Func<string,RibbonToggleButton> Factory { get; }
+        private Func<string, RibbonCheckBox> Factory { get; }
     }
 }

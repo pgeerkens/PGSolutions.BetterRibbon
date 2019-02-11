@@ -137,5 +137,14 @@ namespace PGSolutions.BetterRibbon {
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
             return ctrl;
         }
+
+        public IRibbonToggleModel NewRibbonToggleModel()
+        => new RibbonToggleModel(id=> CustomButtonsModel.GetControl<RibbonToggleButton>(id));
+
+        public IRibbonButtonModel NewRibbonButtonModel()
+        => new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id));
+
+        public IRibbonToggleModel NewRibbonCheckboxModel()
+        => new RibbonCheckboxModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id));
     }
 }

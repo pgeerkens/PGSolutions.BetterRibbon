@@ -168,9 +168,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         event ToggledEventHandler Toggled;
 
         IRibbonToggle ViewModel { get; }
-        bool IsPressed { get; set; }
+        bool          IsPressed { get; set; }
 
-        void Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings);
     }
 
     public static partial class Extensions {

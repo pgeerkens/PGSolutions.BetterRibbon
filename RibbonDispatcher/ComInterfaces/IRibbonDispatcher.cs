@@ -79,5 +79,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //[DispId(9)]
         IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
                 IIntegerSource source);
+
+        IRibbonToggleModel NewRibbonToggleModel();
+
+        IRibbonButtonModel NewRibbonButtonModel();
+
+        IRibbonToggleModel NewRibbonCheckboxModel();
     }
 }
