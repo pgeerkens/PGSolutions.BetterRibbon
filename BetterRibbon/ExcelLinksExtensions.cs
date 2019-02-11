@@ -13,6 +13,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
+    /// <summary>Extension methods for Excel objects.</summary>
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
         /// <inheritdoc/>
