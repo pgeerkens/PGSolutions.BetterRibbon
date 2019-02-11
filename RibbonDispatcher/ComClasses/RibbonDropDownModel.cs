@@ -26,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
 
-        IRibbonDropDown ViewModel { get;  set; }
+        IRibbonDropDown ViewModel { get; set; }
 
         public int SelectedIndex  { get; set; }
 
@@ -39,10 +39,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings) {
             var viewModel = Factory(controlId);
-            viewModel?.Attach(Getter).SetLanguageStrings(strings);
-            if (viewModel != null) { viewModel.SelectionMade += OnSelectionMade; }
+            if (viewModel != null) {
+                viewModel.Attach(Getter).SetLanguageStrings(strings);
+                viewModel.SelectionMade += OnSelectionMade;
+                foreach (var item in _items) viewModel.AddItem(item);
+            }
             ViewModel = viewModel;
-            foreach (var item in _items) ViewModel.AddItem(item);
             Invalidate();
             return this;
         }

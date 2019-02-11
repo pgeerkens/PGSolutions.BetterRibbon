@@ -35,8 +35,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings) {
             var viewModel = Factory(controlId);
-            viewModel?.Attach(Getter).SetLanguageStrings(strings);
-            if (viewModel != null) { viewModel.Toggled += OnToggled; }
+            if (viewModel != null) {
+                viewModel.Attach(Getter).SetLanguageStrings(strings);
+                viewModel.Toggled += OnToggled;
+            }
             ViewModel = viewModel;
             Invalidate();
             return this;
@@ -67,19 +69,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
                 ViewModel.Invalidate();
             }
-        }
-    }
-
-    public static partial class Extensions {
-        internal static void SetSizeablel(this ISizeable target, ISizeable source) {
-            target.IsLarge = source.IsLarge;
-        }
-
-        internal static void SetImageable(this IImageable target, IImageable source) {
-            target.ShowImage = source.ShowImage;
-            target.ShowLabel = source.ShowLabel;
-            if (source.Image is string) target.SetImageMso(source.Image as string);
-            if (source.Image is IPictureDisp) target.SetImageDisp(source.Image as IPictureDisp);
         }
     }
 }

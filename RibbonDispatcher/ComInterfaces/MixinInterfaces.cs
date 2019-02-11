@@ -159,7 +159,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool   ShowImage { get; set; }
         bool   ShowLabel { get; set; }
 
-        void Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonButtonModel Attach(string controlId, IRibbonControlStrings strings);
 
         void Invalidate();
 
@@ -204,21 +204,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
         event SelectedEventHandler SelectionMade;
 
-        bool   IsEnabled { get; set; }
-        bool   IsVisible { get; set; }
+        bool IsEnabled { get; set; }
+        bool IsVisible { get; set; }
 
-        int             SelectedIndex { get; set; }
+        int  SelectedIndex { get; set; }
 
         IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
 
         IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings);
 
         void Invalidate();
-    }
-
-    public static partial class Extensions {
-        public static RibbonControlSize ControlSize(this bool isLarge)
-            => isLarge ? RibbonControlSize.RibbonControlSizeLarge
-                       : RibbonControlSize.RibbonControlSizeRegular;
     }
 }

@@ -53,10 +53,10 @@ Private Sub Toggle2_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     Toggle2.IsLarge = Not IsPressed
     Toggle3.IsLarge = Not IsPressed
     Toggle2.SetImageMso ToggleImage(IsPressed)
-    Toggle1.Invalidate
-    Toggle2.Invalidate
-    Toggle3.Invalidate
-    RibbonDispatcher.InvalidateCustomControlsGroup
+   ' Toggle1.Invalidate
+   ' Toggle2.Invalidate
+   ' Toggle3.Invalidate
+    Invalidate 'RibbonDispatcher.InvalidateCustomControlsGroup
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle2_Toggled", vbOKOnly Or vbInformation
     Resume XT
@@ -70,11 +70,11 @@ Private Sub Toggle3_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     Button3.IsLarge = Not IsPressed
     Toggle3.SetImageMso ToggleImage(IsPressed)
     Dropdown1.IsEnabled = IsPressed
-    Button1.Invalidate
-    Button2.Invalidate
-    Button3.Invalidate
-    Dropdown1.Invalidate
-    RibbonDispatcher.InvalidateCustomControlsGroup
+   ' Button1.Invalidate
+   ' Button2.Invalidate
+   ' Button3.Invalidate
+   ' Dropdown1.Invalidate
+    Invalidate 'RibbonDispatcher.InvalidateCustomControlsGroup
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or vbInformation
     Resume XT
@@ -128,17 +128,34 @@ Friend Sub Activate()
     
     Dropdown1.Attach "CustomVbaDropdown1", Dropdown1Strings
     
-    Button1.Attach "CustomizableButton1", Button1Strings:  Button1.Invalidate
-    Button2.Attach "CustomizableButton2", Button2Strings:  Button2.Invalidate
-    Button3.Attach "CustomizableButton3", Button3Strings:  Button3.Invalidate
+    Button1.Attach "CustomizableButton1", Button1Strings ':  Button1.Invalidate
+    Button2.Attach "CustomizableButton2", Button2Strings ':  Button2.Invalidate
+    Button3.Attach "CustomizableButton3", Button3Strings ':  Button3.Invalidate
     
-    RibbonDispatcher.InvalidateCustomControlsGroup
+    Invalidate 'RibbonDispatcher.InvalidateCustomControlsGroup
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Activate")
         Case vbAbort:  ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Activate"
         Case vbRetry:  Resume
         Case vbIgnore: Resume Next
     End Select
+    Resume          ' for debugging only
+End Sub
+
+Private Sub Invalidate()
+    On Error GoTo EH
+    Toggle1.Invalidate
+    Toggle2.Invalidate
+    Toggle3.Invalidate
+    Dropdown1.Invalidate
+    'Dropdown2.Invalidate
+    'Dropdown3.Invalidate
+    Button1.Invalidate
+    Button2.Invalidate
+    Button3.Invalidate
+    
+XT: Exit Sub
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Button1_Processing"
     Resume          ' for debugging only
 End Sub
 

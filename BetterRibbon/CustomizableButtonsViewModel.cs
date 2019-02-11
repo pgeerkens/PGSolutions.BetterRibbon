@@ -49,10 +49,26 @@ namespace PGSolutions.BetterRibbon {
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public string   GroupId      => CustomizableGroup.Id;
-        public void     Invalidate() => CustomizableGroup.Invalidate();
+        public void Invalidate() {
+            CustomizableToggle1?.Invalidate();
+            CustomizableToggle2?.Invalidate();
+            CustomizableToggle3?.Invalidate();
 
-        public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
-            AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
+            CustomizableCheckBox1?.Invalidate();
+            CustomizableCheckBox2?.Invalidate();
+            CustomizableCheckBox3?.Invalidate();
+
+            CustomizableDropDown1?.Invalidate();
+            CustomizableDropDown2?.Invalidate();
+            CustomizableDropDown3?.Invalidate();
+
+            CustomizableButton1?.Invalidate();
+            CustomizableButton2?.Invalidate();
+            CustomizableButton3?.Invalidate();
+        }
+
+        public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon
+        => AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
 
         public void     DetachControls() {
             foreach (var c in AdaptorControls) c.Value.Detach();

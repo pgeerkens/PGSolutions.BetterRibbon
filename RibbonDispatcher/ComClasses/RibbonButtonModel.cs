@@ -27,11 +27,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         IRibbonButton ViewModel { get; set; }
 
-        public void Attach(string controlId, IRibbonControlStrings strings) {
+        public IRibbonButtonModel Attach(string controlId, IRibbonControlStrings strings) {
             var viewModel = Factory(controlId);
-            viewModel.Attach().SetLanguageStrings(strings);
-            viewModel.Clicked += OnClicked;
+            if (viewModel != null) {
+                viewModel.Attach().SetLanguageStrings(strings);
+                viewModel.Clicked += OnClicked;
+            }
             ViewModel = viewModel;
+            Invalidate();
+            return this;
         }
 
         private void OnClicked(object sender) => Clicked(sender);
