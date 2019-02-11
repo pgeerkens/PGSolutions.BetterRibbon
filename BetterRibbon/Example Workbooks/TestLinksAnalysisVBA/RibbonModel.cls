@@ -7,6 +7,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'''=======================================================================================
+'''                Copyright (c) 2017-2019 Pieter Geerkens
+'''
+'''     Licensed under the MIT Licence at:
+'''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
+'''=======================================================================================
 Option Explicit
 
 Private MRibbonDispatcher   As PGSolutions_RibbonDispatcher.IRibbonDispatcher
@@ -22,7 +28,6 @@ End Sub
 Friend Sub Activate()
     Button1.Attach "CustomizableButton1", Button1Strings
     Button1.Invalidate
-    RibbonDispatcher.InvalidateCustomControlsGroup
 End Sub
 
 Private Function RibbonDispatcher() As PGSolutions_RibbonDispatcher.IRibbonDispatcher

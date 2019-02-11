@@ -2,13 +2,16 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+    public enum ERibbonControlSize {
+        SizeSmall = RibbonControlSize.RibbonControlSizeRegular,
+        SizeLarge = RibbonControlSize.RibbonControlSizeLarge
+    }
+
     /// <summary>TODO</summary>
     [CLSCompliant( true )]
     public delegate void ClickedEventHandler(object sender);
@@ -17,9 +20,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public delegate void SelectedEventHandler(object sender, int selectedIndex);
 
-    public enum ERibbonControlSize {
-        SizeSmall = RibbonControlSize.RibbonControlSizeRegular,
-        SizeLarge = RibbonControlSize.RibbonControlSizeLarge
+    public class EventArgs<T> :EventArgs where T : struct {
+        public EventArgs(T value) : base() => Value = value;
+
+        public T Value { get; }
     }
 
     /// <summary>The interface for controls that can be clicked.</summary>
@@ -108,111 +112,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         [DispId(DispIds.ItemShowLabel)]
         bool ItemShowLabel(int Index);
-    }
-
-    public class EventArgs<T> : EventArgs where T:struct {
-        public EventArgs(T value) : base() => Value = value;
-
-        public T Value { get; }
-    }
-
-    /// <summary></summary>
-    [Description("")]    
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IViewModelStore)]
-    public interface IViewModelStore {
-        IRibbonGroup    AttachGroup(string controlId, IRibbonControlStrings strings);
-        IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings);
-        IRibbonToggle   AttachToggle(string controlId, IRibbonControlStrings strings, IBooleanSource source);
-        IRibbonToggle   AttachCheckBox(string controlId, IRibbonControlStrings strings, IBooleanSource source);
-        IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings, IIntegerSource source);
-    }
-
-    /// <summary></summary>
-    [Description("")]    
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonGroupModel)]
-    public interface IRibbonGroupModel {
-        IRibbonGroup ViewModel { get; }
-
-        void Attach(string controlId, IRibbonControlStrings strings);
-    }
-
-    /// <summary></summary>
-    [Description("")]    
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonButtonModel)]
-    public interface IRibbonButtonModel {
-        [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
-        event ClickedEventHandler Clicked;
-
-        bool   IsEnabled { get; set; }
-        bool   IsVisible { get; set; }
-        bool   IsLarge   { get; set; }
-        object Image     { get; set; }
-        bool   ShowImage { get; set; }
-        bool   ShowLabel { get; set; }
-
-        IRibbonButtonModel Attach(string controlId, IRibbonControlStrings strings);
-
-        void Invalidate();
-
-        void SetImageDisp(IPictureDisp image);
-        void SetImageMso(string imageMso);
-    }
-
-    /// <summary></summary>
-    [Description("")]    
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonToggleModel)]
-    public interface IRibbonToggleModel {
-        [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
-        event ToggledEventHandler Toggled;
-
-        bool   IsEnabled { get; set; }
-        bool   IsVisible { get; set; }
-        bool   IsLarge   { get; set; }
-        object Image     { get; set; }
-        bool   ShowImage { get; set; }
-        bool   ShowLabel { get; set; }
-
-        bool   IsPressed { get; set; }
-
-        IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings);
-
-        void Invalidate();
-
-        void SetImageDisp(IPictureDisp image);
-        void SetImageMso(string imageMso);
-    }
-
-    /// <summary></summary>
-    [Description("")]
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonDropDownModel)]
-    public interface IRibbonDropDownModel {
-        [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
-        event SelectedEventHandler SelectionMade;
-
-        bool IsEnabled { get; set; }
-        bool IsVisible { get; set; }
-
-        int  SelectedIndex { get; set; }
-
-        IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
-
-        IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings);
-
-        void Invalidate();
     }
 }

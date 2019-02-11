@@ -7,6 +7,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+'''=======================================================================================
+'''                Copyright (c) 2017-2019 Pieter Geerkens
+'''
+'''     Licensed under the MIT Licence at:
+'''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
+'''=======================================================================================
 Option Explicit
 Private MRibbonModel            As RibbonModel
 
