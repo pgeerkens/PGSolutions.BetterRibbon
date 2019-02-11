@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupViewModel.cs" />
+    <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
     <Compile Include="ComClasses\RibbonDropDownModel.cs" />
     <Compile Include="ComClasses\RibbonGroupModel.cs" />
