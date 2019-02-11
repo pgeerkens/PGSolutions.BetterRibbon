@@ -40,19 +40,25 @@
         "Entry"
         {
         "MsmKey" = "8:_2369F475A72B5C965B5623FDAD0019D9"
-        "OwnerKey" = "8:_E568EA5BF3A9BCB074F651BBB33C8EF6"
+        "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2369F475A72B5C965B5623FDAD0019D9"
-        "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
+        "OwnerKey" = "8:_2CD37360DE035274623917DE608324CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2BA69C75A3F84ADEA7383EDA4231B638"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2CD37360DE035274623917DE608324CA"
+        "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -65,6 +71,12 @@
         {
         "MsmKey" = "8:_3DF8B83D8644938E7EBC9EB20BC003E9"
         "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_44EA624846D26839CB846B639445BDD8"
+        "OwnerKey" = "8:_2CD37360DE035274623917DE608324CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -99,12 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AE7523CCB270A6B37C283110948B3CCA"
-        "OwnerKey" = "8:_E568EA5BF3A9BCB074F651BBB33C8EF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C08B9AF40445D6DBAA30F09110067AD4"
         "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
         "MsmSig" = "8:_UNDEFINED"
@@ -113,12 +119,6 @@
         {
         "MsmKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E568EA5BF3A9BCB074F651BBB33C8EF6"
-        "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,7 +142,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E568EA5BF3A9BCB074F651BBB33C8EF6"
+        "OwnerKey" = "8:_2CD37360DE035274623917DE608324CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -201,7 +201,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\Publish\\BetterRibbon\\Debug\\Setup-SinglePackage.msi"
+        "OutputFilename" = "8:..\\..\\Publish\\BetterRibbon Single Package\\Debug\\Setup-Debug.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -238,7 +238,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\..\\Publish\\BetterRibbon\\Release\\Setup-SinglePackage.msi"
+        "OutputFilename" = "8:..\\..\\Publish\\BetterRibbon Single Package\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -411,6 +411,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2CD37360DE035274623917DE608324CA"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonUtilities, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b1407009db00379f, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2CD37360DE035274623917DE608324CA"
+                    {
+                    "Name" = "8:PGSolutions.RibbonUtilities.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PGSolutions.RibbonUtilities.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3CA9937D05909DEE02E372863C16A9E4"
             {
             "AssemblyRegister" = "3:1"
@@ -469,6 +500,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_44EA624846D26839CB846B639445BDD8"
+            {
+            "SourcePath" = "8:PGSolutions.RibbonUtilities.tlb"
+            "TargetName" = "8:PGSolutions.RibbonUtilities.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -544,26 +595,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AE7523CCB270A6B37C283110948B3CCA"
-            {
-            "SourcePath" = "8:PGSolutions.RibbonUtilities.tlb"
-            "TargetName" = "8:PGSolutions.RibbonUtilities.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C08B9AF40445D6DBAA30F09110067AD4"
             {
             "AssemblyRegister" = "3:1"
@@ -578,37 +609,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.Office.Tools.v4.0.Framework.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E568EA5BF3A9BCB074F651BBB33C8EF6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonUtilities, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b1407009db00379f, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_E568EA5BF3A9BCB074F651BBB33C8EF6"
-                    {
-                    "Name" = "8:PGSolutions.RibbonUtilities.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:PGSolutions.RibbonUtilities.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
@@ -725,14 +725,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.BetterRibbon"
         "ProductCode" = "8:{CA0DAF85-79DA-47D3-9A2F-C50E2491DACB}"
-        "PackageCode" = "8:{DC3DA7F7-7851-4EA3-98FE-458EB53E5B50}"
+        "PackageCode" = "8:{67EFA60D-442A-46D6-8964-674D200E9074}"
         "UpgradeCode" = "8:{29C7E5C8-FF18-40DF-86D1-E44B03F568B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:PGSolutions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues"
