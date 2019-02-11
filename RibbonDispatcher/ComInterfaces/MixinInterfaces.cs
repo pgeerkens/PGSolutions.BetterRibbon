@@ -152,9 +152,19 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
         event ClickedEventHandler Clicked;
 
-        IRibbonButton ViewModel { get; }
+        bool   IsEnabled { get; set; }
+        bool   IsVisible { get; set; }
+        bool   IsLarge   { get; set; }
+        object Image     { get; set; }
+        bool   ShowImage { get; set; }
+        bool   ShowLabel { get; set; }
 
         void Attach(string controlId, IRibbonControlStrings strings);
+
+        void Invalidate();
+
+        void SetImageDisp(IPictureDisp image);
+        void SetImageMso(string imageMso);
     }
 
     /// <summary></summary>
@@ -167,10 +177,43 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
         event ToggledEventHandler Toggled;
 
-        IRibbonToggle ViewModel { get; }
-        bool          IsPressed { get; set; }
+        bool   IsEnabled { get; set; }
+        bool   IsVisible { get; set; }
+        bool   IsLarge   { get; set; }
+        object Image     { get; set; }
+        bool   ShowImage { get; set; }
+        bool   ShowLabel { get; set; }
+
+        bool   IsPressed { get; set; }
 
         IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings);
+
+        void Invalidate();
+
+        void SetImageDisp(IPictureDisp image);
+        void SetImageMso(string imageMso);
+    }
+
+    /// <summary></summary>
+    [Description("")]
+    [ComVisible(true)]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid(Guids.IRibbonDropDownModel)]
+    public interface IRibbonDropDownModel {
+        [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
+        event SelectedEventHandler SelectionMade;
+
+        bool   IsEnabled { get; set; }
+        bool   IsVisible { get; set; }
+
+        int             SelectedIndex { get; set; }
+
+        IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
+
+        IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings);
+
+        void Invalidate();
     }
 
     public static partial class Extensions {

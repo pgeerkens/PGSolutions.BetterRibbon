@@ -64,8 +64,8 @@ namespace PGSolutions.RibbonDispatcher {
         public const string RibbonCheckboxModel         = "69E19431" + RibbonDispatcherGuidSpace;
         public const string IRibbonGroupModel           = "69E19432" + RibbonDispatcherGuidSpace;
         public const string RibbonGroupModel            = "69E19433" + RibbonDispatcherGuidSpace;
-        //public const string IResourceLoader             = "69E19434" + RibbonDispatcherGuidSpace;
-        //public const string ResourceLoader              = "69E19435" + RibbonDispatcherGuidSpace;
+        public const string IRibbonDropDownModel        = "69E19434" + RibbonDispatcherGuidSpace;
+        public const string RibbonDropDownModel         = "69E19435" + RibbonDispatcherGuidSpace;
         //public const string IRibbonModel                = "69E19436" + RibbonDispatcherGuidSpace;
         //public const string IRibbonLoader               = "69E19437" + RibbonDispatcherGuidSpace;
         //public const string IBooleanSource              = "69E19438" + RibbonDispatcherGuidSpace;

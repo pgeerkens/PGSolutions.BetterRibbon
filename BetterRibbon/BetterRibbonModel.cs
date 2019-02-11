@@ -138,13 +138,23 @@ namespace PGSolutions.BetterRibbon {
             return ctrl;
         }
 
-        public IRibbonToggleModel NewRibbonToggleModel()
-        => new RibbonToggleModel(id=> CustomButtonsModel.GetControl<RibbonToggleButton>(id));
+        /// <inheritdoc/>
+        public ISelectableItem NewSelectableItem(string controlID, string label) {
+            var item = ViewModel.RibbonFactory.NewSelectableItem(controlID);
+            item.SetLanguageStrings(new RibbonControlStrings(label));
+            return item;
+        }
 
+        /// <inheritdoc/>
         public IRibbonButtonModel NewRibbonButtonModel()
         => new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id));
 
-        public IRibbonToggleModel NewRibbonCheckboxModel()
-        => new RibbonCheckboxModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id));
+        /// <inheritdoc/>
+        public IRibbonToggleModel NewRibbonToggleModel()
+        => new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id));
+
+        /// <inheritdoc/>
+        public IRibbonDropDownModel NewRibbonDropdownModel()
+        => new RibbonDropDownModel(id => CustomButtonsModel.GetControl<RibbonDropDown>(id));
     }
 }

@@ -8,15 +8,12 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
-using Excel = Microsoft.Office.Interop.Excel;
-
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.BetterRibbon;
 using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    using Application           = Excel.Application;
     using VbaExportEventHandler = EventHandler<VbaExportEventArgs>;
 
     /// <summary>.</summary>

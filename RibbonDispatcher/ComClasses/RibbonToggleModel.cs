@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -18,31 +19,67 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
     [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : IRibbonToggleModel, IBooleanSource {
-        public RibbonToggleModel(Func<string,RibbonToggleButton> factory) => Factory = factory;
+    public sealed class RibbonToggleModel : IRibbonToggleModel, IBooleanSource, ISizeable, IImageable {
+        public RibbonToggleModel(Func<string, RibbonCheckBox> factory) => Factory = factory;
 
         public event ToggledEventHandler Toggled;
 
-        public IRibbonToggle ViewModel {get; private set; }
+        IRibbonToggle ViewModel { get; set; }
 
         public bool IsPressed {
             get => _isPressed;
-            set { _isPressed = value; ViewModel.Invalidate(); }
-        } bool _isPressed;
+            set { _isPressed = value; ViewModel?.Invalidate(); }
+        } bool _isPressed = false;
 
         public bool Getter() => IsPressed;
 
         public IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings) {
             var viewModel = Factory(controlId);
-            viewModel.Attach(Getter).SetLanguageStrings(strings);
-            viewModel.Toggled += OnToggled;
+            viewModel?.Attach(Getter).SetLanguageStrings(strings);
+            if (viewModel != null) { viewModel.Toggled += OnToggled; }
             ViewModel = viewModel;
+            Invalidate();
             return this;
         }
 
         private void OnToggled(object sender, bool isPressed)
         => Toggled?.Invoke(sender, IsPressed = isPressed);
 
-        private Func<string,RibbonToggleButton> Factory { get; }
+        private Func<string, RibbonCheckBox> Factory { get; }
+
+        public bool   IsEnabled { get; set; } = true;
+        public bool   IsVisible { get; set; } = true;
+        public bool   IsLarge   { get; set; } = true;
+        public object Image     { get; set; } = "MacroSecurity";
+        public bool   ShowImage { get; set; } = true;
+        public bool   ShowLabel { get; set; } = true;
+
+        public void SetImageDisp(IPictureDisp image) => Image = image;
+        public void SetImageMso(string imageMso) => Image = imageMso;
+
+        public void Invalidate() {
+            if (ViewModel != null) {
+                ViewModel.IsEnabled = IsEnabled;
+                ViewModel.IsVisible = IsVisible;
+
+                if (ViewModel is ISizeable sizeable)   sizeable.SetSizeablel(this);
+                if (ViewModel is IImageable imageable) imageable.SetImageable(this);
+
+                ViewModel.Invalidate();
+            }
+        }
+    }
+
+    public static partial class Extensions {
+        internal static void SetSizeablel(this ISizeable target, ISizeable source) {
+            target.IsLarge = source.IsLarge;
+        }
+
+        internal static void SetImageable(this IImageable target, IImageable source) {
+            target.ShowImage = source.ShowImage;
+            target.ShowLabel = source.ShowLabel;
+            if (source.Image is string) target.SetImageMso(source.Image as string);
+            if (source.Image is IPictureDisp) target.SetImageDisp(source.Image as IPictureDisp);
+        }
     }
 }

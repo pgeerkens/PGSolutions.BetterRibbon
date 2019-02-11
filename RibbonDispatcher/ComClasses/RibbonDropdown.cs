@@ -36,6 +36,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         public override void Detach() {
+            _items = new List<ISelectableItem>();
             Getter = ()=>0;
             SelectionMade = null;
             base.Detach();
@@ -60,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         public void OnActionDropDown(string SelectedId, int SelectedIndex) {
-            SelectionMade?.Invoke(SelectedId, SelectedIndex);
+            SelectionMade?.Invoke(this, SelectedIndex);
             Invalidate();
         }
 

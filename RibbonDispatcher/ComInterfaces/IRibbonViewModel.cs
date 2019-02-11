@@ -80,7 +80,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         string GetSuperTip(IRibbonControl Control);
 
         /// <summary>Call back for GetVisible events from ribbon elements.</summary>
-        [DispId(DispIds.IsVisible)]
+     //   [DispId(DispIds.IsVisible)]
         [Description("Call back for GetVisible events from ribbon elements.")]
         bool GetVisible(IRibbonControl Control);
 

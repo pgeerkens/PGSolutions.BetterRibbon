@@ -44,7 +44,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.IsEnabled)]
         bool   IsEnabled    { get; set; }
         /// <summary>TODO</summary>
-        [DispId(DispIds.IsVisible)]
+    //    [DispId(DispIds.IsVisible)]
         bool   IsVisible    { get; set; }
     }
 }

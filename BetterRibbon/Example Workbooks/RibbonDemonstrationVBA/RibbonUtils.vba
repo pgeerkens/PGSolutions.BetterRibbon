@@ -8,7 +8,7 @@ Private MRibbonDispatcher   As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 Public Property Get RibbonDispatcher() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
     On Error GoTo EH
     If MRibbonDispatcher Is Nothing Then
-        Set MRibbonDispatcher = Application.COMAddIns("PGSolutions.BetterRibbon").Object.NewBetterRibbon()
+        Set MRibbonDispatcher = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
     End If
     Set RibbonDispatcher = MRibbonDispatcher
 XT: Exit Property

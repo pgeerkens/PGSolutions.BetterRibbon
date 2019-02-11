@@ -13,6 +13,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ISelectionMadeEvents {
         /// <summary>TODO</summary>
         [DispId(1)]
-        void SelectionMade(string ItemId, int ItemIndex);
+        void SelectionMade(object sender, int ItemIndex);
     }
 }

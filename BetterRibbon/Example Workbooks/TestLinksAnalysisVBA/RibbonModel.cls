@@ -12,7 +12,7 @@ Option Explicit
 Private MRibbonDispatcher   As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 
 Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
-Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButton
+Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal sender As Variant)
@@ -20,11 +20,9 @@ Private Sub Button1_Clicked(ByVal sender As Variant)
 End Sub
 
 Friend Sub Activate()
-    With RibbonDispatcher
-        Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
-        Button1.SetImageMso "MacroPlay"
-        .InvalidateCustomControlsGroup
-    End With
+    Button1.Attach "CustomizableButton1", Button1Strings
+    Button1.Invalidate
+    RibbonDispatcher.InvalidateCustomControlsGroup
 End Sub
 
 Private Function RibbonDispatcher() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
@@ -42,5 +40,7 @@ Private Sub Class_Initialize()
                           "specific scanning and parsing tests on " & vbNewLine & _
                           "various formulas.", keyTip:="", _
                 alternateLabel:="", Description:="")
+                
+        Set Button1 = .NewRibbonButtonModel:  Button1.SetImageMso "MacroPlay": Button1.Invalidate
     End With
 End Sub

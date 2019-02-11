@@ -20,9 +20,9 @@ namespace PGSolutions.BetterRibbon {
             (CustomizableCheckBox2 = factory.NewRibbonCheckBox("CustomVbaCheckBox2")).SetLanguageStrings();
             (CustomizableCheckBox3 = factory.NewRibbonCheckBox("CustomVbaCheckBox3")).SetLanguageStrings();
 
-            (CustomizableDropDown1 = factory.NewRibbonDropDown("CustomVbaOptions1")).SetLanguageStrings();
-            (CustomizableDropDown2 = factory.NewRibbonDropDown("CustomVbaOptions2")).SetLanguageStrings();
-            (CustomizableDropDown3 = factory.NewRibbonDropDown("CustomVbaOptions3")).SetLanguageStrings();
+            (CustomizableDropDown1 = factory.NewRibbonDropDown("CustomVbaDropdown1")).SetLanguageStrings();
+            (CustomizableDropDown2 = factory.NewRibbonDropDown("CustomVbaDropdown2")).SetLanguageStrings();
+            (CustomizableDropDown3 = factory.NewRibbonDropDown("CustomVbaDropdown3")).SetLanguageStrings();
 
             (CustomizableButton1 = factory.NewRibbonButtonMso("CustomizableButton1")).SetLanguageStrings();
             (CustomizableButton2 = factory.NewRibbonButtonMso("CustomizableButton2")).SetLanguageStrings();
@@ -48,10 +48,8 @@ namespace PGSolutions.BetterRibbon {
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public string   GroupId => CustomizableGroup.Id;
-        public void     Invalidate() {
-            CustomizableGroup.Invalidate();
-        }
+        public string   GroupId      => CustomizableGroup.Id;
+        public void     Invalidate() => CustomizableGroup.Invalidate();
 
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
             AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
