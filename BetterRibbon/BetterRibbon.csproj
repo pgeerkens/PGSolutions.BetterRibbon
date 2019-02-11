@@ -307,7 +307,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LinksAnalyzer\RibbonUtilities.csproj">
+    <ProjectReference Include="..\RibbonUtilities\RibbonUtilities.csproj">
       <Project>{fab5de05-0232-4053-b4ce-ce9a1a312750}</Project>
       <Name>RibbonUtilities</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>

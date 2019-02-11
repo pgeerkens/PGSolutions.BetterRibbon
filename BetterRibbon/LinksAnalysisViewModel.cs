@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public event EventHandler<WorkbookEventArgs> AnalyzeCurrentClicked;
         /// <inheritdoc/>
         public event EventHandler<RangeEventArgs>    AnalyzeSelectedClicked;
-
+        /// <inheritdoc/>
         public dynamic StatusBar { set => Application.StatusBar = value; }
 
         /// <inheritdoc/>

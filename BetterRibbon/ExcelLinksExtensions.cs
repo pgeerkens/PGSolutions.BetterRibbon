@@ -15,8 +15,11 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
+        /// <inheritdoc/>
         public const string LinksSheetName  = "Links Analysis";
+        /// <inheritdoc/>
         public const string FilesSheetName  = "Linked Files";
+        /// <inheritdoc/>
         public const string ErrorsSheetName = "Links Errors";
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
