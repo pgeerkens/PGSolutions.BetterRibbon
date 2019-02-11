@@ -76,19 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_67803418014B70C252CDFA2B131DD226"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B15BBD89AD42C3491C170D32AA5C8489"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_48C676513BCCF6B792EB5FD6005B5830"
+        "OwnerKey" = "8:_C3308B1D8853C45F937E27B34E821F37"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,7 +88,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C3308B1D8853C45F937E27B34E821F37"
+        "OwnerKey" = "8:_48C676513BCCF6B792EB5FD6005B5830"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B15BBD89AD42C3491C170D32AA5C8489"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_67803418014B70C252CDFA2B131DD226"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1007,7 +1007,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_74838268E21A4367BA2C78D40B0A594E"
             {
-            "SourcePath" = "8:..\\LinksAnalyzer\\obj\\Debug\\PGSolutions.RibbonUtilities.dll"
+            "SourcePath" = "8:..\\RibbonUtilities\\obj\\Debug\\PGSolutions.RibbonUtilities.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_66E1FEA8CE744E9FBD13826CF47DBDDA"
