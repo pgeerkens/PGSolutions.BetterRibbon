@@ -20,9 +20,9 @@ namespace PGSolutions.BetterRibbon {
             (CustomizableCheckBox2 = factory.NewRibbonCheckBox("CustomVbaCheckBox2")).SetLanguageStrings();
             (CustomizableCheckBox3 = factory.NewRibbonCheckBox("CustomVbaCheckBox3")).SetLanguageStrings();
 
-            (CustomizableDropDown1 = factory.NewRibbonDropDown("CustomVbaDropdown1")).SetLanguageStrings();
-            (CustomizableDropDown2 = factory.NewRibbonDropDown("CustomVbaDropdown2")).SetLanguageStrings();
-            (CustomizableDropDown3 = factory.NewRibbonDropDown("CustomVbaDropdown3")).SetLanguageStrings();
+            (CustomizableDropDown1 = factory.NewRibbonDropDown("CustomVbaDropDown1")).SetLanguageStrings();
+            (CustomizableDropDown2 = factory.NewRibbonDropDown("CustomVbaDropDown2")).SetLanguageStrings();
+            (CustomizableDropDown3 = factory.NewRibbonDropDown("CustomVbaDropDown3")).SetLanguageStrings();
 
             (CustomizableButton1 = factory.NewRibbonButtonMso("CustomizableButton1")).SetLanguageStrings();
             (CustomizableButton2 = factory.NewRibbonButtonMso("CustomizableButton2")).SetLanguageStrings();
@@ -65,6 +65,8 @@ namespace PGSolutions.BetterRibbon {
             CustomizableButton1?.Invalidate();
             CustomizableButton2?.Invalidate();
             CustomizableButton3?.Invalidate();
+
+            CustomizableGroup?.Invalidate();
         }
 
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon

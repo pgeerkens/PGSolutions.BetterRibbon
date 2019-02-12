@@ -8,7 +8,6 @@ namespace PGSolutions.BetterRibbon {
         public CustomButtonsModel(CustomizableButtonsViewModel viewModel) =>
             ViewModel = viewModel;
  
-        public string GroupId      => ViewModel.GroupId;
         public void   Invalidate() => ViewModel.Invalidate();
 
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>

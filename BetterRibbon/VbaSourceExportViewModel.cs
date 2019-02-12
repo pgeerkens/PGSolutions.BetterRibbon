@@ -94,7 +94,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
         }
 
-        private bool IsProjectModelTrusted() {
+        private static bool IsProjectModelTrusted() {
             try {
                 return Application.VBE != null;
             }

@@ -28,10 +28,10 @@ Attribute Toggle3.VB_VarHelpID = -1
 Private WithEvents Toggle4   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle4.VB_VarHelpID = -1
 
-Private WithEvents Dropdown1 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
-Attribute Dropdown1.VB_VarHelpID = -1
-Private WithEvents Dropdown2 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
-Attribute Dropdown2.VB_VarHelpID = -1
+Private WithEvents DropDown1 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
+Attribute DropDown1.VB_VarHelpID = -1
+Private WithEvents DropDown2 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
+Attribute DropDown2.VB_VarHelpID = -1
 Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown3.VB_VarHelpID = -1
 
@@ -74,6 +74,7 @@ Private Sub Toggle3_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     Button2.IsLarge = Not IsPressed
     Button3.IsLarge = Not IsPressed
     Toggle3.SetImageMso ToggleImage(IsPressed)
+    DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
 XT: Exit Sub
@@ -98,33 +99,33 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Dropdown1_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
+Private Sub DropDown1_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
     On Error GoTo EH
     SetImageAndLabel SelectedIndex, Button1, Button2, Button3
     
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Dropdown1_SelectionMade", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown1_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
-Private Sub Dropdown2_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
+Private Sub DropDown2_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
     On Error GoTo EH
-    MsgBox "Dropdown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
+    MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Dropdown2_SelectionMade", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown2_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
-Private Sub Dropdown3_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
+Private Sub DropDown3_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
     On Error GoTo EH
-    MsgBox "Dropdown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
+    MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Dropdown3_SelectionMade", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown3_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
@@ -167,8 +168,8 @@ Private Sub Invalidate()
     If Not Toggle3 Is Nothing Then Toggle3.Invalidate
     If Not Toggle4 Is Nothing Then Toggle4.Invalidate
     
-    If Not Dropdown1 Is Nothing Then Dropdown1.Invalidate
-    If Not Dropdown2 Is Nothing Then Dropdown2.Invalidate
+    If Not DropDown1 Is Nothing Then DropDown1.Invalidate
+    If Not DropDown2 Is Nothing Then DropDown2.Invalidate
     If Not Dropdown3 Is Nothing Then Dropdown3.Invalidate
     
     If Not Button1 Is Nothing Then Button1.Invalidate
@@ -189,9 +190,9 @@ Friend Sub Activate()
     If Not Toggle3 Is Nothing Then Toggle3.Attach "CustomVbaCheckBox3"
     If Not Toggle4 Is Nothing Then Toggle4.Attach "CustomVbaCheckBox1"
     
-    If Not Dropdown1 Is Nothing Then Dropdown1.Attach "CustomVbaDropdown1"
-    If Not Dropdown2 Is Nothing Then Dropdown2.Attach "CustomVbaDropdown2"
-    If Not Dropdown3 Is Nothing Then Dropdown3.Attach "CustomVbaDropdown3"
+    If Not DropDown1 Is Nothing Then DropDown1.Attach "CustomVbaDropDown1"
+    If Not DropDown2 Is Nothing Then DropDown2.Attach "CustomVbaDropDown2"
+    If Not Dropdown3 Is Nothing Then Dropdown3.Attach "CustomVbaDropDown3"
     
     If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
     If Not Button2 Is Nothing Then Button2.Attach "CustomizableButton2"
@@ -200,7 +201,7 @@ Friend Sub Activate()
     ' Set initial status
     Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
     BetterRibbon.ShowInactive Toggle1.IsPressed
-    Dropdown1.IsEnabled = Toggle3.IsPressed
+    DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
 XT: Exit Sub
@@ -220,8 +221,8 @@ Private Sub Class_Initialize()
         Set Toggle3 = .NewRibbonToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
         Set Toggle4 = .NewRibbonToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
-        Set Dropdown1 = .NewRibbonDropdownModel(FindStrings("Dropdown1"))
-        Dropdown1.AddItem(.NewSelectableItem("LabelOnly", "Label Only")) _
+        Set DropDown1 = .NewRibbonDropDownModel(FindStrings("DropDown1"))
+        DropDown1.AddItem(.NewSelectableItem("LabelOnly", "Label Only")) _
                  .AddItem(.NewSelectableItem("ImageOnly", "Image Only")) _
                  .AddItem(.NewSelectableItem("LabelAndImage", "Label and Image")) _
                  .SelectedIndex = 2

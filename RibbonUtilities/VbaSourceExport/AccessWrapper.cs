@@ -13,8 +13,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         public Access.Application AccessApp { get; }
 
-        /// <summary>Returns true exactly when the Project Object Model is trusted.</summary>
-        public bool   IsProjectModelTrusted => AccessApp.VBE != null;
+        /// <summary>Returns the nake of the current VBE project.</summary>
         public string CurrentProjectName    => AccessApp.CurrentProject.Name;
 
         public void OpenDbWithuotAutoexec(string path, bool exclusive = false)

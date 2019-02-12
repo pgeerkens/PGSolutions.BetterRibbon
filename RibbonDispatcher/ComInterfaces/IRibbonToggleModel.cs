@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
@@ -15,23 +14,46 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonToggleModel)]
     public interface IRibbonToggleModel {
-        [SuppressMessage( "Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification="EventArgs<T> is unknown to COM.")]
-        event ToggledEventHandler Toggled;
-
-        bool   IsEnabled { get; set; }
-        bool   IsVisible { get; set; }
+        /// <summary>Gets or sets whether the control is enabled.</summary>
+        [Description(".")]
+        bool   IsEnabled {
+            [Description("Gets or sets whether the control is enabled.")]
+            get; set; }
+        /// <summary>Gets or sets whether the control is visible.</summary>
+        [Description(".")]
+        bool   IsVisible {
+            [Description("Gets or sets whether the control is visible.")]
+            get; set; }
+        /// <summary>.</summary>
+        [Description(".")]
         bool   IsLarge   { get; set; }
+        /// <summary>.</summary>
+        [Description(".")]
         object Image     { get; set; }
+        /// <summary>.</summary>
+        [Description(".")]
         bool   ShowImage { get; set; }
+        /// <summary>.</summary>
+        [Description(".")]
         bool   ShowLabel { get; set; }
 
+        /// <summary>.</summary>
+        [Description(".")]
         bool   IsPressed { get; set; }
 
+        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         IRibbonToggleModel Attach(string controlId);
 
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [Description("Queues a request for this control to be refreshed.")]
         void Invalidate();
 
+        /// <summary>.</summary>
+        [Description(".")]
         void SetImageDisp(IPictureDisp image);
+        /// <summary>.</summary>
+        [Description(".")]
         void SetImageMso(string imageMso);
     }
 }

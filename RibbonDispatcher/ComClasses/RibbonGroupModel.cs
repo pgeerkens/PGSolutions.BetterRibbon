@@ -18,14 +18,33 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
     [Guid(Guids.RibbonGroupModel)]
     public sealed class RibbonGroupModel :IRibbonGroupModel {
-        internal RibbonGroupModel(ViewModelStore viewModelStore)
-            => ViewModelStore = viewModelStore;
+        public RibbonGroupModel(Func<string,RibbonGroup> factory, IRibbonControlStrings strings) {
+            Factory = factory;
+            Strings = strings;
+        }
 
-        public IRibbonGroup ViewModel => _viewModel;
-        private RibbonGroup _viewModel { get; set; }
-        private ViewModelStore ViewModelStore { get; }
+        public IRibbonGroup ViewModel { get; set; }
 
-        public void Attach(string controlId, IRibbonControlStrings strings) =>
-            _viewModel = ViewModelStore.AttachGroup(controlId, strings);
+        public IRibbonGroupModel Attach(string controlId) {
+            var viewModel = Factory(controlId);
+            ViewModel = viewModel;
+            Invalidate();
+            return this;
+        }
+
+        private Func<string, RibbonGroup> Factory { get; }
+
+        public IRibbonControlStrings Strings { get; }
+        public bool IsEnabled { get; set; } = true;
+        public bool IsVisible { get; set; } = true;
+
+        public void Invalidate() {
+            if (ViewModel != null) {
+                ViewModel.IsEnabled = IsEnabled;
+                ViewModel.IsVisible = IsVisible;
+
+                ViewModel.Invalidate();
+            }
+        }
     }
 }

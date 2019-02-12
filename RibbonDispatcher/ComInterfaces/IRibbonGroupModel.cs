@@ -15,6 +15,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IRibbonGroupModel {
         IRibbonGroup ViewModel { get; }
 
-        void Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonGroupModel Attach(string controlId);
     }
 }

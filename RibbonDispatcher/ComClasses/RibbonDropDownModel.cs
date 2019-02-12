@@ -69,9 +69,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 ViewModel.IsEnabled = IsEnabled;
                 ViewModel.IsVisible = IsVisible;
 
-                //if (ViewModel is ISizeable sizeable)   sizeable.SetSizeablel(this);
-                //if (ViewModel is IImageable imageable) imageable.SetImageable(this);
-
                 ViewModel.Invalidate();
             }
         }

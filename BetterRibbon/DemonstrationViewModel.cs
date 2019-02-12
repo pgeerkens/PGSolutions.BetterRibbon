@@ -18,12 +18,12 @@ namespace PGSolutions.BetterRibbon {
             CheckBox1      = factory.NewRibbonCheckBox("CheckBox1", false);
             CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);
             CheckBox3      = factory.NewRibbonCheckBox("CheckBox3", false);
-            DisplayOptions = factory.NewRibbonDropDown("Dropdown1");
+            DisplayOptions = factory.NewRibbonDropDown("DropDown1");
             DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
                           .AddItem(factory.NewSelectableItem("ImageOnly"))
                           .AddItem(factory.NewSelectableItem("LabelAndImage"));
-            Dropdown2      = factory.NewRibbonDropDown("Dropdown2", false);
-            Dropdown3      = factory.NewRibbonDropDown("Dropdown3", false);
+            DropDown2      = factory.NewRibbonDropDown("DropDown2", false);
+            DropDown3      = factory.NewRibbonDropDown("DropDown3", false);
             CustomButton1  = factory.NewRibbonButtonMso("AppLaunchButton1", imageMso:"RefreshAll");
             CustomButton2  = factory.NewRibbonButtonMso("AppLaunchButton2", imageMso:"Refresh");
             CustomButton3  = factory.NewRibbonButtonMso("AppLaunchButton3", imageMso:"MacroPlay");
@@ -52,9 +52,9 @@ namespace PGSolutions.BetterRibbon {
         private RibbonCheckBox     CheckBox3      { get; }
         private RibbonDropDown     DisplayOptions { get; }
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private RibbonDropDown     Dropdown2      { get; }
+        private RibbonDropDown     DropDown2      { get; }
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private RibbonDropDown     Dropdown3      { get; }
+        private RibbonDropDown     DropDown3      { get; }
         private RibbonButton       CustomButton1  { get; }
         private RibbonButton       CustomButton2  { get; }
         private RibbonButton       CustomButton3  { get; }

@@ -23,5 +23,7 @@ End Sub
 
 Private Sub Workbook_Open()
     If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
-        MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
+        MsgBox "Pause for Ctrl-Break to ease debugging." & vbNewLine & vbNewLine & _
+               "This message should only display if you are me.", _
+               vbOKOnly, ThisWorkbook.Name
 End Sub

@@ -301,18 +301,18 @@ namespace BetterRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Display Options.
         /// </summary>
-        internal static string Dropdown1_Label {
+        internal static string DropDown1_Label {
             get {
-                return ResourceManager.GetString("Dropdown1_Label", resourceCulture);
+                return ResourceManager.GetString("DropDown1_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Display Options for Custom Buttons.
         /// </summary>
-        internal static string Dropdown1_ScreenTip {
+        internal static string DropDown1_ScreenTip {
             get {
-                return ResourceManager.GetString("Dropdown1_ScreenTip", resourceCulture);
+                return ResourceManager.GetString("DropDown1_ScreenTip", resourceCulture);
             }
         }
         
@@ -323,9 +323,9 @@ namespace BetterRibbon.Properties {
         ///-Image &amp; Label
         ///Enabled only when button size is Regular, as large buttons always display both..
         /// </summary>
-        internal static string Dropdown1_SuperTip {
+        internal static string DropDown1_SuperTip {
             get {
-                return ResourceManager.GetString("Dropdown1_SuperTip", resourceCulture);
+                return ResourceManager.GetString("DropDown1_SuperTip", resourceCulture);
             }
         }
         

@@ -8,14 +8,14 @@ using System;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel {
-        public BrandingModel(BrandingViewModel viewModel) =>
+        public BrandingModel(BrandingViewModel viewModel) {
             ViewModel = viewModel;
+            ViewModel.ButtonClicked += ButtonClicked;
+        }
 
-        public void Attach()     => ViewModel.ButtonClicked += ButtonClicked;
-        public void Detach()     => ViewModel.ButtonClicked -= ButtonClicked;
         public void Invalidate() => ViewModel.Invalidate();
 
-        private BrandingViewModel ViewModel { get; set; }
+        private BrandingViewModel ViewModel { get; }
 
         private void ButtonClicked(object sender) =>
             ( $"PGSolutions Better Ribbon\n\n"

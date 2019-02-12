@@ -10,14 +10,15 @@ Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
 Public Function AlternateToggle(ByVal Dispatcher As IRibbonDispatcher, Mode As Boolean, _
-        Model As RibbonToggleModel, ByVal ToggleID As String, ByVal CheckboxID As String _
+        Model As RibbonToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
     On Error GoTo EH
     AlternateToggle = Not Mode
     
     Dispatcher.DetachProxy ToggleID
-    Dispatcher.DetachProxy CheckboxID
-    Model.Attach IIf(AlternateToggle, ToggleID, CheckboxID)
+    Dispatcher.DetachProxy CheckBoxID
+    Model.Attach IIf(AlternateToggle, ToggleID, CheckBoxID)
+    Model.SetImageMso ToggleImage(Model.IsPressed)
     Model.Invalidate
     Application.StatusBar = "Ready ...'"
     
