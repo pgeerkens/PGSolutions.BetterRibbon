@@ -1,10 +1,12 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
+using System.Text;
+
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
-using System;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel {
@@ -17,13 +19,13 @@ namespace PGSolutions.BetterRibbon {
 
         private BrandingViewModel ViewModel { get; }
 
-        private void ButtonClicked(object sender) =>
-            ( $"PGSolutions Better Ribbon\n\n"
-            + $"Better Ribbon V {Globals.ThisAddIn.VersionNo3}\n"
-            + $"Ribbon Utilities V {UtilitiesVersion.Format2()}\n"
-            + $"Ribbon Dispatcher V {DispatcherVersion.Format2()}\n\n"
-            + $"{ViewModel.BrandingButton.SuperTip}"
-            ).MsgBoxShow();
+        private void ButtonClicked(object sender) => new StringBuilder()
+            .Append($"PGSolutions Better Ribbon\n\n")
+            .Append($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}\n")
+            .Append($"Ribbon Utilities V {UtilitiesVersion.Format2()}\n")
+            .Append($"Ribbon Dispatcher V {DispatcherVersion.Format2()}\n\n")
+            .Append($"{ViewModel.BrandingButton.SuperTip}")
+            .ToString().MsgBoxShow();
 
         static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
         static Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
