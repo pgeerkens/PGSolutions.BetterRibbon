@@ -22,7 +22,7 @@ Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal sender As Variant)
-    PublicMacros.TestAll
+    ButtonProcessing.Button1_Processing
 End Sub
 
 Friend Sub Activate()
@@ -39,12 +39,12 @@ End Function
 
 Private Sub Class_Initialize()
     With RibbonDispatcher
-        Set Button1Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
-                ScreenTip:="Unit Test for Linka Parser", _
-                superTip:="Performs a connection test and then ten" & vbNewLine & _
-                          "specific scanning and parsing tests on " & vbNewLine & _
-                          "various formulas.", keyTip:="", _
-                alternateLabel:="", Description:="")
+        Set Button1Strings = .NewControlStrings(Label:="This is cool!", _
+                ScreenTip:="VBA-Customized Button Screentip", _
+                SuperTip:="This button is completely" & vbNewLine & _
+                          "customized within the VBA" & vbNewLine & _
+                          "workbook.", keyTip:="", _
+                AlternateLabel:="", Description:="")
                 
         Set Button1 = .NewRibbonButtonModelMso(Button1Strings, "MacroPlay")
     End With

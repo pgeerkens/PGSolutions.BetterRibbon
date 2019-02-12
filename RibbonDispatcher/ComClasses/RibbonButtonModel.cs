@@ -21,16 +21,32 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonButtonModel))]
     [Guid(Guids.RibbonButtonModel)]
     public sealed class RibbonButtonModel : IRibbonButtonModel, ISizeable, IImageable {
-        public RibbonButtonModel(Func<string,RibbonButton> factory) => Factory = factory;
+        public RibbonButtonModel(Func<string, RibbonButton> factory,
+                IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
+        : this(factory, strings, isEnabled, isVisible)
+        => SetImageMso(imageMso);
+
+        public RibbonButtonModel(Func<string, RibbonButton> factory,
+                IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
+        : this(factory, strings, isEnabled, isVisible)
+        => SetImageDisp(image);
+
+        public RibbonButtonModel(Func<string,RibbonButton> factory, IRibbonControlStrings strings,
+                bool isEnabled, bool isVisible) {
+            Factory = factory;
+            Strings = strings;
+            IsEnabled = isEnabled;
+            IsEnabled = isVisible;
+        }
 
         public event ClickedEventHandler Clicked;
 
         IRibbonButton ViewModel { get; set; }
 
-        public IRibbonButtonModel Attach(string controlId, IRibbonControlStrings strings) {
+        public IRibbonButtonModel Attach(string controlId) {
             var viewModel = Factory(controlId);
             if (viewModel != null) {
-                viewModel.Attach().SetLanguageStrings(strings);
+                viewModel.Attach().SetLanguageStrings(Strings);
                 viewModel.Clicked += OnClicked;
             }
             ViewModel = viewModel;
@@ -42,6 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private Func<string, RibbonButton> Factory { get; }
 
+        public IRibbonControlStrings Strings { get; }
         public bool   IsEnabled { get; set; } = true;
         public bool   IsVisible { get; set; } = true;
         public bool   IsLarge   { get; set; } = true;

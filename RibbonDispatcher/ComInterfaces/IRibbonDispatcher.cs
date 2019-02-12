@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
@@ -87,14 +88,25 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>.</summary>
         [Description(".")]
-        IRibbonButtonModel NewRibbonButtonModel();
+        IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
+                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
-        IRibbonToggleModel NewRibbonToggleModel();
+        IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
+                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
-        IRibbonDropDownModel NewRibbonDropdownModel();
+        IRibbonDropDownModel NewRibbonDropdownModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
     }
 }

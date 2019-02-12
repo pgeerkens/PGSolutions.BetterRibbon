@@ -24,7 +24,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
 
-        IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonDropDownModel Attach(string controlId);
 
         void Invalidate();
     }

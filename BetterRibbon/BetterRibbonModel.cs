@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
@@ -146,15 +147,33 @@ namespace PGSolutions.BetterRibbon {
         }
 
         /// <inheritdoc/>
-        public IRibbonButtonModel NewRibbonButtonModel()
-        => new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id));
+        public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
+        => new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id),
+                strings, image, isEnabled, isVisible);
 
         /// <inheritdoc/>
-        public IRibbonToggleModel NewRibbonToggleModel()
-        => new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id));
+        public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
+                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
+        => new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id),
+                strings, imageMso, isEnabled, isVisible);
 
         /// <inheritdoc/>
-        public IRibbonDropDownModel NewRibbonDropdownModel()
-        => new RibbonDropDownModel(id => CustomButtonsModel.GetControl<RibbonDropDown>(id));
+        public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
+        => new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id),
+                strings, image, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
+                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
+        => new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id),
+                strings, imageMso, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        public IRibbonDropDownModel NewRibbonDropdownModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => new RibbonDropDownModel(id => CustomButtonsModel.GetControl<RibbonDropDown>(id),
+                strings, isEnabled, isVisible);
     }
 }

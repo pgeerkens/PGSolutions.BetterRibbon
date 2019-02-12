@@ -20,7 +20,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
     [Guid(Guids.RibbonToggleModel)]
     public sealed class RibbonToggleModel : IRibbonToggleModel, IBooleanSource, ISizeable, IImageable {
-        public RibbonToggleModel(Func<string, RibbonCheckBox> factory) => Factory = factory;
+        public RibbonToggleModel(Func<string, RibbonCheckBox> factory,
+                IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
+        : this(factory, strings, isEnabled, isVisible)
+        => SetImageMso(imageMso);
+
+        public RibbonToggleModel(Func<string, RibbonCheckBox> factory,
+                IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
+        : this(factory, strings, isEnabled, isVisible)
+        => SetImageDisp(image);
+
+        public RibbonToggleModel(Func<string, RibbonCheckBox> factory,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
+            Factory = factory;
+            Strings = strings;
+            IsEnabled = isEnabled;
+            IsEnabled = isVisible;
+        }
 
         public event ToggledEventHandler Toggled;
 
@@ -33,10 +49,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public bool Getter() => IsPressed;
 
-        public IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings) {
+        public IRibbonToggleModel Attach(string controlId) {
             var viewModel = Factory(controlId);
             if (viewModel != null) {
-                viewModel.Attach(Getter).SetLanguageStrings(strings);
+                viewModel.Attach(Getter).SetLanguageStrings(Strings);
                 viewModel.Toggled += OnToggled;
             }
             ViewModel = viewModel;
@@ -49,6 +65,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private Func<string, RibbonCheckBox> Factory { get; }
 
+        public IRibbonControlStrings Strings { get; }
         public bool   IsEnabled { get; set; } = true;
         public bool   IsVisible { get; set; } = true;
         public bool   IsLarge   { get; set; } = true;

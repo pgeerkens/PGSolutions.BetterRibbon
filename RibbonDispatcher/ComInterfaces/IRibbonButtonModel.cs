@@ -25,7 +25,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool   ShowImage { get; set; }
         bool   ShowLabel { get; set; }
 
-        IRibbonButtonModel Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonButtonModel Attach(string controlId);
 
         void Invalidate();
 

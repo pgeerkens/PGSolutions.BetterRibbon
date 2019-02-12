@@ -21,12 +21,14 @@ Private WithEvents Toggle2   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle2.VB_VarHelpID = -1
 Private WithEvents Toggle3   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle3.VB_VarHelpID = -1
+
 Private WithEvents Dropdown1 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown1.VB_VarHelpID = -1
 Private WithEvents Dropdown2 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown2.VB_VarHelpID = -1
 Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown3.VB_VarHelpID = -1
+
 Private WithEvents Button1   As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 Private WithEvents Button2   As PGSolutions_RibbonDispatcher.RibbonButtonModel
@@ -38,7 +40,6 @@ Private Sub Toggle1_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
     RibbonDispatcher.ShowInactive IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
-    'Toggle1.Invalidate
     
     Invalidate
 XT: Exit Sub
@@ -134,17 +135,17 @@ End Sub
 
 Friend Sub Activate()
     On Error GoTo EH
-    Toggle1.Attach "CustomVbaToggle1", Toggle1Strings
-    Toggle2.Attach "CustomVbaCheckBox2", Toggle2Strings
-    Toggle3.Attach "CustomVbaCheckBox3", Toggle3Strings
+    If Not Toggle1 Is Nothing Then Toggle1.Attach "CustomVbaToggle1"
+    If Not Toggle2 Is Nothing Then Toggle2.Attach "CustomVbaCheckBox2"
+    If Not Toggle3 Is Nothing Then Toggle3.Attach "CustomVbaCheckBox3"
     
-    Dropdown1.Attach "CustomVbaDropdown1", Dropdown1Strings
-    'Dropdown2.Attach "CustomVbaDropdown2", Dropdown2Strings
-    'Dropdown3.Attach "CustomVbaDropdown3", Dropdown3Strings
+    If Not Dropdown1 Is Nothing Then Dropdown1.Attach "CustomVbaDropdown1"
+    If Not Dropdown2 Is Nothing Then Dropdown2.Attach "CustomVbaDropdown2"
+    If Not Dropdown3 Is Nothing Then Dropdown3.Attach "CustomVbaDropdown3"
     
-    Button1.Attach "CustomizableButton1", Button1Strings
-    Button2.Attach "CustomizableButton2", Button2Strings
-    Button3.Attach "CustomizableButton3", Button3Strings
+    If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
+    If Not Button2 Is Nothing Then Button2.Attach "CustomizableButton2"
+    If Not Button3 Is Nothing Then Button3.Attach "CustomizableButton3"
     
     Invalidate
 XT: Exit Sub
@@ -178,19 +179,19 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With RibbonDispatcher
-        Set Toggle1 = .NewRibbonToggleModel
-        Set Toggle2 = .NewRibbonToggleModel
-        Set Toggle3 = .NewRibbonToggleModel
+        Set Toggle1 = .NewRibbonToggleModelMso(Toggle1Strings, "MarginsShowHide")
+        Set Toggle2 = .NewRibbonToggleModelMso(Toggle2Strings, "MarginsShowHide")
+        Set Toggle3 = .NewRibbonToggleModelMso(Toggle3Strings, "MarginsShowHide")
         
-        Set Dropdown1 = .NewRibbonDropdownModel
+        Set Dropdown1 = .NewRibbonDropdownModel(Dropdown1Strings)
         Dropdown1.AddItem(.NewSelectableItem("LabelOnly", "Label Only")) _
                  .AddItem(.NewSelectableItem("ImageOnly", "Image Only")) _
-                 .AddItem .NewSelectableItem("LabelAndImage", "Label and Image")
-        Dropdown1.SelectedIndex = 2
+                 .AddItem(.NewSelectableItem("LabelAndImage", "Label and Image")) _
+                 .SelectedIndex = 2
         
-        Set Button1 = .NewRibbonButtonModel:  Button1.SetImageMso "RefreshAll": Button1.Invalidate
-        Set Button2 = .NewRibbonButtonModel:  Button2.SetImageMso "Refresh":    Button2.Invalidate
-        Set Button3 = .NewRibbonButtonModel:  Button3.SetImageMso "MacroPlay":  Button3.Invalidate
+        Set Button1 = .NewRibbonButtonModelMso(Button1Strings, "RefreshAll")
+        Set Button2 = .NewRibbonButtonModelMso(Button2Strings, "Refresh")
+        Set Button3 = .NewRibbonButtonModelMso(Button3Strings, "MacroPlay")
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")

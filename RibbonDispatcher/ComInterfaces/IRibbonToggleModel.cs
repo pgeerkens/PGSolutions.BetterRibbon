@@ -27,7 +27,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         bool   IsPressed { get; set; }
 
-        IRibbonToggleModel Attach(string controlId, IRibbonControlStrings strings);
+        IRibbonToggleModel Attach(string controlId);
 
         void Invalidate();
 

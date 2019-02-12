@@ -20,7 +20,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
     public sealed class RibbonDropDownModel : IRibbonDropDownModel, IIntegerSource {
-        public RibbonDropDownModel(Func<string, RibbonDropDown> factory) => Factory = factory;
+        public RibbonDropDownModel(Func<string, RibbonDropDown> factory, IRibbonControlStrings strings,
+                bool isEnabled, bool isVisible) {
+            Factory = factory;
+            Strings = strings;
+            IsEnabled = isEnabled;
+            IsEnabled = isVisible;
+        }
 
         public event SelectedEventHandler SelectionMade;
 
@@ -37,10 +43,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        public IRibbonDropDownModel Attach(string controlId, IRibbonControlStrings strings) {
+        public IRibbonDropDownModel Attach(string controlId) {
             var viewModel = Factory(controlId);
             if (viewModel != null) {
-                viewModel.Attach(Getter).SetLanguageStrings(strings);
+                viewModel.Attach(Getter).SetLanguageStrings(Strings);
                 viewModel.SelectionMade += OnSelectionMade;
                 foreach (var item in _items) viewModel.AddItem(item);
             }
@@ -54,6 +60,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private Func<string, RibbonDropDown> Factory { get; }
 
+        public IRibbonControlStrings Strings { get; }
         public bool IsEnabled { get; set; } = true;
         public bool IsVisible { get; set; } = true;
 
