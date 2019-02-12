@@ -1,4 +1,4 @@
-Attribute VB_Name = "RibbonUtils"
+Attribute VB_Name = "Utilities"
 '''=======================================================================================
 '''                Copyright (c) 2017-2019 Pieter Geerkens
 '''
@@ -69,7 +69,7 @@ Public Function TestAddinConnection() As Boolean
     
 XT: MsgBox Messages, vbOKOnly, "TestAddinConnection"
     Exit Function
-EH: ErrorUtils.DisplayError Err, Messages & vbNewLine & "Failure - " & StepName
+EH: ErrorUtils.ReRaiseError Err, ModuleName & "TestAddinConnection"
     Resume XT
     Resume          ' for debugging only
 End Function

@@ -28,7 +28,8 @@ End Sub
 
 Private Sub Workbook_Open()
     On Error GoTo EH
-    MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
+    If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
+        MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Open", vbOKOnly Or vbInformation
     Resume XT

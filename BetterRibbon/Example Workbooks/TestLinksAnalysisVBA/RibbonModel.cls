@@ -14,15 +14,18 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
+Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 
-Private MRibbonDispatcher   As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-
-Private Button1Strings      As PGSolutions_RibbonDispatcher.IRibbonControlStrings
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal sender As Variant)
-    PublicMacros.TestAll
+    On Error GoTo EH
+    LinksLexerTests.TestAll
+XT: Exit Sub
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
+    Resume XT
 End Sub
 
 Friend Sub Activate()
@@ -30,22 +33,23 @@ Friend Sub Activate()
     Button1.Invalidate
 End Sub
 
-Private Function RibbonDispatcher() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-    If MRibbonDispatcher Is Nothing Then
-        Set MRibbonDispatcher = Application.COMAddIns("PGSolutions.BetterRibbon").Object.NewBetterRibbon()
+Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+    If MBetterRibbon Is Nothing Then
+        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
     End If
-    Set RibbonDispatcher = MRibbonDispatcher
+    Set BetterRibbon = MBetterRibbon
 End Function
 
 Private Sub Class_Initialize()
-    With RibbonDispatcher
-        Set Button1Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
+    Dim Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+    With BetterRibbon
+        Set Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
                 ScreenTip:="Unit Test for Linka Parser", _
                 superTip:="Performs a connection test and then ten" & vbNewLine & _
                           "specific scanning and parsing tests on " & vbNewLine & _
                           "various formulas.", keyTip:="", _
                 alternateLabel:="", Description:="")
                 
-        Set Button1 = .NewRibbonButtonModelMso(Button1Strings, "MacroPlay")
+        Set Button1 = .NewRibbonButtonModelMso(Strings, "MacroPlay")
     End With
 End Sub

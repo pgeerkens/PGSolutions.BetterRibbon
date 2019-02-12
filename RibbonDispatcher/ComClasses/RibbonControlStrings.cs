@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [Guid(Guids.RibbonTextLanguageControl)]
     public class RibbonControlStrings : IRibbonControlStrings {
         public static RibbonControlStrings Empty { get; } = new RibbonControlStrings();
-        private RibbonControlStrings() : this("", "", "", "", "", "") { }
+        private RibbonControlStrings() : this(null) { }
 
         /// <summary>TODO</summary>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage." )]
@@ -28,12 +28,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
             string alternateLabel = null,
             string description    = null
         ) {
-            Label           = label         ?? "Missing";
-            ScreenTip       = screenTip     ?? Label; 
-            SuperTip        = superTip      ?? "SuperTip text for " + Label; 
-            KeyTip          = keyTip        ?? "";
-            AlternateLabel  = alternateLabel?? Label; 
-            Description     = description   ?? "Description for " + Label;
+            Label           = label;
+            ScreenTip       = screenTip;
+            SuperTip        = superTip;
+            KeyTip          = keyTip;
+            AlternateLabel  = alternateLabel;
+            Description     = description;
         }
         /// <inheritdoc/>
         public string Label { get; }

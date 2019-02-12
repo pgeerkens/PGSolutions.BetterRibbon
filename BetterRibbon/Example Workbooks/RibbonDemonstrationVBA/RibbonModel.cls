@@ -14,6 +14,10 @@ Attribute VB_Exposed = False
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
+Private Const COMAddInName   As String = "PGSolutions.BetterRibbon"
+
+Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroup
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
@@ -38,7 +42,7 @@ Attribute Button3.VB_VarHelpID = -1
 
 Private Sub Toggle1_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
-    RibbonDispatcher.ShowInactive IsPressed
+    BetterRibbon.ShowInactive IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
     
     Invalidate
@@ -171,6 +175,7 @@ Private Sub Invalidate()
     If Not Button2 Is Nothing Then Button2.Invalidate
     If Not Button3 Is Nothing Then Button3.Invalidate
     
+    BetterRibbon.InvalidateControl "CustomizableGroup"
 XT: Exit Sub
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Invalidate"
     Resume          ' for debugging only
@@ -178,7 +183,7 @@ End Sub
 
 Private Sub Class_Initialize()
     On Error GoTo EH
-    With RibbonDispatcher
+    With BetterRibbon
         Set Toggle1 = .NewRibbonToggleModelMso(Toggle1Strings, "MarginsShowHide")
         Set Toggle2 = .NewRibbonToggleModelMso(Toggle2Strings, "MarginsShowHide")
         Set Toggle3 = .NewRibbonToggleModelMso(Toggle3Strings, "MarginsShowHide")
@@ -201,3 +206,14 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
     End Select
     Resume          ' for debugging only
 End Sub
+
+Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+    On Error GoTo EH
+    If MBetterRibbon Is Nothing Then
+        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
+    End If
+    Set BetterRibbon = MBetterRibbon
+XT: Exit Property
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+    Resume          ' for debugging only
+End Property

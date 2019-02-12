@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public         string Id          { get; }
         /// <inheritdoc/>
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        public virtual string Description => Strings?.Description ?? "";
+        public virtual string Description => Strings?.Description ?? $"{Id} Description";
         /// <inheritdoc/>
         [Description("Returns the KeyTip string for this control.")]
         public virtual string KeyTip      => Strings?.KeyTip ?? "";
@@ -42,13 +42,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public virtual string Label       => Strings?.Label ?? Id;
         /// <inheritdoc/>
         [Description("Returns the screenTip string for this control.")]
-        public virtual string ScreenTip   => Strings?.ScreenTip ?? Id;
+        public virtual string ScreenTip   => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
-        public virtual string SuperTip    => Strings?.SuperTip ?? "";
+        public virtual string SuperTip    => Strings?.SuperTip ?? $"{Id} SuperTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
-        public virtual string AlternateLabel => Strings?.AlternateLabel ?? "";
+        public virtual string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
 
         /// <inheritdoc/>
         protected IRibbonControlStrings Strings { get; private set; }

@@ -166,8 +166,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
-                string screenTip = "", string superTip = "",
-                string keyTip = "", string alternateLabel = "", string description = "") =>
-            new RibbonControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
+                string screenTip = null, string superTip = null, string keyTip = null,
+                string alternateLabel = null, string description = null)
+        => new RibbonControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
     }
 }

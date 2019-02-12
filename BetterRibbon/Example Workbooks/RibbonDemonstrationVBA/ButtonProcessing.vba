@@ -9,8 +9,6 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
-Public Const COMAddInName   As String = "PGSolutions.BetterRibbon"
-
 Public Sub Button1_Processing(ByVal SourceName As String)
     On Error GoTo EH
     MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, SourceName

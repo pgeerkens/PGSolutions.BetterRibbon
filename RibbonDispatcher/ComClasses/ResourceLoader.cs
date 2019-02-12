@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         Dictionary<string, IRibbonControlStrings>  _controls;
-        Dictionary<string, IPictureDisp>                _images;
+        Dictionary<string, IPictureDisp>           _images;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -44,11 +44,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         {
             _controls.Add(ControlId, new RibbonControlStrings(
                     Label           ?? ControlId,
-                    ScreenTip       ?? ControlId + " ScreenTip",
-                    SuperTip        ?? ControlId + " SuperTip",
+                    ScreenTip       ?? $"{ControlId} ScreenTip",
+                    SuperTip        ?? $"{ControlId} SuperTip",
                     KeyTip          ?? "",
-                    AlternateLabel  ?? ControlId + " Alternate",
-                    Description     ?? ControlId + " Description"));
+                    AlternateLabel  ?? $"{ControlId} Alternate",
+                    Description     ?? $"{ControlId} Description"));
             return ControlId;
         }
 

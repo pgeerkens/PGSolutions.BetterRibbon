@@ -10,6 +10,27 @@ Option Private Module
 
 Private Const mModuleName As String = "LinksLexerTests."
 
+Public Sub TestAll()
+    On Error GoTo EH
+    If Utilities.TestAddinConnection Then
+        LinksLexerTests.SimpleOperatorTest
+        LinksLexerTests.SimpleConcatTest
+        LinksLexerTests.SimpleParensTest
+        LinksLexerTests.StringLiteralTest
+        LinksLexerTests.ComplexRefTest
+        LinksLexerTests.OpenExternRefTest
+    
+        LinksLexerTests.SimpleParseLinkTest
+        LinksLexerTests.ComplexParseLinkTest
+        LinksLexerTests.CellParseLinkTest
+        LinksLexerTests.ArrayNamedRangeTest
+    End If
+XT: Exit Sub
+EH: ErrorUtils.ReRaiseError Err, mModuleName & ".TestAll"
+    Resume XT
+    Resume          ' for debugging only
+End Sub
+
 Public Sub SimpleOperatorTest()
     Const MethodName As String = mModuleName & "SimpleOperatorTest"
     

@@ -119,10 +119,10 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
                 Justification = "Matches COM usage." )]
         public IRibbonControlStrings NewControlStrings(string label,
-                string screenTip = "", string superTip = "",
-                string keyTip    = "", string alternateLabel = "", string description = "") =>
-            ViewModel.RibbonFactory.NewControlStrings(label,
-                    screenTip, superTip, keyTip, alternateLabel, description);
+                string screenTip = null, string superTip = null,
+                string keyTip = null, string alternateLabel = null, string description = null) =>
+            ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
+                    superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
         public void ShowInactive(bool showWhenInactive) {

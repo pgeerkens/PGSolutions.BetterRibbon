@@ -22,5 +22,6 @@ Private Sub Workbook_Activate()
 End Sub
 
 Private Sub Workbook_Open()
-    MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
+    If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
+        MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
 End Sub
