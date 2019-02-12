@@ -54,7 +54,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnClicked(object sender) => Clicked(sender);
+        private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
         private Func<string, RibbonButton> Factory { get; }
 
