@@ -25,6 +25,8 @@ Private WithEvents Toggle2   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle2.VB_VarHelpID = -1
 Private WithEvents Toggle3   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle3.VB_VarHelpID = -1
+Private WithEvents Toggle4   As PGSolutions_RibbonDispatcher.RibbonToggleModel
+Attribute Toggle4.VB_VarHelpID = -1
 
 Private WithEvents Dropdown1 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown1.VB_VarHelpID = -1
@@ -72,9 +74,24 @@ Private Sub Toggle3_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     Button2.IsLarge = Not IsPressed
     Button3.IsLarge = Not IsPressed
     Toggle3.SetImageMso ToggleImage(IsPressed)
-    Dropdown1.IsEnabled = IsPressed
     
     Invalidate
+XT: Exit Sub
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or vbInformation
+    Resume XT
+    Resume          ' for debugging only
+End Sub
+
+Private Sub Toggle4_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
+    On Error GoTo EH
+    Dim ws As Worksheet: Set ws = ThisWorkbook.Worksheets("Control Strings")
+    If ws.Visible = xlSheetVeryHidden Then
+        ws.Visible = xlSheetVisible
+    Else
+        ws.Visible = xlSheetVeryHidden
+    End If
+    Toggle4.IsPressed = (ws.Visible = xlSheetVisible)
+    ws.Activate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or vbInformation
     Resume XT
@@ -95,6 +112,7 @@ End Sub
 Private Sub Dropdown2_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
     On Error GoTo EH
     MsgBox "Dropdown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
+    Invalidate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Dropdown2_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
@@ -104,6 +122,7 @@ End Sub
 Private Sub Dropdown3_SelectionMade(ByVal Sender As Variant, ByVal SelectedIndex As Long)
     On Error GoTo EH
     MsgBox "Dropdown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
+    Invalidate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Dropdown3_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
@@ -112,7 +131,8 @@ End Sub
 
 Private Sub Button1_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    ButtonProcessing.Button1_Processing ThisWorkbook.Name
+    Static IsToggle As Boolean
+    IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or vbInformation
     Resume XT
@@ -121,7 +141,8 @@ End Sub
 
 Private Sub Button2_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    ButtonProcessing.Button2_Processing ThisWorkbook.Name
+    Static IsToggle As Boolean
+    IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
     Resume XT
@@ -130,10 +151,34 @@ End Sub
 
 Private Sub Button3_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
-    ButtonProcessing.Button3_Processing ThisWorkbook.Name
+    Class_Initialize
+    Activate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or vbInformation
     Resume XT
+    Resume          ' for debugging only
+End Sub
+
+Private Sub Invalidate()
+    On Error GoTo EH
+    
+    If Not Toggle1 Is Nothing Then Toggle1.Invalidate
+    If Not Toggle2 Is Nothing Then Toggle2.Invalidate
+    If Not Toggle3 Is Nothing Then Toggle3.Invalidate
+    If Not Toggle4 Is Nothing Then Toggle4.Invalidate
+    
+    If Not Dropdown1 Is Nothing Then Dropdown1.Invalidate
+    If Not Dropdown2 Is Nothing Then Dropdown2.Invalidate
+    If Not Dropdown3 Is Nothing Then Dropdown3.Invalidate
+    
+    If Not Button1 Is Nothing Then Button1.Invalidate
+    If Not Button2 Is Nothing Then Button2.Invalidate
+    If Not Button3 Is Nothing Then Button3.Invalidate
+    
+    BetterRibbon.InvalidateControl "CustomizableGroup"
+    Application.StatusBar = "Ready ...'"
+XT: Exit Sub
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Invalidate"
     Resume          ' for debugging only
 End Sub
 
@@ -142,6 +187,7 @@ Friend Sub Activate()
     If Not Toggle1 Is Nothing Then Toggle1.Attach "CustomVbaToggle1"
     If Not Toggle2 Is Nothing Then Toggle2.Attach "CustomVbaCheckBox2"
     If Not Toggle3 Is Nothing Then Toggle3.Attach "CustomVbaCheckBox3"
+    If Not Toggle4 Is Nothing Then Toggle4.Attach "CustomVbaCheckBox1"
     
     If Not Dropdown1 Is Nothing Then Dropdown1.Attach "CustomVbaDropdown1"
     If Not Dropdown2 Is Nothing Then Dropdown2.Attach "CustomVbaDropdown2"
@@ -150,6 +196,11 @@ Friend Sub Activate()
     If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
     If Not Button2 Is Nothing Then Button2.Attach "CustomizableButton2"
     If Not Button3 Is Nothing Then Button3.Attach "CustomizableButton3"
+    
+    ' Set initial status
+    Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
+    BetterRibbon.ShowInactive Toggle1.IsPressed
+    Dropdown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
 XT: Exit Sub
@@ -161,42 +212,23 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Activate")
     Resume          ' for debugging only
 End Sub
 
-Private Sub Invalidate()
-    On Error GoTo EH
-    If Not Toggle1 Is Nothing Then Toggle1.Invalidate
-    If Not Toggle2 Is Nothing Then Toggle2.Invalidate
-    If Not Toggle3 Is Nothing Then Toggle3.Invalidate
-    
-    If Not Dropdown1 Is Nothing Then Dropdown1.Invalidate
-    If Not Dropdown2 Is Nothing Then Dropdown2.Invalidate
-    If Not Dropdown3 Is Nothing Then Dropdown3.Invalidate
-    
-    If Not Button1 Is Nothing Then Button1.Invalidate
-    If Not Button2 Is Nothing Then Button2.Invalidate
-    If Not Button3 Is Nothing Then Button3.Invalidate
-    
-    BetterRibbon.InvalidateControl "CustomizableGroup"
-XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Invalidate"
-    Resume          ' for debugging only
-End Sub
-
 Private Sub Class_Initialize()
     On Error GoTo EH
     With BetterRibbon
-        Set Toggle1 = .NewRibbonToggleModelMso(Toggle1Strings, "MarginsShowHide")
-        Set Toggle2 = .NewRibbonToggleModelMso(Toggle2Strings, "MarginsShowHide")
-        Set Toggle3 = .NewRibbonToggleModelMso(Toggle3Strings, "MarginsShowHide")
+        Set Toggle1 = .NewRibbonToggleModelMso(FindStrings("Toggle1"), "MarginsShowHide")
+        Set Toggle2 = .NewRibbonToggleModelMso(FindStrings("Toggle2"), "MarginsShowHide")
+        Set Toggle3 = .NewRibbonToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
+        Set Toggle4 = .NewRibbonToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
-        Set Dropdown1 = .NewRibbonDropdownModel(Dropdown1Strings)
+        Set Dropdown1 = .NewRibbonDropdownModel(FindStrings("Dropdown1"))
         Dropdown1.AddItem(.NewSelectableItem("LabelOnly", "Label Only")) _
                  .AddItem(.NewSelectableItem("ImageOnly", "Image Only")) _
                  .AddItem(.NewSelectableItem("LabelAndImage", "Label and Image")) _
                  .SelectedIndex = 2
         
-        Set Button1 = .NewRibbonButtonModelMso(Button1Strings, "RefreshAll")
-        Set Button2 = .NewRibbonButtonModelMso(Button2Strings, "Refresh")
-        Set Button3 = .NewRibbonButtonModelMso(Button3Strings, "MacroPlay")
+        Set Button1 = .NewRibbonButtonModelMso(FindStrings("Button1"), "MacroPlay")
+        Set Button2 = .NewRibbonButtonModelMso(FindStrings("Button2"), "MacroPlay")
+        Set Button3 = .NewRibbonButtonModelMso(FindStrings("Button3"), "Refresh")
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
@@ -217,3 +249,28 @@ XT: Exit Property
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
     Resume          ' for debugging only
 End Property
+
+Private Function FindStrings(ByVal Search As String) As IRibbonControlStrings
+    On Error GoTo EH
+    With New RibbonControlStrings
+        Set FindStrings = .Initialize( _
+                KeyTip:=FindStr(Search, Range("ControlStringData"), 2), _
+                Label:=FindStr(Search, Range("ControlStringData"), 3), _
+                AlternateLabel:=FindStr(Search, Range("ControlStringData"), 4), _
+                ScreenTip:=FindStr(Search, Range("ControlStringData"), 5), _
+                SuperTip:=FindStr(Search, Range("ControlStringData"), 6), _
+                Description:=FindStr(Search, Range("ControlStringData"), 7))
+    End With
+XT: Exit Function
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+    Resume          ' for debugging only
+End Function
+
+Private Function FindStr(ByVal Search As String, ByVal Range As Range, ByVal ColNo As Integer) As String
+    On Error GoTo EH
+    Dim v As Variant: v = Application.WorksheetFunction.VLookup(Search, Range, ColNo, False)
+    FindStr = IIf(VarType(v) = vbString, v, "")
+XT: Exit Function
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+    Resume          ' for debugging only
+End Function

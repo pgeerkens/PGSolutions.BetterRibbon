@@ -26,10 +26,18 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Activate", vbOKOnly O
     Resume          ' for debugging only
 End Sub
 
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+    On Error Resume Next
+    If ThisWorkbook.Worksheets("Control Strings").Visible <> xlSheetVeryHidden Then _
+        ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVeryHidden
+End Sub
+
 Private Sub Workbook_Open()
     On Error GoTo EH
     If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
-        MsgBox "Pause for Ctrl-Break", vbOKOnly, TypeName(Me)
+        MsgBox "Pause for Ctrl-Break to ease debugging." & vbNewLine & vbNewLine & _
+               "This message should only display if you are me.", _
+               vbOKOnly, ThisWorkbook.Name
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Open", vbOKOnly Or vbInformation
     Resume XT

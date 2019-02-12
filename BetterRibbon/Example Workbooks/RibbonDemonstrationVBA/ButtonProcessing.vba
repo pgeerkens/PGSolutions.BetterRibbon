@@ -9,40 +9,21 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
-Public Sub Button1_Processing(ByVal SourceName As String)
+Public Function AlternateToggle(ByVal Dispatcher As IRibbonDispatcher, Mode As Boolean, _
+        Model As RibbonToggleModel, ByVal ToggleID As String, ByVal CheckboxID As String _
+) As Boolean
     On Error GoTo EH
-    MsgBox "Activation message from Button1!", vbOKOnly Or vbInformation, SourceName
-XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".Button1_Processing"
+    AlternateToggle = Not Mode
+    
+    Dispatcher.DetachProxy ToggleID
+    Dispatcher.DetachProxy CheckboxID
+    Model.Attach IIf(AlternateToggle, ToggleID, CheckboxID)
+    Model.Invalidate
+    Application.StatusBar = "Ready ...'"
+    
+XT: Exit Function
+EH: ErrorUtils.ReRaiseError Err, ModuleName & ".AlternateToggle"
     Resume          ' for debugging only
-End Sub
-
-Public Sub Button2_Processing(ByVal SourceName As String)
-    On Error GoTo EH
-    MsgBox "Activation message from Button2!", vbOKOnly Or vbInformation, SourceName
-XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".Button2_Processing"
-    Resume          ' for debugging only
-End Sub
-
-Public Sub Button3_Processing(ByVal SourceName As String)
-    On Error GoTo EH
-    MsgBox "Activation message from Button3!", vbOKOnly Or vbInformation, SourceName
-XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".Button3_Processing"
-    Resume          ' for debugging only
-End Sub
-
-Public Function ToggleImage(ByVal IsPressed As Boolean) As String
-    ToggleImage = IIf(IsPressed, "TagMarkComplete", "MarginsShowHide")
-End Function
-
-Public Function ShowImage(ByVal SelectedIndex As Integer) As Boolean
-    ShowImage = ((SelectedIndex + 1) And 2) <> 0
-End Function
-
-Public Function ShowLabel(ByVal SelectedIndex As Integer) As Boolean
-    ShowLabel = ((SelectedIndex + 1) And 1) <> 0
 End Function
 
 Public Sub SetImageAndLabel(ByVal SelectedIndex As Integer, ParamArray Arr() As Variant)
@@ -57,6 +38,18 @@ Public Sub SetImageAndLabel(ByVal SelectedIndex As Integer, ParamArray Arr() As 
         End If
     Next v
 XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".Button2_Processing"
+EH: ErrorUtils.ReRaiseError Err, ModuleName & ".SetImageAndLabel"
     Resume          ' for debugging only
 End Sub
+
+Public Function ToggleImage(ByVal IsPressed As Boolean) As String
+    ToggleImage = IIf(IsPressed, "TagMarkComplete", "ShapeRectangle") ' "MarginsShowHide")
+End Function
+
+Private Function ShowImage(ByVal SelectedIndex As Integer) As Boolean
+    ShowImage = ((SelectedIndex + 1) And 2) <> 0
+End Function
+
+Private Function ShowLabel(ByVal SelectedIndex As Integer) As Boolean
+    ShowLabel = ((SelectedIndex + 1) And 1) <> 0
+End Function
