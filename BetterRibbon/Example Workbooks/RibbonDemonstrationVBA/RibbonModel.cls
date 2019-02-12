@@ -28,6 +28,7 @@ Private WithEvents Dropdown2 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown2.VB_VarHelpID = -1
 Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
 Attribute Dropdown3.VB_VarHelpID = -1
+
 Private WithEvents Button1   As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 Private WithEvents Button2   As PGSolutions_RibbonDispatcher.RibbonButtonModel
