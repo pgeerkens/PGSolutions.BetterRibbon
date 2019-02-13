@@ -3,9 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.Utilities {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(false)]
     public interface IActivatable {
         bool ShowWhenInactive { get; set; }

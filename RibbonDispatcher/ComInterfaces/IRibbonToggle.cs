@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using Microsoft.Office.Core;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
