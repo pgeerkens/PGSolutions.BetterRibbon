@@ -45,12 +45,12 @@ namespace PGSolutions.BetterRibbon {
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
-        internal BrandingViewModel            BrandingViewModel      { get; private set; }
-        internal LinksAnalysisViewModel       LinksAnalysisViewModel { get; private set; }
-        internal VbaSourceExportViewModel     VbaExportViewModel_MS  { get; private set; }
-        internal VbaSourceExportViewModel     VbaExportViewModel_PG  { get; private set; }
-        internal DemonstrationViewModel       DemonstrationViewModel { get; private set; }
-        internal CustomButtonsViewModel CustomButtonsViewModel { get; private set; }
+        internal BrandingViewModel        BrandingViewModel      { get; private set; }
+        internal LinksAnalysisViewModel   LinksAnalysisViewModel { get; private set; }
+        internal VbaSourceExportViewModel VbaExportViewModel_MS  { get; private set; }
+        internal VbaSourceExportViewModel VbaExportViewModel_PG  { get; private set; }
+        internal DemonstrationViewModel   DemonstrationViewModel { get; private set; }
+        internal CustomButtonsViewModel   CustomButtonsViewModel { get; private set; }
 
         internal void DetachControls() => CustomButtonsViewModel?.DetachControls();
 

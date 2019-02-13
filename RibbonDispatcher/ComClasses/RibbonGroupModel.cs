@@ -32,11 +32,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public ICustomRibbonGroup ViewModel { get; set; }
 
-        private Func<string, ICustomRibbonGroup> Factory { get; }
+        private Func<string,ICustomRibbonGroup> Factory { get; }
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
             ViewModel = Factory(controlId);
+            ViewModel.Attach();
             Invalidate();
             return this;
         }

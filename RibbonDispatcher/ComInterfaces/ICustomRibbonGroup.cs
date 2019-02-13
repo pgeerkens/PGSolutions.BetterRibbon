@@ -63,5 +63,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [Description(".")]
         new void Invalidate();
+
+        /// <summary>.</summary>
+        [Description(".")]
+        IRibbonCommon Attach();
     }
 }

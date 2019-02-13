@@ -72,6 +72,7 @@
                        />
                 </mso:box>
             </mso:group>
+<!--
             <mso:group id="CSharpDemoGroup" getVisible="getVisible"
                    getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                 <mso:toggleButton id="SizeToggle" getImage="getImage"
@@ -94,7 +95,6 @@
                      />
                 </mso:box>
                 <mso:box id="CSharpDemoBox1" boxStyle="vertical" visible="true" >
-                    <!-- Use this DropDown template when the item list will be dynamically defined through callbacks. -->
                     <mso:dropDown id="DropDown1"
                                   getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                                   getVisible="getVisible" getEnabled="getEnabled"
@@ -138,68 +138,67 @@
                        />
                 </mso:box>
             </mso:group>
+-->
             <mso:group id="CustomizableGroup" getVisible="getVisible"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-              <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true" >
-                  <mso:box id="CustomVbaBox1A" boxStyle="vertical" visible="true" >
-                      <mso:toggleButton id="CustomVbaToggle1" getImage="getImage"
+                <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true" >
+                    <mso:toggleButton id="CustomVbaToggle1" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                            getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                        />
+                    <mso:toggleButton id="CustomVbaToggle2" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                            getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                        />
+                    <mso:toggleButton id="CustomVbaToggle3" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                            getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                        />
+                </mso:box>
+                <mso:box id="CustomVbaBox2" boxStyle="vertical" visible="true" >
+                    <mso:checkBox id="CustomVbaCheckBox1"
                                 getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                                 onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
-                           />
-                      <mso:toggleButton id="CustomVbaToggle2" getImage="getImage"
-                              getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                              onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                              getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
-                           />
-                      <mso:toggleButton id="CustomVbaToggle3" getImage="getImage"
-                              getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                              onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                              getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
-                           />
-                  </mso:box>
-                  <mso:box id="CustomVbaBox1B" boxStyle="vertical" visible="true" >
-                      <mso:checkBox id="CustomVbaCheckBox1"
-                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                                onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                           />
-                      <mso:checkBox id="CustomVbaCheckBox2"
-                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                                onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                           />
-                      <mso:checkBox id="CustomVbaCheckBox3"
-                                getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
-                                onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
-                           />
-                  </mso:box>
-              </mso:box>
-              <mso:box id="CustomVbaBox2" boxStyle="vertical" visible="true" >
-                  <mso:dropDown id="CustomVbaDropDown1"
+                            />
+                    <mso:checkBox id="CustomVbaCheckBox2"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                        />
+                    <mso:checkBox id="CustomVbaCheckBox3"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                        />
+                </mso:box>
+                <mso:box id="CustomVbaBox3" boxStyle="vertical" visible="true" >
+                    <mso:dropDown id="CustomVbaDropDown1"
                                 getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                                 getVisible="getVisible" getEnabled="getEnabled"
                                 getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                                 getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                                 onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
                         >
-                  </mso:dropDown>
-                  <mso:dropDown id="CustomVbaDropDown2"
+                    </mso:dropDown>
+                    <mso:dropDown id="CustomVbaDropDown2"
                                 getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                                 getVisible="getVisible" getEnabled="getEnabled"
                                 getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                                 getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                                 onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
                         >
-                  </mso:dropDown>
-                  <mso:dropDown id="CustomVbaDropDown3"
+                    </mso:dropDown>
+                    <mso:dropDown id="CustomVbaDropDown3"
                                 getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                                 getVisible="getVisible" getEnabled="getEnabled"
                                 getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                                 getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                                 onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
                         >
-                  </mso:dropDown>
-              </mso:box>
-              <mso:box id="CustomVbaBox3" boxStyle="vertical" visible="true" >
+                    </mso:dropDown>
+                </mso:box>
+                <mso:box id="CustomVbaBox4" boxStyle="vertical" visible="true" >
                     <mso:button id="CustomizableButton1" getImage="getImage"
                             getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                             onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"

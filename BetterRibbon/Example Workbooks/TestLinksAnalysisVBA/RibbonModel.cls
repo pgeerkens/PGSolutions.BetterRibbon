@@ -16,6 +16,7 @@ Attribute VB_Exposed = True
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private CustomGroup         As PGSolutions_RibbonDispatcher.RibbonGroupModel
 
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
@@ -29,8 +30,9 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
 End Sub
 
 Friend Sub Activate()
-    Button1.Attach "CustomizableButton1"
-    Button1.Invalidate
+    If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
+    If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
+    If Not Button1 Is Nothing Then Button1.Invalidate
 End Sub
 
 Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
@@ -43,6 +45,8 @@ End Function
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings
     With BetterRibbon
+        Set CustomGroup = .NewRibbonGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
+        
         Set Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
                 ScreenTip:="Unit Test for Linka Parser", _
                 superTip:="Performs a connection test and then ten" & vbNewLine & _

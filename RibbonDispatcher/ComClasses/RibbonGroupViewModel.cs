@@ -28,6 +28,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
+        public override IRibbonCommon Attach() {
+            base.Attach();
+            return this;
+        }
+
         public override void Detach() {
             Toggled = null;
             Getter = () => false;

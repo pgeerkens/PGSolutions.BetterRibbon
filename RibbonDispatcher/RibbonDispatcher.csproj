@@ -115,7 +115,6 @@
     <Compile Include="ComClasses\RibbonCommon.cs" />
     <Compile Include="ComClasses\RibbonDropdown.cs" />
     <Compile Include="ComClasses\RibbonFactory.cs" />
-    <Compile Include="ComClasses\RibbonGroup.cs" />
     <Compile Include="ComClasses\RibbonControlStrings.cs" />
     <Compile Include="ComClasses\RibbonToggleButton.cs" />
     <Compile Include="ComClasses\RibbonViewModel.cs" />

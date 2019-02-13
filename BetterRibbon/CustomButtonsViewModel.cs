@@ -84,31 +84,30 @@ namespace PGSolutions.BetterRibbon {
             foreach (var c in AdaptorControls) c.Value.Detach();
         }
 
-        private RibbonToggleButton CustomizableToggle1   { get; }
-        private RibbonToggleButton CustomizableToggle2   { get; }
-        private RibbonToggleButton CustomizableToggle3   { get; }
+        private RibbonToggleButton CustomizableToggle1 { get; }
+        private RibbonToggleButton CustomizableToggle2 { get; }
+        private RibbonToggleButton CustomizableToggle3 { get; }
 
-        private RibbonCheckBox     CustomizableCheckBox1 { get; }
-        private RibbonCheckBox     CustomizableCheckBox2 { get; }
-        private RibbonCheckBox     CustomizableCheckBox3 { get; }
+        private RibbonCheckBox CustomizableCheckBox1 { get; }
+        private RibbonCheckBox CustomizableCheckBox2 { get; }
+        private RibbonCheckBox CustomizableCheckBox3 { get; }
 
-        private RibbonDropDown     CustomizableDropDown1 { get; }
-        private RibbonDropDown     CustomizableDropDown2 { get; }
-        private RibbonDropDown     CustomizableDropDown3 { get; }
+        private RibbonDropDown CustomizableDropDown1 { get; }
+        private RibbonDropDown CustomizableDropDown2 { get; }
+        private RibbonDropDown CustomizableDropDown3 { get; }
 
-        private RibbonButton       CustomizableButton1   { get; }
-        private RibbonButton       CustomizableButton2   { get; }
-        private RibbonButton       CustomizableButton3   { get; }
+        private RibbonButton CustomizableButton1 { get; }
+        private RibbonButton CustomizableButton2 { get; }
+        private RibbonButton CustomizableButton3 { get; }
 
         protected IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
 
         /// <inheritdoc/>
         public virtual void SetShowInactive(bool showInactive) {
             foreach (var ctrl in AdaptorControls) {
-                ctrl.Value.ShowWhenInactive = showInactive;
+                ctrl.Value.ShowActiveOnly = ! showInactive;
                 ctrl.Value.Invalidate();
             }
-            //Invalidate();
         }
     }
 }
