@@ -16,7 +16,9 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public class LinksAnalysisViewModel : AbstractLinksAnalysisViewModel, ILinksAnalysisViewModel {
         /// <summary>.</summary>
-        public LinksAnalysisViewModel(IRibbonFactory factory) : base(factory) { }
+        public LinksAnalysisViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
+        : base(factory, "LinksAnalysisGroup", isVisible, isEnabled) {
+        }
 
         /// <inheritdoc/>
         public override void DisplayAnalysis(ILinksAnalysis externalLinks)

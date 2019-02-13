@@ -50,13 +50,13 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void OnViewModelInitialized() {
-            BrandingModel        = new BrandingModel(ViewModel.BrandingViewModel);
-            LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.LinksAnalysisViewModel);
+            BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel);
+            LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
                     new List<IVbaSourceExportViewModel> {
-                        ViewModel.VbaExportViewModel_MS,
-                        ViewModel.VbaExportViewModel_PG
-                    } );
+                        ViewModel?.VbaExportViewModel_MS,
+                        ViewModel?.VbaExportViewModel_PG
+                    });
 
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);
             DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationViewModel);
@@ -123,11 +123,11 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
                     superTip, keyTip, alternateLabel, description);
 
-        /// <inheritdoc/>
-        public void ShowInactive(bool showWhenInactive) {
-            CustomButtonsModel.SetShowWhenInactive(showWhenInactive);
-            InvalidateCustomControlsGroup();
-        }
+        ///// <inheritdoc/>
+        //public void ShowInactive(bool showWhenInactive) {
+        //    CustomButtonsModel.SetShowWhenInactive(showWhenInactive);
+        //    InvalidateCustomControlsGroup();
+        //}
         #endregion
 
         private TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>

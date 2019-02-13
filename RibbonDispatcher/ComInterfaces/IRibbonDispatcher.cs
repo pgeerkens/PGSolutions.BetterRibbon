@@ -40,12 +40,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //[DispId(4)]
         void DetachProxy(string controlId);
 
-        /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
-        /// <param name="showWhenInactive"></param>
-        [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
-        //[DispId(5)]
-        void ShowInactive(bool showWhenInactive);
-
         /// <summary>Attaches and activates the specified Button control.</summary>
         /// <param name="controlId">The </param>
         /// <param name="strings">The text strings to be displayed for this control.</param>

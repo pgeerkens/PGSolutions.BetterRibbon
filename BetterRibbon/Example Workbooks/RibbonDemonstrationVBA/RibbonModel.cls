@@ -44,7 +44,7 @@ Attribute Button3.VB_VarHelpID = -1
 
 Private Sub Toggle1_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
-    BetterRibbon.ShowInactive IsPressed
+ '   BetterRibbon.ShowInactive IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
     
     Invalidate
@@ -200,7 +200,7 @@ Friend Sub Activate()
     
     ' Set initial status
     Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
-    BetterRibbon.ShowInactive Toggle1.IsPressed
+ '   BetterRibbon.ShowInactive Toggle1.IsPressed
     DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate

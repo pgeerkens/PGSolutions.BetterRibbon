@@ -21,9 +21,9 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     public abstract class AbstractVbaSourceExportViewModel : AbstractRibbonGroupViewModel,
                 IVbaSourceExportViewModel, IApplication {
         /// <summary>.</summary>
-        protected AbstractVbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
+        protected AbstractVbaSourceExportViewModel(IRibbonFactory factory, string suffix, string itemId, bool isVisible = true, bool isEnabled = true)
+        : base(factory, $"VbaExportGroup{suffix}", isVisible, isEnabled) {
             var defaultSize = suffix=="MS" ? false : true;
-            VbaSourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
                                             isLarge:defaultSize, imageMso:ToggleImage(false));
@@ -38,11 +38,16 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         }
 
         /// <inheritdoc/>
-        public void Attach(IBooleanSource srcToggleSource)
-        => UseSrcFolderToggle.Attach(srcToggleSource.Getter);
+        public void Attach(IBooleanSource srcToggleSource) {
+            UseSrcFolderToggle.Attach(srcToggleSource.Getter);
+            base.Attach();
+        }
 
         /// <inheritdoc/>
-        public void Invalidate() => UseSrcFolderToggle.Invalidate();
+        public override void Invalidate() {
+            UseSrcFolderToggle.Invalidate();
+            base.Invalidate();
+        }
 
         /// <inheritdoc/>
         public event ToggledEventHandler           UseSrcFolderToggled;
@@ -69,7 +74,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        protected RibbonGroup        VbaSourceExportGroup  { get; }
         protected RibbonToggleButton UseSrcFolderToggle    { get; }
         /// <inheritdoc/>
         public    RibbonButton       SelectedProjectButton { get; }

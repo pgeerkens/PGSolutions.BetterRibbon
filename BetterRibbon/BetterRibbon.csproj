@@ -201,7 +201,7 @@
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="CustomButtonsModel.cs" />
-    <Compile Include="CustomizableButtonsViewModel.cs" />
+    <Compile Include="CustomButtonsViewModel.cs" />
     <Compile Include="DemonstrationModel.cs" />
     <Compile Include="ExcelLinksExtensions.cs" />
     <Compile Include="IBetterRibbon.cs" />

@@ -9,10 +9,9 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
-    internal class CustomizableButtonsViewModel : AbstractRibbonGroupViewModel {
-        public CustomizableButtonsViewModel(IRibbonFactory factory) : base(factory) {
-            CustomizableGroup = factory.NewRibbonGroup("CustomizableGroup", true);
-
+    internal class CustomButtonsViewModel : AbstractRibbonGroupViewModel, ICustomRibbonGroup {
+        public CustomButtonsViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
+        : base(factory, "CustomizableGroup", isVisible, isEnabled) {
             (CustomizableToggle1 = factory.NewRibbonToggle("CustomVbaToggle1")).SetLanguageStrings();
             (CustomizableToggle2 = factory.NewRibbonToggle("CustomVbaToggle2")).SetLanguageStrings();
             (CustomizableToggle3 = factory.NewRibbonToggle("CustomVbaToggle3")).SetLanguageStrings();
@@ -48,9 +47,7 @@ namespace PGSolutions.BetterRibbon {
             };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public string   GroupId      => CustomizableGroup.Id;
-        public void Invalidate() {
+        public override void Invalidate() {
             CustomizableToggle1?.Invalidate();
             CustomizableToggle2?.Invalidate();
             CustomizableToggle3?.Invalidate();
@@ -67,7 +64,7 @@ namespace PGSolutions.BetterRibbon {
             CustomizableButton2?.Invalidate();
             CustomizableButton3?.Invalidate();
 
-            CustomizableGroup?.Invalidate();
+            base.Invalidate();
         }
 
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon
@@ -76,15 +73,6 @@ namespace PGSolutions.BetterRibbon {
         public void     DetachControls() {
             foreach (var c in AdaptorControls) c.Value.Detach();
         }
-
-        public void     SetShowWhenInactive(bool showWhenInactive) {
-            foreach ( var ctrl in AdaptorControls ) {
-                ctrl.Value.ShowWhenInactive = showWhenInactive;
-                ctrl.Value.Invalidate();
-            }
-        }
-
-        private RibbonGroup        CustomizableGroup     { get; }
 
         private RibbonToggleButton CustomizableToggle1   { get; }
         private RibbonToggleButton CustomizableToggle2   { get; }
@@ -102,6 +90,14 @@ namespace PGSolutions.BetterRibbon {
         private RibbonButton       CustomizableButton2   { get; }
         private RibbonButton       CustomizableButton3   { get; }
 
-        private IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
-   }
+        protected IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
+
+        /// <inheritdoc/>
+        public virtual void SetShowWhenInactive(bool showInactive) {
+            foreach (var ctrl in AdaptorControls) {
+                ctrl.Value.ShowWhenInactive = showInactive;
+                ctrl.Value.Invalidate();
+            }
+        }
+    }
 }

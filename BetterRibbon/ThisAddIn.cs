@@ -7,12 +7,12 @@ using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
 
-using Excel = Microsoft.Office.Interop.Excel;
-using Workbook = Microsoft.Office.Interop.Excel.Workbook;
-
 using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
+    using Excel    = Microsoft.Office.Interop.Excel;
+    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         /// <summary>.</summary>

@@ -11,6 +11,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             ViewModel   = viewModel;
             ViewModel.AnalyzeCurrentClicked  += OnAnalyzeCurrentClicked;
             ViewModel.AnalyzeSelectedClicked += OnAnalyzeSelectedClicked;
+
+            ViewModel.Attach();
         }
 
         public void Invalidate() => ViewModel.Invalidate();

@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
-
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
@@ -18,5 +18,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         void DisplayAnalysis(ILinksAnalysis externalLinks);
 
         void Invalidate();
+
+        IRibbonCommon Attach();
     }
 }

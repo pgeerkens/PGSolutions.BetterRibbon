@@ -38,16 +38,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             IsEnabled = isVisible;
         }
 
-        public event ToggledEventHandler Toggled;
+        public IRibbonControlStrings Strings { get; }
+        public bool   IsEnabled { get; set; } = true;
+        public bool   IsVisible { get; set; } = true;
 
-        IRibbonToggle ViewModel { get; set; }
+        #region IActivatable implementation
+        private IRibbonToggle ViewModel { get; set; }
 
-        public bool IsPressed {
-            get => _isPressed;
-            set { _isPressed = value; ViewModel?.Invalidate(); }
-        } bool _isPressed = false;
-
-        public bool Getter() => IsPressed;
+        private Func<string, RibbonCheckBox> Factory { get; }
 
         public IRibbonToggleModel Attach(string controlId) {
             var viewModel = Factory(controlId);
@@ -60,32 +58,45 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
+        public void Invalidate() {
+            if (ViewModel != null) {
+                ViewModel.IsEnabled = IsEnabled;
+                ViewModel.IsVisible = IsVisible;
+
+                if (ViewModel is ISizeable sizeable) sizeable.SetSizeablel(this);
+                if (ViewModel is IImageable imageable) imageable.SetImageable(this);
+
+                ViewModel.Invalidate();
+            }
+        }
+        #endregion
+
+        #region IToggleable implementation
+        public event ToggledEventHandler Toggled;
+
         private void OnToggled(object sender, bool isPressed)
         => Toggled?.Invoke(sender, IsPressed = isPressed);
 
-        private Func<string, RibbonCheckBox> Factory { get; }
+        public bool IsPressed {
+            get => _isPressed;
+            set { _isPressed = value; ViewModel?.Invalidate(); }
+        }
+        bool _isPressed = false;
 
-        public IRibbonControlStrings Strings { get; }
-        public bool   IsEnabled { get; set; } = true;
-        public bool   IsVisible { get; set; } = true;
+        public bool Getter() => IsPressed;
+        #endregion
+
+        #region ISizeable implementation
         public bool   IsLarge   { get; set; } = true;
+        #endregion
+
+        #region IImageable implementation
         public object Image     { get; set; } = "MacroSecurity";
         public bool   ShowImage { get; set; } = true;
         public bool   ShowLabel { get; set; } = true;
 
         public void SetImageDisp(IPictureDisp image) => Image = image;
         public void SetImageMso(string imageMso) => Image = imageMso;
-
-        public void Invalidate() {
-            if (ViewModel != null) {
-                ViewModel.IsEnabled = IsEnabled;
-                ViewModel.IsVisible = IsVisible;
-
-                if (ViewModel is ISizeable sizeable)   sizeable.SetSizeablel(this);
-                if (ViewModel is IImageable imageable) imageable.SetImageable(this);
-
-                ViewModel.Invalidate();
-            }
-        }
+        #endregion
     }
 }

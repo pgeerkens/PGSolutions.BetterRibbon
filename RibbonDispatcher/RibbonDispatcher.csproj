@@ -103,7 +103,6 @@
     <Compile Include="ComInterfaces\IRibbonDropDownModel.cs" />
     <Compile Include="ComInterfaces\IRibbonGroupModel.cs" />
     <Compile Include="ComInterfaces\IRibbonToggleModel.cs" />
-    <Compile Include="ComInterfaces\IViewModelStore.cs" />
     <Compile Include="ComInterfaces\IActivatableControl.cs" />
     <Compile Include="ComClasses\AbstractRibbonViewModel.cs" />
     <Compile Include="ComClasses\ControlChangedEventArgs.cs" />

@@ -12,8 +12,8 @@ using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 namespace PGSolutions.BetterRibbon {
 
     internal class DemonstrationViewModel : AbstractRibbonGroupViewModel {
-        public DemonstrationViewModel(IRibbonFactory factory) : base(factory) {
-            CustomGroup    = factory.NewRibbonGroup("CSharpDemoGroup");
+        public DemonstrationViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
+        : base(factory, "CSharpDemoGroup", isVisible, isEnabled) {
             IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       imageMso:NoImage);
             CheckBox1      = factory.NewRibbonCheckBox("CheckBox1", false);
             CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);
@@ -41,8 +41,6 @@ namespace PGSolutions.BetterRibbon {
         public event ClickedEventHandler Button2Clicked;
         public event ClickedEventHandler Button3Clicked;
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private RibbonGroup        CustomGroup    { get; }
         private RibbonToggleButton IsLargeToggle  { get; }
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private RibbonCheckBox     CheckBox1      { get; }
@@ -85,20 +83,21 @@ namespace PGSolutions.BetterRibbon {
             CustomButton3.Attach();
         }
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public void Detach() {
+        public override void Detach() {
             CustomButton3.Detach();
             CustomButton2.Detach();
             CustomButton1.Detach();
             DisplayOptions.Detach();
             IsLargeToggle.Detach();
+            base.Detach();
         }
-        public void Invalidate() {
+        public override void Invalidate() {
             IsLargeToggle.Invalidate();
             DisplayOptions.Invalidate();
             CustomButton3.Invalidate();
             CustomButton2.Invalidate();
             CustomButton1.Invalidate();
-            CustomGroup.Invalidate();
+            base.Invalidate();
         }
     }
 }

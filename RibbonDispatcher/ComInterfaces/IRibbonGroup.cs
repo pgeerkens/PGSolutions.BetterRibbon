@@ -60,4 +60,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description(".")]
         void Invalidate();
     }
+
+    public interface ICustomRibbonGroup : IRibbonGroup {
+        /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
+        [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
+        void SetShowWhenInactive(bool showInactive);
+    }
 }

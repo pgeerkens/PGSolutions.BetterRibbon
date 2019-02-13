@@ -37,12 +37,12 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
             Id = "TabPGSolutions";    
 
-            BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
-            LinksAnalysisViewModel = new LinksAnalysisViewModel(RibbonFactory);
-            VbaExportViewModel_PG  = new VbaSourceExportViewModel(RibbonFactory, "MS");
-            VbaExportViewModel_MS  = new VbaSourceExportViewModel(RibbonFactory, "PG");
-            CustomButtonsViewModel = new CustomizableButtonsViewModel(RibbonFactory);
-            DemonstrationViewModel = new DemonstrationViewModel(RibbonFactory);
+            BrandingViewModel      = RibbonFactory.Add(new BrandingViewModel(RibbonFactory, GetBrandingIcon));
+            LinksAnalysisViewModel = RibbonFactory.Add(new LinksAnalysisViewModel(RibbonFactory));
+            VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));
+            VbaExportViewModel_MS  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "PG"));
+            CustomButtonsViewModel = RibbonFactory.Add(new CustomButtonsViewModel(RibbonFactory));
+            DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
         internal BrandingViewModel            BrandingViewModel      { get; private set; }
@@ -50,9 +50,9 @@ namespace PGSolutions.BetterRibbon {
         internal VbaSourceExportViewModel     VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel     VbaExportViewModel_PG  { get; private set; }
         internal DemonstrationViewModel       DemonstrationViewModel { get; private set; }
-        internal CustomizableButtonsViewModel CustomButtonsViewModel { get; private set; }
+        internal CustomButtonsViewModel CustomButtonsViewModel { get; private set; }
 
-        internal void DetachControls() => CustomButtonsViewModel.DetachControls();
+        internal void DetachControls() => CustomButtonsViewModel?.DetachControls();
 
         /// <summary>.</summary>
         public string GetCustomUI(string RibbonID) => Resources.Ribbon;

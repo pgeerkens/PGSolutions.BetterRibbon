@@ -18,8 +18,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonGroup))]
     [Guid(Guids.RibbonGroup)]
     public class RibbonGroup : RibbonCommon, IRibbonGroup {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         internal RibbonGroup(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
-        : base(itemId, strings, visible, enabled) => Attach();
+        : base(itemId, strings, visible, enabled) { }
     }
 }

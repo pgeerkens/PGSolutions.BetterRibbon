@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
@@ -17,6 +18,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public interface IRibbonFactory {
         /// <summary>TODO</summary>
         IResourceManager ResourceManager { get; }
+
+        /// <summary>.</summary>
+        /// <param name="controlId"></param>
+        [Description("")]
+        IRibbonControlStrings GetStrings(string controlId);
+
+        T Add<T>(T ctrl) where T : RibbonCommon;
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [DispId(DispIds.NewRibbonGroup)]

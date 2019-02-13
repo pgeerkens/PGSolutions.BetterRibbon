@@ -13,8 +13,31 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonGroupModel)]
     public interface IRibbonGroupModel {
-        IRibbonGroup ViewModel { get; }
+        /// <summary>Gets or sets whether the control is enabled.</summary>
+        [Description(".")]
+        bool IsEnabled {
+            [Description("Gets or sets whether the control is enabled.")]
+            get; set;
+        }
+        /// <summary>Gets or sets whether the control is visible.</summary>
+        [Description(".")]
+        bool IsVisible {
+            [Description("Gets or sets whether the control is visible.")]
+            get; set;
+        }
 
+        /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
+        [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
+        bool ShowInactive { get; set; }
+
+        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         IRibbonGroupModel Attach(string controlId);
+
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [Description("Queues a request for this control to be refreshed.")]
+        void Invalidate();
+
+        //    IRibbonGroup ViewModel { get; }
     }
 }

@@ -17,7 +17,8 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>.</summary>
     [CLSCompliant(false)]
     public sealed class VbaSourceExportViewModel : AbstractVbaSourceExportViewModel, IVbaSourceExportViewModel {
-        public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory, suffix) { }
+        public VbaSourceExportViewModel(IRibbonFactory factory, string suffix, bool isVisible = true, bool isEnabled = true)
+        : base(factory, suffix, "VbaExportGroup", isVisible, isEnabled) { }
 
         public override void ExportCurrent(object sender) {
             if (!IsProjectModelTrusted()) { return; }

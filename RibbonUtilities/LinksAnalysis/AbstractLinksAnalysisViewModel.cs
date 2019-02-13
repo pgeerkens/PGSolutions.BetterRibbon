@@ -14,8 +14,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     public abstract class AbstractLinksAnalysisViewModel : AbstractRibbonGroupViewModel, ILinksAnalysisViewModel {
         /// <summary>.</summary>
-        protected AbstractLinksAnalysisViewModel(IRibbonFactory factory) : base(factory) {
-            LinksAnalysisGroup    = Factory.NewRibbonGroup("LinksAnalysisGroup", true);
+        protected AbstractLinksAnalysisViewModel(IRibbonFactory factory, string itemId, bool isVisible = true, bool isEnabled = true)
+        : base(factory, itemId, isVisible, isEnabled) {
             AnalyzeCurrentButton  = Factory.NewRibbonButtonMso(itemId: "AnalyzeLinksCurrent", imageMso: "EditLinks");
             AnalyzeSelectedButton = Factory.NewRibbonButtonMso(itemId: "AnalyzeLinksSelected", imageMso: "EditLinks");
 
@@ -34,15 +34,16 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public dynamic StatusBar { set => Application.StatusBar = value; }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public RibbonGroup  LinksAnalysisGroup    { get; }
-        /// <inheritdoc/>
         public RibbonButton AnalyzeCurrentButton  { get; }
         /// <inheritdoc/>
         public RibbonButton AnalyzeSelectedButton { get; }
 
         /// <inheritdoc/>
-        public void Invalidate() => LinksAnalysisGroup.Invalidate();
+        public override void Invalidate() {
+            AnalyzeCurrentButton.Invalidate();
+            AnalyzeSelectedButton.Invalidate();
+            base.Invalidate();
+        }
 
         public abstract void DisplayAnalysis(ILinksAnalysis externalLinks);
 

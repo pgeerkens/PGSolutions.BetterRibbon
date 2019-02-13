@@ -13,6 +13,8 @@ namespace PGSolutions.BetterRibbon {
         public BrandingModel(BrandingViewModel viewModel) {
             ViewModel = viewModel;
             ViewModel.ButtonClicked += ButtonClicked;
+
+            ViewModel.Attach();
         }
 
         public void Invalidate() => ViewModel.Invalidate();

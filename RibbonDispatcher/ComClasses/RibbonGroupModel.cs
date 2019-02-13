@@ -17,14 +17,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
     [Guid(Guids.RibbonGroupModel)]
-    public sealed class RibbonGroupModel :IRibbonGroupModel {
-        public RibbonGroupModel(Func<string,RibbonGroup> factory, IRibbonControlStrings strings) {
+    public sealed class RibbonGroupModel : IRibbonGroupModel, IBooleanSource {
+        public RibbonGroupModel(Func<string, ICustomRibbonGroup> factory, IRibbonControlStrings strings) {
             Factory = factory;
             Strings = strings;
         }
 
-        public IRibbonGroup ViewModel { get; set; }
+        public IRibbonControlStrings Strings { get; }
+        public bool IsEnabled { get; set; } = true;
+        public bool IsVisible { get; set; } = true;
 
+        #region IActivatable implementation
+        /// <inheritdoc/>
+        public ICustomRibbonGroup ViewModel { get; set; }
+
+        private Func<string, ICustomRibbonGroup> Factory { get; }
+
+        /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
             var viewModel = Factory(controlId);
             ViewModel = viewModel;
@@ -32,12 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private Func<string, RibbonGroup> Factory { get; }
-
-        public IRibbonControlStrings Strings { get; }
-        public bool IsEnabled { get; set; } = true;
-        public bool IsVisible { get; set; } = true;
-
+        /// <inheritdoc/>
         public void Invalidate() {
             if (ViewModel != null) {
                 ViewModel.IsEnabled = IsEnabled;
@@ -46,5 +50,22 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 ViewModel.Invalidate();
             }
         }
+        #endregion
+
+        #region IToggleable implementation
+        public event ToggledEventHandler Toggled;
+
+        private void OnToggled(object sender, bool showInactive)
+        => Toggled?.Invoke(sender, ShowInactive = showInactive);
+
+        /// <inheritdoc/>
+        public bool ShowInactive {
+            get => _showInactive;
+            set { _showInactive = value; ViewModel.SetShowWhenInactive(value); ViewModel?.Invalidate(); }
+        }
+        bool _showInactive = false;
+
+        public bool Getter() => ShowInactive;
+        #endregion
     }
 }

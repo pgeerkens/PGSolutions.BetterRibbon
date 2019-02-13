@@ -5,9 +5,12 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class CustomButtonsModel {
-        public CustomButtonsModel(CustomizableButtonsViewModel viewModel) =>
+        public CustomButtonsModel(CustomButtonsViewModel viewModel) {
             ViewModel = viewModel;
- 
+
+            viewModel.Attach();
+        }
+
         public void   Invalidate() => ViewModel.Invalidate();
 
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
@@ -16,6 +19,6 @@ namespace PGSolutions.BetterRibbon {
         public void SetShowWhenInactive(bool showWhenInactive) =>
             ViewModel.SetShowWhenInactive(showWhenInactive);
 
-        private CustomizableButtonsViewModel ViewModel { get; set; }
+        private CustomButtonsViewModel ViewModel { get; set; }
     }
 }

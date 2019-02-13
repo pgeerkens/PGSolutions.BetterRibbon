@@ -85,7 +85,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
-        private T Add<T>(T ctrl) where T:RibbonCommon {
+        public T Add<T>(T ctrl) where T:RibbonCommon {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
             _clickables.AddNotNull(ctrl.Id, ctrl as IClickable);
@@ -98,7 +98,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return ctrl;
         }
 
-        private IRibbonControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
+        public IRibbonControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]

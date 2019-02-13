@@ -10,11 +10,9 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
     internal class BrandingViewModel : AbstractRibbonGroupViewModel {
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon)")]
-        [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions")]
-        public BrandingViewModel(IRibbonFactory factory, Func<IPictureDisp> logo) : base(factory) {
-            BrandingGroup  = Factory.NewRibbonGroup("BrandingGroup", true);
-            BrandingButton = Factory.NewRibbonButton("BrandingButton", true, true, true, logo(), false, false);
+        public BrandingViewModel(IRibbonFactory factory, Func<IPictureDisp> logo, bool isVisible = true, bool isEnabled = true)
+        : base(factory, "BrandingGroup", isVisible, isEnabled) {
+            BrandingButton = Factory.NewRibbonButton("BrandingButton", image:logo(), showImage:false, showLabel:false);
 
             BrandingButton.Clicked += OnButtonClicked;
             BrandingButton.Attach();
@@ -22,11 +20,12 @@ namespace PGSolutions.BetterRibbon {
 
         public event ClickedEventHandler  ButtonClicked;
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public RibbonGroup  BrandingGroup  { get; }
         public RibbonButton BrandingButton { get; }
 
-        public void Invalidate() => BrandingButton.Invalidate();
+        public override void Invalidate() {
+            BrandingButton.Invalidate();
+            base.Invalidate();
+        }
 
         private void OnButtonClicked(object sender) => ButtonClicked?.Invoke(sender);
     }
