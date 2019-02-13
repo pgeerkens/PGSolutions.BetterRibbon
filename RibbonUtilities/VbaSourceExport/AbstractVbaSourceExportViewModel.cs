@@ -1,8 +1,9 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                Copyright (c) 2017-8 Pieter Geerkens                              //
+//                                Copyright (c) 2017-8 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
@@ -13,17 +14,16 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     using VbaExportSelectedEventHandler = EventHandler<VbaExportSelectedEventArgs>;
     using VbaExportCurrentEventHandler = EventHandler<VbaExportCurrentEventArgs>;
-
-    //using Workbook = Microsoft.Office.Tools.Excel.Workbook;
+    using VBE = Microsoft.Vbe.Interop;
 
     /// <summary>.</summary>
     [CLSCompliant(false)]
     public abstract class AbstractVbaSourceExportViewModel : AbstractRibbonGroupViewModel,
-            IVbaSourceExportViewModel, IApplication {
+                IVbaSourceExportViewModel, IApplication {
         /// <summary>.</summary>
         protected AbstractVbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory) {
             var defaultSize = suffix=="MS" ? false : true;
-            VbASourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
+            VbaSourceExportGroup  = Factory.NewRibbonGroup($"VbaExportGroup{suffix}");
 
             UseSrcFolderToggle    = Factory.NewRibbonToggleMso($"UseSrcFolderToggle{suffix}",
                                             isLarge:defaultSize, imageMso:ToggleImage(false));
@@ -32,14 +32,14 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             CurrentProjectButton  = Factory.NewRibbonButtonMso($"CurrentProjectButton{suffix}",
                                             isLarge:defaultSize, imageMso:"FileSaveAs", showImage:true);
 
-            UseSrcFolderToggle.Toggled    += OnSrcFolderToggled;
-            SelectedProjectButton.Attach<RibbonButton>().Clicked += OnExportSelected;
-            CurrentProjectButton.Attach<RibbonButton>().Clicked  += OnExportCurrent;
+            UseSrcFolderToggle.Toggled    += SrcFolderToggled;
+            SelectedProjectButton.Attach<RibbonButton>().Clicked += ExportSelected;
+            CurrentProjectButton.Attach<RibbonButton>().Clicked  += ExportCurrent;
         }
 
         /// <inheritdoc/>
-        public void Attach(IBooleanSource srcToggleSource) =>
-            UseSrcFolderToggle.Attach(srcToggleSource.Getter);
+        public void Attach(IBooleanSource srcToggleSource)
+        => UseSrcFolderToggle.Attach(srcToggleSource.Getter);
 
         /// <inheritdoc/>
         public void Invalidate() => UseSrcFolderToggle.Invalidate();
@@ -51,53 +51,25 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public event VbaExportCurrentEventHandler  CurrentProjectClicked;
 
-        protected virtual void OnSrcFolderToggled(object sender, bool isPressed) {
+        protected virtual void SrcFolderToggled(object sender, bool isPressed) {
             UseSrcFolderToggle.SetImageMso(ToggleImage(isPressed));
             UseSrcFolderToggled?.Invoke(sender, isPressed);
         }
 
-        protected virtual void OnExportCurrent(object sender)
-        =>  PerformSilently(
-                () => CurrentProjectClicked?.Invoke(this,
-                        new VbaExportCurrentEventArgs(new ProjectFilterExcel(this), ActiveWorkbook)
-            ));
+        public abstract void ExportCurrent (object sender);
+        public abstract void ExportSelected(object sender);
 
-        protected virtual void OnExportSelected(object sender) {
-            var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
-            fd.Title = "Select VBA Project(s) to Export From";
-            fd.ButtonName = "Export";
-            fd.AllowMultiSelect = true;
-            fd.Filters.Clear();
-            fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
+        protected virtual void OnExportCurrent(object sender, VbaExportCurrentEventArgs e)
+        => CurrentProjectClicked?.Invoke(this, e);
 
-            var list = new ProjectFilters(this);
-            foreach (var item in list) {
-                fd.Filters.Add(item.Description, item.Extensions);
-            }
-            if (fd.Show() != 0) {
-                PerformSilently(
-                    () => SelectedProjectsClicked?.Invoke(this,
-                            new VbaExportSelectedEventArgs(list[fd.FilterIndex-1], fd.SelectedItems)
-                ));
-            }
-        }
+        protected virtual void OnExportSelected(object sender, VbaExportSelectedEventArgs e)
+         => SelectedProjectsClicked?.Invoke(this, e);
 
-        protected void PerformSilently(System.Action action) {
-            try {
-                Application.Cursor = XlMousePointer.xlWait;
-
-                action();
-            } finally {
-                Application.StatusBar = false;
-
-                Application.Cursor = XlMousePointer.xlDefault;
-            }
-        }
-
-        private static string ToggleImage(bool isPressed) => isPressed ? "TagMarkComplete" : "MarginsShowHide";
+        private static string ToggleImage(bool isPressed)
+        => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        protected RibbonGroup        VbASourceExportGroup  { get; }
+        protected RibbonGroup        VbaSourceExportGroup  { get; }
         protected RibbonToggleButton UseSrcFolderToggle    { get; }
         /// <inheritdoc/>
         public    RibbonButton       SelectedProjectButton { get; }
@@ -113,29 +85,30 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         protected abstract Workbook ActiveWorkbook { get; }
 
         /// <inheritdoc/>
-        public virtual void DoOnOpenWorkbook(string wkbkFullName, Action<Workbook> action) {
+        public virtual void DoOnOpenWorkbook(string wkbkFullName, Action<VBE.VBProject, string> action) {
             if (wkbkFullName == ActiveWorkbook.FullName) {
-                action(ActiveWorkbook);
+                action?.Invoke(ActiveWorkbook?.VBProject, Path.GetDirectoryName(wkbkFullName));
             } else {
                 var thisWkbk = ActiveWorkbook;
 
-                Application.DisplayAlerts = false;
+                DisplayAlerts = false;
                 Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
                 Application.ScreenUpdating = false;
-                var wkbk = Application.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true, AddToMru:false, Editable:false);
+                var wkbk = Application.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true,
+                        AddToMru:false, Editable:false);
                 Application.ActiveWindow.Visible = false;
                 thisWkbk.Activate();
 
                 try {
                     Application.ScreenUpdating = true;
-
-                    action(wkbk);
+                    
+                    action?.Invoke(wkbk?.VBProject, Path.GetDirectoryName(wkbkFullName));
                 }
                 finally {
                     wkbk?.Close(false);
 
-                    Application.DisplayAlerts = true;
+                    DisplayAlerts = true;
                 }
 
             }
@@ -143,11 +116,5 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <inheritdoc/>
         public abstract bool DisplayAlerts { get; set; }
-
-        /// <inheritdoc/>
-        public abstract dynamic StatusBar { get; set; }
-
-        /// <inheritdoc/>
-        public abstract MsoAutomationSecurity AutomationSecurity { get; protected set; }
     }
 }

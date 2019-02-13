@@ -4,38 +4,68 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
+    using static RibbonDispatcher.Utilities.Extensions;
 
     /// <summary>.</summary>
     [CLSCompliant(false)]
-    public sealed class VbaSourceExportViewModel : AbstractVbaSourceExportViewModel, IVbaSourceExportViewModel, IApplication {
+    public sealed class VbaSourceExportViewModel : AbstractVbaSourceExportViewModel, IVbaSourceExportViewModel {
         public VbaSourceExportViewModel(IRibbonFactory factory, string suffix) : base(factory, suffix) { }
 
-        protected override void OnExportCurrent(object sender) {
+        public override void ExportCurrent(object sender) {
             if (!IsProjectModelTrusted()) { return; }
             var securitySaved = Application.AutomationSecurity;
             Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
-            try { base.OnExportCurrent(sender); }
-            catch (IOException ex) { ex.Message.MsgBoxShow("OnExportCurrent"); }
-            finally { Application.AutomationSecurity = securitySaved; }
+            try {
+                Application.Cursor = XlMousePointer.xlWait;
+                Application.StatusBar = "Exporting VBA Source ...";
+
+                OnExportCurrent(sender,
+                        new VbaExportCurrentEventArgs(new ProjectFilterExcel(this), ActiveWorkbook));
+            }
+            catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
+            finally {
+                Application.AutomationSecurity = securitySaved;
+                Application.StatusBar = "Ready";
+
+                Application.Cursor = XlMousePointer.xlDefault;
+            }
         }
 
-        protected override void OnExportSelected(object sender) {
+        public override void ExportSelected(object sender) {
             if (!IsProjectModelTrusted()) { return; }
             var securitySaved = Application.AutomationSecurity;
             Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
-            try { base.OnExportSelected(sender); }
-            catch (IOException ex) { ex.Message.MsgBoxShow("OnExportSelected"); }
-            finally { Application.AutomationSecurity = securitySaved; }
+            try {
+                var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
+                fd.Title = "Select VBA Project(s) to Export From";
+                fd.ButtonName = "Export";
+                fd.AllowMultiSelect = true;
+                fd.Filters.Clear();
+                fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
+
+                var list = new ProjectFilters(this);
+                foreach (var item in list) {
+                    fd.Filters.Add(item.Description, item.Extensions);
+                }
+                if (fd.Show() != 0) {
+                    OnExportSelected(sender,
+                            new VbaExportSelectedEventArgs(list[fd.FilterIndex-1], fd.SelectedItems));
+                }
+            }
+            catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
+            finally {
+                Application.AutomationSecurity = securitySaved;
+            }
         }
 
         private bool IsProjectModelTrusted() {
@@ -48,8 +78,6 @@ namespace PGSolutions.BetterRibbon {
         private static void PleaseEnableTrust()
         => "Please enable trust of the Project Object Model".MsgBoxShow("Project Model Not Trusted");
 
-        private static string ToggleImage(bool isPressed) => isPressed ? "TagMarkComplete" : "MarginsShowHide";
-
         protected override Application Application => Globals.ThisAddIn.Application;
 
         /// <inheritdoc/>
@@ -59,18 +87,6 @@ namespace PGSolutions.BetterRibbon {
         public override bool DisplayAlerts {
             get => Application.DisplayAlerts;
             set => Application.DisplayAlerts = value;
-        }
-
-        /// <inheritdoc/>
-        public override dynamic StatusBar {
-            get => Application.StatusBar;
-            set => Application.StatusBar = value;
-        }
-
-        /// <inheritdoc/>
-        public override MsoAutomationSecurity AutomationSecurity {
-            get => Application.AutomationSecurity;
-            protected set => Application.AutomationSecurity = value;
         }
     }
 }

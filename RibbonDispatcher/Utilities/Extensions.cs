@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -14,6 +15,10 @@ using System.Collections.Generic;
 namespace PGSolutions.RibbonDispatcher.Utilities {
     public static class Extensions {
         private const string Caption = "PGSolutions Ribbon Dispatcher";
+
+        /// <summary>Returns the name of the calling method. </summary>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification ="Because that's just how it works!")]
+        public static string CallerName([CallerMemberName] string memberName = "") => memberName;
 
         /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]

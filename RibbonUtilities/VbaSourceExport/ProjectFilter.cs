@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
 using Microsoft.Vbe.Interop;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
@@ -31,11 +30,11 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc);
 
-        protected void ExtractProjectModules(VBProject project, string path) {
+        protected static void ExtractProjectModules(VBProject project, string path) {
             if (project == null ) throw new ArgumentNullException(nameof(project));
+
             try {
                 foreach (VBComponent component in project.VBComponents) {
-                    SetStatusBarText(project.Name, component.Name);
                     component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),
                             TypeExtension((VbExt_ct)component.Type)));
                 }
@@ -45,13 +44,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)
                                       ||  ex.HResult == unchecked((int)0x800AC35C)) {
                 throw new IOException($"A file or directory conflict occurred. Please retry.", ex);
-            } finally {
-                Application.StatusBar = false;
             }
         }
-
-        protected void SetStatusBarText(string projectName, string componentName)
-        => Application.StatusBar = $"Exporting {projectName}.{componentName} ...";
 
         /// <summary>Prepares this exporter by providing a directory as destination for exports.</summary>
         /// <param name="path">Full (absolute) path-name for the project being exported.</param>

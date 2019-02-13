@@ -6,7 +6,7 @@ using System;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
-namespace PGSolutions.RibbonUtilities.VbaSourceExport {   
+namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     [CLSCompliant(false)]
     public sealed class ProjectFilterExcel : ProjectFilter  {
         public ProjectFilterExcel(IApplication application)
@@ -18,22 +18,15 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             if (items == null ) throw new ArgumentNullException(nameof(items));
-            //var app = new Lazy<Application>(() => new Application());
-            try {
-                foreach (string selectedItem in items) {
-                    ExtractProject(selectedItem, destIsSrc);
-                }
-            } finally {
-                //if (app.IsValueCreated) { app.Value.Quit(); }
-            }
+            foreach (string selectedItem in items) { ExtractProject(selectedItem, destIsSrc); }
         }
+
+        /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
+        private void ExtractProject(string path, bool destIsSrc)
+        => Application.DoOnOpenWorkbook(path, (p, s) => ExtractProjectModules(p, CreateDirectory(path, destIsSrc)));
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         public void ExtractOpenProject(Workbook workbook, bool destIsSrc)
         => ExtractProjectModules(workbook?.VBProject, CreateDirectory(workbook?.FullName, destIsSrc));
-
-        /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private void ExtractProject(string path, bool destIsSrc)
-        => Application.DoOnOpenWorkbook(path, wb => ExtractOpenProject(wb,destIsSrc));
     }
 }

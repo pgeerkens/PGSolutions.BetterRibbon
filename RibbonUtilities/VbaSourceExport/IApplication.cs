@@ -4,18 +4,15 @@
 using System;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+    using VBE = Microsoft.Vbe.Interop;
 
     /// <summary>.</summary>
     [CLSCompliant(false)]
     public interface IApplication {
         /// <summary>.</summary>
-        void DoOnOpenWorkbook(string wkbkFullName, Action<Workbook> action);
+        void DoOnOpenWorkbook(string wkbkFullName, Action<VBE.VBProject, string> action);
 
         /// <summary>.</summary>
-        bool     DisplayAlerts   { get; set; }
-
-        /// <summary>.</summary>
-        dynamic  StatusBar       { get; set; }
+        bool DisplayAlerts { get; set; }
     }
 }
