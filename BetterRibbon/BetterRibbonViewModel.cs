@@ -29,13 +29,13 @@ namespace PGSolutions.BetterRibbon {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-        Justification = "Public, Non-Creatable, class with exported Events.")]
+            Justification = "Public, Non-Creatable, class with exported Events.")]
     //[Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class BetterRibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
         const string _assemblyName  = "BetterRibbon";
 
         internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
-            _id = "TabPGSolutions";    
+            Id = "TabPGSolutions";    
 
             BrandingViewModel      = new BrandingViewModel(RibbonFactory, GetBrandingIcon);
             LinksAnalysisViewModel = new LinksAnalysisViewModel(RibbonFactory);
@@ -76,7 +76,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         /// <summary>.</summary>
-        protected override string Id => _id; private readonly string _id;
+        protected override string Id { get; }
 
         private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();
 

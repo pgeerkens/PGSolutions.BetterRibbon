@@ -97,6 +97,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinksAnalysis\AbstractLinksAnalysisViewModel.cs" />
+    <Compile Include="VbaSourceExport\AbstractVbaSourceExportViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />
     <Compile Include="LinksAnalysis\ExcelExtensions.cs" />

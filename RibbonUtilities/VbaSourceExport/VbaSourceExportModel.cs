@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
@@ -22,8 +23,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         bool IBooleanSource.Getter() => DestIsSrc;
 
         /// <summary>Fakse => file destination is eponymous directory; else directory named "SRC".</summary>
-        private bool                             DestIsSrc   { get; set; }
-        private IList<IVbaSourceExportViewModel> ViewModels  { get; }
+        private bool                             DestIsSrc  { get; set; }
+        private IList<IVbaSourceExportViewModel> ViewModels { get; }
 
         private void UseSrcFolderToggled(object sender, bool isPressed) {
             DestIsSrc = isPressed;
@@ -38,15 +39,15 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportCurrentProject(object sender, VbaExportEventArgs e)
-        => (e.ProjectFilter as ProjectFilterExcel)?.ExtractOpenProject(DestIsSrc);
+        private void ExportCurrentProject(object sender, VbaExportCurrentEventArgs e)
+        => (e.ProjectFilter as ProjectFilterExcel)?.ExtractOpenProject(e.ActiveWorkbook, DestIsSrc);
 
         /// <summary>Extracts VBA modules from a selected EXCEL workbook to a sibling directory.</summary>
         /// <param name="sender">The object that initiated the event.</param>
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportSelectedProjects(object sender, VbaExportEventArgs e)
+        private void ExportSelectedProjects(object sender, VbaExportSelectedEventArgs e)
         => e.ProjectFilter.ExtractProjects(e.Files, DestIsSrc);
     }
 }

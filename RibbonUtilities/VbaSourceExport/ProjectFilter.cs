@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 using Microsoft.Office.Core;
@@ -30,14 +31,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc);
 
-        /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public virtual void ExtractOpenProject(bool destIsSrc)
-        => ExtractOpenProject(Application.ActiveWorkbook,destIsSrc);
-
-        /// <inheritdoc/>
-        protected virtual void ExtractOpenProject(Workbook wkbk, bool destIsSrc)
-        => ExtractProjectModules(wkbk?.VBProject, CreateDirectory(wkbk?.FullName, destIsSrc));
-
         protected void ExtractProjectModules(VBProject project, string path) {
             if (project == null ) throw new ArgumentNullException(nameof(project));
             try {
@@ -48,8 +41,10 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 }
 
                 File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
-            //} catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)) {
-            //    $"Directory conflict occurred. Please retry.".ShowMsgString();
+            }
+            catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)
+                                      ||  ex.HResult == unchecked((int)0x800AC35C)) {
+                throw new IOException($"A file or directory conflict occurred. Please retry.", ex);
             } finally {
                 Application.StatusBar = false;
             }

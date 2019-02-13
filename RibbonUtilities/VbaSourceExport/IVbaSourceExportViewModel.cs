@@ -7,14 +7,15 @@ using System.Diagnostics.CodeAnalysis;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    using VbaExportEventHandler = EventHandler<VbaExportEventArgs>;
+    using VbaExportSelectedEventHandler = EventHandler<VbaExportSelectedEventArgs>;
+    using VbaExportCurrentEventHandler = EventHandler<VbaExportCurrentEventArgs>;
 
     [CLSCompliant(false)]
     public interface IVbaSourceExportViewModel {
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event ToggledEventHandler   UseSrcFolderToggled;
-        event VbaExportEventHandler SelectedProjectsClicked;
-        event VbaExportEventHandler CurrentProjectClicked;
+        event VbaExportSelectedEventHandler SelectedProjectsClicked;
+        event VbaExportCurrentEventHandler  CurrentProjectClicked;
 
         IRibbonToggle UseSrcFolderToggle  { get; }
         IRibbonButton SelectedProjectButton { get; }
