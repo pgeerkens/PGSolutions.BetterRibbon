@@ -12,7 +12,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>.</summary>
     [CLSCompliant(false)]
-    public abstract class AbstractLinksAnalysisViewModel : AbstractRibbonGroupViewModel, ILinksAnalysisViewModel {
+    public abstract class AbstractLinksAnalysisViewModel : RibbonGroupViewModel, ILinksAnalysisViewModel {
         /// <summary>.</summary>
         protected AbstractLinksAnalysisViewModel(IRibbonFactory factory, string itemId, bool isVisible = true, bool isEnabled = true)
         : base(factory, itemId, isVisible, isEnabled) {

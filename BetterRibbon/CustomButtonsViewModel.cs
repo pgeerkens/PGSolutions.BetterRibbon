@@ -1,15 +1,23 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
+using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
-    internal class CustomButtonsViewModel : AbstractRibbonGroupViewModel, ICustomRibbonGroup {
+    [Serializable]
+    [CLSCompliant(false)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComDefaultInterface(typeof(ICustomRibbonGroup))]
+    [Guid(Guids.RibbonGroup)]
+    public class CustomButtonsViewModel : RibbonGroupViewModel, ICustomRibbonGroup {
         public CustomButtonsViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
         : base(factory, "CustomizableGroup", isVisible, isEnabled) {
             (CustomizableToggle1 = factory.NewRibbonToggle("CustomVbaToggle1")).SetLanguageStrings();
@@ -29,6 +37,8 @@ namespace PGSolutions.BetterRibbon {
             (CustomizableButton3 = factory.NewRibbonButtonMso("CustomizableButton3")).SetLanguageStrings();
 
             AdaptorControls = new Dictionary<string, IActivatable>() {
+                { Id,   this },
+
                 { CustomizableToggle1.Id,   CustomizableToggle1 },
                 { CustomizableToggle2.Id,   CustomizableToggle2 },
                 { CustomizableToggle3.Id,   CustomizableToggle3 },
@@ -93,11 +103,12 @@ namespace PGSolutions.BetterRibbon {
         protected IReadOnlyDictionary<string, IActivatable> AdaptorControls { get; }
 
         /// <inheritdoc/>
-        public virtual void SetShowWhenInactive(bool showInactive) {
+        public virtual void SetShowInactive(bool showInactive) {
             foreach (var ctrl in AdaptorControls) {
                 ctrl.Value.ShowWhenInactive = showInactive;
                 ctrl.Value.Invalidate();
             }
+            //Invalidate();
         }
     }
 }

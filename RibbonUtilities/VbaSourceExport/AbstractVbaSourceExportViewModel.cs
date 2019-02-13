@@ -18,7 +18,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
     /// <summary>.</summary>
     [CLSCompliant(false)]
-    public abstract class AbstractVbaSourceExportViewModel : AbstractRibbonGroupViewModel,
+    public abstract class AbstractVbaSourceExportViewModel : RibbonGroupViewModel,
                 IVbaSourceExportViewModel, IApplication {
         /// <summary>.</summary>
         protected AbstractVbaSourceExportViewModel(IRibbonFactory factory, string suffix, string itemId, bool isVisible = true, bool isEnabled = true)

@@ -29,7 +29,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [DispId(DispIds.NewRibbonGroup)]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonGroup NewRibbonGroup(string itemId, bool visible = true, bool enabled = true);
+        RibbonGroupViewModel NewRibbonGroup(string itemId, bool visible = true, bool enabled = true);
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]

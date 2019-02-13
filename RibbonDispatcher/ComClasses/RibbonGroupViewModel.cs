@@ -7,12 +7,12 @@ using System.ComponentModel;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public abstract class AbstractRibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon, bool>, IToggleable {
-        protected AbstractRibbonGroupViewModel(IRibbonFactory factory, string itemId, bool isVisible, bool isEnabled)
+    public class RibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon, bool>, IToggleable {
+        public RibbonGroupViewModel(IRibbonFactory factory, string itemId, bool isVisible, bool isEnabled)
         : base (itemId, null, isVisible, isEnabled)
         => Factory = factory;
 
-        internal AbstractRibbonGroupViewModel(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
+        internal RibbonGroupViewModel(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
         : base(itemId, strings, visible, enabled) { }
 
         protected IRibbonFactory Factory { get; }

@@ -13,11 +13,8 @@ namespace PGSolutions.BetterRibbon {
 
         public void   Invalidate() => ViewModel.Invalidate();
 
-        public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
-            ViewModel.GetControl<TControl>(controlId);
-
-        public void SetShowWhenInactive(bool showWhenInactive) =>
-            ViewModel.SetShowWhenInactive(showWhenInactive);
+        public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon
+        => ViewModel.GetControl<TControl>(controlId);
 
         private CustomButtonsViewModel ViewModel { get; set; }
     }

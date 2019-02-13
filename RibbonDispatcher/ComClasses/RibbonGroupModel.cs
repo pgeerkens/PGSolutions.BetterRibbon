@@ -18,7 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
     [Guid(Guids.RibbonGroupModel)]
     public sealed class RibbonGroupModel : IRibbonGroupModel, IBooleanSource {
-        public RibbonGroupModel(Func<string, ICustomRibbonGroup> factory, IRibbonControlStrings strings) {
+        public RibbonGroupModel(Func<string, ICustomRibbonGroup> factory,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
             Factory = factory;
             Strings = strings;
         }
@@ -35,8 +36,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
-            var viewModel = Factory(controlId);
-            ViewModel = viewModel;
+            ViewModel = Factory(controlId);
             Invalidate();
             return this;
         }
@@ -61,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public bool ShowInactive {
             get => _showInactive;
-            set { _showInactive = value; ViewModel.SetShowWhenInactive(value); ViewModel?.Invalidate(); }
+            set { _showInactive = value; ViewModel?.SetShowInactive(value); ViewModel?.Invalidate(); }
         }
         bool _showInactive = false;
 

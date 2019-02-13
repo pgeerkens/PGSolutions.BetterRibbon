@@ -11,7 +11,7 @@ using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.BetterRibbon {
 
-    internal class DemonstrationViewModel : AbstractRibbonGroupViewModel {
+    internal class DemonstrationViewModel : RibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
         : base(factory, "CSharpDemoGroup", isVisible, isEnabled) {
             IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       imageMso:NoImage);

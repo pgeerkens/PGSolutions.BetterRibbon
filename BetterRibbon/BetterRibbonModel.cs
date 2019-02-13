@@ -122,12 +122,6 @@ namespace PGSolutions.BetterRibbon {
                 string keyTip = null, string alternateLabel = null, string description = null) =>
             ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
                     superTip, keyTip, alternateLabel, description);
-
-        ///// <inheritdoc/>
-        //public void ShowInactive(bool showWhenInactive) {
-        //    CustomButtonsModel.SetShowWhenInactive(showWhenInactive);
-        //    InvalidateCustomControlsGroup();
-        //}
         #endregion
 
         private TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
@@ -178,6 +172,13 @@ namespace PGSolutions.BetterRibbon {
         public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => new RibbonDropDownModel(id => CustomButtonsModel.GetControl<RibbonDropDown>(id),
+                strings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => new RibbonGroupModel(id => CustomButtonsModel.GetControl<CustomButtonsViewModel>(id),
                 strings, isEnabled, isVisible);
     }
 }

@@ -17,7 +17,7 @@ Option Explicit
 Private Const COMAddInName   As String = "PGSolutions.BetterRibbon"
 
 Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroup
+Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.RibbonToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
@@ -44,7 +44,7 @@ Attribute Button3.VB_VarHelpID = -1
 
 Private Sub Toggle1_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)
     On Error GoTo EH
- '   BetterRibbon.ShowInactive IsPressed
+    CustomGroup.ShowInactive = IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
     
     Invalidate
@@ -176,7 +176,7 @@ Private Sub Invalidate()
     If Not Button2 Is Nothing Then Button2.Invalidate
     If Not Button3 Is Nothing Then Button3.Invalidate
     
-    BetterRibbon.InvalidateControl "CustomizableGroup"
+    If Not CustomGroup Is Nothing Then CustomGroup.Invalidate
     Application.StatusBar = "Ready ...'"
 XT: Exit Sub
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Invalidate"
@@ -185,6 +185,8 @@ End Sub
 
 Friend Sub Activate()
     On Error GoTo EH
+    If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
+    
     If Not Toggle1 Is Nothing Then Toggle1.Attach "CustomVbaToggle1"
     If Not Toggle2 Is Nothing Then Toggle2.Attach "CustomVbaCheckBox2"
     If Not Toggle3 Is Nothing Then Toggle3.Attach "CustomVbaCheckBox3"
@@ -200,7 +202,7 @@ Friend Sub Activate()
     
     ' Set initial status
     Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
- '   BetterRibbon.ShowInactive Toggle1.IsPressed
+    CustomGroup.ShowInactive = Toggle1.IsPressed
     DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
@@ -216,6 +218,8 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With BetterRibbon
+        Set CustomGroup = .NewRibbonGroupModel(FindStrings("CustomizableGroup"))
+    
         Set Toggle1 = .NewRibbonToggleModelMso(FindStrings("Toggle1"), "MarginsShowHide")
         Set Toggle2 = .NewRibbonToggleModelMso(FindStrings("Toggle2"), "MarginsShowHide")
         Set Toggle3 = .NewRibbonToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")

@@ -109,5 +109,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        [Description(".")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
     }
 }

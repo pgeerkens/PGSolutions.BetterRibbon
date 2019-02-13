@@ -91,13 +91,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComClasses\AbstractRibbonGroupViewModel.cs" />
+    <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
     <Compile Include="ComClasses\RibbonDropDownModel.cs" />
     <Compile Include="ComClasses\RibbonGroupModel.cs" />
     <Compile Include="ComClasses\RibbonToggleModel.cs" />
     <Compile Include="ComInterfaces\IBooleanSource.cs" />
+    <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
     <Compile Include="ComInterfaces\IIntegerSource.cs" />
     <Compile Include="ComInterfaces\IRibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDownModel.cs" />

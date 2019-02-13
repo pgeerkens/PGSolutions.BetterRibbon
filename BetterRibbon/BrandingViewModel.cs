@@ -9,7 +9,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
-    internal class BrandingViewModel : AbstractRibbonGroupViewModel {
+    internal class BrandingViewModel : RibbonGroupViewModel {
         public BrandingViewModel(IRibbonFactory factory, Func<IPictureDisp> logo, bool isVisible = true, bool isEnabled = true)
         : base(factory, "BrandingGroup", isVisible, isEnabled) {
             BrandingButton = Factory.NewRibbonButton("BrandingButton", image:logo(), showImage:false, showLabel:false);
