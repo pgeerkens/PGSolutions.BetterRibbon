@@ -12,8 +12,8 @@ using Microsoft.Vbe.Interop;
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     [CLSCompliant(false)]
     public abstract class ProjectFilter : IProjectFilter {
-        protected ProjectFilter(IApplication application, string description, string extensions) {
-            Application = application;
+        protected ProjectFilter(string description, string extensions) {
+            //Application = application;
             Description = description;
             Extensions  = extensions;
         }
@@ -24,8 +24,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public string Extensions  { get; }
 
-        /// <inheritdoc/>
-        public IApplication Application { get; }
+        ///// <inheritdoc/>
+        //public IApplication Application { get; }
 
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc);

@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
 
-namespace PGSolutions.RibbonDispatcher.Utilities {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
     public static class DictionaryExtensions {
         /// <summary>Adds the specified element to the dictionary only when it is not null.</summary>

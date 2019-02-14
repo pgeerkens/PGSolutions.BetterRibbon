@@ -1,10 +1,9 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
+using PGSolutions.RibbonDispatcher.ComClasses;
 
-using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
+using static PGSolutions.RibbonDispatcher.ComClasses.Extensions;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class DemonstrationModel {

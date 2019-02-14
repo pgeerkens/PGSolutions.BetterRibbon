@@ -4,7 +4,7 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using PGSolutions.RibbonDispatcher.Utilities;
+using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
     internal class LocalResourceManager : AbstractResourceManager {

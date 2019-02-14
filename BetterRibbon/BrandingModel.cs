@@ -5,15 +5,12 @@ using System;
 using System.Text;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 using stdole;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
         public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image) : base(viewModel) {
-            ViewModel.Attach();
-
             BrandingButtonModel = GetModel<RibbonButton>("BrandingButton", ButtonClicked, true, true, image);
 
             Invalidate();

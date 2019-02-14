@@ -92,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
+    <Compile Include="ComClasses\AbstractRibbonGroupModel2.cs" />
+    <Compile Include="ComClasses\RibbonControlModel.cs" />
     <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
@@ -145,10 +147,9 @@
     <Compile Include="ComInterfaces\EventInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\DictionaryExtensions.cs" />
-    <Compile Include="Utilities\Extensions.cs" />
-    <Compile Include="Utilities\AbstractResourceManager.cs" />
-    <Compile Include="Utilities\ResourceManagerExtensions.cs" />
+    <Compile Include="ComClasses\DictionaryExtensions.cs" />
+    <Compile Include="ComClasses\AbstractResourceManager.cs" />
+    <Compile Include="ComClasses\ResourceManagerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
@@ -157,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="RibbonDispatcherKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

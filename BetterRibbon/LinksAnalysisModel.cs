@@ -1,8 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -10,10 +8,8 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
-    internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel{
+    internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : base(viewModel) {
-            ViewModel.Attach();
-
             AnalyzeCurrentModel  = GetModel<RibbonButton>("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
             AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked, true, true, "EditLinks");
 

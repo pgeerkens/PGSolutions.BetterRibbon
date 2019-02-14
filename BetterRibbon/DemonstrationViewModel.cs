@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using static PGSolutions.RibbonDispatcher.Utilities.Extensions;
 
 namespace PGSolutions.BetterRibbon {
+    using static PGSolutions.RibbonDispatcher.ComClasses.Extensions;
 
     internal class DemonstrationViewModel : RibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)

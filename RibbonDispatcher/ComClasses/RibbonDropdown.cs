@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>

@@ -23,6 +23,9 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         public const string ErrorsSheetName = "Links Errors";
 
+        public static string ToggleImage(this bool isPressed)
+        => isPressed ? "TagMarkComplete" : "MarginsShowHide";
+
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         internal static void WriteLinks(this Workbook wb, ILinksAnalysis links) {
             wb.DeleteTargetWorksheet(LinksSheetName);

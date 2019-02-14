@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using stdole;
@@ -12,11 +11,12 @@ namespace PGSolutions.BetterRibbon {
     public abstract class AbstractRibbonGroupModel {
         protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel) {
             ViewModel = viewModel;
+            ViewModel.Attach();
         }
 
         public void Invalidate() => ViewModel.Invalidate();
 
-        protected RibbonGroupViewModel ViewModel { get; }
+        private RibbonGroupViewModel ViewModel { get; }
 
         protected RibbonButtonModel GetModel<T>(string id, ClickedEventHandler handler, bool isEnabled, bool isVisible, string imageMso)
         where T : RibbonButton {

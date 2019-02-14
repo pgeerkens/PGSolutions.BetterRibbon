@@ -51,34 +51,4 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ViewModel?.Invalidate();
         }
     }
-
-    public abstract class RibbonControlModel<T> : IRibbonControlModel where T:IRibbonCommon {
-        protected RibbonControlModel(IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
-            Strings   = strings;
-            IsEnabled = isEnabled;
-            IsVisible = IsVisible;
-        }
-
-        /// <inheritdoc/>
-        public IRibbonControlStrings Strings   { get; protected set; }
-
-        /// <inheritdoc/>
-        public bool                  IsEnabled { get; set; } = true;
-
-        /// <inheritdoc/>
-        public bool                  IsVisible { get; set; } = true;
-
-        /// <inheritdoc/>
-        public T    ViewModel { get; set; }
-
-        /// <inheritdoc/>
-        public virtual void Invalidate() {
-            if (ViewModel != null) {
-                ViewModel.IsEnabled = IsEnabled;
-                ViewModel.IsVisible = IsVisible;
-
-                ViewModel.Invalidate();
-            }
-        }
-    }
 }

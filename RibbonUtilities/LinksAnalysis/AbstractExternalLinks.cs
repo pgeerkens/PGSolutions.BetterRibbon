@@ -44,6 +44,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private void AddParseError(ISourceCellRef cellRef, string formula, int charPosition, string condition)
         =>_errors.Add(new ParseError(cellRef,formula,charPosition, condition));
 
+        [CLSCompliant(false)]
         protected ILinksAnalysis ParseFormula(ISourceCellRef sourceCell, string formula) {
             var lexer = new LinksLexer(sourceCell, formula);
 

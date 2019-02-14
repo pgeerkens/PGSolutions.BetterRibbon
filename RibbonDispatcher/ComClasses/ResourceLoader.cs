@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>

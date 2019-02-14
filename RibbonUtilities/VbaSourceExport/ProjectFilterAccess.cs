@@ -10,15 +10,15 @@ using Microsoft.Office.Interop.Access.Dao;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     internal class ProjectFilterAccess : ProjectFilter {
-        public ProjectFilterAccess(IApplication status, string description, string extensions)
-        : base(status, description, extensions) { }
+        public ProjectFilterAccess(string description, string extensions)
+        : base(description, extensions) { }
 
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
         /// <remarks>
         /// </remarks>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             if (items == null ) throw new ArgumentNullException(nameof(items));
-            using (var app = Application.NewAccessWrapper()) {
+            using (var app = new AccessWrapper()) {
                 if (app == null) { throw new NotSupportedException("MS-Access not available on this machine."); }
 
                 foreach (string item in items) { ExtractProject(app, item, destIsSrc); }

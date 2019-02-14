@@ -4,9 +4,8 @@
 using System;
 using System.Resources;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ComClasses;
 
-namespace PGSolutions.RibbonDispatcher.Utilities {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     public abstract class AbstractResourceManager : IResourceManager {
         protected AbstractResourceManager(string assemblyName) => AssemblyName = assemblyName;
 

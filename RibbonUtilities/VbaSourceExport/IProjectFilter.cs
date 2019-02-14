@@ -13,8 +13,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <summary>Returns the Extensions list for this filter.</summary>
         string Extensions          { get; }
 
-        IApplication Application   { get; }
-
         /// <summary>Exports modules from specified Access databases to eponymous subdirectories.</summary>
         void   ExtractProjects(FileDialogSelectedItems items,bool destIsSrc);
     }

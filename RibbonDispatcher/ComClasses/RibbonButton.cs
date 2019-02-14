@@ -10,7 +10,6 @@ using stdole;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton objects.</summary>

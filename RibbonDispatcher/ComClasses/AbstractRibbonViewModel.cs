@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 

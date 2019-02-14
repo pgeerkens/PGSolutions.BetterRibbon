@@ -19,20 +19,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
-    public sealed class RibbonDropDownModel : IRibbonDropDownModel, IIntegerSource {
+    public sealed class RibbonDropDownModel : RibbonControlModel<IRibbonDropDown>, IRibbonDropDownModel, IIntegerSource {
         public RibbonDropDownModel(Func<string, RibbonDropDown> factory, IRibbonControlStrings strings,
-                bool isEnabled, bool isVisible) {
-            Factory = factory;
-            Strings = strings;
-            IsEnabled = isEnabled;
-            IsEnabled = isVisible;
-        }
+                bool isEnabled, bool isVisible)
+        :base(strings, isEnabled, isVisible)
+        => Factory = factory;
 
         public event SelectedEventHandler SelectionMade;
 
         private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
-
-        IRibbonDropDown ViewModel { get; set; }
 
         public int SelectedIndex  { get; set; }
 
@@ -59,18 +54,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => SelectionMade?.Invoke(sender, SelectedIndex = selectedIndex);
 
         private Func<string, RibbonDropDown> Factory { get; }
-
-        public IRibbonControlStrings Strings { get; }
-        public bool IsEnabled { get; set; } = true;
-        public bool IsVisible { get; set; } = true;
-
-        public void Invalidate() {
-            if (ViewModel != null) {
-                ViewModel.IsEnabled = IsEnabled;
-                ViewModel.IsVisible = IsVisible;
-
-                ViewModel.Invalidate();
-            }
-        }
     }
 }

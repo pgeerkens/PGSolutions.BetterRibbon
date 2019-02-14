@@ -9,10 +9,8 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using BetterRibbon.Properties;
-using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -53,11 +51,10 @@ namespace PGSolutions.BetterRibbon {
         private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel, BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
-
             VbaSourceExportModel = new VbaSourceExportModel(
-                    new List<IVbaSourceExportViewModel> {
-                        ViewModel?.VbaExportViewModel_MS,
-                        ViewModel?.VbaExportViewModel_PG
+                    new List<KeyValuePair<string,RibbonGroupViewModel>>() {
+                        new KeyValuePair<string,RibbonGroupViewModel>("MS",ViewModel?.VbaExportViewModel_MS),
+                        new KeyValuePair<string,RibbonGroupViewModel>("PG",ViewModel?.VbaExportViewModel_PG)
                     });
 
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);

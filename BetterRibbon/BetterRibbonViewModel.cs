@@ -9,7 +9,6 @@ using stdole;
 
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.Utilities;
 using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
@@ -37,11 +36,8 @@ namespace PGSolutions.BetterRibbon {
 
             BrandingViewModel      = RibbonFactory.NewRibbonGroup("BrandingGroup");
             LinksAnalysisViewModel = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
-        //    VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
-
-
-            VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));
-            VbaExportViewModel_MS  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "PG"));
+            VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("VbaExportGroupPG");
+            VbaExportViewModel_MS  = RibbonFactory.NewRibbonGroup("VbaExportGroupMS");
 
             CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
@@ -50,9 +46,8 @@ namespace PGSolutions.BetterRibbon {
         internal RibbonGroupViewModel BrandingViewModel      { get; private set; }
         internal RibbonGroupViewModel CustomButtonsViewModel { get; private set; }
         internal RibbonGroupViewModel LinksAnalysisViewModel { get; private set; }
-
-        internal VbaSourceExportViewModel VbaExportViewModel_MS  { get; private set; }
-        internal VbaSourceExportViewModel VbaExportViewModel_PG  { get; private set; }
+        internal RibbonGroupViewModel VbaExportViewModel_MS  { get; private set; }
+        internal RibbonGroupViewModel VbaExportViewModel_PG  { get; private set; }
 
         internal DemonstrationViewModel   DemonstrationViewModel { get; private set; }
 

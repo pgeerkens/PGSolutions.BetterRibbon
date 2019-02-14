@@ -99,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LinksAnalysis\LinksParser.cs" />
-    <Compile Include="VbaSourceExport\AbstractVbaSourceExportViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />
     <Compile Include="LinksAnalysis\ExcelExtensions.cs" />
@@ -133,7 +132,6 @@
     <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
     <Compile Include="VbaSourceExport\ProjectFilters.cs" />
     <Compile Include="VbaSourceExport\VbaExportEventArgs.cs" />
-    <Compile Include="VbaSourceExport\VbaSourceExportModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

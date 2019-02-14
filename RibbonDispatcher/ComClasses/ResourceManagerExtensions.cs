@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Microsoft.Office.Core;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.Utilities {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
     public static class ResourceManagerExtensions {
         /// <summary>TODO</summary>
