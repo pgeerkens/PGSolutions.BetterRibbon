@@ -41,7 +41,8 @@ namespace PGSolutions.BetterRibbon {
             LinksAnalysisViewModel = RibbonFactory.Add(new LinksAnalysisViewModel(RibbonFactory));
             VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));
             VbaExportViewModel_MS  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "PG"));
-            CustomButtonsViewModel = RibbonFactory.Add(new CustomButtonsViewModel(RibbonFactory));
+            //CustomButtonsViewModel = RibbonFactory.Add(new CustomButtonsViewModel(RibbonFactory));
+            CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
@@ -50,7 +51,7 @@ namespace PGSolutions.BetterRibbon {
         internal VbaSourceExportViewModel VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel VbaExportViewModel_PG  { get; private set; }
         internal DemonstrationViewModel   DemonstrationViewModel { get; private set; }
-        internal CustomButtonsViewModel   CustomButtonsViewModel { get; private set; }
+        internal RibbonGroupViewModel     CustomButtonsViewModel { get; private set; }
 
         internal void DetachControls() => CustomButtonsViewModel?.DetachControls();
 
@@ -82,5 +83,23 @@ namespace PGSolutions.BetterRibbon {
 
         /// <summary>.</summary>
         public static string MsgBoxTitle => Resources.ApplicationName;
+
+        private RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
+        => new RibbonGroupViewModel(factory, "CustomizableGroup")
+            .Add(factory.NewRibbonToggle("CustomVbaToggle1"))
+            .Add(factory.NewRibbonToggle("CustomVbaToggle2"))
+            .Add(factory.NewRibbonToggle("CustomVbaToggle3"))
+
+            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox1"))
+            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox2"))
+            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox3"))
+
+            .Add(factory.NewRibbonDropDown("CustomVbaDropDown1"))
+            .Add(factory.NewRibbonDropDown("CustomVbaDropDown2"))
+            .Add(factory.NewRibbonDropDown("CustomVbaDropDown3"))
+
+            .Add(factory.NewRibbonButtonMso("CustomizableButton1"))
+            .Add(factory.NewRibbonButtonMso("CustomizableButton2"))
+            .Add(factory.NewRibbonButtonMso("CustomizableButton3"));
     }
 }

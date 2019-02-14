@@ -20,31 +20,25 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButtonModel))]
     [Guid(Guids.RibbonButtonModel)]
-    public sealed class RibbonButtonModel : IRibbonButtonModel, ISizeable, IImageable {
-        public RibbonButtonModel(Func<string, RibbonButton> factory,
+    public sealed class RibbonButtonModel : RibbonControlModel<IRibbonButton>, IRibbonButtonModel, ISizeable, IImageable {
+        public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
                 IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
-        : this(factory, strings, isEnabled, isVisible)
+        : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageMso(imageMso);
 
-        public RibbonButtonModel(Func<string, RibbonButton> factory,
+        public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
                 IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
-        : this(factory, strings, isEnabled, isVisible)
+        : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageDisp(image);
 
-        public RibbonButtonModel(Func<string,RibbonButton> factory, IRibbonControlStrings strings,
-                bool isEnabled, bool isVisible) {
-            Factory = factory;
-            Strings = strings;
-            IsEnabled = isEnabled;
-            IsEnabled = isVisible;
-        }
+        public RibbonButtonModel(Func<string,RibbonButton> funcViewModel, IRibbonControlStrings strings,
+                bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
+        => FuncViewModel = funcViewModel;
 
         public event ClickedEventHandler Clicked;
 
-        IRibbonButton ViewModel { get; set; }
-
         public IRibbonButtonModel Attach(string controlId) {
-            var viewModel = Factory(controlId);
+            var viewModel = FuncViewModel(controlId);
             if (viewModel != null) {
                 viewModel.Attach().SetLanguageStrings(Strings);
                 viewModel.Clicked += OnClicked;
@@ -56,11 +50,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
-        private Func<string, RibbonButton> Factory { get; }
+        private Func<string, RibbonButton> FuncViewModel { get; }
 
-        public IRibbonControlStrings Strings { get; }
-        public bool   IsEnabled { get; set; } = true;
-        public bool   IsVisible { get; set; } = true;
         public bool   IsLarge   { get; set; } = true;
         public object Image     { get; set; } = "MacroSecurity";
         public bool   ShowImage { get; set; } = true;
@@ -69,15 +60,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void SetImageDisp(IPictureDisp image) => Image = image;
         public void SetImageMso(string imageMso)  => Image = imageMso;
 
-        public void Invalidate() {
+        public override void Invalidate() {
             if (ViewModel != null) {
-                ViewModel.IsEnabled = IsEnabled;
-                ViewModel.IsVisible = IsVisible;
-
-                if (ViewModel is ISizeable sizeable)   sizeable.SetSizeablel(this);
+                if (ViewModel is ISizeable sizeable) sizeable.SetSizeablel(this);
                 if (ViewModel is IImageable imageable) imageable.SetImageable(this);
 
-                ViewModel.Invalidate();
+                base.Invalidate();
             }
         }
     }

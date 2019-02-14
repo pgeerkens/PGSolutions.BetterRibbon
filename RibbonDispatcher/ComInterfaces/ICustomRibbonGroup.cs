@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ICustomRibbonGroup : IRibbonGroup {
         /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
         [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
-        void SetShowInactive(bool showInactive);
+        new void SetShowInactive(bool showInactive);
 
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
@@ -67,5 +67,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [Description(".")]
         IRibbonCommon Attach();
+
+        /// <summary>.</summary>
+        [Description(".")]
+        void DetachControls();
     }
 }

@@ -178,7 +178,7 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => new RibbonGroupModel(id => CustomButtonsModel.GetControl<CustomButtonsViewModel>(id),
+        => new RibbonGroupModel(id => CustomButtonsModel.GetControl<RibbonGroupViewModel>(id),
                 strings, isEnabled, isVisible);
     }
 }

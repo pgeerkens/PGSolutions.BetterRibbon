@@ -17,33 +17,62 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
     [Guid(Guids.RibbonGroupModel)]
-    public sealed class RibbonGroupModel : IRibbonGroupModel, IBooleanSource {
-        public RibbonGroupModel(Func<string, ICustomRibbonGroup> factory,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
-            Factory = factory;
-            Strings = strings;
-        }
-
-        public IRibbonControlStrings Strings { get; }
-        public bool IsEnabled { get; set; } = true;
-        public bool IsVisible { get; set; } = true;
+    public sealed class RibbonGroupModel : RibbonControlModel<IRibbonGroup>, IRibbonGroupModel {
+        public RibbonGroupModel(Func<string, IRibbonGroup> funcViewModel,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+        : base(strings, isEnabled, isVisible)
+        => FuncViewModel   = funcViewModel;
 
         #region IActivatable implementation
-        /// <inheritdoc/>
-        public ICustomRibbonGroup ViewModel { get; set; }
-
-        private Func<string,ICustomRibbonGroup> Factory { get; }
+        private Func<string, IRibbonGroup> FuncViewModel { get; }
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
-            ViewModel = Factory(controlId);
-            ViewModel.Attach();
+            ViewModel = FuncViewModel(controlId);
+            ViewModel.Attach(()=>ShowInactive).SetLanguageStrings(Strings);
             Invalidate();
             return this;
         }
 
         /// <inheritdoc/>
-        public void Invalidate() {
+        public override void Invalidate() {
+            if (ViewModel != null) {
+                base.Invalidate();
+            }
+        }
+        #endregion
+
+        /// <inheritdoc/>
+        public bool ShowInactive { get; private set; }
+
+        public void SetShowInactive(bool showInactive) {
+            ShowInactive = showInactive;
+            ViewModel?.SetShowInactive(ShowInactive);
+            ViewModel?.Invalidate();
+        }
+    }
+
+    public abstract class RibbonControlModel<T> : IRibbonControlModel where T:IRibbonCommon {
+        protected RibbonControlModel(IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
+            Strings   = strings;
+            IsEnabled = isEnabled;
+            IsVisible = IsVisible;
+        }
+
+        /// <inheritdoc/>
+        public IRibbonControlStrings Strings   { get; protected set; }
+
+        /// <inheritdoc/>
+        public bool                  IsEnabled { get; set; } = true;
+
+        /// <inheritdoc/>
+        public bool                  IsVisible { get; set; } = true;
+
+        /// <inheritdoc/>
+        public T    ViewModel { get; set; }
+
+        /// <inheritdoc/>
+        public virtual void Invalidate() {
             if (ViewModel != null) {
                 ViewModel.IsEnabled = IsEnabled;
                 ViewModel.IsVisible = IsVisible;
@@ -51,22 +80,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 ViewModel.Invalidate();
             }
         }
-        #endregion
-
-        #region IToggleable implementation
-        public event ToggledEventHandler Toggled;
-
-        private void OnToggled(object sender, bool showInactive)
-        => Toggled?.Invoke(sender, ShowInactive = showInactive);
-
-        /// <inheritdoc/>
-        public bool ShowInactive {
-            get => _showInactive;
-            set { _showInactive = value; ViewModel?.SetShowInactive(value); ViewModel?.Invalidate(); }
-        }
-        bool _showInactive = false;
-
-        public bool Getter() => ShowInactive;
-        #endregion
     }
 }

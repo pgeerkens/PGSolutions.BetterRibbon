@@ -22,7 +22,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonCheckBox)]
-    public class RibbonCheckBox : RibbonCommon, IRibbonToggle, IActivatableControl<IRibbonCommon, bool>, IToggleable {
+    public class RibbonCheckBox : RibbonCommon, IRibbonToggle, IActivatableControl<IRibbonCommon, bool>,
+            IToggleable {
         internal RibbonCheckBox(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
         ) : base(itemId, strings, visible, enabled) { }
 

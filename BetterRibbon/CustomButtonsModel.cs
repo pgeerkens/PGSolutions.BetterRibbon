@@ -5,7 +5,7 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class CustomButtonsModel {
-        public CustomButtonsModel(CustomButtonsViewModel viewModel) {
+        public CustomButtonsModel(RibbonGroupViewModel viewModel) {
             ViewModel = viewModel;
 
             viewModel.Attach();
@@ -16,6 +16,6 @@ namespace PGSolutions.BetterRibbon {
         public TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon
         => ViewModel.GetControl<TControl>(controlId);
 
-        private CustomButtonsViewModel ViewModel { get; set; }
+        private RibbonGroupViewModel ViewModel { get; set; }
     }
 }

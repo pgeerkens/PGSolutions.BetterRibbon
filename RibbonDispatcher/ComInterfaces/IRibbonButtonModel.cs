@@ -13,16 +13,20 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButtonModel)]
-    public interface IRibbonButtonModel {
+    public interface IRibbonButtonModel : IRibbonControlModel {
+        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        new IRibbonControlStrings Strings {
+            [Description("Gets the {IRibbonControlStrings} for this control.")]
+            get;
+        }
+
         /// <summary>Gets or sets whether the control is enabled.</summary>
-        [Description(".")]
-        bool IsEnabled {
+        new bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
-        [Description(".")]
-        bool IsVisible {
+        new bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
@@ -45,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
-        void Invalidate();
+        new void Invalidate();
 
         /// <summary>.</summary>
         [Description(".")]
