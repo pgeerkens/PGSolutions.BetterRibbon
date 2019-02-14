@@ -15,17 +15,5 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 VK_LSHIFT.KeyUp();
             }
         }
-
-        /// <summary>.</summary>
-        /// <param name="this"></param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        internal static AccessWrapper NewAccessWrapper(this IApplication @this) {
-            try {
-                @this.DisplayAlerts = false;
-                return new AccessWrapper();
-            } finally {
-                @this.DisplayAlerts = true;
-            }
-        }
     }
 }

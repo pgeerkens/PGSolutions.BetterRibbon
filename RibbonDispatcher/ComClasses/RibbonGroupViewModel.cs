@@ -8,11 +8,8 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public class RibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon,bool> { //, IToggleable {
-        public RibbonGroupViewModel(IRibbonFactory factory, string itemId, bool isVisible = true, bool isEnabled = true)
-        : this (factory, itemId, null, isVisible, isEnabled) { }
-
-        internal RibbonGroupViewModel(IRibbonFactory factory, string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
+    public class RibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon,bool> {
+        public RibbonGroupViewModel(IRibbonFactory factory, string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
         : base(itemId, strings, visible, enabled) {
             Factory = factory;
             AdaptorControls = new Dictionary<string, IActivatable>();
@@ -24,6 +21,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected static string NoImage => "MacroSecurity";
 
         public RibbonGroupViewModel Add(IActivatable control) {
+            if (control == null) return null;
             AdaptorControls.Add(new KeyValuePair<string, IActivatable>(control.Id, control));
             return this;
         }
@@ -74,6 +72,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>>
         IRibbonCommon IActivatableControl<IRibbonCommon,bool>.Attach(Func<bool> getter) =>
             Attach(getter) as IRibbonCommon;
+
         /// <inheritdoc/>>
         void IActivatableControl<IRibbonCommon,bool>.Detach() => Detach();
         #endregion

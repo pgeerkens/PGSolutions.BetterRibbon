@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
         [Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
         [DispId(DispIds.SetLanguageStrings)]
-        new void SetLanguageStrings(IRibbonControlStrings languageStrings);
+        new void SetLanguageStrings(IRibbonControlStrings strings);
 
         /// <summary>.</summary>
         [Description(".")]

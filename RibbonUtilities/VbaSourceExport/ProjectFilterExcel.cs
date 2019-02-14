@@ -36,7 +36,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 (p, s) => ExtractProjectModules(p, CreateDirectory(path, destIsSrc)));
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        public void ExtractOpenProject(Workbook workbook, bool destIsSrc)
+        public static void ExtractOpenProject(_Workbook workbook, bool destIsSrc)
         => ExtractProjectModules(workbook?.VBProject, CreateDirectory(workbook?.FullName, destIsSrc));
     }
 

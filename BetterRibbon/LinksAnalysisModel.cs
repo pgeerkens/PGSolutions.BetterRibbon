@@ -4,6 +4,7 @@
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
@@ -31,13 +32,13 @@ namespace PGSolutions.BetterRibbon {
             DisplayAnalysis(parser);
         }
 
-        private void StatusAvailable(object sender, string message)
-        => Application.StatusBar = message;
+        private void StatusAvailable(object sender, EventArgs<string> e)
+        => Application.StatusBar = e.Value;
 
         /// <inheritdoc/>
-        private void DisplayAnalysis(ILinksAnalysis externalLinks)
+        private static void DisplayAnalysis(ILinksAnalysis externalLinks)
         => Application.ActiveWorkbook.WriteLinks(externalLinks);
 
-        private Application Application => Globals.ThisAddIn.Application;
+        private static Application Application => Globals.ThisAddIn.Application;
     }
 }

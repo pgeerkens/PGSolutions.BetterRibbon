@@ -40,7 +40,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public LinksParser(Range range) : base()
         => ExtendFromWorkbookList(range);
 
-        public event StatusAvailableEventHandler StatusAvailable;
+        public event EventHandler<EventArgs<string>> StatusAvailable;
 
         private void ExtendFromWorkbook(Workbook wb, string excludedName) {
             foreach(Worksheet ws in wb.Worksheets) {
@@ -99,7 +99,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                         }
 
                         excel.ScreenUpdating = true;
-                        StatusAvailable?.Invoke(this, $"Processing {path} ....");
+                        StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ...."));
                         excel.ScreenUpdating = false;
 
                         try {

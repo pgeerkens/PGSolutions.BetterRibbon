@@ -12,8 +12,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         SizeLarge = RibbonControlSize.RibbonControlSizeLarge
     }
 
-    public delegate void StatusAvailableEventHandler(object sender, string message);
-
     public class ClickedEventArgs<T> :EventArgs {
         public ClickedEventArgs(T value) => Value = value;
 
@@ -28,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public delegate void SelectedEventHandler(object sender, int selectedIndex);
 
-    public class EventArgs<T> :EventArgs where T : struct {
+    public class EventArgs<T> :EventArgs {
         public EventArgs(T value) : base() => Value = value;
 
         public T Value { get; }

@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -32,7 +33,9 @@ namespace PGSolutions.BetterRibbon {
         }
 
         public RibbonToggleModel DestIsSrc           { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public RibbonButtonModel ExportSelectedModel { get; }
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public RibbonButtonModel ExportCurrentModel  { get; }
 
         private void UseSrcFolderToggled(object sender, bool isPressed) {
@@ -60,8 +63,7 @@ namespace PGSolutions.BetterRibbon {
                 Application.Cursor = XlMousePointer.xlWait;
                 Application.StatusBar = "Exporting VBA Source ...";
 
-                new ProjectFilterExcel(new WorkbookProcessor(Application))
-                        .ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc.IsPressed);
+                ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc.IsPressed);
             }
             catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
             finally {
@@ -104,7 +106,7 @@ namespace PGSolutions.BetterRibbon {
             }
         }
 
-        private bool IsProjectModelTrusted() {
+        private static bool IsProjectModelTrusted() {
             try { return Application.VBE != null; }
             catch (COMException) { PleaseEnableTrust(); }
             catch (InvalidOperationException) { PleaseEnableTrust(); }
@@ -114,6 +116,6 @@ namespace PGSolutions.BetterRibbon {
         private static void PleaseEnableTrust()
         => "Please enable trust of the Project Object Model".MsgBoxShow("Project Model Not Trusted");
 
-        private Application Application => Globals.ThisAddIn.Application;
+        private static Application Application => Globals.ThisAddIn.Application;
     }
 }

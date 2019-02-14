@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using stdole;
@@ -16,6 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected RibbonGroupViewModel ViewModel { get; }
 
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonButtonModel GetModel<T>(string id, ClickedEventHandler handler, bool isEnabled, bool isVisible, string imageMso)
         where T : RibbonButton {
             var model = new RibbonButtonModel(ViewModel.Add(ViewModel.Factory.NewRibbonButton(id))
@@ -26,6 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonButtonModel GetModel<T>(string id, ClickedEventHandler handler, bool isEnabled, bool isVisible, IPictureDisp image)
         where T : RibbonButton {
             var model = new RibbonButtonModel(ViewModel.Add(ViewModel.Factory.NewRibbonButton(id))
@@ -36,6 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonToggleModel GetModel<T>(string id, ToggledEventHandler handler, bool isEnabled, bool isVisible, string imageMso)
         where T : RibbonCheckBox {
             var model = new RibbonToggleModel(ViewModel.Add(ViewModel.Factory.NewRibbonToggleMso(id, imageMso: imageMso))
@@ -46,7 +50,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-    protected RibbonToggleModel GetModel<T>(string id, ToggledEventHandler handler, bool isEnabled, bool isVisible, IPictureDisp image)
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        protected RibbonToggleModel GetModel<T>(string id, ToggledEventHandler handler, bool isEnabled, bool isVisible, IPictureDisp image)
         where T : RibbonCheckBox {
             var model = new RibbonToggleModel(ViewModel.Add(ViewModel.Factory.NewRibbonToggle(id, image: image))
                                 .GetControl<T>, GetStrings(id), isEnabled, isVisible);
@@ -56,7 +61,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-    protected RibbonDropDownModel GetModel<T>(string id, SelectedEventHandler handler, bool isEnabled, bool isVisible)
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        protected RibbonDropDownModel GetModel<T>(string id, SelectedEventHandler handler, bool isEnabled, bool isVisible)
         where T : RibbonDropDown {
             var model = new RibbonDropDownModel(ViewModel.Add(ViewModel.Factory.NewRibbonDropDown(id))
                                 .GetControl<T>, GetStrings(id), isEnabled, isVisible);

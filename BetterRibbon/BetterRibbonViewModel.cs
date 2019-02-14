@@ -77,12 +77,10 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         protected override string Id { get; }
 
-        private static IPictureDisp GetBrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
-
         /// <summary>.</summary>
         public static string MsgBoxTitle => Resources.ApplicationName;
 
-        private RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
+        private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
                 .Add(factory.NewRibbonToggle("CustomVbaToggle1"))
                 .Add(factory.NewRibbonToggle("CustomVbaToggle2"))

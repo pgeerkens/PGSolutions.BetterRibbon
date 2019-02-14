@@ -13,7 +13,7 @@ namespace PGSolutions.BetterRibbon {
 
     internal class DemonstrationViewModel : RibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
-        : base(factory, "CSharpDemoGroup", isVisible, isEnabled) {
+        : base(factory, "CSharpDemoGroup", factory.GetStrings("CSharpDemoGroup"), isVisible, isEnabled) {
             IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       imageMso:NoImage);
             CheckBox1      = factory.NewRibbonCheckBox("CheckBox1", false);
             CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);

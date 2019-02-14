@@ -9,7 +9,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected RibbonControlModel(IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
             Strings   = strings;
             IsEnabled = isEnabled;
-            IsVisible = IsVisible;
+            IsVisible = isVisible;
         }
 
         /// <inheritdoc/>
