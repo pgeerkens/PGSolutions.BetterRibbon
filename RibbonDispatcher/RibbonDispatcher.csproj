@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
     <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />

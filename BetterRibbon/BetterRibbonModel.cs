@@ -12,6 +12,8 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
+using BetterRibbon.Properties;
+using PGSolutions.RibbonDispatcher.Utilities;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -50,7 +52,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void OnViewModelInitialized() {
-            BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel);
+            BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel, BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
                     new List<IVbaSourceExportViewModel> {
@@ -131,6 +133,8 @@ namespace PGSolutions.BetterRibbon {
             ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
             return ctrl;
         }
+
+        private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         /// <inheritdoc/>
         public ISelectableItem NewSelectableItem(string controlID, string label) {

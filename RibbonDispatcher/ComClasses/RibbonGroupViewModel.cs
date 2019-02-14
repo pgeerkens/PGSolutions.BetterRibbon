@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Add(this);
         }
 
-        protected IRibbonFactory Factory { get; }
+        public IRibbonFactory Factory { get; }
 
         protected static string NoImage => "MacroSecurity";
 

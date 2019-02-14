@@ -35,8 +35,7 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
             Id = "TabPGSolutions";
 
-            BrandingViewModel = RibbonFactory.NewRibbonGroup("BrandingGroup")
-                .Add(RibbonFactory.NewRibbonButton("BrandingButton", image:GetBrandingIcon));
+            BrandingViewModel = RibbonFactory.NewRibbonGroup("BrandingGroup");
 
             LinksAnalysisViewModel = RibbonFactory.Add(new LinksAnalysisViewModel(RibbonFactory));
             VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));

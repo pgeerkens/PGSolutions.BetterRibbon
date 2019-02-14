@@ -7,27 +7,28 @@ using System.Text;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
+using stdole;
 
 namespace PGSolutions.BetterRibbon {
-    internal sealed class BrandingModel {
-        public BrandingModel(RibbonGroupViewModel viewModel) {
-            ViewModel = viewModel;
-            ViewModel.GetControl<RibbonButton>("BrandingButton").Clicked += ButtonClicked;
-
+    internal sealed class BrandingModel : AbstractRibbonGroupModel {
+        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image) : base(viewModel) {
             ViewModel.Attach();
+
+            BrandingButtonModel = GetModel<RibbonButton>("BrandingButton", ButtonClicked, true, true, image);
+
+            Invalidate();
         }
 
-        public void Invalidate() => ViewModel.Invalidate();
-
-        private RibbonGroupViewModel ViewModel { get; }
-        private RibbonButton BrandingButton => ViewModel.GetControl<RibbonButton>("BrandingButton");
+        private RibbonButtonModel BrandingButtonModel { get; }
 
         private void ButtonClicked(object sender) => new StringBuilder()
-            .Append($"PGSolutions Better Ribbon\n\n")
-            .Append($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}\n")
-            .Append($"Ribbon Utilities V {UtilitiesVersion.Format2()}\n")
-            .Append($"Ribbon Dispatcher V {DispatcherVersion.Format2()}\n\n")
-            .Append($"{BrandingButton.SuperTip}")
+            .AppendLine($"PGSolutions Better Ribbon")
+            .AppendLine()
+            .AppendLine($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}")
+            .AppendLine($"Ribbon Utilities V {UtilitiesVersion.Format2()}")
+            .AppendLine($"Ribbon Dispatcher V {DispatcherVersion.Format2()}")
+            .AppendLine()
+            .AppendLine($"{BrandingButtonModel.ViewModel.SuperTip}")
             .ToString().MsgBoxShow();
 
         static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
