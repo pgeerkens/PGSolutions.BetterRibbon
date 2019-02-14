@@ -9,10 +9,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public sealed class LinksAnalysisModel {
         public LinksAnalysisModel(ILinksAnalysisViewModel viewModel) {
             ViewModel   = viewModel;
+            ViewModel.Attach();
+
             ViewModel.AnalyzeCurrentClicked  += OnAnalyzeCurrentClicked;
             ViewModel.AnalyzeSelectedClicked += OnAnalyzeSelectedClicked;
-
-            ViewModel.Attach();
         }
 
         public void Invalidate() => ViewModel.Invalidate();

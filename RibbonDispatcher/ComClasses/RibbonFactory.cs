@@ -88,10 +88,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public T Add<T>(T ctrl) where T:RibbonCommon {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
-            _clickables.AddNotNull(ctrl.Id, ctrl as IClickable);
-            _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeable);
+            _clickables .AddNotNull(ctrl.Id, ctrl as IClickable);
+            _sizeables  .AddNotNull(ctrl.Id, ctrl as ISizeable);
             _selectables.AddNotNull(ctrl.Id, ctrl as ISelectable);
-            _imageables.AddNotNull(ctrl.Id, ctrl as IImageable);
+            _imageables. AddNotNull(ctrl.Id, ctrl as IImageable);
             _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleable);
 
             ctrl.Changed += OnChanged;
@@ -103,7 +103,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonGroupViewModel NewRibbonGroup(string itemId, bool visible = true, bool enabled = true)
-            => Add(new RibbonGroupViewModel(itemId, GetStrings(itemId), visible, enabled));
+            => Add(new RibbonGroupViewModel(this, itemId, GetStrings(itemId), visible, enabled));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]

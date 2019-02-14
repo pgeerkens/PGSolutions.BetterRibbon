@@ -10,8 +10,6 @@ using stdole;
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.Utilities;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
-using PGSolutions.RibbonUtilities.VbaSourceExport;
 using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
@@ -35,23 +33,27 @@ namespace PGSolutions.BetterRibbon {
         const string _assemblyName  = "BetterRibbon";
 
         internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
-            Id = "TabPGSolutions";    
+            Id = "TabPGSolutions";
 
-            BrandingViewModel      = RibbonFactory.Add(new BrandingViewModel(RibbonFactory, GetBrandingIcon));
+            BrandingViewModel = RibbonFactory.NewRibbonGroup("BrandingGroup")
+                .Add(RibbonFactory.NewRibbonButton("BrandingButton", image:GetBrandingIcon));
+
             LinksAnalysisViewModel = RibbonFactory.Add(new LinksAnalysisViewModel(RibbonFactory));
             VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));
             VbaExportViewModel_MS  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "PG"));
-            //CustomButtonsViewModel = RibbonFactory.Add(new CustomButtonsViewModel(RibbonFactory));
+
             CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
-        internal BrandingViewModel        BrandingViewModel      { get; private set; }
+        internal RibbonGroupViewModel     BrandingViewModel      { get; private set; }
+        internal RibbonGroupViewModel     CustomButtonsViewModel { get; private set; }
+
         internal LinksAnalysisViewModel   LinksAnalysisViewModel { get; private set; }
         internal VbaSourceExportViewModel VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel VbaExportViewModel_PG  { get; private set; }
+
         internal DemonstrationViewModel   DemonstrationViewModel { get; private set; }
-        internal RibbonGroupViewModel     CustomButtonsViewModel { get; private set; }
 
         internal void DetachControls() => CustomButtonsViewModel?.DetachControls();
 
@@ -79,27 +81,27 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         protected override string Id { get; }
 
-        private static IPictureDisp GetBrandingIcon() => Resources.PGeerkens.ImageToPictureDisp();
+        private static IPictureDisp GetBrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         /// <summary>.</summary>
         public static string MsgBoxTitle => Resources.ApplicationName;
 
         private RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
-        => new RibbonGroupViewModel(factory, "CustomizableGroup")
-            .Add(factory.NewRibbonToggle("CustomVbaToggle1"))
-            .Add(factory.NewRibbonToggle("CustomVbaToggle2"))
-            .Add(factory.NewRibbonToggle("CustomVbaToggle3"))
+        => factory.NewRibbonGroup("CustomizableGroup")
+                .Add(factory.NewRibbonToggle("CustomVbaToggle1"))
+                .Add(factory.NewRibbonToggle("CustomVbaToggle2"))
+                .Add(factory.NewRibbonToggle("CustomVbaToggle3"))
 
-            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox1"))
-            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox2"))
-            .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox3"))
+                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox1"))
+                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox2"))
+                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox3"))
 
-            .Add(factory.NewRibbonDropDown("CustomVbaDropDown1"))
-            .Add(factory.NewRibbonDropDown("CustomVbaDropDown2"))
-            .Add(factory.NewRibbonDropDown("CustomVbaDropDown3"))
+                .Add(factory.NewRibbonDropDown("CustomVbaDropDown1"))
+                .Add(factory.NewRibbonDropDown("CustomVbaDropDown2"))
+                .Add(factory.NewRibbonDropDown("CustomVbaDropDown3"))
 
-            .Add(factory.NewRibbonButtonMso("CustomizableButton1"))
-            .Add(factory.NewRibbonButtonMso("CustomizableButton2"))
-            .Add(factory.NewRibbonButtonMso("CustomizableButton3"));
+                .Add(factory.NewRibbonButtonMso("CustomizableButton1"))
+                .Add(factory.NewRibbonButtonMso("CustomizableButton2"))
+                .Add(factory.NewRibbonButtonMso("CustomizableButton3"));
     }
 }

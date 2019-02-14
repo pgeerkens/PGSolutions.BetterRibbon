@@ -201,13 +201,11 @@
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="CustomButtonsModel.cs" />
-    <Compile Include="CustomButtonsViewModel.cs" />
     <Compile Include="DemonstrationModel.cs" />
     <Compile Include="ExcelLinksExtensions.cs" />
     <Compile Include="IBetterRibbon.cs" />
     <Compile Include="LinksAnalysisViewModel.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="BrandingViewModel.cs" />
     <Compile Include="DemonstrationViewModel.cs" />
     <Compile Include="LocalResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

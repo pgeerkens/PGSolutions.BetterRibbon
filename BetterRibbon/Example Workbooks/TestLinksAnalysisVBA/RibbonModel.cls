@@ -31,6 +31,7 @@ End Sub
 
 Friend Sub Activate()
     If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
+    If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive False
     If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
     If Not Button1 Is Nothing Then Button1.Invalidate
 End Sub

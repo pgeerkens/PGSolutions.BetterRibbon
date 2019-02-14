@@ -10,14 +10,14 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class RibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon,bool> { //, IToggleable {
         public RibbonGroupViewModel(IRibbonFactory factory, string itemId, bool isVisible = true, bool isEnabled = true)
-        : base (itemId, null, isVisible, isEnabled) {
+        : this (factory, itemId, null, isVisible, isEnabled) { }
+
+        internal RibbonGroupViewModel(IRibbonFactory factory, string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
+        : base(itemId, strings, visible, enabled) {
             Factory = factory;
             AdaptorControls = new Dictionary<string, IActivatable>();
             Add(this);
         }
-
-        internal RibbonGroupViewModel(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
-        : base(itemId, strings, visible, enabled) { }
 
         protected IRibbonFactory Factory { get; }
 
