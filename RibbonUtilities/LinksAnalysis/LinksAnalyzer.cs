@@ -9,7 +9,6 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    using Range = Microsoft.Office.Interop.Excel.Range;
     using Workbook = Microsoft.Office.Interop.Excel.Workbook;
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
@@ -27,10 +26,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <inheritdoc/>
         public ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula)
              => new LinksLexer(cellRef, formula);
-
-        /// <inheritdoc/>
-        public ILinksAnalysis NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range)
-            => new LinksParser(viewModel, range);
 
         /// <inheritdoc/>
         public ILinksAnalysis NewExternalLinksWB(Workbook wb, string excludedName)

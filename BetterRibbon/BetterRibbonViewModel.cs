@@ -35,9 +35,11 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
             Id = "TabPGSolutions";
 
-            BrandingViewModel = RibbonFactory.NewRibbonGroup("BrandingGroup");
+            BrandingViewModel      = RibbonFactory.NewRibbonGroup("BrandingGroup");
+            LinksAnalysisViewModel = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
+        //    VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
 
-            LinksAnalysisViewModel = RibbonFactory.Add(new LinksAnalysisViewModel(RibbonFactory));
+
             VbaExportViewModel_PG  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "MS"));
             VbaExportViewModel_MS  = RibbonFactory.Add(new VbaSourceExportViewModel(RibbonFactory, "PG"));
 
@@ -45,10 +47,10 @@ namespace PGSolutions.BetterRibbon {
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
-        internal RibbonGroupViewModel     BrandingViewModel      { get; private set; }
-        internal RibbonGroupViewModel     CustomButtonsViewModel { get; private set; }
+        internal RibbonGroupViewModel BrandingViewModel      { get; private set; }
+        internal RibbonGroupViewModel CustomButtonsViewModel { get; private set; }
+        internal RibbonGroupViewModel LinksAnalysisViewModel { get; private set; }
 
-        internal LinksAnalysisViewModel   LinksAnalysisViewModel { get; private set; }
         internal VbaSourceExportViewModel VbaExportViewModel_MS  { get; private set; }
         internal VbaSourceExportViewModel VbaExportViewModel_PG  { get; private set; }
 

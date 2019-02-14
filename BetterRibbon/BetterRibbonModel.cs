@@ -11,7 +11,6 @@ using stdole;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 using BetterRibbon.Properties;
 using PGSolutions.RibbonDispatcher.Utilities;
 
@@ -54,6 +53,7 @@ namespace PGSolutions.BetterRibbon {
         private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel, BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
+
             VbaSourceExportModel = new VbaSourceExportModel(
                     new List<IVbaSourceExportViewModel> {
                         ViewModel?.VbaExportViewModel_MS,

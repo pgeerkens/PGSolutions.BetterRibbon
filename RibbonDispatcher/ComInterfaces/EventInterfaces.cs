@@ -12,6 +12,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         SizeLarge = RibbonControlSize.RibbonControlSizeLarge
     }
 
+    public delegate void StatusAvailableEventHandler(object sender, string message);
+
+    public class ClickedEventArgs<T> :EventArgs {
+        public ClickedEventArgs(T value) => Value = value;
+
+        public T Value { get; }
+    }
+
     /// <summary>TODO</summary>
     [CLSCompliant( true )]
     public delegate void ClickedEventHandler(object sender);

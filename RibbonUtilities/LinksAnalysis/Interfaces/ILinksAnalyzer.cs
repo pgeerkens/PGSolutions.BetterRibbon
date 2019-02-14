@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    using Range = Microsoft.Office.Interop.Excel.Range;
     using Workbook = Microsoft.Office.Interop.Excel.Workbook;
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
@@ -25,11 +24,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         [Description( "Attaches an {IIntegerSource} to the specified DropDown control." )]
         [DispId(1)]
         ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula);
-
-        /// <summary>.</summary>
-        /// <param name="excel"></param>
-        /// <param name="nameList"></param>
-        ILinksAnalysis NewExternalLinks(ILinksAnalysisViewModel viewModel, Range range);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>

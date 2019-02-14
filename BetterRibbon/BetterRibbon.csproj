@@ -198,13 +198,14 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="AbstractRibbonGroupModel.cs" />
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="CustomButtonsModel.cs" />
     <Compile Include="DemonstrationModel.cs" />
     <Compile Include="ExcelLinksExtensions.cs" />
     <Compile Include="IBetterRibbon.cs" />
-    <Compile Include="LinksAnalysisViewModel.cs" />
+    <Compile Include="LinksAnalysisModel.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DemonstrationViewModel.cs" />
     <Compile Include="LocalResourceManager.cs" />

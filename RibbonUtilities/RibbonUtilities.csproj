@@ -98,18 +98,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinksAnalysis\AbstractLinksAnalysisViewModel.cs" />
+    <Compile Include="LinksAnalysis\LinksParser.cs" />
     <Compile Include="VbaSourceExport\AbstractVbaSourceExportViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />
     <Compile Include="LinksAnalysis\ExcelExtensions.cs" />
     <Compile Include="LinksAnalysis\Extensions.cs" />
     <Compile Include="LinksAnalysis\ExternalFiles.cs" />
-    <Compile Include="LinksAnalysis\ExternaLinks.cs" />
     <Compile Include="LinksAnalysis\ExternalLinks.cs" />
     <Compile Include="LinksAnalysis\ExternalRef.cs" />
     <Compile Include="LinksAnalysis\FilesDictionary.cs" />
-    <Compile Include="LinksAnalysis\Interfaces\ILinksAnalysisViewModel.cs" />
     <Compile Include="LinksAnalysis\Interfaces\EToken.cs" />
     <Compile Include="LinksAnalysis\Interfaces\Guids.cs" />
     <Compile Include="LinksAnalysis\Interfaces\Interfaces.cs" />
@@ -117,7 +115,6 @@
     <Compile Include="LinksAnalysis\Interfaces\ILinksAnalyzer.cs" />
     <Compile Include="LinksAnalysis\Interfaces\IParseError.cs" />
     <Compile Include="LinksAnalysis\Interfaces\IToken.cs" />
-    <Compile Include="LinksAnalysis\LinksAnalysisModel.cs" />
     <Compile Include="LinksAnalysis\LinksAnalyzer.cs" />
     <Compile Include="LinksAnalysis\LinksLexer.cs" />
     <Compile Include="LinksAnalysis\ParseError.cs" />

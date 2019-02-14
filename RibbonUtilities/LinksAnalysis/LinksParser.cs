@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using Core = Microsoft.Office.Core;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Excel = Microsoft.Office.Interop.Excel;
@@ -19,9 +20,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>TODO</summary>
     [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
+    [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
-    internal sealed class LinksParser : AbstractLinksParser {
+    public sealed class LinksParser : AbstractLinksParser {
         /// <summary>Returns all the external links found in the supplied formula.</summary>
         public LinksParser(ISourceCellRef cellRef, string formula) : base() 
         => ParseFormula(cellRef, formula);
@@ -35,8 +37,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         => ExtendFromWorkbook(wb, excludedName);
 
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public LinksParser(ILinksAnalysisViewModel viewModel, Range range) : base()
-        => ExtendFromWorkbookList(viewModel, range);
+        public LinksParser(Range range) : base()
+        => ExtendFromWorkbookList(range);
+
+        public event StatusAvailableEventHandler StatusAvailable;
 
         private void ExtendFromWorkbook(Workbook wb, string excludedName) {
             foreach(Worksheet ws in wb.Worksheets) {
@@ -76,8 +80,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
         }
 
-        private void ExtendFromWorkbookList(ILinksAnalysisViewModel viewModel, Range range) {
-            if (viewModel==null) throw new ArgumentNullException(nameof(viewModel));
+        private void ExtendFromWorkbookList(Range range) {
             if (range==null) return;
 
             var nameList = range.GetNameList();
@@ -96,7 +99,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                         }
 
                         excel.ScreenUpdating = true;
-                        viewModel.StatusBar = $"Opening {path}";
+                        StatusAvailable?.Invoke(this, $"Processing {path} ....");
                         excel.ScreenUpdating = false;
 
                         try {

@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
     [Guid(Guids.AbstractLinksParser)]
-    internal abstract class AbstractLinksParser : ILinksAnalysis {
+    public abstract class AbstractLinksParser : ILinksAnalysis {
         protected AbstractLinksParser() {
             _errors = new ParseErrors();
             _files  = new FilesDictionary();
