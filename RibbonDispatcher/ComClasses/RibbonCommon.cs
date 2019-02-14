@@ -29,25 +29,25 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal event ChangedEventHandler Changed;
 
         /// <inheritdoc/>
-        public         string Id          { get; }
-        /// <inheritdoc/>
-        [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        public virtual string Description => Strings?.Description ?? $"{Id} Description";
+        public         string Id        { get; }
         /// <inheritdoc/>
         [Description("Returns the KeyTip string for this control.")]
-        public virtual string KeyTip      => Strings?.KeyTip ?? "";
+        public virtual string KeyTip    => Strings?.KeyTip ?? "";
         /// <inheritdoc/>
         [Description("Returns the Label string for this control.")]
-        public virtual string Label       => Strings?.Label ?? Id;
+        public virtual string Label     => Strings?.Label ?? Id;
         /// <inheritdoc/>
         [Description("Returns the screenTip string for this control.")]
-        public virtual string ScreenTip   => Strings?.ScreenTip ?? $"{Id} ScreenTip";
+        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
-        public virtual string SuperTip    => Strings?.SuperTip ?? $"{Id} SuperTip";
+        public virtual string SuperTip  => Strings?.SuperTip ?? $"{Id} SuperTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
         public virtual string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
+        /// <inheritdoc/>
+        [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
+        public virtual string Description => Strings?.Description ?? $"{Id} Description";
 
         /// <inheritdoc/>
         protected IRibbonControlStrings Strings { get; private set; }
@@ -62,6 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public virtual T Attach<T>() where T : RibbonCommon {
             IsAttached = true;
+            Invalidate();
             return this as T;
         }
 

@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonGroupModel)]
-    public interface IRibbonGroupModel : IRibbonControlModel {
+    public interface IRibbonGroupModel : IRibbonControlSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
         new IRibbonControlStrings Strings {
             [Description("Gets the {IRibbonControlStrings} for this control.")]
@@ -44,33 +44,19 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
-        new void Invalidate();
-
-        ///// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
-        //[Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
-        //[DispId(DispIds.SetLanguageStrings)]
-        //void SetLanguageStrings(IRibbonControlStrings languageStrings);
+        void Invalidate();
     }
 
-    public interface IRibbonControlModel {
+    public interface IRibbonControlSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
-        IRibbonControlStrings Strings   {
-            [Description("Gets the {IRibbonControlStrings} for this control.")]
-            get;
-        }
+        IRibbonControlStrings Strings { get; }
 
-         /// <summary>Gets or sets whether the control is enabled.</summary>
-        bool IsEnabled {
-            [Description("Gets or sets whether the control is enabled.")]
-            get; set;
-        }
+        /// <summary>Gets whether the control is enabled.</summary>
+        bool IsEnabled { get; }
 
-        /// <summary>Gets or sets whether the control is visible.</summary>
-        bool IsVisible {
-            [Description("Gets or sets whether the control is visible.")]
-            get; set;
-        }
+        /// <summary>Gets whether the control is visible.</summary>
+        bool IsVisible { get; }
 
-        void Invalidate();
+        //void Invalidate();
     }
 }

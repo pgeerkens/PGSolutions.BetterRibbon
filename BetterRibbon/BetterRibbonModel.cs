@@ -52,9 +52,9 @@ namespace PGSolutions.BetterRibbon {
             BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel, BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
-                    new List<KeyValuePair<string,RibbonGroupViewModel>>() {
-                        new KeyValuePair<string,RibbonGroupViewModel>("MS",ViewModel?.VbaExportViewModel_MS),
-                        new KeyValuePair<string,RibbonGroupViewModel>("PG",ViewModel?.VbaExportViewModel_PG)
+                    new List<VbaSourceExportGroupModel>() {
+                        new VbaSourceExportGroupModel(ViewModel?.VbaExportViewModel_MS,"MS"),
+                        new VbaSourceExportGroupModel(ViewModel?.VbaExportViewModel_PG,"PG")
                     });
 
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);

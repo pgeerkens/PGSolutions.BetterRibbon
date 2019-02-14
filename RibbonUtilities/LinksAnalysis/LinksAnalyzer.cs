@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
@@ -28,8 +29,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
              => new LinksLexer(cellRef, formula);
 
         /// <inheritdoc/>
-        public ILinksAnalysis NewExternalLinksWB(Workbook wb, string excludedName)
-            => new LinksParser(wb, excludedName);
+        public ILinksAnalysis NewExternalLinksWB(Workbook wb, IList<string> excludedNames)
+            => new LinksParser(wb, excludedNames);
 
         /// <inheritdoc/>
         public ILinksAnalysis NewExternalLinksWS(Worksheet ws)

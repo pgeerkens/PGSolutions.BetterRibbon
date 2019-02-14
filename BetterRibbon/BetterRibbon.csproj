@@ -198,7 +198,6 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="AbstractRibbonGroupModel.cs" />
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="CustomButtonsModel.cs" />
@@ -215,6 +214,7 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="VbaSourceExportGroupModel.cs" />
     <Compile Include="VbaSourceExportModel.cs" />
     <Content Include="Example Workbooks\Database1.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

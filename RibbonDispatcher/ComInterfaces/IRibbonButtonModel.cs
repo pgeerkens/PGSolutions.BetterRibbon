@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButtonModel)]
-    public interface IRibbonButtonModel : IRibbonControlModel {
+    public interface IRibbonButtonModel : IRibbonControlSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
         new IRibbonControlStrings Strings {
             [Description("Gets the {IRibbonControlStrings} for this control.")]

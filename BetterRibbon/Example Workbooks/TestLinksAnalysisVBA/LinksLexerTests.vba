@@ -19,6 +19,7 @@ Public Sub TestAll()
         LinksLexerTests.StringLiteralTest
         LinksLexerTests.ComplexRefTest
         LinksLexerTests.OpenExternRefTest
+        LinksLexerTests.FakeExternRefTest
     
         LinksLexerTests.SimpleParseLinkTest
         LinksLexerTests.ComplexParseLinkTest
@@ -223,6 +224,28 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, MethodName)
     Resume
 End Sub
 
+Public Sub FakeExternRefTest()
+    Const MethodName As String = mModuleName & "FakeExternRefTest"
+    
+    On Error GoTo EH
+    Const Formula As String = "='Control Strings'!$A$1:$G$13 "
+    Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
+        ScanCheck MethodName, Lexer, EToken_Equals, "="
+        ScanCheck MethodName, Lexer, EToken_ExternRef, "'Control Strings'"
+        ScanCheck MethodName, Lexer, EToken_Bang, "!"
+        ScanCheck MethodName, Lexer, EToken_Identifier, "$A$1:$G$13"
+        ScanCheckEOT MethodName, Lexer
+    
+    MsgBox "Successfully scanned: " & vbNewLine & Formula, vbOKOnly, MethodName
+XT: Exit Sub
+EH: Select Case MsgBoxAbortRetryIgnore(Err, mModuleName & "SimpleOperatorTest")
+        Case vbRetry:  Resume
+        Case vbIgnore: Resume Next
+    End Select
+    Resume XT
+    Resume
+End Sub
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Sub SimpleParseLinkTest()
     Const MethodName As String = mModuleName & "SimpleParseLinkTest"
     

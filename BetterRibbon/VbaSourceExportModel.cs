@@ -2,7 +2,6 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -10,43 +9,48 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
+    using Models = List<VbaSourceExportGroupModel>;
 
-    internal sealed class VbaSourceExportModel : AbstractRibbonGroupModel2{
-        private static string UseSrcFolderToggleID    = "UseSrcFolderToggle";
-        private static string SelectedProjectButtonID = "SelectedProjectButton";
-        private static string CurrentProjectButtonID  = "CurrentProjectButton";
+    internal sealed class VbaSourceExportModel {
 
-        public VbaSourceExportModel(List<KeyValuePair<string,RibbonGroupViewModel>> viewModels)
-        : base(viewModels) {
-            DestIsSrc = GetModel<RibbonCheckBox>(UseSrcFolderToggleID, UseSrcFolderToggled, true, true, false.ToggleImage());
-            ExportSelectedModel = GetModel<RibbonButton>(SelectedProjectButtonID, ExportSelected, true, true, "SaveAll");
-            ExportCurrentModel  = GetModel<RibbonButton>(CurrentProjectButtonID, ExportCurrent, true, true, "FileSaveAs");
+        public VbaSourceExportModel(Models models) {
+            Models    = models;
+            DestIsSrc = false;
 
-            DestIsSrc.IsPressed = false;
+            Models.ForEach(model => {
+                model.UseSrcFolderToggled   += UseSrcFolderToggled;
+                model.ExportSelectedClicked += ExportSelected;
+                model.ExportCurrentClicked  += ExportCurrent;
+            });
 
             Invalidate();
         }
 
-        public RibbonToggleModel DestIsSrc           { get; }
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public RibbonButtonModel ExportSelectedModel { get; }
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public RibbonButtonModel ExportCurrentModel  { get; }
+        private bool   DestIsSrc { get; set; }
 
-        private void UseSrcFolderToggled(object sender, bool isPressed) {
-            DestIsSrc.IsPressed = isPressed;
-            foreach (var kvp in ViewModels) {
-                kvp.Value.GetControl<RibbonButton>($"{SelectedProjectButtonID}{kvp.Key}")
-                            .IsEnabled = ! DestIsSrc.IsPressed;
-                kvp.Value.GetControl<RibbonToggleButton>($"{UseSrcFolderToggleID}{kvp.Key}")
-                            .SetImageMso(DestIsSrc.IsPressed.ToggleImage());
-                kvp.Value.Invalidate();
-            }
+        private Models Models    { get; }
+
+        private void Invalidate()
+        => Models.ForEach(model => {
+            model.DestIsSrc.IsPressed = DestIsSrc;
+            model.DestIsSrc.SetImageMso(DestIsSrc.ToggleImage());
+            model.ExportSelected.IsEnabled = ! DestIsSrc;
+            model.DestIsSrc.IsLarge      = model.Suffix == "PG";
+            model.ExportSelected.IsLarge = model.Suffix == "PG";
+            model.ExportCurrent.IsLarge  = model.Suffix == "PG";
+
+            model.Invalidate();
+        });
+
+        private void UseSrcFolderToggled(object sender, EventArgs<bool> e) {
+            DestIsSrc = e.Value;
+
+            Invalidate();
         }
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
@@ -63,7 +67,7 @@ namespace PGSolutions.BetterRibbon {
                 Application.Cursor = XlMousePointer.xlWait;
                 Application.StatusBar = "Exporting VBA Source ...";
 
-                ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc.IsPressed);
+                ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc);
             }
             catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
             finally {
@@ -97,7 +101,7 @@ namespace PGSolutions.BetterRibbon {
                     fd.Filters.Add(item.Description, item.Extensions);
                 }
                 if (fd.Show() != 0) {
-                    list[fd.FilterIndex-1].ExtractProjects(fd.SelectedItems, DestIsSrc.IsPressed);
+                    list[fd.FilterIndex-1].ExtractProjects(fd.SelectedItems, DestIsSrc);
                 }
             }
             catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }

@@ -38,8 +38,8 @@ namespace PGSolutions.BetterRibbon {
             LinksAnalysisViewModel = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
             VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("VbaExportGroupPG");
             VbaExportViewModel_MS  = RibbonFactory.NewRibbonGroup("VbaExportGroupMS");
-
             CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
+
             DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 

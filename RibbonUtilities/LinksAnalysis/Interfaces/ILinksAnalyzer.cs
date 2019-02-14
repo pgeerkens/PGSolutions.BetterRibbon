@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -28,7 +29,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        ILinksAnalysis NewExternalLinksWB(Workbook wb, string excludedName);
+        ILinksAnalysis NewExternalLinksWB(Workbook wb, IList<string> excludedNames);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>

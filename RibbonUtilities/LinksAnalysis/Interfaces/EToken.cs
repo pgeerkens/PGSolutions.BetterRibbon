@@ -28,6 +28,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
         OpenExternRef,
         OpenBrace,
         CloseBrace,
+        Apostrophe,
         ErrorTag
     }
 
@@ -51,6 +52,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
                 case EToken.OpenExternRef:  return "<OpenExternRef>";
                 case EToken.OpenBrace:      return "<OpenBrace>";
                 case EToken.CloseBrace:     return "<CloseBrace>";
+                case EToken.Apostrophe:     return "<Apostrophe>";
+
                 case EToken.ErrorTag:       return "<ErrorTag>";
                 default:                    return "<Unknown>";
             }

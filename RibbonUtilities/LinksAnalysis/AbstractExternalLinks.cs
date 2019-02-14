@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
@@ -92,7 +93,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         private bool ParseExternRef(string path, string cell, string formula, ISourceCellRef source) {
-            var indexBra  = path.IndexOf('[',       0); if (indexBra < 0) return false;
+            var indexBra  = path.IndexOf('[',       0); if (indexBra < 0) return IsValidSheetName(path);
             var indexKet  = path.IndexOf(']',indexBra); if (indexKet < 0) return false;
             return Add(new ExternalRef(formula,source,
                        new SourceCellRef(
@@ -104,7 +105,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         private bool ParseOpenExternRef(string path, string cell, string formula, ISourceCellRef source) {
-            var indexKet  = path.IndexOf(']',0); if (indexKet < 0) return false;
+            var indexKet  = path.IndexOf(']',0); if (indexKet < 0) return IsValidSheetName(path);
             return Add(new ExternalRef(formula,source,
                        new SourceCellRef(
                            "open workbook w/o a path",
@@ -112,6 +113,14 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                            path.Substring(indexKet+1, path.Length - indexKet - 1), // omit ']' trailing
                            cell
             ) ) );
+        }
+
+        private bool IsValidSheetName(string path) {
+            var invalid = new List<char>{':', '\\', '/', '?', '*', '[', ']' };
+            foreach (var c in invalid) if (path.IndexOf(c) >= 0) return false;
+
+            if (path.IndexOf('\'') == 0  &&  path.Substring(1).IndexOf('\'') == path.Length-2) return true;
+            return path.IndexOf('\'') < 0;
         }
     }
 }

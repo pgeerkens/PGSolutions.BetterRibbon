@@ -12,7 +12,7 @@ namespace PGSolutions.BetterRibbon {
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : base(viewModel) {
             AnalyzeCurrentModel  = GetModel<RibbonButton>("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
-            AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked, true, true, "EditLinks");
+            AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
 
             Invalidate();
         }
@@ -21,15 +21,17 @@ namespace PGSolutions.BetterRibbon {
         public RibbonButtonModel AnalyzeSelectedModel { get; }
 
         private void AnalyzeCurrentClicked(object sender) {
-            var parser = new LinksParser(Application.ActiveWorkbook, "");
+            var parser = new LinksParser(Application.ActiveWorkbook);
             parser.StatusAvailable += StatusAvailable;
             DisplayAnalysis(parser);
+            parser.StatusAvailable -= StatusAvailable;
         }
 
         private void AnalyzeSelectedClicked(object sender) {
             var parser = new LinksParser(Application.Selection);
             parser.StatusAvailable += StatusAvailable;
             DisplayAnalysis(parser);
+            parser.StatusAvailable -= StatusAvailable;
         }
 
         private void StatusAvailable(object sender, EventArgs<string> e)

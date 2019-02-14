@@ -47,12 +47,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             base.Detach();
         }
 
-        public override void Invalidate() {
-            foreach (var ctrl in AdaptorControls) { if (ctrl.Value != this) ctrl.Value.Invalidate(); }
-
-            base.Invalidate();
-        }
-
         /// <inheritdoc/>>
         public bool ShowInactive => ShowInactiveGetter?.Invoke() ?? false;
 

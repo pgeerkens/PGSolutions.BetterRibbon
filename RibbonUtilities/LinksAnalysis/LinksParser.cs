@@ -4,12 +4,14 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using Core = Microsoft.Office.Core;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using System.Collections.Generic;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Excel = Microsoft.Office.Interop.Excel;
@@ -33,8 +35,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         => ExtendFromWorksheet(ws);
 
         /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
-        public LinksParser(Workbook wb, string excludedName) : base()
-        => ExtendFromWorkbook(wb, excludedName);
+        public LinksParser(Workbook wb) : this(wb, ExcludedSheetNames) { }
+
+        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
+        public LinksParser(Workbook wb, IList<string> excludedSheetNames) : base()
+        => ExtendFromWorkbook(wb, excludedSheetNames);
 
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
         public LinksParser(Range range) : base()
@@ -42,9 +47,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
-        private void ExtendFromWorkbook(Workbook wb, string excludedName) {
+        private void ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
             foreach(Worksheet ws in wb.Worksheets) {
-                if ( ! excludedName.Equals(ws.Name) ) { ExtendFromWorksheet(ws); }
+                if (excludedSheetNames.FirstOrDefault(s => s.Equals(ws.Name)) == null) {
+                    ExtendFromWorksheet(ws);
+                }
             }
 
             ExtendFromNamedRanges(wb);
@@ -107,7 +114,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                             if (wb == null) {
                                 AnalyzeClosedWorkbook(excel, item);
                             } else {
-                                ExtendFromWorkbook(wb, "");
+                                ExtendFromWorkbook(wb, ExcludedSheetNames);
                             }
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
@@ -125,11 +132,15 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             Workbook wb = null;
             try {
                 wb = excel.Workbooks.Open(path, UpdateLinks: false, ReadOnly: true, AddToMru: false);
-                ExtendFromWorkbook(wb, "");
+                ExtendFromWorkbook(wb, ExcludedSheetNames);
             }
             finally {
                 wb?.Close(SaveChanges: false);
             }
         }
+
+        static IList<string> ExcludedSheetNames = new List<string> {
+            "Links Errors", "Linked Files", "Links Analysis"
+        };
     }
 }
