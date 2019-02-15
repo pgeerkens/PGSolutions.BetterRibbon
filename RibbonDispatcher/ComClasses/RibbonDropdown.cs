@@ -30,7 +30,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Attach<RibbonDropDown>(source);
 
         public override void Detach() {
-            _items = new List<ISelectableItem>();
             SelectionMade = null;
             base.Detach();
         }
@@ -40,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>TODO</summary>
         public event SelectedEventHandler  SelectionMade;
 
-        private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
+        private IList<ISelectableItem>  _items  => Source?.Items ?? new List<ISelectableItem>();
 
         /// <inheritdoc/>
         public string   SelectedItemId => _items[SelectedItemIndex].Id;
@@ -54,11 +53,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Invalidate();
         }
 
-        /// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
-        public IRibbonDropDown AddItem(ISelectableItem SelectableItem) {
-            _items.Add(SelectableItem);
-            return this;
-        }
+        ///// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
+        //public IRibbonDropDown AddItem(ISelectableItem SelectableItem) {
+        //    _items.Add(SelectableItem);
+        //    Invalidate();
+        //    return this;
+        //}
 
         /// <inheritdoc/>
         public ISelectableItem this[int ItemIndex] => _items[ItemIndex];

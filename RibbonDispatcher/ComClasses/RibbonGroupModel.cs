@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonGroupModel)]
     public class RibbonGroupModel : RibbonControlModel<RibbonGroupViewModel>, IRibbonGroupModel,
                 IRibbonCommonSource {
-        public RibbonGroupModel(Func<string, RibbonGroupViewModel> funcViewModel,
+        public RibbonGroupModel(Func<string,RibbonGroupViewModel> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible,
                 IRibbonCommonSource groupMaster)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
+            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonGroupViewModel,IRibbonCommonSource>)
                       ?.Attach(this);
             if (ViewModel != null) {
                 ViewModel.Invalidate();

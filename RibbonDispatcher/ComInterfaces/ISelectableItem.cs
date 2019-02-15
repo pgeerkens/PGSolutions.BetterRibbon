@@ -26,9 +26,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
         [DispId(DispIds.ItemShowImage)]
-        bool     ShowImage  { get; set; }
+        bool     ShowImage  { get; }
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         [DispId(DispIds.ItemShowLabel)]
-        bool     ShowLabel  { get; set; }
+        bool     ShowLabel  { get; }
     }
 }

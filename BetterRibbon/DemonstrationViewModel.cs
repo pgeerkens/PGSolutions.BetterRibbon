@@ -19,9 +19,9 @@ namespace PGSolutions.BetterRibbon {
             CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);
             CheckBox3      = factory.NewRibbonCheckBox("CheckBox3", false);
             DisplayOptions = factory.NewRibbonDropDown("DropDown1");
-            DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
-                          .AddItem(factory.NewSelectableItem("ImageOnly"))
-                          .AddItem(factory.NewSelectableItem("LabelAndImage"));
+            //DisplayOptions.AddItem(factory.NewSelectableItem("LabelOnly"))
+            //              .AddItem(factory.NewSelectableItem("ImageOnly"))
+            //              .AddItem(factory.NewSelectableItem("LabelAndImage"));
             DropDown2      = factory.NewRibbonDropDown("DropDown2", false);
             DropDown3      = factory.NewRibbonDropDown("DropDown3", false);
             CustomButton1  = factory.NewRibbonButtonMso("AppLaunchButton1", imageMso:"RefreshAll");

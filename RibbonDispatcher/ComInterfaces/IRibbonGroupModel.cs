@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -120,6 +121,31 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         new bool ShowInactive { get; }
 
+        IList<ISelectableItem> Items { get; }
+
         int SelectedIndex { get; }
-    } 
+    }
+
+    public interface ISelectableItemSource:IRibbonCommonSource {
+        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        new IRibbonControlStrings Strings { get; }
+
+        /// <summary>Gets whether the control is enabled.</summary>
+        new bool IsEnabled { get; }
+
+        /// <summary>Gets whether the control is visible.</summary>
+        new bool IsVisible { get; }
+
+        new bool ShowInactive { get; }
+
+        object Image { get; }
+
+        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowImage { get; }
+
+        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowLabel { get; }
+
+        bool IsLarge { get; }
+    }
 }

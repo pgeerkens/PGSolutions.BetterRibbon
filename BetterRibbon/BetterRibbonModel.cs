@@ -117,7 +117,6 @@ namespace PGSolutions.BetterRibbon {
 
         /// <inheritdoc/>
         public ISelectableItem NewSelectableItem(string controlID, string label) {
-            var item = ViewModel.RibbonFactory.NewSelectableItem(controlID);
             var model = new SelectableItemModel(id=>ViewModel.RibbonFactory.NewSelectableItem(id),
                                 new RibbonControlStrings(label),true,true);
 
@@ -154,13 +153,6 @@ namespace PGSolutions.BetterRibbon {
         public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => CustomButtonsModel.NewDropDownModel(strings, isEnabled, isVisible);
-
-        ///// <inheritdoc/>
-        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        //public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
-        //        bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonGroupModel(id => CustomButtonsModel.GetControl<RibbonGroupViewModel>(id),
-        //        strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

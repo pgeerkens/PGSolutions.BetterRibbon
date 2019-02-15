@@ -17,24 +17,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IClickedEvents))]
-    [ComDefaultInterface(typeof(IRibbonButtonModel))]
+    [ComDefaultInterface(typeof(ISelectableItemModel))]
     [Guid(Guids.SelectableItemModel)]
     public class SelectableItemModel : RibbonControlModel<SelectableItem>, ISelectableItem,
-             IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
-        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
+             ISelectableItemModel, ISizeable, IImageable, ISelectableItemSource {
+        public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageMso(imageMso);
 
-        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
+        public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageDisp(image);
 
-        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
+        public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
-        { }
+        : base(funcViewModel, strings, isEnabled, isVisible) { }
 
         public event ClickedEventHandler Clicked;
 
@@ -48,8 +47,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string ScreenTip => Strings.ScreenTip;
         public string SuperTip  => Strings.SuperTip;
 
-        public IRibbonButtonModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<SelectableItem, IRibbonButtonSource>)
+        public ISelectableItemModel Attach(string controlId) {
+            ViewModel = (FuncViewModel(controlId) as IActivatable<SelectableItem, ISelectableItemSource>)
                       ?.Attach(this);
             if (ViewModel != null) {
             //    ViewModel.Clicked += OnClicked;

@@ -44,10 +44,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => SelectionMade?.Invoke(sender, SelectedIndex = selectedIndex);
 
         public IRibbonDropDownModel AddItem(ISelectableItem SelectableItem) {
-            _items.Add(SelectableItem);
+            Items.Add(SelectableItem);
+            ViewModel?.Invalidate();
             return this;
         }
 
-        private IList<ISelectableItem>  _items  = new List<ISelectableItem>();
+        public IList<ISelectableItem>  Items { get; private set; } = new List<ISelectableItem>();
     }
 }

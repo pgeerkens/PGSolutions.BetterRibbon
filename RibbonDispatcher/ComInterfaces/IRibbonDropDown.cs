@@ -63,10 +63,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.OnActionDropDown)]
         void        OnActionDropDown(string SelectedId, int SelectedIndex);
 
-        /// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
-        [Description("Returns this RibbonDropDown with a new {SelectableItem} in its list.")]
-        [DispId(DispIds.AddItem)]
-        IRibbonDropDown AddItem(ISelectableItem SelectableItem);
+        ///// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
+        //[Description("Returns this RibbonDropDown with a new {SelectableItem} in its list.")]
+        //[DispId(DispIds.AddItem)]
+        //IRibbonDropDown AddItem(ISelectableItem SelectableItem);
 
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         [Description("Call back for ItemCount events from the drop-down ribbon elements.")]

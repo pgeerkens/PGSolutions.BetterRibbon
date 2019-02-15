@@ -68,7 +68,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this as T;
         }
 
-        IRibbonCommon IActivatable<IRibbonCommon, TSource>.Attach(TSource source)
+        IRibbonCommon IActivatable<IRibbonCommon,TSource>.Attach(TSource source)
         => Attach<RibbonCommon<TSource>>(source);
 
         public virtual void Detach() {
