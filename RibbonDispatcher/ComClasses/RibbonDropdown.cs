@@ -21,12 +21,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonDropDown))]
     [Guid(Guids.RibbonDropDown)]
     public class RibbonDropDown : RibbonCommon<IRibbonDropDownSource>, IRibbonDropDown,
-            IActivatable<IRibbonDropDown, IRibbonDropDownSource>, ISelectable {
+            IActivatable<RibbonDropDown, IRibbonDropDownSource>, ISelectable {
         internal RibbonDropDown(string itemId)
         : base(itemId) { }
 
         #region IActivatable implementation
-        IRibbonDropDown IActivatable<IRibbonDropDown, IRibbonDropDownSource>.Attach(IRibbonDropDownSource source)
+        RibbonDropDown IActivatable<RibbonDropDown, IRibbonDropDownSource>.Attach(IRibbonDropDownSource source)
         => Attach<RibbonDropDown>(source);
 
         public override void Detach() {

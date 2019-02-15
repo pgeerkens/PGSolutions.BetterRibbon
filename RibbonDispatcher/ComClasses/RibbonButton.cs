@@ -24,11 +24,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonButton))]
     [Guid(Guids.RibbonButton)]
     public class RibbonButton : RibbonCommon<IRibbonButtonSource>, IRibbonButton,
-            IActivatable<IRibbonButton,IRibbonButtonSource>, ISizeable, IClickable, IImageable {
+            IActivatable<RibbonButton,IRibbonButtonSource>, ISizeable, IClickable, IImageable {
         internal RibbonButton(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        IRibbonButton IActivatable<IRibbonButton, IRibbonButtonSource>.Attach(IRibbonButtonSource source)
+        RibbonButton IActivatable<RibbonButton, IRibbonButtonSource>.Attach(IRibbonButtonSource source)
         => Attach<RibbonButton>(source);
 
         public override void Detach() {

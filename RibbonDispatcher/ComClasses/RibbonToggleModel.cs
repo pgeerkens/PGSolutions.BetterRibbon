@@ -32,8 +32,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => SetImageDisp(image);
 
         public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
-        => FuncViewModel = funcViewModel;
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        { }
 
         public event ToggledEventHandler Toggled;
 
@@ -43,8 +44,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool   ShowLabel { get; set; } = true;
 
         public bool   IsPressed { get; set; } = false;
-
-        private Func<string, RibbonCheckBox> FuncViewModel { get; }
 
         public IRibbonToggleModel Attach(string controlId) {
             ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonCheckBox, IRibbonToggleSource>)
@@ -59,6 +58,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(sender, IsPressed = isPressed);
 
         public void SetImageDisp(IPictureDisp image) => Image = image;
-        public void SetImageMso(string imageMso) => Image = imageMso;
+        public void SetImageMso(string imageMso)     => Image = imageMso;
     }
 }

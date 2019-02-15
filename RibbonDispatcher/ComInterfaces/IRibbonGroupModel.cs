@@ -57,7 +57,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets whether the control is visible.</summary>
         bool IsVisible { get; }
 
-        bool ShowInactive { get;}
+        bool ShowInactive { get; set; }
     }
 
     public interface IRibbonButtonSource : IRibbonCommonSource {
@@ -70,7 +70,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets whether the control is visible.</summary>
         new bool IsVisible { get; }
 
-        new bool ShowInactive { get; }
+        new bool ShowInactive { get; set; }
 
         object Image       { get; }
 
@@ -93,7 +93,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets whether the control is visible.</summary>
         new bool IsVisible { get; }
 
-        new bool ShowInactive { get; }
+        new bool ShowInactive { get; set; }
 
         new object Image   { get; }
 
@@ -116,7 +116,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets whether the control is visible.</summary>
         new bool IsVisible { get; }
 
-        new bool ShowInactive { get; }
+        new bool ShowInactive { get; set; }
 
         int SelectedIndex { get; }
     } 

@@ -22,10 +22,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonToggleButton)]
-    public class RibbonToggleButton : RibbonCheckBox, IRibbonToggle, ISizeable, IImageable {
+    public class RibbonToggleButton : RibbonCheckBox, IRibbonToggle,
+        IActivatable<RibbonToggleButton, IRibbonToggleSource>, ISizeable, IImageable {
         internal RibbonToggleButton(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
+        RibbonToggleButton IActivatable<RibbonToggleButton, IRibbonToggleSource>.Attach(IRibbonToggleSource source)
+        => Attach<RibbonToggleButton>(source);
         #endregion
 
         #region IToggleable implementation

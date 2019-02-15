@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
@@ -19,19 +20,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonGroupModel)]
     public class RibbonGroupModel : RibbonControlModel<RibbonGroupViewModel>, IRibbonGroupModel,
                 IRibbonCommonSource {
-        public RibbonGroupModel(Func<string, IRibbonGroup> funcViewModel,
+        public RibbonGroupModel(Func<string, RibbonGroupViewModel> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
-        : base(strings, isEnabled, isVisible)
-        => FuncViewModel   = funcViewModel;
-        //{
-        //    FuncViewModel   = funcViewModel;
-
-        //    IsVisible = true;
-        //    IsEnabled = true;
-        //    Invalidate();
-        //}
-
-        private Func<string, IRibbonGroup> FuncViewModel { get; }
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        { }
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {

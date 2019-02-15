@@ -31,23 +31,22 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageDisp(image);
 
-        public SelectableItemModel(Func<string, SelectableItem> funcViewModel, IRibbonControlStrings strings,
-                bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
-        => FuncViewModel = funcViewModel;
+        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        { }
 
         public event ClickedEventHandler Clicked;
+
+        public bool IsLarge { get => false; set { } } 
+        public object Image { get; set; } = "MacroSecurity";
+        public bool ShowImage { get; set; } = true;
+        public bool ShowLabel { get; set; } = true;
 
         public string Id        => ViewModel.Id;
         public string Label     => Strings.Label;
         public string ScreenTip => Strings.ScreenTip;
         public string SuperTip  => Strings.SuperTip;
-
-        public bool IsLarge { get; set; } = true;
-        public object Image { get; set; } = "MacroSecurity";
-        public bool ShowImage { get; set; } = true;
-        public bool ShowLabel { get; set; } = true;
-
-        private Func<string, SelectableItem> FuncViewModel { get; }
 
         public IRibbonButtonModel Attach(string controlId) {
             ViewModel = (FuncViewModel(controlId) as IActivatable<SelectableItem, IRibbonButtonSource>)

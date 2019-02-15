@@ -2,15 +2,22 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     public abstract class RibbonControlModel<T> : IRibbonCommonSource where T:IRibbonCommon {
-        protected RibbonControlModel(IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
-            Strings   = strings;
+        protected RibbonControlModel(Func<string,T> funcViewModel,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
+            FuncViewModel = funcViewModel;
+            Strings       = strings;
+            IsEnabled     = isEnabled;
+            IsVisible     = isVisible;
 
-            Invalidate();
+            //Invalidate();
         }
+
+        protected Func<string, T> FuncViewModel { get; }
 
         /// <inheritdoc/>
         public IRibbonControlStrings Strings { get; protected set; }
@@ -24,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public bool IsVisible { get; set; } = true;
 
-        public bool ShowInactive { get; private set; } = true;
+        public bool ShowInactive { get; set; } = true;
 
         /// <inheritdoc/>
         public virtual void Invalidate() {

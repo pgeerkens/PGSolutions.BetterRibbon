@@ -55,7 +55,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool IsVisible => Source?.IsVisible ?? true;
 
         /// <inheritdoc/>
-        public bool ShowInactive => Source?.ShowInactive ?? true;
+        public bool ShowInactive => Source?.ShowInactive ?? false;
 
         #region IActivatable implementation
         protected TSource Source { get; private set; }

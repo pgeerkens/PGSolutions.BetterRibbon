@@ -13,7 +13,7 @@ namespace PGSolutions.BetterRibbon {
         : base(viewModel) {
             Suffix = suffix;
 
-            DestIsSrc      = GetModel<RibbonCheckBox>($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
+            DestIsSrc      = GetModel<RibbonToggleButton>($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
             ExportSelected = GetModel<RibbonButton>($"SelectedProjectButton{suffix}", OnExportSelected, true, true, "SaveAll");
             ExportCurrent  = GetModel<RibbonButton>($"CurrentProjectButton{suffix}", OnExportCurrent, true, true, "FileSaveAs");
 

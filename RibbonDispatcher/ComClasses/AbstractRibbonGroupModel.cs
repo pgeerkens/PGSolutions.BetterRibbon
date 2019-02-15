@@ -15,8 +15,6 @@ namespace PGSolutions.BetterRibbon {
             ViewModel = viewModel;
             (ViewModel as IActivatable<IRibbonGroup,IRibbonCommonSource>)?.Attach(this);
 
-            IsVisible = true;
-            IsEnabled = true;
             Invalidate();
         }
 
@@ -24,9 +22,9 @@ namespace PGSolutions.BetterRibbon {
 
         private RibbonGroupViewModel ViewModel { get; }
 
-        public bool IsEnabled    { get; set; }
-        public bool IsVisible    { get; set; }
-        public bool ShowInactive { get; set; }
+        public bool IsEnabled    { get; set; } = true;
+        public bool IsVisible    { get; set; } = true;
+        public bool ShowInactive { get; set; } = true;
 
         public IRibbonControlStrings Strings { get; private set; }
 
@@ -59,9 +57,9 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonToggleModel GetModel<T>(string id, ToggledEventHandler handler, bool isEnabled,
                 bool isVisible, string imageMso)
-        where T : RibbonCheckBox {
+        where T : RibbonToggleButton {
             var model = new RibbonToggleModel(
-                    ViewModel.Add<IRibbonToggleSource>(ViewModel.Factory.NewRibbonButton(id))
+                    ViewModel.Add<IRibbonToggleSource>(ViewModel.Factory.NewRibbonToggle(id))
                             .GetControl<T>, GetStrings(id), isEnabled, isVisible);
             model.SetImageMso(imageMso);
             model?.Attach(id);
@@ -72,9 +70,9 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonToggleModel GetModel<T>(string id, ToggledEventHandler handler, bool isEnabled,
                 bool isVisible, IPictureDisp image)
-        where T : RibbonCheckBox {
+        where T : RibbonToggleButton {
             var model = new RibbonToggleModel(
-                    ViewModel.Add<IRibbonToggleSource>(ViewModel.Factory.NewRibbonButton(id))
+                    ViewModel.Add<IRibbonToggleSource>(ViewModel.Factory.NewRibbonToggle(id))
                             .GetControl<T>, GetStrings(id), isEnabled, isVisible);
             model.SetImageDisp(image);
             model?.Attach(id);
@@ -87,7 +85,7 @@ namespace PGSolutions.BetterRibbon {
                 bool isVisible)
         where T : RibbonDropDown {
             var model = new RibbonDropDownModel(
-                    ViewModel.Add<IRibbonDropDownSource>(ViewModel.Factory.NewRibbonButton(id))
+                    ViewModel.Add<IRibbonDropDownSource>(ViewModel.Factory.NewRibbonDropDown(id))
                             .GetControl<T>, GetStrings(id), isEnabled, isVisible);
             model?.Attach(id);
             model.SelectionMade += handler;

@@ -46,8 +46,8 @@ namespace PGSolutions.BetterRibbon {
         }
  
         public void Invalidate() {
-            ViewModel.SetButtonSize(IsLarge);
-            ViewModel.SetButtonDisplay(DisplayOption);
+            //ViewModel.SetButtonSize(IsLarge);
+            //ViewModel.SetButtonDisplay(DisplayOption);
             ViewModel.Invalidate();
         }
     }

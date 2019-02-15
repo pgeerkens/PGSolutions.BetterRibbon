@@ -115,7 +115,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             ) ) );
         }
 
-        private bool IsValidSheetName(string path) {
+        private static bool IsValidSheetName(string path) {
             var invalid = new List<char>{':', '\\', '/', '?', '*', '[', ']' };
             foreach (var c in invalid) if (path.IndexOf(c) >= 0) return false;
 

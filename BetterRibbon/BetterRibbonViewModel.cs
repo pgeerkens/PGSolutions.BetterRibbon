@@ -38,7 +38,7 @@ namespace PGSolutions.BetterRibbon {
             LinksAnalysisViewModel = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
             VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("VbaExportGroupPG");
             VbaExportViewModel_MS  = RibbonFactory.NewRibbonGroup("VbaExportGroupMS");
-            CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
+            CustomButtonsViewModel = RibbonFactory.NewCustomButtonsViewModel();
 
             DemonstrationViewModel = null;//RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
@@ -80,7 +80,10 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         public static string MsgBoxTitle => Resources.ApplicationName;
 
-        private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
+    }
+
+    internal static partial class Extensions {
+        public static RibbonGroupViewModel NewCustomButtonsViewModel(this IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
                 .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle1"))
                 .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle2"))

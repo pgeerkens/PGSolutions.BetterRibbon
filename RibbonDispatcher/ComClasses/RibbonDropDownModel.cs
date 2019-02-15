@@ -21,16 +21,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.RibbonDropDownModel)]
     public sealed class RibbonDropDownModel : RibbonControlModel<RibbonDropDown>, IRibbonDropDownModel,
             IRibbonDropDownSource {
-        public RibbonDropDownModel(Func<string, RibbonDropDown> funcViewModel, IRibbonControlStrings strings,
-                bool isEnabled, bool isVisible)
-        :base(strings, isEnabled, isVisible)
-        => FuncViewModel = funcViewModel;
+        public RibbonDropDownModel(Func<string, RibbonDropDown> funcViewModel,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        { }
 
         public event SelectedEventHandler SelectionMade;
 
         public int SelectedIndex  { get; set; }
-
-        private Func<string, RibbonDropDown> FuncViewModel { get; }
 
         public IRibbonDropDownModel Attach(string controlId) {
             ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonDropDown, IRibbonDropDownSource>)

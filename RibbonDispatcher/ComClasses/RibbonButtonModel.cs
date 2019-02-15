@@ -31,9 +31,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageDisp(image);
 
-        public RibbonButtonModel(Func<string,RibbonButton> funcViewModel, IRibbonControlStrings strings,
-                bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
-        => FuncViewModel = funcViewModel;
+        public RibbonButtonModel(Func<string,RibbonButton> funcViewModel,
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        { }
 
         public event ClickedEventHandler Clicked;
 
@@ -41,8 +42,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public object Image     { get; set; } = "MacroSecurity";
         public bool   ShowImage { get; set; } = true;
         public bool   ShowLabel { get; set; } = true;
-
-        private Func<string, RibbonButton> FuncViewModel { get; }
 
         public IRibbonButtonModel Attach(string controlId) {
             ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonButton, IRibbonButtonSource>)
@@ -57,6 +56,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
         public void SetImageDisp(IPictureDisp image) => Image = image;
-        public void SetImageMso(string imageMso)  => Image = imageMso;
+        public void SetImageMso(string imageMso)     => Image = imageMso;
     }
 }

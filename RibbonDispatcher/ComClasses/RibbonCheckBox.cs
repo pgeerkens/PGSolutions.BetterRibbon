@@ -22,11 +22,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonCheckBox)]
     public class RibbonCheckBox : RibbonCommon<IRibbonToggleSource>, IRibbonToggle,
-        IActivatable<IRibbonToggle,IRibbonToggleSource>, IToggleable {
+        IActivatable<RibbonCheckBox, IRibbonToggleSource>, IToggleable {
         internal RibbonCheckBox(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        IRibbonToggle IActivatable<IRibbonToggle,IRibbonToggleSource>.Attach(IRibbonToggleSource source)
+        RibbonCheckBox IActivatable<RibbonCheckBox, IRibbonToggleSource>.Attach(IRibbonToggleSource source)
         => Attach<RibbonCheckBox>(source);
 
         public override void Detach() {
@@ -66,5 +66,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
         public virtual bool ShowLabel => true;
         #endregion
+
+        public override void Invalidate() => base.Invalidate();
     }
 }

@@ -14,9 +14,6 @@ namespace PGSolutions.BetterRibbon {
             AnalyzeCurrentModel  = GetModel<RibbonButton>("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
             AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
 
-            IsVisible = true;
-            IsEnabled = true;
-            Invalidate();
             Invalidate();
         }
 
