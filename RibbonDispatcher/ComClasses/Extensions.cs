@@ -18,15 +18,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public static partial class Extensions {
         private const string Caption = "PGSolutions Ribbon Dispatcher";
 
-        internal static void SetSizeablel(this ISizeable target, ISizeable source)
-        => target.IsLarge = source.IsLarge;
+        //internal static void SetSizeablel(this ISizeable target, ISizeable source)
+        //=> target.IsLarge = source.IsLarge;
 
-        internal static void SetImageable(this IImageable target, IImageable source) {
-            target.ShowImage = source.ShowImage;
-            target.ShowLabel = source.ShowLabel;
-            if (source.Image is string) target.SetImageMso(source.Image as string);
-            if (source.Image is IPictureDisp) target.SetImageDisp(source.Image as IPictureDisp);
-        }
+        //internal static void SetImageable(this IImageable target, IImageable source) {
+        //    target.ShowImage = source.ShowImage;
+        //    target.ShowLabel = source.ShowLabel;
+        //    if (source.Image is string) target.SetImageMso(source.Image as string);
+        //    if (source.Image is IPictureDisp) target.SetImageDisp(source.Image as IPictureDisp);
+        //}
 
         public static RibbonControlSize ControlSize(this bool isLarge)
             => isLarge ? RibbonControlSize.RibbonControlSizeLarge
@@ -56,10 +56,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                                 ).FirstOrDefault()) { return reader?.ReadToEnd(); }
         }
 
-        public static bool SetButtonSize(this IList<IRibbonButton> buttons, bool isLarge) {
-            foreach (var b in buttons ?? new List<IRibbonButton>()) { b.IsLarge = isLarge; }
-            return isLarge;
-        }
+        //public static bool SetButtonSize(this IList<IRibbonButton> buttons, bool isLarge) {
+        //    foreach (var b in buttons ?? new List<IRibbonButton>()) { b.IsLarge = isLarge; }
+        //    return isLarge;
+        //}
 
         public static string Format2(this Version version) =>
             $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}";
@@ -89,8 +89,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
         public static void SetDisplay<T>(this IList<T> buttons, LabelImageOptions displayOptions) where T : IRibbonImageable {
             foreach (var b in buttons  ?? new List<T>()) {
-                b.ShowLabel = displayOptions.HasFlag(LabelImageOptions.ShowLabel);
-                b.ShowImage = displayOptions.HasFlag(LabelImageOptions.ShowImage);
+            //    b.ShowLabel = displayOptions.HasFlag(LabelImageOptions.ShowLabel);
+            //    b.ShowImage = displayOptions.HasFlag(LabelImageOptions.ShowImage);
             }
         }
     }

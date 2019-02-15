@@ -8,19 +8,36 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public class RibbonGroupViewModel : RibbonCommon, IRibbonGroup, IActivatableControl<IRibbonCommon,bool> {
-        public RibbonGroupViewModel(IRibbonFactory factory, string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
-        : base(itemId, strings, visible, enabled) {
+    public class RibbonGroupViewModel : RibbonCommon<IRibbonCommonSource>, IRibbonGroup,
+            IActivatable<IRibbonGroup, IRibbonCommonSource> {
+        public RibbonGroupViewModel(IRibbonFactory factory, string itemId)
+        : base(itemId) {
             Factory = factory;
             AdaptorControls = new Dictionary<string, IActivatable>();
-            Add(this);
+            Add<IRibbonCommonSource>(this);
         }
+
+        #region IActivatable implementation
+        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
+        IRibbonGroup IActivatable<IRibbonGroup, IRibbonCommonSource>.Attach(IRibbonCommonSource source)
+        => Attach<RibbonGroupViewModel>(source);
+
+        public override void Detach() {
+            foreach (var c in AdaptorControls) c.Value.Detach();
+            base.Detach();
+        }
+        #endregion
 
         public IRibbonFactory Factory { get; }
 
-        protected static string NoImage => "MacroSecurity";
+        protected IDictionary<string, IActivatable> AdaptorControls { get; }
 
-        public RibbonGroupViewModel Add(IActivatable control) {
+        public TControl GetControl<TControl>(string controlId) where TControl : class,IRibbonCommon
+        => AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
+
+        public RibbonGroupViewModel Add<TSource>(IActivatable control)
+        where TSource:IRibbonCommonSource{
             if (control == null) return null;
             AdaptorControls.Add(new KeyValuePair<string, IActivatable>(control.Id, control));
             return this;
@@ -30,45 +47,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             foreach (var ctrl in AdaptorControls) if(ctrl.Value != this) ctrl.Value?.Detach();
         }
 
-        protected IDictionary<string, IActivatable> AdaptorControls { get; }
+        public new IRibbonControlStrings Strings => base.Strings;
 
-        #region IActivatable implementation
-        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        public IRibbonGroup Attach(Func<bool> showInactiveGetter) {
-            base.Attach();
-            ShowInactiveGetter = showInactiveGetter;
-            return this;
-        }
-
-        public override void Detach() {
-            foreach (var c in AdaptorControls) c.Value.Detach();
-            ShowInactiveGetter = () => false;
-            base.Detach();
-        }
-
-        /// <inheritdoc/>>
-        public bool ShowInactive => ShowInactiveGetter?.Invoke() ?? false;
-
-        /// <inheritdoc/>>
-        public virtual void SetShowInactive(bool showInactive) {
-            foreach (var ctrl in AdaptorControls) {
-                ctrl.Value.ShowActiveOnly = !showInactive;
-                ctrl.Value.Invalidate();
-            }
-        }
-
-        public TControl GetControl<TControl>(string controlId) where TControl : RibbonCommon
-        => AdaptorControls.FirstOrDefault(kv => kv.Key == controlId).Value as TControl;
-
-        private Func<bool> ShowInactiveGetter { get; set; }
-
-        /// <inheritdoc/>>
-        IRibbonCommon IActivatableControl<IRibbonCommon,bool>.Attach(Func<bool> getter) =>
-            Attach(getter) as IRibbonCommon;
-
-        /// <inheritdoc/>>
-        void IActivatableControl<IRibbonCommon,bool>.Detach() => Detach();
-        #endregion
+        protected static string NoImage => "MacroSecurity";
     }
 }

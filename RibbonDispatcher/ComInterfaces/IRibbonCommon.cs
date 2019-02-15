@@ -36,19 +36,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(DispIds.SuperTip)]
         [Description("Returns the SuperTip string for this control.")]
         string SuperTip     { get; }
-        /// <summary>Sets the {IRibbonTextLanguageControl} source for the control</summary>
-        [DispId(DispIds.SetLanguageStrings)]
-        [Description("Sets the {IRibbonTextLanguageControl} source for the control.")]
-        void SetLanguageStrings(IRibbonControlStrings strings);
 
         /// <summary>Gets or sets whether or not the control is enabled.</summary>
         [DispId(DispIds.IsEnabled)]
         [Description("Gets or sets whether or not the control is enabled.")]
-        bool IsEnabled      { get; set; }
+        bool IsEnabled      { get; }
         /// <summary>Gets or sets whether or not the control is visible.</summary>
     //    [DispId(DispIds.IsVisible)]
         [Description("Gets or sets whether or not the control is visible..")]
-        bool IsVisible      { get; set; }
+        bool IsVisible      { get; }
 
         void Invalidate();
     }

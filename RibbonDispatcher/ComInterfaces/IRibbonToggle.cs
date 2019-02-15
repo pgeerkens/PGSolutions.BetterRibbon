@@ -42,18 +42,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Returns the SuperTip string for this control.")]
         new string SuperTip  { get; }
 
-        /// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
-        [DispId(DispIds.SetLanguageStrings)]
-        new void SetLanguageStrings(IRibbonControlStrings strings);
-
         /// <summary>Gets or sets whether the control is enabled.</summary>
         [DispId(DispIds.IsEnabled)]
         [Description("Gets or sets whether the control is enabled.")]
-        new bool IsEnabled   { get; set; }
+        new bool IsEnabled   { get; }
         /// <summary>Gets or sets whether the control is visible.</summary>
     //    [DispId(DispIds.IsVisible)]
         [Description("Gets or sets whether the control is visible.")]
-        new bool IsVisible   { get; set; }
+        new bool IsVisible   { get; }
 
         /// <inheritdoc/>
         new void Invalidate();
@@ -71,29 +67,21 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool     IsSizeable  { get; }
         /// <summary>TODO</summary>
         [DispId(DispIds.Size)]
-        bool     IsLarge     { get; set; }
+        bool     IsLarge     { get; }
 
         /// <summary>TODO</summary>
         bool     IsImageable { get; }
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
         [DispId(DispIds.ShowImage)]
         [Description("Gets or sets whether to show the control's image; ignored by Large controls.")]
-        new bool ShowImage   { get; set; }
+        new bool ShowImage   { get; }
         /// <summary>Gets or sets whether to show the control's label; ignored by Large controls.</summary>
         [DispId(DispIds.ShowLabel)]
         [Description("Gets or sets whether to show the control's label; ignored by Large controls.")]
-        new bool ShowLabel   { get; set; }
+        new bool ShowLabel   { get; }
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]
         new object Image     { get; }
-        /// <summary>Sets the current Image for the control as an {IPictureDisp}.</summary>
-        [DispId(DispIds.SetImageDisp)]
-        [Description("Sets the current Image for the control as an {IPictureDisp}.")]
-        new void SetImageDisp(IPictureDisp Image);
-        /// <summary>Sets the current Image for the control as a {string} naming an MsoImage.</summary>
-        [DispId(DispIds.SetImageMso)]
-        [Description("Sets the current Image for the control as a {string} naming an MsoImage.")]
-        new void SetImageMso(string ImageMso);
     }
 }

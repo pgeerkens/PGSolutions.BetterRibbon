@@ -16,47 +16,50 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IToggledEvents))]
-    [ComDefaultInterface(typeof(IRibbonToggleModel))]
-    [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : RibbonControlModel<RibbonCheckBox>, IRibbonToggleModel,
-                ISizeable, IImageable, IRibbonToggleSource {
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
+    [ComSourceInterfaces(typeof(IClickedEvents))]
+    [ComDefaultInterface(typeof(IRibbonButtonModel))]
+    [Guid(Guids.SelectableItemModel)]
+    public class SelectableItemModel : RibbonControlModel<SelectableItem>, ISelectableItem,
+             IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
+        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageMso(imageMso);
 
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
+        public SelectableItemModel(Func<string, SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
         : this(funcViewModel, strings, isEnabled, isVisible)
         => SetImageDisp(image);
 
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
+        public SelectableItemModel(Func<string, SelectableItem> funcViewModel, IRibbonControlStrings strings,
+                bool isEnabled, bool isVisible) : base(strings, isEnabled, isVisible)
         => FuncViewModel = funcViewModel;
 
-        public event ToggledEventHandler Toggled;
+        public event ClickedEventHandler Clicked;
 
-        public bool   IsLarge   { get; set; } = true;
-        public object Image     { get; set; } = "MacroSecurity";
-        public bool   ShowImage { get; set; } = true;
-        public bool   ShowLabel { get; set; } = true;
+        public string Id        => ViewModel.Id;
+        public string Label     => Strings.Label;
+        public string ScreenTip => Strings.ScreenTip;
+        public string SuperTip  => Strings.SuperTip;
 
-        public bool   IsPressed { get; set; } = false;
+        public bool IsLarge { get; set; } = true;
+        public object Image { get; set; } = "MacroSecurity";
+        public bool ShowImage { get; set; } = true;
+        public bool ShowLabel { get; set; } = true;
 
-        private Func<string, RibbonCheckBox> FuncViewModel { get; }
+        private Func<string, SelectableItem> FuncViewModel { get; }
 
-        public IRibbonToggleModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonCheckBox, IRibbonToggleSource>)
+        public IRibbonButtonModel Attach(string controlId) {
+            ViewModel = (FuncViewModel(controlId) as IActivatable<SelectableItem, IRibbonButtonSource>)
                       ?.Attach(this);
             if (ViewModel != null) {
-                ViewModel.Toggled += OnToggled;
+            //    ViewModel.Clicked += OnClicked;
                 ViewModel.Invalidate();
             }
             return this;
         }
 
-        private void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(sender, IsPressed = isPressed);
+        private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
         public void SetImageDisp(IPictureDisp image) => Image = image;
         public void SetImageMso(string imageMso) => Image = imageMso;

@@ -15,11 +15,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
-    public class SelectableItem : RibbonCommon, ISelectableItem, IImageable {
+    public class SelectableItem : RibbonCommon<IRibbonCommonSource>, ISelectableItem, IImageable {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId, IRibbonControlStrings strings, ImageObject Image) 
-            : base(ItemId, strings, true, true)
-            => _image = Image;
+        : base(ItemId) {
+            _strings = strings;
+            _image = Image;
+        }
+
+        protected override IRibbonControlStrings Strings => _strings;
+        private IRibbonControlStrings _strings;
 
         #region IImageable implementation
         /// <inheritdoc/>

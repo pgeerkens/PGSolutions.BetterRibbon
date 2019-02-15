@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
-using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public enum ERibbonControlSize {
@@ -46,17 +45,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Invalidate();
 
         /// <summary>Sets or gets whether to display the Image for this control.</summary>
-        bool ShowImage { get; set; }
+        bool ShowImage { get; }
         /// <summary>Sets or gets whether to display the Label for this control.</summary>
-        bool ShowLabel { get; set; }
+        bool ShowLabel { get; }
 
-        object Image { get; }
-
-        /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
-        void SetImageDisp(IPictureDisp Image);
-
-        /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
-        void SetImageMso(string ImageMso);
+        object Image   { get; }
     }
 
     /// <summary>The interface for controls that can be sized.</summary>
@@ -65,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>TODO</summary>
         void Invalidate();
 
-        bool IsLarge { get; set; }
+        bool IsLarge { get; }
     }
 
     /// <summary>The interface for controls that can be toggled.</summary>

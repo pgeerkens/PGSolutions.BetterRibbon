@@ -69,7 +69,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string ICustomRibbonGroup          = "69E19436" + RibbonDispatcherGuidSpace;
         public const string CustomRibbonGroup           = "69E19437" + RibbonDispatcherGuidSpace;
         //public const string IBooleanSource              = "69E19438" + RibbonDispatcherGuidSpace;
-        //public const string IIntegerSource              = "69E19439" + RibbonDispatcherGuidSpace;
+        public const string SelectableItemModel           = "69E19439" + RibbonDispatcherGuidSpace;
         //public const string IIntegerSource              = "69E1943A" + RibbonDispatcherGuidSpace;
         //public const string IIntegerSource              = "69E1943B" + RibbonDispatcherGuidSpace;
         //public const string IIntegerSource              = "69E1943C" + RibbonDispatcherGuidSpace;

@@ -37,19 +37,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Returns the SuperTip string for this control.")]
         [DispId(DispIds.SuperTip)]
         new string SuperTip        { get; }
-        /// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
-        [Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
-        [DispId(DispIds.SetLanguageStrings)]
-        new void SetLanguageStrings(IRibbonControlStrings strings);
 
         /// <summary>TODO</summary>
         [Description("")]
         [DispId(DispIds.IsEnabled)]
-        new bool IsEnabled       { get; set; }
+        new bool IsEnabled       { get; }
         /// <summary>TODO</summary>
         [Description("")]
     //    [DispId(DispIds.IsVisible)]
-        new bool IsVisible       { get; set; }
+        new bool IsVisible       { get; }
 
         /// <inheritdoc/>
         new void Invalidate();

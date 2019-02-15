@@ -21,27 +21,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonCheckBox)]
-    public class RibbonCheckBox : RibbonCommon, IRibbonToggle, IActivatableControl<IRibbonCommon, bool>,
-            IToggleable {
-        internal RibbonCheckBox(string itemId, IRibbonControlStrings strings, bool visible, bool enabled
-        ) : base(itemId, strings, visible, enabled) { }
+    public class RibbonCheckBox : RibbonCommon<IRibbonToggleSource>, IRibbonToggle,
+        IActivatable<IRibbonToggle,IRibbonToggleSource>, IToggleable {
+        internal RibbonCheckBox(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public IRibbonToggle Attach(Func<bool> getter) {
-            base.Attach();
-            Getter = getter;
-            return this;
-        }
+        IRibbonToggle IActivatable<IRibbonToggle,IRibbonToggleSource>.Attach(IRibbonToggleSource source)
+        => Attach<RibbonCheckBox>(source);
 
         public override void Detach() {
             Toggled = null;
-            Getter = () => false;
             base.Detach();
         }
-
-        IRibbonCommon IActivatableControl<IRibbonCommon, bool>.Attach(Func<bool> getter) =>
-            Attach(getter) as IRibbonCommon;
-        void IActivatableControl<IRibbonCommon, bool>.Detach() => Detach();
         #endregion
 
         #region IToggleable implementation
@@ -49,13 +40,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event ToggledEventHandler Toggled;
 
         /// <inheritdoc/>>
-        public bool IsPressed => Getter?.Invoke() ?? false;
+        public bool IsPressed => Source?.IsPressed ?? false;
 
         /// <inheritdoc/>>
         public virtual void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(this,isPressed);
-
-        /// <summary>TODO</summary>
-        private Func<bool> Getter { get; set; }
         #endregion
 
         #region ISizeable implementation
@@ -63,10 +51,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public virtual bool IsSizeable => false;
 
         /// <summary>Gets or sets the preferred {RibbonControlSize} for the control.</summary>
-        public virtual bool IsLarge {
-            get => false;
-            set { /* NO-OP */ }
-        }
+        public virtual bool IsLarge => false;
         #endregion
 
         #region IImageable implementation
@@ -76,22 +61,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public virtual object Image => null;
 
         /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        public virtual bool ShowImage {
-            get => false;
-            set { /* NO-OP */ }
-        }
+        public virtual bool ShowImage => false;
 
         /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        public virtual bool ShowLabel {
-            get => true;
-            set { /* NO-OP */ }
-        }
-
-        /// <summary>Sets the displayable image for this control to the provided {IPictureDisp}</summary>
-        public virtual void SetImageDisp(IPictureDisp Image) { /* NO-OP */ }
-
-        /// <summary>Sets the displayable image for this control to the named ImageMso image</summary>
-        public virtual void SetImageMso(string ImageMso)     { /* NO-OP */ }
+        public virtual bool ShowLabel => true;
         #endregion
     }
 }

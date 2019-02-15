@@ -24,7 +24,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [Description("")]
         IRibbonControlStrings GetStrings(string controlId);
 
-        T Add<T>(T ctrl) where T : RibbonCommon;
+        T Add<T, TSource>(T ctrl) where T : RibbonCommon<TSource> where TSource : class, IRibbonCommonSource;
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [DispId(DispIds.NewRibbonGroup)]

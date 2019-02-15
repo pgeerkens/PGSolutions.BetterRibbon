@@ -13,7 +13,7 @@ namespace PGSolutions.BetterRibbon {
 
     internal class DemonstrationViewModel : RibbonGroupViewModel {
         public DemonstrationViewModel(IRibbonFactory factory, bool isVisible = true, bool isEnabled = true)
-        : base(factory, "CSharpDemoGroup", factory.GetStrings("CSharpDemoGroup"), isVisible, isEnabled) {
+        : base(factory, "CSharpDemoGroup") { //, factory.GetStrings("CSharpDemoGroup"), isVisible, isEnabled) {
             IsLargeToggle  = factory.NewRibbonToggleMso("SizeToggle",       imageMso:NoImage);
             CheckBox1      = factory.NewRibbonCheckBox("CheckBox1", false);
             CheckBox2      = factory.NewRibbonCheckBox("CheckBox2", false);
@@ -69,18 +69,18 @@ namespace PGSolutions.BetterRibbon {
         private void OnButton2Clicked(object sender) => Button2Clicked?.Invoke(sender);
         private void OnButton3Clicked(object sender) => Button3Clicked?.Invoke(sender);
 
-        public void SetButtonSize(bool isLarge) =>
-            DisplayOptions.IsEnabled = ! Buttons.SetButtonSize(isLarge);
+        public void SetButtonSize(bool isLarge) { }
+//        => DisplayOptions.IsEnabled = ! Buttons.SetButtonSize(isLarge);
 
         public void SetButtonDisplay(LabelImageOptions displayOption) =>
             Buttons.SetDisplay(displayOption);
 
         public void Attach(Func<bool> isLargeSource, Func<int> selectedItemSource) {
-            IsLargeToggle.Attach(isLargeSource);
-            DisplayOptions.Attach(selectedItemSource);
-            CustomButton1.Attach();
-            CustomButton2.Attach();
-            CustomButton3.Attach();
+            //IsLargeToggle.Attach(isLargeSource);
+            //DisplayOptions.Attach(selectedItemSource);
+            //CustomButton1.Attach();
+            //CustomButton2.Attach();
+            //CustomButton3.Attach();
         }
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public override void Detach() {

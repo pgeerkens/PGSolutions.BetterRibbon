@@ -84,7 +84,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
-        public T Add<T>(T ctrl) where T:RibbonCommon {
+        public T Add<T,TSource>(T ctrl) where T:RibbonCommon<TSource> where TSource:class,IRibbonCommonSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
             _clickables .AddNotNull(ctrl.Id, ctrl as IClickable);
@@ -102,7 +102,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonGroupViewModel NewRibbonGroup(string itemId, bool visible = true, bool enabled = true)
-            => Add(new RibbonGroupViewModel(this, itemId, GetStrings(itemId), visible, enabled));
+            => Add<RibbonGroupViewModel,IRibbonCommonSource>(new RibbonGroupViewModel(this, itemId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -111,7 +111,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             IPictureDisp image     = null,
             bool         showImage = true,
             bool         showLabel = true
-        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(image), showImage, showLabel));
+        ) => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(itemId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -120,7 +120,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool         showImage = true,
             bool         showLabel = true
-        ) => Add(new RibbonButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(imageMso), showImage, showLabel));
+        ) => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(itemId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -129,7 +129,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             IPictureDisp image     = null,
             bool         showImage = true,
             bool         showLabel = true
-        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(image), showImage, showLabel));
+        ) => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(itemId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
@@ -138,17 +138,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
             bool         showImage = true,
             bool         showLabel = true
-        ) => Add(new RibbonToggleButton(itemId, GetStrings(itemId), visible, enabled, isLarge, new ImageObject(imageMso), showImage, showLabel));
+        ) => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(itemId));
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonCheckBox NewRibbonCheckBox(string itemId, bool visible = true, bool enabled = true)
-            => Add(new RibbonCheckBox(itemId, GetStrings(itemId), visible, enabled));
+            => Add<RibbonCheckBox,IRibbonToggleSource>(new RibbonCheckBox(itemId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true)
-            => Add(new RibbonDropDown(itemId, GetStrings(itemId), visible, enabled));
+            => Add<RibbonDropDown,IRibbonDropDownSource>(new RibbonDropDown(itemId));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

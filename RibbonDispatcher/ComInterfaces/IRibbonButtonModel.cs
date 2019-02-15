@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButtonModel)]
-    public interface IRibbonButtonModel : IRibbonControlSource {
+    public interface IRibbonButtonModel : IRibbonCommonSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
         new IRibbonControlStrings Strings {
             [Description("Gets the {IRibbonControlStrings} for this control.")]
@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
-        new void Invalidate();
+        void Invalidate();
 
         /// <summary>.</summary>
         [Description(".")]

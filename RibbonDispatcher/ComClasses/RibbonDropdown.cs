@@ -20,30 +20,20 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDown))]
     [Guid(Guids.RibbonDropDown)]
-    public class RibbonDropDown : RibbonCommon, IRibbonDropDown, IActivatableControl<IRibbonCommon, int>,
-        ISelectable {
-        internal RibbonDropDown(string itemId, IRibbonControlStrings strings, bool visible, bool enabled)
-        : base(itemId, strings, visible, enabled) { }
+    public class RibbonDropDown : RibbonCommon<IRibbonDropDownSource>, IRibbonDropDown,
+            IActivatable<IRibbonDropDown, IRibbonDropDownSource>, ISelectable {
+        internal RibbonDropDown(string itemId)
+        : base(itemId) { }
 
         #region IActivatable implementation
-        private Func<int> Getter { get; set; }
-
-        public IRibbonDropDown Attach(Func<int> getter) {
-            base.Attach();
-            Getter = getter;
-            return this;
-        }
+        IRibbonDropDown IActivatable<IRibbonDropDown, IRibbonDropDownSource>.Attach(IRibbonDropDownSource source)
+        => Attach<RibbonDropDown>(source);
 
         public override void Detach() {
             _items = new List<ISelectableItem>();
-            Getter = ()=>0;
             SelectionMade = null;
             base.Detach();
         }
-
-        IRibbonCommon IActivatableControl<IRibbonCommon, int>.Attach(Func<int> getter) =>
-            Attach(getter) as IRibbonCommon;
-        void IActivatableControl<IRibbonCommon, int>.Detach() => Detach();
         #endregion
 
         #region ISelectable implementation
@@ -56,7 +46,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string   SelectedItemId => _items[SelectedItemIndex].Id;
 
         /// <inheritdoc/>
-        public int      SelectedItemIndex => Getter?.Invoke() ?? 0;
+        public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         public void OnActionDropDown(string SelectedId, int SelectedIndex) {

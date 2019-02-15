@@ -56,8 +56,8 @@ namespace PGSolutions.BetterRibbon {
                         new VbaSourceExportGroupModel(ViewModel?.VbaExportViewModel_MS,"MS"),
                         new VbaSourceExportGroupModel(ViewModel?.VbaExportViewModel_PG,"PG")
                     });
-
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);
+
             DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationViewModel);
         }
 
@@ -90,28 +90,29 @@ namespace PGSolutions.BetterRibbon {
          /// <inheritdoc/>
         public void InvalidateControl(string ControlId) => ViewModel?.InvalidateControl(ControlId);
 
-         /// <inheritdoc/>
-        public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) =>
-            SetStrings(GetControl<RibbonButton>(controlId),strings).Attach() as IRibbonButton;
+        // /// <inheritdoc/>
+        //public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) =>
+        //    SetStrings(GetControl<RibbonButton>(controlId),strings).Attach() as IRibbonButton;
 
-         /// <inheritdoc/>
-        public IRibbonToggle   AttachCheckBox(string controlId, IRibbonControlStrings strings,
-                IBooleanSource source) =>
-            SetStrings(GetControl<RibbonCheckBox>(controlId),strings).Attach(source.Getter);
+        // /// <inheritdoc/>
+        //public IRibbonToggle   AttachCheckBox(string controlId, IRibbonControlStrings strings,
+        //        IBooleanSource source) =>
+        //    SetStrings(GetControl<RibbonCheckBox>(controlId),strings).Attach(source.Getter);
 
-         /// <inheritdoc/>
-        public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
-                IIntegerSource source) =>
-            SetStrings(GetControl<RibbonDropDown>(controlId),strings).Attach(source.Getter);
+        // /// <inheritdoc/>
+        //public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
+        //        IIntegerSource source) =>
+        //    SetStrings(GetControl<RibbonDropDown>(controlId),strings).Attach(source.Getter);
 
-         /// <inheritdoc/>
-        public IRibbonToggle   AttachToggle(string controlId, IRibbonControlStrings strings,
-                IBooleanSource source) =>
-            SetStrings(GetControl<RibbonToggleButton>(controlId),strings).Attach(source.Getter);
+        // /// <inheritdoc/>
+        //public IRibbonToggle   AttachToggle(string controlId, IRibbonControlStrings strings,
+        //        IBooleanSource source) =>
+        //    SetStrings(GetControl<RibbonToggleButton>(controlId),strings).Attach(source.Getter);
 
-        /// <inheritdoc/>
-        public void DetachProxy(string controlId) =>
-            CustomButtonsModel.GetControl<RibbonCommon>(controlId)?.Detach();
+        ///// <inheritdoc/>
+        //internal void DetachProxy<TControl>(string controlId)
+        //where TControl:class,IRibbonCommon
+        //=> CustomButtonsModel.GetControl<TControl>(controlId)?.Detach();
 
         /// <inheritdoc/>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
@@ -123,21 +124,25 @@ namespace PGSolutions.BetterRibbon {
                     superTip, keyTip, alternateLabel, description);
         #endregion
 
-        private TControl GetControl<TControl>(string controlId) where TControl:RibbonCommon =>
+        private TControl GetControl<TControl>(string controlId) where TControl:class,IRibbonCommon =>
             CustomButtonsModel.GetControl<TControl>(controlId);
 
-        private static TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings) where TControl:RibbonCommon {
-            ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
-            return ctrl;
-        }
+        //private static TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings)
+        //where TControl:RibbonCommon {
+        //    ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
+        //    return ctrl;
+        //}
 
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         /// <inheritdoc/>
         public ISelectableItem NewSelectableItem(string controlID, string label) {
             var item = ViewModel.RibbonFactory.NewSelectableItem(controlID);
-            item.SetLanguageStrings(new RibbonControlStrings(label));
-            return item;
+            var model = new SelectableItemModel(id=>ViewModel.RibbonFactory.NewSelectableItem(id),
+                                new RibbonControlStrings(label),true,true);
+
+            model.Attach(controlID);
+            return model;
         }
 
         /// <inheritdoc/>

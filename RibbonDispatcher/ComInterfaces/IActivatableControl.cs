@@ -7,23 +7,26 @@ using System.Runtime.InteropServices;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(false)]
     public interface IActivatable {
-        string Id { get; }
-        bool ShowActiveOnly { get; set; }
-        void Detach();
-        void Invalidate();
+        string Id           { get; }
+    //    bool   ShowInactive { get; }
+        void   Detach();
+    //    void   Invalidate();
     }
+    //[ComVisible(false)]
+    //public interface IAttachableControlModel<TCtl>
+    //        where TCtl : IRibbonCommon {
+    //    new string Id { get; }
+    //    TCtl Attach(string id);
+    //    void Detach();
+    //    bool ShowInactive { get; }
+    //}
     [ComVisible(false)]
-    public interface IActivatableControl<TCtl> : IActivatable where TCtl : IRibbonCommon {
+    public interface IActivatable<TCtrl, TSource> : IActivatable
+            where TCtrl : IRibbonCommon where TSource : IRibbonCommonSource {
+        TCtrl Attach(TSource source);
+        bool ShowInactive { get; }
+
         new string Id { get; }
-        TCtl Attach();
-        new void Detach();
-        new bool ShowActiveOnly { get; set; }
-    }
-    [ComVisible(false)]
-    public interface IActivatableControl<TCtl, TSource> : IActivatable where TCtl:IRibbonCommon {
-        new string Id { get; }
-        TCtl Attach(Func<TSource> getter);
-        new void Detach();
-        new bool ShowActiveOnly { get; set; }
-    }
+        new void   Detach();
+   }
 }

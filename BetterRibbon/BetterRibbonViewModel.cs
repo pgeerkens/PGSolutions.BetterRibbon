@@ -5,11 +5,11 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using stdole;
 
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using BetterRibbon.Properties;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -40,7 +40,7 @@ namespace PGSolutions.BetterRibbon {
             VbaExportViewModel_MS  = RibbonFactory.NewRibbonGroup("VbaExportGroupMS");
             CustomButtonsViewModel = NewCustomButtonsViewModel(RibbonFactory);
 
-            DemonstrationViewModel = RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
+            DemonstrationViewModel = null;//RibbonFactory.Add(new DemonstrationViewModel(RibbonFactory));
         }
 
         internal RibbonGroupViewModel BrandingViewModel      { get; private set; }
@@ -82,20 +82,20 @@ namespace PGSolutions.BetterRibbon {
 
         private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
-                .Add(factory.NewRibbonToggle("CustomVbaToggle1"))
-                .Add(factory.NewRibbonToggle("CustomVbaToggle2"))
-                .Add(factory.NewRibbonToggle("CustomVbaToggle3"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle1"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle2"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle3"))
 
-                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox1"))
-                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox2"))
-                .Add(factory.NewRibbonCheckBox("CustomVbaCheckBox3"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonCheckBox("CustomVbaCheckBox1"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonCheckBox("CustomVbaCheckBox2"))
+                .Add<IRibbonToggleSource>(factory.NewRibbonCheckBox("CustomVbaCheckBox3"))
 
-                .Add(factory.NewRibbonDropDown("CustomVbaDropDown1"))
-                .Add(factory.NewRibbonDropDown("CustomVbaDropDown2"))
-                .Add(factory.NewRibbonDropDown("CustomVbaDropDown3"))
+                .Add<IRibbonDropDownSource>(factory.NewRibbonDropDown("CustomVbaDropDown1"))
+                .Add<IRibbonDropDownSource>(factory.NewRibbonDropDown("CustomVbaDropDown2"))
+                .Add<IRibbonDropDownSource>(factory.NewRibbonDropDown("CustomVbaDropDown3"))
 
-                .Add(factory.NewRibbonButtonMso("CustomizableButton1"))
-                .Add(factory.NewRibbonButtonMso("CustomizableButton2"))
-                .Add(factory.NewRibbonButtonMso("CustomizableButton3"));
+                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton1"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton2"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton3"));
     }
 }

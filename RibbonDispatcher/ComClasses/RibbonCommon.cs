@@ -16,87 +16,66 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonCommon))]
     [Guid(Guids.RibbonCommon)]
-    public abstract class RibbonCommon : IRibbonCommon, IActivatableControl<IRibbonCommon> {
+    public abstract class RibbonCommon<TSource> : IRibbonCommon, IActivatable<IRibbonCommon,TSource>
+        where TSource : IRibbonCommonSource {
         /// <summary>TODO</summary>
-        protected RibbonCommon(string itemId, IRibbonControlStrings strings, bool visible, bool enabled) {
-            Id       = itemId;
-            Strings  = strings;
-            _visible = visible;
-            _enabled = enabled;
-        }
+        protected RibbonCommon(string itemId) => Id = itemId;
 
         /// <summary>TODO</summary>
         internal event ChangedEventHandler Changed;
 
         /// <inheritdoc/>
-        public         string Id        { get; }
+        public string Id        { get; }
         /// <inheritdoc/>
         [Description("Returns the KeyTip string for this control.")]
-        public virtual string KeyTip    => Strings?.KeyTip ?? "";
+        public string KeyTip => Strings?.KeyTip ?? "";
         /// <inheritdoc/>
         [Description("Returns the Label string for this control.")]
-        public virtual string Label     => Strings?.Label ?? Id;
+        public virtual string Label => Strings?.Label ?? Id;
         /// <inheritdoc/>
         [Description("Returns the screenTip string for this control.")]
-        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{Id} ScreenTip";
+        public string ScreenTip => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
-        public virtual string SuperTip  => Strings?.SuperTip ?? $"{Id} SuperTip";
+        public string SuperTip => Strings?.SuperTip ?? $"{Id} SuperTip";
         /// <inheritdoc/>
         [Description("Returns the SuperTip string for this control.")]
-        public virtual string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
+        public string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
         /// <inheritdoc/>
         [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        public virtual string Description => Strings?.Description ?? $"{Id} Description";
+        public string Description => Strings?.Description ?? $"{Id} Description";
 
         /// <inheritdoc/>
-        protected IRibbonControlStrings Strings { get; private set; }
+        protected virtual IRibbonControlStrings Strings => Source?.Strings;
+
+        /// <inheritdoc/>
+        public bool IsEnabled => Source?.IsEnabled ?? false;
+
+        /// <inheritdoc/>
+        public bool IsVisible => Source?.IsVisible ?? true;
+
+        /// <inheritdoc/>
+        public bool ShowInactive => Source?.ShowInactive ?? true;
 
         #region IActivatable implementation
-        public bool ShowActiveOnly { get; set; } = false;
+        protected TSource Source { get; private set; }
 
-        public virtual IRibbonCommon Attach() {
-            IsAttached = true;
-            return this;
-        }
+        protected bool IsAttached => Source != null;
 
-        public virtual T Attach<T>() where T : RibbonCommon {
-            IsAttached = true;
+        public virtual T Attach<T>(TSource source) where T:RibbonCommon<TSource> {
+            Source = source;
             Invalidate();
             return this as T;
         }
 
+        IRibbonCommon IActivatable<IRibbonCommon, TSource>.Attach(TSource source)
+        => Attach<RibbonCommon<TSource>>(source);
+
         public virtual void Detach() {
-            IsAttached = false;
-            SetLanguageStrings(RibbonControlStrings.Empty);
+            Source = default;
             Invalidate();
         }
-
-        /// <inheritdoc/>
-        public virtual bool IsEnabled {
-            get => _enabled  && IsAttached;
-            set { _enabled = value; Invalidate(); }
-        }
-        private bool _enabled;
-
-        /// <inheritdoc/>
-        public virtual bool IsVisible {
-            get => (_visible && IsAttached)  ||  ! ShowActiveOnly;
-            set { _visible = value; Invalidate(); }
-        }
-
-        protected bool IsAttached { get; private set; } = false;
-
-        private bool _visible;
         #endregion
-
-        /// <inheritdoc/>
-        public void SetLanguageStrings(IRibbonControlStrings strings) {
-            Strings = strings;
-            Invalidate();
-        }
-
-        public void SetLanguageStrings() => SetLanguageStrings(RibbonControlStrings.Default(Id));
 
         /// <inheritdoc/>
         public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));

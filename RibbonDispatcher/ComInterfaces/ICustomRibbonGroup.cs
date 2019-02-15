@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ICustomRibbonGroup : IRibbonGroup {
         /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
         [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
-        new void SetShowInactive(bool showInactive);
+        void SetShowInactive(bool showInactive);
 
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [DispId(DispIds.Id)]
@@ -46,10 +46,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Returns the SuperTip string for this control.")]
         new string SuperTip { get; }
 
-        /// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
-        [Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
-        [DispId(DispIds.SetLanguageStrings)]
-        new void SetLanguageStrings(IRibbonControlStrings strings);
+        ///// <summary>Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.</summary>
+        //[Description("Sets the Label, KeyTip, ScreenTip and SuperTip for this control from the supplied values.")]
+        //[DispId(DispIds.SetLanguageStrings)]
+        //new void SetLanguageStrings(IRibbonControlStrings strings);
 
         /// <summary>.</summary>
         [Description(".")]

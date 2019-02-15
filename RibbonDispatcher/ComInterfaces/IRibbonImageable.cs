@@ -16,18 +16,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
         [DispId(DispIds.ShowImage)]
         [Description("Gets or sets whether to show the control's image; ignored by Large controls.")]
-        bool ShowImage          { get; set; }
+        bool ShowImage          { get; }
         /// <summary>Gets or sets whether to show the control's label; ignored by Large controls.</summary>
         [DispId(DispIds.ShowLabel)]
         [Description("Gets or sets whether to show the control's label; ignored by Large controls.")]
-        bool ShowLabel          { get; set; }
-        /// <summary>Sets the current Image for the control as an {IPictureDisp}.</summary>
-        [DispId(DispIds.SetImageDisp)]
-        [Description("Sets the current Image for the control as an {IPictureDisp}.")]
-        void SetImageDisp(IPictureDisp Image);
-        /// <summary>Sets the current Image for the control as a {string} naming an MsoImage.</summary>
-        [DispId(DispIds.SetImageMso)]
-        [Description("Sets the current Image for the control as a {string} naming an MsoImage.")]
-        void SetImageMso(string ImageMso);
+        bool ShowLabel          { get; }
     }
 }

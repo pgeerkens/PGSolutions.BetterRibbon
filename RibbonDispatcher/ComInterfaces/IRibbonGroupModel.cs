@@ -12,20 +12,20 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonGroupModel)]
-    public interface IRibbonGroupModel : IRibbonControlSource {
+    public interface IRibbonGroupModel {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
-        new IRibbonControlStrings Strings {
+        IRibbonControlStrings Strings {
             [Description("Gets the {IRibbonControlStrings} for this control.")]
             get;
         }
 
         /// <summary>Gets or sets whether the control is enabled.</summary>
-        new bool IsEnabled {
+        bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
-        new bool IsVisible {
+        bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
@@ -47,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Invalidate();
     }
 
-    public interface IRibbonControlSource {
+    public interface IRibbonCommonSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
         IRibbonControlStrings Strings { get; }
 
@@ -57,6 +57,67 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Gets whether the control is visible.</summary>
         bool IsVisible { get; }
 
-        //void Invalidate();
+        bool ShowInactive { get;}
     }
+
+    public interface IRibbonButtonSource : IRibbonCommonSource {
+        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        new IRibbonControlStrings Strings { get; }
+
+        /// <summary>Gets whether the control is enabled.</summary>
+        new bool IsEnabled { get; }
+
+        /// <summary>Gets whether the control is visible.</summary>
+        new bool IsVisible { get; }
+
+        new bool ShowInactive { get; }
+
+        object Image       { get; }
+
+        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowImage     { get; }
+
+        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowLabel     { get; }
+
+        bool IsLarge       { get; }
+    }
+
+    public interface IRibbonToggleSource : IRibbonButtonSource {
+        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        new IRibbonControlStrings Strings { get; }
+
+        /// <summary>Gets whether the control is enabled.</summary>
+        new bool IsEnabled { get; }
+
+        /// <summary>Gets whether the control is visible.</summary>
+        new bool IsVisible { get; }
+
+        new bool ShowInactive { get; }
+
+        new object Image   { get; }
+
+        new bool ShowImage { get; }
+
+        new bool ShowLabel { get; }
+
+        new bool IsLarge   { get; }
+
+        bool IsPressed     { get; }
+    }
+
+    public interface IRibbonDropDownSource :IRibbonCommonSource {
+        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        new IRibbonControlStrings Strings { get; }
+
+        /// <summary>Gets whether the control is enabled.</summary>
+        new bool IsEnabled { get; }
+
+        /// <summary>Gets whether the control is visible.</summary>
+        new bool IsVisible { get; }
+
+        new bool ShowInactive { get; }
+
+        int SelectedIndex { get; }
+    } 
 }

@@ -12,7 +12,7 @@ namespace PGSolutions.BetterRibbon {
             IsLarge        = false;
             DisplayOption  = LabelImageOptions.ShowBoth;
 
-            ViewModel.Attach();
+         //   ViewModel.Attach();
         }
 
         private DemonstrationViewModel ViewModel  { get; set; }
