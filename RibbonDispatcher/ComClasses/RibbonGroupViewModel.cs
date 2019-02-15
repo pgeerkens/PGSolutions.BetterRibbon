@@ -16,7 +16,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Add<IRibbonCommonSource>(this);
         }
 
-        #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         IRibbonGroup IActivatable<IRibbonGroup, IRibbonCommonSource>.Attach(IRibbonCommonSource source)
@@ -26,7 +25,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             foreach (var c in Controls) c.Detach();
             base.Detach();
         }
-        #endregion
 
         public IRibbonFactory Factory { get; }
 
