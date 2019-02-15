@@ -97,8 +97,8 @@ namespace PGSolutions.BetterRibbon {
                 .Add<IRibbonDropDownSource>(factory.NewRibbonDropDown("CustomVbaDropDown2"))
                 .Add<IRibbonDropDownSource>(factory.NewRibbonDropDown("CustomVbaDropDown3"))
 
-                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton1"))
-                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton2"))
-                .Add<IRibbonButtonSource>(factory.NewRibbonButtonMso("CustomizableButton3"));
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton1"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton2"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton3"));
     }
 }

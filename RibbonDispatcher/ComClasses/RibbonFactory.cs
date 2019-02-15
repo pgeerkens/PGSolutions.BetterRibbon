@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -52,11 +51,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IResourceManager   ResourceManager { get; }
 
         private  readonly IDictionary<string, IRibbonCommon> _controls;
-        private  readonly IDictionary<string, ISizeable>    _sizeables;
-        private  readonly IDictionary<string, IClickable>   _clickables;
-        private  readonly IDictionary<string, ISelectable>  _selectables;
-        private  readonly IDictionary<string, IImageable>   _imageables;
-        private  readonly IDictionary<string, IToggleable>  _toggleables;
+        private  readonly IDictionary<string, ISizeable>     _sizeables;
+        private  readonly IDictionary<string, IClickable>    _clickables;
+        private  readonly IDictionary<string, ISelectable>   _selectables;
+        private  readonly IDictionary<string, IImageable>    _imageables;
+        private  readonly IDictionary<string, IToggleable>   _toggleables;
 
         internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
@@ -101,64 +100,33 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonGroupViewModel NewRibbonGroup(string itemId, bool visible = true, bool enabled = true)
-            => Add<RibbonGroupViewModel,IRibbonCommonSource>(new RibbonGroupViewModel(this, itemId));
+        public RibbonGroupViewModel NewRibbonGroup(string controlId)
+        => Add<RibbonGroupViewModel,IRibbonCommonSource>(new RibbonGroupViewModel(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonButton NewRibbonButton(string itemId, bool visible = true, bool enabled = true,
-            bool         isLarge   = true,
-            IPictureDisp image     = null,
-            bool         showImage = true,
-            bool         showLabel = true
-        ) => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(itemId));
-
-        /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonButton NewRibbonButtonMso(string itemId, bool visible = true, bool enabled = true,
-            bool         isLarge   = true,
-            string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
-            bool         showImage = true,
-            bool         showLabel = true
-        ) => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(itemId));
+        public RibbonButton NewRibbonButton(string controlId)
+        => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonToggleButton NewRibbonToggle(string itemId, bool visible = true, bool enabled = true,
-            bool         isLarge   = true,
-            IPictureDisp image     = null,
-            bool         showImage = true,
-            bool         showLabel = true
-        ) => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(itemId));
-
-        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonToggleButton NewRibbonToggleMso(string itemId, bool visible = true, bool enabled = true,
-            bool         isLarge   = true,
-            string       imageMso  = "MacroSecurity",  // This one gets people's attention ;-)
-            bool         showImage = true,
-            bool         showLabel = true
-        ) => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(itemId));
+        public RibbonToggleButton NewRibbonToggle(string controlId)
+        => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(controlId));
 
         /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonCheckBox NewRibbonCheckBox(string itemId, bool visible = true, bool enabled = true)
-            => Add<RibbonCheckBox,IRibbonToggleSource>(new RibbonCheckBox(itemId));
+        public RibbonCheckBox NewRibbonCheckBox(string controlId)
+        => Add<RibbonCheckBox,IRibbonToggleSource>(new RibbonCheckBox(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonDropDown NewRibbonDropDown(string itemId, bool visible = true, bool enabled = true)
-            => Add<RibbonDropDown,IRibbonDropDownSource>(new RibbonDropDown(itemId));
+        public RibbonDropDown NewRibbonDropDown(string controlId)
+        => Add<RibbonDropDown,IRibbonDropDownSource>(new RibbonDropDown(controlId));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public SelectableItem NewSelectableItem(string itemId, IPictureDisp image = null)
-            => new SelectableItem(itemId, GetStrings(itemId), new ImageObject(image));
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public SelectableItem NewSelectableItemMso(string itemId, string imageMso = "MacroSecurity")
-            => new SelectableItem(itemId, GetStrings(itemId), new ImageObject(imageMso));
+        public SelectableItem NewSelectableItem(string controlId)
+        => new SelectableItem(controlId);
 
         /// <inheritdoc/>
         public IResourceLoader NewResourceLoader() => ResourceLoader;

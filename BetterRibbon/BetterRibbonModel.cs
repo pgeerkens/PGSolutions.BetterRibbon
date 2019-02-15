@@ -107,12 +107,6 @@ namespace PGSolutions.BetterRibbon {
         private TControl GetControl<TControl>(string controlId) where TControl:class,IRibbonCommon =>
             CustomButtonsModel.GetControl<TControl>(controlId);
 
-        //private static TControl SetStrings<TControl>(TControl ctrl, IRibbonControlStrings strings)
-        //where TControl:RibbonCommon {
-        //    ctrl?.SetLanguageStrings(strings ?? RibbonControlStrings.Default(ctrl.Id));
-        //    return ctrl;
-        //}
-
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         /// <inheritdoc/>

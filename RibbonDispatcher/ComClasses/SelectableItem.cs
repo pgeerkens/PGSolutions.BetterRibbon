@@ -17,10 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class SelectableItem : RibbonCommon<ISelectableItemSource>,
             IActivatable<SelectableItem, ISelectableItemSource>, ISelectableItem, IImageable {
         /// <summary>TODO</summary>
-        internal SelectableItem(string ItemId, IRibbonControlStrings strings, ImageObject Image) 
-        : base(ItemId) {
-            Strings = strings;
-        }
+        internal SelectableItem(string ItemId) : base(ItemId) { }
 
         #region IActivatable implementation
         SelectableItem IActivatable<SelectableItem, ISelectableItemSource>.Attach(ISelectableItemSource source)
@@ -42,7 +39,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;
         #endregion
-
-        protected override IRibbonControlStrings Strings { get; }
     }
 }
