@@ -101,9 +101,7 @@
     <Compile Include="ComClasses\RibbonGroupModel.cs" />
     <Compile Include="ComClasses\RibbonToggleModel.cs" />
     <Compile Include="ComClasses\SelectableItemModel.cs" />
-    <Compile Include="ComInterfaces\IBooleanSource.cs" />
     <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
-    <Compile Include="ComInterfaces\IIntegerSource.cs" />
     <Compile Include="ComInterfaces\IRibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDownModel.cs" />
     <Compile Include="ComInterfaces\IRibbonGroupModel.cs" />

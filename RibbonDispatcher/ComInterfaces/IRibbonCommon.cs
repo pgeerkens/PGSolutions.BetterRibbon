@@ -47,5 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsVisible      { get; }
 
         void Invalidate();
+
+        void Detach();
     }
 }

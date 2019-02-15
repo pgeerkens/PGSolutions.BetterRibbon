@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
+    /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
@@ -34,47 +34,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "");
 
-        ///// <summary>Deactivate the specified control, detaching any attached data source.</summary>
-        ///// <param name="controlId">The ID of the control to be detached.</param>
-        //[Description("Deactivate the specified control, detaching any attached data source.")]
-        ////[DispId(4)]
-        //void DetachProxy(string controlId);
-
-        ///// <summary>Attaches and activates the specified Button control.</summary>
-        ///// <param name="controlId">The </param>
-        ///// <param name="strings">The text strings to be displayed for this control.</param>
-        ///// <returns></returns>
-        //[Description("Attaches and activates the specified Button control.")]
-        ////[DispId(6)]
-        //IRibbonButton AttachButton(string controlId, IRibbonControlStrings strings,
-        //        IRibbonButtonSource source);
-
-        ///// <summary>Attaches an {IBooleanSource} to the specified ToggleButton control.</summary>
-        ///// <param name="controlId">The ID of the control to be attached to the specified data source.</param>
-        ///// <param name="strings">The text strings to be displayed for this control.</param>
-        ///// <returns></returns>
-        //[Description("Attaches an {IBooleanSource} to the specified ToggleButton control.")]
-        ////[DispId(7)]
-        //IRibbonToggle AttachToggle(string controlId, IRibbonControlStrings strings,
-        //        IRibbonToggleSource source);
-
-        ///// <summary>Attaches an {IBooleanSource} to the specified CheckBox control.</summary>
-        ///// <param name="controlId">The ID of the control to be attached to the specified data source.</param>
-        ///// <param name="strings">The text strings to be displayed for this control.</param>
-        ///// <returns></returns>
-        //[Description("Attaches an {IBooleanSource} to the specified CheckBox control.")]
-        ////[DispId(8)]
-        //IRibbonToggle AttachCheckBox(string controlId, IRibbonControlStrings strings,
-        //        IRibbonToggleSource source);
-
-        ///// <summary>Attaches an {IIntegerSource} to the specified DropDown control.</summary>
-        ///// <param name="controlId">The ID of the control to be attached to the specified data source.</param>
-        ///// <param name="strings">The text strings to be displayed for this control.</param>
-        ///// <returns></returns>
-        //[Description("Attaches an {IIntegerSource} to the specified DropDown control.")]
-        ////[DispId(9)]
-        //IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
-        //        IRibbonDropDownSource source);
+        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
+        /// <param name="controlId">The ID of the control to be detached.</param>
+        [Description("Deactivate the specified control, detaching any attached data source.")]
+        //[DispId(4)]
+        void DetachProxy(string controlId);
 
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>

@@ -90,29 +90,9 @@ namespace PGSolutions.BetterRibbon {
          /// <inheritdoc/>
         public void InvalidateControl(string ControlId) => ViewModel?.InvalidateControl(ControlId);
 
-        // /// <inheritdoc/>
-        //public IRibbonButton   AttachButton(string controlId, IRibbonControlStrings strings) =>
-        //    SetStrings(GetControl<RibbonButton>(controlId),strings).Attach() as IRibbonButton;
-
-        // /// <inheritdoc/>
-        //public IRibbonToggle   AttachCheckBox(string controlId, IRibbonControlStrings strings,
-        //        IBooleanSource source) =>
-        //    SetStrings(GetControl<RibbonCheckBox>(controlId),strings).Attach(source.Getter);
-
-        // /// <inheritdoc/>
-        //public IRibbonDropDown AttachDropDown(string controlId, IRibbonControlStrings strings,
-        //        IIntegerSource source) =>
-        //    SetStrings(GetControl<RibbonDropDown>(controlId),strings).Attach(source.Getter);
-
-        // /// <inheritdoc/>
-        //public IRibbonToggle   AttachToggle(string controlId, IRibbonControlStrings strings,
-        //        IBooleanSource source) =>
-        //    SetStrings(GetControl<RibbonToggleButton>(controlId),strings).Attach(source.Getter);
-
-        ///// <inheritdoc/>
-        //internal void DetachProxy<TControl>(string controlId)
-        //where TControl:class,IRibbonCommon
-        //=> CustomButtonsModel.GetControl<TControl>(controlId)?.Detach();
+        /// <inheritdoc/>
+        public void DetachProxy(string controlId)
+        => CustomButtonsModel.GetControl<IRibbonCommon>(controlId)?.Detach();
 
         /// <inheritdoc/>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
@@ -149,40 +129,30 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id),
-        //        strings, image, isEnabled, isVisible);
         => CustomButtonsModel.NewButtonModel(strings, image, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonButtonModel(id => CustomButtonsModel.GetControl<RibbonButton>(id),
-        //        strings, imageMso, isEnabled, isVisible);
         => CustomButtonsModel.NewButtonModel(strings, imageMso, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id),
-        //        strings, image, isEnabled, isVisible);
         => CustomButtonsModel.NewToggleModel(strings, image, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonToggleModel(id => CustomButtonsModel.GetControl<RibbonCheckBox>(id),
-        //        strings, imageMso, isEnabled, isVisible);
         => CustomButtonsModel.NewToggleModel(strings, imageMso, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        //=> new RibbonDropDownModel(id => CustomButtonsModel.GetControl<RibbonDropDown>(id),
-        //        strings, isEnabled, isVisible);
         => CustomButtonsModel.NewDropDownModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>

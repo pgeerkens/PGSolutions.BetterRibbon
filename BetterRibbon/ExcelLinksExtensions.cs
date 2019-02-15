@@ -23,6 +23,7 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         public const string ErrorsSheetName = "Links Errors";
 
+        /// <inheritdoc/>
         public static string ToggleImage(this bool isPressed)
         => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 

@@ -33,8 +33,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
-        { }
+        : base(funcViewModel, strings, isEnabled, isVisible) { }
 
         public event ToggledEventHandler Toggled;
 

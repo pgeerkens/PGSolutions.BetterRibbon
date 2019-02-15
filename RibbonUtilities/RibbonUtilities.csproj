@@ -125,7 +125,6 @@
     <Compile Include="VbaSourceExport\Extensions.cs" />
     <Compile Include="VbaSourceExport\IApplication.cs" />
     <Compile Include="VbaSourceExport\IProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\IVbaSourceExportViewModel.cs" />
     <Compile Include="VbaSourceExport\NativeMethods.cs" />
     <Compile Include="VbaSourceExport\ProjectFilter.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
