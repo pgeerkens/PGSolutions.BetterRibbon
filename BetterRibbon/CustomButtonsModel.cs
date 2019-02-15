@@ -1,7 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -28,13 +27,7 @@ namespace PGSolutions.BetterRibbon {
 
         public void   Invalidate() => ViewModel.Invalidate();
 
-        public void SetShowInactive(bool showInactive, Func<IRibbonCommonSource,bool> predicate) {
-            foreach (var model in Models) { 
-                if(model is IRibbonCommonSource m  &&  predicate(m)) {
-                    m.ShowInactive = showInactive;
-                }
-            }
-        }
+        public void SetShowInactive(bool showInactive) => ViewModel.SetShowInactive(showInactive);
 
         public TControl GetControl<TControl>(string controlId) where TControl:class,IRibbonCommon
         => ViewModel.GetControl<TControl>(controlId);
@@ -43,7 +36,7 @@ namespace PGSolutions.BetterRibbon {
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true) {
             var model = Models.Add(new RibbonButtonModel(id => GetControl<RibbonButton>(id),
                     strings, image, isEnabled, isVisible));
-            model.ShowInactive = false;
+            model.SetShowInactive(false);
             model.Invalidate();
             return model;
         }
@@ -52,7 +45,7 @@ namespace PGSolutions.BetterRibbon {
                 string imageMso = null, bool isEnabled = true, bool isVisible = true) {
             var model = Models.Add(new RibbonButtonModel(id => GetControl<RibbonButton>(id),
                     strings, imageMso, isEnabled, isVisible));
-            model.ShowInactive = false;
+            model.SetShowInactive(false);
             model.Invalidate();
             return model;
         }
@@ -61,7 +54,7 @@ namespace PGSolutions.BetterRibbon {
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true) {
             var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
                     strings, image, isEnabled, isVisible));
-            model.ShowInactive = false;
+            model.SetShowInactive(false);
             model.Invalidate();
             return model;
         }
@@ -70,7 +63,7 @@ namespace PGSolutions.BetterRibbon {
                 string imageMso = null, bool isEnabled = true, bool isVisible = true) {
             var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
                     strings, imageMso, isEnabled, isVisible));
-            model.ShowInactive = false;
+            model.SetShowInactive(false);
             model.Invalidate();
             return model;
         }
@@ -79,7 +72,7 @@ namespace PGSolutions.BetterRibbon {
                 bool isEnabled = true, bool isVisible = true) {
             var model = Models.Add(new RibbonDropDownModel(id => GetControl<RibbonDropDown>(id),
                     strings, isEnabled, isVisible));
-            model.ShowInactive = false;
+            model.SetShowInactive(false);
             model.Invalidate();
             return model;
         }

@@ -21,9 +21,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class RibbonGroupModel : RibbonControlModel<RibbonGroupViewModel>, IRibbonGroupModel,
                 IRibbonCommonSource {
         public RibbonGroupModel(Func<string, RibbonGroupViewModel> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+                IRibbonControlStrings strings, bool isEnabled, bool isVisible,
+                IRibbonCommonSource groupMaster)
         : base(funcViewModel, strings, isEnabled, isVisible)
-        { }
+        => GroupMaster = groupMaster;
 
         /// <inheritdoc/>
         public IRibbonGroupModel Attach(string controlId) {
@@ -34,5 +35,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             }
             return this;
         }
+
+        public override void SetShowInactive(bool showInactive)
+        => GroupMaster.SetShowInactive(showInactive);
+
+        private IRibbonCommonSource GroupMaster { get; }
     }
 }

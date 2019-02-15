@@ -10,6 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         string Id           { get; }
         void   Detach();
         void   Invalidate();
+        void   SetShowInactive(bool showInactive);
     }
     [ComVisible(false)]
     public interface IActivatable<TCtrl, TSource> : IActivatable
@@ -19,5 +20,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         new string Id { get; }
         new void   Detach();
-   }
+        new void   SetShowInactive(bool showInactive);
+    }
 }

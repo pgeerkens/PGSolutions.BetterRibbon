@@ -155,11 +155,18 @@ namespace PGSolutions.BetterRibbon {
                 bool isEnabled = true, bool isVisible = true)
         => CustomButtonsModel.NewDropDownModel(strings, isEnabled, isVisible);
 
+        ///// <inheritdoc/>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        //public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
+        //        bool isEnabled = true, bool isVisible = true)
+        //=> new RibbonGroupModel(id => CustomButtonsModel.GetControl<RibbonGroupViewModel>(id),
+        //        strings, isEnabled, isVisible);
+
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => new RibbonGroupModel(id => CustomButtonsModel.GetControl<RibbonGroupViewModel>(id),
-                strings, isEnabled, isVisible);
+                strings, isEnabled, isVisible, CustomButtonsModel);
     }
 }

@@ -24,7 +24,7 @@ namespace PGSolutions.BetterRibbon {
 
         public bool IsEnabled    { get; set; } = true;
         public bool IsVisible    { get; set; } = true;
-        public bool ShowInactive { get; set; } = true;
+        public bool ShowInactive { get; private set; } = true;
 
         public IRibbonControlStrings Strings { get; private set; }
 
@@ -94,5 +94,10 @@ namespace PGSolutions.BetterRibbon {
 
         IRibbonControlStrings GetStrings(string id)
         => ViewModel.Factory.ResourceManager.GetControlStrings(id);
+
+        public void SetShowInactive(bool showInactie) {
+            ShowInactive = showInactie;
+            Invalidate();
+        }
     }
 }

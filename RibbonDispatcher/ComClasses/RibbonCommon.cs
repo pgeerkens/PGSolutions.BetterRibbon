@@ -52,10 +52,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool IsEnabled => Source?.IsEnabled ?? false;
 
         /// <inheritdoc/>
-        public bool IsVisible => Source?.IsVisible ?? true;
+        public bool IsVisible => Source?.IsVisible ?? ShowInactive;
 
         /// <inheritdoc/>
-        public bool ShowInactive => Source?.ShowInactive ?? false;
+        public bool ShowInactive => Source?.ShowInactive ?? _defaultShowInactive;
 
         #region IActivatable implementation
         protected TSource Source { get; private set; }
@@ -76,6 +76,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Invalidate();
         }
         #endregion
+
+        public void SetShowInactive(bool showInactive) {
+            _defaultShowInactive = showInactive; Invalidate();
+        } bool _defaultShowInactive = false;
 
         /// <inheritdoc/>
         public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
