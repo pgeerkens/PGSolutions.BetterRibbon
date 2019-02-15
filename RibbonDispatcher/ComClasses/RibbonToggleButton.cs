@@ -29,6 +29,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #region IActivatable implementation
         RibbonToggleButton IActivatable<RibbonToggleButton, IRibbonToggleSource>.Attach(IRibbonToggleSource source)
         => Attach<RibbonToggleButton>(source);
+
+        public override void Detach() {
+            base.Detach();
+        }
         #endregion
 
         #region IToggleable implementation

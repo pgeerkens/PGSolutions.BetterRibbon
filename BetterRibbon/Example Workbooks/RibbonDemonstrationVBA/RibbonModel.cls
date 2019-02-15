@@ -152,6 +152,7 @@ End Sub
 
 Private Sub Button3_Clicked(ByVal Sender As Variant)
     On Error GoTo EH
+    If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
     Activate
 XT: Exit Sub

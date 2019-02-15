@@ -12,19 +12,24 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IRibbonCommonSource {
         protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel){
-            ViewModel = viewModel;
-            (ViewModel as IActivatable<IRibbonGroup,IRibbonCommonSource>)?.Attach(this);
+            ViewModel = (viewModel as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
+                      .Attach(this);
 
             Invalidate();
         }
 
-        public void Invalidate() => ViewModel.Invalidate();
-
-        private RibbonGroupViewModel ViewModel { get; }
-
         public bool IsEnabled    { get; set; } = true;
         public bool IsVisible    { get; set; } = true;
         public bool ShowInactive { get; private set; } = true;
+
+        private RibbonGroupViewModel ViewModel { get; }
+
+        public void Invalidate() => ViewModel.Invalidate();
+
+        public void SetShowInactive(bool showInactie) {
+            ShowInactive = showInactie;
+            Invalidate();
+        }
 
         public IRibbonControlStrings Strings { get; private set; }
 
@@ -94,10 +99,5 @@ namespace PGSolutions.BetterRibbon {
 
         IRibbonControlStrings GetStrings(string id)
         => ViewModel.Factory.ResourceManager.GetControlStrings(id);
-
-        public void SetShowInactive(bool showInactie) {
-            ShowInactive = showInactie;
-            Invalidate();
-        }
     }
 }

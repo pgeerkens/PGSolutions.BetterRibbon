@@ -39,6 +39,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public override void SetShowInactive(bool showInactive)
         => GroupMaster.SetShowInactive(showInactive);
 
+        public void Detach() {
+            ViewModel.DetachControls();
+        }
+
         private IRibbonCommonSource GroupMaster { get; }
     }
 }

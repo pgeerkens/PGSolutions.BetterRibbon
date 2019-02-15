@@ -8,8 +8,8 @@ using stdole;
 namespace PGSolutions.BetterRibbon {
     internal sealed class CustomButtonsModel : IRibbonCommonSource {
         public CustomButtonsModel(RibbonGroupViewModel viewModel) {
-            ViewModel = (viewModel as IActivatable<IRibbonGroup, IRibbonCommonSource>).Attach(this)
-                    as RibbonGroupViewModel;
+            ViewModel = (viewModel as IActivatable<RibbonGroupViewModel,IRibbonCommonSource>)
+                      .Attach(this);
 
             Invalidate();
         }

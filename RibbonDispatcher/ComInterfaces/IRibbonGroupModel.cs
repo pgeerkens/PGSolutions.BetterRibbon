@@ -46,6 +46,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
         void Invalidate();
+
+        /// <summary>Detaches this Ribbon Group, and all child models, from their view-models.</summary>
+        [Description("Detaches this Ribbon Group, and all child models, from their view-models.")]
+        void Detach();
     }
 
     public interface IRibbonCommonSource {
