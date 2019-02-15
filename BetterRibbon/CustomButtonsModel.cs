@@ -59,7 +59,7 @@ namespace PGSolutions.BetterRibbon {
 
         public IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true) {
-            var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonToggleButton>(id),
+            var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
                     strings, image, isEnabled, isVisible));
             model.ShowInactive = false;
             model.Invalidate();
@@ -68,7 +68,7 @@ namespace PGSolutions.BetterRibbon {
 
         public IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
                 string imageMso = null, bool isEnabled = true, bool isVisible = true) {
-            var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonToggleButton>(id),
+            var model = Models.Add(new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
                     strings, imageMso, isEnabled, isVisible));
             model.ShowInactive = false;
             model.Invalidate();
