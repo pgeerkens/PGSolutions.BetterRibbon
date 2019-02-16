@@ -22,7 +22,7 @@ namespace PGSolutions.BetterRibbon {
         internal Main() { }
 
          /// <inheritdoc/>
-        public IRibbonDispatcher NewBetterRibbon() => Globals.ThisAddIn.Model as IRibbonDispatcher;
+        public IRibbonDispatcher NewBetterRibbon() => Globals.ThisAddIn.Model.Dispatcher;
 
         /// <inheritdoc/>
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();

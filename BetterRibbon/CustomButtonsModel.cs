@@ -19,9 +19,11 @@ namespace PGSolutions.BetterRibbon {
         public bool ShowInactive { get; set; } = false;
         public IRibbonControlStrings Strings { get; }
 
-        private RibbonGroupViewModel ViewModel { get; set; }
+        internal RibbonGroupViewModel ViewModel { get; set; }
 
         public void   Invalidate() => ViewModel.Invalidate();
+
+        internal void DetachControls() => ViewModel?.DetachControls();
 
         public void SetShowInactive(bool showInactive) => ViewModel.SetShowInactive(showInactive);
 

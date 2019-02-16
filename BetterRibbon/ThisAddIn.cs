@@ -17,7 +17,7 @@ namespace PGSolutions.BetterRibbon {
     public partial class ThisAddIn {
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            ViewModel = new BetterRibbonViewModel();
+            ViewModel = new BetterRibbonViewModel("TabPGSolutions");
             ViewModel.Initialized += ViewModel_Initialized;
             return ViewModel;
         }
@@ -57,12 +57,12 @@ namespace PGSolutions.BetterRibbon {
 
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         private void Workbook_Deactivate(Workbook wb)
-        => ViewModel.DetachControls();
+        => Model?.CustomButtonsModel?.DetachControls();
 
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wn" )]
         private void Window_Deactivate(Workbook wb, Excel.Window wn) 
-        => ViewModel.DetachControls();
+        => Model?.CustomButtonsModel?.DetachControls();
 
         #region VSTO generated code
 

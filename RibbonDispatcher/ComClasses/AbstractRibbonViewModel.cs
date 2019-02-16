@@ -9,7 +9,6 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
@@ -45,7 +44,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _ribbonFactory.Changed += PropertyChanged;
         }
 
-        public virtual void OnRibbonLoad(IRibbonUI ribbonUI) => RibbonUI = ribbonUI;
+        #region IRibbonExtensibility implementation
+        /// <summary>Raised to signal completion of the Ribbon load.</summary>
+        public event EventHandler Initialized;
+
+        /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
+        public abstract string GetCustomUI(string RibbonID);
+
+        /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
+        [CLSCompliant(false)]
+        public virtual void OnRibbonLoad(IRibbonUI ribbonUI) {
+            RibbonUI = ribbonUI;
+
+            Initialized?.Invoke(this, EventArgs.Empty);
+
+            Invalidate();
+        }
+        #endregion
 
         /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);

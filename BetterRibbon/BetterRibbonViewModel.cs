@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
@@ -11,6 +12,8 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
+    using GroupViewModelFactory = Func<IRibbonFactory,RibbonGroupViewModel>;
+
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226">For more information about adding callback methods.</a>
@@ -23,56 +26,38 @@ namespace PGSolutions.BetterRibbon {
     /// </remarks>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [ComVisible(true)]
-    [CLSCompliant(true)]
+    [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
     //[Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class BetterRibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
-        const string _assemblyName  = "BetterRibbon";
+        const string _assemblyName = "BetterRibbon";
 
-        internal BetterRibbonViewModel() : base(new LocalResourceManager(_assemblyName)) {
-            Id = "TabPGSolutions";
+        internal BetterRibbonViewModel(string controlId)
+        : base(new LocalResourceManager(_assemblyName))
+        => Id = controlId;
 
-            BrandingViewModel      = RibbonFactory.NewRibbonGroup("BrandingGroup");
-            LinksAnalysisViewModel = RibbonFactory.NewRibbonGroup("LinksAnalysisGroup");
-            VbaExportViewModel_PG  = RibbonFactory.NewRibbonGroup("VbaExportGroupPG");
-            VbaExportViewModel_MS  = RibbonFactory.NewRibbonGroup("VbaExportGroupMS");
-            CustomButtonsViewModel = RibbonFactory.NewCustomButtonsViewModel();
-        }
-
-        internal RibbonGroupViewModel BrandingViewModel      { get; private set; }
-        internal RibbonGroupViewModel CustomButtonsViewModel { get; private set; }
-        internal RibbonGroupViewModel LinksAnalysisViewModel { get; private set; }
-        internal RibbonGroupViewModel VbaExportViewModel_MS  { get; private set; }
-        internal RibbonGroupViewModel VbaExportViewModel_PG  { get; private set; }
-
-        internal void DetachControls() => CustomButtonsViewModel?.DetachControls();
-
-        /// <summary>.</summary>
-        public string GetCustomUI(string RibbonID) => Resources.Ribbon;
-
-        /// <summary>.</summary>
-        public event EventHandler Initialized;
-
-         /// <summary>.</summary>
-       public bool IsInitialized => RibbonUI != null;
-
-        /// <summary>.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1061:DoNotHideBaseClassMethods",
-                Justification="False positive - parameter types are identical.")]
-        [CLSCompliant(false)]
-        public sealed override void OnRibbonLoad(IRibbonUI ribbonUI) {
-            base.OnRibbonLoad(ribbonUI);
-
-            Initialized?.Invoke(this, EventArgs.Empty);
-
-            Invalidate();
-        }
+        #region IRibbonExtensibility implementation
+        /// <inheritdoc/>
+        public override string GetCustomUI(string RibbonID) => Resources.Ribbon;
+        #endregion
 
         /// <summary>.</summary>
         protected override string Id { get; }
 
-        /// <summary>.</summary>
-        public static string MsgBoxTitle => Resources.ApplicationName;
+        public RibbonGroupViewModel AddGroupViewModel(string groupName) {
+            var viewModel = RibbonFactory.NewRibbonGroup(groupName);
+            GroupViewModels.Add(viewModel);
+            return viewModel;
+        }
+
+        public RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func) {
+            var viewModel = func(RibbonFactory);
+            GroupViewModels.Add(viewModel);
+            return viewModel;
+        }
+
+        private IList<RibbonGroupViewModel> GroupViewModels { get; }
+                                        = new List<RibbonGroupViewModel>();
     }
 }
