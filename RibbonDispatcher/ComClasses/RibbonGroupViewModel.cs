@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -30,9 +31,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected KeyedCollection<string,IActivatable> Controls { get; }
 
-        public override void Invalidate() {
-            foreach (var ctrl in Controls) { if (ctrl != this) ctrl.Invalidate(); }
+        public override void Invalidate() => Invalidate(null);
 
+        internal void Invalidate(Action<IActivatable> action) {
+            foreach (var ctrl in Controls) {
+                if (ctrl != this) {
+                    action?.Invoke(ctrl);
+                    ctrl.Invalidate(); 
+                }
+            }
             base.Invalidate();
         }
 

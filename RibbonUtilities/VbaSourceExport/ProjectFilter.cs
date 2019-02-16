@@ -47,7 +47,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
             catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)
                                       ||  ex.HResult == unchecked((int)0x800AC35C)) {
-                throw new IOException($"A file or directory conflict occurred. Please retry.", ex);
+                throw new IOException(
+                    $"A file or directory conflict occurred. Please retry.\n\nPath:\n{path}", ex);
             }
         }
 

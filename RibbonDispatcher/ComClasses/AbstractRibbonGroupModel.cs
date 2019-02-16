@@ -27,11 +27,15 @@ namespace PGSolutions.BetterRibbon {
 
         protected RibbonGroupViewModel ViewModel { get; }
 
-        public void Invalidate() => ViewModel.Invalidate();
+        public void Invalidate() => Invalidate(null);
 
+        public void Invalidate(Action<IActivatable> action) => ViewModel.Invalidate(action);
+
+        /// <summary>Set ShowInactive for al- child controls of this ViewModel - even the unattached.</summary>
+        /// <param name="showInactive">The <see cref="bool"/> value to be set</param>
         public void SetShowInactive(bool showInactive) {
             ShowInactive = showInactive;
-            Invalidate();
+            ViewModel.Invalidate(c => c.SetShowInactive(ShowInactive));
         }
 
         public void DetachControls() => ViewModel?.DetachControls();
