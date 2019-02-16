@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -39,10 +38,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>TODO</summary>
         public event SelectedEventHandler  SelectionMade;
 
-        private IList<ISelectableItem>  _items  => Source?.Items ?? new List<ISelectableItem>();
-
         /// <inheritdoc/>
-        public string   SelectedItemId => _items[SelectedItemIndex].Id;
+        public string   SelectedItemId => Source[SelectedItemIndex].Id;
 
         /// <inheritdoc/>
         public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
@@ -53,34 +50,28 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Invalidate();
         }
 
-        ///// <summary>Returns this RibbonDropDown with a new {SelectableItem} in its list.</summary>
-        //public IRibbonDropDown AddItem(ISelectableItem SelectableItem) {
-        //    _items.Add(SelectableItem);
-        //    Invalidate();
-        //    return this;
-        //}
-
         /// <inheritdoc/>
-        public ISelectableItem this[int ItemIndex] => _items[ItemIndex];
+        public ISelectableItem this[int ItemIndex] => Source[ItemIndex];
         /// <inheritdoc/>
-        public ISelectableItem this[string ItemId] => ( from i in _items where i.Id == ItemId select i ).FirstOrDefault();
+        public ISelectableItem this[string ItemId]
+        => Source.FirstOrDefault(i => i.Id == ItemId);
 
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        public int      ItemCount                => _items?.Count ?? -1;
+        public int      ItemCount                => Source?.Count ?? 0;
         /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
-        public string   ItemId(int Index)        => _items[Index].Id;
+        public string   ItemId(int Index)        => Source[Index].Id;
         /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        public string   ItemLabel(int Index)     => _items[Index].Label;
+        public string   ItemLabel(int Index)     => Source[Index].Label;
         /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public string   ItemScreenTip(int Index) => _items[Index].ScreenTip;
+        public string   ItemScreenTip(int Index) => Source[Index].ScreenTip;
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public string   ItemSuperTip(int Index)  => _items[Index].SuperTip;
+        public string   ItemSuperTip(int Index)  => Source[Index].SuperTip;
         /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
         public object   ItemImage(int Index)     => "MacroSecurity";
         /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public bool     ItemShowImage(int Index) => _items[Index].ShowImage;
+        public bool     ItemShowImage(int Index) => Source[Index].ShowImage;
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public bool     ItemShowLabel(int Index) => _items[Index].ShowImage;
+        public bool     ItemShowLabel(int Index) => Source[Index].ShowImage;
         #endregion
     }
 }

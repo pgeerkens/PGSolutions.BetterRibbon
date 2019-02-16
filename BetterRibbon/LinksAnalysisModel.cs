@@ -10,7 +10,9 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
-        public LinksAnalysisModel(RibbonGroupViewModel viewModel) : base(viewModel) {
+        public LinksAnalysisModel(RibbonGroupViewModel viewModel) : this(viewModel,null) { }
+        public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)
+        : base(viewModel,strings) {
             AnalyzeCurrentModel  = GetModel<RibbonButton>("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
             AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
 

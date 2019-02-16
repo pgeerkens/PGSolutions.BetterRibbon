@@ -36,19 +36,6 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel) {
             ViewModel   = viewModel;
 
-            if(viewModel.IsInitialized) {
-                OnViewModelInitialized();
-            } else {
-                ViewModel.Initialized += ViewModelInitialized;
-            }
-        }
-
-        private void ViewModelInitialized(object sender, EventArgs e) {
-            OnViewModelInitialized();
-            ViewModel.Initialized -= ViewModelInitialized;
-        }
-
-        private void OnViewModelInitialized() {
             BrandingModel        = new BrandingModel(ViewModel?.BrandingViewModel, BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel?.LinksAnalysisViewModel);
             VbaSourceExportModel = new VbaSourceExportModel(
@@ -57,30 +44,22 @@ namespace PGSolutions.BetterRibbon {
                         new VbaSourceExportGroupModel(ViewModel?.VbaExportViewModel_PG,"PG")
                     });
             CustomButtonsModel   = new CustomButtonsModel(ViewModel.CustomButtonsViewModel);
-
-            DemonstrationModel   = new DemonstrationModel(ViewModel.DemonstrationViewModel);
         }
 
-        private BetterRibbonViewModel ViewModel            { get; set; }
+        private  BetterRibbonViewModel ViewModel            { get; }
 
-        private BrandingModel         BrandingModel        { get; set; }
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private LinksAnalysisModel    LinksAnalysisModel   { get; set; }
-        [SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
-        private VbaSourceExportModel  VbaSourceExportModel { get; set; }
-        private DemonstrationModel    DemonstrationModel   { get; set; }
-        private CustomButtonsModel    CustomButtonsModel   { get; set; }
+        internal BrandingModel         BrandingModel        { get; private set; }
+        internal LinksAnalysisModel    LinksAnalysisModel   { get; private set; }
+        internal VbaSourceExportModel  VbaSourceExportModel { get; private set; }
+        internal CustomButtonsModel    CustomButtonsModel   { get; private set; }
 
-         /// <inheritdoc/>
-        public void Attach() => DemonstrationModel.Attach();
-         /// <inheritdoc/>
-        public void Detach() => DemonstrationModel.Detach();
 
         #region IRibbonDispatcher methods
          /// <inheritdoc/>
         public void Invalidate() {
             BrandingModel?.Invalidate();
-            DemonstrationModel?.Invalidate();
+            LinksAnalysisModel?.Invalidate();
+            VbaSourceExportModel?.Invalidate();
             CustomButtonsModel?.Invalidate();
         }
 
@@ -104,17 +83,13 @@ namespace PGSolutions.BetterRibbon {
                     superTip, keyTip, alternateLabel, description);
         #endregion
 
-        private TControl GetControl<TControl>(string controlId) where TControl:class,IRibbonCommon =>
-            CustomButtonsModel.GetControl<TControl>(controlId);
-
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         /// <inheritdoc/>
-        public ISelectableItem NewSelectableItem(string controlID, string label) {
-            var model = new SelectableItemModel(id=>ViewModel.RibbonFactory.NewSelectableItem(id),
-                                new RibbonControlStrings(label),true,true);
-
-            model.Attach(controlID);
+        public ISelectableItemModel NewSelectableModel(string controlID, IRibbonControlStrings strings) {
+            var vm = ViewModel.RibbonFactory.NewSelectableItem(controlID);
+            var model = new SelectableItemModel(id => vm, strings, true, true)
+                        .Attach(controlID);
             return model;
         }
 

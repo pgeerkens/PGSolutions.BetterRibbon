@@ -16,38 +16,53 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         /// <summary>.</summary>
-        public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
-            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
-            : null;
-        /// <summary>.</summary>
-        public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
-        /// <summary>.</summary>
-        public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
+            ViewModel = new BetterRibbonViewModel();
+            ViewModel.Initialized += ViewModel_Initialized;
+            return ViewModel;
+        }
 
-        internal BetterRibbonViewModel ViewModel { get; private set; }
+        private void ViewModel_Initialized(object sender, EventArgs e) {
+            Model = new BetterRibbonModel(ViewModel);
+            ViewModel.Initialized -= ViewModel_Initialized;
+        }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
-            Application.WorkbookDeactivate += WorkbookDeactivate;
-            Application.WindowDeactivate += WindowDeactivate;
+            Application.WorkbookDeactivate += Workbook_Deactivate;
+            Application.WindowDeactivate += Window_Deactivate;
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() 
-            => ViewModel = new BetterRibbonViewModel();
-
-        private Lazy<Main> ComEntry = new Lazy<Main>(() => new Main());
-
-        /// <summary>.</summary>
         protected override object RequestComAddInAutomationService() =>
             ComEntry.Value as IBetterRibbon;
 
+        private  Lazy<Main>            ComEntry  = new Lazy<Main>(() => new Main());
+
+        internal BetterRibbonViewModel ViewModel { get; private set; }
+
+        internal BetterRibbonModel     Model     { get; private set; }
+
+        /// <summary>.</summary>
+        public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
+            : null;
+
+        /// <summary>.</summary>
+        public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
+
+        /// <summary>.</summary>
+        public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
+
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
-        private void WorkbookDeactivate(Workbook wb) => ViewModel.DetachControls();
+        private void Workbook_Deactivate(Workbook wb)
+        => ViewModel.DetachControls();
+
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wn" )]
-        private void WindowDeactivate(Workbook wb, Excel.Window wn) => ViewModel.DetachControls();
+        private void Window_Deactivate(Workbook wb, Excel.Window wn) 
+        => ViewModel.DetachControls();
 
         #region VSTO generated code
 

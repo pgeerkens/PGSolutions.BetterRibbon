@@ -14,9 +14,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonGroupModel)]
     public interface IRibbonGroupModel {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         IRibbonControlStrings Strings {
-            [Description("Gets the {IRibbonControlStrings} for this control.")]
+            [Description("Gets the IRibbonControlStrings for this control.")]
             get;
         }
 
@@ -53,7 +53,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     public interface IRibbonCommonSource {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
@@ -68,7 +68,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     public interface IRibbonButtonSource : IRibbonCommonSource {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
@@ -91,7 +91,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     public interface IRibbonToggleSource : IRibbonButtonSource {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
@@ -113,8 +113,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsPressed     { get; }
     }
 
-    public interface IRibbonDropDownSource :IRibbonCommonSource {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+    public interface IRibbonDropDownSource : IRibbonCommonSource, IEnumerable<ISelectableItem> {
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
@@ -125,13 +125,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         new bool ShowInactive { get; }
 
-        IList<ISelectableItem> Items { get; }
-
         int SelectedIndex { get; }
+
+        ISelectableItem this[int index] { get; }
+
+        int Count { get; }
+
+        new IEnumerator<ISelectableItem> GetEnumerator();
     }
 
     public interface ISelectableItemSource:IRibbonCommonSource {
-        /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>

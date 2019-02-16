@@ -19,8 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(ISelectableItemModel))]
     [Guid(Guids.SelectableItemModel)]
-    public class SelectableItemModel : RibbonControlModel<SelectableItem>, ISelectableItem,
-             ISelectableItemModel, ISizeable, IImageable, ISelectableItemSource {
+    public class SelectableItemModel : RibbonControlModel<SelectableItem>, ISelectableItemModel,
+            ISizeable, IImageable, ISelectableItemSource, ISelectableItem {
         public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
                 IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
         : this(funcViewModel, strings, isEnabled, isVisible)
@@ -37,8 +37,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public event ClickedEventHandler Clicked;
 
-        public bool IsLarge { get => false; set { } } 
-        public object Image { get; set; } = "MacroSecurity";
+        public bool IsLarge   { get => false; set { } } 
+        public object Image   { get; set; } = "MacroSecurity";
         public bool ShowImage { get; set; } = true;
         public bool ShowLabel { get; set; } = true;
 
@@ -51,12 +51,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ViewModel = (FuncViewModel(controlId) as IActivatable<SelectableItem, ISelectableItemSource>)
                       ?.Attach(this);
             if (ViewModel != null) {
-            //    ViewModel.Clicked += OnClicked;
+                ViewModel.Clicked += OnClicked;
                 ViewModel.Invalidate();
             }
             return this;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+                Justification ="Intended for dual-purpose Selectable items.")]
         private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
         public void SetImageDisp(IPictureDisp image) => Image = image;

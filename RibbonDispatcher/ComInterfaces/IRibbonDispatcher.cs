@@ -43,7 +43,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]
-        ISelectableItem NewSelectableItem(string controlID, string label);
+        ISelectableItemModel NewSelectableModel(string controlID, IRibbonControlStrings strings);
 
         /// <summary>.</summary>
         [Description(".")]

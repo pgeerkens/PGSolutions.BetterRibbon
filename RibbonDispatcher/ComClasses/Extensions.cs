@@ -18,16 +18,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public static partial class Extensions {
         private const string Caption = "PGSolutions Ribbon Dispatcher";
 
-        //internal static void SetSizeablel(this ISizeable target, ISizeable source)
-        //=> target.IsLarge = source.IsLarge;
-
-        //internal static void SetImageable(this IImageable target, IImageable source) {
-        //    target.ShowImage = source.ShowImage;
-        //    target.ShowLabel = source.ShowLabel;
-        //    if (source.Image is string) target.SetImageMso(source.Image as string);
-        //    if (source.Image is IPictureDisp) target.SetImageDisp(source.Image as IPictureDisp);
-        //}
-
         public static RibbonControlSize ControlSize(this bool isLarge)
             => isLarge ? RibbonControlSize.RibbonControlSizeLarge
                        : RibbonControlSize.RibbonControlSizeRegular;
@@ -56,11 +46,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                                 ).FirstOrDefault()) { return reader?.ReadToEnd(); }
         }
 
-        //public static bool SetButtonSize(this IList<IRibbonButton> buttons, bool isLarge) {
-        //    foreach (var b in buttons ?? new List<IRibbonButton>()) { b.IsLarge = isLarge; }
-        //    return isLarge;
-        //}
-
         public static string Format2(this Version version) =>
             $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}";
         public static string Format(this Version version) => Format2(version) +
@@ -81,17 +66,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public static int IndexFromLabelImageDisplay(this LabelImageOptions value) => (int)(value - 1);
         [SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "value+1")]
         public static LabelImageOptions IndexToLabelImageDisplay(this int value) => (LabelImageOptions)(value + 1);
-
-        /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
-        public static void SetDisplay<T>(this IList<T> buttons, int index) where T : IRibbonImageable
-            => buttons.SetDisplay(index.IndexToLabelImageDisplay());
-
-        /// <summary>Set the display of all supplied {IRibbonImageable}s as per the supplied {displayFlags}.</summary>
-        public static void SetDisplay<T>(this IList<T> buttons, LabelImageOptions displayOptions) where T : IRibbonImageable {
-            foreach (var b in buttons  ?? new List<T>()) {
-            //    b.ShowLabel = displayOptions.HasFlag(LabelImageOptions.ShowLabel);
-            //    b.ShowImage = displayOptions.HasFlag(LabelImageOptions.ShowImage);
-            }
-        }
     }
 }

@@ -14,7 +14,8 @@ Attribute VB_Exposed = False
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private Const COMAddInName   As String = "PGSolutions.BetterRibbon"
+Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
+Private Const ControlStringsRangeName As String = "ControlStringData"
 
 Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroupModel
@@ -203,7 +204,7 @@ Friend Sub Activate()
     
     ' Set initial status
     Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
-    CustomGroup.SetShowInactive Toggle1.IsPressed
+    If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive Toggle1.IsPressed
     DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
@@ -227,9 +228,9 @@ Private Sub Class_Initialize()
         Set Toggle4 = .NewRibbonToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
         Set DropDown1 = .NewRibbonDropDownModel(FindStrings("DropDown1"))
-        DropDown1.AddItem(.NewSelectableItem("LabelOnly", "Label Only")) _
-                 .AddItem(.NewSelectableItem("ImageOnly", "Image Only")) _
-                 .AddItem(.NewSelectableItem("LabelAndImage", "Label and Image")) _
+        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
+                 .AddSelectableModel(.NewSelectableModel("ImageOnly", FindStrings("ImageOnly"))) _
+                 .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
                  .SelectedIndex = 2
         
         Set Button1 = .NewRibbonButtonModelMso(FindStrings("Button1"), "MacroPlay")
@@ -257,15 +258,17 @@ EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
 End Property
 
 Private Function FindStrings(ByVal Search As String) As IRibbonControlStrings
+    Const ControlStringsRangeName As String = "ControlStringData"
+    
     On Error GoTo EH
     With New RibbonControlStrings
         Set FindStrings = .Initialize( _
-                KeyTip:=FindStr(Search, Range("ControlStringData"), 2), _
-                Label:=FindStr(Search, Range("ControlStringData"), 3), _
-                AlternateLabel:=FindStr(Search, Range("ControlStringData"), 4), _
-                ScreenTip:=FindStr(Search, Range("ControlStringData"), 5), _
-                SuperTip:=FindStr(Search, Range("ControlStringData"), 6), _
-                Description:=FindStr(Search, Range("ControlStringData"), 7))
+                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
+                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
+                AlternateLabel:=FindStr(Search, Range(ControlStringsRangeName), 4), _
+                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
+                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6), _
+                Description:=FindStr(Search, Range(ControlStringsRangeName), 7))
     End With
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
@@ -277,6 +280,7 @@ Private Function FindStr(ByVal Search As String, ByVal Range As Range, ByVal Col
     Dim v As Variant: v = Application.WorksheetFunction.VLookup(Search, Range, ColNo, False)
     FindStr = IIf(VarType(v) = vbString, v, "")
 XT: Exit Function
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+EH: If Err.Number = 1004 Then Resume Next
+    ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
     Resume          ' for debugging only
 End Function

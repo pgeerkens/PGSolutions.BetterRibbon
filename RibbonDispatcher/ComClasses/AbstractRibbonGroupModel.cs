@@ -11,10 +11,10 @@ using stdole;
 namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IRibbonCommonSource {
-        protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel){
+        protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings) {
             ViewModel = (viewModel as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
-                      .Attach(this);
-
+                      ?.Attach(this);
+            Strings = strings;
             Invalidate();
         }
 
@@ -26,12 +26,12 @@ namespace PGSolutions.BetterRibbon {
 
         public void Invalidate() => ViewModel.Invalidate();
 
-        public void SetShowInactive(bool showInactie) {
-            ShowInactive = showInactie;
+        public void SetShowInactive(bool showInactive) {
+            ShowInactive = showInactive;
             Invalidate();
         }
 
-        public IRibbonControlStrings Strings { get; private set; }
+        public IRibbonControlStrings Strings { get; }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonButtonModel GetModel<T>(string id, ClickedEventHandler handler, bool isEnabled,

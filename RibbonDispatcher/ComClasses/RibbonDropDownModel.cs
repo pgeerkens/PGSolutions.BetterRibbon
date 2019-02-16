@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -20,7 +21,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
     public sealed class RibbonDropDownModel : RibbonControlModel<RibbonDropDown>, IRibbonDropDownModel,
-            IRibbonDropDownSource {
+            IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
         public RibbonDropDownModel(Func<string, RibbonDropDown> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -43,12 +44,21 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private void OnSelectionMade(object sender, int selectedIndex)
         => SelectionMade?.Invoke(sender, SelectedIndex = selectedIndex);
 
-        public IRibbonDropDownModel AddItem(ISelectableItem SelectableItem) {
-            Items.Add(SelectableItem);
+        public IRibbonDropDownModel AddSelectableModel(ISelectableItemModel selectableModel) {
+            Items.Add(selectableModel);
             ViewModel?.Invalidate();
             return this;
         }
 
-        public IList<ISelectableItem>  Items { get; private set; } = new List<ISelectableItem>();
+        public ISelectableItem this[int index] => Items[index] as ISelectableItem;
+
+        public int Count => Items.Count;
+
+        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
+
+        public IEnumerator<ISelectableItem> GetEnumerator() {
+            foreach (var item in Items) yield return item as ISelectableItem;
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

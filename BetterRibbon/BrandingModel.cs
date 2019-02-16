@@ -3,14 +3,20 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Text;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
-using stdole;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image) : base(viewModel) {
+        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image)
+        : this(viewModel, image, null) { }
+
+        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image,
+                IRibbonControlStrings strings)
+        : base(viewModel,strings) {
             BrandingButtonModel = GetModel<RibbonButton>("BrandingButton", ButtonClicked, true, true, image);
 
             Invalidate();

@@ -35,7 +35,7 @@ namespace PGSolutions.BetterRibbon {
 
         private Models Models    { get; }
 
-        private void Invalidate()
+        public void Invalidate()
         => Models.ForEach(model => {
             model.DestIsSrc.IsPressed = DestIsSrc;
             model.DestIsSrc.SetImageMso(DestIsSrc.ToggleImage());

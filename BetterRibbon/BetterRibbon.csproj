@@ -201,12 +201,11 @@
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="CustomButtonsModel.cs" />
-    <Compile Include="DemonstrationModel.cs" />
     <Compile Include="ExcelLinksExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IBetterRibbon.cs" />
     <Compile Include="LinksAnalysisModel.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="DemonstrationViewModel.cs" />
     <Compile Include="LocalResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -214,6 +213,7 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Compile Include="RibbonFactoryExtensions.cs" />
     <Compile Include="VbaSourceExportGroupModel.cs" />
     <Compile Include="VbaSourceExportModel.cs" />
     <Content Include="Example Workbooks\Database1.accdb">

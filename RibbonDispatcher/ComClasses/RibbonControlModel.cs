@@ -13,14 +13,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Strings       = strings;
             IsEnabled     = isEnabled;
             IsVisible     = isVisible;
-
-            //Invalidate();
         }
 
         protected Func<string, T> FuncViewModel { get; }
 
         /// <inheritdoc/>
-        public IRibbonControlStrings Strings { get; protected set; }
+        public IRibbonControlStrings Strings { get; }
 
         /// <inheritdoc/>
         public T ViewModel { get; set; }

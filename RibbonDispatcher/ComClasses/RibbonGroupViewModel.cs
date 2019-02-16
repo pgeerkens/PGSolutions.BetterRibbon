@@ -39,6 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public TControl GetControl<TControl>(string controlId) where TControl : class,IRibbonCommon
         => Controls.FirstOrDefault(ctl => ctl.Id == controlId) as TControl;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public RibbonGroupViewModel Add<TSource>(IActivatable control)
         where TSource:IRibbonCommonSource {
             if (control == null) return null;

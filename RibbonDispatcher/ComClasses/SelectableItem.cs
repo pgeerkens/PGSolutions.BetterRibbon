@@ -14,8 +14,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
-    public class SelectableItem : RibbonCommon<ISelectableItemSource>,
-            IActivatable<SelectableItem, ISelectableItemSource>, ISelectableItem, IImageable {
+    public class SelectableItem : RibbonCommon<ISelectableItemSource>, ISelectableItem,
+            IActivatable<SelectableItem, ISelectableItemSource>, IClickable, IImageable {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId) : base(ItemId) { }
 
@@ -24,6 +24,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Attach<SelectableItem>(source);
 
         public override void Detach() => base.Detach();
+        #endregion
+
+        #region IClickable implementation
+        /// <summary>The Clicked event source for COM clients</summary>
+        public event ClickedEventHandler Clicked;
+
+        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
+        public virtual void OnClicked() => Clicked?.Invoke(this);
+
+        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
+        public virtual void OnClicked(object sender) => Clicked?.Invoke(this);
         #endregion
 
         #region IImageable implementation

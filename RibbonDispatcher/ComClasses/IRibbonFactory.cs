@@ -23,6 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [Description("")]
         IRibbonControlStrings GetStrings(string controlId);
 
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         T Add<T, TSource>(T ctrl) where T : RibbonCommon<TSource> where TSource : class, IRibbonCommonSource;
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>

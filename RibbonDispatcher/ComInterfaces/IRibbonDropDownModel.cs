@@ -27,9 +27,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets the (zero-based) integer of the selected item.")]
             get; set; }
 
-        /// <summary>Adds the specified {ISelectableItem} to the available options in the drop-down list.</summary>
-        [Description("Adds the specified ISelectableItem to the available options in the drop-down list.")]
-        IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
+        // /// <summary>Adds the specified {ISelectableItem} to the available options in the drop-down list.</summary>
+        //[Description("Adds the specified ISelectableItem to the available options in the drop-down list.")]
+        //IRibbonDropDownModel AddItem(ISelectableItem SelectableItem);
+
+        /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
+        IRibbonDropDownModel AddSelectableModel(ISelectableItemModel selectableModel);
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]

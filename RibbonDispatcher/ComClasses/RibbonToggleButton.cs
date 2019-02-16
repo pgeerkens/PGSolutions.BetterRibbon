@@ -5,10 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for Ribbon ToggleButton objects.</summary>
@@ -29,10 +27,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #region IActivatable implementation
         RibbonToggleButton IActivatable<RibbonToggleButton, IRibbonToggleSource>.Attach(IRibbonToggleSource source)
         => Attach<RibbonToggleButton>(source);
-
-        public override void Detach() {
-            base.Detach();
-        }
         #endregion
 
         #region IToggleable implementation

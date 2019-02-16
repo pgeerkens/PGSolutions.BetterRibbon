@@ -83,6 +83,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public T Add<T,TSource>(T ctrl) where T:RibbonCommon<TSource> where TSource:class,IRibbonCommonSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
