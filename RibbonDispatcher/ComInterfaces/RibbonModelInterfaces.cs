@@ -52,6 +52,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Detach();
     }
 
+    public interface IInvalidate {
+        void Invalidate();
+    }
+
     public interface IRibbonCommonSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         IRibbonControlStrings Strings { get; }

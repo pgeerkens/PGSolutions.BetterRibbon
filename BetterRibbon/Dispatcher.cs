@@ -18,21 +18,12 @@ namespace PGSolutions.BetterRibbon {
 
         /// <inheritdoc/>
         public void Invalidate() {
-            Model.BrandingModel?.Invalidate();
-            Model.LinksAnalysisModel?.Invalidate();
-            Model.VbaSourceExportModel?.Invalidate();
-            Model.CustomButtonsModel?.Invalidate();
+            foreach (var model in Model.Models) { model?.Invalidate(); }
         }
 
         /// <inheritdoc/>
-        public void InvalidateCustomControlsGroup() => Model.CustomButtonsModel?.Invalidate();
-
-        /// <inheritdoc/>
-        public void InvalidateControl(string ControlId) => Model.ViewModel?.InvalidateControl(ControlId);
-
-        /// <inheritdoc/>
         public void DetachProxy(string controlId)
-        => Model.CustomButtonsModel.GetControl<IRibbonCommon>(controlId)?.Detach();
+        => Model.GetCustomControl<IRibbonCommon>(controlId)?.Detach();
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
@@ -85,7 +76,7 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => new RibbonGroupModel(id => Model.CustomButtonsModel.GetControl<RibbonGroupViewModel>(id),
+        => new RibbonGroupModel(id => Model.GetCustomControl<RibbonGroupViewModel>(id),
                 strings, isEnabled, isVisible, Model.CustomButtonsModel);
     }
 }

@@ -129,7 +129,6 @@
     <Compile Include="VbaSourceExport\ProjectFilter.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
-    <Compile Include="VbaSourceExport\ProjectFilters.cs" />
     <Compile Include="VbaSourceExport\VbaExportEventArgs.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExporter.cs" />
     <Compile Include="VbaSourceExport\WorkbookProcessor.cs" />

@@ -36,29 +36,34 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel) {
             ViewModel = viewModel;
 
-            BrandingModel        = new BrandingModel(ViewModel.AddGroupViewModel("BrandingGroup"), BrandingIcon);
-            LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.AddGroupViewModel("LinksAnalysisGroup"));
-            VbaSourceExportModel = new VbaSourceExportModel(
-                new List<VbaSourceExportGroupModel>() {
+            Models = new List<IInvalidate> {
+                new BrandingModel(ViewModel.AddGroupViewModel("BrandingGroup"), BrandingIcon),
+                new LinksAnalysisModel(ViewModel.AddGroupViewModel("LinksAnalysisGroup")),
+                new VbaSourceExportModel( new List<VbaSourceExportGroupModel>() {
                     new VbaSourceExportGroupModel(ViewModel.AddGroupViewModel("VbaExportGroupMS"),"MS"),
                     new VbaSourceExportGroupModel(ViewModel.AddGroupViewModel("VbaExportGroupPG"),"PG")
-                });
-
-            CustomButtonsModel   = new CustomButtonsGroupModel(ViewModel.AddGroupViewModel(NewCustomButtonsViewModel));
+                } ),
+                (CustomButtonsModel = new CustomButtonsGroupModel(ViewModel.AddGroupViewModel(NewCustomButtonsViewModel)))
+            }.AsReadOnly();
         }
 
-        internal BetterRibbonViewModel ViewModel            { get; }
+        internal BetterRibbonViewModel      ViewModel          { get; }
 
-        internal BrandingModel         BrandingModel        { get; private set; }
-        internal LinksAnalysisModel    LinksAnalysisModel   { get; private set; }
-        internal VbaSourceExportModel  VbaSourceExportModel { get; private set; }
-        internal CustomButtonsGroupModel    CustomButtonsModel   { get; private set; }
+        internal IReadOnlyList<IInvalidate> Models             { get; }
+
+        internal CustomButtonsGroupModel    CustomButtonsModel { get; private set; }
 
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
         internal IRibbonDispatcher Dispatcher => new Dispatcher(this);
 
-        public static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
+        internal TControl GetCustomControl<TControl>(string controlId)
+        where TControl : class, IRibbonCommon
+        => CustomButtonsModel.GetControl<TControl>(controlId);
+
+        internal void DetachCustomControls() => CustomButtonsModel?.DetachControls();
+
+        private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
                 .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle1"))
                 .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle2"))

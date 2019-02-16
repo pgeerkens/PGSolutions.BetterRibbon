@@ -57,12 +57,12 @@ namespace PGSolutions.BetterRibbon {
 
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         private void Workbook_Deactivate(Workbook wb)
-        => Model?.CustomButtonsModel?.DetachControls();
+        => Model?.DetachCustomControls();
 
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wn" )]
         private void Window_Deactivate(Workbook wb, Excel.Window wn) 
-        => Model?.CustomButtonsModel?.DetachControls();
+        => Model?.DetachCustomControls();
 
         #region VSTO generated code
 

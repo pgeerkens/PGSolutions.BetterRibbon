@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,8 +20,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         internal static event EventHandler<EventArgs<string>> StatusAvailable;
 
-        protected static void OnStatusAvailable(object sender, string meaaage)
-        => StatusAvailable?.Invoke(sender, new EventArgs<string>(meaaage));
+        protected static void OnStatusAvailable(object sender, string message)
+        => StatusAvailable?.Invoke(sender, new EventArgs<string>(message));
 
         /// <inheritdoc/>
         public string Description { get; }
@@ -31,6 +32,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public abstract void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc);
 
+        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times",
+                Justification = "Appears to be a spurious, or perhaps irreconcilable, warning.")]
         protected static void ExtractProjectModules(VBProject project, string path) {
             if (project == null ) throw new ArgumentNullException(nameof(project));
 

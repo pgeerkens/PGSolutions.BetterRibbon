@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
@@ -16,9 +17,8 @@ namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
     using Models        = List<VbaSourceExportGroupModel>;
     using ComInterfaces = RibbonDispatcher.ComInterfaces;
-    using System.Text;
 
-    internal sealed class VbaSourceExportModel {
+    internal sealed class VbaSourceExportModel : ComInterfaces.IInvalidate {
 
         public VbaSourceExportModel(Models models) {
             Models    = models;

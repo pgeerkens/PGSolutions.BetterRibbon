@@ -52,6 +52,8 @@ namespace PGSolutions.BetterRibbon {
         }
 
         public RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func) {
+            if (func == null) throw new ArgumentNullException(nameof(func));
+
             var viewModel = func(RibbonFactory);
             GroupViewModels.Add(viewModel);
             return viewModel;

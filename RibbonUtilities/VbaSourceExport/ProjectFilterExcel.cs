@@ -13,7 +13,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     }
 
     internal sealed class ProjectFilterExcel : ProjectFilter  {
-        public ProjectFilterExcel(WorkbookProcessor processor): this(processor, null, null) { }
 
         public ProjectFilterExcel(WorkbookProcessor processor, string description, string extensions)
         : base(description, extensions) 
