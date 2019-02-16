@@ -24,7 +24,10 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <inheritdoc/>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
             if (items == null ) throw new ArgumentNullException(nameof(items));
-            foreach (string selectedItem in items) { ExtractProject(selectedItem, destIsSrc); }
+            foreach (string selectedItem in items) {
+                OnStatusAvailable(this, $"Exporting VBA Source from {selectedItem}; Please be patient ...");
+                ExtractProject(selectedItem, destIsSrc);
+            }
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
@@ -33,8 +36,10 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 (p, s) => ExtractProjectModules(p, CreateDirectory(path, destIsSrc)));
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        internal static void ExtractOpenProject(_Workbook workbook, bool destIsSrc)
-        => ExtractProjectModules(workbook?.VBProject, CreateDirectory(workbook?.FullName, destIsSrc));
+        internal static void ExtractOpenProject(_Workbook workbook, bool destIsSrc) {
+            OnStatusAvailable(workbook, $"Exporting VBA Source from {workbook.FullName}; Please be patient ...");
+            ExtractProjectModules(workbook?.VBProject, CreateDirectory(workbook?.FullName, destIsSrc));
+        }
     }
 }
 

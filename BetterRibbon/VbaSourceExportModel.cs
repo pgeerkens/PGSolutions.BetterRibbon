@@ -16,6 +16,7 @@ namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
     using Models        = List<VbaSourceExportGroupModel>;
     using ComInterfaces = RibbonDispatcher.ComInterfaces;
+    using System.Text;
 
     internal sealed class VbaSourceExportModel {
 
@@ -115,7 +116,14 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private static void PleaseEnableTrust()
-        => "Please enable trust of the Project Object Model".MsgBoxShow("Project Model Not Trusted");
+        => new StringBuilder()
+            .AppendLine("Please enable trust of the Project object model:")
+            .AppendLine("    File -> Options")
+            .AppendLine("         -> Trust Center")
+            .AppendLine("         -> Trust Center Settings")
+            .AppendLine("         -> Macro Settings")
+            .AppendLine("         -> Trust Access to the VBA Project object model")
+            .ToString().MsgBoxShow("Project Model Not Trusted");
 
         private static Application Application => Globals.ThisAddIn.Application;
     }

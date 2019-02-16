@@ -34,9 +34,11 @@ End Sub
 
 Private Sub Workbook_Open()
     On Error GoTo EH
-    If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
+    If DeskTop(False) = "D:\Users\Pieter\Desktop" _
+    Or ThisWorkbook.Path = DeskTop(False) & "Example Workbooks" Then _
         MsgBox "Pause for Ctrl-Break to ease debugging." & vbNewLine & vbNewLine & _
-               "This message should only display if you are me.", _
+               "This message can be disabled by moving the workbook" & vbNewLine & _
+               "out of the Desktop folder 'Example Workbooks'.", _
                vbOKOnly, ThisWorkbook.Name
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Open", vbOKOnly Or vbInformation

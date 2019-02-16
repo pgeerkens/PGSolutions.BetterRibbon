@@ -420,6 +420,26 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Links Analyzer.
+        /// </summary>
+        internal static string LinksAnalysisGroup_ScreenTip {
+            get {
+                return ResourceManager.GetString("LinksAnalysisGroup_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports on all external links detected in either the current workbook, or the list of workbooks in column 1 of the currently selected Range.
+        ///
+        ///Both cell formulas and Named Ranges are searched..
+        /// </summary>
+        internal static string LinksAnalysisGroup_SuperTip {
+            get {
+                return ResourceManager.GetString("LinksAnalysisGroup_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap PGeerkens {

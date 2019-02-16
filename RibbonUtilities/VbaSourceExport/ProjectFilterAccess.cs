@@ -28,6 +28,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         private static void ExtractProject(AccessWrapper app, string filename, bool destIsSrc) {
             try {
+                OnStatusAvailable(app, $"Exporting VBA Source from {filename}; Please be patient ...");
                 app.OpenDbWithuotAutoexec(filename);
                 ExtractOpenProject(app, destIsSrc);
             } finally {

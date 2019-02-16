@@ -34,7 +34,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         protected static void ExtractProjectModules(VBProject project, string path) {
             if (project == null ) throw new ArgumentNullException(nameof(project));
 
-            OnStatusAvailable(project, $"Exporting VBA Source from {path}; Please be patient ...");
             try {
                 foreach (VBComponent component in project.VBComponents) {
                     component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),

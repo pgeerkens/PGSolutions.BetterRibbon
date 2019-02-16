@@ -328,4 +328,12 @@ All valid WB names in the currently selected Range are analyzed.</value>
   <data name="LinksAnalysisGroup_Label" xml:space="preserve">
     <value>External Links Analysis</value>
   </data>
+  <data name="LinksAnalysisGroup_ScreenTip" xml:space="preserve">
+    <value>External Links Analyzer</value>
+  </data>
+  <data name="LinksAnalysisGroup_SuperTip" xml:space="preserve">
+    <value>Reports on all external links detected in either the current workbook, or the list of workbooks in column 1 of the currently selected Range.
+
+Both cell formulas and Named Ranges are searched.</value>
+  </data>
 </root>
