@@ -14,7 +14,8 @@ namespace PGSolutions.BetterRibbon {
         protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings) {
             ViewModel = (viewModel as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
                       ?.Attach(this);
-            Strings = strings;
+            Strings = strings ?? GetStrings(ViewModel.Id);
+            ;
             Invalidate();
         }
 
@@ -22,7 +23,9 @@ namespace PGSolutions.BetterRibbon {
         public bool IsVisible    { get; set; } = true;
         public bool ShowInactive { get; private set; } = true;
 
-        private RibbonGroupViewModel ViewModel { get; }
+        public IRibbonControlStrings   Strings   { get; }
+
+        protected RibbonGroupViewModel ViewModel { get; }
 
         public void Invalidate() => ViewModel.Invalidate();
 
@@ -31,7 +34,55 @@ namespace PGSolutions.BetterRibbon {
             Invalidate();
         }
 
-        public IRibbonControlStrings Strings { get; }
+        public void DetachControls() => ViewModel?.DetachControls();
+
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        => ViewModel.GetControl<TControl>(controlId);
+
+        public IRibbonButtonModel NewButtonModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true) {
+            var model = new RibbonButtonModel(id => GetControl<RibbonButton>(id),
+                    strings, image, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
+
+        public IRibbonButtonModel NewButtonModel(IRibbonControlStrings strings,
+                string imageMso = null, bool isEnabled = true, bool isVisible = true) {
+            var model = new RibbonButtonModel(id => GetControl<RibbonButton>(id),
+                    strings, imageMso, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
+
+        public IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
+                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true) {
+            var model = new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
+                    strings, image, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
+
+        public IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
+                string imageMso = null, bool isEnabled = true, bool isVisible = true) {
+            var model = new RibbonToggleModel(id => GetControl<RibbonCheckBox>(id),
+                    strings, imageMso, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
+
+        public IRibbonDropDownModel NewDropDownModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true) {
+            var model = new RibbonDropDownModel(id => GetControl<RibbonDropDown>(id),
+                    strings, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         protected RibbonButtonModel GetModel<T>(string id, ClickedEventHandler handler, bool isEnabled,
@@ -97,7 +148,7 @@ namespace PGSolutions.BetterRibbon {
             return model;
         }
 
-        IRibbonControlStrings GetStrings(string id)
+        protected IRibbonControlStrings GetStrings(string id)
         => ViewModel.Factory.ResourceManager.GetControlStrings(id);
     }
 }

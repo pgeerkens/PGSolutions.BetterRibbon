@@ -34,7 +34,7 @@ namespace PGSolutions.BetterRibbon {
             Justification = "Public, Non-Creatable, class with exported Events.")]
     public sealed class BetterRibbonModel {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel) {
-            ViewModel   = viewModel;
+            ViewModel = viewModel;
 
             BrandingModel        = new BrandingModel(ViewModel.AddGroupViewModel("BrandingGroup"), BrandingIcon);
             LinksAnalysisModel   = new LinksAnalysisModel(ViewModel.AddGroupViewModel("LinksAnalysisGroup"));
@@ -44,7 +44,7 @@ namespace PGSolutions.BetterRibbon {
                     new VbaSourceExportGroupModel(ViewModel.AddGroupViewModel("VbaExportGroupPG"),"PG")
                 });
 
-            CustomButtonsModel   = new CustomButtonsModel(ViewModel.AddGroupViewModel(NewCustomButtonsViewModel));
+            CustomButtonsModel   = new CustomButtonsGroupModel(ViewModel.AddGroupViewModel(NewCustomButtonsViewModel));
         }
 
         internal BetterRibbonViewModel ViewModel            { get; }
@@ -52,7 +52,7 @@ namespace PGSolutions.BetterRibbon {
         internal BrandingModel         BrandingModel        { get; private set; }
         internal LinksAnalysisModel    LinksAnalysisModel   { get; private set; }
         internal VbaSourceExportModel  VbaSourceExportModel { get; private set; }
-        internal CustomButtonsModel    CustomButtonsModel   { get; private set; }
+        internal CustomButtonsGroupModel    CustomButtonsModel   { get; private set; }
 
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
 
