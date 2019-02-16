@@ -9,6 +9,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
+    /// <summary>.</summary>
     [CLSCompliant(false)]
     public class Dispatcher : IRibbonDispatcher {
         public Dispatcher(BetterRibbonModel model) => Model = model;

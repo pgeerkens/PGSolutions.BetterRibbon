@@ -9,12 +9,13 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonUtilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
-    using Models = List<VbaSourceExportGroupModel>;
+    using Models        = List<VbaSourceExportGroupModel>;
+    using ComInterfaces = RibbonDispatcher.ComInterfaces;
 
     internal sealed class VbaSourceExportModel {
 
@@ -47,11 +48,14 @@ namespace PGSolutions.BetterRibbon {
             model.Invalidate();
         });
 
-        private void UseSrcFolderToggled(object sender, EventArgs<bool> e) {
+        private void UseSrcFolderToggled(object sender, ComInterfaces.EventArgs<bool> e) {
             DestIsSrc = e.Value;
 
             Invalidate();
         }
+
+        private void StatusAvailable(object sender, EventArgs<string> e)
+        => Application.StatusBar = e.Value;
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
         /// <param name="sender">The object that initiated the event.</param>
@@ -60,21 +64,19 @@ namespace PGSolutions.BetterRibbon {
         /// </remarks>
         private void ExportCurrent(object sender) {
             if (!IsProjectModelTrusted()) { return; }
-            var securitySaved = Application.AutomationSecurity;
-            Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
+            var exporter = new VbaSourceExporter(Application);
+            exporter.StatusAvailable += StatusAvailable;
             try {
                 Application.Cursor = XlMousePointer.xlWait;
-                Application.StatusBar = "Exporting VBA Source ...";
-
-                ProjectFilterExcel.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc);
+                exporter.ExtractOpenProject(Application.ActiveWorkbook, DestIsSrc);
             }
             catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
             finally {
-                Application.AutomationSecurity = securitySaved;
-                Application.StatusBar = "Ready";
-
                 Application.Cursor = XlMousePointer.xlDefault;
+
+                exporter.StatusAvailable -= StatusAvailable;
+                Application.StatusBar = "Ready";
             }
         }
 
@@ -85,28 +87,23 @@ namespace PGSolutions.BetterRibbon {
         /// </remarks>
         private void ExportSelected(object sender) {
             if (!IsProjectModelTrusted()) { return; }
-            var securitySaved = Application.AutomationSecurity;
-            Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
-            try {
-                var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
-                fd.Title = "Select VBA Project(s) to Export From";
-                fd.ButtonName = "Export";
-                fd.AllowMultiSelect = true;
-                fd.Filters.Clear();
-                fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
+            var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];
+            fd.Title = "Select VBA Project(s) to Export From";
+            fd.ButtonName = "Export";
+            fd.AllowMultiSelect = true;
+            fd.Filters.Clear();
+            fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-                var list = new ProjectFilters(new WorkbookProcessor(Application));
-                foreach (var item in list) {
-                    fd.Filters.Add(item.Description, item.Extensions);
+            var exporter = new VbaSourceExporter(Application);
+            var list = exporter.FillFilters(fd);
+            if (fd.Show() != 0) {
+                try {
+                    exporter.StatusAvailable += StatusAvailable;
+                    exporter.ExportSelected(list[fd.FilterIndex-1], fd.SelectedItems, DestIsSrc);
+                    exporter.StatusAvailable -= StatusAvailable;
                 }
-                if (fd.Show() != 0) {
-                    list[fd.FilterIndex-1].ExtractProjects(fd.SelectedItems, DestIsSrc);
-                }
-            }
-            catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
-            finally {
-                Application.AutomationSecurity = securitySaved;
+                catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
             }
         }
 

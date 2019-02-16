@@ -2,7 +2,6 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -31,10 +30,8 @@ namespace PGSolutions.BetterRibbon {
 
         public RibbonToggleModel DestIsSrc      { get; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public RibbonButtonModel ExportSelected { get; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public RibbonButtonModel ExportCurrent  { get; }
 
         private void OnUseSrcFolderToggled(object sender, bool isPressed)

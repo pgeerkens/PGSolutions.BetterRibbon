@@ -4,11 +4,13 @@
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonUtilities;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
+    using IRibbonControlStrings = RibbonDispatcher.ComInterfaces.IRibbonControlStrings;
+
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : this(viewModel,null) { }
         public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)

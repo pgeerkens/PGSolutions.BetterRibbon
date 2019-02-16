@@ -11,8 +11,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         SizeLarge = RibbonControlSize.RibbonControlSizeLarge
     }
 
-    public class ClickedEventArgs<T> :EventArgs {
-        public ClickedEventArgs(T value) => Value = value;
+    public class EventArgs<T>:EventArgs {
+        public EventArgs(T value) : base() => Value = value;
 
         public T Value { get; }
     }
@@ -24,12 +24,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public delegate void ToggledEventHandler(object sender, bool isPressed);
 
     public delegate void SelectedEventHandler(object sender, int selectedIndex);
-
-    public class EventArgs<T> :EventArgs {
-        public EventArgs(T value) : base() => Value = value;
-
-        public T Value { get; }
-    }
 
     /// <summary>The interface for controls that can be clicked.</summary>
     [CLSCompliant(true)]

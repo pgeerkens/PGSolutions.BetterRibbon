@@ -131,6 +131,8 @@
     <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
     <Compile Include="VbaSourceExport\ProjectFilters.cs" />
     <Compile Include="VbaSourceExport\VbaExportEventArgs.cs" />
+    <Compile Include="VbaSourceExport\VbaSourceExporter.cs" />
+    <Compile Include="VbaSourceExport\WorkbookProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

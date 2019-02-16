@@ -157,8 +157,6 @@
   <ItemGroup>
     <None Include="RibbonDispatcherKey.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

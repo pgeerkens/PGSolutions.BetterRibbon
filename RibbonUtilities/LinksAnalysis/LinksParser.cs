@@ -60,11 +60,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private void ExtendFromWorksheet(Worksheet ws) {
             if (ws == null) return;
 
-            var messageText = $"Searching {ws.Parent.Name}[{ws.Name}] ... (???%)";
             var usedRange = ws.UsedRange;
             for(var colNo=1; colNo <= usedRange.Columns.Count; colNo++) {
                 var percentage = 100 * colNo / usedRange.Columns.Count;
-                ws.Application.StatusBar = messageText.Replace("???", percentage.ToString().PadLeft(3));
+                StatusAvailable?.Invoke(this, 
+                    new EventArgs<string>($"Searching {ws.Parent.Name}[{ws.Name}] ... ({percentage,3}%)"));
 
                 var lastRowNo = ws.Cells[ws.Rows.Count, colNo].End(Excel.XlDirection.xlUp).Row;
                 for(long rowNo = 1; rowNo <= lastRowNo; rowNo++) {
