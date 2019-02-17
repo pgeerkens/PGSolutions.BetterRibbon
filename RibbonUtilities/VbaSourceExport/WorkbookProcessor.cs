@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.IO;
+
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
@@ -11,39 +12,42 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
     [CLSCompliant(false)]
     public sealed class WorkbookProcessor : IWorkbookProcessor {
-        public WorkbookProcessor(Application application) => Application = application;
+        public WorkbookProcessor(Application excelApp) => ExcelApp = excelApp;
         /// <inheritdoc/>
         public void DoOnOpenWorkbook(string wkbkFullName, Action<VBE.VBProject, string> action) {
-            if (wkbkFullName == ActiveWorkbook.FullName) {
+            Workbook wb = ActiveWorkbook;
+            if (wb.FullName == wkbkFullName) {
                 action?.Invoke(ActiveWorkbook?.VBProject, Path.GetDirectoryName(wkbkFullName));
+            } else if( (wb = ExcelApp.Workbooks.TryItem(wkbkFullName))  !=  null) {
+                action?.Invoke(wb.VBProject, Path.GetDirectoryName(wkbkFullName));
             } else {
                 var thisWkbk = ActiveWorkbook;
 
-                Application.DisplayAlerts = false;
-                Application.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
+                ExcelApp.DisplayAlerts = false;
+                ExcelApp.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
-                Application.ScreenUpdating = false;
-                var wkbk = Application.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true,
+                ExcelApp.ScreenUpdating = false;
+                var wkbk = ExcelApp.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true,
                             AddToMru:false, Editable:false);
-                Application.ActiveWindow.Visible = false;
+                ExcelApp.ActiveWindow.Visible = false;
                 thisWkbk.Activate();
 
                 try {
-                    Application.ScreenUpdating = true;
+                    ExcelApp.ScreenUpdating = true;
 
                     action?.Invoke(wkbk?.VBProject, Path.GetDirectoryName(wkbkFullName));
                 }
                 finally {
                     wkbk?.Close(false);
 
-                    Application.DisplayAlerts = true;
+                    ExcelApp.DisplayAlerts = true;
                 }
             }
         }
 
-        private Application Application { get; }
+        private Application ExcelApp { get; }
 
-        private Workbook ActiveWorkbook => Application.ActiveWorkbook;
+        private Workbook ActiveWorkbook => ExcelApp.ActiveWorkbook;
     }
 }
 

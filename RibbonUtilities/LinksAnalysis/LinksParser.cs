@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -109,11 +110,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                         excel.ScreenUpdating = false;
 
                         try {
-                            var wb = excel.TryItem(item);
-                            if (wb == null) {
-                                AnalyzeClosedWorkbook(excel, item);
+                            var wlbl = excel.Workbooks.TryItem(item);
+                            if (wlbl == null) {
+                                excel.AnalyzeClosedWorkbook(item,
+                                        wb => ExtendFromWorkbook(wb, ExcludedSheetNames));
                             } else {
-                                ExtendFromWorkbook(wb, ExcludedSheetNames);
+                                ExtendFromWorkbook(wlbl, ExcludedSheetNames);
                             }
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
@@ -124,17 +126,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                 excel.ScreenUpdating = true;
                 excel.DisplayAlerts = true;
                 excel.AutomationSecurity = @as;
-            }
-        }
-
-        private void AnalyzeClosedWorkbook(Excel.Application excel, string path) {
-            Workbook wb = null;
-            try {
-                wb = excel.Workbooks.Open(path, UpdateLinks: false, ReadOnly: true, AddToMru: false);
-                ExtendFromWorkbook(wb, ExcludedSheetNames);
-            }
-            finally {
-                wb?.Close(SaveChanges: false);
             }
         }
 

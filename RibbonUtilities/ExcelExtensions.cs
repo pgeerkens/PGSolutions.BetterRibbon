@@ -5,23 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.RibbonUtilities.LinksAnalysis {
+namespace PGSolutions.RibbonUtilities {
     using Excel = Microsoft.Office.Interop.Excel;
     using Range = Microsoft.Office.Interop.Excel.Range;
     using Workbook = Microsoft.Office.Interop.Excel.Workbook;
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
     public static partial class ExcelExtensions {
-        /// <summary>.</summary>
-        /// <param name="excel"></param>
-        /// <param name="path"></param>
-        internal static Workbook TryItem(this Excel.Application excel, string path) {
-            foreach(Workbook wb in excel.Workbooks) if (wb.FullName == path) return wb;
-            return null;
-        }
-
         internal static SourceCellRef NewCellRef(this Worksheet ws, Range cl) =>
             new SourceCellRef(ws.Parent.Path, ws.Parent.Name, ws.Name, cl.Address);
 
