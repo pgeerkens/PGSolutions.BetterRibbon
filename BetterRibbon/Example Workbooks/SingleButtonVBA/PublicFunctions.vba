@@ -14,5 +14,6 @@ End Function
 Public Function DeskTop(Optional ByVal AllUsers As Boolean = False) As String
     DeskTop = IIf(AllUsers, _
             CreateObject("WScript.Shell").SpecialFolders("AllUsersDesktop"), _
-            CreateObject("WScript.Shell").SpecialFolders("Desktop"))
+            CreateObject("WScript.Shell").SpecialFolders("Desktop")) _
+            & "\"
 End Function

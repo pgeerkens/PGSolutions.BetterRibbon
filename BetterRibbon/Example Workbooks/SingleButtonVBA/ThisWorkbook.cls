@@ -22,7 +22,7 @@ Private Sub Workbook_Activate()
 End Sub
 
 Private Sub Workbook_Open()
-    If DeskTop(False) = "D:\Users\Pieter\Desktop" Then _
+    If DeskTop(False) = "D:\Users\Pieter\Desktop\" Then _
         MsgBox "Pause for Ctrl-Break to ease debugging." & vbNewLine & vbNewLine & _
                "This message can be disabled by moving the workbook" & vbNewLine & _
                "out of the Desktop folder 'Example Workbooks'.", _
