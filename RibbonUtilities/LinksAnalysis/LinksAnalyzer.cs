@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
@@ -41,33 +40,4 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     }
 }
 namespace PGSolutions.RibbonUtilities {
-    using Microsoft.Office.Interop.Excel;
-    using PGSolutions.RibbonUtilities.LinksAnalysis;
-    using PGSolutions.RibbonUtilities.VbaSourceExport;
-
-    /// <summary>.</summary>
-    public class RibbonUtilitiesEntryPoint : IRibbonUtilities {
-        /// <inheritdoc/>
-        public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
-
-        public VbaSourceExporter NewVbaSourceExporter() => new VbaSourceExporter(ExcelApp());
-
-        private static Application ExcelApp() {
-
-            return new Application();
-        }       
-    }
-
-    /// <summary>.</summary>
-    public interface IRibbonUtilities {
-        /// <summary>.</summary>
-        ILinksAnalyzer NewLinksAnalyzer();
-
-    }
-
-    /// <summary>Static clas of ProgIds</summary>
-    public static class ProgIds {
-        /// <summary>ProgID for the Ribbon dispatcher.</summary>
-        public const string RibbonUtilitiesProgId      = "PGSolutions.RibbonUtilities";
-    }
 }

@@ -6,19 +6,13 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
-    using VBE = Microsoft.Vbe.Interop;
-
-    internal interface IWorkbookProcessor {
-        void DoOnOpenWorkbook(string wkbkFullName, Action<VBE.VBProject, string> action);
-    }
-
     internal sealed class ProjectFilterExcel : ProjectFilter  {
 
-        public ProjectFilterExcel(WorkbookProcessor processor, string description, string extensions)
+        public ProjectFilterExcel(IWorkbookProcessor processor, string description, string extensions)
         : base(description, extensions) 
         => Processor = processor;
 
-        WorkbookProcessor Processor { get; }
+        IWorkbookProcessor Processor { get; }
 
         /// <inheritdoc/>
         public override void ExtractProjects(FileDialogSelectedItems items, bool destIsSrc) {
@@ -31,8 +25,8 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         private void ExtractProject(string path, bool destIsSrc)
-        => Processor.DoOnOpenWorkbook(path,
-                (p, s) => ExtractProjectModules(p, CreateDirectory(path, destIsSrc)));
+        => Processor.DoOnWorkbook(path,
+                (wb, s) => ExtractProjectModules(wb?.VBProject, CreateDirectory(path, destIsSrc)));
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
         internal static void ExtractOpenProject(_Workbook workbook, bool destIsSrc) {

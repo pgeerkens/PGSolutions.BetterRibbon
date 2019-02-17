@@ -4,7 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+namespace PGSolutions.RibbonUtilities {
     internal static class NativeMethods {
         public static void KeyDown(this byte Vk) => Vk.keybd_event(0x10, KEYEVENTF_KEYDOWN, 0);
         public static void KeyUp(this byte Vk)   => Vk.keybd_event(0x10, KEYEVENTF_KEYUP, 0);

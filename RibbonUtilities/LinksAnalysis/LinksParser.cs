@@ -8,10 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-using Core = Microsoft.Office.Core;
-
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
-using System.Collections.Generic;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Excel = Microsoft.Office.Interop.Excel;
@@ -90,14 +87,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private void ExtendFromWorkbookList(Range range) {
             if (range==null) return;
 
+            var oldExcel = range.Application;
             var nameList = range.GetNameList();
-            var excel = range.Application;
-            var @as = excel.AutomationSecurity;
-            try {
-                excel.AutomationSecurity = Core.MsoAutomationSecurity.msoAutomationSecurityForceDisable;
-                excel.DisplayAlerts = false;
-                excel.ScreenUpdating = false;
 
+            using (var newExcel = new WorkbookProcessor2()) {
                 foreach (var item in nameList) {
                     if (item is string path) {
                         if (!File.Exists(path)) {
@@ -105,27 +98,20 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                             continue;
                         }
 
-                        excel.ScreenUpdating = true;
                         StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ...."));
-                        excel.ScreenUpdating = false;
 
                         try {
-                            var wlbl = excel.Workbooks.TryItem(item);
-                            if (wlbl == null) {
-                                excel.AnalyzeClosedWorkbook(item,
-                                        wb => ExtendFromWorkbook(wb, ExcludedSheetNames));
+                            var wkbk = oldExcel.Workbooks.TryItem(item);
+                            if (wkbk == null) {
+                                newExcel.DoOnWorkbook(item,
+                                        (wb,s) => ExtendFromWorkbook(wb, ExcludedSheetNames));
                             } else {
-                                ExtendFromWorkbook(wlbl, ExcludedSheetNames);
+                                ExtendFromWorkbook(wkbk, ExcludedSheetNames);
                             }
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
                     }
                 }
-            }
-            finally {
-                excel.ScreenUpdating = true;
-                excel.DisplayAlerts = true;
-                excel.AutomationSecurity = @as;
             }
         }
 

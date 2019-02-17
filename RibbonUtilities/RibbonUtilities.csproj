@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="IWorkbookProcessor.cs" />
     <Compile Include="LinksAnalysis\LinksParser.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />
@@ -123,16 +125,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="VbaSourceExport\AccessWrapper.cs" />
-    <Compile Include="VbaSourceExport\Extensions.cs" />
     <Compile Include="VbaSourceExport\IApplication.cs" />
     <Compile Include="VbaSourceExport\IProjectFilter.cs" />
-    <Compile Include="VbaSourceExport\NativeMethods.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="VbaSourceExport\ProjectFilter.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterAccess.cs" />
     <Compile Include="VbaSourceExport\ProjectFilterExcel.cs" />
     <Compile Include="VbaSourceExport\VbaExportEventArgs.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExporter.cs" />
-    <Compile Include="VbaSourceExport\WorkbookProcessor.cs" />
+    <Compile Include="WorkbookProcessor.cs" />
+    <Compile Include="WorkbookProcessor2.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

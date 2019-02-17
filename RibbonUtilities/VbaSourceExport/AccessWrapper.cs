@@ -3,9 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 
-using Access = Microsoft.Office.Interop.Access;
-
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
+    using Access = Microsoft.Office.Interop.Access;
+
     internal class AccessWrapper : IDisposable {
         internal AccessWrapper() => AccessApp = new Access.Application();
 
@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         /// <summary>Returns the nake of the current VBE project.</summary>
         public string CurrentProjectName    => AccessApp.CurrentProject.Name;
 
-        public void OpenDbWithuotAutoexec(string path, bool exclusive = false)
+        public void OpenDbWithoutAutoexec(string path, bool exclusive = false)
         => Extensions.InvokeWithShiftKey(() => AccessApp.OpenCurrentDatabase(path,exclusive));
 
         public void CloseCurrentDb() => AccessApp?.CloseCurrentDatabase();
@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 // Dispose of managed resources (only!) here
                 if (disposing) {
                     if (AccessApp?.CurrentDb() != null) { AccessApp?.CloseCurrentDatabase(); }
-                    AccessApp.Quit();
+                    AccessApp?.Quit();
                 }
 
                 // Dispose of unmanaged resources here

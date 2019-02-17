@@ -29,7 +29,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         private static void ExtractProject(AccessWrapper app, string filename, bool destIsSrc) {
             try {
                 OnStatusAvailable(app, $"Exporting VBA Source from {filename}; Please be patient ...");
-                app.OpenDbWithuotAutoexec(filename);
+                app.OpenDbWithoutAutoexec(filename);
                 ExtractOpenProject(app, destIsSrc);
             } finally {
                app.CloseCurrentDb();
