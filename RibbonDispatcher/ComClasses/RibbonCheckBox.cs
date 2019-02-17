@@ -57,7 +57,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public virtual bool IsImageable => false;
         /// <inheritdoc/>
-        public virtual object Image => null;
+        public virtual ImageObject Image => null;
 
         /// <summary>Gets or sets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
         public virtual bool ShowImage => false;

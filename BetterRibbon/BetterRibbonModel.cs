@@ -3,65 +3,28 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using stdole;
+using System.Linq;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
-    /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
-    /// <remarks>
-    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226">For more information about adding callback methods.</a>
-    /// 
-    /// Take care renaming this class, or its namespace; and coordinate any such with the content of the (hidden)
-    /// ThisAddIn.Designer.xml file. Commit frequently. Excel is very tempermental on the naming of ribbon objects
-    /// and provides poor, and very minimal, diagnostic information.
-    /// 
-    /// This class MUST be ComVisible for the ribbon to launch properly.
-    /// </remarks>
-    [Description("The (top-level) ViewModel for the ribbon interface.")]
-    [Serializable, CLSCompliant(false)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonDispatcher))]
-    [Guid(RibbonDispatcher.Guids.BetterRibbon)]
-    [ProgId(ProgIds.RibbonDispatcherProgId)]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-            Justification = "Public, Non-Creatable, class with exported Events.")]
-    public sealed class BetterRibbonModel {
-        internal BetterRibbonModel(BetterRibbonViewModel viewModel) {
-            ViewModel = viewModel;
-
-            Models = new List<IInvalidate> {
-                new BrandingModel(ViewModel.AddGroupViewModel("BrandingGroup"), BrandingIcon),
-                new LinksAnalysisModel(ViewModel.AddGroupViewModel("LinksAnalysisGroup")),
+    /// <summary>The (top-level) Model for the ribbon interface.</summary>
+    [CLSCompliant(false)]
+    public sealed class BetterRibbonModel : AbstractRibbonTabModel {
+        internal BetterRibbonModel(BetterRibbonViewModel viewModel)
+        : base(viewModel, new List<IInvalidate> {
+                new BrandingModel(viewModel.AddGroupViewModel("BrandingGroup")),
+                new LinksAnalysisModel(viewModel.AddGroupViewModel("LinksAnalysisGroup")),
                 new VbaSourceExportModel( new List<VbaSourceExportGroupModel>() {
-                    new VbaSourceExportGroupModel(ViewModel.AddGroupViewModel("VbaExportGroupMS"),"MS"),
-                    new VbaSourceExportGroupModel(ViewModel.AddGroupViewModel("VbaExportGroupPG"),"PG")
+                    new VbaSourceExportGroupModel(viewModel.AddGroupViewModel("VbaExportGroupMS"),"MS"),
+                    new VbaSourceExportGroupModel(viewModel.AddGroupViewModel("VbaExportGroupPG"),"PG")
                 } ),
-                (CustomButtonsModel = new CustomButtonsGroupModel(ViewModel.AddGroupViewModel(NewCustomButtonsViewModel)))
-            }.AsReadOnly();
-        }
+                new CustomButtonsGroup1Model(viewModel.AddGroupViewModel(NewCustomButtonsViewModel))
+        }.AsReadOnly())
+        => CustomButtons1Model = Models.OfType<CustomButtonsGroup1Model>().FirstOrDefault();
 
-        internal BetterRibbonViewModel      ViewModel          { get; }
-
-        internal IReadOnlyList<IInvalidate> Models             { get; }
-
-        internal CustomButtonsGroupModel    CustomButtonsModel { get; private set; }
-
-        private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
-
-        internal IRibbonDispatcher Dispatcher => new Dispatcher(this);
-
-        internal TControl GetCustomControl<TControl>(string controlId)
-        where TControl : class, IRibbonCommon
-        => CustomButtonsModel.GetControl<TControl>(controlId);
-
-        internal void DetachCustomControls() => CustomButtonsModel?.DetachControls();
+        protected override AbstractRibbonGroupModel CustomButtons1Model { get; }
 
         private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
@@ -80,5 +43,11 @@ namespace PGSolutions.BetterRibbon {
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton1"))
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton2"))
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton3"));
+
+        internal TControl GetCustomControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        => CustomButtons1Model.GetControl<TControl>(controlId);
+
+        internal void     DetachCustomControls()
+        => CustomButtons1Model?.DetachControls();
     }
 }

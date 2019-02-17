@@ -1,17 +1,16 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Resources;
-using System.Windows.Forms;
-using Microsoft.Office.Core;
 using stdole;
+
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
-    public static class ResourceManagerExtensions {
+    public static partial class ResourceManagerExtensions {
         /// <summary>TODO</summary>
         public static string GetCurrentUIString(this ResourceManager resourceManager, string name)
             => resourceManager?.GetString(name, CultureInfo.CurrentUICulture) ?? "";
@@ -55,15 +54,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>TODO</summary>
         public static IPictureDisp IconToPictureDisp(this Icon icon)
             => PictureConverter.IconToPictureDisp(icon);
-
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-                Justification="False positive - static methods ARE accessed.")]
-        internal class PictureConverter : AxHost {
-            private PictureConverter() : base(string.Empty) { }
-
-            public static IPictureDisp ImageToPictureDisp(Image image) => GetIPictureDispFromPicture(image) as IPictureDisp;
-
-            public static IPictureDisp IconToPictureDisp(Icon icon) => ImageToPictureDisp(icon.ToBitmap());
-        }
     }
 }

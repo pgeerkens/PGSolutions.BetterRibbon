@@ -39,11 +39,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Invalidate();
 
         /// <summary>Sets or gets whether to display the Image for this control.</summary>
-        bool ShowImage { get; }
+        bool ShowImage    { get; }
         /// <summary>Sets or gets whether to display the Label for this control.</summary>
-        bool ShowLabel { get; }
+        bool ShowLabel    { get; }
 
-        object Image   { get; }
+        ImageObject Image { get; }
     }
 
     /// <summary>The interface for controls that can be sized.</summary>

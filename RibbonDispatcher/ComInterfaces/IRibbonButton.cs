@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by RibbonButton objects.</summary>
@@ -63,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]
-        new object Image        { get; }
+        new ImageObject Image   { get; }
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
         [DispId(DispIds.ShowImage)]
         [Description("Gets or sets whether to show the control's image; ignored by Large controls.")]

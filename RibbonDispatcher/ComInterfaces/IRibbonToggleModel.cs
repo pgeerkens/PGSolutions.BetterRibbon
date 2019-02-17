@@ -29,7 +29,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool   IsLarge   { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        object Image     { get; set; }
+        ImageObject Image     { get; set; }
         /// <summary>.</summary>
         [Description(".")]
         bool   ShowImage { get; set; }

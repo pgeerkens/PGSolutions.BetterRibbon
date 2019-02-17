@@ -83,7 +83,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         new bool ShowInactive { get; }
 
-        object Image       { get; }
+        ImageObject Image  { get; }
 
         /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
         bool ShowImage     { get; }
@@ -99,22 +99,22 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
-        new bool IsEnabled { get; }
+        new bool IsEnabled    { get; }
 
         /// <summary>Gets whether the control is visible.</summary>
-        new bool IsVisible { get; }
+        new bool IsVisible    { get; }
 
         new bool ShowInactive { get; }
 
-        new object Image   { get; }
+        new ImageObject Image { get; }
 
-        new bool ShowImage { get; }
+        new bool ShowImage    { get; }
 
-        new bool ShowLabel { get; }
+        new bool ShowLabel    { get; }
 
-        new bool IsLarge   { get; }
+        new bool IsLarge      { get; }
 
-        bool IsPressed     { get; }
+        bool IsPressed        { get; }
     }
 
     public interface IRibbonDropDownSource : IRibbonCommonSource, IEnumerable<ISelectableItem> {
@@ -150,7 +150,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         new bool ShowInactive { get; }
 
-        object Image { get; }
+        ImageObject Image { get; }
 
         /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
         bool ShowImage { get; }

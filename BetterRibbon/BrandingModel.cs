@@ -8,16 +8,17 @@ using stdole;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
+using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image)
-        : this(viewModel, image, null) { }
+        public BrandingModel(RibbonGroupViewModel viewModel)
+        : this(viewModel, null) { }
 
-        public BrandingModel(RibbonGroupViewModel viewModel, IPictureDisp image,
-                IRibbonControlStrings strings)
+        public BrandingModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)
         : base(viewModel,strings) {
-            BrandingButtonModel = GetModel<RibbonButton>("BrandingButton", ButtonClicked, true, true, image);
+            BrandingButtonModel = NewButtonModel("BrandingButton", ButtonClicked,
+                    true, true, new ImageObject(BrandingIcon));
 
             Invalidate();
         }
@@ -36,5 +37,7 @@ namespace PGSolutions.BetterRibbon {
 
         static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
         static Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
+
+        private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
     }
 }

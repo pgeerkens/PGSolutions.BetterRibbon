@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using stdole;
 
@@ -10,6 +11,7 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>.</summary>
+    [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
     public class Dispatcher : IRibbonDispatcher {
         public Dispatcher(BetterRibbonModel model) => Model = model;
@@ -17,21 +19,18 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonModel     Model     { get; }
 
         /// <inheritdoc/>
-        public void Invalidate() {
-            foreach (var model in Model.Models) { model?.Invalidate(); }
-        }
+        public void Invalidate() => Model.Invalidate();
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId)
         => Model.GetCustomControl<IRibbonCommon>(controlId)?.Detach();
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-                Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = null, string superTip = null,
-                string keyTip = null, string alternateLabel = null, string description = null) =>
-            Model.ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
+                string keyTip = null, string alternateLabel = null, string description = null)
+        =>  Model.ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
                     superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
@@ -46,37 +45,36 @@ namespace PGSolutions.BetterRibbon {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => Model.CustomButtonsModel.NewButtonModel(strings, image, isEnabled, isVisible);
+        => Model.NewRibbonButtonModel(strings, image, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => Model.CustomButtonsModel.NewButtonModel(strings, imageMso, isEnabled, isVisible);
+        => Model.NewRibbonButtonModel(strings, imageMso, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => Model.CustomButtonsModel.NewToggleModel(strings, image, isEnabled, isVisible);
+        => Model.NewRibbonToggleModel(strings, image, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => Model.CustomButtonsModel.NewToggleModel(strings, imageMso, isEnabled, isVisible);
+        => Model.NewRibbonToggleModel(strings, imageMso, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => Model.CustomButtonsModel.NewDropDownModel(strings, isEnabled, isVisible);
+        => Model.NewRibbonDropDownModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => new RibbonGroupModel(id => Model.GetCustomControl<RibbonGroupViewModel>(id),
-                strings, isEnabled, isVisible, Model.CustomButtonsModel);
+        => Model.NewRibbonGroupModel(strings, isEnabled, isVisible);
     }
 }

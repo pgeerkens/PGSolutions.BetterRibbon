@@ -37,10 +37,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public event ClickedEventHandler Clicked;
 
-        public bool IsLarge   { get => false; set { } } 
-        public object Image   { get; set; } = "MacroSecurity";
-        public bool ShowImage { get; set; } = true;
-        public bool ShowLabel { get; set; } = true;
+        public bool        IsLarge   { get => false; set { } } 
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
 
         public string Id        => ViewModel.Id;
         public string Label     => Strings.Label;
@@ -61,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 Justification ="Intended for dual-purpose Selectable items.")]
         private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
-        public void SetImageDisp(IPictureDisp image) => Image = image;
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso) => Image = imageMso;
     }
 }

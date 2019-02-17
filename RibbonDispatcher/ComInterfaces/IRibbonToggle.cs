@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
@@ -82,6 +81,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [DispId(DispIds.Image)]
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]
-        new object Image     { get; }
+        new ImageObject Image { get; }
     }
 }

@@ -117,51 +117,6 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom Button #1.
-        /// </summary>
-        internal static string AppLaunchButton1_Label {
-            get {
-                return ResourceManager.GetString("AppLaunchButton1_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to First CustomButton.
-        /// </summary>
-        internal static string AppLaunchButton1_ScreenTip {
-            get {
-                return ResourceManager.GetString("AppLaunchButton1_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to First example of a dynamically registered button..
-        /// </summary>
-        internal static string AppLaunchButton1_SuperTip {
-            get {
-                return ResourceManager.GetString("AppLaunchButton1_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Second Custom Button.
-        /// </summary>
-        internal static string AppLaunchButton2_Label {
-            get {
-                return ResourceManager.GetString("AppLaunchButton2_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Third Custom Button.
-        /// </summary>
-        internal static string AppLaunchButton3_Label {
-            get {
-                return ResourceManager.GetString("AppLaunchButton3_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to PGSolutions Ribbon.
         /// </summary>
         internal static string ApplicationName {
@@ -205,15 +160,6 @@ namespace BetterRibbon.Properties {
         internal static string BrandingGroup_Label {
             get {
                 return ResourceManager.GetString("BrandingGroup_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Controls Customized in C#.
-        /// </summary>
-        internal static string CSharpDemoGroup_Label {
-            get {
-                return ResourceManager.GetString("CSharpDemoGroup_Label", resourceCulture);
             }
         }
         
@@ -295,118 +241,6 @@ namespace BetterRibbon.Properties {
         internal static string CustomizableGroup_SuperTip {
             get {
                 return ResourceManager.GetString("CustomizableGroup_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display Options.
-        /// </summary>
-        internal static string DropDown1_Label {
-            get {
-                return ResourceManager.GetString("DropDown1_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display Options for Custom Buttons.
-        /// </summary>
-        internal static string DropDown1_ScreenTip {
-            get {
-                return ResourceManager.GetString("DropDown1_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select button display options from:
-        ///- Image Only
-        ///- Label Only
-        ///-Image &amp; Label
-        ///Enabled only when button size is Regular, as large buttons always display both..
-        /// </summary>
-        internal static string DropDown1_SuperTip {
-            get {
-                return ResourceManager.GetString("DropDown1_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Image Only.
-        /// </summary>
-        internal static string ImageOnly_Label {
-            get {
-                return ResourceManager.GetString("ImageOnly_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display Image Only.
-        /// </summary>
-        internal static string ImageOnly_ScreenTip {
-            get {
-                return ResourceManager.GetString("ImageOnly_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Displays just the button image when its size is Regular; else both..
-        /// </summary>
-        internal static string ImageOnly_SuperTip {
-            get {
-                return ResourceManager.GetString("ImageOnly_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Label &amp; Image.
-        /// </summary>
-        internal static string LabelAndImage_Label {
-            get {
-                return ResourceManager.GetString("LabelAndImage_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display Label &amp; Image.
-        /// </summary>
-        internal static string LabelAndImage_ScreenTip {
-            get {
-                return ResourceManager.GetString("LabelAndImage_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Always displays both the button label and image..
-        /// </summary>
-        internal static string LabelAndImage_SuperTip {
-            get {
-                return ResourceManager.GetString("LabelAndImage_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Label Only.
-        /// </summary>
-        internal static string LabelOnly_Label {
-            get {
-                return ResourceManager.GetString("LabelOnly_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Display Label Only.
-        /// </summary>
-        internal static string LabelOnly_ScreenTip {
-            get {
-                return ResourceManager.GetString("LabelOnly_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Displays just the button label when its size is Regular; else both..
-        /// </summary>
-        internal static string LabelOnly_SuperTip {
-            get {
-                return ResourceManager.GetString("LabelOnly_SuperTip", resourceCulture);
             }
         }
         
@@ -518,33 +352,6 @@ namespace BetterRibbon.Properties {
         internal static string SelectedProjectButtonPG_SuperTip {
             get {
                 return ResourceManager.GetString("SelectedProjectButtonPG_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Prefer Large.
-        /// </summary>
-        internal static string SizeToggle_Label {
-            get {
-                return ResourceManager.GetString("SizeToggle_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toggles Button Size.
-        /// </summary>
-        internal static string SizeToggle_ScreenTip {
-            get {
-                return ResourceManager.GetString("SizeToggle_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toggles between large and small (preferred size for) buttons for this ribbon group..
-        /// </summary>
-        internal static string SizeToggle_SuperTIp {
-            get {
-                return ResourceManager.GetString("SizeToggle_SuperTIp", resourceCulture);
             }
         }
         

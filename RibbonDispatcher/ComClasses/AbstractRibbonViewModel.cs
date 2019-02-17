@@ -9,6 +9,8 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    using GroupViewModelFactory = Func<IRibbonFactory, RibbonGroupViewModel>;
+
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
@@ -61,6 +63,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Invalidate();
         }
         #endregion
+
+        public abstract RibbonGroupViewModel AddGroupViewModel(string groupName);
+
+        public abstract RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func);
 
         /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
@@ -126,7 +132,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private IImageable Imageables (string controlId) => _ribbonFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public object GetImage(IRibbonControl Control)
-            => Imageables(Control?.Id)?.Image ?? "MacroSecurity";
+            => Imageables(Control?.Id)?.Image.Image ?? "MacroSecurity";
         /// <inheritdoc/>
         public bool   GetShowImage(IRibbonControl Control)
             => Imageables(Control?.Id)?.ShowImage ?? false;

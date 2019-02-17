@@ -8,12 +8,12 @@ using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
-    [Description("")]    
+    [Description("")]
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonButtonModel)]
-    public interface IRibbonButtonModel : IRibbonCommonSource {
+    [Guid(Guids.ISelectableItemModel)]
+    public interface ISelectableItemModel:IRibbonCommonSource {
         /// <summary>Gets the {IRibbonControlStrings} for this control.</summary>
         new IRibbonControlStrings Strings {
             [Description("Gets the {IRibbonControlStrings} for this control.")]
@@ -32,20 +32,20 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         }
         /// <summary>.</summary>
         [Description(".")]
-        bool   IsLarge    { get; set; }
+        bool IsLarge { get; set; }
         /// <summary>.</summary>
         [Description(".")]
         ImageObject Image { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        bool   ShowImage  { get; set; }
+        bool ShowImage { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        bool   ShowLabel  { get; set; }
+        bool ShowLabel { get; set; }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        IRibbonButtonModel Attach(string controlId);
+        ISelectableItemModel Attach(string controlId);
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]

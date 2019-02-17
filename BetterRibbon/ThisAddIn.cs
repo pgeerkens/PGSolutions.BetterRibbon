@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     using Excel    = Microsoft.Office.Interop.Excel;
@@ -43,6 +44,8 @@ namespace PGSolutions.BetterRibbon {
         internal BetterRibbonViewModel ViewModel { get; private set; }
 
         internal BetterRibbonModel     Model     { get; private set; }
+
+        internal IRibbonDispatcher     Dispatcher => new Dispatcher(Model);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

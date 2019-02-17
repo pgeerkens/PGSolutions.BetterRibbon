@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public override bool IsImageable => true;
 
         /// <inheritdoc/>
-        public override object Image => Source?.Image ?? "MacroSecurity";
+        public override ImageObject Image => Source?.Image ?? "MacroSecurity";
 
         /// <inheritdoc/>
         public override bool ShowImage => Source?.ShowImage ?? true;

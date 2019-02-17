@@ -22,27 +22,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public sealed class RibbonToggleModel : RibbonControlModel<RibbonCheckBox>, IRibbonToggleModel,
                 ISizeable, IImageable, IRibbonToggleSource {
         public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
-                IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
-        : this(funcViewModel, strings, isEnabled, isVisible)
-        => SetImageMso(imageMso);
-
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
-                IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
-        : this(funcViewModel, strings, isEnabled, isVisible)
-        => SetImageDisp(image);
-
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible) { }
+                IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible)
+        => Image = image;
 
         public event ToggledEventHandler Toggled;
 
-        public bool   IsLarge   { get; set; } = true;
-        public object Image     { get; set; } = "MacroSecurity";
-        public bool   ShowImage { get; set; } = true;
-        public bool   ShowLabel { get; set; } = true;
+        public bool        IsLarge   { get; set; } = true;
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
 
-        public bool   IsPressed { get; set; } = false;
+        public bool        IsPressed { get; set; } = false;
 
         public IRibbonToggleModel Attach(string controlId) {
             ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonCheckBox, IRibbonToggleSource>)
@@ -56,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(sender, IsPressed = isPressed);
 
-        public void SetImageDisp(IPictureDisp image) => Image = image;
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
     }
 }

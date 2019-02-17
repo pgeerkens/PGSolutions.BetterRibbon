@@ -22,31 +22,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class RibbonButtonModel : RibbonControlModel<RibbonButton>, IRibbonButtonModel,
             ISizeable, IImageable, IRibbonButtonSource {
         public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
-                IRibbonControlStrings strings, string imageMso, bool isEnabled, bool isVisible)
-        : this(funcViewModel, strings, isEnabled, isVisible)
-        => SetImageMso(imageMso);
-
-        public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
-                IRibbonControlStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
-        : this(funcViewModel, strings, isEnabled, isVisible)
-        => SetImageDisp(image);
-
-        public RibbonButtonModel(Func<string,RibbonButton> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+                IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
-        { }
+        => Image = image;
 
         public event ClickedEventHandler Clicked;
 
-        public bool   IsLarge   { get; set; } = true;
-        public object Image     { get; set; } = "MacroSecurity";
-        public bool   ShowImage { get; set; } = true;
-        public bool   ShowLabel { get; set; } = true;
+        public bool        IsLarge   { get; set; } = true;
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
 
-        public IRibbonButtonModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonButton, IRibbonButtonSource>)
-                      ?.Attach(this);
-            if (ViewModel != null) {
+        public IRibbonButtonModel Attach(string controlId) => Attach(FuncViewModel(controlId));
+
+        internal IRibbonButtonModel Attach(RibbonButton viewModel) {
+            (viewModel as IActivatable<RibbonButton, IRibbonButtonSource>)?.Attach(this);
+            if (viewModel != null) {
+                ViewModel = viewModel;
                 ViewModel.Clicked += OnClicked;
                 ViewModel.Invalidate();
             }
@@ -55,7 +47,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private void OnClicked(object sender) => Clicked?.Invoke(sender);
 
-        public void SetImageDisp(IPictureDisp image) => Image = image;
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
     }
+}
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 }

@@ -39,5 +39,3 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             => new LinksParser(cellRef, formula);
     }
 }
-namespace PGSolutions.RibbonUtilities {
-}

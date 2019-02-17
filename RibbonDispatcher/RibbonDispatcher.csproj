@@ -92,7 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
-    <Compile Include="ComClasses\AbstractRibbonGroupModel2.cs" />
+    <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
+    <Compile Include="ComClasses\PictureConverter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComInterfaces\ImageObject.cs" />
     <Compile Include="ComClasses\RibbonControlModel.cs" />
     <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
     <Compile Include="ComInterfaces\IRibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDownModel.cs" />
+    <Compile Include="ComInterfaces\ISelectableItemModel.cs" />
     <Compile Include="ComInterfaces\RibbonModelInterfaces.cs" />
     <Compile Include="ComInterfaces\IRibbonToggleModel.cs" />
     <Compile Include="ComInterfaces\IActivatableControl.cs" />

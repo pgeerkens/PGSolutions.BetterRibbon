@@ -15,8 +15,8 @@ namespace PGSolutions.BetterRibbon {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : this(viewModel,null) { }
         public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)
         : base(viewModel,strings) {
-            AnalyzeCurrentModel  = GetModel<RibbonButton>("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
-            AnalyzeSelectedModel = GetModel<RibbonButton>("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
+            AnalyzeCurrentModel  = NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
+            AnalyzeSelectedModel = NewButtonModel("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
 
             Invalidate();
         }
