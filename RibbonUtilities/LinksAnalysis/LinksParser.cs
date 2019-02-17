@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using Core = Microsoft.Office.Core;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using System.Collections.Generic;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {

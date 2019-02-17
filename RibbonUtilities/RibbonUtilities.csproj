@@ -139,12 +139,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
-      <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
-      <Name>RibbonDispatcher</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="RibbonUtilitiesKey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
