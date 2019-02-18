@@ -28,7 +28,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <summary>.</summary>
         /// <param name="excel"></param>
         /// <param name="nameList"></param>
-        ILinksAnalysis NewExternalLinksWB(Workbook wb, IList<string> excludedNames);
+        /// <remarks>
+        /// Worksheets named any of "Links Errors", "Linked Files" and "Links Analysis" will be
+        /// excluded from tha analysis.
+        /// </remarks>
+        ILinksAnalysis NewExternalLinksWB(Workbook wb);
 
         /// <summary>.</summary>
         /// <param name="excel"></param>

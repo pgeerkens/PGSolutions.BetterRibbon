@@ -27,8 +27,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
              => new LinksLexer(cellRef, formula);
 
         /// <inheritdoc/>
-        public ILinksAnalysis NewExternalLinksWB(Workbook wb, IList<string> excludedNames)
-            => new FormulaParser().ParseWorkbook(wb, excludedNames);
+        public ILinksAnalysis NewExternalLinksWB(Workbook wb)
+            => new FormulaParser().ParseWorkbook(wb);
 
         /// <inheritdoc/>
         public ILinksAnalysis NewExternalLinksWS(Worksheet ws)
