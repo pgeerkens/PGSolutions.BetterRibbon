@@ -76,22 +76,22 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
-        new bool IsEnabled { get; }
+        new bool IsEnabled    { get; }
 
         /// <summary>Gets whether the control is visible.</summary>
-        new bool IsVisible { get; }
+        new bool IsVisible    { get; }
 
         new bool ShowInactive { get; }
 
-        ImageObject Image  { get; }
+        ImageObject Image     { get; }
 
         /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowImage     { get; }
+        bool ShowImage        { get; }
 
         /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowLabel     { get; }
+        bool ShowLabel        { get; }
 
-        bool IsLarge       { get; }
+        bool IsLarge          { get; }
     }
 
     public interface IRibbonToggleSource : IRibbonButtonSource {
@@ -122,18 +122,18 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
-        new bool IsEnabled { get; }
+        new bool IsEnabled    { get; }
 
         /// <summary>Gets whether the control is visible.</summary>
-        new bool IsVisible { get; }
+        new bool IsVisible    { get; }
 
         new bool ShowInactive { get; }
 
-        int SelectedIndex { get; }
+        int SelectedIndex     { get; }
 
         ISelectableItem this[int index] { get; }
 
-        int Count { get; }
+        int Count             { get; }
 
         new IEnumerator<ISelectableItem> GetEnumerator();
     }
@@ -143,21 +143,21 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IRibbonControlStrings Strings { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
-        new bool IsEnabled { get; }
+        new bool IsEnabled    { get; }
 
         /// <summary>Gets whether the control is visible.</summary>
-        new bool IsVisible { get; }
+        new bool IsVisible    { get; }
 
         new bool ShowInactive { get; }
 
-        ImageObject Image { get; }
+        ImageObject Image     { get; }
 
         /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowImage { get; }
+        bool ShowImage        { get; }
 
         /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowLabel { get; }
+        bool ShowLabel        { get; }
 
-        bool IsLarge { get; }
+        bool IsLarge          { get; }
     }
 }

@@ -96,7 +96,7 @@
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ComInterfaces\ImageObject.cs" />
+    <Compile Include="ComInterfaces\IImageObject.cs" />
     <Compile Include="ComClasses\RibbonControlModel.cs" />
     <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="ComClasses\RibbonToggleModel.cs" />
     <Compile Include="ComClasses\SelectableItemModel.cs" />
     <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
+    <Compile Include="ComInterfaces\ImageObject.cs" />
     <Compile Include="ComInterfaces\IRibbonButtonModel.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDownModel.cs" />
     <Compile Include="ComInterfaces\ISelectableItemModel.cs" />

@@ -46,8 +46,6 @@ namespace PGSolutions.RibbonUtilities {
 
             Excel.Workbook wkbk = null;
             try {
-            //    ExcelApp.ActiveWindow.Visible = false;
-
                 wkbk = ExcelApp.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true,
                             AddToMru:false, Editable:false);
                 
