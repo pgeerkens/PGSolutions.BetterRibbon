@@ -105,10 +105,3 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                                                          : "unk";
     }
 }
-namespace PGSolutions.RibbonUtilities {
-    public class EventArgs<T>:EventArgs {
-        public EventArgs(T value) : base() => Value = value;
-
-        public T Value { get; }
-    }
-}

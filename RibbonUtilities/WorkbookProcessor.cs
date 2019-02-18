@@ -10,32 +10,33 @@ namespace PGSolutions.RibbonUtilities {
     using Excel = Microsoft.Office.Interop.Excel;
 
     /// <summary>An implementation of <see cref="IWorkbookProcessor"/> that uses an existing <see cref="Excel.Application"/>.</summary>
-    internal class WorkbookProcessor : IWorkbookProcessor {
+    [CLSCompliant(false)]
+    public class WorkbookProcessor : IWorkbookProcessor {
         /// <summary>.</summary>
         /// <param name="excelApp"></param>
-        public WorkbookProcessor(Excel.Application excelApp) => ExcelApp = excelApp;
+        internal WorkbookProcessor(Excel.Application excelApp) => ExcelApp = excelApp;
 
         protected Excel.Application ExcelApp  { get; }
 
         private Excel.Workbook ActiveWorkbook => ExcelApp.ActiveWorkbook;
 
         /// <inheritdoc/>
-        public void DoOnWorkbook(string wkbkFullName, Action<Excel.Workbook, string> action) {
-            var path = Path.GetDirectoryName(wkbkFullName);
-            var wkbk = ActiveWorkbook;
+        public void DoOnWorkbook(string wkbkFullName, Action<Excel.Workbook> action) {
+            Excel.Workbook wkbk = null;
 
-            if (wkbk.FullName == wkbkFullName) {
-                action?.Invoke(ActiveWorkbook, path);
-            } else if( (wkbk = ExcelApp.Workbooks.TryItem(wkbkFullName))  !=  null) {
-                action?.Invoke(wkbk, path);
+            if( (wkbk = ExcelApp.Workbooks.TryItem(wkbkFullName))  !=  null) {
+                DoOnOpenWorkbook(wkbk, action);
             } else {
                 DoOnClosedWorkbook(wkbkFullName, action);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void DoOnClosedWorkbook(string wkbkFullName, Action<Excel.Workbook, string> action) {
-            var path = Path.GetDirectoryName(wkbkFullName);
+        protected static void DoOnOpenWorkbook(Excel.Workbook wkbk, Action<Excel.Workbook> action)
+        => action?.Invoke(wkbk);
+
+        /// <inheritdoc/>
+        protected virtual void DoOnClosedWorkbook(string wkbkFullName, Action<Excel.Workbook> action) {
             var thisWkbk = ActiveWorkbook;
 
             var saveSecurity = MsoAutomationSecurity.msoAutomationSecurityForceDisable;
@@ -45,11 +46,12 @@ namespace PGSolutions.RibbonUtilities {
 
             Excel.Workbook wkbk = null;
             try {
-                ExcelApp.ActiveWindow.Visible = false;
+            //    ExcelApp.ActiveWindow.Visible = false;
 
                 wkbk = ExcelApp.Workbooks.Open(wkbkFullName, UpdateLinks:false, ReadOnly:true,
                             AddToMru:false, Editable:false);
-                action?.Invoke(wkbk, path);
+                
+                action?.Invoke(wkbk);
             }
             finally {
                 wkbk?.Close(false);

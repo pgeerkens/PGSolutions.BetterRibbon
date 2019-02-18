@@ -96,15 +96,17 @@ namespace PGSolutions.BetterRibbon {
             fd.Filters.Clear();
             fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-            var exporter = new VbaSourceExporter(Application);
-            var list = exporter.FillFilters(fd);
-            if (fd.Show() != 0) {
-                try {
-                    exporter.StatusAvailable += StatusAvailable;
-                    exporter.ExportSelected(list[fd.FilterIndex-1], fd.SelectedItems, DestIsSrc);
-                    exporter.StatusAvailable -= StatusAvailable;
+            using (var processor = new WorkbookProcessor2(Application)) {
+                var exporter = new VbaSourceExporter(Application);
+                var list = VbaSourceExporter.FillFilters(processor, fd);
+                if (fd.Show() != 0) {
+                    try {
+                        exporter.StatusAvailable += StatusAvailable;
+                        exporter.ExportSelected(list[fd.FilterIndex-1], fd.SelectedItems, DestIsSrc);
+                        exporter.StatusAvailable -= StatusAvailable;
+                    }
+                    catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
                 }
-                catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
             }
         }
 

@@ -6,7 +6,7 @@ namespace PGSolutions.RibbonUtilities {
     using Excel = Microsoft.Office.Interop.Excel;
 
     public static partial class Extensions {
-        /// <summary>Returns the speccified <see cref="Workbook"/> exactly when it is already open.</summary>
+        /// <summary>Returns the speccified <see cref="Workbook"/> exactly when it is already open; else null.</summary>
         /// <param name="excel">The running instnce of Excel.</param>
         /// <param name="path">The absolute full=path and -name for the desired workbook.</param>
         internal static Excel.Workbook TryItem(this Excel.Workbooks workbooks, string fullName) {

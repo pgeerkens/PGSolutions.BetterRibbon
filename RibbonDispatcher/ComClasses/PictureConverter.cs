@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    [SuppressMessage("Microsoft.Design", "CA1052:StaticHolderTypesShouldBeSealed")]
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
             Justification = "False positive - static methods ARE accessed.")]
     public class PictureConverter:AxHost {
@@ -14,6 +15,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public static IPictureDisp ImageToPictureDisp(Image image) => GetIPictureDispFromPicture(image) as IPictureDisp;
 
-        public static IPictureDisp IconToPictureDisp(Icon icon) => ImageToPictureDisp(icon.ToBitmap());
+        public static IPictureDisp IconToPictureDisp(Icon icon) => ImageToPictureDisp(icon?.ToBitmap());
     }
 }

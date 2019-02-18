@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         private Application Application { get; }
 
-        public void ExtractOpenProject(_Workbook workbook, bool destIsSrc) {
+        public void ExtractOpenProject(Workbook workbook, bool destIsSrc) {
             ProjectFilter.StatusAvailable += OnStatusAvailable;
             ProjectFilterExcel.ExtractOpenProject(workbook, destIsSrc);
             ProjectFilter.StatusAvailable -= OnStatusAvailable;
@@ -38,17 +38,17 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             }
         }
 
-        public ProjectFilters FillFilters(FileDialog fileDialog) {
+        public static ProjectFilters FillFilters(IWorkbookProcessor processor, FileDialog fileDialog) {
             if (fileDialog == null) throw new ArgumentNullException(nameof(fileDialog));
 
-            var list = GetFilters(new WorkbookProcessor(Application));
+            var list = GetFilters(processor);
             foreach (var item in list) {
                 fileDialog.Filters.Add(item.Description, item.Extensions);
             }
             return list;
         }
 
-        static ProjectFilters GetFilters(WorkbookProcessor processor) {
+        static ProjectFilters GetFilters(IWorkbookProcessor processor) {
             var filters = new List<ProjectFilter> {
                 new ProjectFilterExcel(processor,
                         "MS-Excel Projects", "*.xlsm;*.xlsb;*.xlam;*.xls;*.xla")

@@ -44,6 +44,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
+        private void ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
+
         private void ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
             foreach(Worksheet ws in wb.Worksheets) {
                 if (excludedSheetNames.FirstOrDefault(s => s.Equals(ws.Name)) == null) {
@@ -87,10 +89,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private void ExtendFromWorkbookList(Range range) {
             if (range==null) return;
 
-            var oldExcel = range.Application;
             var nameList = range.GetNameList();
-
-            using (var newExcel = new WorkbookProcessor2()) {
+            using (var newExcel = new WorkbookProcessor2(range.Application)) {
                 foreach (var item in nameList) {
                     if (item is string path) {
                         if (!File.Exists(path)) {
@@ -101,13 +101,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                         StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ...."));
 
                         try {
-                            var wkbk = oldExcel.Workbooks.TryItem(item);
-                            if (wkbk == null) {
-                                newExcel.DoOnWorkbook(item,
-                                        (wb,s) => ExtendFromWorkbook(wb, ExcludedSheetNames));
-                            } else {
-                                ExtendFromWorkbook(wkbk, ExcludedSheetNames);
-                            }
+                            newExcel.DoOnWorkbook(item, ExtendFromWorkbook);
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
                     }

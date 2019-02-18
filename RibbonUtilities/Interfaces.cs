@@ -32,4 +32,12 @@ namespace PGSolutions.RibbonUtilities {
         /// <summary>ProgID for the Ribbon dispatcher.</summary>
         public const string RibbonUtilitiesProgId      = "PGSolutions.RibbonUtilities";
     }
+
+    /// <summary>.</summary>
+    /// <typeparam name="T"></typeparam>
+    public class EventArgs<T>:EventArgs {
+        public EventArgs(T value) : base() => Value = value;
+
+        public T Value { get; }
+    }
 }

@@ -2,7 +2,9 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.IO;
 using Microsoft.Office.Core;
+
 using Microsoft.Office.Interop.Excel;
 
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
@@ -20,16 +22,20 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             foreach (string selectedItem in items) {
                 OnStatusAvailable(this, $"Exporting VBA Source from {selectedItem}; Please be patient ...");
                 ExtractProject(selectedItem, destIsSrc);
+                OnStatusAvailable(this, $"Ready");
             }
         }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        private void ExtractProject(string path, bool destIsSrc)
-        => Processor.DoOnWorkbook(path,
-                (wb, s) => ExtractProjectModules(wb?.VBProject, CreateDirectory(path, destIsSrc)));
+        private void ExtractProject(string wkbkFullName, bool destIsSrc) {
+            var path = Path.GetDirectoryName(wkbkFullName);
+            path = wkbkFullName;
+            Processor.DoOnWorkbook(wkbkFullName,
+                    wb => ExtractProjectModules(wb?.VBProject, CreateDirectory(path,destIsSrc)));
+        }
 
         /// <summary>Exports modules from specified EXCEL workbook to an eponymous subdirectory.</summary>
-        internal static void ExtractOpenProject(_Workbook workbook, bool destIsSrc) {
+        internal static void ExtractOpenProject(Workbook workbook, bool destIsSrc) {
             OnStatusAvailable(workbook, $"Exporting VBA Source from {workbook.FullName}; Please be patient ...");
             ExtractProjectModules(workbook?.VBProject, CreateDirectory(workbook?.FullName, destIsSrc));
         }
