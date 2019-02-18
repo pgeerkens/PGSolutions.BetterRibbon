@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
         => ViewModel.GetControl<TControl>(controlId);
 
-        protected RibbonButtonModel NewButtonModel(string id, ClickedEventHandler handler,
+        protected RibbonButtonModel NewButtonModel(string id, EventHandler handler,
                 bool isEnabled, bool isVisible, ImageObject image) {
             var model = new RibbonButtonModel(GetControl<RibbonButton>, GetStrings(id), image, isEnabled, isVisible);
 

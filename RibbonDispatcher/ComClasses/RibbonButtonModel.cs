@@ -26,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
 
-        public event ClickedEventHandler Clicked;
+        public event EventHandler Clicked;
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
@@ -45,7 +45,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnClicked(object sender) => Clicked?.Invoke(sender);
+        private void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(sender,e);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;

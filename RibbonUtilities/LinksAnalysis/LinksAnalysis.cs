@@ -17,6 +17,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
     /// <summary>TODO</summary>
+    [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
     [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
     [Serializable]
     [CLSCompliant(false)]

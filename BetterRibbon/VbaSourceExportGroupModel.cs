@@ -23,8 +23,8 @@ namespace PGSolutions.BetterRibbon {
         }
 
         public event EventHandler<EventArgs<bool>> UseSrcFolderToggled;
-        public event ClickedEventHandler ExportSelectedClicked;
-        public event ClickedEventHandler ExportCurrentClicked;
+        public event EventHandler ExportSelectedClicked;
+        public event EventHandler ExportCurrentClicked;
 
         public RibbonToggleModel DestIsSrc      { get; }
 
@@ -37,8 +37,8 @@ namespace PGSolutions.BetterRibbon {
         private void OnUseSrcFolderToggled(object sender, bool isPressed)
         => UseSrcFolderToggled?.Invoke(sender, new EventArgs<bool>(isPressed));
 
-        private void OnExportCurrent(object sender)  => ExportCurrentClicked?.Invoke(sender);
+        private void OnExportCurrent(object sender, EventArgs e)  => ExportCurrentClicked?.Invoke(sender,e);
 
-        private void OnExportSelected(object sender) => ExportSelectedClicked?.Invoke(sender);
+        private void OnExportSelected(object sender, EventArgs e) => ExportSelectedClicked?.Invoke(sender,e);
     }
 }

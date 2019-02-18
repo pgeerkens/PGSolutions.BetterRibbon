@@ -21,7 +21,7 @@ Private CustomGroup         As PGSolutions_RibbonDispatcher.RibbonGroupModel
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
-Private Sub Button1_Clicked(ByVal sender As Variant)
+Private Sub Button1_Clicked(ByVal sender As Variant, ByVal e As EventArgs)
     On Error GoTo EH
     LinksLexerTests.TestAll
 XT: Exit Sub

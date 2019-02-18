@@ -14,6 +14,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IClickedEvents {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
         [Description("Fired when the associated control is clicked by the user.")]
-        void Clicked(object sender);
+        void Clicked(object sender, EventArgs e);
     }
 }

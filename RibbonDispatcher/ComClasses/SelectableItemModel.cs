@@ -35,7 +35,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible) { }
 
-        public event ClickedEventHandler Clicked;
+        public event EventHandler Clicked;
 
         public bool        IsLarge   { get => false; set { } } 
         public ImageObject Image     { get; set; } = "MacroSecurity";
@@ -59,7 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
                 Justification ="Intended for dual-purpose Selectable items.")]
-        private void OnClicked(object sender) => Clicked?.Invoke(sender);
+        private void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(sender,e);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso) => Image = imageMso;

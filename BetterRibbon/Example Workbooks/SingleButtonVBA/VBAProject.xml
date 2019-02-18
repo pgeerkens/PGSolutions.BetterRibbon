@@ -51,4 +51,13 @@
       Name='PGSolutions_RibbonDispatcher'
       Type='vbext_rk_TypeLib'
    />
+   <References
+      Description='mscorlib.dll'
+      FullPath='C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.tlb'
+      Guid='{BED7F4EA-1A96-11D2-8F08-00A0C9A6186D}'
+      Major='2'
+      Minor='4'
+      Name='mscorlib'
+      Type='vbext_rk_TypeLib'
+   />
 </Project>

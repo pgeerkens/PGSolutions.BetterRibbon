@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -17,10 +16,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         public T Value { get; }
     }
 
-    /// <summary>TODO</summary>
-    [CLSCompliant( true )]
-    public delegate void ClickedEventHandler(object sender);
-
     public delegate void ToggledEventHandler(object sender, bool isPressed);
 
     public delegate void SelectedEventHandler(object sender, int selectedIndex);
@@ -29,7 +24,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     internal interface IClickable {
         /// <summary>TODO</summary>
-        void OnClicked(object sender);
+        void OnClicked(object sender, EventArgs e);
     }
 
     /// <summary>The interface for controls that can have images.</summary>

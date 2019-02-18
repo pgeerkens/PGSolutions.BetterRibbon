@@ -36,13 +36,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IClickable implementation
         /// <summary>The Clicked event source for COM clients</summary>
-        public event ClickedEventHandler Clicked;
+        public event EventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked() => Clicked?.Invoke(this);
+        public virtual void OnClicked() => Clicked?.Invoke(this,EventArgs.Empty);
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked(object sender) => Clicked?.Invoke(this);
+        public virtual void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(this, EventArgs.Empty);
         #endregion
 
         #region ISizeable implementation

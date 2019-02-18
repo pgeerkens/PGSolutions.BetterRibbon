@@ -47,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Callback for the Clicked event on the control.</summary>
         [Description("Callback for the Clicked event on the control.")]
-        void OnClicked(object sender);
+        void OnClicked(object sender, EventArgs e);
 
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]

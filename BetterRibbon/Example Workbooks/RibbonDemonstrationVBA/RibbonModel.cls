@@ -131,7 +131,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown3_SelectionMade", vbOK
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button1_Clicked(ByVal Sender As Variant)
+Private Sub Button1_Clicked(ByVal Sender As Variant, ByVal e As EventArgs)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
@@ -141,7 +141,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button2_Clicked(ByVal Sender As Variant)
+Private Sub Button2_Clicked(ByVal Sender As Variant, ByVal e As EventArgs)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
@@ -151,7 +151,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button3_Clicked(ByVal Sender As Variant)
+Private Sub Button3_Clicked(ByVal Sender As Variant, ByVal e As EventArgs)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize

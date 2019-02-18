@@ -32,10 +32,10 @@ namespace PGSolutions.BetterRibbon {
 
         private void BackgroundModeToggled(object sender, bool isPressed) => Invalidate();
 
-        private void AnalyzeCurrentClicked(object sender)
+        private void AnalyzeCurrentClicked(object sender, EventArgs e)
         => DisplayAnalysis(parser => parser.ParseWorkbook(Application.ActiveWorkbook));
 
-        private void AnalyzeSelectedClicked(object sender)
+        private void AnalyzeSelectedClicked(object sender, EventArgs e)
         => DisplayAnalysis(parser => parser.ParseWorkbookList(Application.Selection, EnableBackgroundMode.IsPressed));
 
         private void DisplayAnalysis(Func<FormulaParser,ILinksAnalysis> func) {

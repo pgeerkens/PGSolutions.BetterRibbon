@@ -64,7 +64,7 @@ namespace PGSolutions.BetterRibbon {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
-        private void ExportCurrent(object sender) {
+        private void ExportCurrent(object sender, EventArgs e) {
             if (!IsProjectModelTrusted()) { return; }
 
             var exporter = new VbaSourceExporter(Application);
@@ -88,7 +88,7 @@ namespace PGSolutions.BetterRibbon {
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect")]
-        private void ExportSelected(object sender) {
+        private void ExportSelected(object sender, EventArgs e) {
             if (!IsProjectModelTrusted()) { return; }
 
             var fd = Application.FileDialog[MsoFileDialogType.msoFileDialogFilePicker];

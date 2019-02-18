@@ -156,7 +156,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
         private IClickable Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(this);
+        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(this, EventArgs.Empty);
         #endregion
 
         #region ISelectableMixin implementation
