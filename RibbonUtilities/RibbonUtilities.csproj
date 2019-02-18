@@ -99,9 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
+    <Compile Include="LinksAnalysis\FormulaParser.cs" />
     <Compile Include="LinksAnalysis\LinksParser.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />
+    <Compile Include="LinksAnalysis\LinksAnalysis.cs" />
     <Compile Include="ExcelExtensions.cs" />
     <Compile Include="LinksAnalysis\Extensions.cs" />
     <Compile Include="LinksAnalysis\ExternalFiles.cs" />

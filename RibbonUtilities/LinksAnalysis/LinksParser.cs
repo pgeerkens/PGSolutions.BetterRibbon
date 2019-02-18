@@ -22,31 +22,14 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
-    public sealed class LinksParser: AbstractLinksParser {
-        /// <summary>Returns all the external links found in the supplied formula.</summary>
-        public LinksParser(ISourceCellRef cellRef, string formula) : base() 
-        => ParseFormula(cellRef, formula);
-
-        /// <summary>Returns all the external links found in the supplied {Excel.Worksheet}.</summary>
-        public LinksParser(Worksheet ws) : base()
-        => ExtendFromWorksheet(ws);
-
-        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
-        public LinksParser(Workbook wb) : this(wb, ExcludedSheetNames) { }
-
-        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
-        public LinksParser(Workbook wb, IList<string> excludedSheetNames) : base()
-        => ExtendFromWorkbook(wb, excludedSheetNames);
-
-        /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public LinksParser(Range range, bool inBackGround) : base()
-        => ExtendFromWorkbookList(range, inBackGround);
+    public sealed class LinksParser: LinksAnalysis {
+        public LinksParser() { }
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
-        private void ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
+        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
 
-        private void ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
+        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
             foreach(Worksheet ws in wb.Worksheets) {
                 if (excludedSheetNames.FirstOrDefault(s => s.Equals(ws.Name)) == null) {
                     ExtendFromWorksheet(ws);
@@ -54,10 +37,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
 
             ExtendFromNamedRanges(wb);
+            return this;
         }
 
-        private void ExtendFromWorksheet(Worksheet ws) {
-            if (ws == null) return;
+        internal ILinksAnalysis ExtendFromWorksheet(Worksheet ws) {
+            if (ws == null) return null;
 
             var usedRange = ws.UsedRange;
             for(var colNo=1; colNo <= usedRange.Columns.Count; colNo++) {
@@ -74,9 +58,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     }
                 }
             }
+            return this;
         }
 
-        private void ExtendFromNamedRanges(Workbook wb) {
+        internal void ExtendFromNamedRanges(Workbook wb) {
             foreach(Excel.Name source in wb.Names) {
                 if ( source.RefersTo is string formula  &&  formula.Length > 0  
                 &&  formula[0] == '=') {
@@ -86,8 +71,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
         }
 
-        private void ExtendFromWorkbookList(Range range, bool inBackGround) {
-            if (range==null) return;
+        internal ILinksAnalysis ExtendFromWorkbookList(Range range, bool inBackGround) {
+            if (range==null) return null;
 
             StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
             var nameList = range.GetNameList();
@@ -102,7 +87,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                         StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ..."));
 
                         try {
-                            newExcel.DoOnWorkbook(item, ExtendFromWorkbook);
+                            newExcel.DoOnWorkbook(item, wb=>ExtendFromWorkbook(wb));
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
                         finally {
@@ -111,9 +96,10 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     }
                 }
             }
+            return this;
         }
 
-        static IList<string> ExcludedSheetNames = new List<string> {
+        static IList<string> ExcludedSheetNames => new List<string> {
             "Links Errors", "Linked Files", "Links Analysis"
         };
     }

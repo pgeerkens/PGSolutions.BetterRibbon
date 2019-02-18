@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
@@ -34,14 +35,15 @@ namespace PGSolutions.BetterRibbon {
         private void BackgroundModeToggled(object sender, bool isPressed) => Invalidate();
 
         private void AnalyzeCurrentClicked(object sender)
-        => DisplayAnalysis(new LinksParser(Application.ActiveWorkbook));
+        => DisplayAnalysis(parser => parser.ParseWorkbook(Application.ActiveWorkbook));
 
-        private void AnalyzeSelectedClicked(object sender) 
-        => DisplayAnalysis(new LinksParser(Application.Selection, EnableBackgroundMode.IsPressed));
+        private void AnalyzeSelectedClicked(object sender)
+        => DisplayAnalysis(parser => parser.ParseWorkbookList(Application.Selection, EnableBackgroundMode.IsPressed));
 
-        private void DisplayAnalysis(LinksParser parser) {
+        private void DisplayAnalysis(Func<FormulaParser,ILinksAnalysis> func) {
+            var parser = new FormulaParser();
             parser.StatusAvailable += StatusAvailable;
-            Application.ActiveWorkbook.WriteLinks(parser);
+            Application.ActiveWorkbook.WriteLinks(func(parser));
             parser.StatusAvailable -= StatusAvailable;
         }
 

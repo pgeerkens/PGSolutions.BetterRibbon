@@ -13,8 +13,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
     [Guid(Guids.AbstractLinksParser)]
-    public abstract class AbstractLinksParser : ILinksAnalysis {
-        protected AbstractLinksParser() {
+    public class LinksAnalysis : ILinksAnalysis {
+        public LinksAnalysis() {
             _errors = new ParseErrors();
             _files  = new FilesDictionary();
             _links  = new ExternalLinks();
@@ -46,7 +46,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         =>_errors.Add(new ParseError(cellRef,formula,charPosition, condition));
 
         [CLSCompliant(false)]
-        protected ILinksAnalysis ParseFormula(ISourceCellRef sourceCell, string formula) {
+        public ILinksAnalysis ParseFormula(ISourceCellRef sourceCell, string formula) {
             var lexer = new LinksLexer(sourceCell, formula);
 
             for (var token = lexer.Scan(); token.Value != EToken.EOT; token = lexer.Scan()) {
