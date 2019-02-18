@@ -13,8 +13,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class PictureConverter:AxHost {
         private PictureConverter() : base(string.Empty) { }
 
-        public static IPictureDisp ImageToPictureDisp(Image image) => GetIPictureDispFromPicture(image) as IPictureDisp;
+        public static IPictureDisp ImageToPictureDisp(Image image)
+        => GetIPictureDispFromPicture(image) as IPictureDisp;
 
-        public static IPictureDisp IconToPictureDisp(Icon icon) => ImageToPictureDisp(icon?.ToBitmap());
+        public static IPictureDisp IconToPictureDisp(Icon icon)
+        => ImageToPictureDisp(icon?.ToBitmap());
     }
 }

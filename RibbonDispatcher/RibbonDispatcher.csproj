@@ -126,7 +126,6 @@
     <Compile Include="ComClasses\RibbonToggleButton.cs" />
     <Compile Include="ComClasses\RibbonViewModel.cs" />
     <Compile Include="ComClasses\SelectableItem.cs" />
-    <Compile Include="ComInterfaces\DispIds.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="ComInterfaces\IClickedEvents.cs" />
     <Compile Include="ComInterfaces\IControlChangedEventArgs.cs" />

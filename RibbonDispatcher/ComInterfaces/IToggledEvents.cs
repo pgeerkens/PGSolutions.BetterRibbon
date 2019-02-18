@@ -12,7 +12,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IToggledEvents)]
     public interface IToggledEvents {
         /// <summary>TODO</summary>
-        [DispId(1)]
         void Toggled(object sender, bool IsPressed);
     }
 }

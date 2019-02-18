@@ -32,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         private object _image { get; }
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
-            Justification = "Unneeded - constructorss and properties work fine for this here.")]
+                Justification = "Unnecessary - the existing properties achieve that.")]
         public static implicit operator ImageObject(string s) => new ImageObject(s);
     }
 }

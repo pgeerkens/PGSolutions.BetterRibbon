@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string ISelectedEventArgs          = "69E19405" + RibbonDispatcherGuidSpace;
         public const string IRibbonWorkbook             = "69E19406" + RibbonDispatcherGuidSpace;
         //public const string IBetterRibbon               = "69E19407" + RibbonDispatcherGuidSpace;
-        public const string BetterRibbon                = "69E19408" + RibbonDispatcherGuidSpace;
+        //public const string BetterRibbon                = "69E19408" + RibbonDispatcherGuidSpace;
         public const string BetterRibbonMain            = "69E19409" + RibbonDispatcherGuidSpace;
         public const string IResourceManager            = "69E1940A" + RibbonDispatcherGuidSpace;
         //public const string IAbstractDispatcher         = "69E1940B" + RibbonDispatcherGuidSpace;
@@ -42,14 +42,12 @@ namespace PGSolutions.RibbonDispatcher {
 
         public const string ISelectableItem             = "69E19420" + RibbonDispatcherGuidSpace;
         public const string SelectableItem              = "69E19421" + RibbonDispatcherGuidSpace;
-
         //public const string IControlStrings             = "69E19422" + RibbonDispatcherGuidSpace;
         //public const string ControlStrings              = "69E19423" + RibbonDispatcherGuidSpace;
         public const string IResourceLoader             = "69E19424" + RibbonDispatcherGuidSpace;
         public const string ResourceLoader              = "69E19425" + RibbonDispatcherGuidSpace;
         public const string IRibbonModel                = "69E19426" + RibbonDispatcherGuidSpace;
         public const string IRibbonLoader               = "69E19427" + RibbonDispatcherGuidSpace;
-
         //public const string IBooleanSource              = "69E19428" + RibbonDispatcherGuidSpace;
         //public const string IIntegerSource              = "69E19429" + RibbonDispatcherGuidSpace;
         public const string IImageObject                = "69E1942A" + RibbonDispatcherGuidSpace;

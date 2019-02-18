@@ -2,11 +2,14 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+    using IStrings = IRibbonControlStrings;
+
     /// <summary></summary>
     [Description("")]    
     [ComVisible(true)]
@@ -15,7 +18,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IRibbonGroupModel)]
     public interface IRibbonGroupModel {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        IRibbonControlStrings Strings {
+        IStrings Strings {
             [Description("Gets the IRibbonControlStrings for this control.")]
             get;
         }
@@ -58,13 +61,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface IRibbonCommonSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        IRibbonControlStrings Strings { get; }
+        IStrings Strings  { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
-        bool IsEnabled { get; }
+        bool IsEnabled    { get; }
 
         /// <summary>Gets whether the control is visible.</summary>
-        bool IsVisible { get; }
+        bool IsVisible    { get; }
 
         bool ShowInactive { get; }
 
@@ -73,7 +76,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface IRibbonButtonSource : IRibbonCommonSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        new IRibbonControlStrings Strings { get; }
+        new IStrings Strings  { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
         new bool IsEnabled    { get; }
@@ -96,7 +99,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface IRibbonToggleSource : IRibbonButtonSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        new IRibbonControlStrings Strings { get; }
+        new IStrings Strings  { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
         new bool IsEnabled    { get; }
@@ -117,9 +120,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsPressed        { get; }
     }
 
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IRibbonDropDownSource : IRibbonCommonSource, IEnumerable<ISelectableItem> {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        new IRibbonControlStrings Strings { get; }
+        new IStrings Strings  { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
         new bool IsEnabled    { get; }
@@ -131,16 +135,16 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         int SelectedIndex     { get; }
 
-        ISelectableItem this[int index] { get; }
-
         int Count             { get; }
+
+        ISelectableItem this[int index] { get; }
 
         new IEnumerator<ISelectableItem> GetEnumerator();
     }
 
     public interface ISelectableItemSource:IRibbonCommonSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        new IRibbonControlStrings Strings { get; }
+        new IStrings Strings  { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
         new bool IsEnabled    { get; }

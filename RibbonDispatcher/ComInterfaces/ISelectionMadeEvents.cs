@@ -12,7 +12,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.ISelectedEvents)]
     public interface ISelectionMadeEvents {
         /// <summary>TODO</summary>
-        [DispId(1)]
         void SelectionMade(object sender, int ItemIndex);
     }
 }

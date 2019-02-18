@@ -23,7 +23,6 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         /// <param name="strings">The text strings to be displayed for this control.</param>
         /// <returns></returns>
         [Description( "Attaches an {IIntegerSource} to the specified DropDown control." )]
-        [DispId(1)]
         ILinksLexer NewLinksLexer(ISourceCellRef cellRef, string formula);
 
         /// <summary>.</summary>

@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The ViewModel for RibbonButton objects.</summary>
     [Description("The ViewModel for Ribbon Button objects.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-        Justification = "Public, Non-Creatable, class with exported Events.")]
+            Justification = "Public, Non-Creatable, class with exported Events.")]
     [Serializable]
     [CLSCompliant(true)]
     [ComVisible(true)]

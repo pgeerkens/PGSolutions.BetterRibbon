@@ -10,7 +10,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IControlChangedEventArgs {
         /// <summary>The</summary>
-        [DispId(DispIds.ControlId)]
         string ControlId { get; }
     }
 }
