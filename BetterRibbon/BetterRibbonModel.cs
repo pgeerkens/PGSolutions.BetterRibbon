@@ -24,6 +24,7 @@ namespace PGSolutions.BetterRibbon {
         }.AsReadOnly())
         => CustomButtons1Model = Models.OfType<CustomButtonsGroup1Model>().FirstOrDefault();
 
+        /// <summary>.</summary>
         protected override AbstractRibbonGroupModel CustomButtons1Model { get; }
 
         private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)

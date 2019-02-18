@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
                 if (disposing) {
                     if (AccessApp?.CurrentDb() != null) { AccessApp?.CloseCurrentDatabase(); }
                     AccessApp?.Quit();
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(AccessApp);
+                    //System.Runtime.InteropServices.Marshal.ReleaseComObject(AccessApp);
                 }
 
                 // Dispose of unmanaged resources here

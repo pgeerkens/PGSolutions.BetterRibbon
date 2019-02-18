@@ -14,6 +14,7 @@ namespace PGSolutions.BetterRibbon {
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
     public class Dispatcher : IRibbonDispatcher {
+        /// <summary>.</summary>
         public Dispatcher(BetterRibbonModel model) => Model = model;
 
         internal BetterRibbonModel     Model     { get; }

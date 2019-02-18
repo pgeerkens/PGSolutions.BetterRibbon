@@ -22,7 +22,6 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             foreach (string selectedItem in items) {
                 OnStatusAvailable(this, $"Exporting VBA Source from {selectedItem}; Please be patient ...");
                 ExtractProject(selectedItem, destIsSrc);
-                OnStatusAvailable(this, $"Ready");
             }
         }
 

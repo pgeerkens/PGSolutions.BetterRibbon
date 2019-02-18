@@ -14,8 +14,6 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
-    using GroupViewModelFactory = Func<IRibbonFactory,RibbonGroupViewModel>;
-
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
@@ -47,16 +45,17 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         protected override string Id { get; }
 
-        public override RibbonGroupViewModel AddGroupViewModel(string groupName) {
-            var viewModel = RibbonFactory.NewRibbonGroup(groupName);
-            GroupViewModels.Add(viewModel);
-            return viewModel;
-        }
+        /// <summary>Creates, registers, and returns a new <see cref="RibbonGroupViewModel"/> of the specified name.</summary>
+        public override RibbonGroupViewModel AddGroupViewModel(string groupName)
+        => AddGroupViewModel(RibbonFactory.NewRibbonGroup(groupName));
 
-        public override RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func) {
-            if (func == null) throw new ArgumentNullException(nameof(func));
+        /// <summary>Registers and returns the <see cref="RibbonGroupViewModel"/> created by the supplied delegate.</summary>
+        public override RibbonGroupViewModel AddGroupViewModel(
+                        Func<IRibbonFactory, RibbonGroupViewModel> func)
+        => AddGroupViewModel(func?.Invoke(RibbonFactory));
 
-            var viewModel = func(RibbonFactory);
+        /// <summary>Registers and returns the supplied <see cref="RibbonGroupViewModel"/></summary>
+        private RibbonGroupViewModel AddGroupViewModel(RibbonGroupViewModel viewModel) {
             GroupViewModels.Add(viewModel);
             return viewModel;
         }

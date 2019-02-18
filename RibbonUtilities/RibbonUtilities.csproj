@@ -134,7 +134,6 @@
     <Compile Include="VbaSourceExport\VbaExportEventArgs.cs" />
     <Compile Include="VbaSourceExport\VbaSourceExporter.cs" />
     <Compile Include="WorkbookProcessor.cs" />
-    <Compile Include="WorkbookProcessor2.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

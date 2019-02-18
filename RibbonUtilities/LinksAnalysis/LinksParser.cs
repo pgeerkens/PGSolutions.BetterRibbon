@@ -89,8 +89,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         private void ExtendFromWorkbookList(Range range) {
             if (range==null) return;
 
+            StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
             var nameList = range.GetNameList();
-            using (var newExcel = new WorkbookProcessor2(range.Application)) {
+            using (var newExcel = WorkbookProcessor.New(range.Application, false)) {
                 foreach (var item in nameList) {
                     if (item is string path) {
                         if (!File.Exists(path)) {
@@ -98,12 +99,15 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                             continue;
                         }
 
-                        StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ...."));
+                        StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ..."));
 
                         try {
                             newExcel.DoOnWorkbook(item, ExtendFromWorkbook);
                         }
                         catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
+                        finally {
+                            StatusAvailable?.Invoke(this, new EventArgs<string>("Ready"));
+                        }
                     }
                 }
             }

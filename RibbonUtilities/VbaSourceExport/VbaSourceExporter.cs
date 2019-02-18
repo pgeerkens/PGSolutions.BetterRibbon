@@ -35,6 +35,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
             finally {
                 Application.AutomationSecurity = securitySaved;
                 ProjectFilter.StatusAvailable -= OnStatusAvailable;
+                OnStatusAvailable(this, new EventArgs<string>( $"Ready"));
             }
         }
 

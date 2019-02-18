@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -86,6 +87,7 @@ namespace PGSolutions.BetterRibbon {
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect")]
         private void ExportSelected(object sender) {
             if (!IsProjectModelTrusted()) { return; }
 
@@ -96,11 +98,15 @@ namespace PGSolutions.BetterRibbon {
             fd.Filters.Clear();
             fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-            using (var processor = new WorkbookProcessor2(Application)) {
-                var exporter = new VbaSourceExporter(Application);
+            using (var processor = WorkbookProcessor.New(Application, false)) {
+                StatusAvailable(this, new EventArgs<string>("Loading background processor ..."));
+                Application.Cursor = XlMousePointer.xlWait;
                 var list = VbaSourceExporter.FillFilters(processor, fd);
+                Application.Cursor = XlMousePointer.xlDefault;
+                StatusAvailable(this, new EventArgs<string>("Ready"));
                 if (fd.Show() != 0) {
                     try {
+                        var exporter = new VbaSourceExporter(Application);
                         exporter.StatusAvailable += StatusAvailable;
                         exporter.ExportSelected(list[fd.FilterIndex-1], fd.SelectedItems, DestIsSrc);
                         exporter.StatusAvailable -= StatusAvailable;
@@ -108,6 +114,13 @@ namespace PGSolutions.BetterRibbon {
                     catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
                 }
             }
+        #if DEBUG
+            Application.Cursor = XlMousePointer.xlWait;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Application.Cursor = XlMousePointer.xlDefault;
+        #endif
+            StatusAvailable(this, new EventArgs<string>("Ready"));
         }
 
         private static bool IsProjectModelTrusted() {
