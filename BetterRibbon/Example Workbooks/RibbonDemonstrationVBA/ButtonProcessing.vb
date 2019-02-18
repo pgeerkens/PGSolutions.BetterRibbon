@@ -44,7 +44,7 @@ EH: ErrorUtils.ReRaiseError Err, ModuleName & ".SetImageAndLabel"
 End Sub
 
 Public Function ToggleImage(ByVal IsPressed As Boolean) As String
-    ToggleImage = IIf(IsPressed, "TagMarkComplete", "ShapeRectangle") ' "MarginsShowHide")
+    ToggleImage = IIf(IsPressed, "TagMarkComplete", "MarginsShowHide")
 End Function
 
 Private Function ShowImage(ByVal SelectedIndex As Integer) As Boolean

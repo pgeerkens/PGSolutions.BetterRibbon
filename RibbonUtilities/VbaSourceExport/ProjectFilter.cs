@@ -98,7 +98,7 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
 
         /// <summary>Returns an appropriate file extension (prefixed with '.') for the supplied moduleType ordinal.</summary>
         private static string TypeExtension(VbExt_ct moduleType) =>
-               moduleType == VbExt_ct.vbext_ct_StdModule ? "vba"
+               moduleType == VbExt_ct.vbext_ct_StdModule ? "vb"
             :  moduleType == VbExt_ct.vbext_ct_MSForm    ? "frm"
             : (moduleType == VbExt_ct.vbext_ct_ClassModule
             || moduleType == VbExt_ct.vbext_ct_Document) ? "cls"
