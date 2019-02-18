@@ -99,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
-    <Compile Include="IWorkbookProcessor.cs" />
     <Compile Include="LinksAnalysis\LinksParser.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LinksAnalysis\AbstractExternalLinks.cs" />

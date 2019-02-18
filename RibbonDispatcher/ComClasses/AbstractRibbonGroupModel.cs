@@ -25,7 +25,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected RibbonGroupViewModel ViewModel { get; }
 
-        public void Invalidate() => Invalidate(null);
+        public virtual void Invalidate() => Invalidate(null);
 
         public void Invalidate(Action<IActivatable> action) => ViewModel.Invalidate(action);
 

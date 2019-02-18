@@ -33,6 +33,10 @@ namespace PGSolutions.BetterRibbon {
             .AppendLine($"Ribbon Dispatcher V {DispatcherVersion.Format2()}")
             .AppendLine()
             .AppendLine($"{BrandingButtonModel.ViewModel.SuperTip}")
+        #if DEBUG
+            .AppendLine()
+            .AppendLine("***  DEBUG mode  ***")
+        #endif
             .ToString().MsgBoxShow();
 
         static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;

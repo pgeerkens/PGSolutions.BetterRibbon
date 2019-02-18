@@ -22,7 +22,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
-    public sealed class LinksParser : AbstractLinksParser {
+    public sealed class LinksParser: AbstractLinksParser {
         /// <summary>Returns all the external links found in the supplied formula.</summary>
         public LinksParser(ISourceCellRef cellRef, string formula) : base() 
         => ParseFormula(cellRef, formula);
@@ -39,8 +39,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         => ExtendFromWorkbook(wb, excludedSheetNames);
 
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public LinksParser(Range range) : base()
-        => ExtendFromWorkbookList(range);
+        public LinksParser(Range range, bool inBackGround) : base()
+        => ExtendFromWorkbookList(range, inBackGround);
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
@@ -86,12 +86,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
         }
 
-        private void ExtendFromWorkbookList(Range range) {
+        private void ExtendFromWorkbookList(Range range, bool inBackGround) {
             if (range==null) return;
 
             StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
             var nameList = range.GetNameList();
-            using (var newExcel = WorkbookProcessor.New(range.Application, false)) {
+            using (var newExcel = WorkbookProcessor.New(range.Application, inBackGround)) {
                 foreach (var item in nameList) {
                     if (item is string path) {
                         if (!File.Exists(path)) {

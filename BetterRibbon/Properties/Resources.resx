@@ -269,4 +269,15 @@ All valid WB names in the currently selected Range are analyzed.</value>
 
 Both cell formulas and Named Ranges are searched.</value>
   </data>
+  <data name="BackgroundModeToggle_Label" xml:space="preserve">
+    <value>Background Mode</value>
+  </data>
+  <data name="BackgroundModeToggle_ScreenTip" xml:space="preserve">
+    <value>Toggles Background-Mode </value>
+  </data>
+  <data name="BackgroundModeToggle_SuperTip" xml:space="preserve">
+    <value>When pressed, uses a separate background instance of Excel for analysis of a file list, instead of the default instance. 
+
+This is a beta feature, not yet fully tested.</value>
+  </data>
 </root>

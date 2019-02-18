@@ -65,4 +65,3 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         => StatusAvailable?.Invoke(this, e);
     }
 }
-

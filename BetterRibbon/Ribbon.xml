@@ -70,6 +70,11 @@
                                 getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
                                 onAction="onAction"
                        />
+                    <mso:toggleButton id="BackgroundModeToggle" getImage="getImage"
+                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
+                            onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"
+                            getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel"
+                        />
                 </mso:box>
             </mso:group>
             <mso:group id="CustomizableGroup" getVisible="getVisible"

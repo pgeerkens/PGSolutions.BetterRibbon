@@ -126,6 +126,35 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background Mode.
+        /// </summary>
+        internal static string BackgroundModeToggle_Label {
+            get {
+                return ResourceManager.GetString("BackgroundModeToggle_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggles Background-Mode .
+        /// </summary>
+        internal static string BackgroundModeToggle_ScreenTip {
+            get {
+                return ResourceManager.GetString("BackgroundModeToggle_ScreenTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When pressed, uses a separate background instance of Excel for analysis of a file list, instead of the default instance. 
+        ///
+        ///This is a beta feature, not yet fully tested..
+        /// </summary>
+        internal static string BackgroundModeToggle_SuperTip {
+            get {
+                return ResourceManager.GetString("BackgroundModeToggle_SuperTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A Better Ribbon.
         /// </summary>
         internal static string BrandingButton_Label {
@@ -285,7 +314,7 @@ namespace BetterRibbon.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-        ///&lt;!-- Copyright 2018 Pieter Geerkens --&gt;
+        ///&lt;!-- Copyright 2018-2019 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
         ///&lt;mso:customUI xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
         ///              xmlns:rd=&quot;BetterRibbon&quot;
@@ -293,7 +322,7 @@ namespace BetterRibbon.Properties {
         ///  &lt;mso:ribbon&gt;
         ///    &lt;mso:tabs&gt;
         ///        &lt;mso:tab idMso=&quot;TabDeveloper&quot; &gt;
-        ///            &lt;mso:group id=&quot;VbaExportGroupMS&quot; getVisible=&quot;g [rest of string was truncated]&quot;;.
+        ///            &lt;mso:group id=&quot;VbaExportGroupMS&quot; getVisib [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Ribbon {
             get {

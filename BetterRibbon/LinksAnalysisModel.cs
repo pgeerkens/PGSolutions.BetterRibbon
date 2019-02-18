@@ -15,35 +15,38 @@ namespace PGSolutions.BetterRibbon {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : this(viewModel,null) { }
         public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)
         : base(viewModel,strings) {
-            AnalyzeCurrentModel  = NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked,true, true, "EditLinks");
-            AnalyzeSelectedModel = NewButtonModel("AnalyzeLinksSelected",AnalyzeSelectedClicked,true, true, "EditLinks");
+            AnalyzeCurrentModel  = NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, true, true, "EditLinks");
+            AnalyzeSelectedModel = NewButtonModel("AnalyzeLinksSelected",AnalyzeSelectedClicked, true, true, "EditLinks");
+            EnableBackgroundMode = NewToggleModel("BackgroundModeToggle", BackgroundModeToggled, true, true, "EditLinks");
 
             Invalidate();
         }
 
+        public RibbonToggleModel EnableBackgroundMode { get; }
         public RibbonButtonModel AnalyzeCurrentModel  { get; }
         public RibbonButtonModel AnalyzeSelectedModel { get; }
 
-        private void AnalyzeCurrentClicked(object sender) {
-            var parser = new LinksParser(Application.ActiveWorkbook);
-            parser.StatusAvailable += StatusAvailable;
-            DisplayAnalysis(parser);
-            parser.StatusAvailable -= StatusAvailable;
+        public override void Invalidate() {
+            EnableBackgroundMode?.SetImageMso(EnableBackgroundMode?.IsPressed.ToggleImage());
+            base.Invalidate();
         }
 
-        private void AnalyzeSelectedClicked(object sender) {
-            var parser = new LinksParser(Application.Selection);
+        private void BackgroundModeToggled(object sender, bool isPressed) => Invalidate();
+
+        private void AnalyzeCurrentClicked(object sender)
+        => DisplayAnalysis(new LinksParser(Application.ActiveWorkbook));
+
+        private void AnalyzeSelectedClicked(object sender) 
+        => DisplayAnalysis(new LinksParser(Application.Selection, EnableBackgroundMode.IsPressed));
+
+        private void DisplayAnalysis(LinksParser parser) {
             parser.StatusAvailable += StatusAvailable;
-            DisplayAnalysis(parser);
+            Application.ActiveWorkbook.WriteLinks(parser);
             parser.StatusAvailable -= StatusAvailable;
         }
 
         private void StatusAvailable(object sender, EventArgs<string> e)
         => Application.StatusBar = e.Value;
-
-        /// <inheritdoc/>
-        private static void DisplayAnalysis(ILinksAnalysis externalLinks)
-        => Application.ActiveWorkbook.WriteLinks(externalLinks);
 
         private static Application Application => Globals.ThisAddIn.Application;
     }
