@@ -5,13 +5,11 @@ using System;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonUtilities;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
-    using IRibbonControlStrings = RibbonDispatcher.ComInterfaces.IRibbonControlStrings;
-
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(RibbonGroupViewModel viewModel) : this(viewModel,null) { }
         public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonControlStrings strings)
@@ -27,9 +25,9 @@ namespace PGSolutions.BetterRibbon {
         public RibbonButtonModel AnalyzeCurrentModel  { get; }
         public RibbonButtonModel AnalyzeSelectedModel { get; }
 
-        public override void Invalidate() {
+        public override void Invalidate(Action<IActivatable> action) {
             EnableBackgroundMode?.SetImageMso(EnableBackgroundMode?.IsPressed.ToggleImage());
-            base.Invalidate();
+            base.Invalidate(action);
         }
 
         private void BackgroundModeToggled(object sender, bool isPressed) => Invalidate();
@@ -47,7 +45,7 @@ namespace PGSolutions.BetterRibbon {
             parser.StatusAvailable -= StatusAvailable;
         }
 
-        private void StatusAvailable(object sender, EventArgs<string> e)
+        private void StatusAvailable(object sender, RibbonUtilities.EventArgs<string> e)
         => Application.StatusBar = e.Value;
 
         private static Application Application => Globals.ThisAddIn.Application;

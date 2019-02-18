@@ -15,11 +15,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public sealed class FormulaParser {
         /// <summary>Returns all the external links found in the supplied formula.</summary>
         public FormulaParser() : base() {
-            LinksParser = new LinksParser();
+            LinksParser = new LinksAnalysis();
             LinksParser.StatusAvailable += OnStatusAvailable;
         }
 
-        private LinksParser LinksParser { get; }
+        private LinksAnalysis LinksParser { get; }
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
@@ -43,7 +43,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         => LinksParser.ExtendFromWorkbook(wb, excludedSheetNames);
 
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public ILinksAnalysis ParseWorkbookList(Range range, bool inBackGround)
-        => LinksParser.ExtendFromWorkbookList(range, inBackGround);
+        public ILinksAnalysis ParseWorkbookList(Range range, bool inBackground)
+        => LinksParser.ExtendFromWorkbookList(range, inBackground);
     }
 }

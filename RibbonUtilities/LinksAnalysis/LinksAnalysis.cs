@@ -3,124 +3,104 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    /// <summary>.</summary>
-    [ComVisible(true)]
+    using Excel = Microsoft.Office.Interop.Excel;
+    using Range = Microsoft.Office.Interop.Excel.Range;
+    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
+    using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+
+    /// <summary>TODO</summary>
+    [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
+    [Serializable]
+    [CLSCompliant(false)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ILinksAnalysis))]
-    [Guid(Guids.AbstractLinksParser)]
-    public class LinksAnalysis : ILinksAnalysis {
-        public LinksAnalysis() {
-            _errors = new ParseErrors();
-            _files  = new FilesDictionary();
-            _links  = new ExternalLinks();
-        }
+    public sealed class LinksAnalysis: AbstractLinksAnalysis {
+        public LinksAnalysis() { }
 
-        /// <inheritdoc/>
-        public IParseErrors   Errors => _errors;
-        /// <inheritdoc/>
-        public IExternalFiles Files  => _files.OrderedList;
-        /// <inheritdoc/>
-        public IExternalLinks Links  => _links;
+        public event EventHandler<EventArgs<string>> StatusAvailable;
 
-        private readonly ParseErrors     _errors;
-        private readonly FilesDictionary _files;
-        private readonly ExternalLinks   _links;
+        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
 
-        private bool Add(ICellRef cell) {
-            if (cell != null) {
-                _links.Add(cell);
-                _files.Add(Path.Combine(cell.TargetPath, cell.TargetFile));
+        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
+            foreach(Worksheet ws in wb.Worksheets) {
+                if (excludedSheetNames.FirstOrDefault(s => s.Equals(ws.Name)) == null) {
+                    ExtendFromWorksheet(ws);
+                }
             }
-            return cell != null;
+
+            ExtendFromNamedRanges(wb);
+            return this;
         }
 
-        protected void AddFileAccessError(string path, string condition)
-        => _errors.AddFileAccessError(path, condition);
+        internal ILinksAnalysis ExtendFromWorksheet(Worksheet ws) {
+            if (ws == null) return null;
 
-        private void AddParseError(ISourceCellRef cellRef, string formula, int charPosition, string condition)
-        =>_errors.Add(new ParseError(cellRef,formula,charPosition, condition));
+            var usedRange = ws.UsedRange;
+            for(var colNo=1; colNo <= usedRange.Columns.Count; colNo++) {
+                var percentage = 100 * colNo / usedRange.Columns.Count;
+                StatusAvailable?.Invoke(this, 
+                    new EventArgs<string>($"Searching {ws.Parent.Name}[{ws.Name}] ... ({percentage,3}%)"));
 
-        [CLSCompliant(false)]
-        public ILinksAnalysis ParseFormula(ISourceCellRef sourceCell, string formula) {
-            var lexer = new LinksLexer(sourceCell, formula);
-
-            for (var token = lexer.Scan(); token.Value != EToken.EOT; token = lexer.Scan()) {
-                switch (token.Value) {
-                    case EToken.ScanError:
-                        AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Scan error at position {lexer.CharPosition}; found: '{token.Text}'");
-                        break;
-                    case EToken.ExternRef:
-                        var path = token.Text;
-                        if((token = lexer.Scan()).Value != EToken.Bang) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected '!' found '{token.Name()}' at position {lexer.CharPosition}");
-                        } else if((token = lexer.Scan()).Value != EToken.Identifier) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected Identifier, found '{token.Name()}' at position {lexer.CharPosition}");
-                        } else if (! ParseExternRef(path,token.Text,formula,sourceCell)) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected a cell reference at position {lexer.CharPosition}; found '{token.Text}'");
-                        } else {
-                            break;
-                        }
-                        break;
-                    case EToken.OpenExternRef:
-                        path = token.Text;
-                        if((token = lexer.Scan()).Value != EToken.Bang) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected '!' found '{token.Name()}' at position {lexer.CharPosition}");
-                        } else if((token = lexer.Scan()).Value != EToken.Identifier) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected Identifier, found '{token.Name()}' at position {lexer.CharPosition}");
-                        } else if (! ParseOpenExternRef(path,token.Text,formula,sourceCell)) {
-                            AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
-                                $"Expected a cell reference at position {lexer.CharPosition}; found '{token.Text}'");
-                        } else {
-                            break;
-                        }
-                        break;
-                    default:
-                        break;
+                var lastRowNo = ws.Cells[ws.Rows.Count, colNo].End(Excel.XlDirection.xlUp).Row;
+                for(long rowNo = 1; rowNo <= lastRowNo; rowNo++) {
+                    var cell    = usedRange[rowNo, colNo];
+                    if ( cell.Formula is string formula && formula.Length > 0 && formula[0] == '=' ) {
+                        var cellRef = ws.NewCellRef(cell as Range);
+                        ParseFormula(cellRef,formula);
+                    }
                 }
             }
             return this;
         }
 
-        private bool ParseExternRef(string path, string cell, string formula, ISourceCellRef source) {
-            var indexBra  = path.IndexOf('[',       0); if (indexBra < 0) return IsValidSheetName(path);
-            var indexKet  = path.IndexOf(']',indexBra); if (indexKet < 0) return false;
-            return Add(new ExternalRef(formula,source,
-                       new SourceCellRef(
-                           path.Substring(         1, indexBra - 1),               // omit "'" leading
-                           path.Substring(indexBra+1, indexKet - indexBra - 1),    // omit "'['
-                           path.Substring(indexKet+1, path.Length - indexKet - 2), // omit ']' trailing
-                           cell
-            ) ) );
+        internal void ExtendFromNamedRanges(Workbook wb) {
+            foreach(Excel.Name source in wb.Names) {
+                if ( source.RefersTo is string formula  &&  formula.Length > 0  
+                &&  formula[0] == '=') {
+                    var cellRef = wb.NewWorkbookNameRef(source);
+                    ParseFormula(cellRef,formula);
+                }
+            }
         }
 
-        private bool ParseOpenExternRef(string path, string cell, string formula, ISourceCellRef source) {
-            var indexKet  = path.IndexOf(']',0); if (indexKet < 0) return IsValidSheetName(path);
-            return Add(new ExternalRef(formula,source,
-                       new SourceCellRef(
-                           "open workbook w/o a path",
-                           path.Substring(         1, indexKet - 1),               // omit "'['
-                           path.Substring(indexKet+1, path.Length - indexKet - 1), // omit ']' trailing
-                           cell
-            ) ) );
+        internal ILinksAnalysis ExtendFromWorkbookList(Range range, bool inBackGround) {
+            if (range==null) return null;
+
+            StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
+            var nameList = range.GetNameList();
+            using (var newExcel = WorkbookProcessor.New(range.Application, inBackGround)) {
+                foreach (var item in nameList) {
+                    if (item is string path) {
+                        if (!File.Exists(path)) {
+                            AddFileAccessError(path, "File not found.");
+                            continue;
+                        }
+
+                        StatusAvailable?.Invoke(this, new EventArgs<string>($"Processing {path} ..."));
+
+                        try {
+                            newExcel.DoOnWorkbook(item, wb=>ExtendFromWorkbook(wb));
+                        }
+                        catch (IOException ex) { AddFileAccessError(path, $"IOException: '{ex.Message}'"); }
+                        finally {
+                            StatusAvailable?.Invoke(this, new EventArgs<string>("Ready"));
+                        }
+                    }
+                }
+            }
+            return this;
         }
 
-        private static bool IsValidSheetName(string path) {
-            var invalid = new List<char>{':', '\\', '/', '?', '*', '[', ']' };
-            foreach (var c in invalid) if (path.IndexOf(c) >= 0) return false;
-
-            if (path.IndexOf('\'') == 0  &&  path.Substring(1).IndexOf('\'') == path.Length-2) return true;
-            return path.IndexOf('\'') < 0;
-        }
+        static IList<string> ExcludedSheetNames => new List<string> {
+            "Links Errors", "Linked Files", "Links Analysis"
+        };
     }
 }

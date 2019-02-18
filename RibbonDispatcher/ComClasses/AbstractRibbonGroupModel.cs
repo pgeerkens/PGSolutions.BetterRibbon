@@ -14,8 +14,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ViewModel = (viewModel as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
                       ?.Attach(this);
             Strings = strings ?? GetStrings(ViewModel.Id);
-
-            Invalidate();
         }
 
         public bool     IsEnabled    { get; set; } = true;
@@ -25,9 +23,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected RibbonGroupViewModel ViewModel { get; }
 
-        public virtual void Invalidate() => Invalidate(null);
+        public void Invalidate() => Invalidate(null);
 
-        public void Invalidate(Action<IActivatable> action) => ViewModel.Invalidate(action);
+        public virtual void Invalidate(Action<IActivatable> action) => ViewModel.Invalidate(action);
 
         /// <summary>Set ShowInactive for al- child controls of this ViewModel - even the unattached.</summary>
         /// <param name="showInactive">The <see cref="bool"/> value to be set</param>
