@@ -18,7 +18,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
         Number,
         BinaryOperator,
         UnaryOperator,
-        Equals,
+        EqualsOperator,
         Comma,
         Semicolon,
         Bang,
@@ -42,7 +42,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
                 case EToken.Number:         return "<Number>";
                 case EToken.BinaryOperator: return "<BinOp>";
                 case EToken.UnaryOperator:  return "Unop<>";
-                case EToken.Equals:         return "<Equals>";
+                case EToken.EqualsOperator: return "<EqualsOp>";
                 case EToken.Comma:          return "<Comma>";
                 case EToken.Semicolon:      return "<SemiColon>";
                 case EToken.Bang:           return "<Bang>";

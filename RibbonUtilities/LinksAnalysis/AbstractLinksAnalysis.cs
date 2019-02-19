@@ -51,11 +51,11 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
             for (var token = lexer.Scan(); token.Value != EToken.EOT; token = lexer.Scan()) {
                 switch (token.Value) {
-                    case EToken.ScanError:
+                    case EToken t when t == EToken.ScanError :
                         AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
                                 $"Scan error at position {lexer.CharPosition}; found: '{token.Text}'");
                         break;
-                    case EToken.ExternRef:
+                    case EToken t when t == EToken.ExternRef:
                         var path = token.Text;
                         if((token = lexer.Scan()).Value != EToken.Bang) {
                             AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,
@@ -70,7 +70,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                             break;
                         }
                         break;
-                    case EToken.OpenExternRef:
+                    case EToken t when t == EToken.OpenExternRef:
                         path = token.Text;
                         if((token = lexer.Scan()).Value != EToken.Bang) {
                             AddParseError(sourceCell, lexer.Formula, lexer.CharPosition,

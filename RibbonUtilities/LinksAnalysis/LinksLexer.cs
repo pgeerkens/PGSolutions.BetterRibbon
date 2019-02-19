@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                     var start = CharPosition;
                     switch (CurrentCharacter) {
                         case '!': return Add(EToken.Bang, start, GetText(start));
-                        case '=': return Add(EToken.Equals, start, GetText(start));
+                        case '=': return Add(EToken.EqualsOperator, start, GetText(start));
                         case ',': return Add(EToken.Comma, start, GetText(start));
                         case ';': return Add(EToken.Semicolon, start, GetText(start));
                         case '+':

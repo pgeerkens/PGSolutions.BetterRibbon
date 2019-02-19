@@ -104,7 +104,7 @@ Public Sub StringLiteralTest()
     Const Formula As String = "=MID(C2, FIND("" '"", C2, 1)+1,  FIND(""]"", C2, 1)-FIND(""'"", C2, 1))"
     
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
-        ScanCheck MethodName, Lexer, EToken_Equals, "="
+        ScanCheck MethodName, Lexer, EToken_EqualsOperator, "="
         ScanCheck MethodName, Lexer, EToken_Identifier, "MID"
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
         ScanCheck MethodName, Lexer, EToken_Identifier, "C2"
@@ -161,7 +161,7 @@ Public Sub ComplexRefTest()
         "=VLOOKUP(A18,'T:\div\Income Stmt\[Income Stmt.xlsx]IS_lines'!$A$6:$B$400,2,FALSE)"
     
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
-        ScanCheck MethodName, Lexer, EToken_Equals, "="
+        ScanCheck MethodName, Lexer, EToken_EqualsOperator, "="
         ScanCheck MethodName, Lexer, EToken_Identifier, "VLOOKUP"
         ScanCheck MethodName, Lexer, EToken_OpenParen, "("
         ScanCheck MethodName, Lexer, EToken_Identifier, "A18"
@@ -230,7 +230,7 @@ Public Sub FakeExternRefTest()
     On Error GoTo EH
     Const Formula As String = "='Control Strings'!$A$1:$G$13 "
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
-        ScanCheck MethodName, Lexer, EToken_Equals, "="
+        ScanCheck MethodName, Lexer, EToken_EqualsOperator, "="
         ScanCheck MethodName, Lexer, EToken_ExternRef, "'Control Strings'"
         ScanCheck MethodName, Lexer, EToken_Bang, "!"
         ScanCheck MethodName, Lexer, EToken_Identifier, "$A$1:$G$13"
@@ -395,7 +395,7 @@ Public Sub ArrayNamedRangeTest()
     
     On Error GoTo EH
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
-    VerifyToken Lexer, EToken_Equals, "="
+    VerifyToken Lexer, EToken_EqualsOperator, "="
     VerifyToken Lexer, EToken_OpenBrace, "{"
     VerifyToken Lexer, EToken_Identifier, "#N/A":      VerifyToken Lexer, EToken_Comma, ","
     VerifyToken Lexer, EToken_Identifier, "#N/A":      VerifyToken Lexer, EToken_Comma, ","

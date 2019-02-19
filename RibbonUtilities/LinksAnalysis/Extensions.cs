@@ -47,7 +47,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         internal static bool IsWordOperator(this string text) => 
             LinksLexer.WordOperators.FirstOrDefault(s => s == text) != null;
 
-        internal static string Name(this IToken token) => token.Value.Name();
+        internal static string Name(this IToken token) => token.Name();
 
         [SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Body" )]
         [CLSCompliant(false)]
