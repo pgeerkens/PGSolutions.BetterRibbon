@@ -9,10 +9,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
         public VbaSourceExportGroupModel(RibbonGroupViewModel viewModel, string suffix)
-        : this(viewModel, suffix, null) { }
-
-        public VbaSourceExportGroupModel(RibbonGroupViewModel viewModel, string suffix, IRibbonControlStrings strings)
-        : base(viewModel, strings) {
+        : base(viewModel) {
             Suffix = suffix;
 
             DestIsSrc      = NewToggleModel($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
@@ -32,7 +29,7 @@ namespace PGSolutions.BetterRibbon {
 
         public RibbonButtonModel ExportCurrent  { get; }
 
-        public string           Suffix          { get; }
+        public string            Suffix         { get; }
 
         private void OnUseSrcFolderToggled(object sender, bool isPressed)
         => UseSrcFolderToggled?.Invoke(sender, new EventArgs<bool>(isPressed));

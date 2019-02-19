@@ -10,16 +10,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IRibbonCommonSource, IInvalidate {
-        protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel, IStrings strings) {
+        protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel) {
             ViewModel = (viewModel as IActivatable<RibbonGroupViewModel, IRibbonCommonSource>)
                       ?.Attach(this);
-            Strings = strings ?? GetStrings(ViewModel.Id);
+            Strings   = GetStrings(ViewModel.Id);
         }
 
         public bool     IsEnabled    { get; set; } = true;
         public bool     IsVisible    { get; set; } = true;
         public bool     ShowInactive { get; private set; } = true;
-        public IStrings Strings      { get; }
+        public IStrings Strings      { get; private set; }
 
         protected RibbonGroupViewModel ViewModel { get; }
 

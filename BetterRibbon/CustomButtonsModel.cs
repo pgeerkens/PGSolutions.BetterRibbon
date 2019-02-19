@@ -10,6 +10,6 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     [CLSCompliant(false)]
     public sealed class CustomButtonsGroup1Model : AbstractRibbonGroupModel, IRibbonCommonSource {
-        internal CustomButtonsGroup1Model(RibbonGroupViewModel viewModel) : base(viewModel,null) { }
+        internal CustomButtonsGroup1Model(RibbonGroupViewModel viewModel) : base(viewModel) { }
     }
 }

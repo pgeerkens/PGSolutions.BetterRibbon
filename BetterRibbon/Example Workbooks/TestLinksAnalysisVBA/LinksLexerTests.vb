@@ -158,7 +158,7 @@ Public Sub ComplexRefTest()
     
     On Error GoTo EH
     Const Formula As String = _
-        "=VLOOKUP(A18,'G:\can\Income Stmt Mapping\[IS Mapping.xlsx]IS_line names'!$A$6:$B$400,2,FALSE)"
+        "=VLOOKUP(A18,'T:\div\Income Stmt\[Income Stmt.xlsx]IS_lines'!$A$6:$B$400,2,FALSE)"
     
     Dim Lexer As ILinksLexer: Set Lexer = NewLinksLexer(DummyCellRef, Formula)
         ScanCheck MethodName, Lexer, EToken_Equals, "="
@@ -168,7 +168,7 @@ Public Sub ComplexRefTest()
         ScanCheck MethodName, Lexer, EToken_Comma, ","
         
         ScanCheck MethodName, Lexer, EToken_ExternRef, _
-            "'G:\can\Income Stmt Mapping\[IS Mapping.xlsx]IS_line names'"
+            "'T:\div\Income Stmt\[Income Stmt.xlsx]IS_lines'"
         ScanCheck MethodName, Lexer, EToken_Bang, "!"
         ScanCheck MethodName, Lexer, EToken_Identifier, "$A$6:$B$400"
         ScanCheck MethodName, Lexer, EToken_Comma, ","
@@ -251,18 +251,18 @@ Public Sub SimpleParseLinkTest()
     
     On Error GoTo EH
     Const Formula As String = _
-        "=VLOOKUP(A18,'S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\[IS Mapping.xlsx]IS_line names'!$A$6:$B$400,2,FALSE)"
+        "=VLOOKUP(A18,'S:\div\group\team\PROJECT\Income Statement\[IS Mapping.xlsx]IS_lines'!$A$6:$B$400,2,FALSE)"
                 
     Dim ExtLinks As IExternalLinks
     Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks.Item(0)
-        If .TargetPath <> "S:\can\Affinity\actuar\SPONSOR\VALN\Income Statement Mapping\" Then _
+        If .TargetPath <> "S:\div\group\team\PROJECT\Income Statement\" Then _
              Err.Raise 1, MethodName, "Incorrect Path found"
         
         If .TargetFile <> "IS Mapping.xlsx" Then _
             Err.Raise 1, MethodName, "Incorrect FileName found"
 
-        If .TargetTab <> "IS_line names" Then _
+        If .TargetTab <> "IS_lines" Then _
             Err.Raise 1, MethodName, "Incorrect TabName found"
 
         If .TargetCell <> "$A$6:$B$400" Then _
@@ -285,27 +285,27 @@ End Sub
 
 Public Sub ComplexParseLinkTest()
     Const MethodName As String = mModuleName & "ComplexParseLinkTest"
-    Const PathPrefix As String = "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\"
+    Const PathPrefix As String = "S:\div\group\team\PROJECT\Reporting\"
     Const Formula As String = _
-        "=SUM('S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\[CCPE Experience Report_2016 Q1.xls]INTERIM REPORT'!$V$16," & vbNewLine & _
-        "     'S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\[CCPE Experience Report_2016 Q1.xls]INTERIM REPORT'!$W$16)" & vbNewLine & _
-        "-SUM('S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\[CCPE Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$V$16," & vbNewLine & _
-        "     'S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\[CCPE Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$W$16)" & vbNewLine
+        "=SUM('S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\[Experience Report_2016 Q1.xls]INTERIM REPORT'!$V$16," & vbNewLine & _
+        "     'S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\[Experience Report_2016 Q1.xls]INTERIM REPORT'!$W$16)" & vbNewLine & _
+        "-SUM('S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\[Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$V$16," & vbNewLine & _
+        "     'S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\[Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$W$16)" & vbNewLine
                 
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
     Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks
-        If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
-        Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
-        Or .Item(2).TargetPath <> "S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\" _
-        Or .Item(3).TargetPath <> "S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\" _
+        If .Item(0).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\" _
+        Or .Item(1).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\" _
+        Or .Item(2).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\" _
+        Or .Item(3).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\" _
         Then Err.Raise 1, MethodName, "Incorrect Path found"
         
-        If .Item(0).TargetFile <> "CCPE Experience Report_2016 Q1.xls" _
-        Or .Item(1).TargetFile <> "CCPE Experience Report_2016 Q1.xls" _
-        Or .Item(2).TargetFile <> "CCPE Experience Report_2015 Q4 - Corrected.xls" _
-        Or .Item(3).TargetFile <> "CCPE Experience Report_2015 Q4 - Corrected.xls" _
+        If .Item(0).TargetFile <> "Experience Report_2016 Q1.xls" _
+        Or .Item(1).TargetFile <> "Experience Report_2016 Q1.xls" _
+        Or .Item(2).TargetFile <> "Experience Report_2015 Q4 - Corrected.xls" _
+        Or .Item(3).TargetFile <> "Experience Report_2015 Q4 - Corrected.xls" _
         Then Err.Raise 1, MethodName, "Incorrect FileName found"
 
         If .Item(0).TargetTab <> "INTERIM REPORT" _
@@ -335,27 +335,27 @@ End Sub
 
 Public Sub CellParseLinkTest()
     Const MethodName As String = mModuleName & "CellParseLinkTest"
-    Const PathPrefix As String = "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\"
+    Const PathPrefix As String = "S:\div\group\team\PROJECT\Reporting\2016\"
     Const Formula As String = _
-        "=SUM('S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\[CCPE Experience Report_2016 Q1.xls]INTERIM REPORT'!$V$16," & _
-        "     'S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\[CCPE Experience Report_2016 Q1.xls]INTERIM REPORT'!$W$16)" & _
-        "-SUM('S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\[CCPE Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$V$16," & _
-        "     'S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\[CCPE Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$W$16)"
+        "=SUM('S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\[Experience Report_2016 Q1.xls]INTERIM REPORT'!$V$16," & _
+        "     'S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\[Experience Report_2016 Q1.xls]INTERIM REPORT'!$W$16)" & _
+        "-SUM('S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\[Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$V$16," & _
+        "     'S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\[Experience Report_2015 Q4 - Corrected.xls]INTERIM REPORT'!$W$16)"
     
     On Error GoTo EH
     Dim ExtLinks As IExternalLinks
     Set ExtLinks = AddInHandle.Parse(DummyCellRef, Formula).Links
     With ExtLinks
-        If .Item(0).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
-        Or .Item(1).TargetPath <> "S:\can\Finance\actuarial\ASSC\Institutional\Reporting\2016\M03\Reserves\CRR\Affinity\" _
-        Or .Item(2).TargetPath <> "S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\" _
-        Or .Item(3).TargetPath <> "S:\can\finance\actuarial\ASSC\Institutional\Reporting\2015\M12\Reserves\CRR\Affinity\" _
+        If .Item(0).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\" _
+        Or .Item(1).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2016\M03\Reserves\CRR\" _
+        Or .Item(2).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\" _
+        Or .Item(3).TargetPath <> "S:\div\group\team\PROJECT\Reporting\2015\M12\Reserves\CRR\" _
         Then Err.Raise 1, MethodName, "Incorrect Path found"
         
-        If .Item(0).TargetFile <> "CCPE Experience Report_2016 Q1.xls" _
-        Or .Item(1).TargetFile <> "CCPE Experience Report_2016 Q1.xls" _
-        Or .Item(2).TargetFile <> "CCPE Experience Report_2015 Q4 - Corrected.xls" _
-        Or .Item(3).TargetFile <> "CCPE Experience Report_2015 Q4 - Corrected.xls" _
+        If .Item(0).TargetFile <> "Experience Report_2016 Q1.xls" _
+        Or .Item(1).TargetFile <> "Experience Report_2016 Q1.xls" _
+        Or .Item(2).TargetFile <> "Experience Report_2015 Q4 - Corrected.xls" _
+        Or .Item(3).TargetFile <> "Experience Report_2015 Q4 - Corrected.xls" _
         Then Err.Raise 1, MethodName, "Incorrect FileName found"
 
         If .Item(0).TargetTab <> "INTERIM REPORT" _
