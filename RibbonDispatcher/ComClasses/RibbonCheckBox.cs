@@ -65,6 +65,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public virtual bool ShowLabel => true;
         #endregion
 
-        public override void Invalidate() => base.Invalidate();
+        //public override void Invalidate() => base.Invalidate();
     }
 }

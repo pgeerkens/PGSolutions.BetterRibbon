@@ -24,11 +24,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Attach<RibbonGroupViewModel>(source);
 
         public override void Detach() {
-            foreach (var c in Controls) c.Detach();
+            Invalidate(ctrl => {
+                ctrl.Detach();
+                ctrl.SetShowInactive(false);
+            });
             base.Detach();
         }
 
-        public IRibbonFactory Factory { get; }
+        internal IRibbonFactory Factory { get; }
 
         protected KeyedCollection<string,IActivatable> Controls { get; }
 
@@ -54,15 +57,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Controls.Add(control);
             return this;
         }
-
-        public void DetachControls() {
-            foreach (var ctrl in Controls) {
-                if (ctrl != this) ctrl?.Detach();
-                ctrl.SetShowInactive(false);
-            }
-        }
-
-        public new IRibbonControlStrings Strings => base.Strings;
 
         protected static string NoImage => "MacroSecurity";
 

@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ViewModel.Invalidate(c => c.SetShowInactive(ShowInactive));
         }
 
-        public void DetachControls() => ViewModel?.DetachControls();
+        public void DetachControls() => ViewModel?.Detach();
 
         public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
         => ViewModel.GetControl<TControl>(controlId);

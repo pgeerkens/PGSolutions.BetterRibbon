@@ -7,7 +7,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The contract specifying that a ViewModel implementation can be attached to bya Model.</summary>
     [ComVisible(false)]
     public interface IActivatable {
-        string Id           { get; }
+        string Id { get; }
 
         void   Detach();
         void   Invalidate();
@@ -21,11 +21,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IActivatable<TSource, TControl>: IActivatable
             where TControl: class, IRibbonCommon
             where TSource: IRibbonCommonSource {
-        new string Id           { get; }
-        bool       ShowInactive { get; }
+        bool     ShowInactive { get; }
 
-        TControl   Attach(TSource source);
-        new void   Detach();
-        new void   SetShowInactive(bool showInactive);
+        TControl Attach(TSource source);
     }
 }

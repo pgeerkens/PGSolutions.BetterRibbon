@@ -23,20 +23,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IRibbonControlStrings Strings { get; }
 
         /// <inheritdoc/>
-        public TCtrl ViewModel { get; set; }
+        public TCtrl ViewModel    { get; set; }
 
         /// <inheritdoc/>
-        public bool IsEnabled { get; set; } = true;
+        public bool  IsEnabled    { get; set; } = true;
 
         /// <inheritdoc/>
-        public bool IsVisible { get; set; } = true;
+        public bool  IsVisible    { get; set; } = true;
 
-        public bool ShowInactive { get; private set; } = true;
+        public bool  ShowInactive { get; private set; } = true;
 
         /// <inheritdoc/>
-        public virtual void Invalidate() {
-            if (ViewModel != null) { ViewModel.Invalidate(); }
-        }
+        public virtual void Invalidate() => ViewModel?.Invalidate();
 
         /// <inheritdoc/>
         public virtual void SetShowInactive(bool showInactive) {
