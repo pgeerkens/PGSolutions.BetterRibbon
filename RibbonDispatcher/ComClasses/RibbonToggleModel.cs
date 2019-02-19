@@ -19,8 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
     [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : RibbonControlModel<RibbonCheckBox>, IRibbonToggleModel,
-                ISizeable, IImageable, IRibbonToggleSource {
+    public sealed class RibbonToggleModel : RibbonControlModel<IRibbonToggleSource,RibbonCheckBox>,
+            IRibbonToggleModel, ISizeable, IImageable, IRibbonToggleSource {
         public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -36,8 +36,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool        IsPressed { get; set; } = false;
 
         public IRibbonToggleModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonCheckBox, IRibbonToggleSource>)
-                      ?.Attach(this);
+            ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Toggled += OnToggled;
                 ViewModel.Invalidate();
@@ -45,7 +44,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(sender, IsPressed = isPressed);
+        private void OnToggled(object sender, bool isPressed)
+        => Toggled?.Invoke(sender, IsPressed = isPressed);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;

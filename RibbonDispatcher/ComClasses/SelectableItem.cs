@@ -15,12 +15,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
     public class SelectableItem : RibbonCommon<ISelectableItemSource>, ISelectableItem,
-            IActivatable<SelectableItem, ISelectableItemSource>, IClickable, IImageable {
+            IActivatable<ISelectableItemSource,SelectableItem>, IClickable, IImageable {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId) : base(ItemId) { }
 
         #region IActivatable implementation
-        SelectableItem IActivatable<SelectableItem, ISelectableItemSource>.Attach(ISelectableItemSource source)
+        SelectableItem IActivatable<ISelectableItemSource,SelectableItem>.Attach(ISelectableItemSource source)
         => Attach<SelectableItem>(source);
 
         public override void Detach() => base.Detach();

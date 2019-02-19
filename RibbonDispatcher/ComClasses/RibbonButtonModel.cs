@@ -19,8 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButtonModel))]
     [Guid(Guids.RibbonButtonModel)]
-    public class RibbonButtonModel : RibbonControlModel<RibbonButton>, IRibbonButtonModel,
-            ISizeable, IImageable, IRibbonButtonSource {
+    public class RibbonButtonModel : RibbonControlModel<IRibbonButtonSource,RibbonButton>,
+            IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
         public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -33,12 +33,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public IRibbonButtonModel Attach(string controlId) => Attach(FuncViewModel(controlId));
-
-        internal IRibbonButtonModel Attach(RibbonButton viewModel) {
-            (viewModel as IActivatable<RibbonButton, IRibbonButtonSource>)?.Attach(this);
-            if (viewModel != null) {
-                ViewModel = viewModel;
+         public IRibbonButtonModel Attach(string controlId) {
+            ViewModel = AttachToViewModel(controlId, this);
+            if (ViewModel != null) {
                 ViewModel.Clicked += OnClicked;
                 ViewModel.Invalidate();
             }
@@ -50,6 +47,4 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
     }
-}
-namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 }

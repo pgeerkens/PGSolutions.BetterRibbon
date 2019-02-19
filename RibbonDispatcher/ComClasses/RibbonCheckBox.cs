@@ -21,12 +21,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonToggle))]
     [Guid(Guids.RibbonCheckBox)]
     public class RibbonCheckBox : RibbonCommon<IRibbonToggleSource>, IRibbonToggle,
-        IActivatable<RibbonCheckBox, IRibbonToggleSource>, IToggleable {
+        IActivatable<IRibbonToggleSource,RibbonCheckBox>, IToggleable {
         internal RibbonCheckBox(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        RibbonCheckBox IActivatable<RibbonCheckBox, IRibbonToggleSource>.Attach(IRibbonToggleSource source)
-        => Attach<RibbonCheckBox>(source);
+        public new RibbonCheckBox Attach(IRibbonToggleSource source) => Attach<RibbonCheckBox>(source);
 
         public override void Detach() {
             Toggled = null;

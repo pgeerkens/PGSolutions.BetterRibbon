@@ -57,6 +57,7 @@ namespace PGSolutions.BetterRibbon {
             Invalidate();
         }
 
+        /// <summary>Writes a status message to the Excel Application Status Bar.</summary>
         private void StatusAvailable(object sender, EventArgs<string> e)
         => Application.StatusBar = e.Value;
 
@@ -133,16 +134,20 @@ namespace PGSolutions.BetterRibbon {
 
         private static void PleaseEnableTrust()
         => new StringBuilder()
-            .AppendLine("Please enable trust of the VBA Project object model:")
-            .AppendLine("    File -> Options")
-            .AppendLine("         -> Trust Center")
-            .AppendLine("         -> Trust Center Settings")
-            .AppendLine("         -> Macro Settings")
-            .AppendLine("         -> Trust Access to the VBA Project object model")
+            .AppendLine("VBA Export requires trust of the VBA Project object model.")
             .AppendLine()
-            .AppendLine(" or, from the Developer Ribbon Tab:")
-            .AppendLine("    Macro Security")
-            .AppendLine("         -> Trust Access to the VBA Project object model")
+            .AppendLine("Please enable trust at:")
+            .AppendLine("    File")
+            .AppendLine("        -> Options")
+            .AppendLine("        -> Trust Center")
+            .AppendLine("        -> Trust Center Settings")
+            .AppendLine("        -> Macro Settings")
+            .AppendLine("        -> Trust Access to the VBA Project object model")
+            .AppendLine()
+            .AppendLine(" or:")
+            .AppendLine("    Developer")
+            .AppendLine("        -> Macro Security")
+            .AppendLine("        -> Trust Access to the VBA Project object model")
             .ToString().MsgBoxShow("Project Model Not Trusted");
 
         private static Application Application => Globals.ThisAddIn.Application;

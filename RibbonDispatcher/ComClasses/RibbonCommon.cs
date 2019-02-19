@@ -2,19 +2,18 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
-    public abstract class RibbonCommon<TSource> : IRibbonCommon, IActivatable<IRibbonCommon,TSource>
-        where TSource : IRibbonCommonSource {
+    public abstract class RibbonCommon<TSource>: IRibbonCommon, IActivatable<TSource,IRibbonCommon>
+        where TSource: IRibbonCommonSource {
         /// <summary>TODO</summary>
         protected RibbonCommon(string itemId) => Id = itemId;
 
+        #region Common Control implementation
         /// <summary>TODO</summary>
         internal event ChangedEventHandler Changed;
 
@@ -41,6 +40,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         public bool IsVisible        => Source?.IsVisible ?? ShowInactive;
+        #endregion
 
         #region IActivatable implementation
         protected TSource Source { get; private set; }
@@ -48,14 +48,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected bool IsAttached => Source != null;
 
         /// <inheritdoc/>
-        public virtual T Attach<T>(TSource source) where T:RibbonCommon<TSource> {
+        protected virtual T Attach<T>(TSource source) where T: RibbonCommon<TSource> {
             Source = source;
             Invalidate();
             return this as T;
         }
 
-        IRibbonCommon IActivatable<IRibbonCommon,TSource>.Attach(TSource source)
-        => Attach<RibbonCommon<TSource>>(source);
+        public IRibbonCommon Attach(TSource source) => Attach<RibbonCommon<TSource>>(source);
 
         /// <inheritdoc/>
         public virtual void Detach() {

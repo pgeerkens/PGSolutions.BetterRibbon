@@ -1,27 +1,29 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 using System;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public abstract class RibbonControlModel<T> : IRibbonCommonSource where T:IRibbonCommon {
-        protected RibbonControlModel(Func<string,T> funcViewModel,
+    public abstract class RibbonControlModel<TSource,TCtrl>: IRibbonCommonSource
+            where TSource: IRibbonCommonSource
+            where TCtrl: class, IRibbonCommon {
+        protected RibbonControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
-            FuncViewModel = funcViewModel;
-            Strings       = strings;
-            IsEnabled     = isEnabled;
-            IsVisible     = isVisible;
+            AttachToViewModel = (controlId, source) => funcViewModel(controlId)?.Attach(source);
+            Strings   = strings;
+            IsEnabled = isEnabled;
+            IsVisible = isVisible;
         }
 
-        protected Func<string, T> FuncViewModel { get; }
+        protected Func<string, TSource, TCtrl> AttachToViewModel { get; }
 
         /// <inheritdoc/>
         public IRibbonControlStrings Strings { get; }
 
         /// <inheritdoc/>
-        public T ViewModel { get; set; }
+        public TCtrl ViewModel { get; set; }
 
         /// <inheritdoc/>
         public bool IsEnabled { get; set; } = true;
@@ -36,6 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             if (ViewModel != null) { ViewModel.Invalidate(); }
         }
 
+        /// <inheritdoc/>
         public virtual void SetShowInactive(bool showInactive) {
             ShowInactive = showInactive;
             ViewModel?.Invalidate();

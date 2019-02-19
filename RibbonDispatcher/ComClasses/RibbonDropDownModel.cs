@@ -20,8 +20,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
-    public sealed class RibbonDropDownModel : RibbonControlModel<RibbonDropDown>, IRibbonDropDownModel,
-            IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
+    public sealed class RibbonDropDownModel : RibbonControlModel<IRibbonDropDownSource,RibbonDropDown>,
+            IRibbonDropDownModel, IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
         public RibbonDropDownModel(Func<string, RibbonDropDown> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -32,8 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public int SelectedIndex  { get; set; }
 
         public IRibbonDropDownModel Attach(string controlId) {
-            ViewModel = (FuncViewModel(controlId) as IActivatable<RibbonDropDown, IRibbonDropDownSource>)
-                      ?.Attach(this);
+            ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.SelectionMade += OnSelectionMade;
                 ViewModel.Invalidate();

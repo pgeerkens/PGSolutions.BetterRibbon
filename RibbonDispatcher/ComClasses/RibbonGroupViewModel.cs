@@ -10,7 +10,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class RibbonGroupViewModel : RibbonCommon<IRibbonCommonSource>, IRibbonGroup,
-            IActivatable<RibbonGroupViewModel,IRibbonCommonSource> {
+            IActivatable<IRibbonCommonSource,RibbonGroupViewModel> {
         public RibbonGroupViewModel(IRibbonFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;
@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        RibbonGroupViewModel IActivatable<RibbonGroupViewModel,IRibbonCommonSource>.Attach(IRibbonCommonSource source)
+        RibbonGroupViewModel IActivatable<IRibbonCommonSource,RibbonGroupViewModel>.Attach(IRibbonCommonSource source)
         => Attach<RibbonGroupViewModel>(source);
 
         public override void Detach() {
