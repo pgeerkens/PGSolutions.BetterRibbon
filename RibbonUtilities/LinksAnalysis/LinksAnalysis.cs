@@ -100,8 +100,15 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             return this;
         }
 
+        /// <inheritdoc/>
+        public const string LinksSheetName  = "Links Analysis";
+        /// <inheritdoc/>
+        public const string FilesSheetName  = "Linked Files";
+        /// <inheritdoc/>
+        public const string ErrorsSheetName = "Links Errors";
+
         static IList<string> ExcludedSheetNames => new List<string> {
-            "Links Errors", "Linked Files", "Links Analysis"
+            LinksSheetName, FilesSheetName, ErrorsSheetName
         };
     }
 }

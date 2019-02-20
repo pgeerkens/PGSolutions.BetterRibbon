@@ -14,16 +14,11 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.BetterRibbon {
+    using static LinksAnalysis;
+
     /// <summary>Extension methods for Excel objects.</summary>
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
-        /// <inheritdoc/>
-        public const string LinksSheetName  = "Links Analysis";
-        /// <inheritdoc/>
-        public const string FilesSheetName  = "Linked Files";
-        /// <inheritdoc/>
-        public const string ErrorsSheetName = "Links Errors";
-
         /// <inheritdoc/>
         public static string ToggleImage(this bool isPressed)
         => isPressed ? "TagMarkComplete" : "MarginsShowHide";
@@ -67,9 +62,8 @@ namespace PGSolutions.BetterRibbon {
                     links2D.FastCopyToRange(sheetData);
 
                     ws.InitializeTargetWorksheet(links2D.RowsCount() + 2, new List<string>() {
-                            "Links Target",     "External\nPath",   "External\nFileName", "External\nWorksheet",
-                            "External\nCell",   "Link\nType",       "Source\nType",       "Source\nPath",
-                            "Source\nFileName", "Source\nWorksheet","Source\nCell",       "Source Formula"});
+                            "Target FullName", "Target Path", "Target FileName", "Target Worksheet", "Target Cell", "Link Type",
+                            "Source FullName", "Source Path", "Source FileName", "Source Worksheet", "Source Cell", "Source Formula"});
                 }
                 finally {
                     ws.Application.ScreenUpdating = true;

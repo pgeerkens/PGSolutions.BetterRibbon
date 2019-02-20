@@ -9,6 +9,10 @@ using Microsoft.Office.Interop.Excel;
 namespace PGSolutions.RibbonUtilities.VbaSourceExport {
     using ProjectFilters = IReadOnlyList<ProjectFilter>;
 
+    /// <summary>.</summary>
+    /// <remarks>
+    /// Requires that access to the VBA project object model be trusted (Macro Security).
+    /// </remarks>
     [CLSCompliant(false)]
     public class VbaSourceExporter {
         public VbaSourceExporter(Application application) => Application = application;
