@@ -79,7 +79,9 @@ namespace BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references..
+        ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references.
+        ///
+        ///Should be idempotent, as the output worksheets (ie &quot;Links Errors&quot;, &quot;Linked Files&quot; and &quot;Links Analysis&quot;) are omitted from the analysis.
         /// </summary>
         internal static string AnalyzeLinksCurrent_SuperTip {
             get {
@@ -108,7 +110,9 @@ namespace BetterRibbon.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references.
         ///
-        ///All valid WB names in the currently selected Range are analyzed..
+        ///All valid WB names in the currently selected Range are analyzed.
+        ///
+        ///Always performed in a separate Excel instance to avoid file name conflicts with open workbooks..
         /// </summary>
         internal static string AnalyzeLinksSelected_SuperTip {
             get {

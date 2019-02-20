@@ -72,12 +72,12 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             }
         }
 
-        internal ILinksAnalysis ExtendFromWorkbookList(Range range, bool inBackGround) {
+        internal ILinksAnalysis ExtendFromWorkbookList(Range range) {
             if (range==null) return null;
 
             StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
             var nameList = range.GetNameList();
-            using (var newExcel = WorkbookProcessor.New(range.Application, inBackGround)) {
+            using (var newExcel = WorkbookProcessor.New(range.Application, true)) {
                 foreach (var item in nameList) {
                     if (item is string path) {
                         if (!File.Exists(path)) {

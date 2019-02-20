@@ -43,7 +43,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         => LinksParser.ExtendFromWorkbook(wb, excludedSheetNames);
 
         /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public ILinksAnalysis ParseWorkbookList(Range range, bool inBackground)
-        => LinksParser.ExtendFromWorkbookList(range, inBackground);
+        public ILinksAnalysis ParseWorkbookList(Range range)
+        => LinksParser.ExtendFromWorkbookList(range);
     }
 }
