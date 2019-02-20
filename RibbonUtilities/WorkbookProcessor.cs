@@ -60,8 +60,6 @@ namespace PGSolutions.RibbonUtilities {
             }
         }
 
-        public static IWorkbookProcessor New(Excel.Application application) => New(application, false);
-
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public static IWorkbookProcessor New(Excel.Application application, bool inBackground)
             => inBackground ? new WorkbookProcessor2(application)

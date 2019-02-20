@@ -16,21 +16,22 @@ using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
-    using Models        = List<VbaSourceExportGroupModel>;
+    using Models        = IReadOnlyList<VbaSourceExportGroupModel>;
     using ComInterfaces = RibbonDispatcher.ComInterfaces;
 
     /// <summary>The Model for the VBA Source Export Group on the BetterRibbon.</summary>
     internal sealed class VbaSourceExportModel : ComInterfaces.IInvalidate {
-
+        /// <summary>.</summary>
+        /// <param name="models"></param>
         public VbaSourceExportModel(Models models) {
             Models    = models;
             DestIsSrc = false;
 
-            Models.ForEach(model => {
+            foreach (var model in Models) {
                 model.UseSrcFolderToggled   += UseSrcFolderToggled;
                 model.ExportSelectedClicked += ExportSelected;
                 model.ExportCurrentClicked  += ExportCurrent;
-            });
+            }
 
             Invalidate();
         }
@@ -39,17 +40,17 @@ namespace PGSolutions.BetterRibbon {
 
         private Models Models    { get; }
 
-        public void Invalidate()
-        => Models.ForEach(model => {
-            model.DestIsSrc.IsPressed = DestIsSrc;
-            model.DestIsSrc.SetImageMso(DestIsSrc.ToggleImage());
-            model.ExportSelected.IsEnabled = ! DestIsSrc;
-            model.DestIsSrc.IsLarge      = model.Suffix == "PG";
-            model.ExportSelected.IsLarge = model.Suffix == "PG";
-            model.ExportCurrent.IsLarge  = model.Suffix == "PG";
+        public void Invalidate() {
+            foreach (var model in Models) {
+                model.DestIsSrc.IsPressed = DestIsSrc;
+                model.DestIsSrc.SetImageMso(DestIsSrc.ToggleImage());
+                model.ExportSelected.IsEnabled = ! DestIsSrc;
+                model.DestIsSrc.IsLarge      = model.Suffix == "PG";
+                model.ExportSelected.IsLarge = model.Suffix == "PG";
+                model.ExportCurrent.IsLarge  = model.Suffix == "PG";
 
-            model.Invalidate();
-        });
+                model.Invalidate();
+        }   }
 
         private void UseSrcFolderToggled(object sender, ComInterfaces.EventArgs<bool> e) {
             DestIsSrc = e.Value;
@@ -100,13 +101,13 @@ namespace PGSolutions.BetterRibbon {
             fd.Filters.Clear();
             fd.InitialFileName = Application.ActiveWorkbook?.Path ?? "C:\\";
 
-            using (var processor = WorkbookProcessor.New(Application, false)) {
-                StatusAvailable(this, new EventArgs<string>("Loading background processor ..."));
-                Application.Cursor = XlMousePointer.xlWait;
+            Application.Cursor = XlMousePointer.xlWait;
+            StatusAvailable(this, new EventArgs<string>("Loading background processor ..."));
+            using (var processor = WorkbookProcessor.New(Application, true)) {
                 var list = VbaSourceExporter.FillFilters(processor, fd);
                 Application.Cursor = XlMousePointer.xlDefault;
-                StatusAvailable(this, new EventArgs<string>("Ready"));
                 if (fd.Show() != 0) {
+                    Application.Cursor = XlMousePointer.xlWait;
                     try {
                         var exporter = new VbaSourceExporter(Application);
                         exporter.StatusAvailable += StatusAvailable;
@@ -114,6 +115,9 @@ namespace PGSolutions.BetterRibbon {
                         exporter.StatusAvailable -= StatusAvailable;
                     }
                     catch (IOException ex) { ex.Message.MsgBoxShow(CallerName()); }
+                    finally {
+                        Application.Cursor = XlMousePointer.xlDefault;
+                    }
                 }
             }
         #if DEBUG

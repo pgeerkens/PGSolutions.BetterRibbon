@@ -22,10 +22,6 @@ namespace PGSolutions.BetterRibbon {
         public RibbonButtonModel AnalyzeCurrentModel  { get; }
         public RibbonButtonModel AnalyzeSelectedModel { get; }
 
-        public override void Invalidate(Action<IActivatable> action) {
-            base.Invalidate(action);
-        }
-
         private void AnalyzeCurrentClicked(object sender, EventArgs e)
         => DisplayAnalysis(parser => parser.ParseWorkbook(Application.ActiveWorkbook));
 
