@@ -24,6 +24,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public static void WriteLinks(this Workbook wb, ILinksAnalysis links) {
+            if (wb == null) throw new ArgumentNullException(nameof(wb));
+            if (links == null) throw new ArgumentNullException(nameof(links));
+            
             wb.DeleteTargetWorksheet(LinksSheetName);
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);
@@ -45,6 +48,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         public static void WriteLinksAnalysis(this Worksheet ws, ILinksAnalysis links) {
+            if (ws == null) throw new ArgumentNullException(nameof(ws));
+            if (links == null) throw new ArgumentNullException(nameof(links));
+
             if (links.Links.Count > 0) {
                 var calculation = ws.Application.Calculation;
                 try {
@@ -73,6 +79,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         public static void WriteLinksFiles(this Worksheet ws, IExternalFiles files) {
+            if (ws == null) throw new ArgumentNullException(nameof(ws));
+            if (files == null) throw new ArgumentNullException(nameof(files));
+
             var lastRow = 2;
             var i       = 0;
             foreach (var fileName in files.OrderBy(s => s)) {
@@ -85,6 +94,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         }
 
         public static void WriteLinksErrors(this Worksheet ws, IParseErrors errors) {
+            if (ws == null) throw new ArgumentNullException(nameof(ws));
+            if (errors == null) throw new ArgumentNullException(nameof(errors));
+
             var lastRow = 2;
             var i       = 0;
             foreach (var error in errors) {

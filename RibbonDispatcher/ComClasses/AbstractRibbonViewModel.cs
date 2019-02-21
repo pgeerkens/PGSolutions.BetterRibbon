@@ -10,8 +10,6 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using GroupViewModelFactory = Func<IRibbonFactory, RibbonGroupViewModel>;
-
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
@@ -47,44 +45,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _ribbonFactory.Changed += PropertyChanged;
         }
 
-        protected virtual string ParseXml(string ribbonXml) {
-            var doc = XDocument.Parse(ribbonXml);
-            XNamespace mso = "http://schemas.microsoft.com/office/2009/07/customui";
-            var x = mso+"group";
-            foreach (var group in doc.Root.Descendants(mso+"group")) {
-                var viewModel = AddGroupViewModel(RibbonFactory.NewRibbonGroup(group.Attribute("id").Value));
-
-                foreach (var element in group.Descendants()) {
-                    switch (element.Name) {
-                        case XName name when name == mso+"toggleButton":
-                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonToggle(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso+"checkBox":
-                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonCheckBox(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso+"dropDown":
-                            viewModel.Add<IRibbonDropDownSource>(RibbonFactory.NewRibbonDropDown(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso+"button":
-                            viewModel.Add<IRibbonButtonSource>(RibbonFactory.NewRibbonButton(element.Attribute("id").Value));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            return ribbonXml;
-        }
-
         #region IRibbonExtensibility implementation
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
         public string GetCustomUI(string RibbonID) => ParseXml(RibbonXml);
-
-        protected abstract string RibbonXml { get; }
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
         [CLSCompliant(false)]
@@ -95,16 +62,43 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
             Invalidate();
         }
+
+        protected abstract string RibbonXml { get; }
+
+        /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
+        /// <param name="ribbonXml"></param>
+        private string ParseXml(string ribbonXml) {
+            XNamespace mso2009 = "http://schemas.microsoft.com/office/2009/07/customui";
+            foreach (var group in XDocument.Parse(ribbonXml).Root.Descendants(mso2009+"group")) {
+                var viewModel = AddGroupViewModel(group.Attribute("id").Value);
+
+                foreach (var element in group.Descendants()) {
+                    switch (element.Name) {
+                        case XName name when name == mso2009+"toggleButton":
+                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonToggle(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso2009+"checkBox":
+                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonCheckBox(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso2009+"dropDown":
+                            viewModel.Add<IRibbonDropDownSource>(RibbonFactory.NewRibbonDropDown(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso2009+"button":
+                            viewModel.Add<IRibbonButtonSource>(RibbonFactory.NewRibbonButton(element.Attribute("id").Value));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return ribbonXml;
+        }
         #endregion
 
-        public virtual RibbonGroupViewModel AddGroupViewModel(string groupName)
-        => AddGroupViewModel(RibbonFactory.NewRibbonGroup(groupName));
-
-        public virtual RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func)
-        => AddGroupViewModel(func?.Invoke(RibbonFactory));
-
-        /// <summary>Registers and returns the supplied <see cref="RibbonGroupViewModel"/></summary>
-        private RibbonGroupViewModel AddGroupViewModel(RibbonGroupViewModel viewModel) {
+        /// <summary>Registers and returns a new <see cref="RibbonGroupViewModel"/> as named.</summary>
+        public virtual RibbonGroupViewModel AddGroupViewModel(string groupName) {
+            var viewModel = RibbonFactory.NewRibbonGroup(groupName);
             _groupViewModels.Add(viewModel);
             return viewModel;
         }

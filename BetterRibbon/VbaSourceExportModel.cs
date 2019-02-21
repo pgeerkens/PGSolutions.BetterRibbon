@@ -153,7 +153,7 @@ namespace PGSolutions.BetterRibbon {
             .AppendLine("    Developer")
             .AppendLine("        -> Macro Security")
             .AppendLine("        -> Trust Access to the VBA Project object model")
-            .ToString().MsgBoxShow("Project TabModel Not Trusted");
+            .ToString().MsgBoxShow("VBA Project Object Model Not Trusted");
 
         private static Application Application => Globals.ThisAddIn.Application;
     }
