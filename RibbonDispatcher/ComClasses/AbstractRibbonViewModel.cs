@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -68,45 +67,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
         private string ParseXml(string ribbonXml) {
-            XNamespace mso2009 = "http://schemas.microsoft.com/office/2009/07/customui";
-            foreach (var group in XDocument.Parse(ribbonXml).Root.Descendants(mso2009+"group")) {
-                var viewModel = AddGroupViewModel(group.Attribute("id").Value);
-
-                foreach (var element in group.Descendants()) {
-                    switch (element.Name) {
-                        case XName name when name == mso2009+"toggleButton":
-                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonToggle(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso2009+"checkBox":
-                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonCheckBox(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso2009+"dropDown":
-                            viewModel.Add<IRibbonDropDownSource>(RibbonFactory.NewRibbonDropDown(element.Attribute("id").Value));
-                            break;
-                        case XName name when name == mso2009+"button":
-                            viewModel.Add<IRibbonButtonSource>(RibbonFactory.NewRibbonButton(element.Attribute("id").Value));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+            GroupViewModels = RibbonFactory.ParseXml(ribbonXml);
 
             return ribbonXml;
         }
         #endregion
 
-        /// <summary>Registers and returns a new <see cref="RibbonGroupViewModel"/> as named.</summary>
-        public virtual RibbonGroupViewModel AddGroupViewModel(string groupName) {
-            var viewModel = RibbonFactory.NewRibbonGroup(groupName);
-            _groupViewModels.Add(viewModel);
-            return viewModel;
-        }
-
-        public IReadOnlyList<RibbonGroupViewModel> GroupViewModels => _groupViewModels.AsReadOnly();
-
-        private List<RibbonGroupViewModel> _groupViewModels { get; }
-                                        = new List<RibbonGroupViewModel>();
+        public IReadOnlyList<RibbonGroupViewModel> GroupViewModels { get; private set; }
 
         /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
@@ -114,24 +81,24 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public IRibbonFactory RibbonFactory => _ribbonFactory; private RibbonFactory _ribbonFactory;
 
-        public IRibbonUI RibbonUI { get; protected set; }
+        public IRibbonUI RibbonUI { get; private set; }
 
         private void PropertyChanged(object sender, IControlChangedEventArgs e) => RibbonUI?.InvalidateControl(e.ControlId);
 
         /// <inheritdoc/>
-        public void Invalidate()                                => RibbonUI?.Invalidate();
+        public void Invalidate()                              => RibbonUI?.Invalidate();
         /// <inheritdoc/>
-        public void InvalidateTab()                             => RibbonUI?.InvalidateControl(Id);
+        public void InvalidateTab()                           => RibbonUI?.InvalidateControl(Id);
         /// <inheritdoc/>
-        public void InvalidateControl(string ControlId)         => RibbonUI?.InvalidateControl(ControlId);
+        public void InvalidateControl(string ControlId)       => RibbonUI?.InvalidateControl(ControlId);
         /// <inheritdoc/>
-        public void InvalidateControlMso(string ControlId)      => RibbonUI?.InvalidateControlMso(ControlId);
+        public void InvalidateControlMso(string ControlId)    => RibbonUI?.InvalidateControlMso(ControlId);
         /// <inheritdoc/>
-        public void ActivateTab(string ControlId)               => RibbonUI?.ActivateTab(ControlId);
+        public void ActivateTab(string ControlId)             => RibbonUI?.ActivateTab(ControlId);
         /// <inheritdoc/>
-        public void ActivateTabQ(string ControlId, string ns)   => RibbonUI?.ActivateTabQ(ControlId, ns);
+        public void ActivateTabQ(string ControlId, string ns) => RibbonUI?.ActivateTabQ(ControlId, ns);
 
-        protected string Id { get; }
+        public string Id { get; }
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>

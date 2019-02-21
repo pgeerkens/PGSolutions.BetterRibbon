@@ -11,14 +11,15 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 namespace PGSolutions.BetterRibbon {
     /// <summary>The TabModel for the Links Aalysis Group on the BetterRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
-        public LinksAnalysisModel(RibbonGroupViewModel viewModel, AbstractRibbonTabModel parent) : base(viewModel) {
-            AnalyzeCurrentModel  = parent.NewRibbonButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, true, true, "EditLinks");
-            AnalyzeSelectedModel = parent.NewRibbonButtonModel("AnalyzeLinksSelected",AnalyzeSelectedClicked, true, true, "EditLinks");
+        public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonFactory factory) : base(viewModel) {
+            AnalyzeCurrentModel  = factory.NewRibbonButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, true, true, "EditLinks");
+            AnalyzeSelectedModel = factory.NewRibbonButtonModel("AnalyzeLinksSelected",AnalyzeSelectedClicked, true, true, "EditLinks");
 
             Invalidate();
         }
 
         public RibbonButtonModel AnalyzeCurrentModel  { get; }
+
         public RibbonButtonModel AnalyzeSelectedModel { get; }
 
         private void AnalyzeCurrentClicked(object sender, EventArgs e)

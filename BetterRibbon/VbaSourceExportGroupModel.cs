@@ -9,13 +9,13 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(RibbonGroupViewModel viewModel, AbstractRibbonTabModel parent, string suffix)
+        public VbaSourceExportGroupModel(RibbonGroupViewModel viewModel, IRibbonFactory factory, string suffix)
         : base(viewModel) {
             Suffix = suffix;
 
-            DestIsSrc      = parent.NewRibbonToggleModel($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
-            ExportSelected = parent.NewRibbonButtonModel($"SelectedProjectButton{suffix}", OnExportSelected, true, true, "SaveAll");
-            ExportCurrent  = parent.NewRibbonButtonModel($"CurrentProjectButton{suffix}", OnExportCurrent, true, true, "FileSaveAs");
+            DestIsSrc      = factory.NewRibbonToggleModel($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
+            ExportSelected = factory.NewRibbonButtonModel($"SelectedProjectButton{suffix}", OnExportSelected, true, true, "SaveAll");
+            ExportCurrent  = factory.NewRibbonButtonModel($"CurrentProjectButton{suffix}", OnExportCurrent, true, true, "FileSaveAs");
 
             Invalidate();
         }

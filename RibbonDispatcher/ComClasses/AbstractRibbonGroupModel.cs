@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel) {
             ViewModel = (viewModel as IActivatable<IRibbonCommonSource,RibbonGroupViewModel>)
                       ?.Attach(this);
-            Strings   = GetStrings(ViewModel.Id);
+            Strings   = ViewModel?.Factory.GetStrings(ViewModel.Id);
         }
 
         public bool     IsEnabled    { get; set; } = true;
@@ -25,51 +25,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public void Invalidate() => Invalidate(null);
 
-        public virtual void Invalidate(Action<IActivatable> action) => ViewModel.Invalidate(action);
+        public virtual void Invalidate(Action<IActivatable> action) => ViewModel?.Invalidate(action);
 
         /// <summary>Set ShowInactive for al- child controls of this ViewModel - even the unattached.</summary>
         /// <param name="showInactive">The <see cref="bool"/> value to be set</param>
         public void SetShowInactive(bool showInactive) {
             ShowInactive = showInactive;
-            ViewModel.Invalidate(c => c.SetShowInactive(ShowInactive));
+            ViewModel?.Invalidate(c => c.SetShowInactive(ShowInactive));
         }
 
         public void DetachControls() => ViewModel?.Detach();
-
-        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
-        => ViewModel.GetControl<TControl>(controlId);
-
-        //protected RibbonButtonModel NewButtonModel(string id, EventHandler handler,
-        //        bool isEnabled, bool isVisible, ImageObject image) {
-        //    var model = new RibbonButtonModel(GetControl<RibbonButton>, GetStrings(id), image, isEnabled, isVisible);
-
-        //    ViewModel.Add<IRibbonButtonSource>(ViewModel.Factory.NewRibbonButton(id));
-        //    model?.Attach(id);
-        //    model.Clicked += handler;
-        //    return model;
-        //}
-
-        //protected RibbonToggleModel NewToggleModel(string id, ToggledEventHandler handler, bool isEnabled,
-        //        bool isVisible, ImageObject image) {
-        //    var model = new RibbonToggleModel(GetControl<RibbonCheckBox>, GetStrings(id), image, isEnabled, isVisible);
-
-        //    ViewModel.Add<IRibbonToggleSource>(ViewModel.Factory.NewRibbonToggle(id));
-        //    model?.Attach(id);
-        //    model.Toggled += handler;
-        //    return model;
-        //}
-
-        //protected RibbonDropDownModel NewDropDownModel(string id, SelectedEventHandler handler, bool isEnabled,
-        //        bool isVisible) {
-        //    var model = new RibbonDropDownModel(GetControl<RibbonDropDown>, GetStrings(id), isEnabled, isVisible);
-
-        //    ViewModel.Add<IRibbonDropDownSource>(ViewModel.Factory.NewRibbonDropDown(id));
-        //    model?.Attach(id);
-        //    model.SelectionMade += handler;
-        //    return model;
-        //}
-
-        protected IStrings GetStrings(string id)
-        => ViewModel.Factory.ResourceManager.GetControlStrings(id);
     }
 }

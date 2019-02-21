@@ -70,6 +70,7 @@
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ComClasses\RibbonFactoryExtensions.cs" />
     <Compile Include="ComInterfaces\IImageObject.cs" />
     <Compile Include="ComClasses\RibbonControlModel.cs" />
     <Compile Include="ComClasses\RibbonGroupViewModel.cs" />

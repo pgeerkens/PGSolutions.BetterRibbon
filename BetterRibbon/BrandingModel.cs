@@ -12,8 +12,8 @@ using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(RibbonGroupViewModel viewModel, AbstractRibbonTabModel parent) : base(viewModel) {
-            BrandingButtonModel = parent.NewRibbonButtonModel("BrandingButton", ButtonClicked,
+        public BrandingModel(RibbonGroupViewModel viewModel, IRibbonFactory factory) : base(viewModel) {
+            BrandingButtonModel = factory.NewRibbonButtonModel("BrandingButton", ButtonClicked,
                     true, true, new ImageObject(BrandingIcon));
 
             Invalidate();
@@ -31,7 +31,7 @@ namespace PGSolutions.BetterRibbon {
             .AppendLine($"{BrandingButtonModel.ViewModel.SuperTip}")
         #if DEBUG
             .AppendLine()
-            .AppendLine("***  DEBUG mode  ***")
+            .AppendLine("***  DEBUG build  ***")
         #endif
             .ToString().MsgBoxShow();
 

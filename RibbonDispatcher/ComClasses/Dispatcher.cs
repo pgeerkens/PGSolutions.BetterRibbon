@@ -24,17 +24,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
 
+        private IRibbonFactory RibbonFactory => TabModel.ViewModel.RibbonFactory;
+
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = null, string superTip = null,
                 string keyTip = null, string alternateLabel = null, string description = null)
-        =>  TabModel.ViewModel.RibbonFactory.NewControlStrings(label, screenTip,
-                    superTip, keyTip, alternateLabel, description);
+        =>  RibbonFactory.NewControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
         public ISelectableItemModel NewSelectableModel(string controlID, IRibbonControlStrings strings) {
-            var vm = TabModel.ViewModel.RibbonFactory.NewSelectableItem(controlID);
+            var vm = RibbonFactory.NewSelectableItem(controlID);
             var model = new SelectableItemModel(id => vm, strings, true, true)
                         .Attach(controlID);
             return model;
@@ -44,36 +45,36 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => RibbonFactory.NewRibbonButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => RibbonFactory.NewRibbonButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => RibbonFactory.NewRibbonToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => RibbonFactory.NewRibbonToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonDropDownModel(strings, isEnabled, isVisible);
+        => RibbonFactory.NewRibbonDropDownModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonGroupModel(strings, isEnabled, isVisible);
+        => RibbonFactory.NewRibbonGroupModel(strings, isEnabled, isVisible);
     }
 }
