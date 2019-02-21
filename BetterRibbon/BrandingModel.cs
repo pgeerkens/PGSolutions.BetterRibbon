@@ -12,8 +12,8 @@ using BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(RibbonGroupViewModel viewModel): base(viewModel) {
-            BrandingButtonModel = NewButtonModel("BrandingButton", ButtonClicked,
+        public BrandingModel(RibbonGroupViewModel viewModel, AbstractRibbonTabModel parent) : base(viewModel) {
+            BrandingButtonModel = parent.NewRibbonButtonModel("BrandingButton", ButtonClicked,
                     true, true, new ImageObject(BrandingIcon));
 
             Invalidate();

@@ -2,8 +2,9 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using System.Xml.Linq;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -35,15 +36,45 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonViewModel))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractRibbonViewModel : IRibbonViewModel {
-        /// <summary>Initializes this instance with the supplied {IRibbonUI}.</summary>
-        protected AbstractRibbonViewModel() : this(new RibbonFactory()) { }
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
-        protected AbstractRibbonViewModel(IResourceManager ResourceManager) : this(new RibbonFactory(ResourceManager)) { }
+        protected AbstractRibbonViewModel(string controlId, IResourceManager ResourceManager)
+        : this(controlId, new RibbonFactory(ResourceManager)) { }
 
-        private AbstractRibbonViewModel(RibbonFactory ribbonFactory) {
+        private AbstractRibbonViewModel(string controlId, RibbonFactory ribbonFactory) {
+            Id             = controlId;
             _ribbonFactory = ribbonFactory;
             _ribbonFactory.Changed += PropertyChanged;
+        }
+
+        protected virtual string ParseXml(string ribbonXml) {
+            var doc = XDocument.Parse(ribbonXml);
+            XNamespace mso = "http://schemas.microsoft.com/office/2009/07/customui";
+            var x = mso+"group";
+            foreach (var group in doc.Root.Descendants(mso+"group")) {
+                var viewModel = AddGroupViewModel(RibbonFactory.NewRibbonGroup(group.Attribute("id").Value));
+
+                foreach (var element in group.Descendants()) {
+                    switch (element.Name) {
+                        case XName name when name == mso+"toggleButton":
+                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonToggle(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso+"checkBox":
+                            viewModel.Add<IRibbonToggleSource>(RibbonFactory.NewRibbonCheckBox(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso+"dropDown":
+                            viewModel.Add<IRibbonDropDownSource>(RibbonFactory.NewRibbonDropDown(element.Attribute("id").Value));
+                            break;
+                        case XName name when name == mso+"button":
+                            viewModel.Add<IRibbonButtonSource>(RibbonFactory.NewRibbonButton(element.Attribute("id").Value));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return ribbonXml;
         }
 
         #region IRibbonExtensibility implementation
@@ -51,7 +82,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event EventHandler Initialized;
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
-        public abstract string GetCustomUI(string RibbonID);
+        public string GetCustomUI(string RibbonID) => ParseXml(RibbonXml);
+
+        protected abstract string RibbonXml { get; }
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
         [CLSCompliant(false)]
@@ -64,9 +97,22 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
         #endregion
 
-        public abstract RibbonGroupViewModel AddGroupViewModel(string groupName);
+        public virtual RibbonGroupViewModel AddGroupViewModel(string groupName)
+        => AddGroupViewModel(RibbonFactory.NewRibbonGroup(groupName));
 
-        public abstract RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func);
+        public virtual RibbonGroupViewModel AddGroupViewModel(GroupViewModelFactory func)
+        => AddGroupViewModel(func?.Invoke(RibbonFactory));
+
+        /// <summary>Registers and returns the supplied <see cref="RibbonGroupViewModel"/></summary>
+        private RibbonGroupViewModel AddGroupViewModel(RibbonGroupViewModel viewModel) {
+            _groupViewModels.Add(viewModel);
+            return viewModel;
+        }
+
+        public IReadOnlyList<RibbonGroupViewModel> GroupViewModels => _groupViewModels.AsReadOnly();
+
+        private List<RibbonGroupViewModel> _groupViewModels { get; }
+                                        = new List<RibbonGroupViewModel>();
 
         /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
@@ -91,7 +137,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public void ActivateTabQ(string ControlId, string ns)   => RibbonUI?.ActivateTabQ(ControlId, ns);
 
-        protected abstract string Id { get; }
+        protected string Id { get; }
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
@@ -155,6 +201,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #region IClickable implementation
         /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
         private IClickable Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
+ 
         /// <inheritdoc/>
         public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(this, EventArgs.Empty);
         #endregion

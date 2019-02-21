@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
@@ -12,6 +11,7 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
 using BetterRibbon.Properties;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -34,33 +34,10 @@ namespace PGSolutions.BetterRibbon {
         const string _assemblyName = "BetterRibbon";
 
         internal BetterRibbonViewModel(string controlId)
-        : base(new LocalResourceManager(_assemblyName))
-        => Id = controlId;
+        : base(controlId, new LocalResourceManager(_assemblyName))
+        { }
 
-        #region IRibbonExtensibility implementation
         /// <inheritdoc/>
-        public override string GetCustomUI(string RibbonID) => Resources.Ribbon;
-        #endregion
-
-        /// <summary>.</summary>
-        protected override string Id { get; }
-
-        /// <summary>Creates, registers, and returns a new <see cref="RibbonGroupViewModel"/> of the specified name.</summary>
-        public override RibbonGroupViewModel AddGroupViewModel(string groupName)
-        => AddGroupViewModel(RibbonFactory.NewRibbonGroup(groupName));
-
-        /// <summary>Registers and returns the <see cref="RibbonGroupViewModel"/> created by the supplied delegate.</summary>
-        public override RibbonGroupViewModel AddGroupViewModel(
-                        Func<IRibbonFactory, RibbonGroupViewModel> func)
-        => AddGroupViewModel(func?.Invoke(RibbonFactory));
-
-        /// <summary>Registers and returns the supplied <see cref="RibbonGroupViewModel"/></summary>
-        private RibbonGroupViewModel AddGroupViewModel(RibbonGroupViewModel viewModel) {
-            GroupViewModels.Add(viewModel);
-            return viewModel;
-        }
-
-        private IList<RibbonGroupViewModel> GroupViewModels { get; }
-                                        = new List<RibbonGroupViewModel>();
+        protected override string RibbonXml => Resources.Ribbon;
     }
 }
