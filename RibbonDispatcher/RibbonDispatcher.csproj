@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
     <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
+    <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\Dispatcher.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>

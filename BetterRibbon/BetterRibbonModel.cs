@@ -21,14 +21,8 @@ namespace PGSolutions.BetterRibbon {
                     new VbaSourceExportGroupModel(viewModel.GroupViewModels.FirstOrDefault(vm => vm.Id == "VbaExportGroupMS"), this, "MS"),
                     new VbaSourceExportGroupModel(viewModel.GroupViewModels.FirstOrDefault(vm => vm.Id == "VbaExportGroupPG"), this, "PG")
                 } ),
-                new CustomButtonsGroup1Model(viewModel.GroupViewModels.FirstOrDefault(vm => vm.Id == "CustomizableGroup"))
+                new CustomButtonsGroupModel(viewModel.GroupViewModels.FirstOrDefault(vm => vm.Id == "CustomizableGroup"))
             }.AsReadOnly());
-            CustomButtons1Model = Models.OfType<CustomButtonsGroup1Model>().FirstOrDefault();
         }
-
-        /// <summary>.</summary>
-        protected override AbstractRibbonGroupModel CustomButtons1Model { get; }
-
-        internal void     DetachCustomControls() => CustomButtons1Model?.DetachControls();
     }
 }

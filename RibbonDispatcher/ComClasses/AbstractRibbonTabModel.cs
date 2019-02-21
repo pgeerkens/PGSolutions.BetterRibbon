@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
@@ -21,15 +21,19 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected IReadOnlyList<IInvalidate> Models             { get; private set; }
 
-        protected abstract AbstractRibbonGroupModel CustomButtons1Model { get; }
+        protected List<CustomButtonsGroupModel> CustomButtonsModel
+        => Models.OfType<CustomButtonsGroupModel>().ToList();
 
         public void Invalidate() { foreach (var model in Models) { model?.Invalidate(); } }
 
         /// <inheritdoc/>
-        internal void DetachProxy(string controlId) => GetControl<IRibbonCommon>(controlId).Detach();
+        internal void DetachProxy(string controlId) => GetControl<IRibbonCommon>(controlId)?.Detach();
 
         private TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
         => ViewModel.RibbonFactory.GetControl<TControl>(controlId);
+
+        public void DetachCustomControls()
+        => CustomButtonsModel.ForEach(model => model.DetachControls());
 
         protected IStrings GetStrings(string id)
         => ViewModel.RibbonFactory.ResourceManager.GetControlStrings(id);

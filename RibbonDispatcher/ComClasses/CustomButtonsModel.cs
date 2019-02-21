@@ -3,13 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     [CLSCompliant(false)]
-    public sealed class CustomButtonsGroup1Model : AbstractRibbonGroupModel, IRibbonCommonSource {
-        internal CustomButtonsGroup1Model(RibbonGroupViewModel viewModel) : base(viewModel) { }
+    public sealed class CustomButtonsGroupModel : AbstractRibbonGroupModel, IRibbonCommonSource {
+        public CustomButtonsGroupModel(RibbonGroupViewModel viewModel) : base(viewModel) { }
     }
 }

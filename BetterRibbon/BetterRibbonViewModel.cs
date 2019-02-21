@@ -11,7 +11,6 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
 
 using BetterRibbon.Properties;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>

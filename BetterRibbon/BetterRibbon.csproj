@@ -200,7 +200,6 @@
   <ItemGroup>
     <Compile Include="BetterRibbonModel.cs" />
     <Compile Include="BrandingModel.cs" />
-    <Compile Include="CustomButtonsModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IBetterRibbon.cs" />
     <Compile Include="LinksAnalysisModel.cs" />
