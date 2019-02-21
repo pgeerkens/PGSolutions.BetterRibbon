@@ -9,11 +9,10 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
-using PGSolutions.RibbonUtilities;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
+
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using static LinksAnalysis;
 
     /// <summary>Extension methods for Excel objects.</summary>
@@ -24,7 +23,7 @@ namespace PGSolutions.BetterRibbon {
         => isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
-        internal static void WriteLinks(this Workbook wb, ILinksAnalysis links) {
+        public static void WriteLinks(this Workbook wb, ILinksAnalysis links) {
             wb.DeleteTargetWorksheet(LinksSheetName);
             wb.DeleteTargetWorksheet(FilesSheetName);
             wb.DeleteTargetWorksheet(ErrorsSheetName);
@@ -45,7 +44,7 @@ namespace PGSolutions.BetterRibbon {
             }
         }
 
-        internal static void WriteLinksAnalysis(this Worksheet ws, ILinksAnalysis links) {
+        public static void WriteLinksAnalysis(this Worksheet ws, ILinksAnalysis links) {
             if (links.Links.Count > 0) {
                 var calculation = ws.Application.Calculation;
                 try {
@@ -73,7 +72,7 @@ namespace PGSolutions.BetterRibbon {
             }
         }
 
-        internal static void WriteLinksFiles(this Worksheet ws, IExternalFiles files) {
+        public static void WriteLinksFiles(this Worksheet ws, IExternalFiles files) {
             var lastRow = 2;
             var i       = 0;
             foreach (var fileName in files.OrderBy(s => s)) {
@@ -85,7 +84,7 @@ namespace PGSolutions.BetterRibbon {
             ws.InitializeTargetWorksheet(lastRow, new List<string>() { "External FIles" });
         }
 
-        internal static void WriteLinksErrors(this Worksheet ws, IParseErrors errors) {
+        public static void WriteLinksErrors(this Worksheet ws, IParseErrors errors) {
             var lastRow = 2;
             var i       = 0;
             foreach (var error in errors) {

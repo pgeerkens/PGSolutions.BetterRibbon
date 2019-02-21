@@ -9,7 +9,7 @@ using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
-    /// <summary>The (top-level) Model for the ribbon interface.</summary>
+    /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel)

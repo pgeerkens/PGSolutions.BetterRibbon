@@ -1,7 +1,8 @@
-﻿using Microsoft.Office.Core;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>Interface exposed by an Excel workbook to the RibbonDispatcher.</summary>

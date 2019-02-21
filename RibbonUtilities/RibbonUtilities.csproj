@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
+    <Compile Include="LinksAnalysis\ExcelLinksExtensions.cs" />
     <Compile Include="LinksAnalysis\FormulaParser.cs" />
     <Compile Include="LinksAnalysis\LinksAnalysis.cs" />
     <Compile Include="GlobalSuppressions.cs" />

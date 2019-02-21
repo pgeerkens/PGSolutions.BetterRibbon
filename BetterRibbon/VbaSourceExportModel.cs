@@ -12,6 +12,7 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonUtilities;
+using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
@@ -19,7 +20,7 @@ namespace PGSolutions.BetterRibbon {
     using Models        = IReadOnlyList<VbaSourceExportGroupModel>;
     using ComInterfaces = RibbonDispatcher.ComInterfaces;
 
-    /// <summary>The Model for the VBA Source Export Group on the BetterRibbon.</summary>
+    /// <summary>The TabModel for the VBA Source Export Group on the BetterRibbon.</summary>
     internal sealed class VbaSourceExportModel : ComInterfaces.IInvalidate {
         /// <summary>.</summary>
         /// <param name="models"></param>
@@ -152,7 +153,7 @@ namespace PGSolutions.BetterRibbon {
             .AppendLine("    Developer")
             .AppendLine("        -> Macro Security")
             .AppendLine("        -> Trust Access to the VBA Project object model")
-            .ToString().MsgBoxShow("Project Model Not Trusted");
+            .ToString().MsgBoxShow("Project TabModel Not Trusted");
 
         private static Application Application => Globals.ThisAddIn.Application;
     }
