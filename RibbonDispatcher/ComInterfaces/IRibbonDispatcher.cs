@@ -25,6 +25,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "");
 
+        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
+        /// <param name="controlId">The ID of the control to be detached.</param>
+        [Description("Deactivate the specified control, detaching any attached data source.")]
+        //[DispId(4)]
+        void DetachProxy(string controlId);
+
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]

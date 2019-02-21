@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -77,7 +78,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
 
-        /// <summary>TODO</summary>
+        /// <inheritdoc/>
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
+
+        /// <inheritdoc/>
         internal event ChangedEventHandler Changed;
 
         /// <inheritdoc/>

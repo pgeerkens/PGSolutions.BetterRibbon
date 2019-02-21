@@ -27,6 +27,21 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         protected override AbstractRibbonGroupModel CustomButtons1Model { get; }
 
+        private static RibbonGroupViewModel NewBrandingViewModel(IRibbonFactory factory)
+        => factory.NewRibbonGroup($"BrandingGroup")
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton($"BrandingButton"));
+
+        private static RibbonGroupViewModel NewLinksAnalysisViewModel(IRibbonFactory factory)
+        => factory.NewRibbonGroup($"LinksAnalysisGroup")
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton($"AnalyzeLinksCurrent"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton($"AnalyzeLinksSelected"));
+
+        private static RibbonGroupViewModel NewSourceExportViewModel(IRibbonFactory factory, string suffix)
+        => factory.NewRibbonGroup($"VbaExportGroup{suffix}")
+                .Add<IRibbonToggleSource>(factory.NewRibbonToggle($"UseSrcFolderToggle{suffix}"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton($"SelectedProjectButton{suffix}"))
+                .Add<IRibbonButtonSource>(factory.NewRibbonButton($"CurrentProjectButton{suffix}"));
+
         private static RibbonGroupViewModel NewCustomButtonsViewModel(IRibbonFactory factory)
         => factory.NewRibbonGroup("CustomizableGroup")
                 .Add<IRibbonToggleSource>(factory.NewRibbonToggle("CustomVbaToggle1"))
@@ -44,9 +59,6 @@ namespace PGSolutions.BetterRibbon {
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton1"))
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton2"))
                 .Add<IRibbonButtonSource>(factory.NewRibbonButton("CustomizableButton3"));
-
-        internal TControl GetCustomControl<TControl>(string controlId) where TControl : class, IRibbonCommon
-        => CustomButtons1Model.GetControl<TControl>(controlId);
 
         internal void     DetachCustomControls()
         => CustomButtons1Model?.DetachControls();

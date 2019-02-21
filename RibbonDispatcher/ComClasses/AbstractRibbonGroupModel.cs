@@ -49,15 +49,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-        internal RibbonButtonModel NewButtonModel(IStrings strings, ImageObject image,
-                bool isEnabled, bool isVisible) {
-            var model = new RibbonButtonModel(GetControl<RibbonButton>, strings, image, isEnabled, isVisible);
-
-            model.SetShowInactive(false);
-            model.Invalidate();
-            return model;
-        }
-
         protected RibbonToggleModel NewToggleModel(string id, ToggledEventHandler handler, bool isEnabled,
                 bool isVisible, ImageObject image) {
             var model = new RibbonToggleModel(GetControl<RibbonCheckBox>, GetStrings(id), image, isEnabled, isVisible);
@@ -68,15 +59,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-        public RibbonToggleModel NewToggleModel(IStrings strings, ImageObject image,
-                bool isEnabled, bool isVisible) {
-            var model = new RibbonToggleModel(GetControl<RibbonCheckBox>, strings, image, isEnabled, isVisible);
-
-            model.SetShowInactive(false);
-            model.Invalidate();
-            return model;
-        }
-
         protected RibbonDropDownModel NewDropDownModel(string id, SelectedEventHandler handler, bool isEnabled,
                 bool isVisible) {
             var model = new RibbonDropDownModel(GetControl<RibbonDropDown>, GetStrings(id), isEnabled, isVisible);
@@ -84,15 +66,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ViewModel.Add<IRibbonDropDownSource>(ViewModel.Factory.NewRibbonDropDown(id));
             model?.Attach(id);
             model.SelectionMade += handler;
-            return model;
-        }
-
-        public RibbonDropDownModel NewDropDownModel(IStrings strings,
-                bool isEnabled, bool isVisible) {
-            var model = new RibbonDropDownModel(GetControl<RibbonDropDown>, strings, isEnabled, isVisible);
-
-            model.SetShowInactive(false);
-            model.Invalidate();
             return model;
         }
 

@@ -26,6 +26,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         T Add<T, TSource>(T ctrl) where T : RibbonCommon<TSource> where TSource : class, IRibbonCommonSource;
 
+        /// <summary>TODO</summary>
+        TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon;
+
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         RibbonGroupViewModel NewRibbonGroup(string controlId);

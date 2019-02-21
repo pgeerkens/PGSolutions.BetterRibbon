@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
@@ -21,34 +20,48 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected IReadOnlyList<IInvalidate> Models             { get; }
 
-        public void Invalidate() { foreach (var model in Models) { model?.Invalidate(); } }
-
         protected abstract AbstractRibbonGroupModel CustomButtons1Model { get; }
 
+        public void Invalidate() { foreach (var model in Models) { model?.Invalidate(); } }
+
         /// <inheritdoc/>
-        public IRibbonButtonModel NewRibbonButtonModel(IStrings strings,
-                IPictureDisp image, bool isEnabled, bool isVisible)
-        => CustomButtons1Model.NewButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
+        internal void DetachProxy(string controlId) => GetControl<IRibbonCommon>(controlId).Detach();
+
+        private TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        => ViewModel.RibbonFactory.GetControl<TControl>(controlId);
 
         /// <inheritdoc/>
         public IRibbonButtonModel NewRibbonButtonModel(IStrings strings,
-                string imageMso, bool isEnabled, bool isVisible)
-        => CustomButtons1Model.NewButtonModel(strings, imageMso, isEnabled, isVisible);
+                ImageObject image, bool isEnabled, bool isVisible) {
+            var model = new RibbonButtonModel(GetControl<RibbonButton>, strings, image, isEnabled, isVisible);
+
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
 
         /// <inheritdoc/>
-        public IRibbonToggleModel NewRibbonToggleModel(IStrings strings, IPictureDisp image, bool isEnabled, bool isVisible)
-        => CustomButtons1Model.NewToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
+        public RibbonToggleModel NewRibbonToggleModel(IStrings strings, ImageObject image,
+                bool isEnabled, bool isVisible) {
+            var model = new RibbonToggleModel(GetControl<RibbonCheckBox>, strings, image, isEnabled, isVisible);
+
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
 
         /// <inheritdoc/>
-        public IRibbonToggleModel NewRibbonToggleModel(IStrings strings, string imageMso, bool isEnabled, bool isVisible)
-        => CustomButtons1Model.NewToggleModel(strings, imageMso, isEnabled, isVisible);
+        public RibbonDropDownModel NewRibbonDropDownModel(IStrings strings,
+                bool isEnabled, bool isVisible) {
+            var model = new RibbonDropDownModel(GetControl<RibbonDropDown>, strings, isEnabled, isVisible);
 
-        /// <inheritdoc/>
-        public IRibbonDropDownModel NewRibbonDropDownModel(IStrings strings, bool isEnabled, bool isVisible)
-        => CustomButtons1Model.NewDropDownModel(strings, isEnabled, isVisible);
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
 
         /// <inheritdoc/>
         public RibbonGroupModel NewRibbonGroupModel(IStrings strings, bool isEnabled, bool isVisible)
-        => new RibbonGroupModel(CustomButtons1Model.GetControl<RibbonGroupViewModel>, strings, isEnabled, isVisible, CustomButtons1Model);
+        => new RibbonGroupModel(ViewModel.RibbonFactory.GetControl<RibbonGroupViewModel>, strings, isEnabled, isVisible, CustomButtons1Model);
     }
 }

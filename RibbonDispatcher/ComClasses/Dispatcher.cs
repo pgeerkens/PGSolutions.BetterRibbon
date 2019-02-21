@@ -22,6 +22,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void Invalidate() => TabModel.Invalidate();
 
         /// <inheritdoc/>
+        public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
+
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonControlStrings NewControlStrings(string label,
                 string screenTip = null, string superTip = null,
@@ -41,25 +44,25 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonButtonModel(strings, image, isEnabled, isVisible);
+        => TabModel.NewRibbonButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonButtonModel(strings, imageMso, isEnabled, isVisible);
+        => TabModel.NewRibbonButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonToggleModel(strings, image, isEnabled, isVisible);
+        => TabModel.NewRibbonToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => TabModel.NewRibbonToggleModel(strings, imageMso, isEnabled, isVisible);
+        => TabModel.NewRibbonToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
