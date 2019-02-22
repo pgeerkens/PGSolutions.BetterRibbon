@@ -5,7 +5,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon ToggleButton objects.</summary>
-    public class ToggleButtonVM : CheckBoxVM, IRibbonToggle,
+    public class ToggleButtonVM : CheckBoxVM, IToggleButtonVM,
         IActivatable<IRibbonToggleSource,ToggleButtonVM>, ISizeable, IImageable {
         internal ToggleButtonVM(string itemId) : base(itemId) { }
 

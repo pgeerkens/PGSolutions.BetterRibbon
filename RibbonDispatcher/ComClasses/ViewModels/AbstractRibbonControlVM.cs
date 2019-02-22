@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public string Description    => Strings?.Description ?? $"{Id} Description";
 
         /// <inheritdoc/>
-        protected virtual IRibbonControlStrings Strings => Source?.Strings;
+        protected virtual IControlStrings Strings => Source?.Strings;
 
         /// <inheritdoc/>
         public bool IsEnabled        => Source?.IsEnabled ?? false;

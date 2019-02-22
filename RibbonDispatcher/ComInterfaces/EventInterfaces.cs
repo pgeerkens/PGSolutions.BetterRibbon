@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         SizeLarge = RibbonControlSize.RibbonControlSizeLarge
     }
 
-    public class EventArgs<T>:EventArgs {
+    public class EventArgs<T>: EventArgs {
         public EventArgs(T value) : base() => Value = value;
 
         public T Value { get; }
@@ -38,6 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Sets or gets whether to display the Image for this control.</summary>
         bool ShowImage    { get; }
+
         /// <summary>Sets or gets whether to display the Label for this control.</summary>
         bool ShowLabel    { get; }
 
@@ -92,5 +93,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool ItemShowImage(int Index);
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         bool ItemShowLabel(int Index);
+    }
+
+    public interface ITextEditable {
+        /// <summary>Current contents of this <see cref="ITextEditable"/> control.</summary>
+        string Text { get; }
+
+        /// <summary>Call back for OnChanged events from <see cref="ITextEditable"/> controls.</summary>
+        void OnEdited(object sender, string text);
     }
 }

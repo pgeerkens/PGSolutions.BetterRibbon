@@ -10,7 +10,7 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    public class GroupVM : AbstractControlVM<IRibbonCommonSource>, IRibbonGroup,
+    public class GroupVM : AbstractControlVM<IRibbonCommonSource>, IGroupVM,
             IActivatable<IRibbonCommonSource,GroupVM> {
         public GroupVM(IRibbonFactory factory, string itemId)
         : base(itemId) {

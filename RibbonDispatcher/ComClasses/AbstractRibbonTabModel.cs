@@ -7,7 +7,7 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IStrings = IRibbonControlStrings;
+    using IStrings = IControlStrings;
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {

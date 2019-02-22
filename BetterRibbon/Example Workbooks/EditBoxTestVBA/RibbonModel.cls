@@ -21,8 +21,8 @@ Private CustomGroup         As PGSolutions_RibbonDispatcher.GroupModel
 Private WithEvents EditBox  As PGSolutions_RibbonDispatcher.EditBoxModel
 Attribute EditBox.VB_VarHelpID = -1
 
-Private Sub EditBox_Edited(ByVal sender As Variant, ByVal text As String)
-    ButtonProcessing.EditBox_Processing
+Private Sub EditBox_Edited(ByVal sender As Variant, ByVal Text As String)
+    ButtonProcessing.EditBox_Processing Text
 End Sub
 
 Friend Sub Activate()

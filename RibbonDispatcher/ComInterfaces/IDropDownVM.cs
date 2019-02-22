@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by DropDownVM objects; 
     /// composition of IRibbonControlVM, IDropDownItem &amp; IImageableItem</summary>
-    public interface IRibbonDropDown : IRibbonControlVM {
+    public interface IDropDownVM : IRibbonControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
         new string      Id         { get; }

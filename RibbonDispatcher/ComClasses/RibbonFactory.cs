@@ -109,7 +109,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return ctrl;
         }
 
-        public IRibbonControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
+        public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         public GroupVM NewGroup(string controlId)
@@ -117,7 +117,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         public ButtonVM NewButton(string controlId)
-        => Add<ButtonVM,IRibbonButtonSource>(new ButtonVM(controlId));
+        => Add<ButtonVM,IButtonSource>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         public ToggleButtonVM NewToggleButton(string controlId)
@@ -129,7 +129,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         public DropDownVM NewDropDown(string controlId)
-        => Add<DropDownVM,IRibbonDropDownSource>(new DropDownVM(controlId));
+        => Add<DropDownVM,IDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>
         public SelectableItem NewSelectableItem(string controlId)
@@ -139,13 +139,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public EditBoxVM NewEditBox(string controlId)
         => Add<EditBoxVM, IEditBoxSource>(new EditBoxVM(controlId));
 
+        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
+        public ComboBoxVM NewComboBox(string controlId)
+        => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
+
         /// <inheritdoc/>
         public IResourceLoader NewResourceLoader() => ResourceLoader;
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonControlStrings NewControlStrings(string label,
+        public IControlStrings NewControlStrings(string label,
                 string screenTip = null, string superTip = null, string keyTip = null,
                 string alternateLabel = null, string description = null)
-        => new RibbonControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
+        => new ControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
     }
 }

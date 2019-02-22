@@ -11,7 +11,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IStrings = IRibbonControlStrings;
+    using IStrings = IControlStrings;
 
     public static partial class RibbonFactoryExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
@@ -44,15 +44,19 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                             break;
 
                         case XName name when name == mso+"dropDown":
-                            viewModel.Add<IRibbonDropDownSource>(factory.NewDropDown(element.Attribute("id").Value));
+                            viewModel.Add<IDropDownSource>(factory.NewDropDown(element.Attribute("id").Value));
                             break;
 
                         case XName name when name == mso+"button":
-                            viewModel.Add<IRibbonButtonSource>(factory.NewButton(element.Attribute("id").Value));
+                            viewModel.Add<IButtonSource>(factory.NewButton(element.Attribute("id").Value));
                             break;
 
                         case XName name when name == mso+"editBox":
                             viewModel.Add<IEditBoxSource>(factory.NewEditBox(element.Attribute("id").Value));
+                            break;
+
+                        case XName name when name == mso+"comboBox":
+                            viewModel.Add<IComboBoxSource>(factory.NewComboBox(element.Attribute("id").Value));
                             break;
 
                         default:

@@ -22,7 +22,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>.</summary>
         /// <param name="controlId"></param>
         [Description("")]
-        IRibbonControlStrings GetStrings(string controlId);
+        IControlStrings GetStrings(string controlId);
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         T Add<T, TSource>(T ctrl) where T : AbstractControlVM<TSource> where TSource : class, IRibbonCommonSource;
@@ -54,6 +54,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         EditBoxVM NewEditBox(string controlId);
 
+        /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        ComboBoxVM NewComboBox(string controlId);
+
         /// <summary>Returns a new {SelectableItem} from a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         SelectableItem NewSelectableItem(string controlId);
@@ -62,7 +66,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         IResourceLoader NewResourceLoader();
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonControlStrings NewControlStrings(string label,
+        IControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "");
     }

@@ -31,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IStringLoader {
-        IRibbonControlStrings GetStrings(string ControlId);
+        IControlStrings GetStrings(string ControlId);
     }
 
     [CLSCompliant(false)]

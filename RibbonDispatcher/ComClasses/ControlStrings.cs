@@ -12,15 +12,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [Serializable]
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonControlStrings))]
-    [Guid(Guids.RibbonControlStrings)]
-    public class RibbonControlStrings : IRibbonControlStrings {
-        public static RibbonControlStrings Empty { get; } = new RibbonControlStrings();
-        private RibbonControlStrings() : this(null) { }
+    [ComDefaultInterface(typeof(IControlStrings))]
+    [Guid(Guids.ControlStrings)]
+    public class ControlStrings : IControlStrings {
+        public static ControlStrings Empty { get; } = new ControlStrings();
+        private ControlStrings() : this(null) { }
 
         /// <summary>TODO</summary>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage." )]
-        public RibbonControlStrings(
+        public ControlStrings(
             string label,
             string screenTip      = null,
             string superTip       = null,
@@ -53,6 +53,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
         /// <inheritdoc/>
         public string Description { get; }
 
-        public static RibbonControlStrings Default(string Id) => new RibbonControlStrings(Id);
+        public static ControlStrings Default(string Id) => new ControlStrings(Id);
     }
 }

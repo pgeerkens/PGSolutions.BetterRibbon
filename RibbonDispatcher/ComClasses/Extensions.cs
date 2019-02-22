@@ -25,10 +25,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Because that's just how it works!")]
         public static string CallerName([CallerMemberName] string memberName = "") => memberName;
 
-        /// <summary>Displays a {MessageBox} identifying the (supplied) source {IRibbonButton}/</summary>
+        /// <summary>Displays a {MessageBox} identifying the (supplied) source {IButtonVM}/</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public static void DefaultButtonAction(object sender) =>
-            $"{(sender as IRibbonButton)?.Id ?? "Unknown Button"} pressed.".MsgBoxShow();
+            $"{(sender as IButtonVM)?.Id ?? "Unknown Button"} pressed.".MsgBoxShow();
 
         public static void MsgBoxShow(this string message) => message.MsgBoxShow(Caption);
 

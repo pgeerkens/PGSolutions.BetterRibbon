@@ -18,12 +18,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvents))]
-    [ComDefaultInterface(typeof(IRibbonToggleModel))]
-    [Guid(Guids.RibbonToggleModel)]
+    [ComDefaultInterface(typeof(IToggleModel))]
+    [Guid(Guids.ToggleModel)]
     public sealed class ToggleModel : RibbonControlModel<IRibbonToggleSource,CheckBoxVM>,
-            IRibbonToggleModel, ISizeable, IImageable, IRibbonToggleSource {
+            IToggleModel, ISizeable, IImageable, IRibbonToggleSource {
         public ToggleModel(Func<string, CheckBoxVM> funcViewModel,
-                IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
+                IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
 
@@ -36,7 +36,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public bool        IsPressed { get; set; } = false;
 
-        public IRibbonToggleModel Attach(string controlId) {
+        public IToggleModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Toggled += OnToggled;

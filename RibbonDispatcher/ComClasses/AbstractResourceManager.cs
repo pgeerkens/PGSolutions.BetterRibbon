@@ -16,8 +16,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected ResourceManager ResourceManager { get; }
 
         /// <inheritdoc/>
-        public IRibbonControlStrings GetControlStrings(string ControlId) =>
-            new RibbonControlStrings(
+        public IControlStrings GetControlStrings(string ControlId) =>
+            new ControlStrings(
                     GetCurrentUIString($"{ControlId}_Label")          ?? ControlId.Unknown(),
                     GetCurrentUIString($"{ControlId}_ScreenTip")      ?? ControlId.Unknown("ScreenTip"),
                     GetCurrentUIString($"{ControlId}_SuperTip")       ?? ControlId.Unknown("SuperTip"),

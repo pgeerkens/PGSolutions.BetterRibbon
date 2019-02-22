@@ -12,19 +12,19 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary></summary>
+    /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
+    [Description("The COM visible Model for Ribbon Drop Down controls")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
-    [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
-    [ComDefaultInterface(typeof(IRibbonDropDownModel))]
-    [Guid(Guids.RibbonDropDownModel)]
-    public sealed class DropDownModel : RibbonControlModel<IRibbonDropDownSource,DropDownVM>,
-            IRibbonDropDownModel, IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
+    [ComSourceInterfaces(typeof(ISelectedEvents))]
+    [ComDefaultInterface(typeof(IDropDownModel))]
+    [Guid(Guids.DropDownModel)]
+    public sealed class DropDownModel : RibbonControlModel<IDropDownSource,DropDownVM>,
+            IDropDownModel, IDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
         public DropDownModel(Func<string, DropDownVM> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+                IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
 
@@ -32,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public int SelectedIndex  { get; set; }
 
-        public IRibbonDropDownModel Attach(string controlId) {
+        public IDropDownModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.SelectionMade += OnSelectionMade;
@@ -44,7 +44,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private void OnSelectionMade(object sender, int selectedIndex)
         => SelectionMade?.Invoke(sender, SelectedIndex = selectedIndex);
 
-        public IRibbonDropDownModel AddSelectableModel(ISelectableItemModel selectableModel) {
+        public IDropDownModel AddSelectableModel(ISelectableItemModel selectableModel) {
             Items.Add(selectableModel);
             ViewModel?.Invalidate();
             return this;

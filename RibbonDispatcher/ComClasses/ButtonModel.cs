@@ -11,19 +11,19 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary></summary>
+    /// <summary>The COM visible Model for Ribbon Button controls.</summary>
+    [Description("The COM visible Model for Ribbon Button controls.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
-    [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IClickedEvents))]
-    [ComDefaultInterface(typeof(IRibbonButtonModel))]
+    [ComDefaultInterface(typeof(IButtonModel))]
     [Guid(Guids.ButtonModel)]
-    public class ButtonModel : RibbonControlModel<IRibbonButtonSource,ButtonVM>,
-            IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
+    public class ButtonModel : RibbonControlModel<IButtonSource,ButtonVM>,
+            IButtonModel, IButtonSource, ISizeable, IImageable {
         public ButtonModel(Func<string, ButtonVM> funcViewModel,
-                IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
+                IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
 
@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-         public IRibbonButtonModel Attach(string controlId) {
+         public IButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Clicked += OnClicked;

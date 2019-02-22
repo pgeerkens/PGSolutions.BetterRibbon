@@ -20,9 +20,9 @@ namespace PGSolutions.BetterRibbon {
             Invalidate();
         }
 
-        public IRibbonButtonModel AnalyzeCurrentModel  { get; }
+        public IButtonModel AnalyzeCurrentModel  { get; }
 
-        public IRibbonButtonModel AnalyzeSelectedModel { get; }
+        public IButtonModel AnalyzeSelectedModel { get; }
 
         private void AnalyzeCurrentClicked(object sender, EventArgs e)
         => DisplayAnalysis(new WorkbookParser(Application.ActiveWorkbook));

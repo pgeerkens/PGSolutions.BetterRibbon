@@ -2,21 +2,18 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Linq;
-
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
-    public class DropDownVM : AbstractControlVM<IDropDownSource>, IDropDownVM,
-            IActivatable<IDropDownSource,DropDownVM>, ISelectable {
-        internal DropDownVM(string itemId)
-        : base(itemId) { }
+    public class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBox,
+            IActivatable<IComboBoxSource, ComboBoxVM>, ITextEditable {
+        internal ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new DropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
+        public new ComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
 
         public override void Detach() {
-            SelectionMade = null;
+            Edited = null;
             base.Detach();
         }
         #endregion
@@ -60,5 +57,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         public bool     ItemShowLabel(int Index) => Source[Index].ShowImage;
         #endregion
+
+        #region IEditable implementation
+        public event EditedEventHandler Edited;
+
+        public string Text => Source?.Text ?? "";
+
+        public void OnEdited(object sender, string text)
+        => Edited?.Invoke(this, text);
+        #endregion
+
     }
 }

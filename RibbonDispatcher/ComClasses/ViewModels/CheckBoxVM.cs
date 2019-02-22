@@ -5,7 +5,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
-    public class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IRibbonToggle,
+    public class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IToggleButtonVM,
         IActivatable<IRibbonToggleSource,CheckBoxVM>, IToggleable {
         internal CheckBoxVM(string itemId) : base(itemId) { }
 
@@ -49,7 +49,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <summary>Gets or sets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
         public virtual bool ShowLabel => true;
         #endregion
-
-        //public override void Invalidate() => base.Invalidate();
     }
 }

@@ -22,11 +22,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class ResourceLoader : IResourceLoader, IResourceManager {
         /// <summary>Creates a new empty ControlStrings collection.</summary>
         internal ResourceLoader() {
-            _controls = new Dictionary<string, IRibbonControlStrings>();
+            _controls = new Dictionary<string, IControlStrings>();
             _images   = new Dictionary<string, IPictureDisp>();
         }
 
-        Dictionary<string, IRibbonControlStrings>  _controls;
+        Dictionary<string, IControlStrings>  _controls;
         Dictionary<string, IPictureDisp>           _images;
 
         /// <inheritdoc/>
@@ -41,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             string KeyTip           = null
         )
         {
-            _controls.Add(ControlId, new RibbonControlStrings(
+            _controls.Add(ControlId, new ControlStrings(
                     Label           ?? ControlId,
                     ScreenTip       ?? $"{ControlId} ScreenTip",
                     SuperTip        ?? $"{ControlId} SuperTip",
@@ -60,13 +60,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <inheritdoc/>
-        public IRibbonControlStrings GetControlStrings(string ControlId) =>
+        public IControlStrings GetControlStrings(string ControlId) =>
             _controls.FirstOrDefault(i => i.Key == ControlId).Value;
         /// <inheritdoc/>
         public object GetImage(string Name) =>
             _images.FirstOrDefault(i => i.Key == Name).Value;
 
         /// <inheritdoc/>
-        public IRibbonControlStrings this[string ControlId] => _controls.FirstOrDefault(i => i.Key == ControlId).Value;
+        public IControlStrings this[string ControlId] => _controls.FirstOrDefault(i => i.Key == ControlId).Value;
     }
 }

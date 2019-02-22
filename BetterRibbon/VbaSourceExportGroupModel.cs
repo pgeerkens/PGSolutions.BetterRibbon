@@ -28,11 +28,11 @@ namespace PGSolutions.BetterRibbon {
         public event EventHandler ExportSelectedClicked;
         public event EventHandler ExportCurrentClicked;
 
-        public IRibbonToggleModel DestIsSrc      { get; }
+        public IToggleModel DestIsSrc      { get; }
 
-        public IRibbonButtonModel ExportSelected { get; }
+        public IButtonModel ExportSelected { get; }
 
-        public IRibbonButtonModel ExportCurrent  { get; }
+        public IButtonModel ExportCurrent  { get; }
 
         public string             Suffix         { get; }
 

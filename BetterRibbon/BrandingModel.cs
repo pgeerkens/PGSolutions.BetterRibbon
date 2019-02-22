@@ -20,7 +20,7 @@ namespace PGSolutions.BetterRibbon {
             Invalidate();
         }
 
-        private IRibbonButtonModel BrandingButtonModel { get; }
+        private IButtonModel BrandingButtonModel { get; }
 
         private void ButtonClicked(object sender, EventArgs e) => new StringBuilder()
             .AppendLine($"PGSolutions Better Ribbon")

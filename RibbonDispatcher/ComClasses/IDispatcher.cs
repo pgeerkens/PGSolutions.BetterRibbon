@@ -7,75 +7,74 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+using PGSolutions.RibbonDispatcher.ComInterfaces;
+
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonDispatcher)]
-    public interface IRibbonDispatcher {
+    [Guid(Guids.IDispatcher)]
+    public interface IDispatcher {
         /// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
         [Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
-        //[DispId(2)]
         void Invalidate();
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        //[DispId(3)]
-        IRibbonControlStrings NewControlStrings(string label,
+        IControlStrings NewControlStrings(string label,
                 string screenTip = "", string superTip = "",
                 string keyTip = "", string alternateLabel = "", string description = "");
 
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>
         [Description("Deactivate the specified control, detaching any attached data source.")]
-        //[DispId(4)]
         void DetachProxy(string controlId);
 
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]
-        ISelectableItemModel NewSelectableModel(string controlID, IRibbonControlStrings strings);
+        SelectableItemModel NewSelectableModel(string controlID, IControlStrings strings);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        IRibbonButtonModel NewButtonModel(IRibbonControlStrings strings,
+        ButtonModel NewButtonModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonButtonModel NewButtonModelMso(IRibbonControlStrings strings,
+        ButtonModel NewButtonModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
+        ToggleModel NewToggleModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonToggleModel NewToggleModelMso(IRibbonControlStrings strings,
+        ToggleModel NewToggleModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonDropDownModel NewDropDownModel(IRibbonControlStrings strings,
+        DropDownModel NewDropDownModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IEditBoxModel NewEditBoxModel(IRibbonControlStrings strings,
+        EditBoxModel NewEditBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonGroupModel NewGroupModel(IRibbonControlStrings strings,
+        GroupModel NewGroupModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
     }
 }

@@ -16,17 +16,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonGroupModel))]
+    [ComDefaultInterface(typeof(IGroupModel))]
     [Guid(Guids.GroupModel)]
     public class GroupModel : RibbonControlModel<IRibbonCommonSource,GroupVM>,
-            IRibbonGroupModel, IRibbonCommonSource {
+            IGroupModel, IRibbonCommonSource {
         public GroupModel(Func<string,GroupVM> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+                IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
 
         /// <inheritdoc/>
-        public IRibbonGroupModel Attach(string controlId) {
+        public IGroupModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Invalidate();

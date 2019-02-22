@@ -8,44 +8,48 @@ using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
-    [Description("")]
+    [Description("")]    
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.ISelectableItemModel)]
-    public interface ISelectableItemModel:IRibbonCommonSource {
-        /// <summary>Gets the {IControlStrings} for this control.</summary>
-        new IControlStrings Strings {
-            [Description("Gets the {IControlStrings} for this control.")]
+    [Guid(Guids.IToggleModel)]
+    public interface IToggleModel {
+        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
+        IControlStrings Strings {
+            [Description("Gets the IControlStrings for this control.")]
             get;
         }
 
         /// <summary>Gets or sets whether the control is enabled.</summary>
-        new bool IsEnabled {
+        [Description(".")]
+        bool   IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
-            get; set;
-        }
+            get; set; }
         /// <summary>Gets or sets whether the control is visible.</summary>
-        new bool IsVisible {
+        [Description(".")]
+        bool   IsVisible {
             [Description("Gets or sets whether the control is visible.")]
-            get; set;
-        }
+            get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        bool IsLarge { get; set; }
+        bool   IsLarge   { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        ImageObject Image { get; set; }
+        ImageObject Image     { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        bool ShowImage { get; set; }
+        bool   ShowImage { get; set; }
         /// <summary>.</summary>
         [Description(".")]
-        bool ShowLabel { get; set; }
+        bool   ShowLabel { get; set; }
+
+        /// <summary>.</summary>
+        [Description(".")]
+        bool   IsPressed { get; set; }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        ISelectableItemModel Attach(string controlId);
+        IToggleModel Attach(string controlId);
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]

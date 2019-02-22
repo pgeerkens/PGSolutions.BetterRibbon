@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
@@ -19,12 +18,12 @@ namespace PGSolutions.BetterRibbon {
     [Guid(RibbonDispatcher.Guids.BetterRibbonMain)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class Main : IBetterRibbon {
-        internal Main(Func<IRibbonDispatcher> funcDispatcher) => FuncDispatcher = funcDispatcher;
+        internal Main(Func<IDispatcher> funcDispatcher) => FuncDispatcher = funcDispatcher;
 
-        Func<IRibbonDispatcher> FuncDispatcher { get; }
+        Func<IDispatcher> FuncDispatcher { get; }
 
          /// <inheritdoc/>
-        public IRibbonDispatcher NewBetterRibbon() => FuncDispatcher();
+        public IDispatcher NewBetterRibbon() => FuncDispatcher();
 
         /// <inheritdoc/>
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();

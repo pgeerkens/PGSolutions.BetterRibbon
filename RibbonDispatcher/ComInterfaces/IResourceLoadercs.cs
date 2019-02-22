@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IResourceLoader {
         /// <summary>Returns the specified {ControlStrings} object.</summary>
         [Description("Returns the specified ControlStrings object.")]
-        IRibbonControlStrings this[string ControlId] { get; }
+        IControlStrings this[string ControlId] { get; }
 
         /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
         [Description("Adds a new ControlString to the collection, and returns it.")]

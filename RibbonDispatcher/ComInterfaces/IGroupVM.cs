@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
-    public interface IRibbonGroup : IRibbonControlVM {
+    public interface IGroupVM : IRibbonControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
         new string Id           { get; }

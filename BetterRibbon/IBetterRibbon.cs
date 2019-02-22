@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
@@ -15,8 +15,8 @@ namespace PGSolutions.BetterRibbon {
   //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
         /// <summary>Returns a new implementation of the <see cref="IRibbonDispatcher"/> interface.</summary>
-        [Description("Returns a new implementation of the IRibbonDispatcher interface.")]
-        IRibbonDispatcher NewBetterRibbon();
+        [Description("Returns a new implementation of the IDispatcher interface.")]
+        IDispatcher NewBetterRibbon();
         /// <summary>Returns a new implementation of the <see cref="ILinksAnalyzer"/> interface.</summary>
         [Description("Returns a new implementation of the ILinksAnalyzer interface.")]
         ILinksAnalyzer    NewLinksAnalyzer();

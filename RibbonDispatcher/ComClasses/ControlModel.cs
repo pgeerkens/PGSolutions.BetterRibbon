@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             where TSource: IRibbonCommonSource
             where TCtrl: class, IRibbonControlVM {
         protected RibbonControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
+                IControlStrings strings, bool isEnabled, bool isVisible) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId)?.Attach(source);
             Strings   = strings;
             IsEnabled = isEnabled;
@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected Func<string, TSource, TCtrl> AttachToViewModel { get; }
 
         /// <inheritdoc/>
-        public IRibbonControlStrings Strings { get; }
+        public IControlStrings Strings { get; }
 
         /// <inheritdoc/>
         public TCtrl ViewModel    { get; set; }

@@ -22,7 +22,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class SelectableItemModel : RibbonControlModel<ISelectableItemSource,SelectableItem>,
             ISelectableItemModel, ISizeable, IImageable, ISelectableItemSource, ISelectableItem {
         public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
-                IRibbonControlStrings strings, bool isEnabled, bool isVisible)
+                IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible) { }
 
         public event EventHandler Clicked;

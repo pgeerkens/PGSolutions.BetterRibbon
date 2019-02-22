@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IResourceManager {
         /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
         [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
-        IRibbonControlStrings GetControlStrings(string ControlId);
+        IControlStrings GetControlStrings(string ControlId);
 
         /// <summary>Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.</summary>
         [Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]

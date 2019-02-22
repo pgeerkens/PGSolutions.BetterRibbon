@@ -8,6 +8,6 @@ Attribute VB_Name = "ButtonProcessing"
 Option Explicit
 Option Private Module
 
-Public Sub EditBox_Processing()
-    MsgBox "VBA CustomButton clicked.", vbOKOnly Or vbInformation, ActiveWorkbook.Name
+Public Sub EditBox_Processing(ByVal Text As String)
+    MsgBox "VBA EditBox edited to value: '" & Text & "'.", vbOKOnly Or vbInformation, ActiveWorkbook.Name
 End Sub
