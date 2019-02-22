@@ -43,38 +43,44 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
+        public IRibbonButtonModel NewButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => RibbonFactory.NewButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
+        public IRibbonButtonModel NewButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => RibbonFactory.NewButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
+        public IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => RibbonFactory.NewToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
+        public IRibbonToggleModel NewToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => RibbonFactory.NewToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
+        public IRibbonDropDownModel NewDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonDropDownModel(strings, isEnabled, isVisible);
+        => RibbonFactory.NewDropDownModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
+        public IEditBoxModel NewEditBoxModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => RibbonFactory.NewRibbonGroupModel(strings, isEnabled, isVisible);
+        => RibbonFactory.NewEditBoxModel(strings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public IRibbonGroupModel NewGroupModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => RibbonFactory.NewGroupModel(strings, isEnabled, isVisible);
     }
 }

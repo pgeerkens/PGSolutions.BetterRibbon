@@ -18,22 +18,18 @@ Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 Private CustomGroup         As PGSolutions_RibbonDispatcher.GroupModel
 
-Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
-Attribute Button1.VB_VarHelpID = -1
+Private WithEvents EditBox  As PGSolutions_RibbonDispatcher.EditBoxModel
+Attribute EditBox.VB_VarHelpID = -1
 
-Private Sub Button1_Clicked(ByVal sender As Variant, ByVal e As EventArgs)
-    On Error GoTo EH
-    LinksLexerTests.TestAll
-XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
-    Resume XT
+Private Sub EditBox_Edited(ByVal sender As Variant, ByVal text As String)
+    ButtonProcessing.EditBox_Processing
 End Sub
 
 Friend Sub Activate()
     If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
     If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive False
-    If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
-    If Not Button1 Is Nothing Then Button1.Invalidate
+    If Not EditBox Is Nothing Then EditBox.Attach "CustomVbaEditBox1"
+    If Not EditBox Is Nothing Then EditBox.Invalidate
 End Sub
 
 Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
@@ -48,13 +44,13 @@ Private Sub Class_Initialize()
     With BetterRibbon
         Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
         
-        Set Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
-                ScreenTip:="Unit Test for Linka Parser", _
-                superTip:="Performs a connection test and then ten" & vbNewLine & _
-                          "specific scanning and parsing tests on " & vbNewLine & _
-                          "various formulas.", keyTip:="", _
-                alternateLabel:="", Description:="")
-                
-        Set Button1 = .NewButtonModelMso(Strings, "MacroPlay")
+        Set Strings = .NewControlStrings(Label:="This is cool!", _
+                ScreenTip:="VBA-Customized Button Screentip", _
+                SuperTip:="This button is completely" & vbNewLine & _
+                          "customized within the VBA" & vbNewLine & _
+                          "workbook.", keyTip:="", _
+                AlternateLabel:="", Description:="")
+        
+        Set EditBox = .NewEditBoxModel(Strings)
     End With
 End Sub

@@ -16,7 +16,7 @@ Attribute VB_Exposed = True
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-Private CustomGroup         As PGSolutions_RibbonDispatcher.RibbonGroupModel
+Private CustomGroup         As PGSolutions_RibbonDispatcher.GroupModel
 
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button1.VB_VarHelpID = -1
@@ -42,7 +42,7 @@ End Function
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings
     With BetterRibbon
-        Set CustomGroup = .NewRibbonGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
+        Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
         
         Set Strings = .NewControlStrings(Label:="This is cool!", _
                 ScreenTip:="VBA-Customized Button Screentip", _
@@ -51,6 +51,6 @@ Private Sub Class_Initialize()
                           "workbook.", keyTip:="", _
                 AlternateLabel:="", Description:="")
                 
-        Set Button1 = .NewRibbonButtonModelMso(Strings, "MacroPlay")
+        Set Button1 = .NewButtonModelMso(Strings, "MacroPlay")
     End With
 End Sub

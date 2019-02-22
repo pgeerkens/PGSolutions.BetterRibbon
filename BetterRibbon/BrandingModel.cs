@@ -14,7 +14,7 @@ using PGSolutions.BetterRibbon.Properties;
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
         public BrandingModel(GroupVM viewModel, IRibbonFactory factory) : base(viewModel) {
-            BrandingButtonModel = factory.NewRibbonButtonModel("BrandingButton", ButtonClicked,
+            BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
                 new ImageObject(BrandingIcon));
 
             Invalidate();

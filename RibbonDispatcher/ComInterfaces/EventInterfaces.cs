@@ -21,6 +21,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public delegate void SelectedEventHandler(object sender, int selectedIndex);
 
+    public delegate void EditedEventHandler(object sender, string text);
+
     /// <summary>The interface for controls that can be clicked.</summary>
     [CLSCompliant(true)]
     internal interface IClickable {

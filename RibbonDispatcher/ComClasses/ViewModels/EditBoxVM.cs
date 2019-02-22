@@ -14,24 +14,24 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public new EditBoxVM Attach(IEditBoxSource source) => Attach<EditBoxVM>(source);
 
         public override void Detach() {
-            TextChanged = null;
+            Edited = null;
             base.Detach();
         }
         #endregion
 
         #region ITextEditable implementation
-        public event EventHandler TextChanged;
+        public event EditedEventHandler Edited;
 
         public string Text => Source?.Text ?? "";
 
-        public void OnTextChanged(object sender, EventArgs<string> e)
-        => TextChanged?.Invoke(this, EventArgs.Empty);
+        public void OnEdited(object sender, string text)
+        => Edited?.Invoke(this, text);
         #endregion
 
     }
 
     public interface IEditBoxSource : IRibbonCommonSource {
-        event EventHandler TextChanged;
+        event EditedEventHandler Edited;
 
         string Text         { get; }
     }
@@ -69,6 +69,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     public interface ITextEditable {
         string Text { get; }
 
-        void OnTextChanged(object sender, EventArgs<string> e);
+        void OnEdited(object sender, string text);
     }
 }

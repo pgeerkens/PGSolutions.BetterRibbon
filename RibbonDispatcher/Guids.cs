@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IRibbonFactory              = "69E1940E" + GuidSpace;
         public const string RibbonFactory               = "69E1940F" + GuidSpace;
 
-        //public const string IRibbonViewModel            = "69E19410" + GuidSpace;
+        public const string IRibbonViewModel            = "69E19410" + GuidSpace;
         //public const string RibbonViewModel             = "69E19411" + GuidSpace;
         //public const string IRibbonCommon               = "69E19412" + GuidSpace;
         //public const string RibbonCommon                = "69E19413" + GuidSpace;
@@ -60,7 +60,7 @@ namespace PGSolutions.RibbonDispatcher {
         //public const string IRibbonCheckBoxModel        = "69E19430" + GuidSpace;
         public const string RibbonCheckBoxModel         = "69E19431" + GuidSpace;
         public const string IRibbonGroupModel           = "69E19432" + GuidSpace;
-        public const string RibbonGroupModel            = "69E19433" + GuidSpace;
+        public const string GroupModel                  = "69E19433" + GuidSpace;
         public const string IRibbonDropDownModel        = "69E19434" + GuidSpace;
         public const string RibbonDropDownModel         = "69E19435" + GuidSpace;
         public const string ICustomRibbonGroup          = "69E19436" + GuidSpace;

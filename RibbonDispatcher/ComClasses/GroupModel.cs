@@ -17,10 +17,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
-    [Guid(Guids.RibbonGroupModel)]
-    public class RibbonGroupModel : RibbonControlModel<IRibbonCommonSource,GroupVM>,
+    [Guid(Guids.GroupModel)]
+    public class GroupModel : RibbonControlModel<IRibbonCommonSource,GroupVM>,
             IRibbonGroupModel, IRibbonCommonSource {
-        public RibbonGroupModel(Func<string,GroupVM> funcViewModel,
+        public GroupModel(Func<string,GroupVM> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

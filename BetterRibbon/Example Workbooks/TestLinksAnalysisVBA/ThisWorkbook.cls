@@ -14,7 +14,7 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private MRibbonModel    As TestLinksAnalysis.RibbonModel
+Private MRibbonModel    As RibbonModel
 
 Private Sub Workbook_Activate()
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel

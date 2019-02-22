@@ -18,7 +18,7 @@ Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
 Private Const ControlStringsRangeName As String = "ControlStringData"
 
 Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
-Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroupModel
+Private CustomGroup          As PGSolutions_RibbonDispatcher.GroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
@@ -220,22 +220,22 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With BetterRibbon
-        Set CustomGroup = .NewRibbonGroupModel(FindStrings("CustomizableGroup"))
+        Set CustomGroup = .NewGroupModel(FindStrings("CustomizableGroup"))
     
-        Set Toggle1 = .NewRibbonToggleModelMso(FindStrings("Toggle1"), "MarginsShowHide")
-        Set Toggle2 = .NewRibbonToggleModelMso(FindStrings("Toggle2"), "MarginsShowHide")
-        Set Toggle3 = .NewRibbonToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
-        Set Toggle4 = .NewRibbonToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
+        Set Toggle1 = .NewToggleModelMso(FindStrings("Toggle1"), "MarginsShowHide")
+        Set Toggle2 = .NewToggleModelMso(FindStrings("Toggle2"), "MarginsShowHide")
+        Set Toggle3 = .NewToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
+        Set Toggle4 = .NewToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
-        Set DropDown1 = .NewRibbonDropDownModel(FindStrings("DropDown1"))
+        Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
         DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("ImageOnly", FindStrings("ImageOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
                  .SelectedIndex = 2
         
-        Set Button1 = .NewRibbonButtonModelMso(FindStrings("Button1"), "MacroPlay")
-        Set Button2 = .NewRibbonButtonModelMso(FindStrings("Button2"), "MacroPlay")
-        Set Button3 = .NewRibbonButtonModelMso(FindStrings("Button3"), "Refresh")
+        Set Button1 = .NewButtonModelMso(FindStrings("Button1"), "MacroPlay")
+        Set Button2 = .NewButtonModelMso(FindStrings("Button2"), "MacroPlay")
+        Set Button3 = .NewButtonModelMso(FindStrings("Button3"), "Refresh")
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")

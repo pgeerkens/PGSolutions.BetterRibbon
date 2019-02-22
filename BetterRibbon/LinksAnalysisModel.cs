@@ -14,8 +14,8 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The TabModel for the Links Aalysis Group on the BetterRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(GroupVM viewModel, IRibbonFactory factory) : base(viewModel) {
-            AnalyzeCurrentModel  = factory.NewRibbonButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, "EditLinks");
-            AnalyzeSelectedModel = factory.NewRibbonButtonModel("AnalyzeLinksSelected", AnalyzeSelectedClicked, "EditLinks");
+            AnalyzeCurrentModel  = factory.NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, "EditLinks");
+            AnalyzeSelectedModel = factory.NewButtonModel("AnalyzeLinksSelected", AnalyzeSelectedClicked, "EditLinks");
 
             Invalidate();
         }

@@ -37,8 +37,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal RibbonFactory(IResourceManager manager) : this(null, manager) { ; }
 
         internal RibbonFactory(ResourceLoader loader, IResourceManager manager) {
-            ResourceLoader   = loader;
-            ResourceManager  = manager ?? loader;
+            ResourceLoader  = loader;
+            ResourceManager = manager ?? loader;
 
             _controls      = new Dictionary<string, IRibbonControlVM>();
             _sizeables     = new Dictionary<string, ISizeable>();
@@ -112,23 +112,23 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IRibbonControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
-        public GroupVM NewRibbonGroup(string controlId)
+        public GroupVM NewGroup(string controlId)
         => Add<GroupVM,IRibbonCommonSource>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        public ButtonVM NewRibbonButton(string controlId)
+        public ButtonVM NewButton(string controlId)
         => Add<ButtonVM,IRibbonButtonSource>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        public ToggleButtonVM NewRibbonToggle(string controlId)
+        public ToggleButtonVM NewToggleButton(string controlId)
         => Add<ToggleButtonVM,IRibbonToggleSource>(new ToggleButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
-        public CheckBoxVM NewRibbonCheckBox(string controlId)
+        public CheckBoxVM NewCheckBox(string controlId)
         => Add<CheckBoxVM,IRibbonToggleSource>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
-        public DropDownVM NewRibbonDropDown(string controlId)
+        public DropDownVM NewDropDown(string controlId)
         => Add<DropDownVM,IRibbonDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>

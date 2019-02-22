@@ -14,11 +14,11 @@ namespace PGSolutions.BetterRibbon {
         : base(viewModel) {
             Suffix = suffix;
 
-            DestIsSrc      = factory.NewRibbonToggleModel($"UseSrcFolderToggle{suffix}",
+            DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",
                                 OnUseSrcFolderToggled, false.ToggleImage());
-            ExportSelected = factory.NewRibbonButtonModel($"SelectedProjectButton{suffix}",
+            ExportSelected = factory.NewButtonModel($"SelectedProjectButton{suffix}",
                                 OnExportSelected, "SaveAll");
-            ExportCurrent  = factory.NewRibbonButtonModel($"CurrentProjectButton{suffix}",
+            ExportCurrent  = factory.NewButtonModel($"CurrentProjectButton{suffix}",
                                 OnExportCurrent, "FileSaveAs");
 
             Invalidate();

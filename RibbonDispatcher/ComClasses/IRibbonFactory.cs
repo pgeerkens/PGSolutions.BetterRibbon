@@ -32,23 +32,27 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        GroupVM NewRibbonGroup(string controlId);
+        GroupVM NewGroup(string controlId);
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        ButtonVM NewRibbonButton(string controlId);
+        ButtonVM NewButton(string controlId);
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        ToggleButtonVM NewRibbonToggle(string controlId);
+        ToggleButtonVM NewToggleButton(string controlId);
 
         /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        CheckBoxVM NewRibbonCheckBox(string controlId);
+        CheckBoxVM NewCheckBox(string controlId);
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        DropDownVM NewRibbonDropDown(string controlId);
+        DropDownVM NewDropDown(string controlId);
+
+        /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        EditBoxVM NewEditBox(string controlId);
 
         /// <summary>Returns a new {SelectableItem} from a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

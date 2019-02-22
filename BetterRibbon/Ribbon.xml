@@ -135,17 +135,17 @@
                     <mso:editBox id="CustomVbaEditBox1"
                             getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                             getVisible="getVisible" getEnabled="getEnabled" onChange="onTextChanged" getText="getText"
-                            maxLength="10" sizeString="mnmnmnmnmn"
+                            maxLength="15" sizeString="__m____m____m__"
                     />
                     <mso:editBox id="CustomVbaEditBox2"
                             getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                             getVisible="getVisible" getEnabled="getEnabled" onChange="onTextChanged" getText="getText"
-                            maxLength="10" sizeString="mnmnmnmnmn"
+                            maxLength="15" sizeString="__m____m____m__"
                     />
                     <mso:editBox id="CustomVbaEditBox3"
                             getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip"
                             getVisible="getVisible" getEnabled="getEnabled" onChange="onTextChanged" getText="getText"
-                            maxLength="10" sizeString="mnmnmnmnmn"
+                            maxLength="15" sizeString="__m____m____m__"
                     />
                 </mso:box>
                 <mso:box id="CustomVbaBox5" boxStyle="vertical" visible="true" >

@@ -9,10 +9,10 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
-    //[ComVisible(true)]
-    //[CLSCompliant(false)]
-    //[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    //[Guid(Guids.IRibbonViewModel)]
+    [ComVisible(true)]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid(Guids.IRibbonViewModel)]
     public interface IRibbonViewModel {
         /// <summary>Invalidates the entire Fluent Ribbon.</summary>
         [Description("Invalidates the entire Fluent Ribbon.")]

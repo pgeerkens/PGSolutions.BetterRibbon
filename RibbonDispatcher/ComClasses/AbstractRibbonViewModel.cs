@@ -211,7 +211,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => TextEditables(control?.Id)?.Text ?? "";
 
         public void   OnTextChanged(IRibbonControl control, string text)
-        => TextEditables(control?.Id)?.OnTextChanged(this, new EventArgs<string>(text));
+        => TextEditables(control?.Id)?.OnEdited(this, text);
         #endregion
     }
 }

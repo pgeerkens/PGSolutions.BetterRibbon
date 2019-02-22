@@ -19,29 +19,30 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ITextEditEvents))]
     [ComDefaultInterface(typeof(IEditBoxModel))]
     [Guid(Guids.EditBoxModel)]
-    public class EditBoxMode : RibbonControlModel<IEditBoxSource, EditBoxVM>,
+    public class EditBoxModel : RibbonControlModel<IEditBoxSource, EditBoxVM>,
             IEditBoxModel, IEditBoxSource {
-        public EditBoxMode(Func<string, EditBoxVM> funcViewModel,
+        public EditBoxModel(Func<string, EditBoxVM> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
 
-        public event EventHandler TextChanged;
+        public event EditedEventHandler Edited;
 
         public string Text       { get; } = "";
 
         public IEditBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
-                ViewModel.TextChanged+= OnTextChanged;
+                ViewModel.Edited+= OnEdited;
                 ViewModel.Invalidate();
             }
             return this;
         }
 
-        private void OnTextChanged(object sender, EventArgs e) => TextChanged?.Invoke(sender,e);
+        private void OnEdited(object sender, string text) => Edited?.Invoke(sender,text);
     }
-
+}
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
@@ -50,7 +51,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public interface ITextEditEvents {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
         [Description("Fired when the associated control is clicked by the user.")]
-        void TextChanged(object sender, EventArgs e);
+        void Edited(object sender, string text);
     }
 
     /// <summary></summary>

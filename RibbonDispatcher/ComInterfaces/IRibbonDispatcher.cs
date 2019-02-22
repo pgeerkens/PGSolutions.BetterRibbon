@@ -39,37 +39,43 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        IRibbonButtonModel NewRibbonButtonModel(IRibbonControlStrings strings,
+        IRibbonButtonModel NewButtonModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonButtonModel NewRibbonButtonModelMso(IRibbonControlStrings strings,
+        IRibbonButtonModel NewButtonModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonToggleModel NewRibbonToggleModel(IRibbonControlStrings strings,
+        IRibbonToggleModel NewToggleModel(IRibbonControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonToggleModel NewRibbonToggleModelMso(IRibbonControlStrings strings,
+        IRibbonToggleModel NewToggleModelMso(IRibbonControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonDropDownModel NewRibbonDropDownModel(IRibbonControlStrings strings,
+        IRibbonDropDownModel NewDropDownModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IRibbonGroupModel NewRibbonGroupModel(IRibbonControlStrings strings,
+        IEditBoxModel NewEditBoxModel(IRibbonControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        [Description(".")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IRibbonGroupModel NewGroupModel(IRibbonControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
     }
 }

@@ -79,7 +79,7 @@
     <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\ButtonModel.cs" />
     <Compile Include="ComClasses\DropDownModel.cs" />
-    <Compile Include="ComClasses\RibbonGroupModel.cs" />
+    <Compile Include="ComClasses\GroupModel.cs" />
     <Compile Include="ComClasses\ToggleModel.cs" />
     <Compile Include="ComClasses\SelectableItemModel.cs" />
     <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
