@@ -1,18 +1,20 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
+using System.Reflection;
 using System.Resources;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public abstract class AbstractResourceManager : IResourceManager {
-        protected AbstractResourceManager(string assemblyName) => AssemblyName = assemblyName;
+    public class MyResourceManager: IResourceManager {
+        public MyResourceManager() : this(Assembly.GetCallingAssembly()) { }
 
-        protected string AssemblyName { get; }
+        private MyResourceManager(Assembly assembly)
+        => ResourceManager = new ResourceManager(
+                $"{assembly.GetName().Name}.Properties.Resources", assembly);
 
-        protected abstract Lazy<ResourceManager> ResourceManager { get; }
-        
+        protected ResourceManager ResourceManager { get; }
+
         /// <inheritdoc/>
         public IRibbonControlStrings GetControlStrings(string ControlId) =>
             new RibbonControlStrings(
@@ -25,8 +27,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             );
 
         /// <inheritdoc/>
-        public object GetImage(string Name) => ResourceManager.Value.GetResourceImage(Name);
+        public object GetImage(string Name) => ResourceManager.GetResourceImage(Name);
 
-        protected string GetCurrentUIString(string controlId) => ResourceManager.Value.GetCurrentUIString(controlId);
+        protected string GetCurrentUIString(string controlId) => ResourceManager.GetCurrentUIString(controlId);
     }
 }

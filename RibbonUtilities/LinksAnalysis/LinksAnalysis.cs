@@ -3,10 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
@@ -17,20 +15,21 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
     /// <summary>TODO</summary>
-    [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
-    [SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
-    [Serializable]
     [CLSCompliant(false)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(ILinksAnalysis))]
-    public sealed class LinksAnalysis: AbstractLinksAnalysis {
-        public LinksAnalysis() { }
+        public abstract class AbstractParser: AbstractLinksAnalysis, IParser {
+        protected AbstractParser() { }
 
         public event EventHandler<EventArgs<string>> StatusAvailable;
 
-        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
+        public ILinksAnalysis Parse() => FuncParse();
 
-        internal ILinksAnalysis ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
+        protected abstract  Func<ILinksAnalysis> FuncParse { get; }
+
+        protected ILinksAnalysis ExtendFromWorkbook(Workbook wb) => ExtendFromWorkbook(wb, ExcludedSheetNames);
+
+        protected ILinksAnalysis ExtendFromWorkbook(Workbook wb, IList<string> excludedSheetNames) {
+            if (wb == null) throw new ArgumentNullException(nameof(wb));
+
             foreach(Worksheet ws in wb.Worksheets) {
                 if (excludedSheetNames.FirstOrDefault(s => s.Equals(ws.Name)) == null) {
                     ExtendFromWorksheet(ws);
@@ -41,7 +40,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             return this;
         }
 
-        internal ILinksAnalysis ExtendFromWorksheet(Worksheet ws) {
+        protected ILinksAnalysis ExtendFromWorksheet(Worksheet ws) {
             if (ws == null) return null;
 
             var usedRange = ws.UsedRange;
@@ -62,17 +61,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
             return this;
         }
 
-        internal void ExtendFromNamedRanges(Workbook wb) {
-            foreach(Excel.Name source in wb.Names) {
-                if ( source.RefersTo is string formula  &&  formula.Length > 0  
-                &&  formula[0] == '=') {
-                    var cellRef = wb.NewWorkbookNameRef(source);
-                    ParseFormula(cellRef,formula);
-                }
-            }
-        }
-
-        internal ILinksAnalysis ExtendFromWorkbookList(Range range) {
+        protected ILinksAnalysis ExtendFromWorkbookList(Range range) {
             if (range==null) return null;
 
             StatusAvailable?.Invoke(this, new EventArgs<string>("Loading background processor ..."));
@@ -98,6 +87,16 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
                 }
             }
             return this;
+        }
+
+        private void ExtendFromNamedRanges(Workbook wb) {
+            foreach (Excel.Name source in wb.Names) {
+                if (source.RefersTo is string formula  &&  formula.Length > 0
+                &&  formula[0] == '=') {
+                    var cellRef = wb.NewWorkbookNameRef(source);
+                    ParseFormula(cellRef, formula);
+                }
+            }
         }
 
         /// <inheritdoc/>

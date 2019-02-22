@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
@@ -35,12 +36,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public abstract class AbstractRibbonViewModel : IRibbonViewModel {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
-        protected AbstractRibbonViewModel(string controlId, IResourceManager ResourceManager)
-        : this(controlId, new RibbonFactory(ResourceManager)) { }
-
-        private AbstractRibbonViewModel(string controlId, RibbonFactory ribbonFactory) {
+        protected AbstractRibbonViewModel(string controlId, IResourceManager resourceManager){
             Id             = controlId;
-            _ribbonFactory = ribbonFactory;
+            _ribbonFactory = new RibbonFactory(resourceManager);
             _ribbonFactory.Changed += PropertyChanged;
         }
 
@@ -49,8 +47,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event EventHandler Initialized;
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
-        public string GetCustomUI(string RibbonID) => ParseXml(RibbonXml);
+        /// <param name="RibbonID"></param>
+        /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
+        public string GetCustomUI(string RibbonID) {
+            GroupViewModels = RibbonFactory.ParseXml(RibbonXml);
+
+            return RibbonXml;
+        }
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
         [CLSCompliant(false)]
@@ -63,14 +67,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         protected abstract string RibbonXml { get; }
-
-        /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
-        /// <param name="ribbonXml"></param>
-        private string ParseXml(string ribbonXml) {
-            GroupViewModels = RibbonFactory.ParseXml(ribbonXml);
-
-            return ribbonXml;
-        }
         #endregion
 
         public IReadOnlyList<RibbonGroupViewModel> GroupViewModels { get; private set; }
@@ -83,7 +79,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public IRibbonUI RibbonUI { get; private set; }
 
-        private void PropertyChanged(object sender, IControlChangedEventArgs e) => RibbonUI?.InvalidateControl(e.ControlId);
+        private void PropertyChanged(object sender, IControlChangedEventArgs e)
+        => RibbonUI?.InvalidateControl(e.ControlId);
 
         /// <inheritdoc/>
         public void Invalidate()                              => RibbonUI?.Invalidate();

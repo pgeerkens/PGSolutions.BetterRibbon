@@ -12,38 +12,46 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 
     [CLSCompliant(false)]
-    public sealed class FormulaParser {
-        /// <summary>Returns all the external links found in the supplied formula.</summary>
-        public FormulaParser() : base() {
-            LinksParser = new LinksAnalysis();
-            LinksParser.StatusAvailable += OnStatusAvailable;
-        }
+    /// <summary>Returns all the external links found in the supplied formula.</summary>
+    public sealed class FormulaParser: AbstractParser {
+        /// <summary>Creates a new <see cref="IParser"/> for a single string formula.</summary>
+        public FormulaParser(ISourceCellRef cellRef, string formula)
+        => FuncParse = () => ParseFormula(cellRef, formula);
 
-        private LinksAnalysis LinksParser { get; }
+        protected override Func<ILinksAnalysis> FuncParse { get; }
+    }
 
-        public event EventHandler<EventArgs<string>> StatusAvailable;
+    /// <summary>Returns all the external links found in the supplied <see cref="Worksheet"/>.</summary>
+    [CLSCompliant(false)]
+    public sealed class WorksheetParser: AbstractParser {
+        /// <summary>Creates a new <see cref="IParser"/> for a single <see cref="Worksheet"/>.</summary>
+        public WorksheetParser(Worksheet ws)
+        => FuncParse = () => ExtendFromWorksheet(ws);
 
-        private void OnStatusAvailable(object sender, EventArgs<string> e)
-        => StatusAvailable?.Invoke(sender,e);
+        protected override Func<ILinksAnalysis> FuncParse { get; }
+    }
 
-        /// <summary>Returns all the external links found in the supplied formula.</summary>
-        public ILinksAnalysis ParseFormula(ISourceCellRef cellRef, string formula)
-        => LinksParser.ParseFormula(cellRef, formula);
+    [CLSCompliant(false)]
+    /// <summary>Returns all the external links found in the supplied <see cref="Workbook"/>.</summary>
+    public sealed class WorkbookParser: AbstractParser {
+        /// <summary>Creates a new <see cref="IParser"/> for a single <see cref="Workbook"/>.</summary>
+        /// <param name="wb"></param>
+        public WorkbookParser(Workbook wb)
+        => FuncParse = () => ExtendFromWorkbook(wb);
 
-        /// <summary>Returns all the external links found in the supplied {Excel.Worksheet}.</summary>
-        public ILinksAnalysis ParseWorksheet(Worksheet ws)
-        => LinksParser.ExtendFromWorksheet(ws);
+        public WorkbookParser(Workbook wb, IList<string> excludedSheetNames)
+        => FuncParse = () => ExtendFromWorkbook(wb, excludedSheetNames);
 
-        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
-        public ILinksAnalysis ParseWorkbook(Workbook wb)
-        => LinksParser.ExtendFromWorkbook(wb);
+        protected override Func<ILinksAnalysis> FuncParse { get; }
+    }
 
-        /// <summary>Returns all the external links found in the supplied {Excel.Workbook}.</summary>
-        public ILinksAnalysis ParseWorkbook(Workbook wb, IList<string> excludedSheetNames)
-        => LinksParser.ExtendFromWorkbook(wb, excludedSheetNames);
+    /// <summary>Returns all the external links found in the <see cref="Workbook"/> names found in <see cref="Range"/>.</summary>
+    [CLSCompliant(false)]
+    public sealed class WorkbookListParser: AbstractParser {
+        /// <summary>Creates a new <see cref="IParser"/> for a list of <see cref="Workbook"/>s.</summary>
+        public WorkbookListParser(Range range)
+        => FuncParse = () => ExtendFromWorkbookList(range);
 
-        /// <summary>Returns all the external links found in the supplied list of workbook names.</summary>
-        public ILinksAnalysis ParseWorkbookList(Range range)
-        => LinksParser.ExtendFromWorkbookList(range);
+        protected override Func<ILinksAnalysis> FuncParse { get; }
     }
 }

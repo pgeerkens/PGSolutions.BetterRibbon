@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected IReadOnlyList<IInvalidate> Models    { get; private set; }
 
-        protected List<CustomButtonsGroupModel> CustomButtonsModel
+        private List<CustomButtonsGroupModel> CustomButtonsModel
         => Models.OfType<CustomButtonsGroupModel>().ToList();
 
         public void Invalidate() { foreach (var model in Models) { model?.Invalidate(); } }

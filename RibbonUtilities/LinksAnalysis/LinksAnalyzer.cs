@@ -28,14 +28,14 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
 
         /// <inheritdoc/>
         public ILinksAnalysis NewExternalLinksWB(Workbook wb)
-            => new FormulaParser().ParseWorkbook(wb);
+            => new WorkbookParser(wb).Parse();
 
         /// <inheritdoc/>
         public ILinksAnalysis NewExternalLinksWS(Worksheet ws)
-            => new FormulaParser().ParseWorksheet(ws);
+            => new WorksheetParser(ws).Parse();
 
         /// <inheritdoc/>
         public ILinksAnalysis Parse(ISourceCellRef cellRef, string formula)
-            => new FormulaParser().ParseFormula(cellRef, formula);
+            => new FormulaParser(cellRef, formula).Parse();
     }
 }

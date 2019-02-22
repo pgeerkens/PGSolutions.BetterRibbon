@@ -13,7 +13,7 @@ using Microsoft.Office.Interop.Excel;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
-    using static LinksAnalysis;
+    using static AbstractParser;
 
     /// <summary>Extension methods for Excel objects.</summary>
     [CLSCompliant(false)]

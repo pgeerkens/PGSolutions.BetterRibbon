@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BetterRibbon.Properties {
+namespace PGSolutions.BetterRibbon.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BetterRibbon.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BetterRibbon.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PGSolutions.BetterRibbon.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -117,15 +117,6 @@ namespace BetterRibbon.Properties {
         internal static string AnalyzeLinksSelected_SuperTip {
             get {
                 return ResourceManager.GetString("AnalyzeLinksSelected_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PGSolutions Ribbon.
-        /// </summary>
-        internal static string ApplicationName {
-            get {
-                return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
         

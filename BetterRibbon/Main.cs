@@ -19,10 +19,12 @@ namespace PGSolutions.BetterRibbon {
     [Guid(RibbonDispatcher.Guids.BetterRibbonMain)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class Main : IBetterRibbon {
-        internal Main() { }
+        internal Main(Func<IRibbonDispatcher> funcDispatcher) => FuncDispatcher = funcDispatcher;
+
+        Func<IRibbonDispatcher> FuncDispatcher { get; }
 
          /// <inheritdoc/>
-        public IRibbonDispatcher NewBetterRibbon() => Globals.ThisAddIn.Dispatcher;
+        public IRibbonDispatcher NewBetterRibbon() => FuncDispatcher();
 
         /// <inheritdoc/>
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();

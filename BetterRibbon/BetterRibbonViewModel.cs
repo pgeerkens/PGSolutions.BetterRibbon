@@ -10,7 +10,7 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
 
-using BetterRibbon.Properties;
+using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
@@ -21,20 +21,15 @@ namespace PGSolutions.BetterRibbon {
     /// of the (hidden) ThisAddIn.Designer.xml file. Commit frequently. Excel is very tempermental
     /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
     /// 
-    /// This class MUST be ComVisible for the ribbon to launch properly.
+    /// This class MUST be ComVisible for the ribbon to launch properly; <see cref="IRibbonExtensibility"/>.
     /// </remarks>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [ComVisible(true)]
     [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
-    //[Guid("A8ED8DFB-C422-4F03-93BF-FB5453D8F213")]
     public sealed class BetterRibbonViewModel : AbstractRibbonViewModel, IRibbonExtensibility {
-        const string _assemblyName = "BetterRibbon";
-
-        internal BetterRibbonViewModel(string controlId)
-        : base(controlId, new LocalResourceManager(_assemblyName))
-        { }
+        internal BetterRibbonViewModel(string controlId) : base(controlId, new MyResourceManager()) { }
 
         /// <inheritdoc/>
         protected override string RibbonXml => Resources.Ribbon;

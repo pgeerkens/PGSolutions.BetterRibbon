@@ -24,7 +24,7 @@
     <ProjectGuid>{5056E803-B7EA-49B7-B77C-B270DE3FF822}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>BetterRibbon</RootNamespace>
+    <RootNamespace>PGSolutions.BetterRibbon</RootNamespace>
     <AssemblyName>PGSolutions.BetterRibbon</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
@@ -204,7 +204,6 @@
     <Compile Include="IBetterRibbon.cs" />
     <Compile Include="LinksAnalysisModel.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="LocalResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

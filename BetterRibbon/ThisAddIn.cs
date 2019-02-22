@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
     using Excel    = Microsoft.Office.Interop.Excel;
@@ -36,16 +35,13 @@ namespace PGSolutions.BetterRibbon {
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() =>
-            ComEntry.Value as IBetterRibbon;
-
-        private  Lazy<Main>            ComEntry  = new Lazy<Main>(() => new Main());
+        protected override object RequestComAddInAutomationService() => ComEntry as IBetterRibbon;
 
         internal BetterRibbonViewModel ViewModel { get; private set; }
 
         internal BetterRibbonModel     Model     { get; private set; }
 
-        internal IRibbonDispatcher     Dispatcher => new Dispatcher(Model);
+        private  Main                  ComEntry  => new Main(() => new Dispatcher(Model));
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

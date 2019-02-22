@@ -13,9 +13,12 @@ namespace PGSolutions.BetterRibbon {
         : base(viewModel) {
             Suffix = suffix;
 
-            DestIsSrc      = factory.NewRibbonToggleModel($"UseSrcFolderToggle{suffix}", OnUseSrcFolderToggled, true, true, false.ToggleImage());
-            ExportSelected = factory.NewRibbonButtonModel($"SelectedProjectButton{suffix}", OnExportSelected, true, true, "SaveAll");
-            ExportCurrent  = factory.NewRibbonButtonModel($"CurrentProjectButton{suffix}", OnExportCurrent, true, true, "FileSaveAs");
+            DestIsSrc      = factory.NewRibbonToggleModel($"UseSrcFolderToggle{suffix}",
+                                OnUseSrcFolderToggled, false.ToggleImage());
+            ExportSelected = factory.NewRibbonButtonModel($"SelectedProjectButton{suffix}",
+                                OnExportSelected, "SaveAll");
+            ExportCurrent  = factory.NewRibbonButtonModel($"CurrentProjectButton{suffix}",
+                                OnExportCurrent, "FileSaveAs");
 
             Invalidate();
         }
@@ -24,13 +27,13 @@ namespace PGSolutions.BetterRibbon {
         public event EventHandler ExportSelectedClicked;
         public event EventHandler ExportCurrentClicked;
 
-        public RibbonToggleModel DestIsSrc      { get; }
+        public IRibbonToggleModel DestIsSrc      { get; }
 
-        public RibbonButtonModel ExportSelected { get; }
+        public IRibbonButtonModel ExportSelected { get; }
 
-        public RibbonButtonModel ExportCurrent  { get; }
+        public IRibbonButtonModel ExportCurrent  { get; }
 
-        public string            Suffix         { get; }
+        public string             Suffix         { get; }
 
         private void OnUseSrcFolderToggled(object sender, bool isPressed)
         => UseSrcFolderToggled?.Invoke(sender, new EventArgs<bool>(isPressed));

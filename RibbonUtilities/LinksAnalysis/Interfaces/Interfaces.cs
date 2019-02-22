@@ -7,6 +7,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
+    [CLSCompliant(false)]
+    public interface IParser {
+        ILinksAnalysis Parse();
+
+        event EventHandler<EventArgs<string>> StatusAvailable;
+    }
+
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
