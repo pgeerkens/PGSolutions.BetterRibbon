@@ -1,31 +1,19 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-      Justification = "Public, Non-Creatable, class with exported Events.")]
-    [Serializable]
-    [CLSCompliant(true)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
-    [ComDefaultInterface(typeof(IRibbonDropDown))]
-    [Guid(Guids.RibbonDropDown)]
-    public class RibbonDropDown : RibbonCommon<IRibbonDropDownSource>, IRibbonDropDown,
-            IActivatable<IRibbonDropDownSource,RibbonDropDown>, ISelectable {
-        internal RibbonDropDown(string itemId)
+    public class DropDownVM : AbstractControlVM<IRibbonDropDownSource>, IRibbonDropDown,
+            IActivatable<IRibbonDropDownSource,DropDownVM>, ISelectable {
+        internal DropDownVM(string itemId)
         : base(itemId) { }
 
         #region IActivatable implementation
-        public new RibbonDropDown Attach(IRibbonDropDownSource source) => Attach<RibbonDropDown>(source);
+        public new DropDownVM Attach(IRibbonDropDownSource source) => Attach<DropDownVM>(source);
 
         public override void Detach() {
             SelectionMade = null;

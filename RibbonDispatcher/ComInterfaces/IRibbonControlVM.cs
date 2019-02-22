@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The base interface for Ribbnon controls.</summary>
     [CLSCompliant(true)]
-    public interface IRibbonCommon {
+    public interface IRibbonControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
         string Id           { get; }

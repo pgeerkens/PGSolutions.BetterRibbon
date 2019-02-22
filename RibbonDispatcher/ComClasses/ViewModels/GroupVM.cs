@@ -6,12 +6,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public class RibbonGroupViewModel : RibbonCommon<IRibbonCommonSource>, IRibbonGroup,
-            IActivatable<IRibbonCommonSource,RibbonGroupViewModel> {
-        public RibbonGroupViewModel(IRibbonFactory factory, string itemId)
+namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
+    public class GroupVM : AbstractControlVM<IRibbonCommonSource>, IRibbonGroup,
+            IActivatable<IRibbonCommonSource,GroupVM> {
+        public GroupVM(IRibbonFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;
             Controls = new KeyedControls();
@@ -20,8 +21,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        RibbonGroupViewModel IActivatable<IRibbonCommonSource,RibbonGroupViewModel>.Attach(IRibbonCommonSource source)
-        => Attach<RibbonGroupViewModel>(source);
+        GroupVM IActivatable<IRibbonCommonSource,GroupVM>.Attach(IRibbonCommonSource source)
+        => Attach<GroupVM>(source);
 
         public override void Detach() {
             Invalidate(ctrl => {
@@ -47,11 +48,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             base.Invalidate();
         }
 
-        public TControl GetControl<TControl>(string controlId) where TControl : class,IRibbonCommon
+        public TControl GetControl<TControl>(string controlId) where TControl : class,IRibbonControlVM
         => Controls.FirstOrDefault(ctl => ctl.Id == controlId) as TControl;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public RibbonGroupViewModel Add<TSource>(IActivatable control)
+        public GroupVM Add<TSource>(IActivatable control)
         where TSource:IRibbonCommonSource {
             if (control == null) return null;
             Controls.Add(control);

@@ -6,12 +6,12 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    /// <summary>The total interface (required to be) exposed externally by RibbonButton objects.</summary>
+    /// <summary>The total interface (required to be) exposed externally by ButtonVM objects.</summary>
     [CLSCompliant(false)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonButton)]
-    public interface IRibbonButton : IRibbonCommon, IRibbonImageable {
+    public interface IRibbonButton : IRibbonControlVM, IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
         new string Id           { get; }

@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -17,9 +18,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonGroupModel))]
     [Guid(Guids.RibbonGroupModel)]
-    public class RibbonGroupModel : RibbonControlModel<IRibbonCommonSource,RibbonGroupViewModel>,
+    public class RibbonGroupModel : RibbonControlModel<IRibbonCommonSource,GroupVM>,
             IRibbonGroupModel, IRibbonCommonSource {
-        public RibbonGroupModel(Func<string,RibbonGroupViewModel> funcViewModel,
+        public RibbonGroupModel(Func<string,GroupVM> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

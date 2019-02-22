@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
@@ -14,7 +15,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
-    public class SelectableItem : RibbonCommon<ISelectableItemSource>, ISelectableItem,
+    public class SelectableItem : AbstractControlVM<ISelectableItemSource>, ISelectableItem,
             IActivatable<ISelectableItemSource,SelectableItem>, IClickable, IImageable {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId) : base(ItemId) { }

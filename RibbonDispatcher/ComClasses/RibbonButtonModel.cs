@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -19,9 +20,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButtonModel))]
     [Guid(Guids.RibbonButtonModel)]
-    public class RibbonButtonModel : RibbonControlModel<IRibbonButtonSource,RibbonButton>,
+    public class RibbonButtonModel : RibbonControlModel<IRibbonButtonSource,ButtonVM>,
             IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
-        public RibbonButtonModel(Func<string, RibbonButton> funcViewModel,
+        public RibbonButtonModel(Func<string, ButtonVM> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;

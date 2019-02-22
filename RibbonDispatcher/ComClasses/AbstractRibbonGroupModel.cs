@@ -4,14 +4,15 @@
 using System;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IRibbonControlStrings;
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IRibbonCommonSource, IInvalidate {
-        protected AbstractRibbonGroupModel(RibbonGroupViewModel viewModel) {
-            ViewModel = (viewModel as IActivatable<IRibbonCommonSource,RibbonGroupViewModel>)
+        protected AbstractRibbonGroupModel(GroupVM viewModel) {
+            ViewModel = (viewModel as IActivatable<IRibbonCommonSource,GroupVM>)
                       ?.Attach(this);
             Strings   = ViewModel?.Factory.GetStrings(ViewModel.Id);
         }
@@ -21,7 +22,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool     ShowInactive { get; private set; } = true;
         public IStrings Strings      { get; private set; }
 
-        protected RibbonGroupViewModel ViewModel { get; }
+        protected GroupVM ViewModel { get; }
 
         public void Invalidate() => Invalidate(null);
 

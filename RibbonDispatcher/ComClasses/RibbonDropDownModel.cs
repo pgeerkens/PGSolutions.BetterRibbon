@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -20,9 +21,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
-    public sealed class RibbonDropDownModel : RibbonControlModel<IRibbonDropDownSource,RibbonDropDown>,
+    public sealed class RibbonDropDownModel : RibbonControlModel<IRibbonDropDownSource,DropDownVM>,
             IRibbonDropDownModel, IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
-        public RibbonDropDownModel(Func<string, RibbonDropDown> funcViewModel,
+        public RibbonDropDownModel(Func<string, DropDownVM> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

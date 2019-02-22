@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonToggleButton)]
-    public interface IRibbonToggle : IRibbonCommon, IRibbonImageable {
+    public interface IRibbonToggle : IRibbonControlVM, IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         new string Id        { get; }
 

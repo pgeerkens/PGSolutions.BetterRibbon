@@ -71,9 +71,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComClasses\RibbonFactoryExtensions.cs" />
+    <Compile Include="ComClasses\ViewModels\EditBoxVM.cs" />
     <Compile Include="ComInterfaces\IImageObject.cs" />
     <Compile Include="ComClasses\RibbonControlModel.cs" />
-    <Compile Include="ComClasses\RibbonGroupViewModel.cs" />
+    <Compile Include="ComClasses\ViewModels\GroupVM.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
     <Compile Include="ComClasses\RibbonButtonModel.cs" />
     <Compile Include="ComClasses\RibbonDropDownModel.cs" />
@@ -92,13 +93,13 @@
     <Compile Include="ComClasses\ControlChangedEventArgs.cs" />
     <Compile Include="ComClasses\ProgIds.cs" />
     <Compile Include="ComClasses\ResourceLoader.cs" />
-    <Compile Include="ComClasses\RibbonButton.cs" />
-    <Compile Include="ComClasses\RibbonCheckBox.cs" />
-    <Compile Include="ComClasses\RibbonCommon.cs" />
-    <Compile Include="ComClasses\RibbonDropdown.cs" />
+    <Compile Include="ComClasses\ViewModels\ButtonVM.cs" />
+    <Compile Include="ComClasses\ViewModels\CheckBoxVM.cs" />
+    <Compile Include="ComClasses\ViewModels\AbstractRibbonControlVM.cs" />
+    <Compile Include="ComClasses\ViewModels\DropDownVM.cs" />
     <Compile Include="ComClasses\RibbonFactory.cs" />
     <Compile Include="ComClasses\RibbonControlStrings.cs" />
-    <Compile Include="ComClasses\RibbonToggleButton.cs" />
+    <Compile Include="ComClasses\ViewModels\ToggleButtonVM.cs" />
     <Compile Include="ComClasses\RibbonViewModel.cs" />
     <Compile Include="ComClasses\SelectableItem.cs" />
     <Compile Include="Guids.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IRibbonButton.cs" />
-    <Compile Include="ComInterfaces\IRibbonCommon.cs" />
+    <Compile Include="ComInterfaces\IRibbonControlVM.cs" />
     <Compile Include="ComInterfaces\IRibbonDropDown.cs" />
     <Compile Include="ComClasses\IRibbonFactory.cs" />
     <Compile Include="ComInterfaces\IRibbonGroup.cs" />

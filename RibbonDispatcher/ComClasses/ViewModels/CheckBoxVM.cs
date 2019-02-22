@@ -1,31 +1,16 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary>The ViewModel for Ribbon CheckBox objects.</summary>
-    [Description("The ViewModel for Ribbon CheckBox objects.")]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-        Justification = "Public, Non-Creatable, class with exported Events.")]
-    [Serializable]
-    [CLSCompliant(false)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IToggledEvents))]
-    [ComDefaultInterface(typeof(IRibbonToggle))]
-    [Guid(Guids.RibbonCheckBox)]
-    public class RibbonCheckBox : RibbonCommon<IRibbonToggleSource>, IRibbonToggle,
-        IActivatable<IRibbonToggleSource,RibbonCheckBox>, IToggleable {
-        internal RibbonCheckBox(string itemId) : base(itemId) { }
+namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
+    /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
+    public class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IRibbonToggle,
+        IActivatable<IRibbonToggleSource,CheckBoxVM>, IToggleable {
+        internal CheckBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new RibbonCheckBox Attach(IRibbonToggleSource source) => Attach<RibbonCheckBox>(source);
+        public new CheckBoxVM Attach(IRibbonToggleSource source) => Attach<CheckBoxVM>(source);
 
         public override void Detach() {
             Toggled = null;

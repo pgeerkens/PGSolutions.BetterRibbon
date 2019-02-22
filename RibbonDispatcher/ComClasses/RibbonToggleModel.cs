@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -19,9 +20,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
     [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : RibbonControlModel<IRibbonToggleSource,RibbonCheckBox>,
+    public sealed class RibbonToggleModel : RibbonControlModel<IRibbonToggleSource,CheckBoxVM>,
             IRibbonToggleModel, ISizeable, IImageable, IRibbonToggleSource {
-        public RibbonToggleModel(Func<string, RibbonCheckBox> funcViewModel,
+        public RibbonToggleModel(Func<string, CheckBoxVM> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;

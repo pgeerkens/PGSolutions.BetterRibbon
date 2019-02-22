@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     public abstract class RibbonControlModel<TSource,TCtrl>: IRibbonCommonSource
             where TSource: IRibbonCommonSource
-            where TCtrl: class, IRibbonCommon {
+            where TCtrl: class, IRibbonControlVM {
         protected RibbonControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId)?.Attach(source);

@@ -4,11 +4,12 @@
 using System;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     [CLSCompliant(false)]
     public sealed class CustomButtonsGroupModel : AbstractRibbonGroupModel, IRibbonCommonSource {
-        public CustomButtonsGroupModel(RibbonGroupViewModel viewModel) : base(viewModel) { }
+        public CustomButtonsGroupModel(GroupVM viewModel) : base(viewModel) { }
     }
 }

@@ -4,9 +4,11 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IRibbonControlStrings;
@@ -14,30 +16,38 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public static partial class RibbonFactoryExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
-        public static IReadOnlyList<RibbonGroupViewModel> ParseXml(this IRibbonFactory factory, string ribbonXml) {
+        public static IReadOnlyList<GroupVM> ParseXml(this IRibbonFactory factory, string ribbonXml) {
             if (factory == null) throw new ArgumentNullException(nameof(factory));
+            var groupModels = new List<GroupVM>();
+            var doc = XDocument.Parse(ribbonXml);
+            var root = doc.Root;
+            XNamespace mso = ( from a in doc.Descendants().Attributes() 
+                               where a.IsNamespaceDeclaration && a.Name.LocalName == "mso" 
+                               select a
+                             ).FirstOrDefault()?.Value;
+            foreach (var group in root.Descendants(mso+"group")) {
+                if (group.Attribute(mso+"idMso") != null  ||  group.Attribute(mso+"idQ") != null) continue;
 
-            var groupModels = new List<RibbonGroupViewModel>();
-            XNamespace mso2009 = "http://schemas.microsoft.com/office/2009/07/customui";
-            foreach (var group in XDocument.Parse(ribbonXml).Root.Descendants(mso2009+"group")) {
                 var viewModel = factory?.NewRibbonGroup(group.Attribute("id").Value);
                 groupModels?.Add(viewModel);
 
                 foreach (var element in group.Descendants()) {
+                    if (element.Attribute(mso+"idMso") != null  ||  element.Attribute(mso+"idQ") != null) continue;
+
                     switch (element.Name) {
-                        case XName name when name == mso2009+"toggleButton":
+                        case XName name when name == mso+"toggleButton":
                             viewModel.Add<IRibbonToggleSource>(factory.NewRibbonToggle(element.Attribute("id").Value));
                             break;
 
-                        case XName name when name == mso2009+"checkBox":
+                        case XName name when name == mso+"checkBox":
                             viewModel.Add<IRibbonToggleSource>(factory.NewRibbonCheckBox(element.Attribute("id").Value));
                             break;
 
-                        case XName name when name == mso2009+"dropDown":
+                        case XName name when name == mso+"dropDown":
                             viewModel.Add<IRibbonDropDownSource>(factory.NewRibbonDropDown(element.Attribute("id").Value));
                             break;
 
-                        case XName name when name == mso2009+"button":
+                        case XName name when name == mso+"button":
                             viewModel.Add<IRibbonButtonSource>(factory.NewRibbonButton(element.Attribute("id").Value));
                             break;
 
@@ -87,7 +97,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes and returns a new <see cref="RibbonButtonModel"/>.</summary>
         internal static RibbonButtonModel NewRibbonButtonModel(this IRibbonFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonButtonModel(factory.GetControl<RibbonButton>, strings, image, isEnabled, isVisible);
+            var model = new RibbonButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();
@@ -97,7 +107,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes and returns a new <see cref="RibbonToggleModel"/>.</summary>
         internal static RibbonToggleModel NewRibbonToggleModel(this IRibbonFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonToggleModel(factory.GetControl<RibbonCheckBox>, strings, image, isEnabled, isVisible);
+            var model = new RibbonToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();
@@ -107,7 +117,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         internal static RibbonDropDownModel NewRibbonDropDownModel(this IRibbonFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonDropDownModel(factory.GetControl<RibbonDropDown>, strings, isEnabled, isVisible);
+            var model = new RibbonDropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();
@@ -117,6 +127,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes and returns a new <see cref="RibbonGroupModel"/>.</summary>
         internal static RibbonGroupModel NewRibbonGroupModel(this IRibbonFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => new RibbonGroupModel(factory.GetControl<RibbonGroupViewModel>, strings, isEnabled, isVisible);
+        => new RibbonGroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
     }
 }

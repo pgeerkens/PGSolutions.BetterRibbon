@@ -5,13 +5,13 @@ using System;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
-    public abstract class RibbonCommon<TSource>: IRibbonCommon, IActivatable<TSource,IRibbonCommon>
+    public abstract class AbstractControlVM<TSource>: IRibbonControlVM, IActivatable<TSource,IRibbonControlVM>
         where TSource: IRibbonCommonSource {
         /// <summary>TODO</summary>
-        protected RibbonCommon(string itemId) => Id = itemId;
+        protected AbstractControlVM(string itemId) => Id = itemId;
 
         #region Common Control implementation
         /// <summary>TODO</summary>
@@ -48,13 +48,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected bool IsAttached => Source != null;
 
         /// <inheritdoc/>
-        protected virtual T Attach<T>(TSource source) where T: RibbonCommon<TSource> {
+        protected virtual T Attach<T>(TSource source) where T: AbstractControlVM<TSource> {
             Source = source;
             Invalidate();
             return this as T;
         }
 
-        public IRibbonCommon Attach(TSource source) => Attach<RibbonCommon<TSource>>(source);
+        public IRibbonControlVM Attach(TSource source) => Attach<AbstractControlVM<TSource>>(source);
 
         /// <inheritdoc/>
         public virtual void Detach() {

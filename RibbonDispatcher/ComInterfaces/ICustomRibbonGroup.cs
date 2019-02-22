@@ -54,7 +54,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>.</summary>
         [Description(".")]
-        IRibbonCommon Attach();
+        IRibbonControlVM Attach();
 
         /// <summary>.</summary>
         [Description(".")]

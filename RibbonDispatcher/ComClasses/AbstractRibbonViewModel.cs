@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
@@ -69,7 +70,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected abstract string RibbonXml { get; }
         #endregion
 
-        public IReadOnlyList<RibbonGroupViewModel> GroupViewModels { get; private set; }
+        public IReadOnlyList<GroupVM> GroupViewModels { get; private set; }
 
         /// <inheritdoc/>
         public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
@@ -99,7 +100,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
-        private IRibbonCommon Controls (string controlId) => _ribbonFactory.Controls.GetOrDefault(controlId);
+        private IRibbonControlVM Controls (string controlId) => _ribbonFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public string GetDescription(IRibbonControl Control)
             => Controls(Control?.Id)?.Description ?? Control.Unknown("Description");

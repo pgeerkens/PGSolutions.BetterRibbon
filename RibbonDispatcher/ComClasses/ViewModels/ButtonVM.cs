@@ -2,30 +2,17 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary>The ViewModel for RibbonButton objects.</summary>
-    [Description("The ViewModel for Ribbon Button objects.")]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-            Justification = "Public, Non-Creatable, class with exported Events.")]
-    [Serializable]
-    [CLSCompliant(true)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvents))]
-    [ComDefaultInterface(typeof(IRibbonButton))]
-    [Guid(Guids.RibbonButton)]
-    public class RibbonButton : RibbonCommon<IRibbonButtonSource>, IRibbonButton,
-            IActivatable<IRibbonButtonSource,RibbonButton>, ISizeable, IClickable, IImageable {
-        internal RibbonButton(string itemId) : base(itemId) { }
+namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
+    /// <summary>The ViewModel for ButtonVM objects.</summary>
+    public class ButtonVM : AbstractControlVM<IRibbonButtonSource>, IRibbonButton,
+            IActivatable<IRibbonButtonSource,ButtonVM>, ISizeable, IClickable, IImageable {
+        internal ButtonVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new RibbonButton Attach(IRibbonButtonSource source) => Attach<RibbonButton>(source);
+        public new ButtonVM Attach(IRibbonButtonSource source) => Attach<ButtonVM>(source);
 
         public override void Detach() {
             Clicked = null;
@@ -38,10 +25,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public event EventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked() => Clicked?.Invoke(this,EventArgs.Empty);
-
-        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(this, EventArgs.Empty);
+        public virtual void OnClicked(object sender, EventArgs e)
+        => Clicked?.Invoke(this, EventArgs.Empty);
         #endregion
 
         #region ISizeable implementation

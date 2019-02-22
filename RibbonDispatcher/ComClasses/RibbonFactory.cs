@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
 
@@ -39,7 +40,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ResourceLoader   = loader;
             ResourceManager  = manager ?? loader;
 
-            _controls    = new Dictionary<string, IRibbonCommon>();
+            _controls    = new Dictionary<string, IRibbonControlVM>();
             _sizeables   = new Dictionary<string, ISizeable>();
             _clickables  = new Dictionary<string, IClickable>();
             _toggleables = new Dictionary<string, IToggleable>();
@@ -51,7 +52,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
-        private  readonly IDictionary<string, IRibbonCommon> _controls;
+        private  readonly IDictionary<string, IRibbonControlVM> _controls;
         private  readonly IDictionary<string, ISizeable>     _sizeables;
         private  readonly IDictionary<string, IClickable>    _clickables;
         private  readonly IDictionary<string, ISelectable>   _selectables;
@@ -61,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IRibbonCommon> Controls    => new ReadOnlyDictionary<string, IRibbonCommon>(_controls);
+        internal IReadOnlyDictionary<string, IRibbonControlVM> Controls    => new ReadOnlyDictionary<string, IRibbonControlVM>(_controls);
  
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, ISizeable>     Sizeables   => new ReadOnlyDictionary<string, ISizeable>(_sizeables);
@@ -79,7 +80,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
 
         /// <inheritdoc/>
-        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
         => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
 
         /// <inheritdoc/>
@@ -89,7 +90,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public T Add<T,TSource>(T ctrl) where T:RibbonCommon<TSource> where TSource:class,IRibbonCommonSource {
+        public T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IRibbonCommonSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
             _clickables .AddNotNull(ctrl.Id, ctrl as IClickable);
@@ -106,28 +107,28 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonGroupViewModel NewRibbonGroup(string controlId)
-        => Add<RibbonGroupViewModel,IRibbonCommonSource>(new RibbonGroupViewModel(this, controlId));
+        public GroupVM NewRibbonGroup(string controlId)
+        => Add<GroupVM,IRibbonCommonSource>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonButton NewRibbonButton(string controlId)
-        => Add<RibbonButton,IRibbonButtonSource>(new RibbonButton(controlId));
+        public ButtonVM NewRibbonButton(string controlId)
+        => Add<ButtonVM,IRibbonButtonSource>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonToggleButton NewRibbonToggle(string controlId)
-        => Add<RibbonToggleButton,IRibbonToggleSource>(new RibbonToggleButton(controlId));
+        public ToggleButtonVM NewRibbonToggle(string controlId)
+        => Add<ToggleButtonVM,IRibbonToggleSource>(new ToggleButtonVM(controlId));
 
-        /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
+        /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonCheckBox NewRibbonCheckBox(string controlId)
-        => Add<RibbonCheckBox,IRibbonToggleSource>(new RibbonCheckBox(controlId));
+        public CheckBoxVM NewRibbonCheckBox(string controlId)
+        => Add<CheckBoxVM,IRibbonToggleSource>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        public RibbonDropDown NewRibbonDropDown(string controlId)
-        => Add<RibbonDropDown,IRibbonDropDownSource>(new RibbonDropDown(controlId));
+        public DropDownVM NewRibbonDropDown(string controlId)
+        => Add<DropDownVM,IRibbonDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

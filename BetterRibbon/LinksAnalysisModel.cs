@@ -5,6 +5,7 @@ using System;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
@@ -12,7 +13,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 namespace PGSolutions.BetterRibbon {
     /// <summary>The TabModel for the Links Aalysis Group on the BetterRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
-        public LinksAnalysisModel(RibbonGroupViewModel viewModel, IRibbonFactory factory) : base(viewModel) {
+        public LinksAnalysisModel(GroupVM viewModel, IRibbonFactory factory) : base(viewModel) {
             AnalyzeCurrentModel  = factory.NewRibbonButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, "EditLinks");
             AnalyzeSelectedModel = factory.NewRibbonButtonModel("AnalyzeLinksSelected", AnalyzeSelectedClicked, "EditLinks");
 

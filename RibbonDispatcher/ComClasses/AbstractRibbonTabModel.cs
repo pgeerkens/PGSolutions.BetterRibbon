@@ -26,9 +26,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void Invalidate() { foreach (var model in Models) { model?.Invalidate(); } }
 
         /// <inheritdoc/>
-        internal void DetachProxy(string controlId) => GetControl<IRibbonCommon>(controlId)?.Detach();
+        internal void DetachProxy(string controlId) => GetControl<IRibbonControlVM>(controlId)?.Detach();
 
-        private TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon
+        private TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
         => ViewModel.RibbonFactory.GetControl<TControl>(controlId);
 
         public void DetachCustomControls()

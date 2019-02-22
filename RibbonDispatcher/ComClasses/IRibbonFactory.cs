@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The factory interface for the Ribbon Dispatcher.</summary>
@@ -24,30 +25,30 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         IRibbonControlStrings GetStrings(string controlId);
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        T Add<T, TSource>(T ctrl) where T : RibbonCommon<TSource> where TSource : class, IRibbonCommonSource;
+        T Add<T, TSource>(T ctrl) where T : AbstractControlVM<TSource> where TSource : class, IRibbonCommonSource;
 
         /// <summary>TODO</summary>
-        TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonCommon;
+        TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM;
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonGroupViewModel NewRibbonGroup(string controlId);
+        GroupVM NewRibbonGroup(string controlId);
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonButton NewRibbonButton(string controlId);
+        ButtonVM NewRibbonButton(string controlId);
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance that uses a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonToggleButton NewRibbonToggle(string controlId);
+        ToggleButtonVM NewRibbonToggle(string controlId);
 
-        /// <summary>Returns a new Ribbon CheckBox ViewModel instance.</summary>
+        /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonCheckBox NewRibbonCheckBox(string controlId);
+        CheckBoxVM NewRibbonCheckBox(string controlId);
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        RibbonDropDown NewRibbonDropDown(string controlId);
+        DropDownVM NewRibbonDropDown(string controlId);
 
         /// <summary>Returns a new {SelectableItem} from a custom Image (or none).</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

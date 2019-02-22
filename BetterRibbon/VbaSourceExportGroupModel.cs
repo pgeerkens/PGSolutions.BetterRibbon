@@ -4,12 +4,13 @@
 using System;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(RibbonGroupViewModel viewModel, IRibbonFactory factory, string suffix)
+        public VbaSourceExportGroupModel(GroupVM viewModel, IRibbonFactory factory, string suffix)
         : base(viewModel) {
             Suffix = suffix;
 
