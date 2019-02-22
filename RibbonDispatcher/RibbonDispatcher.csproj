@@ -67,19 +67,20 @@
     <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
     <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\Dispatcher.cs" />
+    <Compile Include="ComClasses\EditBoxModel.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComClasses\RibbonFactoryExtensions.cs" />
     <Compile Include="ComClasses\ViewModels\EditBoxVM.cs" />
     <Compile Include="ComInterfaces\IImageObject.cs" />
-    <Compile Include="ComClasses\RibbonControlModel.cs" />
+    <Compile Include="ComClasses\ControlModel.cs" />
     <Compile Include="ComClasses\ViewModels\GroupVM.cs" />
     <Compile Include="ComClasses\Extensions.cs" />
-    <Compile Include="ComClasses\RibbonButtonModel.cs" />
-    <Compile Include="ComClasses\RibbonDropDownModel.cs" />
+    <Compile Include="ComClasses\ButtonModel.cs" />
+    <Compile Include="ComClasses\DropDownModel.cs" />
     <Compile Include="ComClasses\RibbonGroupModel.cs" />
-    <Compile Include="ComClasses\RibbonToggleModel.cs" />
+    <Compile Include="ComClasses\ToggleModel.cs" />
     <Compile Include="ComClasses\SelectableItemModel.cs" />
     <Compile Include="ComInterfaces\ICustomRibbonGroup.cs" />
     <Compile Include="ComInterfaces\ImageObject.cs" />

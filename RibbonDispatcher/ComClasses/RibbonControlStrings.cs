@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses
     [CLSCompliant(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IRibbonControlStrings))]
-    [Guid(Guids.RibbonTextLanguageControl)]
+    [Guid(Guids.RibbonControlStrings)]
     public class RibbonControlStrings : IRibbonControlStrings {
         public static RibbonControlStrings Empty { get; } = new RibbonControlStrings();
         private RibbonControlStrings() : this(null) { }

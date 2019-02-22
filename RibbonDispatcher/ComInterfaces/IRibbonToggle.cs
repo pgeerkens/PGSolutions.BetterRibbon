@@ -1,16 +1,10 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonToggleButton)]
     public interface IRibbonToggle : IRibbonControlVM, IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         new string Id        { get; }

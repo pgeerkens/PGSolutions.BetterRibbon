@@ -10,7 +10,7 @@ Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
 Public Function AlternateToggle(ByVal Dispatcher As IRibbonDispatcher, Mode As Boolean, _
-        Model As RibbonToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
+        Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
     On Error GoTo EH
     AlternateToggle = Not Mode
@@ -31,7 +31,7 @@ Public Sub SetImageAndLabel(ByVal SelectedIndex As Integer, ParamArray Arr() As 
     On Error GoTo EH
     Dim v As Variant
     For Each v In Arr
-        Dim button As RibbonButtonModel: Set button = v
+        Dim button As ButtonModel: Set button = v
         If Not button Is Nothing Then
             button.ShowImage = ShowImage(SelectedIndex)
             button.ShowLabel = ShowLabel(SelectedIndex)

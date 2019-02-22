@@ -18,7 +18,7 @@ Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 Private CustomGroup         As PGSolutions_RibbonDispatcher.RibbonGroupModel
 
-Private WithEvents Button1  As PGSolutions_RibbonDispatcher.RibbonButtonModel
+Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal sender As Variant, ByVal e As EventArgs)

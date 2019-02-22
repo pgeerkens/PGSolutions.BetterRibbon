@@ -202,5 +202,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
             => Selectables(Control?.Id)?.OnActionDropDown(SelectedId, SelectedIndex);
         #endregion
+
+        #region ITextEditable implementation
+        /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
+        private ITextEditable TextEditables(string controlId) => _ribbonFactory.TextEditables.GetOrDefault(controlId);
+
+        public string GetText(IRibbonControl control)
+        => TextEditables(control?.Id)?.Text ?? "";
+
+        public void   OnTextChanged(IRibbonControl control, string text)
+        => TextEditables(control?.Id)?.OnTextChanged(this, new EventArgs<string>(text));
+        #endregion
     }
 }

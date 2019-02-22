@@ -40,12 +40,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ResourceLoader   = loader;
             ResourceManager  = manager ?? loader;
 
-            _controls    = new Dictionary<string, IRibbonControlVM>();
-            _sizeables   = new Dictionary<string, ISizeable>();
-            _clickables  = new Dictionary<string, IClickable>();
-            _toggleables = new Dictionary<string, IToggleable>();
-            _selectables = new Dictionary<string, ISelectable>();
-            _imageables  = new Dictionary<string, IImageable>();
+            _controls      = new Dictionary<string, IRibbonControlVM>();
+            _sizeables     = new Dictionary<string, ISizeable>();
+            _clickables    = new Dictionary<string, IClickable>();
+            _selectables   = new Dictionary<string, ISelectable>();
+            _imageables    = new Dictionary<string, IImageable>();
+            _toggleables   = new Dictionary<string, IToggleable>();
+            _textEditables = new Dictionary<string, ITextEditable>();
         }
 
         internal IResourceLoader  ResourceLoader  { get; }
@@ -58,6 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private  readonly IDictionary<string, ISelectable>   _selectables;
         private  readonly IDictionary<string, IImageable>    _imageables;
         private  readonly IDictionary<string, IToggleable>   _toggleables;
+        private  readonly IDictionary<string, ITextEditable> _textEditables;
 
         internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
@@ -79,6 +81,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
 
+        /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
+        internal IReadOnlyDictionary<string, ITextEditable> TextEditables => new ReadOnlyDictionary<string, ITextEditable>(_textEditables);
+
         /// <inheritdoc/>
         public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
         => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
@@ -93,11 +98,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IRibbonCommonSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
-            _clickables .AddNotNull(ctrl.Id, ctrl as IClickable);
-            _sizeables  .AddNotNull(ctrl.Id, ctrl as ISizeable);
-            _selectables.AddNotNull(ctrl.Id, ctrl as ISelectable);
-            _imageables. AddNotNull(ctrl.Id, ctrl as IImageable);
-            _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleable);
+            _clickables   .AddNotNull(ctrl.Id, ctrl as IClickable);
+            _sizeables    .AddNotNull(ctrl.Id, ctrl as ISizeable);
+            _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectable);
+            _imageables   .AddNotNull(ctrl.Id, ctrl as IImageable);
+            _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleable);
+            _textEditables.AddNotNull(ctrl.Id, ctrl as ITextEditable);
 
             ctrl.Changed += OnChanged;
             return ctrl;
@@ -106,34 +112,32 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IRibbonControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public GroupVM NewRibbonGroup(string controlId)
         => Add<GroupVM,IRibbonCommonSource>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public ButtonVM NewRibbonButton(string controlId)
         => Add<ButtonVM,IRibbonButtonSource>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public ToggleButtonVM NewRibbonToggle(string controlId)
         => Add<ToggleButtonVM,IRibbonToggleSource>(new ToggleButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public CheckBoxVM NewRibbonCheckBox(string controlId)
         => Add<CheckBoxVM,IRibbonToggleSource>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         public DropDownVM NewRibbonDropDown(string controlId)
         => Add<DropDownVM,IRibbonDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public SelectableItem NewSelectableItem(string controlId)
         => new SelectableItem(controlId);
+
+        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
+        public EditBoxVM NewEditBox(string controlId)
+        => Add<EditBoxVM, IEditBoxSource>(new EditBoxVM(controlId));
 
         /// <inheritdoc/>
         public IResourceLoader NewResourceLoader() => ResourceLoader;

@@ -21,9 +21,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvents))]
     [ComDefaultInterface(typeof(IRibbonDropDownModel))]
     [Guid(Guids.RibbonDropDownModel)]
-    public sealed class RibbonDropDownModel : RibbonControlModel<IRibbonDropDownSource,DropDownVM>,
+    public sealed class DropDownModel : RibbonControlModel<IRibbonDropDownSource,DropDownVM>,
             IRibbonDropDownModel, IRibbonDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
-        public RibbonDropDownModel(Func<string, DropDownVM> funcViewModel,
+        public DropDownModel(Func<string, DropDownVM> funcViewModel,
                 IRibbonControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

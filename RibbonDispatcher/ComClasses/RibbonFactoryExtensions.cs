@@ -62,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static RibbonButtonModel NewRibbonButtonModel(this IRibbonFactory factory, string id,
+        public static ButtonModel NewRibbonButtonModel(this IRibbonFactory factory, string id,
                 EventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewRibbonButtonModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
@@ -73,7 +73,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static RibbonToggleModel NewRibbonToggleModel(this IRibbonFactory factory, string id,
+        public static ToggleModel NewRibbonToggleModel(this IRibbonFactory factory, string id,
                 ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewRibbonToggleModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
@@ -84,7 +84,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static RibbonDropDownModel NewRibbonDropDownModel(this IRibbonFactory factory, string id,
+        public static DropDownModel NewRibbonDropDownModel(this IRibbonFactory factory, string id,
                 SelectedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewRibbonDropDownModel(factory.GetStrings(id), isEnabled, isVisible);
 
@@ -95,9 +95,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonButtonModel"/>.</summary>
-        internal static RibbonButtonModel NewRibbonButtonModel(this IRibbonFactory factory, IStrings strings,
+        internal static ButtonModel NewRibbonButtonModel(this IRibbonFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible);
+            var model = new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();
@@ -105,9 +105,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonToggleModel"/>.</summary>
-        internal static RibbonToggleModel NewRibbonToggleModel(this IRibbonFactory factory, IStrings strings,
+        internal static ToggleModel NewRibbonToggleModel(this IRibbonFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible);
+            var model = new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();
@@ -115,9 +115,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
-        internal static RibbonDropDownModel NewRibbonDropDownModel(this IRibbonFactory factory, IStrings strings,
+        internal static DropDownModel NewRibbonDropDownModel(this IRibbonFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true) {
-            var model = new RibbonDropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible);
+            var model = new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible);
 
             model.SetShowInactive(false);
             model.Invalidate();

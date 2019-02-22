@@ -20,9 +20,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvents))]
     [ComDefaultInterface(typeof(IRibbonToggleModel))]
     [Guid(Guids.RibbonToggleModel)]
-    public sealed class RibbonToggleModel : RibbonControlModel<IRibbonToggleSource,CheckBoxVM>,
+    public sealed class ToggleModel : RibbonControlModel<IRibbonToggleSource,CheckBoxVM>,
             IRibbonToggleModel, ISizeable, IImageable, IRibbonToggleSource {
-        public RibbonToggleModel(Func<string, CheckBoxVM> funcViewModel,
+        public ToggleModel(Func<string, CheckBoxVM> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;

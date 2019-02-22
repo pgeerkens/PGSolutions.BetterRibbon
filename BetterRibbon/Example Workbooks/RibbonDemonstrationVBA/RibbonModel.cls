@@ -20,27 +20,27 @@ Private Const ControlStringsRangeName As String = "ControlStringData"
 Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
 Private CustomGroup          As PGSolutions_RibbonDispatcher.RibbonGroupModel
 
-Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.RibbonToggleModel
+Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
-Private WithEvents Toggle2   As PGSolutions_RibbonDispatcher.RibbonToggleModel
+Private WithEvents Toggle2   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle2.VB_VarHelpID = -1
-Private WithEvents Toggle3   As PGSolutions_RibbonDispatcher.RibbonToggleModel
+Private WithEvents Toggle3   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle3.VB_VarHelpID = -1
-Private WithEvents Toggle4   As PGSolutions_RibbonDispatcher.RibbonToggleModel
+Private WithEvents Toggle4   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle4.VB_VarHelpID = -1
 
-Private WithEvents DropDown1 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
+Private WithEvents DropDown1 As PGSolutions_RibbonDispatcher.DropDownModel
 Attribute DropDown1.VB_VarHelpID = -1
-Private WithEvents DropDown2 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
+Private WithEvents DropDown2 As PGSolutions_RibbonDispatcher.DropDownModel
 Attribute DropDown2.VB_VarHelpID = -1
-Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.RibbonDropDownModel
+Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.DropDownModel
 Attribute Dropdown3.VB_VarHelpID = -1
 
-Private WithEvents Button1   As PGSolutions_RibbonDispatcher.RibbonButtonModel
+Private WithEvents Button1   As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button1.VB_VarHelpID = -1
-Private WithEvents Button2   As PGSolutions_RibbonDispatcher.RibbonButtonModel
+Private WithEvents Button2   As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button2.VB_VarHelpID = -1
-Private WithEvents Button3   As PGSolutions_RibbonDispatcher.RibbonButtonModel
+Private WithEvents Button3   As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button3.VB_VarHelpID = -1
 
 Private Sub Toggle1_Toggled(ByVal Sender As Variant, ByVal IsPressed As Boolean)

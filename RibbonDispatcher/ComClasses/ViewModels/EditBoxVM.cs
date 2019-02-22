@@ -7,39 +7,35 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     public class EditBoxVM : AbstractControlVM<IEditBoxSource>, IEditBox,
-            IActivatable<IEditBoxSource,EditBoxVM> {
+            IActivatable<IEditBoxSource,EditBoxVM>, ITextEditable {
         internal EditBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
         public new EditBoxVM Attach(IEditBoxSource source) => Attach<EditBoxVM>(source);
 
         public override void Detach() {
-            EditCommitted = null;
+            TextChanged = null;
             base.Detach();
         }
         #endregion
 
-        #region IEditable implementation
-        public event EventHandler EditCommitted;
+        #region ITextEditable implementation
+        public event EventHandler TextChanged;
 
-        public int    MaxLength     => Source?.MaxLength ?? 10;
-        public string Text          => Source?.Text ?? "";
-        public string SizeString    => Source?.Text ?? "mnmnmnmnmn";
+        public string Text => Source?.Text ?? "";
 
-        public void OnEditCOmmitted(object sender, EventArgs e)
-        => EditCommitted?.Invoke(this, EventArgs.Empty);
+        public void OnTextChanged(object sender, EventArgs<string> e)
+        => TextChanged?.Invoke(this, EventArgs.Empty);
         #endregion
 
     }
 
     public interface IEditBoxSource : IRibbonCommonSource {
-        event EventHandler EditCommitted;
+        event EventHandler TextChanged;
 
-        int    MaxLength    { get; }
         string Text         { get; }
-        string SizeString   { get; }
     }
-    public interface IEditBox : IRibbonControlVM {
+    public interface IEditBox : IRibbonControlVM, ITextEditable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]
         new string Id           { get; }
@@ -68,5 +64,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         /// <inheritdoc/>
         new void Invalidate();
+    }
+
+    public interface ITextEditable {
+        string Text { get; }
+
+        void OnTextChanged(object sender, EventArgs<string> e);
     }
 }

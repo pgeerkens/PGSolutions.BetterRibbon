@@ -3,14 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by ButtonVM objects.</summary>
-    [CLSCompliant(false)]
-    [ComVisible(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonButton)]
     public interface IRibbonButton : IRibbonControlVM, IRibbonImageable {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         [Description("Returns the unique (within this ribbon) identifier for this control.")]

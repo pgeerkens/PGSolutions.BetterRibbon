@@ -19,10 +19,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IClickedEvents))]
     [ComDefaultInterface(typeof(IRibbonButtonModel))]
-    [Guid(Guids.RibbonButtonModel)]
-    public class RibbonButtonModel : RibbonControlModel<IRibbonButtonSource,ButtonVM>,
+    [Guid(Guids.ButtonModel)]
+    public class ButtonModel : RibbonControlModel<IRibbonButtonSource,ButtonVM>,
             IRibbonButtonModel, ISizeable, IImageable, IRibbonButtonSource {
-        public RibbonButtonModel(Func<string, ButtonVM> funcViewModel,
+        public ButtonModel(Func<string, ButtonVM> funcViewModel,
                 IRibbonControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
