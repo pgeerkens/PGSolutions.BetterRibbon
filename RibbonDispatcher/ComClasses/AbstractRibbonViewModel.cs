@@ -93,7 +93,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected abstract string RibbonXml { get; }
 
         /// <inheritdoc/>
-        public object LoadImage(string imageId) => RibbonFactory.LoadImage(imageId);
+        public object LoadImage(string ImageId) => RibbonFactory.LoadImage(ImageId);
         #endregion
 
         #region IRibbonCommon implementation

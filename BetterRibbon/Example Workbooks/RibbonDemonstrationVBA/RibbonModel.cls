@@ -43,7 +43,7 @@ Attribute Button2.VB_VarHelpID = -1
 Private WithEvents Button3   As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button3.VB_VarHelpID = -1
 
-Private Sub Toggle1_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub Toggle1_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     CustomGroup.SetShowInactive IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
@@ -55,7 +55,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle1_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle2_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub Toggle2_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Toggle1.IsLarge = Not IsPressed
     Toggle2.IsLarge = Not IsPressed
@@ -69,7 +69,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle2_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle3_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub Toggle3_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Button1.IsLarge = Not IsPressed
     Button2.IsLarge = Not IsPressed
@@ -84,7 +84,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle4_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub Toggle4_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Dim ws As Worksheet: Set ws = ThisWorkbook.Worksheets("Control Strings")
     If ws.Visible = xlSheetVeryHidden Then
@@ -100,38 +100,38 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown1_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
+Private Sub DropDown1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
     On Error GoTo EH
-    SetImageAndLabel ItemIndex, Button1, Button2, Button3
+    SetImageAndLabel SelectedIndex, Button1, Button2, Button3
     
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown1_Selected", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown1_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown2_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
+Private Sub DropDown2_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
     On Error GoTo EH
     MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown2_Selected", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown2_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown3_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
+Private Sub DropDown3_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
     On Error GoTo EH
     MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
 XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown3_Selected", vbOKOnly Or vbInformation
+EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown3_SelectionMade", vbOKOnly Or vbInformation
     Resume XT
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button1_Clicked(ByVal Control As IRibbonControl)
+Private Sub Button1_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
@@ -141,7 +141,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button2_Clicked(ByVal Control As IRibbonControl)
+Private Sub Button2_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
@@ -151,7 +151,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button3_Clicked(ByVal Control As IRibbonControl)
+Private Sub Button3_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
@@ -206,7 +206,7 @@ Friend Sub Activate()
     If Not Toggle4 Is Nothing Then _
         Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
     If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive Toggle1.IsPressed
-    If Not DropDown1 Is Nothing Then DropDown1.IsEnabled = Toggle3.IsPressed
+    DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
 XT: Exit Sub
