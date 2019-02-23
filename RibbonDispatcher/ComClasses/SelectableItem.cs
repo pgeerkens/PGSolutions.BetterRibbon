@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
@@ -32,13 +33,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IClickable implementation
         /// <summary>The Clicked event source for COM clients</summary>
-        public event EventHandler Clicked;
+        public event ClickedEventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked() => Clicked?.Invoke(this,EventArgs.Empty);
-
-        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(this,e);
+        public virtual void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 
         #region IImageable implementation

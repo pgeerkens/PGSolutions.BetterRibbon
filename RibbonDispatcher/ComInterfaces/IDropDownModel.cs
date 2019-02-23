@@ -23,6 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set; }
+
         /// <summary>Gets or sets whether the control is visible.</summary>
         bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]

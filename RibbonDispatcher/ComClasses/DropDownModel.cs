@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
@@ -41,8 +42,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnSelectionMade(object sender, int selectedIndex)
-        => SelectionMade?.Invoke(sender, SelectedIndex = selectedIndex);
+        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
+        => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
 
         public IDropDownModel AddSelectableModel(ISelectableItemModel selectableModel) {
             Items.Add(selectableModel);

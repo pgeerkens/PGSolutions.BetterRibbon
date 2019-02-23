@@ -9,6 +9,7 @@ using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
@@ -27,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
 
-        public event EventHandler Clicked;
+        public event ClickedEventHandler Clicked;
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
@@ -35,15 +36,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool        ShowLabel { get; set; } = true;
 
          public IButtonModel Attach(string controlId) {
-            ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Clicked += OnClicked;
-                ViewModel.Invalidate();
-            }
-            return this;
-        }
+             ViewModel = AttachToViewModel(controlId, this);
+             if (ViewModel != null) {
+                 ViewModel.Clicked += OnClicked;
+                 ViewModel.Invalidate();
+             }
+             return this;
+         }
 
-        private void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(sender,e);
+        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;

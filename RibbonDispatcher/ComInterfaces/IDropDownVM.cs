@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.ComponentModel;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by DropDownVM objects; 
@@ -44,7 +45,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         int         SelectedItemIndex   { get; }
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         [Description("Call back for OnAction events from the drop-down ribbon elements.")]
-        void        OnActionDropDown(string SelectedId, int SelectedIndex);
+        void        OnSelected(IRibbonControl control, string selectedId, int selectedIndex);
 
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         [Description("Call back for ItemCount events from the drop-down ribbon elements.")]

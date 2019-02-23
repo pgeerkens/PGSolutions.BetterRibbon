@@ -150,11 +150,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>All of the defined controls implementing the {IToggleable} interface.</summary>
         private IToggleable Toggleables(string controlId) => _ribbonFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public bool   GetPressed(IRibbonControl Control)
-            => Toggleables(Control?.Id)?.IsPressed ?? false;
+        public bool   GetPressed(IRibbonControl control)
+            => Toggleables(control?.Id)?.IsPressed ?? false;
         /// <inheritdoc/>
-        public void   OnActionToggle(IRibbonControl Control, bool Pressed)
-            => Toggleables(Control?.Id)?.OnToggled(this, Pressed);
+        public void   OnActionToggle(IRibbonControl control, bool isPressed)
+            => Toggleables(control?.Id)?.OnToggled(control, isPressed);
         #endregion
 
         #region IClickable implementation
@@ -162,7 +162,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private IClickable Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
  
         /// <inheritdoc/>
-        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(this, EventArgs.Empty);
+        public void   OnAction(IRibbonControl control)   => Actionables(control?.Id)?.OnClicked(control);
         #endregion
 
         #region ISelectableMixin implementation
@@ -200,18 +200,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Selectables(Control?.Id)?.SelectedItemIndex ?? 0;
         /// <inheritdoc/>
         public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
-            => Selectables(Control?.Id)?.OnActionDropDown(SelectedId, SelectedIndex);
+            => Selectables(Control?.Id)?.OnSelected(Control, SelectedId, SelectedIndex);
         #endregion
 
         #region ITextEditable implementation
         /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
-        private ITextEditable TextEditables(string controlId) => _ribbonFactory.TextEditables.GetOrDefault(controlId);
+        private IEditable TextEditables(string controlId) => _ribbonFactory.TextEditables.GetOrDefault(controlId);
 
         public string GetText(IRibbonControl control)
         => TextEditables(control?.Id)?.Text ?? "";
 
         public void   OnTextChanged(IRibbonControl control, string text)
-        => TextEditables(control?.Id)?.OnEdited(this, text);
+        => TextEditables(control?.Id)?.OnEdited(control, text);
         #endregion
     }
 }

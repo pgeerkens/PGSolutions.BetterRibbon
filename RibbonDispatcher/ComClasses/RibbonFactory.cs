@@ -46,7 +46,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _selectables   = new Dictionary<string, ISelectable>();
             _imageables    = new Dictionary<string, IImageable>();
             _toggleables   = new Dictionary<string, IToggleable>();
-            _textEditables = new Dictionary<string, ITextEditable>();
+            _textEditables = new Dictionary<string, IEditable>();
         }
 
         internal IResourceLoader  ResourceLoader  { get; }
@@ -59,7 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private  readonly IDictionary<string, ISelectable>   _selectables;
         private  readonly IDictionary<string, IImageable>    _imageables;
         private  readonly IDictionary<string, IToggleable>   _toggleables;
-        private  readonly IDictionary<string, ITextEditable> _textEditables;
+        private  readonly IDictionary<string, IEditable> _textEditables;
 
         internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
@@ -82,7 +82,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ITextEditable> TextEditables => new ReadOnlyDictionary<string, ITextEditable>(_textEditables);
+        internal IReadOnlyDictionary<string, IEditable> TextEditables => new ReadOnlyDictionary<string, IEditable>(_textEditables);
 
         /// <inheritdoc/>
         public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
@@ -103,7 +103,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectable);
             _imageables   .AddNotNull(ctrl.Id, ctrl as IImageable);
             _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleable);
-            _textEditables.AddNotNull(ctrl.Id, ctrl as ITextEditable);
+            _textEditables.AddNotNull(ctrl.Id, ctrl as IEditable);
 
             ctrl.Changed += OnChanged;
             return ctrl;

@@ -147,6 +147,7 @@
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onChange="onTextChanged" getText="getText" maxLength="15" sizeString="__m____m____m__"
+                            invalidateContentOnDrop="false"
                     />
                     <!-- Not Yet Implemented on ComboBox: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                 </mso:box>

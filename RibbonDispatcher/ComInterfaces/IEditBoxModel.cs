@@ -24,9 +24,16 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
+
         /// <summary>Gets or sets whether the control is visible.</summary>
         bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
+            get; set;
+        }
+
+        /// <summary>Gets or sets the content of the <see cref="EditBoxVM"/>.</summary>
+        string Text {
+            [Description("Gets or sets the content of the EditBOxVM.")]
             get; set;
         }
 

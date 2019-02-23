@@ -9,6 +9,7 @@ using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -45,8 +46,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnToggled(object sender, bool isPressed)
-        => Toggled?.Invoke(sender, IsPressed = isPressed);
+        private void OnToggled(IRibbonControl control, bool isPressed)
+        => Toggled?.Invoke(control, IsPressed = isPressed);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;

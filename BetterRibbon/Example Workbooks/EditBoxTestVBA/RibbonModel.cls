@@ -15,13 +15,13 @@ Attribute VB_Exposed = True
 '''=======================================================================================
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
-Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IDispatcher
 Private CustomGroup         As PGSolutions_RibbonDispatcher.GroupModel
 
 Private WithEvents EditBox  As PGSolutions_RibbonDispatcher.EditBoxModel
 Attribute EditBox.VB_VarHelpID = -1
 
-Private Sub EditBox_Edited(ByVal sender As Variant, ByVal Text As String)
+Private Sub EditBox_Edited(ByVal control As IRibbonControl, ByVal Text As String)
     ButtonProcessing.EditBox_Processing Text
 End Sub
 
@@ -32,7 +32,7 @@ Friend Sub Activate()
     If Not EditBox Is Nothing Then EditBox.Invalidate
 End Sub
 
-Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IDispatcher
     If MBetterRibbon Is Nothing Then
         Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
     End If
@@ -40,7 +40,7 @@ Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatche
 End Function
 
 Private Sub Class_Initialize()
-    Dim Strings As PGSolutions_RibbonDispatcher.IRibbonControlStrings
+    Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
     With BetterRibbon
         Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
         

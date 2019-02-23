@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
+using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
@@ -28,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public event EditedEventHandler Edited;
 
-        public string Text { get; } = "";
+        public string Text { get; set; } = "";
 
         public IEditBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
@@ -39,6 +41,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnEdited(object sender, string text) => Edited?.Invoke(sender,text);
+        private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control,text);
     }
 }

@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.ComponentModel;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    public interface IEditBox : IRibbonControlVM, ITextEditable {
+    public interface IEditBox : IRibbonControlVM, IEditable {
         ///// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         //[Description("Returns the unique (within this ribbon) identifier for this control.")]
         //new string Id           { get; }

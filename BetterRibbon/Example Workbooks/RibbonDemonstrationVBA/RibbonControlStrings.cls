@@ -15,7 +15,7 @@ Attribute VB_Exposed = True
 '''=======================================================================================
 Option Explicit
 
-''' <summary>A local (convenience) implementation of {IRibbonControlStrings}.</summary
+''' <summary>A local (convenience) implementation of {IControlStrings}.</summary
 ''' <remarks>
 ''' The implementation published by {PGSolutions.RibbonDispatcher} could have been used
 ''' - but that introduces an undesirable coupling as well as redundant martialing of the
@@ -31,30 +31,30 @@ Private Type TControlStrings
 End Type
 Private This As TControlStrings
 
-Implements PGSolutions_RibbonDispatcher.IRibbonControlStrings
+Implements PGSolutions_RibbonDispatcher.IControlStrings
 
-Private Property Get IRibbonControlStrings_AlternateLabel() As String
-    IRibbonControlStrings_AlternateLabel = This.AlternateLabel
+Private Property Get IControlStrings_AlternateLabel() As String
+    IControlStrings_AlternateLabel = This.AlternateLabel
 End Property
 
-Private Property Get IRibbonControlStrings_Description() As String
-    IRibbonControlStrings_Description = This.Description
+Private Property Get IControlStrings_Description() As String
+    IControlStrings_Description = This.Description
 End Property
 
-Private Property Get IRibbonControlStrings_KeyTip() As String
-    IRibbonControlStrings_KeyTip = This.KeyTip
+Private Property Get IControlStrings_KeyTip() As String
+    IControlStrings_KeyTip = This.KeyTip
 End Property
 
-Private Property Get IRibbonControlStrings_Label() As String
-    IRibbonControlStrings_Label = This.Label
+Private Property Get IControlStrings_Label() As String
+    IControlStrings_Label = This.Label
 End Property
 
-Private Property Get IRibbonControlStrings_ScreenTip() As String
-    IRibbonControlStrings_ScreenTip = This.ScreenTip
+Private Property Get IControlStrings_ScreenTip() As String
+    IControlStrings_ScreenTip = This.ScreenTip
 End Property
 
-Private Property Get IRibbonControlStrings_SuperTip() As String
-    IRibbonControlStrings_SuperTip = This.SuperTip
+Private Property Get IControlStrings_SuperTip() As String
+    IControlStrings_SuperTip = This.SuperTip
 End Property
 
 Public Function Initialize(ByVal Label As String, _

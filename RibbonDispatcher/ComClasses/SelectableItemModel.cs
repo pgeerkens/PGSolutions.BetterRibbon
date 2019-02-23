@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -25,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible) { }
 
-        public event EventHandler Clicked;
+        public event ClickedEventHandler Clicked;
 
         public bool        IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
         public ImageObject Image     { get; set; } = "MacroSecurity";
@@ -46,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnClicked(object sender, EventArgs e) => Clicked?.Invoke(sender,e);
+        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso) => Image = imageMso;

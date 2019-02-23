@@ -68,6 +68,7 @@
     <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\Dispatcher.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
+    <Compile Include="ComInterfaces\IComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IEditBoxModel.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>
@@ -125,7 +126,7 @@
     <Compile Include="ComInterfaces\IToggleButtonVM.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\ISelectableItem.cs" />
-    <Compile Include="ComInterfaces\EventInterfaces.cs" />
+    <Compile Include="ComInterfaces\ViewModelEventInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComClasses\DictionaryExtensions.cs" />

@@ -2,11 +2,12 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Linq;
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     public class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBox,
-            IActivatable<IComboBoxSource, ComboBoxVM>, ITextEditable {
+            IActivatable<IComboBoxSource, ComboBoxVM>, IEditable {
         internal ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
@@ -29,8 +30,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        public void OnActionDropDown(string SelectedId, int SelectedIndex) {
-            SelectionMade?.Invoke(this, SelectedIndex);
+        public void OnSelected(IRibbonControl control, string selectedId, int selectedIndex) {
+            SelectionMade?.Invoke(control, selectedId, selectedIndex);
             Invalidate();
         }
 
@@ -63,9 +64,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         public string Text => Source?.Text ?? "";
 
-        public void OnEdited(object sender, string text)
-        => Edited?.Invoke(this, text);
+        public void OnEdited(IRibbonControl control, string text)
+        => Edited?.Invoke(control, text);
         #endregion
-
     }
 }

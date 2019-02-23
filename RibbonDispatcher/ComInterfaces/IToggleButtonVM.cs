@@ -2,6 +2,7 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.ComponentModel;
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
@@ -44,7 +45,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsPressed       { get; }
         /// <summary>Callback for the Pressed event on the control.</summary>
         [Description("Callback for the Pressed event on the control.")]
-        void OnToggled(object sender, bool IsPressed);
+        void OnToggled(IRibbonControl control, bool isPressed);
 
         /// <summary>TODO</summary>
         bool     IsSizeable  { get; }

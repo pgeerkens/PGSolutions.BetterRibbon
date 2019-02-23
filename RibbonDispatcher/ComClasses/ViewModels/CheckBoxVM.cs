@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
@@ -26,7 +27,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public bool IsPressed => Source?.IsPressed ?? false;
 
         /// <inheritdoc/>>
-        public virtual void OnToggled(object sender, bool isPressed) => Toggled?.Invoke(this,isPressed);
+        public virtual void OnToggled(IRibbonControl control, bool isPressed)
+        => Toggled?.Invoke(control,isPressed);
         #endregion
 
         #region ISizeable implementation

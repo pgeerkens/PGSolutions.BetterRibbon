@@ -2,7 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
@@ -22,11 +22,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         #region IClickable implementation
         /// <summary>The Clicked event source for COM clients</summary>
-        public event EventHandler Clicked;
+        public event ClickedEventHandler Clicked;
 
         /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
-        public virtual void OnClicked(object sender, EventArgs e)
-        => Clicked?.Invoke(this, EventArgs.Empty);
+        public virtual void OnClicked(IRibbonControl control)
+        => Clicked?.Invoke(control);
         #endregion
 
         #region ISizeable implementation

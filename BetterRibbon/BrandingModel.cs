@@ -22,7 +22,7 @@ namespace PGSolutions.BetterRibbon {
 
         private IButtonModel BrandingButtonModel { get; }
 
-        private void ButtonClicked(object sender, EventArgs e) => new StringBuilder()
+        private void ButtonClicked(object sender) => new StringBuilder()
             .AppendLine($"PGSolutions Better Ribbon")
             .AppendLine()
             .AppendLine($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}")

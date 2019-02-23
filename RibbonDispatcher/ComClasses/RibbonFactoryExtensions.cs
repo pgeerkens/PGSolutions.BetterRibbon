@@ -71,7 +71,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static ButtonModel NewButtonModel(this IRibbonFactory factory, string id,
-                EventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
+                ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewButtonModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
             model?.Attach(id);

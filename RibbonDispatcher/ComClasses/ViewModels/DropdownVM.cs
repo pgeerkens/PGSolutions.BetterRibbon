@@ -2,7 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Linq;
-
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
@@ -32,8 +32,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        public void OnActionDropDown(string SelectedId, int SelectedIndex) {
-            SelectionMade?.Invoke(this, SelectedIndex);
+        public void OnSelected(IRibbonControl control, string selectedId, int selectedIndex) {
+            SelectionMade?.Invoke(control, selectedId, selectedIndex);
             Invalidate();
         }
 

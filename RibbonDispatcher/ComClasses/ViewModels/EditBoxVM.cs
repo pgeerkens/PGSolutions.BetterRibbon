@@ -1,11 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     public class EditBoxVM : AbstractControlVM<IEditBoxSource>, IEditBox,
-            IActivatable<IEditBoxSource,EditBoxVM>, ITextEditable {
+            IActivatable<IEditBoxSource,EditBoxVM>, IEditable {
         internal EditBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
@@ -22,8 +24,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         public string Text => Source?.Text ?? "";
 
-        public void OnEdited(object sender, string text)
-        => Edited?.Invoke(this, text);
+        public void OnEdited(IRibbonControl control, string text)
+        => Edited?.Invoke(control, text);
         #endregion
 
     }

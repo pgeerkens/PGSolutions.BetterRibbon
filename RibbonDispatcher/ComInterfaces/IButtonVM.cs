@@ -1,8 +1,9 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.ComponentModel;
+
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The total interface (required to be) exposed externally by ButtonVM objects.</summary>
@@ -42,7 +43,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Callback for the Clicked event on the control.</summary>
         [Description("Callback for the Clicked event on the control.")]
-        void OnClicked(object sender, EventArgs e);
+        void OnClicked(IRibbonControl control);
 
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         [Description("Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.")]

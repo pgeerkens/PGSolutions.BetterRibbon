@@ -17,7 +17,7 @@ Option Explicit
 Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
 Private Const ControlStringsRangeName As String = "ControlStringData"
 
-Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IDispatcher
 Private CustomGroup          As PGSolutions_RibbonDispatcher.GroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
@@ -43,7 +43,7 @@ Attribute Button2.VB_VarHelpID = -1
 Private WithEvents Button3   As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button3.VB_VarHelpID = -1
 
-Private Sub Toggle1_Toggled(ByVal sender As Variant, ByVal IsPressed As Boolean)
+Private Sub Toggle1_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     CustomGroup.SetShowInactive IsPressed
     Toggle1.SetImageMso ToggleImage(IsPressed)
@@ -55,7 +55,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle1_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle2_Toggled(ByVal sender As Variant, ByVal IsPressed As Boolean)
+Private Sub Toggle2_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Toggle1.IsLarge = Not IsPressed
     Toggle2.IsLarge = Not IsPressed
@@ -69,7 +69,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle2_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle3_Toggled(ByVal sender As Variant, ByVal IsPressed As Boolean)
+Private Sub Toggle3_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Button1.IsLarge = Not IsPressed
     Button2.IsLarge = Not IsPressed
@@ -84,7 +84,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Toggle4_Toggled(ByVal sender As Variant, ByVal IsPressed As Boolean)
+Private Sub Toggle4_Toggled(ByVal Control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     Dim ws As Worksheet: Set ws = ThisWorkbook.Worksheets("Control Strings")
     If ws.Visible = xlSheetVeryHidden Then
@@ -100,7 +100,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Toggle3_Toggled", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown1_Selected(ByVal sender As Variant, ByVal ItemIndex As Long)
+Private Sub DropDown1_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
     On Error GoTo EH
     SetImageAndLabel ItemIndex, Button1, Button2, Button3
     
@@ -111,7 +111,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown1_Selected", vbOKOnly 
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown2_Selected(ByVal sender As Variant, ByVal ItemIndex As Long)
+Private Sub DropDown2_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
     On Error GoTo EH
     MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
@@ -121,7 +121,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown2_Selected", vbOKOnly 
     Resume          ' for debugging only
 End Sub
 
-Private Sub DropDown3_Selected(ByVal sender As Variant, ByVal ItemIndex As Long)
+Private Sub DropDown3_Selected(ByVal Control As IRibbonControl, ByVal ItemId As String, ByVal ItemIndex As Long)
     On Error GoTo EH
     MsgBox "DropDown2 has not been implemented yet", vbOKOnly Or vbInformation, TypeName(Me)
     Invalidate
@@ -131,7 +131,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".DropDown3_Selected", vbOKOnly 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button1_Clicked(ByVal sender As Variant, ByVal e As EventArgs)
+Private Sub Button1_Clicked(ByVal Control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
@@ -141,7 +141,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button2_Clicked(ByVal sender As Variant, ByVal e As EventArgs)
+Private Sub Button2_Clicked(ByVal Control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
     IsToggle = AlternateToggle(BetterRibbon, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
@@ -151,7 +151,7 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Button3_Clicked(ByVal sender As Variant, ByVal e As EventArgs)
+Private Sub Button3_Clicked(ByVal Control As IRibbonControl)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
@@ -228,10 +228,8 @@ Private Sub Class_Initialize()
         Set Toggle3 = .NewToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
         Set Toggle4 = .NewToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
-        Dim x As Variant
-        Set x = BetterRibbon.NewDropDownModel(FindStrings("DropDown1"))
-        Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
-        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
+        'Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
+       ' DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("ImageOnly", FindStrings("ImageOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
                  .SelectedIndex = 2
@@ -249,7 +247,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
     Resume          ' for debugging only
 End Sub
 
-Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IRibbonDispatcher
+Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IDispatcher
     On Error GoTo EH
     If MBetterRibbon Is Nothing Then
         Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
@@ -260,7 +258,7 @@ EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
     Resume          ' for debugging only
 End Property
 
-Private Function FindStrings(ByVal Search As String) As IRibbonControlStrings
+Private Function FindStrings(ByVal Search As String) As IControlStrings
     Const ControlStringsRangeName As String = "ControlStringData"
     
     On Error GoTo EH
