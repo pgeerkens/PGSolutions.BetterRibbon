@@ -40,12 +40,18 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IToggleableVM {
         /// <summary>TODO</summary>
+        event ToggledEventHandler Toggled;
+
+        /// <summary>TODO</summary>
         void OnToggled(IRibbonControl control, bool isPressed);
 
         bool    IsPressed         { get; }
     }
 
     public interface IEditableVM {
+        /// <summary>TODO</summary>
+        event EditedEventHandler Edited;
+
         /// <summary>Current contents of this <see cref="ITextEditable"/> control.</summary>
         string  Text              { get; }
 
@@ -56,6 +62,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
     public interface ISelectableVM {
+        event SelectionMadeEventHandler SelectionMade;
+
         /// <summary>ID of the selected item.</summary>
         string  SelectedItemId    { get; }
         /// <summary>Index of the selected item.</summary>

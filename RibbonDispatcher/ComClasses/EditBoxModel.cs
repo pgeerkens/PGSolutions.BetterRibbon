@@ -21,9 +21,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IEditedEvent))]
     [ComDefaultInterface(typeof(IEditBoxModel))]
     [Guid(Guids.EditBoxModel)]
-    internal class EditBoxModel : ControlModel<IEditBoxSource, EditBoxVM>,
+    public class EditBoxModel : ControlModel<IEditBoxSource, IEditBoxVM>,
             IEditBoxModel, IEditBoxSource {
-        public EditBoxModel(Func<string, EditBoxVM> funcViewModel,
+        internal EditBoxModel(Func<string, EditBoxVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

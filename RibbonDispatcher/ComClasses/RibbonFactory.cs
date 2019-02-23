@@ -121,11 +121,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal ToggleButtonVM NewToggleButton(string controlId)
-        => Add<ToggleButtonVM,IRibbonToggleSource>(new ToggleButtonVM(controlId));
+        => Add<ToggleButtonVM,IToggleSource>(new ToggleButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
         internal CheckBoxVM NewCheckBox(string controlId)
-        => Add<CheckBoxVM,IRibbonToggleSource>(new CheckBoxVM(controlId));
+        => Add<CheckBoxVM,IToggleSource>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
         internal DropDownVM NewDropDown(string controlId)

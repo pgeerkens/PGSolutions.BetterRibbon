@@ -16,7 +16,7 @@ Attribute VB_Exposed = True
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IDispatcher
-Private CustomGroup         As PGSolutions_RibbonDispatcher.GroupModel
+Private CustomGroup         As PGSolutions_RibbonDispatcher.IGroupModel
 
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button1.VB_VarHelpID = -1

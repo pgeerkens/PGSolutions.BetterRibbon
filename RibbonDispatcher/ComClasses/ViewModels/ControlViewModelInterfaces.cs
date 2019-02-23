@@ -82,8 +82,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //new bool ShowLabel { get; }
     }
 
+    public interface ICheckBoxVM: IToggleableVM, IRibbonControlVM {
+
+    }
+
     /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
-    public interface IToggleButtonVM: IToggleableVM, IRibbonControlVM, IImageableVM, ISizeableVM {
+    public interface IToggleControlVM: IToggleableVM, IRibbonControlVM, IImageableVM, ISizeableVM {
         ///// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         //new string Id { get; }
 

@@ -42,7 +42,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool        IsLarge   { get; }
     }
 
-    public interface IRibbonToggleSource : IButtonSource {
+    public interface IToggleSource : IButtonSource {
         /// <summary>.</summary>
         bool        IsPressed { get; }
     }

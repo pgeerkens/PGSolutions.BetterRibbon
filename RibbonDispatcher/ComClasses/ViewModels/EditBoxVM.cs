@@ -7,11 +7,11 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     internal class EditBoxVM : AbstractControlVM<IEditBoxSource>, IEditBoxVM,
-            IActivatable<IEditBoxSource,EditBoxVM>, IEditableVM {
+            IActivatable<IEditBoxSource,IEditBoxVM>, IEditableVM {
         internal EditBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new EditBoxVM Attach(IEditBoxSource source) => Attach<EditBoxVM>(source);
+        public new IEditBoxVM Attach(IEditBoxSource source) => Attach<EditBoxVM>(source);
 
         public override void Detach() {
             Edited = null;

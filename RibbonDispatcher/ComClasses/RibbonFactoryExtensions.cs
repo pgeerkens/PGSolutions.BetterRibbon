@@ -36,11 +36,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
                     switch (element.Name) {
                         case XName name when name == mso+"toggleButton":
-                            viewModel.Add<IRibbonToggleSource>(factory.NewToggleButton(element.Attribute("id").Value));
+                            viewModel.Add<IToggleSource>(factory.NewToggleButton(element.Attribute("id").Value));
                             break;
 
                         case XName name when name == mso+"checkBox":
-                            viewModel.Add<IRibbonToggleSource>(factory.NewCheckBox(element.Attribute("id").Value));
+                            viewModel.Add<IToggleSource>(factory.NewCheckBox(element.Attribute("id").Value));
                             break;
 
                         case XName name when name == mso+"dropDown":

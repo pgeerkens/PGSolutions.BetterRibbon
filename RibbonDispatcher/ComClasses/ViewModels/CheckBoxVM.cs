@@ -6,12 +6,12 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
-    internal class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IToggleButtonVM,
-        IActivatable<IRibbonToggleSource,CheckBoxVM>, IToggleableVM {
+    internal class CheckBoxVM : AbstractControlVM<IToggleSource>, IToggleControlVM,
+        IActivatable<IToggleSource, IToggleControlVM>, IToggleableVM {
         internal CheckBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new CheckBoxVM Attach(IRibbonToggleSource source) => Attach<CheckBoxVM>(source);
+        public new IToggleControlVM Attach(IToggleSource source) => Attach<CheckBoxVM>(source);
 
         public override void Detach() {
             Toggled = null;
