@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             base.Invalidate();
         }
 
-        public TControl GetControl<TControl>(string controlId) where TControl : class,IRibbonControlVM
+        public TControl GetControl<TControl>(string controlId) where TControl : class,IControlVM
         => Controls.FirstOrDefault(ctl => ctl.Id == controlId) as TControl;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]

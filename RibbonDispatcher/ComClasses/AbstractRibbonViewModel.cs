@@ -14,13 +14,13 @@ using System.Linq;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IGroupList = IReadOnlyList<GroupVM>;
 
-    /// <summary>Additional implementation-specific methods exposed by the Callback Dispatcher.</summary>
+    /// <summary>Additional implementation-specific methods exposed by the Callback ModelFactory.</summary>
     public interface IRibbonViewModel {
         /// <summary>The Ribbon ControlID of the Ribbon definition being dispatched by this instance.</summary>
         string        ControlId     { get; }
 
         /// <summary>.</summary>
-        RibbonFactory RibbonFactory { get; }
+        ViewModelFactory RibbonFactory { get; }
 
         /// <summary>.</summary>
         IRibbonUI     RibbonUI      { get; }
@@ -56,7 +56,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
         protected AbstractDispatcher(string controlId, IResourceManager resourceManager){
             ControlId     = controlId;
-            RibbonFactory = new RibbonFactory(resourceManager);
+            RibbonFactory = new ViewModelFactory(resourceManager);
             RibbonFactory.Changed += OnPropertyChanged;
         }
 
@@ -64,7 +64,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public   string        ControlId     { get; }
 
         /// <inheritdoc/>
-        public   RibbonFactory RibbonFactory { get; }
+        public   ViewModelFactory RibbonFactory { get; }
 
         /// <inheritdoc/>
         public   IRibbonUI     RibbonUI      { get; private set; }
@@ -110,7 +110,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
-        private IRibbonControlVM Controls (string controlId) => RibbonFactory.Controls.GetOrDefault(controlId);
+        private IControlVM Controls (string controlId) => RibbonFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public string GetDescription(IRibbonControl Control)
             => Controls(Control?.Id)?.Description ?? Control.Unknown("Description");

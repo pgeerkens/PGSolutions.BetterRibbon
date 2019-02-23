@@ -15,8 +15,8 @@ namespace PGSolutions.BetterRibbon {
   //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
         /// <summary>Returns a new implementation of the <see cref="IDispatcher"/> interface.</summary>
-        [Description("Returns a new implementation of the IDispatcher interface.")]
-        IDispatcher    NewBetterRibbon();
+        [Description("Returns a new implementation of the IModelFactory interface.")]
+        IModelFactory    NewBetterRibbon();
         /// <summary>Returns a new implementation of the <see cref="ILinksAnalyzer"/> interface.</summary>
         [Description("Returns a new implementation of the ILinksAnalyzer interface.")]
         ILinksAnalyzer NewLinksAnalyzer();

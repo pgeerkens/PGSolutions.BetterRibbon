@@ -17,7 +17,7 @@ Option Explicit
 Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
 Private Const ControlStringsRangeName As String = "ControlStringData"
 
-Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IDispatcher
+Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IModelFactory
 Private CustomGroup          As PGSolutions_RibbonDispatcher.IGroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
@@ -247,7 +247,7 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
     Resume          ' for debugging only
 End Sub
 
-Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IDispatcher
+Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
     On Error GoTo EH
     If MBetterRibbon Is Nothing Then
         Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()

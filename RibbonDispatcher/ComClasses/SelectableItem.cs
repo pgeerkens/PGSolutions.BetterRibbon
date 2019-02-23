@@ -35,7 +35,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>The Clicked event source for COM clients</summary>
         public event ClickedEventHandler Clicked;
 
-        /// <summary>The callback from the Ribbon Dispatcher to initiate Clicked events on this control.</summary>
+        /// <summary>The callback from the Ribbon ModelFactory to initiate Clicked events on this control.</summary>
         public virtual void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 

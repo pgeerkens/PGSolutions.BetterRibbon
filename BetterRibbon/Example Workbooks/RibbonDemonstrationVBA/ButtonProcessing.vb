@@ -9,14 +9,14 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
-Public Function AlternateToggle(ByVal Dispatcher As IDispatcher, Mode As Boolean, _
+Public Function AlternateToggle(ByVal Factory As IModelFactory, Mode As Boolean, _
         Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
     On Error GoTo EH
     AlternateToggle = Not Mode
     
-    Dispatcher.DetachProxy ToggleID
-    Dispatcher.DetachProxy CheckBoxID
+    Factory.DetachProxy ToggleID
+    Factory.DetachProxy CheckBoxID
     Model.Attach IIf(AlternateToggle, ToggleID, CheckBoxID)
     Model.SetImageMso ToggleImage(Model.IsPressed)
     Model.Invalidate

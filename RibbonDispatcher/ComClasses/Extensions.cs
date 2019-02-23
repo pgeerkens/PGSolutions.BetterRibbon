@@ -15,7 +15,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     public static partial class Extensions {
-        private const string Caption = "PGSolutions Ribbon Dispatcher";
+        private const string Caption = "PGSolutions Ribbon ModelFactory";
 
         public static RibbonControlSize ControlSize(this bool isLarge)
             => isLarge ? RibbonControlSize.RibbonControlSizeLarge

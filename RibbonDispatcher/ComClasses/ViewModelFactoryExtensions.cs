@@ -1,7 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +12,10 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;
 
-    public static partial class RibbonFactoryExtensions {
+    public static partial class ViewModelFactoryExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
-        internal static IReadOnlyList<GroupVM> ParseXml(this RibbonFactory factory, string ribbonXml) {
+        internal static IReadOnlyList<GroupVM> ParseXml(this ViewModelFactory factory, string ribbonXml) {
             //if (factory == null) throw new ArgumentNullException(nameof(factory));
             var groupModels = new List<GroupVM>();
             var doc = XDocument.Parse(ribbonXml);
@@ -70,7 +69,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IButtonModel NewButtonModel(this RibbonFactory factory, string id,
+        public static IButtonModel NewButtonModel(this ViewModelFactory factory, string id,
                 ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewButtonModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
@@ -81,7 +80,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IToggleModel NewToggleModel(this RibbonFactory factory, string id,
+        public static IToggleModel NewToggleModel(this ViewModelFactory factory, string id,
                 ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewToggleModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
@@ -92,7 +91,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IDropDownModel NewDropDownModel(this RibbonFactory factory, string id,
+        public static IDropDownModel NewDropDownModel(this ViewModelFactory factory, string id,
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewDropDownModel(factory.GetStrings(id), isEnabled, isVisible);
 
@@ -103,7 +102,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IEditBoxModel NewEditBoxModel(this RibbonFactory factory, string id,
+        public static IEditBoxModel NewEditBoxModel(this ViewModelFactory factory, string id,
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewEditBoxModel(factory.GetStrings(id), isEnabled, isVisible);
 
@@ -112,9 +111,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-
         /// <summary>Creates, initializes and returns a new <see cref="RibbonButtonModel"/>.</summary>
-        internal static ButtonModel NewButtonModel(this RibbonFactory factory, IStrings strings,
+        internal static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible);
 
@@ -124,7 +122,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonToggleModel"/>.</summary>
-        internal static ToggleModel NewToggleModel(this RibbonFactory factory, IStrings strings,
+        internal static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible);
 
@@ -134,7 +132,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
-        internal static DropDownModel NewDropDownModel(this RibbonFactory factory, IStrings strings,
+        internal static DropDownModel NewDropDownModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true) {
             var model = new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible);
 
@@ -144,7 +142,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
-        internal static EditBoxModel NewEditBoxModel(this RibbonFactory factory, IStrings strings,
+        internal static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true) {
             var model = new EditBoxModel(factory.GetControl<EditBoxVM>, strings, isEnabled, isVisible);
 
@@ -154,7 +152,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Creates, initializes and returns a new <see cref="RibbonGroupModel"/>.</summary>
-        internal static GroupModel NewGroupModel(this RibbonFactory factory, IStrings strings,
+        internal static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => new GroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
     }

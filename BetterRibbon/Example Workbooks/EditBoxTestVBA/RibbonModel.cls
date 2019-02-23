@@ -15,7 +15,7 @@ Attribute VB_Exposed = True
 '''=======================================================================================
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
-Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IDispatcher
+Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
 Private CustomGroup         As PGSolutions_RibbonDispatcher.IGroupModel
 
 Private WithEvents EditBox  As PGSolutions_RibbonDispatcher.EditBoxModel
@@ -32,7 +32,7 @@ Friend Sub Activate()
     If Not EditBox Is Nothing Then EditBox.Invalidate
 End Sub
 
-Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IDispatcher
+Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
     If MBetterRibbon Is Nothing Then
         Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
     End If

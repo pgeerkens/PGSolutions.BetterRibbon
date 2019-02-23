@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
-    internal abstract class AbstractControlVM<TSource>: IRibbonControlVM, IActivatable<TSource,IRibbonControlVM>
+    internal abstract class AbstractControlVM<TSource>: IControlVM, IActivatable<TSource,IControlVM>
         where TSource: IRibbonCommonSource {
         /// <summary>TODO</summary>
         protected AbstractControlVM(string itemId) => Id = itemId;
@@ -54,7 +54,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             return this as T;
         }
 
-        public IRibbonControlVM Attach(TSource source) => Attach<AbstractControlVM<TSource>>(source);
+        public IControlVM Attach(TSource source) => Attach<AbstractControlVM<TSource>>(source);
 
         /// <inheritdoc/>
         public virtual void Detach() {

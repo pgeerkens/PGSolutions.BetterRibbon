@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <typeparam name="TControl">The class type of the ViewModel class implementing this interface.</typeparam>
     [ComVisible(false)]
     public interface IActivatable<TSource, TControl>: IActivatable
-            where TControl: IRibbonControlVM
+            where TControl: IControlVM
             where TSource: IRibbonCommonSource {
         bool     ShowInactive { get; }
 

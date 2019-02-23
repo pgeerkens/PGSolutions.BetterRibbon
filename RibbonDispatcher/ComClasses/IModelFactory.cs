@@ -14,8 +14,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IDispatcher)]
-    public interface IDispatcher {
+    [Guid(Guids.IModelFactory)]
+    public interface IModelFactory {
         /// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
         [Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
         void Invalidate();

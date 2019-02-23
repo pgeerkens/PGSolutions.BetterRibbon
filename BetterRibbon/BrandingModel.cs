@@ -27,7 +27,7 @@ namespace PGSolutions.BetterRibbon {
             .AppendLine()
             .AppendLine($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}")
             .AppendLine($"Ribbon Utilities V {UtilitiesVersion.Format2()}")
-            .AppendLine($"Ribbon Dispatcher V {DispatcherVersion.Format2()}")
+            .AppendLine($"Ribbon ModelFactory V {DispatcherVersion.Format2()}")
             .AppendLine()
             .AppendLine($"{BrandingButtonModel.Strings.SuperTip}")
         #if DEBUG
@@ -36,7 +36,7 @@ namespace PGSolutions.BetterRibbon {
         #endif
             .ToString().MsgBoxShow();
 
-        static Version DispatcherVersion => new RibbonFactory().GetType().Assembly.GetName().Version;
+        static Version DispatcherVersion => new ViewModelFactory().GetType().Assembly.GetName().Version;
         static Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
 
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();

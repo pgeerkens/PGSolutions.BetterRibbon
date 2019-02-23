@@ -31,16 +31,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IRibbonFactory))]
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
-    public partial class RibbonFactory : IRibbonFactory {
-        public RibbonFactory() : this(new ResourceLoader(), null) { ; }
+    public partial class ViewModelFactory : IRibbonFactory {
+        public ViewModelFactory() : this(new ResourceLoader(), null) { ; }
 
-        internal RibbonFactory(IResourceManager manager) : this(null, manager) { ; }
+        internal ViewModelFactory(IResourceManager manager) : this(null, manager) { ; }
 
-        internal RibbonFactory(ResourceLoader loader, IResourceManager manager) {
+        internal ViewModelFactory(ResourceLoader loader, IResourceManager manager) {
             ResourceLoader  = loader;
             ResourceManager = manager ?? loader;
 
-            _controls      = new Dictionary<string, IRibbonControlVM>();
+            _controls      = new Dictionary<string, IControlVM>();
             _sizeables     = new Dictionary<string, ISizeableVM>();
             _clickables    = new Dictionary<string, IClickableVM>();
             _selectables   = new Dictionary<string, ISelectableVM>();
@@ -53,7 +53,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
-        private  readonly IDictionary<string, IRibbonControlVM> _controls;
+        private  readonly IDictionary<string, IControlVM>    _controls;
         private  readonly IDictionary<string, ISizeableVM>   _sizeables;
         private  readonly IDictionary<string, IClickableVM>  _clickables;
         private  readonly IDictionary<string, ISelectableVM> _selectables;
@@ -64,28 +64,28 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IRibbonControlVM> Controls    => new ReadOnlyDictionary<string, IRibbonControlVM>(_controls);
+        internal IReadOnlyDictionary<string, IControlVM>    Controls      => new ReadOnlyDictionary<string, IControlVM>(_controls);
  
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISizeableVM>   Sizeables   => new ReadOnlyDictionary<string, ISizeableVM>(_sizeables);
+        internal IReadOnlyDictionary<string, ISizeableVM>   Sizeables     => new ReadOnlyDictionary<string, ISizeableVM>(_sizeables);
 
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IClickableVM>  Clickables  => new ReadOnlyDictionary<string, IClickableVM>(_clickables);
+        internal IReadOnlyDictionary<string, IClickableVM>  Clickables    => new ReadOnlyDictionary<string, IClickableVM>(_clickables);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISelectableVM> Selectables => new ReadOnlyDictionary<string, ISelectableVM>(_selectables);
+        internal IReadOnlyDictionary<string, ISelectableVM> Selectables   => new ReadOnlyDictionary<string, ISelectableVM>(_selectables);
 
         /// <summary>Returns a readonly collection of all Ribbon Imageable Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IImageableVM>  Imageables  => new ReadOnlyDictionary<string, IImageableVM>(_imageables);
+        internal IReadOnlyDictionary<string, IImageableVM>  Imageables    => new ReadOnlyDictionary<string, IImageableVM>(_imageables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IToggleableVM> Toggleables => new ReadOnlyDictionary<string, IToggleableVM>(_toggleables);
+        internal IReadOnlyDictionary<string, IToggleableVM> Toggleables   => new ReadOnlyDictionary<string, IToggleableVM>(_toggleables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IEditableVM>   TextEditables => new ReadOnlyDictionary<string, IEditableVM>(_textEditables);
 
         /// <inheritdoc/>
-        internal TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
+        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
 
         /// <inheritdoc/>

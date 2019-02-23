@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IResourceManager        = "69E1940A" + GuidSpace;
         //public const string IAbstractDispatcher     = "69E1940B" + GuidSpace;
         public const string AbstractDispatcher      = "69E1940C" + GuidSpace;
-        public const string IDispatcher             = "69E1940D" + GuidSpace;
+        public const string IModelFactory           = "69E1940D" + GuidSpace;
         public const string IRibbonFactory          = "69E1940E" + GuidSpace;
         public const string RibbonFactory           = "69E1940F" + GuidSpace;
 
