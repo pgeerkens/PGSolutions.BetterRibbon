@@ -14,11 +14,11 @@ namespace PGSolutions.BetterRibbon {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
   //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
-        /// <summary>Returns a new implementation of the <see cref="IRibbonDispatcher"/> interface.</summary>
+        /// <summary>Returns a new implementation of the <see cref="IDispatcher"/> interface.</summary>
         [Description("Returns a new implementation of the IDispatcher interface.")]
-        IDispatcher NewBetterRibbon();
+        IDispatcher    NewBetterRibbon();
         /// <summary>Returns a new implementation of the <see cref="ILinksAnalyzer"/> interface.</summary>
         [Description("Returns a new implementation of the ILinksAnalyzer interface.")]
-        ILinksAnalyzer    NewLinksAnalyzer();
+        ILinksAnalyzer NewLinksAnalyzer();
     }
 }

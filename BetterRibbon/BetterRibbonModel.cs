@@ -12,7 +12,7 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
-        internal BetterRibbonModel(AbstractRibbonViewModel viewModel)
+        internal BetterRibbonModel(AbstractDispatcher viewModel)
         : base(viewModel, new List<IInvalidatible> {
                 new BrandingModel(viewModel, "BrandingGroup"),
                 new LinksAnalysisModel(viewModel, "LinksAnalysisGroup"),

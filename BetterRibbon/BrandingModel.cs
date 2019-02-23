@@ -12,7 +12,7 @@ using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(AbstractRibbonViewModel viewModel, string viewModelName)
+        public BrandingModel(AbstractDispatcher viewModel, string viewModelName)
         : base(viewModel, viewModelName) {
             BrandingButtonModel = viewModel.RibbonFactory.NewButtonModel("BrandingButton", ButtonClicked,
                 new ImageObject(BrandingIcon));

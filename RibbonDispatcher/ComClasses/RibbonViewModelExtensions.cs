@@ -2,7 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+namespace PGSolutions.RibbonDispatcher.ComClasses {
     public static partial class RibbonViewModelExtensions {
         /// <summary>Invalidates the entire Fluent Ribbon.</summary>
         public static void Invalidate(this IRibbonViewModel vm)
@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Invalidates this Ribbon Tab.</summary>
         public static void InvalidateTab(this IRibbonViewModel vm)
-        => vm?.RibbonUI?.InvalidateControl(vm?.Id);
+        => vm?.RibbonUI?.InvalidateControl(vm?.ControlId);
 
         /// <summary>Invalidates the specified ribbon control.</summary>
         public static void InvalidateControl(this IRibbonViewModel vm, string ControlId)

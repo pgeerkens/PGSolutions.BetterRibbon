@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IRibbonCommonSource, IInvalidatible {
-        protected AbstractRibbonGroupModel(AbstractRibbonViewModel viewModel, string viewModelName)
+        protected AbstractRibbonGroupModel(AbstractDispatcher viewModel, string viewModelName)
         : this(viewModel?.GetGroup(viewModelName)) {
         }
         private AbstractRibbonGroupModel(IGroupVM viewModel) {

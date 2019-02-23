@@ -14,10 +14,22 @@ using System.Linq;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IGroupList = IReadOnlyList<GroupVM>;
 
+    /// <summary>Additional implementation-specific methods exposed by the Callback Dispatcher.</summary>
+    public interface IRibbonViewModel {
+        /// <summary>The Ribbon ControlID of the Ribbon definition being dispatched by this instance.</summary>
+        string        ControlId     { get; }
+
+        /// <summary>.</summary>
+        RibbonFactory RibbonFactory { get; }
+
+        /// <summary>.</summary>
+        IRibbonUI     RibbonUI      { get; }
+    }
+
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
-    /// class from {AbstractRibbonViewModel} than to compose against an instance of 
+    /// class from {AbstractDispatcher} than to compose against an instance of 
     /// {RibbonViewModel}. COM clients will most likely find the reverse true. 
     /// 
     /// The callback names are chosen to be identical to the corresponding xml tag in the
@@ -27,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     ///    instead of a plain OnAction(,).
     ///    
     /// Whenever possible the ViewModel will return default values acceptable to OFFICE
-    /// even if the Control.Id supplied to a callback is unknown. These defaults are
+    /// even if the Control.ControlId supplied to a callback is unknown. These defaults are
     /// chosen to maximize visibility for the unknown control, but disable its functionality.
     /// This is believed to support the principle of 'least surprise', given the OFFICE 
     /// Ribbon's propensity to fail, silently and/or fatally, at the slightest provocation.
@@ -37,19 +49,19 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Serializable]
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [ComDefaultInterface(typeof(IRibbonViewModel))]
+    [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
-    public abstract class AbstractRibbonViewModel: IRibbonViewModel {
+    public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
-        protected AbstractRibbonViewModel(string controlId, IResourceManager resourceManager){
-            Id             = controlId;
+        protected AbstractDispatcher(string controlId, IResourceManager resourceManager){
+            ControlId     = controlId;
             RibbonFactory = new RibbonFactory(resourceManager);
             RibbonFactory.Changed += OnPropertyChanged;
         }
 
         /// <inheritdoc/>
-        public   string        Id            { get; }
+        public   string        ControlId     { get; }
 
         /// <inheritdoc/>
         public   RibbonFactory RibbonFactory { get; }

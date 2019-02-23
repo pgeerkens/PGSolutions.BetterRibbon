@@ -115,8 +115,6 @@
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComClasses\IRibbonFactory.cs" />
-    <Compile Include="ComInterfaces\IRibbonLoader.cs" />
-    <Compile Include="ComInterfaces\IRibbonModel.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\ISelectableItem.cs" />

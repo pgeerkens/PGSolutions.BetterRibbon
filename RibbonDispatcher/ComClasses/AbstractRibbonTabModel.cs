@@ -11,12 +11,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {
-        protected AbstractRibbonTabModel(AbstractRibbonViewModel viewModel, IReadOnlyList<IInvalidatible> models) {
+        protected AbstractRibbonTabModel(AbstractDispatcher viewModel, IReadOnlyList<IInvalidatible> models) {
             ViewModel = viewModel;
             Models    = models;
         }
 
-        public    AbstractRibbonViewModel    ViewModel { get; }
+        public    AbstractDispatcher    ViewModel { get; }
 
         protected IReadOnlyList<IInvalidatible> Models    { get; private set; }
 

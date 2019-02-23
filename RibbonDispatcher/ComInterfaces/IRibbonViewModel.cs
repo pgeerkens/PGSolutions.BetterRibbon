@@ -8,22 +8,13 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    //internal interface IRibbonViewModel: IRibbonViewModelCom {
-
-    //}
-    /// <summary>TODO</summary>
+    /// <summary>The complete set of Ribbon Cllbacks supported by this implementation.</summary>
+    [Description("")]
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IRibbonViewModel)]
-    public interface IRibbonViewModel {
-        /// <summary>The Control ID of the Ribbon definition being dispatched by this instance.</summary>
-        [Description("The Control ID of the Ribbon definition being dispatched by this instance.")]
-        string Id { get; }
-
-        /// <summary>.</summary>
-        IRibbonUI RibbonUI { get; }
-
+    [Guid(Guids.ICallbackDispatcher)]
+    public interface ICallbackDispatcher {
         /// <summary>Loads an image, making it accessible by name to ribbon controls via an 'image' tag.</summary>
         [Description("Loads an image, making it accessible by name to ribbon controls via an 'image' tag.")]
         object LoadImage(string ImageId);

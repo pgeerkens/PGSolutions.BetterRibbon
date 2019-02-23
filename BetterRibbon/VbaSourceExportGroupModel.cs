@@ -8,7 +8,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(AbstractRibbonViewModel viewModel, string viewModelName, string suffix)
+        public VbaSourceExportGroupModel(AbstractDispatcher viewModel, string viewModelName, string suffix)
         : base(viewModel, viewModelName) {
             Suffix = suffix;
 

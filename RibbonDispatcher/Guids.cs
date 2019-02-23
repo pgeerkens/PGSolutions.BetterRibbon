@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IRibbonFactory          = "69E1940E" + GuidSpace;
         public const string RibbonFactory           = "69E1940F" + GuidSpace;
 
-        public const string IRibbonViewModel        = "69E19410" + GuidSpace;
+        public const string ICallbackDispatcher     = "69E19410" + GuidSpace;
         //public const string RibbonViewModel           = "69E19411" + GuidSpace;
         //public const string IRibbonCommon             = "69E19412" + GuidSpace;
         //public const string RibbonCommon              = "69E19413" + GuidSpace;
