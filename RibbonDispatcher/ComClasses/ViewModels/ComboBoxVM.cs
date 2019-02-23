@@ -7,11 +7,11 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     internal class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBoxVM,
-            IActivatable<IComboBoxSource, ComboBoxVM>, IEditableVM {
+            IActivatable<IComboBoxSource, IComboBoxVM>, IEditableVM {
         internal ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new ComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
+        public new IComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
 
         public override void Detach() {
             Edited = null;

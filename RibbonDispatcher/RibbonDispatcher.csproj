@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
     <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
+    <Compile Include="ComClasses\ComboBoxModel.cs" />
     <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\ModelFactory.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="ComClasses\IModelFactory.cs" />
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
-    <Compile Include="ComClasses\IRibbonFactory.cs" />
+    <Compile Include="ComClasses\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\ISelectableItem.cs" />

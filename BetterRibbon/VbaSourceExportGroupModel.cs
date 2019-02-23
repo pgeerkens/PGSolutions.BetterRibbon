@@ -8,15 +8,15 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(AbstractDispatcher viewModel, string viewModelName, string suffix)
+        public VbaSourceExportGroupModel(IRibbonViewModel viewModel, string viewModelName, string suffix)
         : base(viewModel, viewModelName) {
             Suffix = suffix;
 
-            DestIsSrc      = viewModel.RibbonFactory.NewToggleModel($"UseSrcFolderToggle{suffix}",
+            DestIsSrc      = viewModel.ViewModelFactory.NewToggleModel($"UseSrcFolderToggle{suffix}",
                                 OnUseSrcFolderToggled, false.ToggleImage());
-            ExportSelected = viewModel.RibbonFactory.NewButtonModel($"SelectedProjectButton{suffix}",
+            ExportSelected = viewModel.ViewModelFactory.NewButtonModel($"SelectedProjectButton{suffix}",
                                 OnExportSelected, "SaveAll");
-            ExportCurrent  = viewModel.RibbonFactory.NewButtonModel($"CurrentProjectButton{suffix}",
+            ExportCurrent  = viewModel.ViewModelFactory.NewButtonModel($"CurrentProjectButton{suffix}",
                                 OnExportCurrent, "FileSaveAs");
 
             Invalidate();
