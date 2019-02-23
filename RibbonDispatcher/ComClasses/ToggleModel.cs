@@ -18,11 +18,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IToggledEvents))]
+    [ComSourceInterfaces(typeof(IToggledEvent))]
     [ComDefaultInterface(typeof(IToggleModel))]
     [Guid(Guids.ToggleModel)]
-    public sealed class ToggleModel : RibbonControlModel<IRibbonToggleSource,CheckBoxVM>,
-            IToggleModel, ISizeable, IImageable, IRibbonToggleSource {
+    internal sealed class ToggleModel : ControlModel<IRibbonToggleSource,CheckBoxVM>,
+            IToggleModelPublic, IToggleModel, IRibbonToggleSource{///, ISizeableVM, IImageableVM {
         public ToggleModel(Func<string, CheckBoxVM> funcViewModel,
                 IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -51,5 +51,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
+    }
+
+    public interface IToggleModelPublic : IToggleModel {
+        event ToggledEventHandler Toggled;
     }
 }

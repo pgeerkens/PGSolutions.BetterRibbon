@@ -19,8 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ISelectableItem))]
     [Guid(Guids.SelectableItem)]
-    public class SelectableItem : AbstractControlVM<ISelectableItemSource>, ISelectableItem,
-            IActivatable<ISelectableItemSource,SelectableItem>, IClickable, IImageable {
+    internal class SelectableItem : AbstractControlVM<ISelectableItemSource>, ISelectableItem,
+            IActivatable<ISelectableItemSource,SelectableItem>, IClickableVM, IImageableVM {
         /// <summary>TODO</summary>
         internal SelectableItem(string ItemId) : base(ItemId) { }
 

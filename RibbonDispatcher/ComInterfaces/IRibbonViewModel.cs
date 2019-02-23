@@ -14,25 +14,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonViewModel)]
     public interface IRibbonViewModel {
-        /// <summary>Invalidates the entire Fluent Ribbon.</summary>
-        [Description("Invalidates the entire Fluent Ribbon.")]
-        void Invalidate();
+        /// <summary>.</summary>
+        string Id { get; }
 
-        /// <summary>Invalidates the specified ribbn control.</summary>
-        [Description("Invalidates the specified ribbn control.")]
-        void InvalidateControl(string ControlId);
-
-        /// <summary>Invalidates the specified Office-Built-In ribbon control.</summary>
-        [Description("Invalidates the specified Office-Built-In ribbon control.")]
-        void InvalidateControlMso(string ControlId);
-
-        /// <summary>Actiavtes the specified ribbon tab.</summary>
-        [Description("Actiavtes the specified ribbon tab.")]
-        void ActivateTab(string ControlId);
-
-        /// <summary>Actiavtes the specified ribbon tab.</summary>
-        [Description("Actiavtes the specified ribbon tab.")]
-        void ActivateTabQ(string ControlId, string ns);
+        /// <summary>.</summary>
+        IRibbonUI RibbonUI { get; }
 
         /// <summary>Loads an image, making it accessible by name to ribbon controls via an 'image' tag.</summary>
         [Description("Loads an image, making it accessible by name to ribbon controls via an 'image' tag.")]

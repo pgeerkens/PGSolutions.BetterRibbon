@@ -2,53 +2,50 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The interface for controls that can have images.</summary>
     [CLSCompliant(true)]
-    internal interface IImageable {
+    public interface IImageableVM {
         /// <summary>TODO</summary>
-        void Invalidate();
+        bool        IsImageable { get; }
 
-        /// <summary>Sets or gets whether to display the Image for this control.</summary>
-        bool    ShowImage         { get; }
-
-        /// <summary>Sets or gets whether to display the Label for this control.</summary>
-        bool    ShowLabel         { get; }
-
-        ImageObject Image         { get; }
+        /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
+        ImageObject Image       { get; }
+        /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
+        bool        ShowImage   { get; }
+        /// <summary>Gets or sets whether to show the control's label; ignored by Large controls.</summary>
+        bool        ShowLabel   { get; }
     }
 
     /// <summary>The interface for controls that can be sized.</summary>
     [CLSCompliant(true)]
-    internal interface ISizeable {
-        /// <summary>TODO</summary>
-        void Invalidate();
-
+    public interface ISizeableVM {
         bool    IsLarge           { get; }
     }
 
     /// <summary>The interface for controls that can be clicked.</summary>
     [CLSCompliant(true)]
-    internal interface IClickable {
+    public interface IClickableVM {
+        /// <summary>TODO</summary>
+        event ClickedEventHandler Clicked;
+
         /// <summary>TODO</summary>
         void OnClicked(IRibbonControl control);
     }
 
     /// <summary>The interface for controls that can be toggled.</summary>
     [CLSCompliant(true)]
-    internal interface IToggleable {
-        /// <summary>TODO</summary>
-        void Invalidate();
-
+    public interface IToggleableVM {
         /// <summary>TODO</summary>
         void OnToggled(IRibbonControl control, bool isPressed);
 
         bool    IsPressed         { get; }
     }
 
-    public interface IEditable {
+    public interface IEditableVM {
         /// <summary>Current contents of this <see cref="ITextEditable"/> control.</summary>
         string  Text              { get; }
 
@@ -58,13 +55,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
-    internal interface ISelectable {
+    public interface ISelectableVM {
         /// <summary>ID of the selected item.</summary>
         string  SelectedItemId    { get; }
         /// <summary>Index of the selected item.</summary>
         int     SelectedItemIndex { get; }
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        void    OnSelected(IRibbonControl control, string selectedId, int selectedIndex);
+        void    OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
 
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         int     ItemCount         { get; }

@@ -7,12 +7,12 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for ButtonVM objects.</summary>
-    public class ButtonVM : AbstractControlVM<IButtonSource>, IButtonVM,
-            IActivatable<IButtonSource,ButtonVM>, ISizeable, IClickable, IImageable {
+    internal class ButtonVM : AbstractControlVM<IButtonSource>, IButtonVM,
+            IActivatable<IButtonSource,IButtonVM>, ISizeableVM, IClickableVM, IImageableVM {
         internal ButtonVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new ButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);
+        public new IButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);
 
         public override void Detach() {
             Clicked = null;

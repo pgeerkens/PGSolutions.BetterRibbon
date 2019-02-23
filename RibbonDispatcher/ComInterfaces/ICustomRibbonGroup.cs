@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ICustomRibbonGroup)]
-    public interface ICustomRibbonGroup : IGroupVM {
+    internal interface ICustomRibbonGroup : IGroupVM {
         /// <summary>Sets whether or not inactive controls should be visible on the Ribbon.</summary>
         [Description("Sets whether or not inactive controls should be visible on the Ribbon.")]
         void SetShowInactive(bool showInactive);

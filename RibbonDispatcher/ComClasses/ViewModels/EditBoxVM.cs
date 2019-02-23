@@ -6,8 +6,8 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    public class EditBoxVM : AbstractControlVM<IEditBoxSource>, IEditBox,
-            IActivatable<IEditBoxSource,EditBoxVM>, IEditable {
+    internal class EditBoxVM : AbstractControlVM<IEditBoxSource>, IEditBoxVM,
+            IActivatable<IEditBoxSource,EditBoxVM>, IEditableVM {
         internal EditBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation

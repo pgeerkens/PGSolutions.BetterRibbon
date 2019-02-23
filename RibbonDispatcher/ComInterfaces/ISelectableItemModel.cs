@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISelectableItemModel)]
-    public interface ISelectableItemModel:IRibbonCommonSource {
+    public interface ISelectableItemModel: IRibbonCommonSource {
         /// <summary>Gets the {IControlStrings} for this control.</summary>
         new IControlStrings Strings {
             [Description("Gets the {IControlStrings} for this control.")]
@@ -30,6 +30,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
+
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [Description("Queues a request for this control to be refreshed.")]
+        new void Invalidate();
+
         /// <summary>.</summary>
         [Description(".")]
         bool IsLarge { get; set; }
@@ -46,10 +51,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         ISelectableItemModel Attach(string controlId);
-
-        /// <summary>Queues a request for this control to be refreshed.</summary>
-        [Description("Queues a request for this control to be refreshed.")]
-        void Invalidate();
 
         /// <summary>.</summary>
         [Description(".")]

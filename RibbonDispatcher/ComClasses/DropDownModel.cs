@@ -19,17 +19,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(ISelectedEvents))]
+    [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IDropDownModel))]
     [Guid(Guids.DropDownModel)]
-    public sealed class DropDownModel : RibbonControlModel<IDropDownSource,DropDownVM>,
+    internal sealed class DropDownModel : ControlModel<IDropDownSource,DropDownVM>,
             IDropDownModel, IDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
         public DropDownModel(Func<string, DropDownVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
 
-        public event SelectedEventHandler SelectionMade;
+        public event SelectionMadeEventHandler SelectionMade;
 
         public int SelectedIndex  { get; set; }
 

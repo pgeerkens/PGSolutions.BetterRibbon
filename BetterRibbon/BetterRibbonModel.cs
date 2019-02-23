@@ -12,20 +12,15 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
-        internal BetterRibbonModel(BetterRibbonViewModel viewModel)
-        : base(viewModel, new List<IInvalidate> {
-                new BrandingModel(viewModel.GroupViewModels.FirstOrDefault(
-                            vm => vm.Id == "BrandingGroup"), viewModel.RibbonFactory),
-                new LinksAnalysisModel(viewModel.GroupViewModels.FirstOrDefault(
-                            vm => vm.Id == "LinksAnalysisGroup"), viewModel.RibbonFactory),
+        internal BetterRibbonModel(AbstractRibbonViewModel viewModel)
+        : base(viewModel, new List<IInvalidatible> {
+                new BrandingModel(viewModel, "BrandingGroup"),
+                new LinksAnalysisModel(viewModel, "LinksAnalysisGroup"),
                 new VbaSourceExportModel( new List<VbaSourceExportGroupModel>() {
-                    new VbaSourceExportGroupModel(viewModel.GroupViewModels.FirstOrDefault(
-                            vm => vm.Id == "VbaExportGroupMS"), viewModel.RibbonFactory, "MS"),
-                    new VbaSourceExportGroupModel(viewModel.GroupViewModels.FirstOrDefault(
-                            vm => vm.Id == "VbaExportGroupPG"), viewModel.RibbonFactory, "PG")
+                    new VbaSourceExportGroupModel(viewModel, "VbaExportGroupMS", "MS"),
+                    new VbaSourceExportGroupModel(viewModel, "VbaExportGroupPG", "PG")
                 } ),
-                new CustomButtonsGroupModel(viewModel.GroupViewModels.FirstOrDefault(
-                            vm => vm.Id == "CustomizableGroup"))
+                new CustomButtonsGroupModel(viewModel, "CustomizableGroup")
             }.AsReadOnly()) { }
     }
 }

@@ -3,21 +3,20 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(GroupVM viewModel, IRibbonFactory factory, string suffix)
-        : base(viewModel) {
+        public VbaSourceExportGroupModel(AbstractRibbonViewModel viewModel, string viewModelName, string suffix)
+        : base(viewModel, viewModelName) {
             Suffix = suffix;
 
-            DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",
+            DestIsSrc      = viewModel.RibbonFactory.NewToggleModel($"UseSrcFolderToggle{suffix}",
                                 OnUseSrcFolderToggled, false.ToggleImage());
-            ExportSelected = factory.NewButtonModel($"SelectedProjectButton{suffix}",
+            ExportSelected = viewModel.RibbonFactory.NewButtonModel($"SelectedProjectButton{suffix}",
                                 OnExportSelected, "SaveAll");
-            ExportCurrent  = factory.NewButtonModel($"CurrentProjectButton{suffix}",
+            ExportCurrent  = viewModel.RibbonFactory.NewButtonModel($"CurrentProjectButton{suffix}",
                                 OnExportCurrent, "FileSaveAs");
 
             Invalidate();

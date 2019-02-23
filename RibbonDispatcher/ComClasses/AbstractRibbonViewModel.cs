@@ -9,8 +9,11 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using System.Linq;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    using IGroupList = IReadOnlyList<GroupVM>;
+
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
@@ -28,6 +31,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// chosen to maximize visibility for the unknown control, but disable its functionality.
     /// This is believed to support the principle of 'least surprise', given the OFFICE 
     /// Ribbon's propensity to fail, silently and/or fatally, at the slightest provocation.
+    /// 
+    /// This class must be COM-Visible for the Ribbon callbacks to be received!
     /// </remarks>
     [Serializable]
     [ComVisible(true)]
@@ -39,11 +44,29 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
         protected AbstractRibbonViewModel(string controlId, IResourceManager resourceManager){
             Id             = controlId;
-            _ribbonFactory = new RibbonFactory(resourceManager);
-            _ribbonFactory.Changed += PropertyChanged;
+            RibbonFactory = new RibbonFactory(resourceManager);
+            RibbonFactory.Changed += OnPropertyChanged;
         }
 
+        /// <inheritdoc/>
+        public   string        Id            { get; }
+
+        /// <inheritdoc/>
+        public   RibbonFactory RibbonFactory { get; }
+
+        /// <inheritdoc/>
+        public   IRibbonUI     RibbonUI      { get; private set; }
+
+        internal GroupVM GetGroup(string groupId)
+        => GroupViewModels.FirstOrDefault(vm => vm.Id == groupId);
+
+        private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
+        => RibbonUI?.InvalidateControl(e.ControlId);
+
         #region IRibbonExtensibility implementation
+        /// <inheritdoc/>
+        private IGroupList GroupViewModels { get; set; }
+
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
 
@@ -64,43 +87,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
             Initialized?.Invoke(this, EventArgs.Empty);
 
-            Invalidate();
+            this.InvalidateTab();
         }
 
         protected abstract string RibbonXml { get; }
+
+        /// <inheritdoc/>
+        public object LoadImage(string imageId) => RibbonFactory.LoadImage(imageId);
         #endregion
-
-        public IReadOnlyList<GroupVM> GroupViewModels { get; private set; }
-
-        /// <inheritdoc/>
-        public object LoadImage(string imageId) => _ribbonFactory.LoadImage(imageId);
-
-        /// <inheritdoc/>
-        public IRibbonFactory RibbonFactory => _ribbonFactory; private RibbonFactory _ribbonFactory;
-
-        public IRibbonUI RibbonUI { get; private set; }
-
-        private void PropertyChanged(object sender, IControlChangedEventArgs e)
-        => RibbonUI?.InvalidateControl(e.ControlId);
-
-        /// <inheritdoc/>
-        public void Invalidate()                              => RibbonUI?.Invalidate();
-        /// <inheritdoc/>
-        public void InvalidateTab()                           => RibbonUI?.InvalidateControl(Id);
-        /// <inheritdoc/>
-        public void InvalidateControl(string ControlId)       => RibbonUI?.InvalidateControl(ControlId);
-        /// <inheritdoc/>
-        public void InvalidateControlMso(string ControlId)    => RibbonUI?.InvalidateControlMso(ControlId);
-        /// <inheritdoc/>
-        public void ActivateTab(string ControlId)             => RibbonUI?.ActivateTab(ControlId);
-        /// <inheritdoc/>
-        public void ActivateTabQ(string ControlId, string ns) => RibbonUI?.ActivateTabQ(ControlId, ns);
-
-        public string Id { get; }
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
-        private IRibbonControlVM Controls (string controlId) => _ribbonFactory.Controls.GetOrDefault(controlId);
+        private IRibbonControlVM Controls (string controlId) => RibbonFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public string GetDescription(IRibbonControl Control)
             => Controls(Control?.Id)?.Description ?? Control.Unknown("Description");
@@ -125,16 +123,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #endregion
 
         #region ISizeable implementation
-        /// <summary>All of the defined controls implementing the {ISizeable} interface.</summary>
-        private ISizeable Sizeables(string controlId) => _ribbonFactory.Sizeables.GetOrDefault(controlId);
+        /// <summary>All of the defined controls implementing the {ISizeableVM} interface.</summary>
+        private ISizeableVM Sizeables(string controlId) => RibbonFactory.Sizeables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool GetSize(IRibbonControl Control)
             => (Sizeables(Control?.Id)?.IsLarge ?? true);
         #endregion
 
         #region IImageable implementation
-        /// <summary>All of the defined controls implementing the {IImageable} interface.</summary>
-        private IImageable Imageables (string controlId) => _ribbonFactory.Imageables.GetOrDefault(controlId);
+        /// <summary>All of the defined controls implementing the {IImageableVM} interface.</summary>
+        private IImageableVM Imageables (string controlId) => RibbonFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public object GetImage(IRibbonControl Control)
             => Imageables(Control?.Id)?.Image.Image ?? "MacroSecurity";
@@ -147,8 +145,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #endregion
 
         #region IToggleable implementation
-        /// <summary>All of the defined controls implementing the {IToggleable} interface.</summary>
-        private IToggleable Toggleables(string controlId) => _ribbonFactory.Toggleables.GetOrDefault(controlId);
+        /// <summary>All of the defined controls implementing the {IToggleableVM} interface.</summary>
+        private IToggleableVM Toggleables(string controlId) => RibbonFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool   GetPressed(IRibbonControl control)
             => Toggleables(control?.Id)?.IsPressed ?? false;
@@ -158,8 +156,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         #endregion
 
         #region IClickable implementation
-        /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
-        private IClickable Actionables(string controlId) => _ribbonFactory.Clickables.GetOrDefault(controlId);
+        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
+        private IClickableVM Actionables(string controlId) => RibbonFactory.Clickables.GetOrDefault(controlId);
  
         /// <inheritdoc/>
         public void   OnAction(IRibbonControl control)   => Actionables(control?.Id)?.OnClicked(control);
@@ -167,7 +165,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region ISelectableMixin implementation
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
-        private ISelectable Selectables (string controlId) => _ribbonFactory.Selectables.GetOrDefault(controlId);
+        private ISelectableVM Selectables (string controlId) => RibbonFactory.Selectables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public int    GetItemCount(IRibbonControl Control)
             => Selectables(Control?.Id)?.ItemCount ?? 0;
@@ -200,12 +198,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Selectables(Control?.Id)?.SelectedItemIndex ?? 0;
         /// <inheritdoc/>
         public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
-            => Selectables(Control?.Id)?.OnSelected(Control, SelectedId, SelectedIndex);
+            => Selectables(Control?.Id)?.OnSelectionMade(Control, SelectedId, SelectedIndex);
         #endregion
 
-        #region ITextEditable implementation
-        /// <summary>All of the defined controls implementing the {IClickable} interface.</summary>
-        private IEditable TextEditables(string controlId) => _ribbonFactory.TextEditables.GetOrDefault(controlId);
+        #region IEditable implementation
+        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
+        private IEditableVM TextEditables(string controlId) => RibbonFactory.TextEditables.GetOrDefault(controlId);
 
         public string GetText(IRibbonControl control)
         => TextEditables(control?.Id)?.Text ?? "";

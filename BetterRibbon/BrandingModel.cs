@@ -6,15 +6,15 @@ using System.Text;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(GroupVM viewModel, IRibbonFactory factory) : base(viewModel) {
-            BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
+        public BrandingModel(AbstractRibbonViewModel viewModel, string viewModelName)
+        : base(viewModel, viewModelName) {
+            BrandingButtonModel = viewModel.RibbonFactory.NewButtonModel("BrandingButton", ButtonClicked,
                 new ImageObject(BrandingIcon));
 
             Invalidate();

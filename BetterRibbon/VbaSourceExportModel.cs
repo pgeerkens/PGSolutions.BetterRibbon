@@ -21,7 +21,7 @@ namespace PGSolutions.BetterRibbon {
     using ComInterfaces = RibbonDispatcher.ComInterfaces;
 
     /// <summary>The TabModel for the VBA Source Export Group on the BetterRibbon.</summary>
-    internal sealed class VbaSourceExportModel : ComInterfaces.IInvalidate {
+    internal sealed class VbaSourceExportModel : ComInterfaces.IInvalidatible {
         /// <summary>.</summary>
         /// <param name="models"></param>
         public VbaSourceExportModel(Models models) {

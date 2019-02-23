@@ -41,12 +41,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             ResourceManager = manager ?? loader;
 
             _controls      = new Dictionary<string, IRibbonControlVM>();
-            _sizeables     = new Dictionary<string, ISizeable>();
-            _clickables    = new Dictionary<string, IClickable>();
-            _selectables   = new Dictionary<string, ISelectable>();
-            _imageables    = new Dictionary<string, IImageable>();
-            _toggleables   = new Dictionary<string, IToggleable>();
-            _textEditables = new Dictionary<string, IEditable>();
+            _sizeables     = new Dictionary<string, ISizeableVM>();
+            _clickables    = new Dictionary<string, IClickableVM>();
+            _selectables   = new Dictionary<string, ISelectableVM>();
+            _imageables    = new Dictionary<string, IImageableVM>();
+            _toggleables   = new Dictionary<string, IToggleableVM>();
+            _textEditables = new Dictionary<string, IEditableVM>();
         }
 
         internal IResourceLoader  ResourceLoader  { get; }
@@ -54,38 +54,38 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IResourceManager   ResourceManager { get; }
 
         private  readonly IDictionary<string, IRibbonControlVM> _controls;
-        private  readonly IDictionary<string, ISizeable>     _sizeables;
-        private  readonly IDictionary<string, IClickable>    _clickables;
-        private  readonly IDictionary<string, ISelectable>   _selectables;
-        private  readonly IDictionary<string, IImageable>    _imageables;
-        private  readonly IDictionary<string, IToggleable>   _toggleables;
-        private  readonly IDictionary<string, IEditable> _textEditables;
+        private  readonly IDictionary<string, ISizeableVM>   _sizeables;
+        private  readonly IDictionary<string, IClickableVM>  _clickables;
+        private  readonly IDictionary<string, ISelectableVM> _selectables;
+        private  readonly IDictionary<string, IImageableVM>  _imageables;
+        private  readonly IDictionary<string, IToggleableVM> _toggleables;
+        private  readonly IDictionary<string, IEditableVM>   _textEditables;
 
-        internal object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
+        public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IRibbonControlVM> Controls    => new ReadOnlyDictionary<string, IRibbonControlVM>(_controls);
  
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISizeable>     Sizeables   => new ReadOnlyDictionary<string, ISizeable>(_sizeables);
+        internal IReadOnlyDictionary<string, ISizeableVM>   Sizeables   => new ReadOnlyDictionary<string, ISizeableVM>(_sizeables);
 
         /// <summary>Returns a readonly collection of all Ribbon (Action) Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IClickable>    Clickables  => new ReadOnlyDictionary<string, IClickable>(_clickables);
+        internal IReadOnlyDictionary<string, IClickableVM>  Clickables  => new ReadOnlyDictionary<string, IClickableVM>(_clickables);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, ISelectable>   Selectables => new ReadOnlyDictionary<string, ISelectable>(_selectables);
+        internal IReadOnlyDictionary<string, ISelectableVM> Selectables => new ReadOnlyDictionary<string, ISelectableVM>(_selectables);
 
         /// <summary>Returns a readonly collection of all Ribbon Imageable Controls in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IImageable>    Imageables  => new ReadOnlyDictionary<string, IImageable>(_imageables);
+        internal IReadOnlyDictionary<string, IImageableVM>  Imageables  => new ReadOnlyDictionary<string, IImageableVM>(_imageables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IToggleable>   Toggleables => new ReadOnlyDictionary<string, IToggleable>(_toggleables);
+        internal IReadOnlyDictionary<string, IToggleableVM> Toggleables => new ReadOnlyDictionary<string, IToggleableVM>(_toggleables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string, IEditable> TextEditables => new ReadOnlyDictionary<string, IEditable>(_textEditables);
+        internal IReadOnlyDictionary<string, IEditableVM>   TextEditables => new ReadOnlyDictionary<string, IEditableVM>(_textEditables);
 
         /// <inheritdoc/>
-        public TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
+        internal TControl GetControl<TControl>(string controlId) where TControl : class, IRibbonControlVM
         => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
 
         /// <inheritdoc/>
@@ -95,15 +95,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IRibbonCommonSource {
+        internal T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IRibbonCommonSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
-            _clickables   .AddNotNull(ctrl.Id, ctrl as IClickable);
-            _sizeables    .AddNotNull(ctrl.Id, ctrl as ISizeable);
-            _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectable);
-            _imageables   .AddNotNull(ctrl.Id, ctrl as IImageable);
-            _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleable);
-            _textEditables.AddNotNull(ctrl.Id, ctrl as IEditable);
+            _clickables   .AddNotNull(ctrl.Id, ctrl as IClickableVM);
+            _sizeables    .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
+            _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectableVM);
+            _imageables   .AddNotNull(ctrl.Id, ctrl as IImageableVM);
+            _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
+            _textEditables.AddNotNull(ctrl.Id, ctrl as IEditableVM);
 
             ctrl.Changed += OnChanged;
             return ctrl;
@@ -112,35 +112,35 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
-        public GroupVM NewGroup(string controlId)
+        internal GroupVM NewGroup(string controlId)
         => Add<GroupVM,IRibbonCommonSource>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
-        public ButtonVM NewButton(string controlId)
+        internal ButtonVM NewButton(string controlId)
         => Add<ButtonVM,IButtonSource>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        public ToggleButtonVM NewToggleButton(string controlId)
+        internal ToggleButtonVM NewToggleButton(string controlId)
         => Add<ToggleButtonVM,IRibbonToggleSource>(new ToggleButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon CheckBoxVM ViewModel instance.</summary>
-        public CheckBoxVM NewCheckBox(string controlId)
+        internal CheckBoxVM NewCheckBox(string controlId)
         => Add<CheckBoxVM,IRibbonToggleSource>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDownViewModel instance.</summary>
-        public DropDownVM NewDropDown(string controlId)
+        internal DropDownVM NewDropDown(string controlId)
         => Add<DropDownVM,IDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>
-        public SelectableItem NewSelectableItem(string controlId)
+        internal SelectableItem NewSelectableItem(string controlId)
         => new SelectableItem(controlId);
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        public EditBoxVM NewEditBox(string controlId)
+        internal EditBoxVM NewEditBox(string controlId)
         => Add<EditBoxVM, IEditBoxSource>(new EditBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        public ComboBoxVM NewComboBox(string controlId)
+        internal ComboBoxVM NewComboBox(string controlId)
         => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
 
         /// <inheritdoc/>

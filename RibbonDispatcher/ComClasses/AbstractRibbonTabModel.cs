@@ -11,14 +11,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {
-        protected AbstractRibbonTabModel(AbstractRibbonViewModel viewModel, IReadOnlyList<IInvalidate> models) {
+        protected AbstractRibbonTabModel(AbstractRibbonViewModel viewModel, IReadOnlyList<IInvalidatible> models) {
             ViewModel = viewModel;
             Models    = models;
         }
 
         public    AbstractRibbonViewModel    ViewModel { get; }
 
-        protected IReadOnlyList<IInvalidate> Models    { get; private set; }
+        protected IReadOnlyList<IInvalidatible> Models    { get; private set; }
 
         private List<CustomButtonsGroupModel> CustomButtonsModel
         => Models.OfType<CustomButtonsGroupModel>().ToList();

@@ -18,10 +18,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IEditedEvents))]
+    [ComSourceInterfaces(typeof(IEditedEvent))]
     [ComDefaultInterface(typeof(IEditBoxModel))]
     [Guid(Guids.EditBoxModel)]
-    public class EditBoxModel : RibbonControlModel<IEditBoxSource, EditBoxVM>,
+    internal class EditBoxModel : ControlModel<IEditBoxSource, EditBoxVM>,
             IEditBoxModel, IEditBoxSource {
         public EditBoxModel(Func<string, EditBoxVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)

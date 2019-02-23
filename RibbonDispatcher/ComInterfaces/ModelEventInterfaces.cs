@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public delegate void ToggledEventHandler(IRibbonControl control, bool isPressed);
 
-    public delegate void SelectedEventHandler(IRibbonControl control, string selectedId, int selectedIndex);
+    public delegate void SelectionMadeEventHandler(IRibbonControl control, string selectedId, int selectedIndex);
 
     public delegate void EditedEventHandler(IRibbonControl control, string text);
 
@@ -25,8 +25,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
-    [Guid(Guids.IClickedEvents)]
-    public interface IClickedEvents {
+    [Guid(Guids.IClickedEvent)]
+    public interface IClickedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
         [Description("Fired when the associated control is clicked by the user.")]
         void Clicked(IRibbonControl control);
@@ -36,8 +36,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
-    [Guid(Guids.IToggledEvents)]
-    public interface IToggledEvents {
+    [Guid(Guids.IToggledEvent)]
+    public interface IToggledEvent {
         /// <summary>Fired when the associated control is toggled by the user.</summary>
         [Description("Fired when the associated control is toggled by the user.")]
         void Toggled(IRibbonControl control, bool IsPressed);
@@ -47,8 +47,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
-    [Guid(Guids.IEditedEvents)]
-    public interface IEditedEvents {
+    [Guid(Guids.IEditedEvent)]
+    public interface IEditedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
         [Description("Fired when the associated control is clicked by the user.")]
         void Edited(IRibbonControl control, string text);
@@ -58,10 +58,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
-    [Guid(Guids.ISelectedEvents)]
-    public interface ISelectedEvents {
+    [Guid(Guids.ISelectionMadeEvent)]
+    public interface ISelectionMadeEvent {
         /// <summary>Fired when the associated control has an item selection made by the user.</summary>
         [Description("Fired when the associated control has an item selection made by the user.")]
-        void Selected(IRibbonControl control, string selectedId, int selectedIndex);
+        void SelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
     }
 }

@@ -6,8 +6,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
-    public class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IToggleButtonVM,
-        IActivatable<IRibbonToggleSource,CheckBoxVM>, IToggleable {
+    internal class CheckBoxVM : AbstractControlVM<IRibbonToggleSource>, IToggleButtonVM,
+        IActivatable<IRibbonToggleSource,CheckBoxVM>, IToggleableVM {
         internal CheckBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation

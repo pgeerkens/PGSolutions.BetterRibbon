@@ -17,11 +17,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvents))]
+    [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(ISelectableItemModel))]
     [Guid(Guids.SelectableItemModel)]
-    public class SelectableItemModel : RibbonControlModel<ISelectableItemSource,SelectableItem>,
-            ISelectableItemModel, ISizeable, IImageable, ISelectableItemSource, ISelectableItem {
+    internal class SelectableItemModel : ControlModel<ISelectableItemSource,SelectableItem>,
+            ISelectableItemModel, ISizeableVM, ISelectableItemSource, ISelectableItem {//, IImageableVM {
         public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible) { }

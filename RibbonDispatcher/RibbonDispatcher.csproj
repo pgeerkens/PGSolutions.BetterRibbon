@@ -68,6 +68,7 @@
     <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\Dispatcher.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
+    <Compile Include="ComClasses\RibbonViewModelExtensions.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IEditBoxModel.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
@@ -76,7 +77,7 @@
     <Compile Include="ComClasses\RibbonFactoryExtensions.cs" />
     <Compile Include="ComClasses\ViewModels\ComboBoxVM.cs" />
     <Compile Include="ComClasses\ViewModels\EditBoxVM.cs" />
-    <Compile Include="ComClasses\ViewModels\IEditBox.cs" />
+    <Compile Include="ComClasses\ViewModels\ControlViewModelInterfaces.cs" />
     <Compile Include="ComInterfaces\IImageObject.cs" />
     <Compile Include="ComClasses\ControlModel.cs" />
     <Compile Include="ComClasses\ViewModels\GroupVM.cs" />
@@ -114,16 +115,10 @@
     <Compile Include="ComClasses\IDispatcher.cs" />
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
-    <Compile Include="ComInterfaces\IButtonVM.cs" />
-    <Compile Include="ComInterfaces\IRibbonControlVM.cs" />
-    <Compile Include="ComInterfaces\IDropDownVM.cs" />
     <Compile Include="ComClasses\IRibbonFactory.cs" />
-    <Compile Include="ComInterfaces\IGroupVM.cs" />
-    <Compile Include="ComInterfaces\IRibbonImageable.cs" />
     <Compile Include="ComInterfaces\IRibbonLoader.cs" />
     <Compile Include="ComInterfaces\IRibbonModel.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
-    <Compile Include="ComInterfaces\IToggleButtonVM.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\ISelectableItem.cs" />
     <Compile Include="ComInterfaces\ViewModelEventInterfaces.cs" />

@@ -24,7 +24,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
 
-        private IRibbonFactory RibbonFactory => TabModel.ViewModel.RibbonFactory;
+        private RibbonFactory RibbonFactory => TabModel.ViewModel.RibbonFactory;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         =>  RibbonFactory.NewControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
-        public SelectableItemModel NewSelectableModel(string controlID, IControlStrings strings) {
+        public ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings) {
             var vm = RibbonFactory.NewSelectableItem(controlID);
             var model = new SelectableItemModel(id => vm, strings, true, true);
             model.Attach(controlID);
@@ -55,31 +55,31 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ToggleModel NewToggleModel(IControlStrings strings,
+        public IToggleModel NewToggleModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
         => RibbonFactory.NewToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ToggleModel NewToggleModelMso(IControlStrings strings,
+        public IToggleModel NewToggleModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
         => RibbonFactory.NewToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public DropDownModel NewDropDownModel(IControlStrings strings,
+        public IDropDownModel NewDropDownModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => RibbonFactory.NewDropDownModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public EditBoxModel NewEditBoxModel(IControlStrings strings,
+        public IEditBoxModel NewEditBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => RibbonFactory.NewEditBoxModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public GroupModel NewGroupModel(IControlStrings strings,
+        public IGroupModel NewGroupModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => RibbonFactory.NewGroupModel(strings, isEnabled, isVisible);
     }

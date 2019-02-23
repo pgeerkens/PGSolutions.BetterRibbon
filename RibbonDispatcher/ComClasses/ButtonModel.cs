@@ -18,12 +18,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvents))]
+    [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(IButtonModel))]
     [Guid(Guids.ButtonModel)]
-    public class ButtonModel : RibbonControlModel<IButtonSource,ButtonVM>,
-            IButtonModel, IButtonSource, ISizeable, IImageable {
-        public ButtonModel(Func<string, ButtonVM> funcViewModel,
+    public class ButtonModel : ControlModel<IButtonSource,IButtonVM>,
+            IButtonModel, IButtonSource {
+        internal ButtonModel(Func<string, ButtonVM> funcViewModel,
                 IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         => Image = image;
@@ -35,14 +35,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-         public IButtonModel Attach(string controlId) {
-             ViewModel = AttachToViewModel(controlId, this);
-             if (ViewModel != null) {
-                 ViewModel.Clicked += OnClicked;
-                 ViewModel.Invalidate();
-             }
-             return this;
-         }
+        public IButtonModel Attach(string controlId) {
+            ViewModel = AttachToViewModel(controlId, this);
+            if (ViewModel != null) {
+                ViewModel.Clicked += OnClicked;
+                ViewModel.Invalidate();
+            }
+            return this;
+        }
 
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
 

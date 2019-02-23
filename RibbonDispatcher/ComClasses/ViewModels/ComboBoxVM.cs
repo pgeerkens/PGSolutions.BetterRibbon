@@ -6,8 +6,8 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    public class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBox,
-            IActivatable<IComboBoxSource, ComboBoxVM>, IEditable {
+    internal class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBoxVM,
+            IActivatable<IComboBoxSource, ComboBoxVM>, IEditableVM {
         internal ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
@@ -21,7 +21,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         #region ISelectable implementation
         /// <summary>TODO</summary>
-        public event SelectedEventHandler  SelectionMade;
+        public event SelectionMadeEventHandler  SelectionMade;
 
         /// <inheritdoc/>
         public string   SelectedItemId => Source[SelectedItemIndex].Id;
@@ -30,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        public void OnSelected(IRibbonControl control, string selectedId, int selectedIndex) {
+        public void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex) {
             SelectionMade?.Invoke(control, selectedId, selectedIndex);
             Invalidate();
         }

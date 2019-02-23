@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]
-        SelectableItemModel NewSelectableModel(string controlID, IControlStrings strings);
+        ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings);
 
         /// <summary>.</summary>
         [Description(".")]
@@ -50,31 +50,31 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ToggleModel NewToggleModel(IControlStrings strings,
+        IToggleModel NewToggleModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ToggleModel NewToggleModelMso(IControlStrings strings,
+        IToggleModel NewToggleModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        DropDownModel NewDropDownModel(IControlStrings strings,
+        IDropDownModel NewDropDownModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        EditBoxModel NewEditBoxModel(IControlStrings strings,
+        IEditBoxModel NewEditBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        GroupModel NewGroupModel(IControlStrings strings,
+        IGroupModel NewGroupModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
     }
 }
