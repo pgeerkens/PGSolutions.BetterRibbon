@@ -107,7 +107,6 @@
     <Compile Include="ComClasses\RibbonFactory.cs" />
     <Compile Include="ComClasses\ControlStrings.cs" />
     <Compile Include="ComClasses\ViewModels\ToggleButtonVM.cs" />
-    <Compile Include="ComClasses\RibbonViewModel.cs" />
     <Compile Include="ComClasses\SelectableItem.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="ComInterfaces\ModelEventInterfaces.cs" />

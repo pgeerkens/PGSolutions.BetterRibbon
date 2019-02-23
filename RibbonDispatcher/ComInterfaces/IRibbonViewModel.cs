@@ -8,13 +8,17 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+    //internal interface IRibbonViewModel: IRibbonViewModelCom {
+
+    //}
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IRibbonViewModel)]
     public interface IRibbonViewModel {
-        /// <summary>.</summary>
+        /// <summary>The Control ID of the Ribbon definition being dispatched by this instance.</summary>
+        [Description("The Control ID of the Ribbon definition being dispatched by this instance.")]
         string Id { get; }
 
         /// <summary>.</summary>

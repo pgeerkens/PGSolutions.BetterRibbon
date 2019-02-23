@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComDefaultInterface(typeof(IRibbonViewModel))]
     [Guid(Guids.AbstractDispatcher)]
-    public abstract class AbstractRibbonViewModel : IRibbonViewModel {
+    public abstract class AbstractRibbonViewModel: IRibbonViewModel {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
         protected AbstractRibbonViewModel(string controlId, IResourceManager resourceManager){
