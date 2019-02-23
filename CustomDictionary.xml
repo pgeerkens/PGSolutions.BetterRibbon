@@ -43,6 +43,7 @@
         <Word>toggleables</Word>
         <Word>typelib</Word>
         <Word>vba</Word>
+        <Word>vm</Word>
         <Word>wkbk</Word>
     </Recognized>
     <Deprecated>

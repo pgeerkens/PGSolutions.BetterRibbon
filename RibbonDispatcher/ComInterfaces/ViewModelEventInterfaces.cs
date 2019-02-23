@@ -30,6 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IClickableVM {
         /// <summary>TODO</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event ClickedEventHandler Clicked;
 
         /// <summary>TODO</summary>
@@ -40,6 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IToggleableVM {
         /// <summary>TODO</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event ToggledEventHandler Toggled;
 
         /// <summary>TODO</summary>
@@ -50,6 +52,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface IEditableVM {
         /// <summary>TODO</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event EditedEventHandler Edited;
 
         /// <summary>Current contents of this <see cref="ITextEditable"/> control.</summary>
@@ -62,6 +65,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
     public interface ISelectableVM {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event SelectionMadeEventHandler SelectionMade;
 
         /// <summary>ID of the selected item.</summary>

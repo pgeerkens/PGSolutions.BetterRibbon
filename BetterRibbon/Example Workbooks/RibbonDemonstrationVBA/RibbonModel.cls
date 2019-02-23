@@ -18,7 +18,7 @@ Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
 Private Const ControlStringsRangeName As String = "ControlStringData"
 
 Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IDispatcher
-Private CustomGroup          As PGSolutions_RibbonDispatcher.GroupModel
+Private CustomGroup          As PGSolutions_RibbonDispatcher.IGroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
@@ -228,8 +228,8 @@ Private Sub Class_Initialize()
         Set Toggle3 = .NewToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
         Set Toggle4 = .NewToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
         
-        'Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
-       ' DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
+        Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
+        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("ImageOnly", FindStrings("ImageOnly"))) _
                  .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
                  .SelectedIndex = 2

@@ -148,11 +148,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>All of the defined controls implementing the {IToggleableVM} interface.</summary>
         private IToggleableVM Toggleables(string controlId) => RibbonFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
-        public bool   GetPressed(IRibbonControl control)
-            => Toggleables(control?.Id)?.IsPressed ?? false;
+        public bool   GetPressed(IRibbonControl Control)
+            => Toggleables(Control?.Id)?.IsPressed ?? false;
         /// <inheritdoc/>
-        public void   OnActionToggle(IRibbonControl control, bool isPressed)
-            => Toggleables(control?.Id)?.OnToggled(control, isPressed);
+        public void   OnActionToggle(IRibbonControl Control, bool IsPressed)
+            => Toggleables(Control?.Id)?.OnToggled(Control, IsPressed);
         #endregion
 
         #region IClickable implementation
@@ -160,7 +160,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private IClickableVM Actionables(string controlId) => RibbonFactory.Clickables.GetOrDefault(controlId);
  
         /// <inheritdoc/>
-        public void   OnAction(IRibbonControl control)   => Actionables(control?.Id)?.OnClicked(control);
+        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(Control);
         #endregion
 
         #region ISelectableMixin implementation

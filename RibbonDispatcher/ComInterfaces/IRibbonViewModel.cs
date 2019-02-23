@@ -22,7 +22,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Loads an image, making it accessible by name to ribbon controls via an 'image' tag.</summary>
         [Description("Loads an image, making it accessible by name to ribbon controls via an 'image' tag.")]
-        object LoadImage(string imageId);
+        object LoadImage(string ImageId);
 
         /// <summary>Call back for GetDescription events from ribbon elements.</summary>
         [Description("Call back for GetDescription events from ribbon elements.")]
@@ -74,7 +74,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Call back for OnAction events from the checkBox and toggleButton ribbon elements.</summary>
         [Description("Call back for OnAction events from the checkBox and toggleButton ribbon elements.")]
-        void OnActionToggle(IRibbonControl Control, bool Pressed);
+        void OnActionToggle(IRibbonControl Control, bool IsPressed);
 
         /// <summary>Call back for OnAction events from the button ribbon elements.</summary>
         [Description("Call back for OnAction events from the button ribbon elements.")]

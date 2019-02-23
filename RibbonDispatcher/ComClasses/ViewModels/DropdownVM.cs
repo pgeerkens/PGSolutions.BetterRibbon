@@ -8,12 +8,12 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
     internal class DropDownVM : AbstractControlVM<IDropDownSource>, IDropDownVM,
-            IActivatable<IDropDownSource,DropDownVM>, ISelectableVM {
+            IActivatable<IDropDownSource,IDropDownVM>, ISelectableVM {
         internal DropDownVM(string itemId)
         : base(itemId) { }
 
         #region IActivatable implementation
-        public new DropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
+        public new IDropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
 
         public override void Detach() {
             SelectionMade = null;

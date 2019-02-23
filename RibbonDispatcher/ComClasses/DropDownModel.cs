@@ -22,9 +22,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IDropDownModel))]
     [Guid(Guids.DropDownModel)]
-    internal sealed class DropDownModel : ControlModel<IDropDownSource,DropDownVM>,
+    public sealed class DropDownModel : ControlModel<IDropDownSource,IDropDownVM>,
             IDropDownModel, IDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
-        public DropDownModel(Func<string, DropDownVM> funcViewModel,
+        internal DropDownModel(Func<string, DropDownVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
