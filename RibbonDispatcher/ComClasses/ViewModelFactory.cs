@@ -1,13 +1,10 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
@@ -22,13 +19,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// values" usages are (believed to be) the only means of implementing functionality equivalent
     /// to "overrides" in a COM-compatible way.
     /// </remarks>
-    [Description("Implementation of the factory for Ribbon objects.")]
-    [Serializable]
-    [CLSCompliant(true)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IViewModelFactory))]
-    [Guid(Guids.ViewModelFactory)]
     public partial class ViewModelFactory : IViewModelFactory {
         public ViewModelFactory() : this(new ResourceLoader()) { }
 

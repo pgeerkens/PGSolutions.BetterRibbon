@@ -111,7 +111,7 @@
     <Compile Include="Guids.cs" />
     <Compile Include="ComInterfaces\ModelEventInterfaces.cs" />
     <Compile Include="ComInterfaces\IControlChangedEventArgs.cs" />
-    <Compile Include="ComClasses\IModelFactory.cs" />
+    <Compile Include="ComInterfaces\IModelFactory.cs" />
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IViewModelFactory.cs" />

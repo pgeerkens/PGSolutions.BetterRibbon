@@ -1,25 +1,16 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
     /// <summary></summary>
-    [Description("")]
+    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes",
             Justification ="Unnecessaty.")]
-    [ComVisible(true)]
-    [CLSCompliant(false)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IImageObject))]
-    [Guid(Guids.ImageObject)]
     public class ImageObject:IImageObject {
         public ImageObject(string imageMso)    => _image = imageMso;
         public ImageObject(IPictureDisp image) => _image = image;

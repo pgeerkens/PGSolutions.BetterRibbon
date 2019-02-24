@@ -3,14 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
-    [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IResourceManager)]
     public interface IResourceManager {
         /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
         [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
