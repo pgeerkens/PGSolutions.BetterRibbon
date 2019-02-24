@@ -7,11 +7,11 @@ using System.Collections.Generic;
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     using IStrings = IControlStrings;
 
-    public interface IInvalidatible {
+    public interface ICanInvalidate {
         void Invalidate();
     }
 
-    public interface IRibbonCommonSource {
+    public interface IControlSource {
         /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
         IStrings Strings      { get; }
 
@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void     SetShowInactive(bool showInactive);
     }
 
-    public interface IButtonSource : IRibbonCommonSource {
+    public interface IButtonSource : IControlSource {
         /// <summary>.</summary>
         ImageObject Image     { get; }
 
@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IDropDownSource : IRibbonCommonSource, IEnumerable<ISelectableItem> {
+    public interface IDropDownSource : IControlSource, IEnumerable<ISelectableItem> {
         /// <summary>.</summary>
         int     SelectedIndex { get; }
 
@@ -62,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IEnumerator<ISelectableItem> GetEnumerator();
     }
 
-    public interface ISelectableItemSource: IRibbonCommonSource {
+    public interface ISelectableItemSource: IControlSource {
         /// <summary>.</summary>
         ImageObject Image     { get; }
 
@@ -76,7 +76,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool        IsLarge   { get; }
     }
 
-    public interface IEditBoxSource: IRibbonCommonSource {
+    public interface IEditBoxSource: IControlSource {
         /// <summary>.</summary>
         string      Text      { get; }
     }

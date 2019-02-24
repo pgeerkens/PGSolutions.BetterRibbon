@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [ComVisible(false)]
     public interface IActivatable<TSource, TControl>: IActivatable
             where TControl: IControlVM
-            where TSource: IRibbonCommonSource {
+            where TSource: IControlSource {
         bool     ShowInactive { get; }
 
         TControl Attach(TSource source);

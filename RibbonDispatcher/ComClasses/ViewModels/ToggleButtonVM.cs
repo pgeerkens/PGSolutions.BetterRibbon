@@ -10,33 +10,28 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         internal ToggleButtonVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new ToggleButtonVM Attach(IToggleSource source)
-        => Attach<ToggleButtonVM>(source);
+        /// <inheritdoc/>
+        public new ToggleButtonVM Attach(IToggleSource source) => Attach<ToggleButtonVM>(source);
         #endregion
 
         #region IToggleable implementation
         /// <inheritdoc/>>
-        public override string Label => IsPressed || string.IsNullOrEmpty(AlternateLabel)
-                                     ? base.Label ?? Id
+        public override string Label => !IsPressed || string.IsNullOrEmpty(Strings?.AlternateLabel)
+                                     ? base.Label
                                      : AlternateLabel;
         #endregion
 
         #region ISizeable implementation
-        /// <inheritdoc/>>
-        public override bool IsSizeable => true;
         /// <inheritdoc/>
-        public override bool IsLarge => Source?.IsLarge ?? true;
+        public override bool IsLarge => Source?.IsLarge ?? false;
         #endregion
 
         #region IImageable implementation
         /// <inheritdoc/>
-        public override bool IsImageable => true;
-
-        /// <inheritdoc/>
         public override ImageObject Image => Source?.Image ?? "MacroSecurity";
 
         /// <inheritdoc/>
-        public override bool ShowImage => Source?.ShowImage ?? true;
+        public override bool ShowImage => Source?.ShowImage ?? (Source?.Image != null);
 
         /// <inheritdoc/>
         public override bool ShowLabel => Source?.ShowLabel ?? true;

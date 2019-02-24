@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISelectableItemModel)]
-    public interface ISelectableItemModel: IRibbonCommonSource {
+    public interface ISelectableItemModel: IControlSource {
         /// <summary>Gets the {IControlStrings} for this control.</summary>
         new IControlStrings Strings {
             [Description("Gets the {IControlStrings} for this control.")]

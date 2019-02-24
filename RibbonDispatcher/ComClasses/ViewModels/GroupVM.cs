@@ -10,18 +10,18 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    internal class GroupVM : AbstractControlVM<IRibbonCommonSource>, IGroupVM,
-            IActivatable<IRibbonCommonSource,GroupVM> {
+    internal class GroupVM : AbstractControlVM<IControlSource>, IGroupVM,
+            IActivatable<IControlSource,GroupVM> {
         public GroupVM(IViewModelFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;
             Controls = new KeyedControls();
-            Add<IRibbonCommonSource>(this);
+            Add<IControlSource>(this);
         }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        GroupVM IActivatable<IRibbonCommonSource,GroupVM>.Attach(IRibbonCommonSource source)
+        GroupVM IActivatable<IControlSource,GroupVM>.Attach(IControlSource source)
         => Attach<GroupVM>(source);
 
         public override void Detach() {
@@ -53,7 +53,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public GroupVM Add<TSource>(IActivatable control)
-        where TSource:IRibbonCommonSource {
+        where TSource:IControlSource {
             if (control == null) return null;
             Controls.Add(control);
             return this;

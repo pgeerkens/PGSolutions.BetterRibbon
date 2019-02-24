@@ -9,9 +9,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The interface for controls that can have images.</summary>
     [CLSCompliant(true)]
     public interface IImageableVM {
-        /// <summary>TODO</summary>
-        bool        IsImageable { get; }
-
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
         ImageObject Image       { get; }
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>

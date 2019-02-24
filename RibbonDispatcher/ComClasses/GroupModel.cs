@@ -18,8 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IGroupModel))]
     [Guid(Guids.GroupModel)]
-    internal class GroupModel : ControlModel<IRibbonCommonSource,GroupVM>,
-            IGroupModel, IRibbonCommonSource {
+    internal class GroupModel : ControlModel<IControlSource,GroupVM>,
+            IGroupModel, IControlSource {
         public GroupModel(Func<string,GroupVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)

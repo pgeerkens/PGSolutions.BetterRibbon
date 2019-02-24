@@ -25,29 +25,27 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal SelectableItem(string ItemId) : base(ItemId) { }
 
         #region IActivatable implementation
-        SelectableItem IActivatable<ISelectableItemSource,SelectableItem>.Attach(ISelectableItemSource source)
-        => Attach<SelectableItem>(source);
+        /// <inheritdoc/>
+        public new SelectableItem Attach(ISelectableItemSource source) => Attach<SelectableItem>(source);
 
+        /// <inheritdoc/>
         public override void Detach() => base.Detach();
         #endregion
 
         #region IClickable implementation
-        /// <summary>The Clicked event source for COM clients</summary>
+        /// <inheritdoc/>
         public event ClickedEventHandler Clicked;
 
-        /// <summary>The callback from the Ribbon ModelFactory to initiate Clicked events on this control.</summary>
+        /// <inheritdoc/>
         public virtual void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 
         #region IImageable implementation
         /// <inheritdoc/>
-        public bool IsImageable => true;
-
-        /// <inheritdoc/>
         public ImageObject Image => Source?.Image ?? "MacroSecurity";
 
         /// <inheritdoc/>
-        public bool ShowImage => Source?.ShowImage ?? true;
+        public bool ShowImage => Source?.ShowImage ?? (Source?.Image != null);
 
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;

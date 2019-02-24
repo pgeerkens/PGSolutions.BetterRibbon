@@ -22,17 +22,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// values" usages are (believed to be) the only means of implementing functionality equivalent
     /// to "overrides" in a COM-compatible way.
     /// </remarks>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-       Justification = "Public, Non-Creatable, class with exported Events.")]
+    [Description("Implementation of the factory for Ribbon objects.")]
     [Serializable]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IViewModelFactory))]
-    [Guid(Guids.RibbonFactory)]
-    [Description("Implementation of the factory for Ribbon objects.")]
+    [Guid(Guids.ViewModelFactory)]
     public partial class ViewModelFactory : IViewModelFactory {
-        public ViewModelFactory() : this(new ResourceLoader()) { ; }
+        public ViewModelFactory() : this(new ResourceLoader()) { }
 
         internal ViewModelFactory(IResourceManager manager) {
             ResourceManager = manager; 
@@ -91,7 +89,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        internal T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IRibbonCommonSource {
+        internal T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IControlSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
             _clickables   .AddNotNull(ctrl.Id, ctrl as IClickableVM);
@@ -109,7 +107,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         internal GroupVM NewGroup(string controlId)
-        => Add<GroupVM,IRibbonCommonSource>(new GroupVM(this, controlId));
+        => Add<GroupVM,IControlSource>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton ViewModel instance.</summary>
         internal ButtonVM NewButton(string controlId)

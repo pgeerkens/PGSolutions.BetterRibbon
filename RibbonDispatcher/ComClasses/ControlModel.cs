@@ -6,8 +6,8 @@ using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public abstract class ControlModel<TSource,TCtrl>: IRibbonCommonSource
-            where TSource: IRibbonCommonSource
+    public abstract class ControlModel<TSource,TCtrl>: IControlSource
+            where TSource: IControlSource
             where TCtrl: IControlVM {
         protected ControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible) {

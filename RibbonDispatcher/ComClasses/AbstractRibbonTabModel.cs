@@ -8,11 +8,11 @@ using System.Linq;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IModels  = IReadOnlyList<IInvalidatible>;
+    using IModels  = IReadOnlyList<ICanInvalidate>;
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {
-        protected AbstractRibbonTabModel(IRibbonViewModel viewModel, IReadOnlyList<IInvalidatible> models) {
+        protected AbstractRibbonTabModel(IRibbonViewModel viewModel, IReadOnlyList<ICanInvalidate> models) {
             ViewModel = viewModel;
             Models    = models;
         }
