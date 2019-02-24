@@ -15,7 +15,6 @@ using Microsoft.Office.Core;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
     [Description("The COM visible Model for Ribbon Drop Down controls")]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
@@ -30,26 +29,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public event EditedEventHandler Edited;
 
-        public event SelectionMadeEventHandler SelectionMade;
-
         public string Text          { get; set; } = "";
-
-        public int    SelectedIndex { get; set; } = 0;
 
         public IComboBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Edited += OnEdited;
-                ViewModel.SelectionMade += OnSelectionMade;
                 ViewModel.Invalidate();
             }
             return this;
         }
 
         private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control, text);
-
-        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
-        => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
 
         public IComboBoxModel AddSelectableModel(ISelectableItemModel selectableModel) {
             Items.Add(selectableModel);

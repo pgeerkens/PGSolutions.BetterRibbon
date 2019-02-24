@@ -20,21 +20,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         #endregion
 
         #region ISelectable implementation
-        /// <summary>TODO</summary>
-        public event SelectionMadeEventHandler  SelectionMade;
-
-        /// <inheritdoc/>
-        public string   SelectedItemId => Source[SelectedItemIndex].Id;
-
-        /// <inheritdoc/>
-        public int      SelectedItemIndex => Source?.SelectedIndex ?? 0;
-
-        /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        public void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex) {
-            SelectionMade?.Invoke(control, selectedId, selectedIndex);
-            Invalidate();
-        }
-
         /// <inheritdoc/>
         public ISelectableItemModel this[int ItemIndex] => Source[ItemIndex];
         /// <inheritdoc/>
@@ -53,10 +38,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public string   ItemSuperTip(int Index)  => Source[Index].Strings.SuperTip;
         /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
         public object   ItemImage(int Index)     => "MacroSecurity";
-        /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public bool     ItemShowImage(int Index) => Source[Index].ShowImage;
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public bool     ItemShowLabel(int Index) => Source[Index].ShowImage;
+        ///// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
+        //public bool     ItemShowImage(int Index) => Source[Index].ShowImage;
+        ///// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
+        //public bool     ItemShowLabel(int Index) => Source[Index].ShowImage;
         #endregion
 
         #region IEditable implementation

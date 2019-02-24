@@ -4,29 +4,17 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.InteropServices;
+
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
-using System.Linq;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IGroupList = IReadOnlyList<GroupVM>;
-
-    /// <summary>Additional implementation-specific methods exposed by the Callback ModelFactory.</summary>
-    public interface IRibbonViewModel {
-        /// <summary>The Ribbon ControlID of the Ribbon definition being dispatched by this instance.</summary>
-        string           ControlId        { get; }
-
-        /// <summary>.</summary>
-        ViewModelFactory ViewModelFactory { get; }
-
-        /// <summary>.</summary>
-        IRibbonUI        RibbonUI         { get; }
-
-        IGroupVM GetGroup(string groupId);
-    }
 
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
@@ -48,9 +36,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// 
     /// This class must be COM-Visible for the Ribbon callbacks to be received!
     /// </remarks>
-    [Serializable]
-    [ComVisible(true)]
-    [CLSCompliant(true)]
+    [Description("Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.")]
+    [Serializable, ComVisible(true), CLSCompliant(true)]
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
@@ -110,7 +97,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public object LoadImage(string ImageId) => ViewModelFactory.LoadImage(ImageId);
         #endregion
 
-        #region IRibbonCommon implementation
+        #region IControlVM implementation
         /// <summary>All of the defined controls.</summary>
         private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
@@ -136,7 +123,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Controls(Control?.Id)?.IsVisible ?? true;
         #endregion
 
-        #region ISizeable implementation
+        #region ISizeableVM implementation
         /// <summary>All of the defined controls implementing the {ISizeableVM} interface.</summary>
         private ISizeableVM Sizeables(string controlId) => ViewModelFactory.Sizeables.GetOrDefault(controlId);
         /// <inheritdoc/>
@@ -144,7 +131,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => (Sizeables(Control?.Id)?.IsLarge ?? true);
         #endregion
 
-        #region IImageable implementation
+        #region IImageableVM implementation
         /// <summary>All of the defined controls implementing the {IImageableVM} interface.</summary>
         private IImageableVM Imageables (string controlId) => ViewModelFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
@@ -158,7 +145,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Imageables(Control?.Id)?.ShowLabel ?? true;
         #endregion
 
-        #region IToggleable implementation
+        #region IClickableVM implementation
+        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
+        private IClickableVM Clickables(string controlId) => ViewModelFactory.Clickables.GetOrDefault(controlId);
+
+        /// <inheritdoc/>
+        public void OnAction(IRibbonControl Control) => Clickables(Control?.Id)?.OnClicked(Control);
+        #endregion
+
+        #region IToggleableVM implementation
         /// <summary>All of the defined controls implementing the {IToggleableVM} interface.</summary>
         private IToggleableVM Toggleables(string controlId) => ViewModelFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
@@ -169,15 +164,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Toggleables(Control?.Id)?.OnToggled(Control, IsPressed);
         #endregion
 
-        #region IClickable implementation
-        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
-        private IClickableVM Actionables(string controlId) => ViewModelFactory.Clickables.GetOrDefault(controlId);
- 
-        /// <inheritdoc/>
-        public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(Control);
-        #endregion
-
-        #region ISelectableMixin implementation
+        #region ISelectableVM implementation - DropDown & ComboBox
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
         private ISelectableVM Selectables (string controlId) => ViewModelFactory.Selectables.GetOrDefault(controlId);
         /// <inheritdoc/>
@@ -196,26 +183,34 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string GetItemScreenTip(IRibbonControl Control, int Index)
             => Selectables(Control?.Id)?.ItemScreenTip(Index) ?? Control.Unknown();
         /// <inheritdoc/>
-        public bool   GetItemShowImage(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemShowImage(Index) ?? true;
-        /// <inheritdoc/>
-        public bool   GetItemShowLabel(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemShowLabel(Index) ?? true;
-        /// <inheritdoc/>
         public string GetItemSuperTip(IRibbonControl Control, int Index)
             => Selectables(Control?.Id)?.ItemSuperTip(Index) ?? Control.Unknown();
-        /// <inheritdoc/>
-        public string GetSelectedItemId(IRibbonControl Control)
-            => Selectables(Control?.Id)?.SelectedItemId;
-        /// <inheritdoc/>
-        public int    GetSelectedItemIndex(IRibbonControl Control)
-            => Selectables(Control?.Id)?.SelectedItemIndex ?? 0;
-        /// <inheritdoc/>
-        public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
-            => Selectables(Control?.Id)?.OnSelectionMade(Control, SelectedId, SelectedIndex);
         #endregion
 
-        #region IEditable implementation
+        #region ISelectable2VM implementation - DropDown
+        /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
+        private ISelectable2VM Selectables2(string controlId) => ViewModelFactory.Selectables2.GetOrDefault(controlId);
+
+        /// <inheritdoc/>
+        public string GetSelectedItemId(IRibbonControl Control)
+            => Selectables2(Control?.Id)?.SelectedItemId;
+        /// <inheritdoc/>
+        public int GetSelectedItemIndex(IRibbonControl Control)
+            => Selectables2(Control?.Id)?.SelectedItemIndex ?? 0;
+
+        ///// <inheritdoc/>
+        //public bool   GetItemShowImage(IRibbonControl Control, int Index)
+        //    => Selectables(Control?.Id)?.ItemShowImage(Index) ?? true;
+        ///// <inheritdoc/>
+        //public bool   GetItemShowLabel(IRibbonControl Control, int Index)
+        //    => Selectables(Control?.Id)?.ItemShowLabel(Index) ?? true;
+
+        /// <inheritdoc/>
+        public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
+            => Selectables2(Control?.Id)?.OnSelectionMade(Control, SelectedId, SelectedIndex);
+        #endregion
+
+        #region IEditableVM implementation - EditBox & ComboBox
         /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
         private IEditableVM TextEditables(string controlId) => ViewModelFactory.TextEditables.GetOrDefault(controlId);
 

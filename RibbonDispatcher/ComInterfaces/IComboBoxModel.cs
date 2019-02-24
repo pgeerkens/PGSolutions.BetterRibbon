@@ -31,12 +31,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set;
         }
 
-        /// <summary>Gets or sets the (zero-based) integer of the selected item.</summary>
-        int SelectedIndex {
-            [Description("Gets or sets the (zero-based) integer of the selected item.")]
-            get; set;
-
-        }
         /// <summary>Gets or sets the content of the <see cref="EditBoxVM"/>.</summary>
         string Text {
             [Description("Gets or sets the content of the EditBOxVM.")]

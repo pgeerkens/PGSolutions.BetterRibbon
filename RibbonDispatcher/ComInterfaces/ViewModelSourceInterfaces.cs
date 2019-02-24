@@ -47,11 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool        IsPressed { get; }
     }
 
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IDropDownSource : IControlSource, IEnumerable<ISelectableItemModel> {
-        /// <summary>.</summary>
-        int     SelectedIndex { get; }
-
+    public interface ISelectableSource: IControlSource, IEnumerable<ISelectableItemModel> {
         /// <summary>.</summary>
         int         Count     { get; }
 
@@ -62,18 +58,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         new IEnumerator<ISelectableItemModel> GetEnumerator();
     }
 
-    public interface ISelectableItemSource: IControlSource {
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public interface IDropDownSource : ISelectableSource {
         /// <summary>.</summary>
-        ImageObject Image     { get; }
-
-        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool        ShowImage { get; }
-
-        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool        ShowLabel { get; }
-
-        /// <summary>.</summary>
-        bool        IsLarge   { get; }
+        int     SelectedIndex { get; }
     }
 
     public interface IEditBoxSource: IControlSource {
@@ -82,6 +70,20 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IComboBoxSource: IDropDownSource, IEditBoxSource {
+    public interface IComboBoxSource: ISelectableSource, IEditBoxSource {
+    }
+
+    public interface ISelectableItemSource: IControlSource {
+        /// <summary>.</summary>
+        ImageObject Image { get; }
+
+        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowImage { get; }
+
+        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
+        bool ShowLabel { get; }
+
+        /// <summary>.</summary>
+        bool IsLarge { get; }
     }
 }

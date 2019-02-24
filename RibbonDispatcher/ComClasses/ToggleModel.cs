@@ -12,11 +12,9 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary></summary>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
-    [Description("")]
-    [CLSCompliant(true)]
-    [ComVisible(true)]
+    /// <summary>The COM visible Model for Ribbon EditBox controls.</summary>
+    [Description("The COM visible Model for Ribbon EditBox controls.")]
+    [CLSCompliant(true), ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvent))]
     [ComDefaultInterface(typeof(IToggleModel))]

@@ -113,12 +113,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Call back for GetItemImage events from the drop-down ribbon elements.")]
         object GetItemImage(IRibbonControl Control, int Index);
 
-        /// <summary>Call back for GetItemShowImage events from the drop-down ribbon elements.</summary>
-        [Description("Call back for GetItemShowImage events from the drop-down ribbon elements.")]
-        bool GetItemShowImage(IRibbonControl Control, int Index);
+        ///// <summary>Call back for GetItemShowImage events from the drop-down ribbon elements.</summary>
+        //[Description("Call back for GetItemShowImage events from the drop-down ribbon elements.")]
+        //bool GetItemShowImage(IRibbonControl Control, int Index);
 
-        /// <summary>Call back for GetItemShowLabel events from the drop-down ribbon elements.</summary>
-        [Description("Call back for GetItemShowLabel events from the drop-down ribbon elements.")]
-        bool GetItemShowLabel(IRibbonControl Control, int Index);
+        ///// <summary>Call back for GetItemShowLabel events from the drop-down ribbon elements.</summary>
+        //[Description("Call back for GetItemShowLabel events from the drop-down ribbon elements.")]
+        //bool GetItemShowLabel(IRibbonControl Control, int Index);
     }
 }

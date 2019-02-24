@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The base interface for Ribbon controls.</summary>
@@ -42,12 +43,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The total interface (required to be) exposed externally by DropDownVM objects; 
     /// composition of IControlVM, IDropDownItem &amp; IImageableItem</summary>
-    public interface IDropDownVM: IControlVM, ISelectableVM { }
+    public interface IDropDownVM: IControlVM, ISelectableVM, ISelectable2VM { }
 
     public interface ISelectableItemVM: IControlVM, IImageableVM { }
 
-    public interface IComboBoxVM: IDropDownVM, IEditBoxVM { }
+    public interface IComboBoxVM: IControlVM, ISelectableVM, IEditBoxVM { }
 
     /// <summary>TODO</summary>
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
     public interface IGroupVM: IControlVM { }
 }

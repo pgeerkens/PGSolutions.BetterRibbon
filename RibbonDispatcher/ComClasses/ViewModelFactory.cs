@@ -1,10 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
@@ -18,7 +21,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// anti-pattern. Although non-standard C# practice, these "optional parameters with default 
     /// values" usages are (believed to be) the only means of implementing functionality equivalent
     /// to "overrides" in a COM-compatible way.
+    /// 
+    /// This class must be COM-Visible for the typelib to be created. 
     /// </remarks>
+    [Description("Implementation of the factory for Ribbon objects.")]
+    [Serializable]
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComDefaultInterface(typeof(IViewModelFactory))]
+    [Guid(Guids.ViewModelFactory)]
     public partial class ViewModelFactory : IViewModelFactory {
         public ViewModelFactory() : this(new ResourceLoader()) { }
 
@@ -29,6 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _sizeables     = new Dictionary<string, ISizeableVM>();
             _clickables    = new Dictionary<string, IClickableVM>();
             _selectables   = new Dictionary<string, ISelectableVM>();
+            _selectables2  = new Dictionary<string, ISelectable2VM>();
             _imageables    = new Dictionary<string, IImageableVM>();
             _toggleables   = new Dictionary<string, IToggleableVM>();
             _textEditables = new Dictionary<string, IEditableVM>();
@@ -37,13 +50,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
-        private  readonly IDictionary<string, IControlVM>    _controls;
-        private  readonly IDictionary<string, ISizeableVM>   _sizeables;
-        private  readonly IDictionary<string, IClickableVM>  _clickables;
-        private  readonly IDictionary<string, ISelectableVM> _selectables;
-        private  readonly IDictionary<string, IImageableVM>  _imageables;
-        private  readonly IDictionary<string, IToggleableVM> _toggleables;
-        private  readonly IDictionary<string, IEditableVM>   _textEditables;
+        private  readonly IDictionary<string, IControlVM>     _controls;
+        private  readonly IDictionary<string, ISizeableVM>    _sizeables;
+        private  readonly IDictionary<string, IClickableVM>   _clickables;
+        private  readonly IDictionary<string, ISelectableVM>  _selectables;
+        private  readonly IDictionary<string, ISelectable2VM> _selectables2;
+        private  readonly IDictionary<string, IImageableVM>   _imageables;
+        private  readonly IDictionary<string, IToggleableVM>  _toggleables;
+        private  readonly IDictionary<string, IEditableVM>    _textEditables;
 
         public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
@@ -58,6 +72,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, ISelectableVM> Selectables   => new ReadOnlyDictionary<string, ISelectableVM>(_selectables);
+
+        /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
+        internal IReadOnlyDictionary<string, ISelectable2VM> Selectables2 => new ReadOnlyDictionary<string, ISelectable2VM>(_selectables2);
 
         /// <summary>Returns a readonly collection of all Ribbon Imageable Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IImageableVM>  Imageables    => new ReadOnlyDictionary<string, IImageableVM>(_imageables);
@@ -85,6 +102,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _clickables   .AddNotNull(ctrl.Id, ctrl as IClickableVM);
             _sizeables    .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
             _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectableVM);
+            _selectables2 .AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
             _imageables   .AddNotNull(ctrl.Id, ctrl as IImageableVM);
             _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
             _textEditables.AddNotNull(ctrl.Id, ctrl as IEditableVM);

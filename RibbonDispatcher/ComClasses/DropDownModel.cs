@@ -15,7 +15,6 @@ using Microsoft.Office.Core;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
     [Description("The COM visible Model for Ribbon Drop Down controls")]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]

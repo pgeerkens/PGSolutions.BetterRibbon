@@ -12,7 +12,13 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;
 
+    /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
     public static partial class PublicExtensions {
+        /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
+        /// <param name="model"></param>
+        public static IModelFactory NewModelFactory(this AbstractRibbonTabModel model)
+            => new ModelFactory(model);
+
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IButtonModel NewButtonModel(this ViewModelFactory factory, string id,
@@ -56,35 +62,74 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IComboBoxModel NewComboBoxModel(this ViewModelFactory factory, string id,
-                SelectionMadeEventHandler selectedHandler, EditedEventHandler editedHandler,
+                EditedEventHandler handler,
                 bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewComboBoxModel(factory.GetStrings(id), isEnabled, isVisible);
 
-            model.Edited        += editedHandler;
-            model.SelectionMade += selectedHandler;
+            model.Edited += handler;
             return model?.Attach(id);
-        }
-
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
-        public static SelectableItemModel NewSelectableModel(this ViewModelFactory factory,
-                string controlID, IStrings strings) {
-            var model = new SelectableItemModel(strings, true, true);
-
-            model.Attach(controlID);
-            return model;
         }
     }
 
+    /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the common link between <see cref="ControlModel{TSource, TCtrl}"/> objects created from VBA and C#.></summary>
     internal static partial class ViewModelFactoryExtensions {
+        /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
+        public static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new GroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
+
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
+                ImageObject image, bool isEnabled, bool isVisible)
+        => new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible)
+                .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
+        public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
+                ImageObject image, bool isEnabled, bool isVisible)
+        => new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible)
+                .InitializeModel<IToggleSource, IToggleControlVM, ToggleModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
+        public static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new EditBoxModel(factory.GetControl<EditBoxVM>, strings, isEnabled, isVisible)
+                .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
+        public static ComboBoxModel NewComboBoxModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new ComboBoxModel(factory.GetControl<ComboBoxVM>, strings, isEnabled, isVisible)
+                .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
+        public static DropDownModel NewDropDownModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible)
+                .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
+
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "factory")]
+        public static ISelectableItemModel NewSelectableModel(this ViewModelFactory factory,
+                string controlID, IStrings strings)
+        => new SelectableItemModel(strings, true, true).Attach(controlID);
+
+        public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
+            where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {
+
+            model.SetShowInactive(false);
+            model.Invalidate();
+            return model;
+        }
+
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
         public static IReadOnlyList<GroupVM> ParseXml(this ViewModelFactory factory, string ribbonXml) {
-            //if (factory == null) throw new ArgumentNullException(nameof(factory));
             var groupModels = new List<GroupVM>();
             var doc = XDocument.Parse(ribbonXml);
             var root = doc.Root;
-            XNamespace mso = ( from a in doc.Descendants().Attributes() 
-                               where a.IsNamespaceDeclaration && a.Name.LocalName == "mso" 
+            XNamespace mso = ( from a in doc.Descendants().Attributes()
+                               where a.IsNamespaceDeclaration && a.Name.LocalName == "mso"
                                select a
                              ).FirstOrDefault()?.Value;
             foreach (var group in root.Descendants(mso+"group")) {
@@ -121,6 +166,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                             viewModel.Add<IComboBoxSource>(factory.NewComboBox(element.Attribute("id").Value));
                             break;
 
+                        case XName name when name == mso+"dialogBoxLauncher":
                         default:
                             break;
                     }
@@ -129,48 +175,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
             return groupModels.AsReadOnly();
         }
-
-        /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
-        public static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
-                bool isEnabled, bool isVisible)
-        => new GroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
-
-        public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
-            where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {
-
-            model.SetShowInactive(false);
-            model.Invalidate();
-            return model;
-        }
-
-        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
-                ImageObject image, bool isEnabled, bool isVisible)
-        => new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible)
-                .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
-        public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
-                ImageObject image, bool isEnabled, bool isVisible)
-        => new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible)
-                .InitializeModel<IToggleSource, IToggleControlVM, ToggleModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
-        public static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
-                bool isEnabled, bool isVisible)
-        => new EditBoxModel(factory.GetControl<EditBoxVM>, strings, isEnabled, isVisible)
-                .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
-        public static ComboBoxModel NewComboBoxModel(this ViewModelFactory factory, IStrings strings,
-                bool isEnabled, bool isVisible)
-        => new ComboBoxModel(factory.GetControl<ComboBoxVM>, strings, isEnabled, isVisible)
-                .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
-        public static DropDownModel NewDropDownModel(this ViewModelFactory factory, IStrings strings,
-                bool isEnabled, bool isVisible)
-        => new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible)
-                .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
     }
 }

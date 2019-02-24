@@ -29,9 +29,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void DetachProxy(string controlId);
 
         /// <summary>.</summary>
-        /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]
-        ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings);
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IGroupModel NewGroupModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
@@ -60,19 +61,23 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IDropDownModel NewDropDownModel(IControlStrings strings,
-                bool isEnabled = true, bool isVisible = true);
-
-        /// <summary>.</summary>
-        [Description(".")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         IEditBoxModel NewEditBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IGroupModel NewGroupModel(IControlStrings strings,
+        IDropDownModel NewDropDownModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IComboBoxModel NewComboBoxModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
+        [Description(".")]
+        ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings);
     }
 }

@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>COM-visible implementation of the interface <see cref="IRibbonDispatcher"/>.</summary>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
-    public class ModelFactory : IModelFactory {
+    internal class ModelFactory : IModelFactory {
         /// <summary>.</summary>
         public ModelFactory(AbstractRibbonTabModel tabModel) => TabModel = tabModel;
 

@@ -11,7 +11,6 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]

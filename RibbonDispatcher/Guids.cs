@@ -13,8 +13,8 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IToggledEvent           = "69E19402" + GuidSpace;
         public const string ISelectionMadeEvent     = "69E19403" + GuidSpace;
         //public const string IToggledEventArgs       = "69E19404" + GuidSpace;
-        //public const string ISelectedEventArgs      = "69E19405" + GuidSpace;
-        //public const string IRibbonWorkbook         = "69E19406" + GuidSpace;
+        public const string IViewModelFactory       = "69E19405" + GuidSpace;   // Required for typelib creation
+        public const string ViewModelFactory        = "69E19406" + GuidSpace;   // Required for typelib creation
         public const string IResourceLoader         = "69E19407" + GuidSpace;
         public const string ResourceLoader          = "69E19408" + GuidSpace;
         public const string IControlStrings         = "69E19409" + GuidSpace;

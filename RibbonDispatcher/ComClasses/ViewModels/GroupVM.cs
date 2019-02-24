@@ -48,8 +48,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             base.Invalidate();
         }
 
-        public TControl GetControl<TControl>(string controlId) where TControl : class,IControlVM
-        => Controls.FirstOrDefault(ctl => ctl.Id == controlId) as TControl;
+        //public TControl GetControl<TControl>(string controlId) where TControl : class,IControlVM
+        //=> Controls.FirstOrDefault(ctl => ctl.Id == controlId) as TControl;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public GroupVM Add<TSource>(IActivatable control)

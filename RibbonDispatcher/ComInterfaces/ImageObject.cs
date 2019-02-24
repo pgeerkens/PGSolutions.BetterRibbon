@@ -6,9 +6,6 @@ using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
-    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-            Justification = "Public, Non-Creatable, class with exported Events.")]
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes",
             Justification ="Unnecessaty.")]
     public class ImageObject:IImageObject {

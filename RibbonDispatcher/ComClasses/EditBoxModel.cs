@@ -12,9 +12,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary></summary>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
-    [Description("")]
+    /// <summary>The COM visible Model for Ribbon EditBox controls.</summary>
+    [Description("The COM visible Model for Ribbon EditBox controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]

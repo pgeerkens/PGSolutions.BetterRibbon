@@ -1,4 +1,7 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//                             Copyright (c) 2017-2019 Pieter Geerkens                            //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -11,8 +14,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>TODO</summary>
     /// <remarks>
     /// </remarks>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-       Justification = "Public, Non-Creatable, class with exported Events.")]
     [Serializable]
     [CLSCompliant(true)]
     [ComVisible(true)]

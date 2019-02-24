@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
@@ -11,7 +10,6 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
-    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -34,18 +32,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string Label     => Strings.Label;
         public string ScreenTip => Strings.ScreenTip;
         public string SuperTip  => Strings.SuperTip;
+        public string KeyTip    => Strings.KeyTip;
+        public string Description => Strings.Description;
 
         public new ISelectableItemVM ViewModel => this;
-
-        string IControlVM.Description => Strings.Description;
-
-        string IControlVM.KeyTip      => Strings.KeyTip;
-
-        string IControlVM.Label       => Strings.Label;
-
-        string IControlVM.ScreenTip   => Strings.ScreenTip;
-
-        string IControlVM.SuperTip    => Strings.SuperTip;
 
         public ISelectableItemModel Attach(string controlId) {
             Id = controlId;

@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
 
@@ -27,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IClickableVM {
         /// <summary>TODO</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event ClickedEventHandler Clicked;
 
         /// <summary>TODO</summary>
@@ -38,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IToggleableVM {
         /// <summary>TODO</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event ToggledEventHandler Toggled;
 
         /// <summary>TODO</summary>
@@ -49,7 +50,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface IEditableVM {
         /// <summary>TODO</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event EditedEventHandler Edited;
 
         /// <summary>Current contents of this <see cref="ITextEditable"/> control.</summary>
@@ -61,33 +62,38 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
-    public interface ISelectableVM {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
-        event SelectionMadeEventHandler SelectionMade;
-
-        /// <summary>ID of the selected item.</summary>
-        string  SelectedItemId    { get; }
-        /// <summary>Index of the selected item.</summary>
-        int     SelectedItemIndex { get; }
-        /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
-        void    OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
-
+    public interface ISelectableVM {    // DropDown & ComboBox
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         int     ItemCount         { get; }
         /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
         string  ItemId(int Index);
+        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
+        object  ItemImage(int Index);
         /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
         string  ItemLabel(int Index);
         /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
         string  ItemScreenTip(int Index);
         /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
         string  ItemSuperTip(int Index);
+    }
 
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        object  ItemImage(int Index);
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        bool    ItemShowImage(int Index);
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        bool    ItemShowLabel(int Index);
+    /// <summary>The interface for controls that have a selectable list of items.</summary>
+    [CLSCompliant(true)]
+    public interface ISelectable2VM {   // DropDown
+        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        event SelectionMadeEventHandler SelectionMade;
+
+        /// <summary>ID of the selected item.</summary>
+        string  SelectedItemId    { get; }
+        /// <summary>Index of the selected item.</summary>
+        int     SelectedItemIndex { get; }
+
+        ///// <summary>Call back for GetItemShowImage events from the drop-down ribbon elements.</summary>
+        //bool    ItemShowImage(int Index);
+        ///// <summary>Call back for GetItemShowLabel events from the drop-down ribbon elements.</summary>
+        //bool    ItemShowLabel(int Index);
+
+        /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
+        void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
     }
 }
