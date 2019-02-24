@@ -75,7 +75,7 @@
     <Compile Include="ComClasses\PictureConverter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ComClasses\ViewModelFactoryExtensions.cs" />
+    <Compile Include="ComClasses\ModelFactoryExtensions.cs" />
     <Compile Include="ComClasses\ViewModels\ComboBoxVM.cs" />
     <Compile Include="ComClasses\ViewModels\EditBoxVM.cs" />
     <Compile Include="ComClasses\ViewModels\ControlViewModelInterfaces.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="ComClasses\IModelFactory.cs" />
     <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
-    <Compile Include="ComClasses\IViewModelFactory.cs" />
+    <Compile Include="ComInterfaces\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
     <Compile Include="ComInterfaces\ViewModelEventInterfaces.cs" />

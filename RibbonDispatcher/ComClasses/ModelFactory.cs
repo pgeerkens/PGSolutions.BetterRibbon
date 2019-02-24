@@ -41,13 +41,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ButtonModel NewButtonModel(IControlStrings strings,
+        public IButtonModel NewButtonModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
         => ViewModelFactory.NewButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ButtonModel NewButtonModelMso(IControlStrings strings,
+        public IButtonModel NewButtonModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
         => ViewModelFactory.NewButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 

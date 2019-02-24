@@ -7,9 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
-
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
@@ -38,13 +36,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        ButtonModel NewButtonModel(IControlStrings strings,
+        IButtonModel NewButtonModel(IControlStrings strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ButtonModel NewButtonModelMso(IControlStrings strings,
+        IButtonModel NewButtonModelMso(IControlStrings strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>

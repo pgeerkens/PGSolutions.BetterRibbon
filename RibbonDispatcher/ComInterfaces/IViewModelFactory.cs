@@ -6,10 +6,8 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
-
-namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary>The factory interface for the Ribbon ModelFactory.</summary>
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
+    /// <summary>The interface for the Ribbon ViewModelFactory.</summary>
     [Description("The factory interface for the Ribbon ModelFactory.")]
     [ComVisible(true)]
     [CLSCompliant(false)]

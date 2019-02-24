@@ -19,9 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewButtonModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
-            model?.Attach(id);
             model.Clicked += handler;
-            return model;
+            return model?.Attach(id);
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
@@ -30,9 +29,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewToggleModel(factory.GetStrings(id), image, isEnabled, isVisible);
 
-            model?.Attach(id);
             model.Toggled += handler;
-            return model;
+            return model?.Attach(id);
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
@@ -41,9 +39,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewEditBoxModel(factory.GetStrings(id), isEnabled, isVisible);
 
-            model?.Attach(id);
             model.Edited += handler;
-            return model;
+            return model?.Attach(id);
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
@@ -52,15 +49,25 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewDropDownModel(factory.GetStrings(id), isEnabled, isVisible);
 
-            model?.Attach(id);
             model.SelectionMade += handler;
-            return model;
+            return model?.Attach(id);
         }
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public static IComboBoxModel NewComboBoxModel(this ViewModelFactory factory, string id,
+                SelectionMadeEventHandler selectedHandler, EditedEventHandler editedHandler,
+                bool isEnabled = true, bool isVisible = true) {
+            var model = factory?.NewComboBoxModel(factory.GetStrings(id), isEnabled, isVisible);
+
+            model.Edited        += editedHandler;
+            model.SelectionMade += selectedHandler;
+            return model?.Attach(id);
+        }
+
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         public static SelectableItemModel NewSelectableModel(this ViewModelFactory factory,
                 string controlID, IStrings strings) {
-        //    var vm = factory.NewSelectableItem(controlID);
             var model = new SelectableItemModel(strings, true, true);
 
             model.Attach(controlID);
@@ -123,7 +130,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return groupModels.AsReadOnly();
         }
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonGroupModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
         public static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
         => new GroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
@@ -136,31 +143,31 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonButtonModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled, bool isVisible)
         => new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible)
                 .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonToggleModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
         public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled, bool isVisible)
         => new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible)
                 .InitializeModel<IToggleSource, IToggleControlVM, ToggleModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
         public static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
         => new EditBoxModel(factory.GetControl<EditBoxVM>, strings, isEnabled, isVisible)
                 .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
         public static ComboBoxModel NewComboBoxModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
         => new ComboBoxModel(factory.GetControl<ComboBoxVM>, strings, isEnabled, isVisible)
                 .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
         public static DropDownModel NewDropDownModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
         => new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible)
