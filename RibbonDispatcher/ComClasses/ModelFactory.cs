@@ -16,15 +16,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>.</summary>
         public ModelFactory(AbstractRibbonTabModel tabModel) => TabModel = tabModel;
 
-        internal AbstractRibbonTabModel TabModel     { get; }
+        internal AbstractRibbonTabModel TabModel        { get; }
+
+        private  ViewModelFactory       ViewModelFactory => TabModel.ViewModel.ViewModelFactory;
 
         /// <inheritdoc/>
         public void Invalidate() => TabModel.Invalidate();
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
-
-        private ViewModelFactory ViewModelFactory => TabModel.ViewModel.RibbonFactory;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

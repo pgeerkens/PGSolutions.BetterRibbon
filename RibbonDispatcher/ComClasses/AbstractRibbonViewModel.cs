@@ -17,13 +17,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>Additional implementation-specific methods exposed by the Callback ModelFactory.</summary>
     public interface IRibbonViewModel {
         /// <summary>The Ribbon ControlID of the Ribbon definition being dispatched by this instance.</summary>
-        string        ControlId     { get; }
+        string           ControlId        { get; }
 
         /// <summary>.</summary>
-        ViewModelFactory RibbonFactory { get; }
+        ViewModelFactory ViewModelFactory { get; }
 
         /// <summary>.</summary>
-        IRibbonUI     RibbonUI      { get; }
+        IRibbonUI        RibbonUI         { get; }
+
+        IGroupVM GetGroup(string groupId);
     }
 
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
@@ -55,21 +57,21 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
         protected AbstractDispatcher(string controlId, IResourceManager resourceManager){
-            ControlId     = controlId;
-            RibbonFactory = new ViewModelFactory(resourceManager);
-            RibbonFactory.Changed += OnPropertyChanged;
+            ControlId        = controlId;
+            ViewModelFactory = new ViewModelFactory(resourceManager);
+            ViewModelFactory.Changed += OnPropertyChanged;
         }
 
         /// <inheritdoc/>
-        public   string        ControlId     { get; }
+        public   string           ControlId        { get; }
 
         /// <inheritdoc/>
-        public   ViewModelFactory RibbonFactory { get; }
+        public   ViewModelFactory ViewModelFactory { get; }
 
         /// <inheritdoc/>
-        public   IRibbonUI     RibbonUI      { get; private set; }
+        public   IRibbonUI        RibbonUI         { get; private set; }
 
-        internal GroupVM GetGroup(string groupId)
+        public IGroupVM GetGroup(string groupId)
         => GroupViewModels.FirstOrDefault(vm => vm.Id == groupId);
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
@@ -87,7 +89,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
         public string GetCustomUI(string RibbonID) {
-            GroupViewModels = RibbonFactory.ParseXml(RibbonXml);
+            GroupViewModels = ViewModelFactory.ParseXml(RibbonXml);
 
             return RibbonXml;
         }
@@ -105,12 +107,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         protected abstract string RibbonXml { get; }
 
         /// <inheritdoc/>
-        public object LoadImage(string ImageId) => RibbonFactory.LoadImage(ImageId);
+        public object LoadImage(string ImageId) => ViewModelFactory.LoadImage(ImageId);
         #endregion
 
         #region IRibbonCommon implementation
         /// <summary>All of the defined controls.</summary>
-        private IControlVM Controls (string controlId) => RibbonFactory.Controls.GetOrDefault(controlId);
+        private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public string GetDescription(IRibbonControl Control)
             => Controls(Control?.Id)?.Description ?? Control.Unknown("Description");
@@ -136,7 +138,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region ISizeable implementation
         /// <summary>All of the defined controls implementing the {ISizeableVM} interface.</summary>
-        private ISizeableVM Sizeables(string controlId) => RibbonFactory.Sizeables.GetOrDefault(controlId);
+        private ISizeableVM Sizeables(string controlId) => ViewModelFactory.Sizeables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool GetSize(IRibbonControl Control)
             => (Sizeables(Control?.Id)?.IsLarge ?? true);
@@ -144,7 +146,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IImageable implementation
         /// <summary>All of the defined controls implementing the {IImageableVM} interface.</summary>
-        private IImageableVM Imageables (string controlId) => RibbonFactory.Imageables.GetOrDefault(controlId);
+        private IImageableVM Imageables (string controlId) => ViewModelFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public object GetImage(IRibbonControl Control)
             => Imageables(Control?.Id)?.Image.Image ?? "MacroSecurity";
@@ -158,7 +160,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IToggleable implementation
         /// <summary>All of the defined controls implementing the {IToggleableVM} interface.</summary>
-        private IToggleableVM Toggleables(string controlId) => RibbonFactory.Toggleables.GetOrDefault(controlId);
+        private IToggleableVM Toggleables(string controlId) => ViewModelFactory.Toggleables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool   GetPressed(IRibbonControl Control)
             => Toggleables(Control?.Id)?.IsPressed ?? false;
@@ -169,7 +171,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IClickable implementation
         /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
-        private IClickableVM Actionables(string controlId) => RibbonFactory.Clickables.GetOrDefault(controlId);
+        private IClickableVM Actionables(string controlId) => ViewModelFactory.Clickables.GetOrDefault(controlId);
  
         /// <inheritdoc/>
         public void   OnAction(IRibbonControl Control)   => Actionables(Control?.Id)?.OnClicked(Control);
@@ -177,7 +179,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region ISelectableMixin implementation
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
-        private ISelectableVM Selectables (string controlId) => RibbonFactory.Selectables.GetOrDefault(controlId);
+        private ISelectableVM Selectables (string controlId) => ViewModelFactory.Selectables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public int    GetItemCount(IRibbonControl Control)
             => Selectables(Control?.Id)?.ItemCount ?? 0;
@@ -215,7 +217,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IEditable implementation
         /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
-        private IEditableVM TextEditables(string controlId) => RibbonFactory.TextEditables.GetOrDefault(controlId);
+        private IEditableVM TextEditables(string controlId) => ViewModelFactory.TextEditables.GetOrDefault(controlId);
 
         public string GetText(IRibbonControl control)
         => TextEditables(control?.Id)?.Text ?? "";

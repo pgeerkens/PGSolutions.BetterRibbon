@@ -12,21 +12,21 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
     [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {
-        protected AbstractRibbonTabModel(AbstractDispatcher viewModel, IReadOnlyList<IInvalidatible> models) {
+        protected AbstractRibbonTabModel(IRibbonViewModel viewModel, IReadOnlyList<IInvalidatible> models) {
             ViewModel = viewModel;
             Models    = models;
         }
 
-        public    AbstractDispatcher ViewModel { get; }
+        public  IRibbonViewModel ViewModel { get; }
 
-        private   IModels            Models    { get; }
+        private IModels          Models    { get; }
 
         public void Invalidate()
         => Models.ToList().ForEach(model => model.Invalidate());
 
         /// <inheritdoc/>
         internal void DetachProxy(string controlId)
-        => ViewModel.RibbonFactory.GetControl<IControlVM>(controlId)?.Detach();
+        => ViewModel.ViewModelFactory.GetControl<IControlVM>(controlId)?.Detach();
 
         public void DetachCustomControls()
         => Models.OfType<CustomButtonsGroupModel>().ToList().ForEach(model => model.DetachControls());

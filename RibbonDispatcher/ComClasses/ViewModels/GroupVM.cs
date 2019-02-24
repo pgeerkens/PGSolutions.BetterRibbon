@@ -12,7 +12,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     internal class GroupVM : AbstractControlVM<IRibbonCommonSource>, IGroupVM,
             IActivatable<IRibbonCommonSource,GroupVM> {
-        public GroupVM(IRibbonFactory factory, string itemId)
+        public GroupVM(IViewModelFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;
             Controls = new KeyedControls();
@@ -32,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             base.Detach();
         }
 
-        internal IRibbonFactory Factory { get; }
+        internal IViewModelFactory Factory { get; }
 
         protected KeyedCollection<string,IActivatable> Controls { get; }
 

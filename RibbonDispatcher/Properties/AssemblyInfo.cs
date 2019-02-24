@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "PGSolutions RibbonDispatcher" )]
-[assembly: AssemblyDescription( "PGSolutions ModelFactory for the Office Fluent Ribbon" )]
+[assembly: AssemblyTitle( "PGSolutions Ribbon Dispatcher" )]
+[assembly: AssemblyDescription( "PGSolutions Dispatcher for the Office Fluent Ribbon" )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PGSolutions")]
 [assembly: AssemblyProduct( "RibbonDispatcher" )]

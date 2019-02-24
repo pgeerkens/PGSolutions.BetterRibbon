@@ -17,16 +17,16 @@ namespace PGSolutions.RibbonDispatcher {
         //public const string ITextEditEventsArgs     = "69E19408" + GuidSpace;
         public const string BetterRibbonMain        = "69E19409" + GuidSpace;
         public const string IResourceManager        = "69E1940A" + GuidSpace;
-        //public const string IAbstractDispatcher     = "69E1940B" + GuidSpace;
+        public const string IViewModelFactory       = "69E1940B" + GuidSpace;
         public const string AbstractDispatcher      = "69E1940C" + GuidSpace;
         public const string IModelFactory           = "69E1940D" + GuidSpace;
         public const string IRibbonFactory          = "69E1940E" + GuidSpace;
         public const string RibbonFactory           = "69E1940F" + GuidSpace;
 
         public const string ICallbackDispatcher     = "69E19410" + GuidSpace;
-        //public const string RibbonViewModel           = "69E19411" + GuidSpace;
-        //public const string IRibbonCommon             = "69E19412" + GuidSpace;
-        //public const string RibbonCommon              = "69E19413" + GuidSpace;
+        //public const string RibbonViewModel         = "69E19411" + GuidSpace;
+        //public const string IRibbonCommon           = "69E19412" + GuidSpace;
+        //public const string RibbonCommon            = "69E19413" + GuidSpace;
         public const string IDropDownModel          = "69E19414" + GuidSpace;
         public const string DropDownModel           = "69E19415" + GuidSpace;
         public const string IComboBoxModel          = "69E19416" + GuidSpace;

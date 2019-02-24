@@ -28,17 +28,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IRibbonFactory))]
+    [ComDefaultInterface(typeof(IViewModelFactory))]
     [Guid(Guids.RibbonFactory)]
     [Description("Implementation of the factory for Ribbon objects.")]
-    public partial class ViewModelFactory : IRibbonFactory {
-        public ViewModelFactory() : this(new ResourceLoader(), null) { ; }
+    public partial class ViewModelFactory : IViewModelFactory {
+        public ViewModelFactory() : this(new ResourceLoader()) { ; }
 
-        internal ViewModelFactory(IResourceManager manager) : this(null, manager) { ; }
-
-        internal ViewModelFactory(ResourceLoader loader, IResourceManager manager) {
-            ResourceLoader  = loader;
-            ResourceManager = manager ?? loader;
+        internal ViewModelFactory(IResourceManager manager) {
+            ResourceManager = manager; 
 
             _controls      = new Dictionary<string, IControlVM>();
             _sizeables     = new Dictionary<string, ISizeableVM>();
@@ -49,7 +46,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _textEditables = new Dictionary<string, IEditableVM>();
         }
 
-        internal IResourceLoader  ResourceLoader  { get; }
         /// <inheritdoc/>
         public IResourceManager   ResourceManager { get; }
 
@@ -143,8 +139,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal ComboBoxVM NewComboBox(string controlId)
         => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
 
-        /// <inheritdoc/>
-        public IResourceLoader NewResourceLoader() => ResourceLoader;
+        ///// <inheritdoc/>
+        //public IResourceLoader NewResourceLoader() => ResourceLoader;
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IControlStrings NewControlStrings(string label,
