@@ -14,6 +14,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISelectableItemModel)]
     public interface ISelectableItemModel: IControlSource {
+        /// <summary>TODO</summary>
+        string Id { get; }
+
         /// <summary>Gets the {IControlStrings} for this control.</summary>
         new IControlStrings Strings {
             [Description("Gets the {IControlStrings} for this control.")]

@@ -126,8 +126,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Add<DropDownVM,IDropDownSource>(new DropDownVM(controlId));
 
         /// <inheritdoc/>
-        internal SelectableItem NewSelectableItem(string controlId)
-        => new SelectableItem(controlId);
+        internal SelectableItemVM NewSelectableItem(string controlId)
+        => new SelectableItemVM(controlId);
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal EditBoxVM NewEditBox(string controlId)

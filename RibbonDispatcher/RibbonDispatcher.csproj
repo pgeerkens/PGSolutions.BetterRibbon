@@ -117,7 +117,6 @@
     <Compile Include="ComClasses\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
     <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
-    <Compile Include="ComInterfaces\ISelectableItem.cs" />
     <Compile Include="ComInterfaces\ViewModelEventInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

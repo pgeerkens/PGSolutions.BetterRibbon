@@ -44,6 +44,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// composition of IControlVM, IDropDownItem &amp; IImageableItem</summary>
     public interface IDropDownVM: IControlVM, ISelectableVM { }
 
+    public interface ISelectableItemVM: IControlVM, IImageableVM { }
+
     public interface IComboBoxVM: IDropDownVM, IEditBoxVM { }
 
     /// <summary>TODO</summary>

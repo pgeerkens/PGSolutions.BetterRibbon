@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IComboBoxModel))]
     [Guid(Guids.ComboBoxModel)]
     public sealed class ComboBoxModel: ControlModel<IComboBoxSource, IComboBoxVM>,
-            IComboBoxModel, IComboBoxSource, IEnumerable<ISelectableItem>, IEnumerable {
+            IComboBoxModel, IComboBoxSource, IEnumerable<ISelectableItemModel>, IEnumerable {
         internal ComboBoxModel(Func<string, ComboBoxVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible) { }
@@ -57,14 +57,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        public ISelectableItem this[int index] => Items[index] as ISelectableItem;
+        public ISelectableItemModel this[int index] => Items[index] as ISelectableItemModel;
 
         public int Count => Items.Count;
 
         private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
 
-        public IEnumerator<ISelectableItem> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItem;
+        public IEnumerator<ISelectableItemModel> GetEnumerator() {
+            foreach (var item in Items) yield return item as ISelectableItemModel;
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

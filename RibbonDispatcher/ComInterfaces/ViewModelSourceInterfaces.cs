@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IDropDownSource : IControlSource, IEnumerable<ISelectableItem> {
+    public interface IDropDownSource : IControlSource, IEnumerable<ISelectableItemModel> {
         /// <summary>.</summary>
         int     SelectedIndex { get; }
 
@@ -56,10 +56,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         int         Count     { get; }
 
         /// <summary>.</summary>
-        ISelectableItem this[int index] { get; }
+        ISelectableItemModel this[int index] { get; }
 
         /// <summary>.</summary>
-        new IEnumerator<ISelectableItem> GetEnumerator();
+        new IEnumerator<ISelectableItemModel> GetEnumerator();
     }
 
     public interface ISelectableItemSource: IControlSource {

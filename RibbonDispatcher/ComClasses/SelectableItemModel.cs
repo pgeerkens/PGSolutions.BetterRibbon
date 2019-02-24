@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
@@ -20,34 +19,43 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(ISelectableItemModel))]
     [Guid(Guids.SelectableItemModel)]
-    internal class SelectableItemModel : ControlModel<ISelectableItemSource,SelectableItem>,
-            ISelectableItemModel, ISizeableVM, ISelectableItemSource, ISelectableItem {//, IImageableVM {
-        public SelectableItemModel(Func<string,SelectableItem> funcViewModel,
+    public class SelectableItemModel : ControlModel<ISelectableItemSource,ISelectableItemVM>,
+            ISelectableItemModel, ISelectableItemSource, ISelectableItemVM {
+        internal SelectableItemModel(
                 IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible) { }
-
-        public event ClickedEventHandler Clicked;
+        : base(null, strings, isEnabled, isVisible) { }
 
         public bool        IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public string Id        => ViewModel.Id;
+        public string Id        { get; set; } = null;
         public string Label     => Strings.Label;
         public string ScreenTip => Strings.ScreenTip;
         public string SuperTip  => Strings.SuperTip;
 
+        public new ISelectableItemVM ViewModel => this;
+
+        string IControlVM.Description => Strings.Description;
+
+        string IControlVM.KeyTip      => Strings.KeyTip;
+
+        string IControlVM.Label       => Strings.Label;
+
+        string IControlVM.ScreenTip   => Strings.ScreenTip;
+
+        string IControlVM.SuperTip    => Strings.SuperTip;
+
         public ISelectableItemModel Attach(string controlId) {
-            ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Clicked += OnClicked;
-                ViewModel.Invalidate();
-            }
+            Id = controlId;
+            Invalidate();
             return this;
         }
 
-        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
+        public void Detach() { Id = null; Invalidate(); }
+
+        public override void Invalidate() { }
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso) => Image = imageMso;

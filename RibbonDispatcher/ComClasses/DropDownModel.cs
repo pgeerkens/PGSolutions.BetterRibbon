@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComDefaultInterface(typeof(IDropDownModel))]
     [Guid(Guids.DropDownModel)]
     public sealed class DropDownModel : ControlModel<IDropDownSource,IDropDownVM>,
-            IDropDownModel, IDropDownSource, IEnumerable<ISelectableItem>, IEnumerable {
+            IDropDownModel, IDropDownSource, IEnumerable<ISelectableItemModel>, IEnumerable {
         internal DropDownModel(Func<string, DropDownVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
@@ -51,14 +51,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        public ISelectableItem this[int index] => Items[index] as ISelectableItem;
+        public ISelectableItemModel this[int index] => Items[index] as ISelectableItemModel;
 
         public int Count => Items.Count;
 
         private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
 
-        public IEnumerator<ISelectableItem> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItem;
+        public IEnumerator<ISelectableItemModel> GetEnumerator() {
+            foreach (var item in Items) yield return item as ISelectableItemModel;
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

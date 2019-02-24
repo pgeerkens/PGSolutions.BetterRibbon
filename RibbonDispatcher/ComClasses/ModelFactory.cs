@@ -34,12 +34,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         =>  ViewModelFactory.NewControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
 
         /// <inheritdoc/>
-        public ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings) {
-            var vm = ViewModelFactory.NewSelectableItem(controlID);
-            var model = new SelectableItemModel(id => vm, strings, true, true);
-            model.Attach(controlID);
-            return model;
-        }
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public IGroupModel NewGroupModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => ViewModelFactory.NewGroupModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -67,20 +65,24 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IDropDownModel NewDropDownModel(IControlStrings strings,
-                bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewDropDownModel(strings, isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IEditBoxModel NewEditBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
         => ViewModelFactory.NewEditBoxModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IGroupModel NewGroupModel(IControlStrings strings,
+        public IDropDownModel NewDropDownModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewGroupModel(strings, isEnabled, isVisible);
+        => ViewModelFactory.NewDropDownModel(strings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public IComboBoxModel NewComboBoxModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => ViewModelFactory.NewComboBoxModel(strings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        public ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings)
+        => ViewModelFactory.NewSelectableModel(controlID, strings);
     }
 }

@@ -52,5 +52,6 @@ Private Sub Class_Initialize()
                 AlternateLabel:="", Description:="")
         
         Set EditBox = .NewEditBoxModel(Strings)
+        EditBox.Text = "Default"
     End With
 End Sub
