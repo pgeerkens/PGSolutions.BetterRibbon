@@ -113,7 +113,7 @@
                             getVisible="getVisible" getEnabled="getEnabled"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
-                            onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                            onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
                             showItemImage="true" showItemLabel="true"
                     >
                     </mso:dropDown>
@@ -124,7 +124,7 @@
                             getVisible="getVisible" getEnabled="getEnabled"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
-                            onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                            onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
                             showItemImage="true" showItemLabel="true"
                     >
                     </mso:dropDown>
@@ -135,7 +135,7 @@
                             getVisible="getVisible" getEnabled="getEnabled"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
-                            onAction="onActionDropDown" getSelectedItemID="getSelectedItemID"
+                            onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
                             showItemImage="true" showItemLabel="true"
                     >
                     </mso:dropDown>

@@ -199,7 +199,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             => Selectables2(Control?.Id)?.SelectedItemIndex ?? 0;
 
         /// <inheritdoc/>
-        public void   OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex)
+        public void   OnActionSelected(IRibbonControl Control, string SelectedId, int SelectedIndex)
             => Selectables2(Control?.Id)?.OnSelectionMade(Control, SelectedId, SelectedIndex);
         #endregion
 
@@ -221,6 +221,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string GetContent(IRibbonControl control)
         => DynamicMenus(control?.Id)?.MenuContent
                 ?? "<menu xmlns=\"http://schemas.microsoft.com/office/2006/01/customui\"></menu>";
+        #endregion
+
+        #region GallerySizeVM implementation
+        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
+        private IGallerySizeVM GallerySizes(string controlId) => ViewModelFactory.GallerySizes.GetOrDefault(controlId);
+
+        public int GetItemHeight(IRibbonControl control) => GallerySizes(control?.Id)?.ItemHeight ?? 0;
+
+        public int GetItemWidth(IRibbonControl control) => GallerySizes(control?.Id)?.ItemWidth ?? 0;
         #endregion
     }
 }

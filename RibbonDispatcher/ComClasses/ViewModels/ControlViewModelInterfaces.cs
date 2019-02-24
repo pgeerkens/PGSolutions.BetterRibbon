@@ -5,7 +5,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    /// <summary>The base interface for Ribbon controls.</summary>
+    using VM = ComClasses.ViewModels;
+
+    /// <summary>The base interface for <see cref="VM.AbstractControlVM{TSource}"/> implementations</summary>
     [CLSCompliant(true)]
     public interface IControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
@@ -31,25 +33,39 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Detach();
     }
 
-    /// <summary>The total interface (required to be) exposed externally by ButtonVM objects.</summary>
+    /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface IButtonVM: IControlVM, IImageableVM, ISizeableVM, IClickableVM { }
 
-    public interface ICheckBoxVM: IToggleableVM, IControlVM { }
+    /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface ICheckBoxVM: IControlVM, IToggleableVM { }
 
-    /// <summary>The ViewModel interface exposed by Ribbon ToggleButtons and CheckBoxes.</summary>
-    public interface IToggleControlVM: IToggleableVM, IControlVM, IImageableVM, ISizeableVM { }
+    /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IToggleControlVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM { }
 
-    public interface IEditBoxVM : IEditableVM, IControlVM { }
+    /// <summary>The total interface exposed by <see cref="VM.EditBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IEditBoxVM : IControlVM, IEditableVM { }
 
-    /// <summary>The total interface (required to be) exposed externally by DropDownVM objects; 
-    /// composition of IControlVM, IDropDownItem &amp; IImageableItem</summary>
+    /// <summary>The total interface exposed by <see cref="VM.DropDownVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface IDropDownVM: IControlVM, ISelectableVM, ISelectable2VM { }
 
+    /// <summary>The total interface exposed by <see cref="VM.SelectableItemVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface ISelectableItemVM: IControlVM, IImageableVM { }
 
+    /// <summary>The total interface exposed by <see cref="VM.ComboBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface IComboBoxVM: IControlVM, ISelectableVM, IEditBoxVM { }
 
-    /// <summary>TODO</summary>
+    /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
     [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
     public interface IGroupVM: IControlVM { }
+
+    /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
+    public interface IGalleryM: IControlVM, IGallerySizeVM, ISelectableVM, ISelectable2VM { }
 }

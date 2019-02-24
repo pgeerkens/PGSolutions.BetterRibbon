@@ -124,7 +124,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         [DispId(24), Description("Call back for OnAction events from the drop-down ribbon elements.")]
-        void OnActionDropDown(IRibbonControl Control, string SelectedId, int SelectedIndex);
+        void OnActionSelected(IRibbonControl Control, string SelectedId, int SelectedIndex);
         #endregion
 
         #region IEditableVM implementation - EditBox & ComboBox
@@ -144,6 +144,18 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="control"></param>
         [DispId(27), Description("Gets an XML string that contains the contents of this dynamic menu.")]
         string GetContent(IRibbonControl control);
+        #endregion
+
+        #region GallerySizeVM implementation
+        /// <summary>Asks for the height of items, in pixels.</summary>
+        /// <param name="control"></param>
+        [DispId(28), Description("Asks for the height of items, in pixels.")]
+        int GetItemHeight(IRibbonControl control);
+
+        /// <summary>Asks for the width of items, in pixels.</summary>
+        /// <param name="control"></param>
+        [DispId(29), Description("Asks for the width of items, in pixels.")]
+        int GetItemWidth(IRibbonControl control);
         #endregion
     }
 }

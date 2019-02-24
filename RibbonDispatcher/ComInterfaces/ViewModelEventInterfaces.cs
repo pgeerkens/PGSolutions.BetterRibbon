@@ -97,4 +97,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IDynamicMenuVM {
         string MenuContent { get; }
     }
+
+    /// <summary>The interface for galleries with sizeable items.</summary>
+    [CLSCompliant(true)]
+    public interface IGallerySizeVM {
+        int ItemHeight { get; }
+
+        int ItemWidth  { get; }
+    }
 }
