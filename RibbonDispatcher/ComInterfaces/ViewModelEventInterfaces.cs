@@ -88,12 +88,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Index of the selected item.</summary>
         int     SelectedItemIndex { get; }
 
-        ///// <summary>Call back for GetItemShowImage events from the drop-down ribbon elements.</summary>
-        //bool    ItemShowImage(int Index);
-        ///// <summary>Call back for GetItemShowLabel events from the drop-down ribbon elements.</summary>
-        //bool    ItemShowLabel(int Index);
-
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
+    }
+
+    /// <summary>The interface for controls that have a selectable list of items.</summary>
+    [CLSCompliant(true)]
+    public interface IDynamicMenuVM {
+        string MenuContent { get; }
     }
 }

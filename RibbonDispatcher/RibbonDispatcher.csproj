@@ -117,7 +117,7 @@
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
-    <Compile Include="ComInterfaces\IRibbonViewModel.cs" />
+    <Compile Include="ComInterfaces\ICallbackDispatcher.cs" />
     <Compile Include="ComInterfaces\ViewModelEventInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

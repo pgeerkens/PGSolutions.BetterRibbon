@@ -45,6 +45,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _imageables    = new Dictionary<string, IImageableVM>();
             _toggleables   = new Dictionary<string, IToggleableVM>();
             _textEditables = new Dictionary<string, IEditableVM>();
+            _dynamicMenus  = new Dictionary<string, IDynamicMenuVM>();
         }
 
         /// <inheritdoc/>
@@ -58,6 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private  readonly IDictionary<string, IImageableVM>   _imageables;
         private  readonly IDictionary<string, IToggleableVM>  _toggleables;
         private  readonly IDictionary<string, IEditableVM>    _textEditables;
+        private  readonly IDictionary<string, IDynamicMenuVM> _dynamicMenus;
 
         public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
@@ -84,6 +86,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IEditableVM>   TextEditables => new ReadOnlyDictionary<string, IEditableVM>(_textEditables);
+
+        /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
+        internal IReadOnlyDictionary<string, IDynamicMenuVM> DynamicMenus => new ReadOnlyDictionary<string, IDynamicMenuVM>(_dynamicMenus);
 
         /// <inheritdoc/>
         internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
