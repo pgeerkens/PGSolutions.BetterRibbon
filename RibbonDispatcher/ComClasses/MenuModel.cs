@@ -17,9 +17,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IMenuModel))]
     [Guid(Guids.MenuModel)]
-    internal class MenuModel: ControlModel<IMenuSource,IMenuVM>,
+    public class MenuModel: ControlModel<IMenuSource,IMenuVM>,
             IMenuModel, IMenuSource {
-        public MenuModel(Func<string,MenuVM> funcViewModel,
+        internal MenuModel(Func<string,MenuVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }

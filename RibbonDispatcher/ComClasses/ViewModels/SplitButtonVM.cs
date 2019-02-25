@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public IButtonVM ButtonVM { get; }
         public IMenuVM   MenuVM   { get; }
 
-        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        /// <summary>Attaches this view-model to the specified model as data source and event sink.</summary>
         public new ISplitButtonVM Attach(ISplitButtonSource source) => Attach<SplitButtonVM>(source);
 
         public override void Invalidate() {

@@ -9,6 +9,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    using Microsoft.Office.Core;
     using IStrings = IControlStrings;
 
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
@@ -16,6 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
+    [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(ISplitButtonModel))]
     [Guid(Guids.SplitButtonModel)]
     public class SplitButtonModel: ControlModel<ISplitButtonSource,ISplitButtonVM>,
@@ -27,20 +29,28 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             Menu   = menu;
         }
 
+        public event ClickedEventHandler Clicked;
+
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public IButtonModel Button    { get; }
-        public IMenuModel   Menu      { get; }
+        public ButtonModel Button    { get; }
+        public MenuModel   Menu      { get; }
 
         public ISplitButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            Button.Attach(ViewModel.ButtonVM.Id);
-            Menu.Attach(ViewModel.MenuVM.Id);
+            if (ViewModel != null) {
+                Button.Attach(ViewModel.ButtonVM.Id);
+                Menu.Attach(ViewModel.MenuVM.Id);
+
+                Button.ViewModel.Clicked += OnClicked;
+            }
             ViewModel?.Invalidate();
             return this;
         }
+
+        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
     }
 }
