@@ -20,17 +20,17 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <inheritdoc/>
         public string Id             { get; }
         /// <inheritdoc/>
-        public string KeyTip         => Strings?.KeyTip ?? "";
+        public virtual string KeyTip         => Strings?.KeyTip ?? "";
         /// <inheritdoc/>
-        public virtual string Label  => Strings?.Label ?? Id;
+        public virtual string Label          => Strings?.Label ?? Id;
         /// <inheritdoc/>
-        public string ScreenTip      => Strings?.ScreenTip ?? $"{Id} ScreenTip";
+        public virtual string ScreenTip      => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
-        public string SuperTip       => Strings?.SuperTip ?? $"{Id} SuperTip";
+        public virtual string SuperTip       => Strings?.SuperTip ?? $"{Id} SuperTip";
         /// <inheritdoc/>
-        public string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
+        public virtual string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
         /// <inheritdoc/>
-        public string Description    => Strings?.Description ?? $"{Id} Description";
+        public virtual string Description    => Strings?.Description ?? $"{Id} Description";
 
         /// <inheritdoc/>
         protected virtual IControlStrings Strings => Source?.Strings;

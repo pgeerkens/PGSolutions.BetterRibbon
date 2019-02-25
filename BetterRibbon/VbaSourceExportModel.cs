@@ -65,7 +65,6 @@ namespace PGSolutions.BetterRibbon {
 
         /// <summary>Extracts VBA modules from current EXCEL workbook to a sibling directory.</summary>
         /// <param name="sender">The object that initiated the event.</param>
-        /// <param name="e"></param>
         /// <remarks>
         /// Requires that access to the VBA project object model be trusted (Macro Security).
         /// </remarks>

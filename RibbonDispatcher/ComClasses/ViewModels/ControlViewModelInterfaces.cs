@@ -11,26 +11,29 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [CLSCompliant(true)]
     public interface IControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
-        string Id { get; }
-        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
-        string Description { get; }
+        string Id           { get; }
         /// <summary>Returns the KeyTip string for this control.</summary>
-        string KeyTip { get; }
+        string KeyTip       { get; }
         /// <summary>Returns the Label string for this control.</summary>
-        string Label { get; }
-        /// <summary>Returns the screenTip string for this control.</summary>
-        string ScreenTip { get; }
-        /// <summary>Returns the SuperTip string for this control.</summary>
-        string SuperTip { get; }
+        string Label        { get; }
+        /// <summary>Gets or sets whether or not the control is visible.</summary>
+        bool   IsVisible    { get; }
 
         /// <summary>Gets or sets whether or not the control is enabled.</summary>
-        bool IsEnabled { get; }
-        /// <summary>Gets or sets whether or not the control is visible.</summary>
-        bool IsVisible { get; }
+        bool   IsEnabled    { get; }
 
-        void Invalidate();
+        /// <summary>.</summary>
+        void   Invalidate();
 
-        void Detach();
+        /// <summary>.</summary>
+        void   Detach();
+
+        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
+        string Description  { get; }
+        /// <summary>Returns the screenTip string for this control.</summary>
+        string ScreenTip    { get; }
+        /// <summary>Returns the SuperTip string for this control.</summary>
+        string SuperTip     { get; }
     }
 
     /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>
@@ -65,7 +68,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
     public interface IGroupVM: IControlVM { }
 
+    /// <summary>The total interface exposed by <see cref="VM.TabVM"/> objects.</summary>
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
+    public interface ITabVM: IControlVM { }
+
     /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
     [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
     public interface IGalleryM: IControlVM, IGallerySizeVM, ISelectableVM, ISelectable2VM { }
+
+    public interface ILabelVM: IControlVM { }
+
+    public interface ISPlitVM: IControlVM { }
+
+    public interface IMenuVM: IControlVM { }
 }

@@ -124,6 +124,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
+        internal TabVM NewTab(string controlId)
+        => Add<TabVM, IControlSource>(new TabVM(this, controlId));
+
+        /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         internal GroupVM NewGroup(string controlId)
         => Add<GroupVM,IControlSource>(new GroupVM(this, controlId));
 
@@ -154,6 +158,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal ComboBoxVM NewComboBox(string controlId)
         => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
+
+        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
+        internal LabelVM NewLabel(string controlId)
+        => Add<LabelVM, IControlSource>(new LabelVM(controlId));
+
+        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
+        internal SplitVM NewSplitButton(string controlId)
+        => Add<SplitVM, IControlSource>(new SplitVM(this, controlId));
+
+        /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
+        internal MenuVM NewMenu(string controlId)
+        => Add<MenuVM, IMenuSource>(new MenuVM(this, controlId));
 
         ///// <inheritdoc/>
         //public IResourceLoader NewResourceLoader() => ResourceLoader;

@@ -71,6 +71,11 @@
     <Compile Include="ComClasses\ModelFactory.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
     <Compile Include="ComClasses\RibbonViewModelExtensions.cs" />
+    <Compile Include="ComClasses\ViewModels\AbstractContainerVM.cs" />
+    <Compile Include="ComClasses\ViewModels\IContainerControl.cs" />
+    <Compile Include="ComClasses\ViewModels\LabelVM.cs" />
+    <Compile Include="ComClasses\ViewModels\SplitVM.cs" />
+    <Compile Include="ComClasses\ViewModels\TabVM.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IEditBoxModel.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
@@ -103,7 +108,7 @@
     <Compile Include="ComClasses\ResourceLoader.cs" />
     <Compile Include="ComClasses\ViewModels\ButtonVM.cs" />
     <Compile Include="ComClasses\ViewModels\CheckBoxVM.cs" />
-    <Compile Include="ComClasses\ViewModels\AbstractRibbonControlVM.cs" />
+    <Compile Include="ComClasses\ViewModels\AbstractControlVM.cs" />
     <Compile Include="ComClasses\ViewModels\DropDownVM.cs" />
     <Compile Include="ComClasses\ViewModelFactory.cs" />
     <Compile Include="ComClasses\ControlStrings.cs" />

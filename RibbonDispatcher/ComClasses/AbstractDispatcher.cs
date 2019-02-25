@@ -14,7 +14,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IGroupList = IReadOnlyList<GroupVM>;
+    using ITabList = IReadOnlyList<TabVM>;
 
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
@@ -59,14 +59,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public   IRibbonUI        RibbonUI         { get; private set; }
 
         public IGroupVM GetGroup(string groupId)
-        => GroupViewModels.FirstOrDefault(vm => vm.Id == groupId);
+        => (from t in TabViewModels from g in t select g).OfType<GroupVM>().FirstOrDefault(vm => vm.Id == groupId);
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
         #region IRibbonExtensibility implementation
         /// <inheritdoc/>
-        private IGroupList GroupViewModels { get; set; }
+        private ITabList TabViewModels { get; set; }
 
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
@@ -76,7 +76,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
         public string GetCustomUI(string RibbonID) {
-            GroupViewModels = ViewModelFactory.ParseXml(RibbonXml);
+            TabViewModels = ViewModelFactory.ParseXml(RibbonXml);
 
             return RibbonXml;
         }
