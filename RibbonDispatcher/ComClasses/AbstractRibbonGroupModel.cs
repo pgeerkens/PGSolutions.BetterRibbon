@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IControlSource, ICanInvalidate {
         protected AbstractRibbonGroupModel(IRibbonViewModel viewModel, string viewModelName)
-        : this(viewModel?.GetGroup(viewModelName)) {
+        : this(viewModel?.ViewModelFactory.GetControl<GroupVM>(viewModelName)) {
         }
         private AbstractRibbonGroupModel(IGroupVM viewModel) {
             ViewModel = (viewModel as IActivatable<IControlSource,GroupVM>)

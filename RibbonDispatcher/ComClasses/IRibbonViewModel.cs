@@ -19,7 +19,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>.</summary>
         IRibbonUI        RibbonUI         { get; }
-
-        IGroupVM GetGroup(string groupId);
     }
 }

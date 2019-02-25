@@ -74,6 +74,7 @@
     <Compile Include="ComClasses\ViewModels\AbstractContainerVM.cs" />
     <Compile Include="ComClasses\ViewModels\IContainerControl.cs" />
     <Compile Include="ComClasses\ViewModels\LabelVM.cs" />
+    <Compile Include="ComClasses\ViewModels\MenuVM.cs" />
     <Compile Include="ComClasses\ViewModels\SplitVM.cs" />
     <Compile Include="ComClasses\ViewModels\TabVM.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />

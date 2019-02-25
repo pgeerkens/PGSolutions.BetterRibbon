@@ -58,9 +58,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public   IRibbonUI        RibbonUI         { get; private set; }
 
-        public IGroupVM GetGroup(string groupId)
-        => (from t in TabViewModels from g in t select g).OfType<GroupVM>().FirstOrDefault(vm => vm.Id == groupId);
-
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
