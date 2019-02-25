@@ -78,7 +78,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     public interface ILabelVM: IControlVM { }
 
-    public interface ISplitVM: IControlVM { }
+    public interface ISplitButtonVM: IControlVM {
+        IButtonVM ButtonVM { get; }
+        IMenuVM   MenuVM   { get; }
+    }
 
     public interface IMenuVM: IControlVM { }
 }

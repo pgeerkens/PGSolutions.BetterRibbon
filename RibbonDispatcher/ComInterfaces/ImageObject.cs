@@ -19,6 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         private object _image { get; }
 
+        public static ImageObject Empty => new ImageObject(null as IPictureDisp);
+
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
                 Justification = "Unnecessary - the existing properties achieve that.")]
         public static implicit operator ImageObject(string s) => new ImageObject(s);

@@ -124,6 +124,22 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => new LabelModel(factory.GetControl<LabelVM>, strings, isEnabled, isVisible)
                 .InitializeModel<ILabelSource, ILabelVM, LabelModel>();
 
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public static MenuModel NewMenuModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new MenuModel(factory.GetControl<MenuVM>, strings, isEnabled, isVisible)
+                .InitializeModel<IMenuSource, IMenuVM, MenuModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public static SplitButtonModel NewSplitButtonModel(this ViewModelFactory factory,
+                IStrings splitStrings, IStrings buttonStrings, IStrings menuStrings,
+                bool isEnabled, bool isVisible)
+        => new SplitButtonModel(factory.GetControl<SplitButtonVM>, splitStrings,
+            new ButtonModel(factory.GetControl<ButtonVM>, buttonStrings, ImageObject.Empty,true,true),
+            new MenuModel(factory.GetControl<MenuVM>, menuStrings, true,true),
+            isEnabled, isVisible)
+                .InitializeModel<ISplitButtonSource, ISplitButtonVM, SplitButtonModel>();
+
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
             where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {
 

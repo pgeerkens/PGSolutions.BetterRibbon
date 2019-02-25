@@ -92,6 +92,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsLarge { get; }
     }
 
+    public interface ISplitButtonSource: IControlSource {
+
+    }
+
     public interface IMenuSource: IControlSource {
         /// <summary>.</summary>
         ImageObject Image { get; }

@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
@@ -14,17 +15,21 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IGroupModel))]
-    [Guid(Guids.GroupModel)]
-    internal class GroupModel : ControlModel<IControlSource,GroupVM>,
-            IGroupModel, IControlSource {
-        public GroupModel(Func<string,GroupVM> funcViewModel,
+    [ComDefaultInterface(typeof(IMenuModel))]
+    [Guid(Guids.MenuModel)]
+    internal class MenuModel: ControlModel<IMenuSource,IMenuVM>,
+            IMenuModel, IMenuSource {
+        public MenuModel(Func<string,MenuVM> funcViewModel,
                 IControlStrings strings, bool isEnabled, bool isVisible)
         : base(funcViewModel, strings, isEnabled, isVisible)
         { }
 
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
+
         /// <inheritdoc/>
-        public IGroupModel Attach(string controlId) {
+        public IMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 ViewModel.Invalidate();
@@ -32,9 +37,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        public override void SetShowInactive(bool showInactive)
-        => ViewModel.SetShowInactive(showInactive);
-
-        public void Detach() => ViewModel.Detach();
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
+        public void SetImageMso(string imageMso)     => Image = imageMso;
     }
 }

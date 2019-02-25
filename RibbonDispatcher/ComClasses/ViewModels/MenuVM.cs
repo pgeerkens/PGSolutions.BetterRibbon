@@ -6,8 +6,8 @@ using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    internal class MenuVM: AbstractContainerVM<IMenuSource>, IMenuVM, IImageableVM,
-            IActivatable<IMenuSource,IMenuVM> {
+    internal class MenuVM: AbstractContainerVM<IMenuSource>, IMenuVM,
+            IActivatable<IMenuSource,IMenuVM>, IImageableVM {
         public MenuVM(IViewModelFactory factory, string itemId) : base(factory, itemId) { }
 
         #region IActivatable implementation

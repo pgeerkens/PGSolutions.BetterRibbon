@@ -42,10 +42,10 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IEditBoxModel           = "69E1941E" + GuidSpace;
         public const string EditBoxModel            = "69E1941F" + GuidSpace;
 
-        //public const string ISelectableItem         = "69E19420" + GuidSpace;
-        //public const string SelectableItem          = "69E19421" + GuidSpace;
-        //public const string IImageObject            = "69E19422" + GuidSpace;
-        //public const string ImageObject             = "69E19423" + GuidSpace;
+        public const string ISplitButtonModel       = "69E19420" + GuidSpace;
+        public const string SplitButtonModel        = "69E19421" + GuidSpace;
+        public const string IMenuModel              = "69E19422" + GuidSpace;
+        public const string MenuModel               = "69E19423" + GuidSpace;
         //public const string IResourceLoader         = "69E19424" + GuidSpace;
         //public const string ResourceLoader          = "69E19425" + GuidSpace;
         //public const string IRibbonModel            = "69E19426" + GuidSpace;

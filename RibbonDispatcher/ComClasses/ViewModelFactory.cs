@@ -178,8 +178,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Add<LabelVM, ILabelSource>(new LabelVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        internal SplitVM NewSplitButton(string controlId, IButtonVM button, IMenuVM menu)
-        => Add<SplitVM, IControlSource>(new SplitVM(this, controlId, button, menu));
+        internal SplitButtonVM NewSplitButton(string controlId, IButtonVM button, IMenuVM menu)
+        => Add<SplitButtonVM, ISplitButtonSource>(new SplitButtonVM(this, controlId, button, menu));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal MenuVM NewMenu(string controlId)

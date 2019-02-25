@@ -4,47 +4,43 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    using IStrings = IControlStrings;
+
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
     [Description("The COM visible Model for Ribbon Button controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvent))]
-    [ComDefaultInterface(typeof(IButtonModel))]
-    [Guid(Guids.ButtonModel)]
-    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>,
-            IButtonModel, IButtonSource {
-        internal ButtonModel(Func<string, ButtonVM> funcViewModel,
-                IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
-        => Image = image;
-
-        public event ClickedEventHandler Clicked;
+    [ComDefaultInterface(typeof(ISplitButtonModel))]
+    [Guid(Guids.SplitButtonModel)]
+    public class SplitButtonModel: ControlModel<ISplitButtonSource,ISplitButtonVM>,
+            ISplitButtonModel, ISplitButtonSource {
+        internal SplitButtonModel(Func<string, SplitButtonVM> funcViewModel, IStrings strings,
+                ButtonModel button, MenuModel menu, bool isEnabled, bool isVisible)
+        : base(funcViewModel, strings, isEnabled, isVisible) {
+            Button = button;
+            Menu   = menu;
+        }
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public IButtonModel Attach(string controlId) {
+        public IButtonModel Button    { get; }
+        public IMenuModel   Menu      { get; }
+
+        public ISplitButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Clicked += OnClicked;
-                ViewModel.Invalidate();
-            }
+            Button.Attach(ViewModel.ButtonVM.Id);
+            Menu.Attach(ViewModel.MenuVM.Id);
+            ViewModel?.Invalidate();
             return this;
         }
-
-        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
-
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
     }
 }

@@ -36,6 +36,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public virtual void Invalidate() => ViewModel?.Invalidate();
 
+        //public void Detach() => ViewModel.Detach();
+
         /// <inheritdoc/>
         public virtual void SetShowInactive(bool showInactive) {
             ShowInactive = showInactive;
