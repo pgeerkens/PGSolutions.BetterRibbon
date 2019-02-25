@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(IButtonModel))]
     [Guid(Guids.ButtonModel)]
-    public class ButtonModel : ControlModel<IButtonSource,IButtonVM>,
+    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>,
             IButtonModel, IButtonSource {
         internal ButtonModel(Func<string, ButtonVM> funcViewModel,
                 IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)

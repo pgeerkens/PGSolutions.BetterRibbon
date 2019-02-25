@@ -1,11 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
@@ -70,6 +66,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             model.Edited += handler;
             return model?.Attach(id);
         }
+
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonLabelModel"/>.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public static ILabelModel NewLabelModel(this ViewModelFactory factory, string id,
+                ClickedEventHandler handler, bool isEnabled = true, bool isVisible = true)
+        => factory?.NewLabelModel(factory.GetStrings(id), isEnabled, isVisible)
+                  ?.Attach(id);
     }
 
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the common link between <see cref="ControlModel{TSource, TCtrl}"/> objects created from VBA and C#.></summary>
@@ -115,101 +118,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 string controlID, IStrings strings)
         => new SelectableItemModel(strings, true, true).Attach(controlID);
 
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public static LabelModel NewLabelModel(this ViewModelFactory factory, IStrings strings,
+                bool isEnabled, bool isVisible)
+        => new LabelModel(factory.GetControl<LabelVM>, strings, isEnabled, isVisible)
+                .InitializeModel<ILabelSource, ILabelVM, LabelModel>();
+
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
             where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {
 
             model.SetShowInactive(false);
             model.Invalidate();
             return model;
-        }
-
-        /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
-        /// <param name="ribbonXml"></param>
-        public static IReadOnlyList<TabVM> ParseXml(this ViewModelFactory factory, string ribbonXml) {
-            var tabModels = new List<TabVM>();
-            var doc = XDocument.Parse(ribbonXml);
-            var root = doc.Root;
-            XNamespace mso = ( from a in doc.Descendants().Attributes()
-                               where a.IsNamespaceDeclaration && a.Name.LocalName == "mso"
-                               select a
-                             ).FirstOrDefault()?.Value;
-            foreach (var tab in root.Descendants(mso+"tab")) {
-                if (tab.Attribute("idMso") != null) {
-                    tabModels?.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idMso").Value)));
-                } else if(tab.Attribute("id") != null) {
-                    tabModels?.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
-                } else {
-                    continue;
-                }
-
-            }
-
-            return tabModels.AsReadOnly();
-        }
-
-        private static TCtrl ParseXmlChildren<TCtrl>(this XElement element, XNamespace mso,
-                ViewModelFactory factory, TCtrl parent) where TCtrl: IContainerControl {
-            foreach (var child in element.Elements()) {
-                if (element.Attribute(mso+"idMso") != null  ||  element.Attribute(mso+"idQ") != null) continue;
-
-                switch (child.Name) {
-                    case XName name when name == mso+"toggleButton":
-                        parent.Add(factory.NewToggleButton(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"checkBox":
-                        parent.Add(factory.NewCheckBox(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"dropDown":
-                        parent.Add(factory.NewDropDown(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"button":
-                        parent.Add(factory.NewButton(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"editBox":
-                        parent.Add(factory.NewEditBox(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"comboBox":
-                        parent.Add(factory.NewComboBox(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"labelControl":
-                        parent.Add(factory.NewLabel(child.Attribute("id").Value));
-                        break;
-
-                    case XName name when name == mso+"box"
-                                      || name == mso+"dialogBoxLauncher":
-                        child.ParseXmlChildren(mso, factory, parent);
-                        break;
-
-                    case XName name when name == mso+"menu":
-                        parent.Add(child.ParseXmlChildren(mso, factory,
-                                factory.NewMenu(child.Attribute("id").Value)));
-                        break;
-
-                    case XName name when name == mso+"splitButton":
-                        parent.Add(child.ParseXmlChildren(mso, factory,
-                                factory.NewSplitButton(child.Attribute("id").Value)));
-                        break;
-
-                    case XName name when name == mso+"group":
-                        parent.Add(child.ParseXmlChildren(mso, factory,
-                                factory.NewGroup(child.Attribute("id").Value)) );
-                        break;
-
-                    case XName name when name == mso+"tab":
-                        throw new InvalidOperationException($"Tab '{child.Name.LocalName}' found unexpectedly.");
-
-                    default:
-                        break;
-                }
-            }
-
-            return parent;
         }
     }
 }

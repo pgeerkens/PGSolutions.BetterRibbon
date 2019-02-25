@@ -50,8 +50,34 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <inheritdoc/>
-        public IResourceManager   ResourceManager { get; }
+        internal event ChangedEventHandler Changed;
 
+        /// <inheritdoc/>
+        internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
+
+        /// <inheritdoc/>
+        public IResourceManager ResourceManager { get; }
+
+        /// <inheritdoc/>
+        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
+        => Controls.FirstOrDefault(c => c.Key == controlId).Value as TControl;
+
+        #region IVewModelFactory implementation
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public IControlStrings NewControlStrings(string label,
+                                                 string screenTip      = null,
+                                                 string superTip       = null,
+                                                 string keyTip         = null,
+                                                 string alternateLabel = null,
+                                                 string description    = null)
+        => new ControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
+
+        public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
+
+        public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
+        #endregion
+
+        #region Dictionaries
         private  readonly IDictionary<string, IControlVM>     _controls;
         private  readonly IDictionary<string, ISizeableVM>    _sizeables;
         private  readonly IDictionary<string, IClickableVM>   _clickables;
@@ -62,8 +88,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private  readonly IDictionary<string, IEditableVM>    _textEditables;
         private  readonly IDictionary<string, IDynamicMenuVM> _dynamicMenus;
         private  readonly IDictionary<string, IGallerySizeVM> _gallerySizes;
-
-        public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IControlVM>    Controls      => new ReadOnlyDictionary<string, IControlVM>(_controls);
@@ -94,34 +118,24 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IGallerySizeVM> GallerySizes => new ReadOnlyDictionary<string, IGallerySizeVM>(_gallerySizes);
+        #endregion
 
-        /// <inheritdoc/>
-        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
-        => Controls.FirstOrDefault( c => c.Key == controlId).Value as TControl;
-
-        /// <inheritdoc/>
-        internal event ChangedEventHandler Changed;
-
-        /// <inheritdoc/>
-        internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
-
+        #region Factoy Method implementation
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        internal T Add<T,TSource>(T ctrl) where T:AbstractControlVM<TSource> where TSource:class,IControlSource {
+        internal T Add<T, TSource>(T ctrl) where T : AbstractControlVM<TSource> where TSource : class, IControlSource {
             if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
 
-            _clickables   .AddNotNull(ctrl.Id, ctrl as IClickableVM);
-            _sizeables    .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
-            _selectables  .AddNotNull(ctrl.Id, ctrl as ISelectableVM);
-            _selectables2 .AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
-            _imageables   .AddNotNull(ctrl.Id, ctrl as IImageableVM);
-            _toggleables  .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
+            _clickables.AddNotNull(ctrl.Id, ctrl as IClickableVM);
+            _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeableVM);
+            _selectables.AddNotNull(ctrl.Id, ctrl as ISelectableVM);
+            _selectables2.AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
+            _imageables.AddNotNull(ctrl.Id, ctrl as IImageableVM);
+            _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleableVM);
             _textEditables.AddNotNull(ctrl.Id, ctrl as IEditableVM);
 
             ctrl.Changed += OnChanged;
             return ctrl;
         }
-
-        public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
 
         /// <summary>Returns a new Ribbon Group ViewModel instance.</summary>
         internal TabVM NewTab(string controlId)
@@ -161,23 +175,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal LabelVM NewLabel(string controlId)
-        => Add<LabelVM, IControlSource>(new LabelVM(controlId));
+        => Add<LabelVM, ILabelSource>(new LabelVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
-        internal SplitVM NewSplitButton(string controlId)
-        => Add<SplitVM, IControlSource>(new SplitVM(this, controlId));
+        internal SplitVM NewSplitButton(string controlId, IButtonVM button, IMenuVM menu)
+        => Add<SplitVM, IControlSource>(new SplitVM(this, controlId, button, menu));
 
         /// <summary>Returns a new Ribbon ToggleButton ViewModel instance.</summary>
         internal MenuVM NewMenu(string controlId)
         => Add<MenuVM, IMenuSource>(new MenuVM(this, controlId));
-
-        ///// <inheritdoc/>
-        //public IResourceLoader NewResourceLoader() => ResourceLoader;
-
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IControlStrings NewControlStrings(string label,
-                string screenTip = null, string superTip = null, string keyTip = null,
-                string alternateLabel = null, string description = null)
-        => new ControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
+        #endregion
     }
 }

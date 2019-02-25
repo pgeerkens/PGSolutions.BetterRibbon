@@ -82,6 +82,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => ViewModelFactory.NewComboBoxModel(strings, isEnabled, isVisible);
 
         /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public ILabelModel NewLabelModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true)
+        => ViewModelFactory.NewLabelModel(strings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
         public ISelectableItemModel NewSelectableModel(string controlID, IControlStrings strings)
         => ViewModelFactory.NewSelectableModel(controlID, strings);
     }

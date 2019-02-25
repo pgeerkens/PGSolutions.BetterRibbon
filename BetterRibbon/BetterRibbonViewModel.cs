@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-
 using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
@@ -28,7 +27,7 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
-    public sealed class BetterRibbonViewModel : AbstractDispatcher, IRibbonExtensibility {
+    public sealed class BetterRibbonViewModel: AbstractDispatcher, IRibbonExtensibility {
         internal BetterRibbonViewModel(string controlId) : base(controlId, new MyResourceManager()) { }
 
         /// <inheritdoc/>

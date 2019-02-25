@@ -216,8 +216,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private IDynamicMenuVM DynamicMenus(string controlId) => ViewModelFactory.DynamicMenus.GetOrDefault(controlId);
 
         public string GetContent(IRibbonControl control)
-        => DynamicMenus(control?.Id)?.MenuContent
-                ?? "<menu xmlns=\"http://schemas.microsoft.com/office/2006/01/customui\"></menu>";
+        => DynamicMenus(control?.Id)?.MenuContent ?? MenuContent;
         #endregion
 
         #region GallerySizeVM implementation
@@ -228,5 +227,46 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public int GetItemWidth(IRibbonControl control) => GallerySizes(control?.Id)?.ItemWidth ?? 0;
         #endregion
+
+        private static string MenuContent =>
+@"
+<menu xmlns=\'http://schemas.microsoft.com/office/2006/01/customui\'>
+    <mso:box id='Custom2VbaBox3' boxStyle='vertical' visible='true' >
+        <!-- Not Yet Implemented on DropDown: getImage='getImage' getShowImage='getShowImage' getShowLabel='getShowLabel' -->
+        <!-- Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
+        <mso:dropDown id = 'Custom2VbaDropDown1'
+                getLabel= 'getLabel' getScreentip= 'getScreentip' getSupertip= 'getSupertip' getKeytip= 'getKeytip'
+                getVisible= 'getVisible' getEnabled= 'getEnabled'
+                getItemCount= 'getItemCount' getItemID= 'getItemId' getItemLabel= 'getItemLabel'
+                getItemScreentip= 'getItemScreentip' getItemSupertip= 'getItemSupertip' getItemImage= 'getItemImage'
+                onAction= 'onActionSelected' getSelectedItemID= 'getSelectedItemID'
+                showItemImage= 'true' showItemLabel= 'true'
+        >
+        </mso:dropDown>
+        <!-- Not Yet Implemented on DropDown: getImage= 'getImage' getShowImage= 'getShowImage' getShowLabel= 'getShowLabel'-->
+        <!--Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
+        <mso:dropDown id = 'Custom2VbaDropDown2'
+                getLabel= 'getLabel' getScreentip= 'getScreentip' getSupertip= 'getSupertip' getKeytip= 'getKeytip'
+                getVisible= 'getVisible' getEnabled= 'getEnabled'
+                getItemCount= 'getItemCount' getItemID= 'getItemId' getItemLabel= 'getItemLabel'
+                getItemScreentip= 'getItemScreentip' getItemSupertip= 'getItemSupertip' getItemImage= 'getItemImage'
+                onAction= 'onActionSelected' getSelectedItemID= 'getSelectedItemID'
+                showItemImage= 'true' showItemLabel= 'true'
+        >
+        </mso:dropDown>
+        <!-- Not Yet Implemented on DropDown: getImage= 'getImage' getShowImage= 'getShowImage' getShowLabel= 'getShowLabel'-->
+        <!--Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
+        <mso:dropDown id = 'Custom2VbaDropDown3'
+                getLabel= 'getLabel' getScreentip= 'getScreentip' getSupertip= 'getSupertip' getKeytip= 'getKeytip'
+                getVisible= 'getVisible' getEnabled= 'getEnabled'
+                getItemCount= 'getItemCount' getItemID= 'getItemId' getItemLabel= 'getItemLabel'
+                getItemScreentip= 'getItemScreentip' getItemSupertip= 'getItemSupertip' getItemImage= 'getItemImage'
+                onAction= 'onActionSelected' getSelectedItemID= 'getSelectedItemID'
+                showItemImage= 'true' showItemLabel= 'true'
+        >
+        </mso:dropDown>
+    </mso:box>
+</menu>'
+";
     }
 }

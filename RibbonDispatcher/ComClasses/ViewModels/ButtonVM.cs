@@ -6,7 +6,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>The ViewModel for ButtonVM objects.</summary>
-    internal class ButtonVM : AbstractControlVM<IButtonSource>, IButtonVM,
+    internal class ButtonVM: AbstractControlVM<IButtonSource>, IButtonVM,
             IActivatable<IButtonSource,IButtonVM>, ISizeableVM, IClickableVM, IImageableVM {
         internal ButtonVM(string itemId) : base(itemId) { }
 

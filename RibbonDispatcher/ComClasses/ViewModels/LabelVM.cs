@@ -6,13 +6,19 @@ using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    internal class LabelVM: AbstractControlVM<IControlSource>, ILabelVM,
-             IActivatable<IControlSource, LabelVM> {
+    internal class LabelVM: AbstractControlVM<ILabelSource>, ILabelVM,
+             IActivatable<ILabelSource,ILabelVM>, ISizeableVM {
         public LabelVM(string itemId) : base(itemId) { }
 
+        #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        LabelVM IActivatable<IControlSource, LabelVM>.Attach(IControlSource source)
-        => Attach<LabelVM>(source);
+        public new ILabelVM Attach(ILabelSource source) => Attach<LabelVM>(source);
+        #endregion
+
+        #region ISizeable implementation
+        /// <inheritdoc/>
+        public bool IsLarge => Source?.IsLarge ?? false;
+        #endregion
 
         public override string Description
         => throw new InvalidOperationException("Attribute Description not supported on a Label.");

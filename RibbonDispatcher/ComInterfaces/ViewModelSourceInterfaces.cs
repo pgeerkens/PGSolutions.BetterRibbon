@@ -87,6 +87,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool IsLarge { get; }
     }
 
+    public interface ILabelSource: IControlSource {
+        /// <summary>.</summary>
+        bool IsLarge { get; }
+    }
+
     public interface IMenuSource: IControlSource {
         /// <summary>.</summary>
         ImageObject Image { get; }

@@ -187,7 +187,7 @@
                             getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
                     />
                     <mso:splitButton id="CustomVbaSplit1"
-                            getKeytip="getKeytip" getSize="getSize"
+                            getKeytip="getKeytip" getSize="getSize" 
                             getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
                     >
                         <mso:button id="CustomVbaSplit1Button"
@@ -200,9 +200,13 @@
                                 getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
                                 getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
                         >
-                            
                         </mso:menu>
                     </mso:splitButton>
+                    <mso:dynamicMenu id="VbaDynamicMenu1" getContent="getContent" getSize="getSize"
+                            getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                            getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                    />
                 </mso:box>
                 <mso:dialogBoxLauncher>
                     <!-- The callback getSize is not supported on Buttons embedded in a DialogBoxLauncher. -->

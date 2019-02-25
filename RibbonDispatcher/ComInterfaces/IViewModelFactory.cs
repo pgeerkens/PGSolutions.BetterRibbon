@@ -16,14 +16,20 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface IViewModelFactory {
         /// <summary>.</summary>
         /// <param name="controlId"></param>
-        [Description("")]
+        [DispId(1), Description("")]
         IControlStrings GetStrings(string controlId);
 
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(2), Description("")]
         IControlStrings NewControlStrings(string label,
-                string screenTip = "", string superTip = "",
-                string keyTip = "", string alternateLabel = "", string description = "");
+                                          string screenTip      = null,
+                                          string superTip       = null,
+                                          string keyTip         = null,
+                                          string alternateLabel = null,
+                                          string description    = null);
 
+        /// <summary>.</summary>
+        [DispId(3), Description("")]
         object LoadImage(string imageId);
     }
 }

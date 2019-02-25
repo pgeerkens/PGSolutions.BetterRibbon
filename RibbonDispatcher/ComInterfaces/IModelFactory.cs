@@ -75,6 +75,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IComboBoxModel NewComboBoxModel(IControlStrings strings,
                 bool isEnabled = true, bool isVisible = true);
 
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        ILabelModel NewLabelModel(IControlStrings strings,
+                bool isEnabled = true, bool isVisible = true);
+
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [Description(".")]

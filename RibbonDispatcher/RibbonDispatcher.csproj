@@ -68,6 +68,7 @@
     <Compile Include="ComClasses\ComboBoxModel.cs" />
     <Compile Include="ComClasses\CustomButtonsModel.cs" />
     <Compile Include="ComClasses\IRibbonViewModel.cs" />
+    <Compile Include="ComClasses\LabelModel.cs" />
     <Compile Include="ComClasses\ModelFactory.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
     <Compile Include="ComClasses\RibbonViewModelExtensions.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="ComClasses\ViewModels\MenuVM.cs" />
     <Compile Include="ComClasses\ViewModels\SplitVM.cs" />
     <Compile Include="ComClasses\ViewModels\TabVM.cs" />
+    <Compile Include="ComClasses\XmParserExtensions.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IEditBoxModel.cs" />
     <Compile Include="ComClasses\PictureConverter.cs">
