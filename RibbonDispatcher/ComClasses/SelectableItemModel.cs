@@ -41,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        public void Detach() { Id = null; base.Detach(); }
+        public override void Detach() { Id = null; base.Detach(); }
 
         public override void Invalidate() { }
 

@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonDispatcher.ComClasses;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -24,14 +23,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(2), Description(".")]
-        IStrings NewControlStrings(string label, string screenTip, string superTip,
-                string keyTip);
+        IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(18), Description(".")]
-        IStrings2 NewControlStrings2(string label, string screenTip, string superTip,
-                string keyTip, string description);
+        IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
+                string description);
 
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>
@@ -42,8 +40,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(4), Description(".")]
-        IGroupModel NewGroupModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true);
+        IGroupModel NewGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
@@ -77,29 +74,25 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(9), Description(".")]
-        IEditBoxModel NewEditBoxModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true);
+        IEditBoxModel NewEditBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(10), Description(".")]
-        IDropDownModel NewDropDownModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true);
+        IDropDownModel NewDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(11), Description(".")]
-        IComboBoxModel NewComboBoxModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true);
+        IComboBoxModel NewComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(12), Description(".")]
-        ILabelModel NewLabelModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true);
+        ILabelModel NewLabelModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
@@ -107,17 +100,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(13), Description(".")]
         IMenuModel NewMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new model for a Split(Toggle)Button control.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
-        [DispId(14), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(14), Description("Returns a new model for a Split(Toggle)Button control.")]
         ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new model for a Split(Press)Button control.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(15), Description(".")]
+        [DispId(15), Description("Returns a new model for a Split(Press)Button control.")]
         ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true);
 
@@ -125,13 +118,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [DispId(19), Description(".")]
         ISelectableItemModel NewSelectableModel(string controlID);
-    }
-
-    public interface IModelFactoryInternal {//: IModelFactory {
-        /// <summary>.</summary>
-        ViewModelFactory ViewModelFactory { get; }
-
-        /// <summary>.</summary>
-        IResourceLoader ResourceManager { get; }
     }
 }

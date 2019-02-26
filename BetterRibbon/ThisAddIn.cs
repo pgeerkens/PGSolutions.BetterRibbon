@@ -23,7 +23,8 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void ViewModel_Initialized(object sender, EventArgs e) {
-            Model = new BetterRibbonModel(ViewModel, ViewModel.ViewModelFactory.NewModelFactory2(new MyResourceManager()));
+            Model = new BetterRibbonModel(ViewModel, 
+                    ViewModel.ViewModelFactory.NewModelFactory2(new MyResourceManager()));
             ViewModel.Initialized -= ViewModel_Initialized;
         }
 
@@ -35,7 +36,8 @@ namespace PGSolutions.BetterRibbon {
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() => ComEntry as IBetterRibbon;
+        protected override object RequestComAddInAutomationService()
+        => ComEntry as IBetterRibbon;
 
         internal BetterRibbonViewModel ViewModel { get; private set; }
 

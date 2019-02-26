@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComClasses\AbstractModelFactory.cs" />
     <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
     <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
     <Compile Include="ComClasses\ComboBoxModel.cs" />

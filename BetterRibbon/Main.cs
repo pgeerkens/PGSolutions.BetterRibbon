@@ -23,9 +23,6 @@ namespace PGSolutions.BetterRibbon {
 
         Func<IResourceLoader,IModelFactory> FuncFactory { get; }
 
-        // /// <inheritdoc/>
-        //public IModelFactory NewBetterRibbon() => FuncFactory(new MyResourceManager());
-
         /// <inheritdoc/>
         public IModelFactory NewBetterRibbon(IResourceLoader manager) => FuncFactory(manager);
 

@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         protected Func<string, TSource, TCtrl> AttachToViewModel { get; }
 
-        public void Detach() {
+        public virtual void Detach() {
             ViewModel.Detach();
             ViewModel.Invalidate();
             ViewModel = default;

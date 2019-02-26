@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
-    internal abstract class AbstractControlVM<TSource>: IControlVM, IActivatable<TSource,IControlVM>
+    public abstract class AbstractControlVM<TSource>: IControlVM, IActivatable<TSource,IControlVM>
         where TSource: IControlSource {
         /// <summary>TODO</summary>
         protected AbstractControlVM(string itemId) => Id = itemId;

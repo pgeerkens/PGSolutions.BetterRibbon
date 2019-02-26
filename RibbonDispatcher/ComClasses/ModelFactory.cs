@@ -8,22 +8,14 @@ using stdole;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IStrings  = IControlStrings;
+    using IStrings = IControlStrings;
     using IStrings2 = IControlStrings2;
 
     /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
-    internal class ModelFactory : IModelFactory, IModelFactoryInternal {
+    internal class ModelFactory : AbstractModelFactory, IModelFactory {
         /// <summary>.</summary>
-        public ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager) {
-            ViewModelFactory = viewModelFactory;
-            ResourceManager = manager;
-        }
-
-        public IResourceLoader       ResourceManager  { get; }
-
-        public ViewModelFactory       ViewModelFactory { get; }
-
-        private IModelFactoryInternal _factory => this;
+        public ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
+        : base(viewModelFactory, manager) { }
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId) => ViewModelFactory.GetControl<IControlVM>(controlId).Detach();
@@ -42,73 +34,73 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IGroupModel NewGroupModel(string stringsId,
+        public new IGroupModel NewGroupModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true)
-        => _factory.NewGroupModel(stringsId, isEnabled, isVisible);
+        => base.NewGroupModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IButtonModel NewButtonModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewButtonModel(stringsId, new ImageObject(image), isEnabled, isVisible);
+        => base.NewButtonModel(stringsId, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IButtonModel NewButtonModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => _factory.NewButtonModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
+        => base.NewButtonModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IToggleModel NewToggleModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewToggleModel(stringsId, new ImageObject(image), isEnabled, isVisible);
+        => base.NewToggleModel(stringsId, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IToggleModel NewToggleModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => _factory.NewToggleModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
+        => base.NewToggleModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IComboBoxModel NewComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewComboBoxModel(stringsId, isEnabled, isVisible);
+        public new IComboBoxModel NewComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewComboBoxModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IEditBoxModel NewEditBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewEditBoxModel(stringsId, isEnabled, isVisible);
+        public new IEditBoxModel NewEditBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewEditBoxModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IDropDownModel NewDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewDropDownModel(stringsId, isEnabled, isVisible);
+        public new IDropDownModel NewDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewDropDownModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ILabelModel NewLabelModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => ModelFactoryExtensions.NewLabelModel(this, stringsId, isEnabled, isVisible);
+        public new ILabelModel NewLabelModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewLabelModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IMenuModel NewMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewMenuModel(stringsId, isEnabled, isVisible);
+        public new IMenuModel NewMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewMenuModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
+        public new ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewSplitToggleButtonModel(splitStringId, menuStringId, toggleStringId, isEnabled, isVisible);
+        => base.NewSplitToggleButtonModel(splitStringId, menuStringId, toggleStringId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
+        public new ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewSplitPressButtonModel(splitStringId, menuStringId, buttonStringId,  isEnabled, isVisible);
+        => base.NewSplitPressButtonModel(splitStringId, menuStringId, buttonStringId,  isEnabled, isVisible);
 
         /// <inheritdoc/>
-        public ISelectableItemModel NewSelectableModel(string controlID)
-        => _factory.NewSelectableModel(controlID);
+        public new ISelectableItemModel NewSelectableModel(string controlID)
+        => base.NewSelectableModel(controlID);
     }
 }

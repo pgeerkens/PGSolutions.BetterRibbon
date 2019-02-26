@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
-    internal abstract class AbstractContainerVM<TSource>: AbstractControlVM<TSource>, IContainerControl
+    public abstract class AbstractContainerVM<TSource>: AbstractControlVM<TSource>, IContainerControl
         where TSource : IControlSource {
         protected AbstractContainerVM(IViewModelFactory factory, string itemId)
         : base(itemId) {

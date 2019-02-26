@@ -22,13 +22,14 @@ Private Function IResourceLoader_GetControlStrings2(ByVal Search As String) As I
     Const ControlStringsRangeName As String = "ControlStringData"
     
     On Error GoTo EH
+    Dim RowNo As Double: RowNo = Application.Match(Search, Range(ControlStringsRangeName).Columns.Item(1), 0)
     With New RibbonControlStrings
         Set IResourceLoader_GetControlStrings2 = .Initialize2( _
-                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
-                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
-                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
-                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6), _
-                Description:=FindStr(Search, Range(ControlStringsRangeName), 7))
+                KeyTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 2), _
+                Label:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 3), _
+                ScreenTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 4), _
+                SuperTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 5), _
+                Description:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 6))
     End With
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".IResourceLoader_GetControlStrings2"
@@ -40,12 +41,13 @@ Private Function IResourceLoader_GetControlStrings(ByVal Search As String) As IC
     Const ControlStringsRangeName As String = "ControlStringData"
     
     On Error GoTo EH
+    Dim RowNo As Double: RowNo = Application.Match(Search, Range(ControlStringsRangeName).Columns.Item(1), 0)
     With New RibbonControlStrings
         Set IResourceLoader_GetControlStrings = .Initialize( _
-                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
-                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
-                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
-                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6))
+            KeyTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 2), _
+            Label:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 3), _
+            ScreenTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 4), _
+            SuperTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 5))
     End With
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"

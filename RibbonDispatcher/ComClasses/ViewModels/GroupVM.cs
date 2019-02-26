@@ -8,9 +8,9 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
-    internal class GroupVM : AbstractContainerVM<IControlSource>, IGroupVM, 
+    public class GroupVM : AbstractContainerVM<IControlSource>, IGroupVM, 
             IActivatable<IControlSource,GroupVM> {
-        public GroupVM(IViewModelFactory factory, string itemId)
+        internal GroupVM(IViewModelFactory factory, string itemId)
         : base(factory, itemId) { }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>

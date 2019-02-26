@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>TODO</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ControlStrings(
+        internal ControlStrings(
             string label,
             string screenTip = null,
             string superTip = null,
@@ -56,7 +56,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>TODO</summary>
         [SuppressMessage( "Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage." )]
-        public ControlStrings2(
+        internal ControlStrings2(
             string label,
             string screenTip      = null,
             string superTip       = null,
