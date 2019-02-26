@@ -21,10 +21,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.ButtonModel)]
     public class ButtonModel: ControlModel<IButtonSource,IButtonVM>,
             IButtonModel, IButtonSource {
-        internal ButtonModel(Func<string, ButtonVM> funcViewModel,
-                IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
-        => Image = image;
+        internal ButtonModel(Func<string, ButtonVM> funcViewModel, IControlStrings strings)
+        : base(funcViewModel, strings) { }
 
         public event ClickedEventHandler Clicked;
 

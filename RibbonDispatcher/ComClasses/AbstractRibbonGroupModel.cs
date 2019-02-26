@@ -9,7 +9,6 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;
 
-    [CLSCompliant(false)]
     public abstract class AbstractRibbonGroupModel : IControlSource, ICanInvalidate {
         protected AbstractRibbonGroupModel(IRibbonViewModel viewModel, string viewModelName)
         : this(viewModel?.ViewModelFactory.GetControl<GroupVM>(viewModelName)) {

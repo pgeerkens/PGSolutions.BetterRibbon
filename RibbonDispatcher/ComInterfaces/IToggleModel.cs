@@ -8,9 +8,9 @@ using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
-    [Description("")]    
+    [Description("")]
+    [CLSCompliant(true)]
     [ComVisible(true)]
-    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IToggleModel)]
     public interface IToggleModel {

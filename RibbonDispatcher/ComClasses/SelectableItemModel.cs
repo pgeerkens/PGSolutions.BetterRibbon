@@ -19,9 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.SelectableItemModel)]
     public class SelectableItemModel : ControlModel<ISelectableItemSource,ISelectableItemVM>,
             ISelectableItemModel, ISelectableItemSource, ISelectableItemVM {
-        internal SelectableItemModel(
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(null, strings, isEnabled, isVisible) { }
+        internal SelectableItemModel(IControlStrings strings)
+        : base(null, strings) { }
 
         public bool        IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
         public ImageObject Image     { get; set; } = "MacroSecurity";

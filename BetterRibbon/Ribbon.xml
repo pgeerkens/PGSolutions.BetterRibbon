@@ -202,6 +202,22 @@
                         >
                         </mso:menu>
                     </mso:splitButton>
+                    <mso:splitButton id="CustomVbaSplit2"
+                            getKeytip="getKeytip" getSize="getSize"
+                            getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
+                    >
+                        <mso:toggleButton id="CustomVbaSplit2Toggle"
+                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                onAction="onActionToggle" getEnabled="getEnabled" getDescription="getDescription"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                        />
+                        <mso:menu id="CustomVbaSplit2Menu" itemSize="large"
+                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                        >
+                        </mso:menu>
+                    </mso:splitButton>
                     <mso:dynamicMenu id="VbaDynamicMenu1" getContent="getContent" getSize="getSize"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"

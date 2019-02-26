@@ -24,8 +24,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public sealed class ComboBoxModel: ControlModel<IComboBoxSource, IComboBoxVM>,
             IComboBoxModel, IComboBoxSource, IEnumerable<ISelectableItemModel>, IEnumerable {
         internal ComboBoxModel(Func<string, ComboBoxVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible) { }
+                IControlStrings strings)
+        : base(funcViewModel, strings) { }
 
         public event EditedEventHandler Edited;
 

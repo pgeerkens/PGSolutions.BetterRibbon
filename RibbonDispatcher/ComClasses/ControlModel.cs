@@ -10,11 +10,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             where TSource: IControlSource
             where TCtrl: IControlVM {
         protected ControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible) {
+                IControlStrings strings) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId).Attach(source);
             Strings   = strings;
-            IsEnabled = isEnabled;
-            IsVisible = isVisible;
         }
 
         protected Func<string, TSource, TCtrl> AttachToViewModel { get; }

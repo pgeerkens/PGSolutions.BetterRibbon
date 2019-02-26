@@ -10,7 +10,6 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IModels  = IReadOnlyList<ICanInvalidate>;
 
-    [CLSCompliant(false)]
     public abstract class AbstractRibbonTabModel {
         protected AbstractRibbonTabModel(IRibbonViewModel viewModel, IReadOnlyList<ICanInvalidate> models) {
             ViewModel = viewModel;

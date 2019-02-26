@@ -18,9 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.GroupModel)]
     internal class GroupModel : ControlModel<IControlSource,GroupVM>,
             IGroupModel, IControlSource {
-        public GroupModel(Func<string,GroupVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
+        public GroupModel(Func<string,GroupVM> funcViewModel, IControlStrings strings)
+        : base(funcViewModel, strings)
         { }
 
         /// <inheritdoc/>

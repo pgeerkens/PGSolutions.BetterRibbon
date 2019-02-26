@@ -10,7 +10,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
     [Description("")]
     [ComVisible(true)]
-    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISelectableItemModel)]
     public interface ISelectableItemModel: IControlSource {

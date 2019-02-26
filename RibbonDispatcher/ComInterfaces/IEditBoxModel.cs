@@ -9,7 +9,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
     [Description("")]
     [ComVisible(true)]
-    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IEditBoxModel)]
     public interface IEditBoxModel {

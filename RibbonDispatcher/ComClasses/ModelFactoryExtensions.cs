@@ -14,65 +14,75 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
         public static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new GroupModel(factory.GetControl<GroupVM>, strings, isEnabled, isVisible);
+        => new GroupModel(factory.GetControl<GroupVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible };
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled, bool isVisible)
-        => new ButtonModel(factory.GetControl<ButtonVM>, strings, image, isEnabled, isVisible)
+        => new ButtonModel(factory.GetControl<ButtonVM>, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
         public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
                 ImageObject image, bool isEnabled, bool isVisible)
-        => new ToggleModel(factory.GetControl<CheckBoxVM>, strings, image, isEnabled, isVisible)
-                .InitializeModel<IToggleSource, IToggleControlVM, ToggleModel>();
+        => new ToggleModel(factory.GetControl<CheckBoxVM>, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IToggleSource, IToggleVM, ToggleModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
         public static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new EditBoxModel(factory.GetControl<EditBoxVM>, strings, isEnabled, isVisible)
+        => new EditBoxModel(factory.GetControl<EditBoxVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
         public static ComboBoxModel NewComboBoxModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new ComboBoxModel(factory.GetControl<ComboBoxVM>, strings, isEnabled, isVisible)
+        => new ComboBoxModel(factory.GetControl<ComboBoxVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
         public static DropDownModel NewDropDownModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new DropDownModel(factory.GetControl<DropDownVM>, strings, isEnabled, isVisible)
+        => new DropDownModel(factory.GetControl<DropDownVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "factory")]
         public static ISelectableItemModel NewSelectableModel(this ViewModelFactory factory,
                 string controlID, IStrings strings)
-        => new SelectableItemModel(strings, true, true).Attach(controlID);
+        => new SelectableItemModel(strings).Attach(controlID);
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public static LabelModel NewLabelModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new LabelModel(factory.GetControl<LabelVM>, strings, isEnabled, isVisible)
+        => new LabelModel(factory.GetControl<LabelVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<ILabelSource, ILabelVM, LabelModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public static MenuModel NewMenuModel(this ViewModelFactory factory, IStrings strings,
                 bool isEnabled, bool isVisible)
-        => new MenuModel(factory.GetControl<MenuVM>, strings, isEnabled, isVisible)
+        => new MenuModel(factory.GetControl<MenuVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IMenuSource, IMenuVM, MenuModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public static SplitButtonModel NewSplitButtonModel(this ViewModelFactory factory,
+        public static SplitToggleButtonModel NewSplitToggleButtonModel(this ViewModelFactory factory,
+                IStrings splitStrings, IStrings toggleStrings, IStrings menuStrings,
+                bool isEnabled, bool isVisible)
+        => new SplitToggleButtonModel(factory.GetControl<SplitToggleButtonVM>, splitStrings,
+                    new ToggleModel(factory.GetControl<ToggleButtonVM>, toggleStrings),
+                    new MenuModel(factory.GetControl<MenuVM>, menuStrings) )
+                        { IsEnabled=isEnabled, IsVisible=isVisible }
+            .InitializeModel<IToggleSource, ISplitToggleButtonVM, SplitToggleButtonModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public static SplitPressButtonModel NewSplitPressButtonModel(this ViewModelFactory factory,
                 IStrings splitStrings, IStrings buttonStrings, IStrings menuStrings,
                 bool isEnabled, bool isVisible)
-        => new SplitButtonModel(factory.GetControl<SplitButtonVM>, splitStrings,
-            new ButtonModel(factory.GetControl<ButtonVM>, buttonStrings, ImageObject.Empty,true,true),
-            new MenuModel(factory.GetControl<MenuVM>, menuStrings, true,true),
-            isEnabled, isVisible)
-                .InitializeModel<ISplitButtonSource, ISplitButtonVM, SplitButtonModel>();
+        => new SplitPressButtonModel(factory.GetControl<SplitPressButtonVM>, splitStrings,
+                    new ButtonModel(factory.GetControl<ButtonVM>, buttonStrings),
+                    new MenuModel(factory.GetControl<MenuVM>, menuStrings))
+                        { IsEnabled=isEnabled, IsVisible=isVisible }
+            .InitializeModel<IButtonSource, ISplitPressButtonVM, SplitPressButtonModel>();
 
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
             where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {

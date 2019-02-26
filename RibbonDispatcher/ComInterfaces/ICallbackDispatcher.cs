@@ -11,7 +11,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The complete set of Ribbon Cllbacks supported by this implementation.</summary>
     [Description("The complete set of Ribbon Cllbacks supported by this implementation.")]
     [ComVisible(true)]
-    [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ICallbackDispatcher)]
     public interface ICallbackDispatcher {

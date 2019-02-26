@@ -79,7 +79,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
-        [CLSCompliant(false)]
         public virtual void OnRibbonLoad(IRibbonUI ribbonUI) {
             RibbonUI = ribbonUI;
 

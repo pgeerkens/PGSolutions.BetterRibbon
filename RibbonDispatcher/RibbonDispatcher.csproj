@@ -72,6 +72,7 @@
     <Compile Include="ComClasses\MenuModel.cs" />
     <Compile Include="ComClasses\ModelFactory.cs" />
     <Compile Include="ComClasses\EditBoxModel.cs" />
+    <Compile Include="ComClasses\PublicFactoryExtensions.cs" />
     <Compile Include="ComClasses\RibbonViewModelExtensions.cs" />
     <Compile Include="ComClasses\SplitButtonModel.cs" />
     <Compile Include="ComClasses\ViewModels\AbstractContainerVM.cs" />

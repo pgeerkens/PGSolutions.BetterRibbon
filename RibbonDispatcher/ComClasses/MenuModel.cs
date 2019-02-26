@@ -20,8 +20,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class MenuModel: ControlModel<IMenuSource,IMenuVM>,
             IMenuModel, IMenuSource {
         internal MenuModel(Func<string,MenuVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
+                IControlStrings strings)
+        : base(funcViewModel, strings)
         { }
 
         public ImageObject Image     { get; set; } = "MacroSecurity";

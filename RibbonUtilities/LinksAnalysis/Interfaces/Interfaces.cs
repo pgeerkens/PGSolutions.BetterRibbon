@@ -62,7 +62,7 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces {
 
     /// <summary>TODO</summary>
     [ComVisible(true)]
-    [CLSCompliant(false)]
+    [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ILinksAnalysis)]
     public interface ILinksAnalysis {

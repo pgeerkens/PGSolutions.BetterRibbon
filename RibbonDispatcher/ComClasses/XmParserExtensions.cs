@@ -81,12 +81,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                         break;
 
                     case XName name when name == mso+"splitButton":
-                        var splitButtonId = child.Elements().First().Attribute("id").Value;
-                        var splitMenuId   = child.Elements().Last().Attribute("id").Value;
-                        var splitButtonVM = factory.NewButton(splitButtonId);
-                        var splitMenuVM   = factory.NewMenu(splitMenuId);
+                        var menuId   = child.Elements().Last().Attribute("id").Value;
+                        var menuVM   = factory.NewMenu(menuId);
+                        var buttonId = child.Elements().First().Attribute("id").Value;
 
-                        parent.Add(factory.NewSplitButton(child.Attribute("id").Value, splitButtonVM, splitMenuVM));
+                        if (child.Elements().First().Name == mso+"button") {
+                            parent.Add(factory.NewSplitPressButton(child.Attribute("id").Value, menuVM,
+                                        factory.NewButton(buttonId)));
+                        } else if (child.Elements().First().Name == mso+"toggleButton") {
+                            parent.Add(factory.NewSplitToggleButton(child.Attribute("id").Value, menuVM,
+                                        factory.NewToggleButton(buttonId)));
+                        } else throw new InvalidOperationException($"Encountered invalid control type: '{child.Elements().First().Name}'");
+
                         break;
 
                     case XName name when name == mso+"group":

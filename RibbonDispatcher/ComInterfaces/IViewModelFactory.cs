@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The interface for the Ribbon ViewModelFactory.</summary>
     [Description("The factory interface for the Ribbon ModelFactory.")]
     [ComVisible(true)]
-    [CLSCompliant(false)]
+    [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IViewModelFactory)]
     public interface IViewModelFactory {

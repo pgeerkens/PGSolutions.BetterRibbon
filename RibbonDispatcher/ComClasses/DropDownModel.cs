@@ -24,8 +24,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public sealed class DropDownModel : ControlModel<IDropDownSource,IDropDownVM>,
             IDropDownModel, IDropDownSource, IEnumerable<ISelectableItemModel>, IEnumerable {
         internal DropDownModel(Func<string, DropDownVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
+                IControlStrings strings)
+        : base(funcViewModel, strings)
         { }
 
         public event SelectionMadeEventHandler SelectionMade;

@@ -11,9 +11,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;
 
-    /// <summary>COM-visible implementation of the interface <see cref="IRibbonDispatcher"/>.</summary>
-    [Description("The (top-level) ViewModel for the ribbon interface.")]
-    [CLSCompliant(false)]
+    /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
     internal class ModelFactory : IModelFactory {
         /// <summary>.</summary>
         public ModelFactory(AbstractRibbonTabModel tabModel) => TabModel = tabModel;
@@ -92,9 +90,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public ISplitButtonModel NewSplitButtonModel(IStrings splitStrings, IStrings buttonStrings,
+        public ISplitButtonModel NewSplitToggleButtonModel(IStrings splitStrings, IStrings buttonStrings,
                 IStrings menuStrings, bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewSplitButtonModel(splitStrings, buttonStrings, menuStrings, isEnabled, isVisible);
+        => ViewModelFactory.NewSplitToggleButtonModel(splitStrings, buttonStrings, menuStrings, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public ISplitButtonModel NewSplitPressButtonModel(IStrings splitStrings, IStrings buttonStrings,
+                IStrings menuStrings, bool isEnabled = true, bool isVisible = true)
+        => ViewModelFactory.NewSplitPressButtonModel(splitStrings, buttonStrings, menuStrings, isEnabled, isVisible);
 
         /// <inheritdoc/>
         public ISelectableItemModel NewSelectableModel(string controlID, IStrings strings)

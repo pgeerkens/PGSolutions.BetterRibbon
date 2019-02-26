@@ -70,8 +70,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IComboBoxSource: ISelectableSource, IEditBoxSource {
-    }
+    public interface IComboBoxSource: ISelectableSource, IEditBoxSource { }
 
     public interface ISelectableItemSource: IControlSource {
         /// <summary>.</summary>
@@ -90,10 +89,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ILabelSource: IControlSource {
         /// <summary>.</summary>
         bool IsLarge { get; }
-    }
-
-    public interface ISplitButtonSource: IControlSource {
-
     }
 
     public interface IMenuSource: IControlSource {

@@ -38,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IButtonVM: IControlVM, IImageableVM, ISizeableVM, IClickableVM { }
+    public interface IButtonVM: IControlVM, IClickableVM, IImageableVM, ISizeableVM { }
 
     /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
@@ -46,7 +46,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IToggleControlVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM { }
+    public interface IToggleVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM { }
 
     /// <summary>The total interface exposed by <see cref="VM.EditBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
@@ -79,8 +79,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ILabelVM: IControlVM { }
 
     public interface ISplitButtonVM: IControlVM {
-        IButtonVM ButtonVM { get; }
         IMenuVM   MenuVM   { get; }
+    }
+
+    public interface ISplitToggleButtonVM: ISplitButtonVM {
+        IToggleVM ToggleVM { get; }
+    }
+
+    public interface ISplitPressButtonVM: ISplitButtonVM {
+        IButtonVM ButtonVM { get; }
     }
 
     public interface IMenuVM: IControlVM { }

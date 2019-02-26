@@ -11,8 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     using IStrings = IControlStrings;
 
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
-    [ComVisible(true)]
-    [CLSCompliant(false)]
+    [CLSCompliant(true)][ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IModelFactory)]
     public interface IModelFactory {
@@ -94,8 +93,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(14), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ISplitButtonModel NewSplitButtonModel(IStrings splitStrings, IStrings buttonStrings,
-                IStrings menuStrings, bool isEnabled = true, bool isVisible = true);
+        ISplitButtonModel NewSplitToggleButtonModel(IStrings splitStrings, IStrings menuStrings,
+                IStrings toggleStrings, bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        [DispId(15), Description(".")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        ISplitButtonModel NewSplitPressButtonModel(IStrings splitStrings, IStrings menuStrings,
+                IStrings buttonStrings, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>

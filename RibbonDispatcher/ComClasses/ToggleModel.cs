@@ -19,21 +19,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [ComSourceInterfaces(typeof(IToggledEvent))]
     [ComDefaultInterface(typeof(IToggleModel))]
     [Guid(Guids.ToggleModel)]
-    public sealed class ToggleModel : ControlModel<IToggleSource, IToggleControlVM>,
-            IToggleModel, IToggleSource{
-        internal ToggleModel(Func<string, CheckBoxVM> funcViewModel,
-                IControlStrings strings, ImageObject image, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
-        => Image = image;
-
-        public event ToggledEventHandler Toggled;
-
-        public bool        IsLarge   { get; set; } = true;
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
-
-        public bool        IsPressed { get; set; } = false;
+    public sealed class ToggleModel : ControlModel<IToggleSource, IToggleVM>,
+            IToggleModel, IToggleSource {
+        internal ToggleModel(Func<string, CheckBoxVM> funcViewModel, IControlStrings strings)
+        : base(funcViewModel, strings) { }
 
         public IToggleModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
@@ -44,10 +33,26 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
+        #region Toggleable implementation
+        public event ToggledEventHandler Toggled;
+
+        public bool        IsPressed { get; set; } = false;
+
         private void OnToggled(IRibbonControl control, bool isPressed)
         => Toggled?.Invoke(control, IsPressed = isPressed);
+        #endregion
+
+        #region ISizeable implementation
+        public bool        IsLarge   { get; set; } = true;
+        #endregion
+
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
+        #endregion
     }
 }

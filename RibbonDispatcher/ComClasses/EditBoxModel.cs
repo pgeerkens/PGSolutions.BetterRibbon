@@ -23,8 +23,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class EditBoxModel : ControlModel<IEditBoxSource, IEditBoxVM>,
             IEditBoxModel, IEditBoxSource {
         internal EditBoxModel(Func<string, EditBoxVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
+                IControlStrings strings)
+        : base(funcViewModel, strings)
         { }
 
         public event EditedEventHandler Edited;

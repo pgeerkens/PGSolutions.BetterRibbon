@@ -15,31 +15,81 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
     [Description("The COM visible Model for Ribbon Button controls.")]
     [CLSCompliant(true)]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvent))]
-    [ComDefaultInterface(typeof(ISplitButtonModel))]
-    [Guid(Guids.SplitButtonModel)]
-    public class SplitButtonModel: ControlModel<ISplitButtonSource,ISplitButtonVM>,
-            ISplitButtonModel, ISplitButtonSource {
-        internal SplitButtonModel(Func<string, SplitButtonVM> funcViewModel, IStrings strings,
-                ButtonModel button, MenuModel menu, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible) {
-            Button = button;
-            Menu   = menu;
-        }
-
-        public event ClickedEventHandler Clicked;
+    //[ComVisible(true)]
+    //[ClassInterface(ClassInterfaceType.None)]
+    //[ComSourceInterfaces(typeof(IClickedEvent))]
+    //[ComDefaultInterface(typeof(ISplitButtonModel))]
+    //[Guid(Guids.SplitButtonModel)]
+    public abstract class SplitButtonModel<TSource,TControl>: ControlModel<TSource,TControl>,
+            ISplitButtonModel
+        where TSource: IControlSource where TControl: ISplitButtonVM {
+        internal SplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel, IStrings strings,
+                MenuModel menu)
+        : base(funcViewModel, strings)
+        => Menu   = menu;
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public ButtonModel Button    { get; }
         public MenuModel   Menu      { get; }
+    }
 
-        public ISplitButtonModel Attach(string controlId) {
+    /// <summary>The COM visible Model for Ribbon Split (Toggle) Button controls.</summary>
+    [Description("The COM visible Model for Ribbon Split (Toggle) Button controls.")]
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComSourceInterfaces(typeof(IToggledEvent))]
+    [ComDefaultInterface(typeof(ISplitToggleButtonModel))]
+    [Guid(Guids.SplitToggleButtonModel)]
+    public class SplitToggleButtonModel: SplitButtonModel<IToggleSource,ISplitToggleButtonVM>,
+            ISplitToggleButtonModel, IToggleSource {
+        internal SplitToggleButtonModel(Func<string,SplitToggleButtonVM> funcViewModel,
+                IStrings strings, ToggleModel toggle, MenuModel menu)
+        : base(funcViewModel, strings, menu)
+        => Toggle = toggle;
+
+        public ISplitToggleButtonModel Attach(string controlId) {
+            ViewModel = AttachToViewModel(controlId, this);
+            if (ViewModel != null) {
+                Toggle.Attach(ViewModel.ToggleVM.Id);
+                Menu.Attach(ViewModel.MenuVM.Id);
+
+                Toggle.ViewModel.Toggled += OnToggled;
+            }
+            ViewModel?.Invalidate();
+            return this;
+        }
+
+        #region Toggleable implementation
+        public event ToggledEventHandler Toggled;
+
+        public ToggleModel Toggle    { get; }
+        public bool        IsPressed { get => Toggle.IsPressed; set => Toggle.IsPressed = value; }
+
+        private void OnToggled(IRibbonControl control, bool isPressed)
+        => Toggled?.Invoke(control, IsPressed = isPressed);
+        #endregion
+    }
+
+    /// <summary>The COM visible Model for Ribbon Split (Press) Button controls.</summary>
+    [Description("The COM visible Model for Ribbon Split (Press) Button controls.")]
+    [CLSCompliant(true)]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComSourceInterfaces(typeof(IClickedEvent))]
+    [ComDefaultInterface(typeof(ISplitPressButtonModel))]
+    [Guid(Guids.SplitPressButtonModel)]
+    public class SplitPressButtonModel: SplitButtonModel<IButtonSource,ISplitPressButtonVM>,
+            ISplitPressButtonModel, IButtonSource {
+        internal SplitPressButtonModel(Func<string,SplitPressButtonVM> funcViewModel,
+                IStrings strings, ButtonModel button, MenuModel menu)
+        : base(funcViewModel, strings, menu)
+        => Button = button;
+
+        public ISplitPressButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
                 Button.Attach(ViewModel.ButtonVM.Id);
@@ -51,6 +101,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
-        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
+        #region Pressable implementation
+        public event ClickedEventHandler Pressd;
+
+        public ButtonModel Button { get; }
+
+        private void OnClicked(IRibbonControl control) => Pressd?.Invoke(control);
+        #endregion
     }
 }

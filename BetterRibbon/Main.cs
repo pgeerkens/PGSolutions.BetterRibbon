@@ -12,7 +12,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 namespace PGSolutions.BetterRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
     [SuppressMessage( "Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable" )]
-    [Serializable, CLSCompliant(false)]
+    [Serializable, CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IBetterRibbon))]

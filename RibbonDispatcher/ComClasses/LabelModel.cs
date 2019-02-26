@@ -19,8 +19,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public class LabelModel: ControlModel<ILabelSource, ILabelVM>,
             ILabelModel, ILabelSource {
         internal LabelModel(Func<string, LabelVM> funcViewModel,
-                IControlStrings strings, bool isEnabled, bool isVisible)
-        : base(funcViewModel, strings, isEnabled, isVisible)
+                IControlStrings strings)
+        : base(funcViewModel, strings)
         { }
 
         public bool        IsLarge   { get; set; } = true;
