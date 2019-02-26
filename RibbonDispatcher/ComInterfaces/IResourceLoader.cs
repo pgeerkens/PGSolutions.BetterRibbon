@@ -12,12 +12,16 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IResourceLoader)]
     public interface IResourceLoader {
-        /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
-        [DispId(1), Description("Returns a new ControlString from local resources.")]
+        /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
+        [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
         IControlStrings GetControlStrings(string ControlId);
 
-        /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
-        [DispId(2), Description("Returns a new ControlString from local resources.")]
+        /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
+        [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
         IControlStrings2 GetControlStrings2(string ControlId);
+
+        /// <summary>Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.</summary>
+        [Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]
+        object GetImage(string Name);
     }
 }

@@ -2,18 +2,17 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using IStrings = IControlStrings;
-    using IStrings2 = IControlStrings2;
-
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
     public static partial class PublicFactoryExtensions {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
-        public static IModelFactoryInternal NewModelFactory(this ViewModelFactory viewModelFactory, IResourceManager manager)
+        public static IModelFactory NewModelFactory(this ViewModelFactory viewModelFactory, IResourceLoader manager)
+            => new ModelFactory(viewModelFactory, manager);
+
+        public static IModelFactoryInternal NewModelFactory2(this ViewModelFactory viewModelFactory, IResourceLoader manager)
             => new ModelFactory(viewModelFactory, manager);
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
@@ -51,7 +50,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public static IComboBoxModel NewComboBoxModel(this IModelFactoryInternal factory, string id,
                 EditedEventHandler handler,
                 bool isEnabled = true, bool isVisible = true) {
-            var model = ViewModelFactoryExtensions.NewComboBoxModel(factory, id, isEnabled, isVisible);
+            var model = factory.NewComboBoxModel(id, isEnabled, isVisible);
 
             model.Edited += handler;
             return model?.Attach(id);

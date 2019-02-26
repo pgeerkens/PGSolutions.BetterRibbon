@@ -14,8 +14,6 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private Const COMAddInName      As String = "PGSolutions.BetterRibbon"
-Private MBetterRibbon           As PGSolutions_RibbonDispatcher.IModelFactory
 
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
 Private LabelTest               As PGSolutions_RibbonDispatcher.LabelModel
@@ -59,54 +57,24 @@ Friend Sub Activate()
     If Not Dialog Is Nothing Then Dialog.Attach "CustomVbaDialog"
     
     If Not SplitButton Is Nothing Then SplitButton.Attach "CustomVbaSplit1"
+    If Not SplitToggle Is Nothing Then SplitToggle.Attach "CustomVbaSplit2"
 End Sub
-
-Private Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
-    If MBetterRibbon Is Nothing Then
-        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
-    End If
-    Set BetterRibbon = MBetterRibbon
-End Function
 
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
     With BetterRibbon
-        Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls", _
-                ScreenTip:="", SuperTip:="", KeyTip:=""))
+        Set CustomGroup = .NewGroupModel("CustomizableGroup")
+        Set LabelTest = .NewLabelModel("CustomVbaLabel1")
         
-        Set LabelTest = .NewLabelModel(.NewControlStrings(Label:="A Label Here", _
-                ScreenTip:="Label ScreenTip", _
-                SuperTip:="Some text for the Label SuperTip.", KeyTip:=""))
-        
-        Set EditBox = .NewEditBoxModel(.NewControlStrings(Label:="Enter Text", _
-                ScreenTip:="Enter up to 15 characters", _
-                SuperTip:="Accepts, and echoes back, up to 15 characters entered by the user.", _
-                KeyTip:=""))
+        Set EditBox = .NewEditBoxModel("CustomVbaEditBox1")
         EditBox.Text = "Default"
         
-        Set Button = .NewButtonModelMso(.NewControlStrings2(Label:="Refresh Ribbon", _
-                ScreenTip:="Refreshes the Ribbon", _
-                SuperTip:="Re-runs the methods Class_Initialize and Activate.", _
-                KeyTip:="", Description:=""), "RefreshAll")
-                
-        Set Dialog = .NewButtonModel(.NewControlStrings2(Label:="Pop-Up Dialog", _
-                ScreenTip:="Used to Edit the Ribbon", _
-                SuperTip:="Pops-up a Ribbon Editor Dialog.", _
-                KeyTip:="", Description:=""))
-                
+        Set Button = .NewButtonModelMso("CustomizableButton3", "RefreshAll")
+        Set Dialog = .NewButtonModel("CustomVbaDialog")
         Set SplitButton = .NewSplitPressButtonModel( _
-            .NewControlStrings(Label:="Split Label", ScreenTip:="", SuperTip:="", KeyTip:=""), _
-            .NewControlStrings2(Label:="Button Label", _
-                    ScreenTip:="", SuperTip:="", KeyTip:="", Description:=""), _
-            .NewControlStrings2(Label:="Menu Label", _
-                     ScreenTip:="", SuperTip:="", KeyTip:="", Description:=""))
-                
+            "CustomVbaSplit1", "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
         Set SplitToggle = .NewSplitToggleButtonModel( _
-            .NewControlStrings(Label:="Split Label", ScreenTip:="", SuperTip:="", KeyTip:=""), _
-            .NewControlStrings2(Label:="Toggle Label", _
-                     ScreenTip:="", SuperTip:="", KeyTip:="", Description:=""), _
-            .NewControlStrings2(Label:="Menu Label", _
-                     ScreenTip:="", SuperTip:="", KeyTip:="", Description:=""))
+            "CustomVbaSplit2", "CustomVbaSplit2Menu", "CustomVbaSplit2Toggle")
             
     End With
 End Sub

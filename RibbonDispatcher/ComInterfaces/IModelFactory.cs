@@ -41,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(4), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IGroupModel NewGroupModel(IStrings strings,
+        IGroupModel NewGroupModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
@@ -112,14 +112,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [DispId(19), Description(".")]
-        ISelectableItemModel NewSelectableModel(string controlID, IStrings strings);
+        ISelectableItemModel NewSelectableModel(string controlID);
     }
 
-    public interface IModelFactoryInternal: IModelFactory {
+    public interface IModelFactoryInternal {//: IModelFactory {
         /// <summary>.</summary>
         ViewModelFactory ViewModelFactory { get; }
 
         /// <summary>.</summary>
-        IResourceManager ResourceManager { get; }
+        IResourceLoader ResourceManager { get; }
     }
 }

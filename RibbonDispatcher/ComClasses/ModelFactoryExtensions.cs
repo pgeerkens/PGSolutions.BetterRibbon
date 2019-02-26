@@ -22,11 +22,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => vm.ResourceManager.GetImage(imageId);
 
         /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
-        public static GroupModel NewGroupModel(this ViewModelFactory factory, IStrings strings,
+        public static GroupModel NewGroupModel(this IModelFactoryInternal factory, string controlId,
                 bool isEnabled, bool isVisible)
-        => new GroupModel(factory.GetControl<GroupVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible };
-
-
+        => new GroupModel(factory.GetControl<GroupVM>, factory.GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible };
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public static ButtonModel NewButtonModel(this IModelFactoryInternal factory, string controlId,
@@ -110,14 +109,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return model;
         }
 
-        private static TControl GetControl<TControl>(this IModelFactoryInternal factory, string controlId)
+        public static TControl GetControl<TControl>(this IModelFactoryInternal factory, string controlId)
             where TControl: class,IControlVM
             => factory.ViewModelFactory.GetControl<TControl>(controlId);
 
-        private static IStrings GetStrings(this IModelFactoryInternal factory, string id)
+        public static IStrings GetStrings(this IModelFactoryInternal factory, string id)
             => factory.ResourceManager.GetControlStrings(id);
 
-        private static IStrings2 GetStrings2(this IModelFactoryInternal factory, string id)
+        public static IStrings2 GetStrings2(this IModelFactoryInternal factory, string id)
             => factory.ResourceManager.GetControlStrings2(id);
     }
 }

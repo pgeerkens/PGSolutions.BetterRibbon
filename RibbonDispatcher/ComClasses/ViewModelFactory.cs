@@ -31,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public partial class ViewModelFactory : IViewModelFactory {
         public ViewModelFactory() { }  // exists to enable automated TypeLib creation
 
-        internal ViewModelFactory(IResourceManager manager) {
+        internal ViewModelFactory(IResourceLoader manager) {
             ResourceManager = manager; 
 
             _controls      = new Dictionary<string, IControlVM>();
@@ -54,7 +54,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         internal void OnChanged(object sender, IControlChangedEventArgs e) => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         /// <inheritdoc/>
-        public IResourceManager ResourceManager { get; }
+        public IResourceLoader ResourceManager { get; }
 
         internal Func<string, ButtonVM> GetButtonVM => s => GetControl<ButtonVM>(s);
 

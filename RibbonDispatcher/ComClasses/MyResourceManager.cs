@@ -6,7 +6,7 @@ using System.Resources;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    public class MyResourceManager: IResourceManager {
+    public class MyResourceManager: IResourceLoader {
         public MyResourceManager() : this(Assembly.GetCallingAssembly()) { }
 
         private MyResourceManager(Assembly assembly)

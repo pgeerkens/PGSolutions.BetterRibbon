@@ -127,7 +127,6 @@
     <Compile Include="ComInterfaces\IControlChangedEventArgs.cs" />
     <Compile Include="ComInterfaces\IModelFactory.cs" />
     <Compile Include="ComInterfaces\IResourceLoader.cs" />
-    <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
     <Compile Include="ComInterfaces\ICallbackDispatcher.cs" />

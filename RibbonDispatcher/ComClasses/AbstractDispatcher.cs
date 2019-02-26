@@ -41,8 +41,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
 
-        /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceManager}.</summary>
-        protected AbstractDispatcher(string controlId, IResourceManager resourceManager){
+        /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
+        protected AbstractDispatcher(string controlId, IResourceLoader resourceManager){
             ControlId        = controlId;
             ViewModelFactory = new ViewModelFactory(resourceManager);
             ViewModelFactory.Changed += OnPropertyChanged;

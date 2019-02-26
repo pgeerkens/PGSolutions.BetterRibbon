@@ -12,6 +12,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [ComVisible(true), Guid(Guids.IViewModelFactory)]
     public interface IViewModelFactory {
-        IResourceManager ResourceManager { get; }
+        IResourceLoader ResourceManager { get; }
     }
 }

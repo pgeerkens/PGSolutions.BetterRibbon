@@ -8,6 +8,16 @@ Attribute VB_Name = "Utilities"
 Option Explicit
 Option Private Module
 Private Const ModuleName As String = "RibbonUtils."
+Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
+
+Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
+    If MBetterRibbon Is Nothing Then
+        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
+                .NewBetterRibbon(New ResourceLoader)
+    End If
+    Set BetterRibbon = MBetterRibbon
+End Function
 
 Public Function NewLinksLexer(CellRef As ISourceCellRef, Formula As String) As ILinksLexer
     On Error GoTo EH

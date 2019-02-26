@@ -23,7 +23,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void ViewModel_Initialized(object sender, EventArgs e) {
-            Model = new BetterRibbonModel(ViewModel, ViewModel.ViewModelFactory.NewModelFactory(new MyResourceManager()));
+            Model = new BetterRibbonModel(ViewModel, ViewModel.ViewModelFactory.NewModelFactory2(new MyResourceManager()));
             ViewModel.Initialized -= ViewModel_Initialized;
         }
 

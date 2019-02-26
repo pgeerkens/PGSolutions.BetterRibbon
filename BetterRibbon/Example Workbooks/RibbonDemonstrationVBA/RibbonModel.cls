@@ -221,22 +221,22 @@ End Sub
 Private Sub Class_Initialize()
     On Error GoTo EH
     With BetterRibbon
-        Set CustomGroup = .NewGroupModel(FindStrings("CustomizableGroup"))
+        Set CustomGroup = .NewGroupModel("CustomizableGroup")
     
-        Set Toggle1 = .NewToggleModelMso(FindStrings2("Toggle1"), "MarginsShowHide")
-        Set Toggle2 = .NewToggleModelMso(FindStrings2("Toggle2"), "MarginsShowHide")
-        Set Toggle3 = .NewToggleModelMso(FindStrings2("Toggle3"), "MarginsShowHide")
-        Set Toggle4 = .NewToggleModelMso(FindStrings2("Toggle4"), "MarginsShowHide")
+        Set Toggle1 = .NewToggleModelMso("Toggle1", "MarginsShowHide")
+        Set Toggle2 = .NewToggleModelMso("Toggle2", "MarginsShowHide")
+        Set Toggle3 = .NewToggleModelMso("Toggle3", "MarginsShowHide")
+        Set Toggle4 = .NewToggleModelMso("Toggle4", "MarginsShowHide")
         
-        Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
-        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
-                 .AddSelectableModel(.NewSelectableModel("ImageOnly", FindStrings("ImageOnly"))) _
-                 .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
+        Set DropDown1 = .NewDropDownModel("DropDown1")
+        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly")) _
+                 .AddSelectableModel(.NewSelectableModel("ImageOnly")) _
+                 .AddSelectableModel(.NewSelectableModel("LabelAndImage")) _
                  .SelectedIndex = 2
         
-        Set Button1 = .NewButtonModelMso(FindStrings2("Button1"), "MacroPlay")
-        Set Button2 = .NewButtonModelMso(FindStrings2("Button2"), "MacroPlay")
-        Set Button3 = .NewButtonModelMso(FindStrings2("Button3"), "Refresh")
+        Set Button1 = .NewButtonModelMso("Button1", "MacroPlay")
+        Set Button2 = .NewButtonModelMso("Button2", "MacroPlay")
+        Set Button3 = .NewButtonModelMso("Button3", "Refresh")
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
@@ -250,53 +250,11 @@ End Sub
 Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
     On Error GoTo EH
     If MBetterRibbon Is Nothing Then
-        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object.NewBetterRibbon()
+        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
+            .NewBetterRibbon(New ResourceLoader)
     End If
     Set BetterRibbon = MBetterRibbon
 XT: Exit Property
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
     Resume          ' for debugging only
 End Property
-
-Private Function FindStrings(ByVal Search As String) As IControlStrings
-    Const ControlStringsRangeName As String = "ControlStringData"
-    
-    On Error GoTo EH
-    With New RibbonControlStrings
-        Set FindStrings = .Initialize( _
-                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
-                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
-                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
-                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6))
-    End With
-XT: Exit Function
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
-    Resume          ' for debugging only
-End Function
-
-Private Function FindStrings2(ByVal Search As String) As IControlStrings2
-    Const ControlStringsRangeName As String = "ControlStringData"
-    
-    On Error GoTo EH
-    With New RibbonControlStrings
-        Set FindStrings2 = .Initialize2( _
-                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
-                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
-                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
-                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6), _
-                Description:=FindStr(Search, Range(ControlStringsRangeName), 7))
-    End With
-XT: Exit Function
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
-    Resume          ' for debugging only
-End Function
-
-Private Function FindStr(ByVal Search As String, ByVal Range As Range, ByVal ColNo As Integer) As String
-    On Error GoTo EH
-    Dim v As Variant: v = Application.WorksheetFunction.VLookup(Search, Range, ColNo, False)
-    FindStr = IIf(VarType(v) = vbString, v, "")
-XT: Exit Function
-EH: If Err.Number = 1004 Then Resume Next
-    ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
-    Resume          ' for debugging only
-End Function
