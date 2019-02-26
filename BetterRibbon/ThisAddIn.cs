@@ -41,7 +41,7 @@ namespace PGSolutions.BetterRibbon {
 
         internal BetterRibbonModel     Model     { get; private set; }
 
-        private  Main                  ComEntry  => new Main(() => Model.NewModelFactory());
+        private  Main                  ComEntry  => new Main(Model.NewModelFactory);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

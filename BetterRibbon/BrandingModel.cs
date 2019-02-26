@@ -36,8 +36,8 @@ namespace PGSolutions.BetterRibbon {
         #endif
             .ToString().MsgBoxShow();
 
-        static Version DispatcherVersion => new ViewModelFactory().GetType().Assembly.GetName().Version;
-        static Version UtilitiesVersion  => new VbaExportEventArgs(null).GetType().Assembly.GetName().Version;
+        static Version DispatcherVersion => typeof(ViewModelFactory).Assembly.GetName().Version;
+        static Version UtilitiesVersion  => typeof(VbaExportEventArgs).Assembly.GetName().Version;
 
         private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
     }

@@ -24,15 +24,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// 
     /// This class must be COM-Visible for the typelib to be created. 
     /// </remarks>
-    [Description("Implementation of the factory for Ribbon objects.")]
-    [Serializable]
     [CLSCompliant(true)]
-    [ComVisible(true)]
+    [Description("Implementation of the factory for Ribbon objects. Visible to enable TypeLib creation.")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IViewModelFactory))]
-    [Guid(Guids.ViewModelFactory)]
+    [ComVisible(true), Serializable, Guid(Guids.ViewModelFactory)]
     public partial class ViewModelFactory : IViewModelFactory {
-        public ViewModelFactory() : this(new ResourceLoader()) { }
+        public ViewModelFactory() { }  // exists to enable automated TypeLib creation
 
         internal ViewModelFactory(IResourceManager manager) {
             ResourceManager = manager; 
@@ -62,14 +60,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => Controls.FirstOrDefault(c => c.Key == controlId).Value as TControl;
-
-        #region IVewModelFactory implementation
-        public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
-
-        public IControlStrings2 GetStrings2(string controlId) => ResourceManager.GetControlStrings2(controlId);
-
-        public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
-        #endregion
 
         #region Dictionaries
         private  readonly IDictionary<string, IControlVM>     _controls;

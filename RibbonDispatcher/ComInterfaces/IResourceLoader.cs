@@ -12,25 +12,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IResourceLoader)]
     public interface IResourceLoader {
-        /// <summary>Returns the specified {ControlStrings} object.</summary>
-        [Description("Returns the specified ControlStrings object.")]
-        IControlStrings this[string ControlId] { get; }
+        /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
+        [DispId(1), Description("Returns a new ControlString from local resources.")]
+        IControlStrings GetControlStrings(string ControlId);
 
         /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
-        [Description("Adds a new ControlString to the collection, and returns it.")]
-        string AddControlStrings(string ControlId,
-            [Optional]string Label,
-            [Optional]string ScreenTip,
-            [Optional]string SuperTip,
-            [Optional]string KeyTip);
-
-        /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
-        [Description("Adds a new ControlString to the collection, and returns it.")]
-        string AddControlStrings2(string ControlId,
-            [Optional]string Label,
-            [Optional]string ScreenTip,
-            [Optional]string SuperTip,
-            [Optional]string Description,
-            [Optional]string KeyTip);
+        [DispId(2), Description("Returns a new ControlString from local resources.")]
+        IControlStrings2 GetControlStrings2(string ControlId);
     }
 }

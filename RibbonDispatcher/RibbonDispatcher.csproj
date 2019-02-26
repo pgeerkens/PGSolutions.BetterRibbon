@@ -114,7 +114,6 @@
     <Compile Include="ComClasses\AbstractDispatcher.cs" />
     <Compile Include="ComClasses\ControlChangedEventArgs.cs" />
     <Compile Include="ComClasses\ProgIds.cs" />
-    <Compile Include="ComClasses\ResourceLoader.cs" />
     <Compile Include="ComClasses\ViewModels\ButtonVM.cs" />
     <Compile Include="ComClasses\ViewModels\CheckBoxVM.cs" />
     <Compile Include="ComClasses\ViewModels\AbstractControlVM.cs" />
@@ -127,7 +126,7 @@
     <Compile Include="ComInterfaces\ModelEventInterfaces.cs" />
     <Compile Include="ComInterfaces\IControlChangedEventArgs.cs" />
     <Compile Include="ComInterfaces\IModelFactory.cs" />
-    <Compile Include="ComInterfaces\IResourceLoadercs.cs" />
+    <Compile Include="ComInterfaces\IResourceLoader.cs" />
     <Compile Include="ComInterfaces\IResourceManager.cs" />
     <Compile Include="ComInterfaces\IViewModelFactory.cs" />
     <Compile Include="ComInterfaces\IControlStrings.cs" />
@@ -136,7 +135,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComClasses\DictionaryExtensions.cs" />
-    <Compile Include="ComClasses\AbstractResourceManager.cs" />
+    <Compile Include="ComClasses\MyResourceManager.cs" />
     <Compile Include="ComClasses\ResourceManagerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

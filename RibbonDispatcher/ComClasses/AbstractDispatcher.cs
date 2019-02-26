@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
@@ -14,7 +13,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using ITabList = IReadOnlyList<TabVM>;
+    using ITabSet = IReadOnlyList<TabVM>;
 
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
@@ -63,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IRibbonExtensibility implementation
         /// <inheritdoc/>
-        private ITabList TabViewModels { get; set; }
+        private ITabSet TabViewModels { get; set; }
 
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
