@@ -19,12 +19,15 @@ namespace PGSolutions.BetterRibbon {
     [Guid(RibbonDispatcher.Guids.BetterRibbonMain)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class Main : IBetterRibbon {
-        internal Main(Func<IModelFactory> funcFactory) => FuncFactory = funcFactory;
+        internal Main(Func<IResourceManager,IModelFactory> funcFactory) => FuncFactory = funcFactory;
 
-        Func<IModelFactory> FuncFactory { get; }
+        Func<IResourceManager,IModelFactory> FuncFactory { get; }
 
          /// <inheritdoc/>
-        public IModelFactory NewBetterRibbon() => FuncFactory();
+        public IModelFactory NewBetterRibbon() => FuncFactory(new MyResourceManager());
+
+        /// <inheritdoc/>
+        public IModelFactory NewBetterRibbon(IResourceManager manager) => FuncFactory(manager);
 
         /// <inheritdoc/>
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();

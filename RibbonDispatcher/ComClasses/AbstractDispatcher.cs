@@ -49,13 +49,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         /// <inheritdoc/>
-        public   string           ControlId        { get; }
+        public string           ControlId        { get; }
 
         /// <inheritdoc/>
-        public   ViewModelFactory ViewModelFactory { get; }
+        public ViewModelFactory ViewModelFactory { get; }
 
         /// <inheritdoc/>
-        public   IRibbonUI        RibbonUI         { get; private set; }
+        public IRibbonUI        RibbonUI         { get; private set; }
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);

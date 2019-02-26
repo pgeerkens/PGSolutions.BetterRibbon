@@ -13,7 +13,6 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>
     /// The {SuppressMessage} attributes are left in the source here, instead of being 'fired and
@@ -56,6 +55,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         public IResourceManager ResourceManager { get; }
+
+        internal Func<string, ButtonVM> GetButtonVM => s => GetControl<ButtonVM>(s);
 
         /// <inheritdoc/>
         internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM

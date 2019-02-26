@@ -13,19 +13,25 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings2 = IControlStrings2;
 
     /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
-    internal class ModelFactory : IModelFactory {
+    internal class ModelFactory : IModelFactory, IModelFactoryInternal {
         /// <summary>.</summary>
-        public ModelFactory(AbstractRibbonTabModel tabModel) => TabModel = tabModel;
+        public ModelFactory(ViewModelFactory viewModelFactory, IResourceManager manager) {
+            //TabModel = tabModel;
+            ViewModelFactory = viewModelFactory;
+            ResourceManager = manager;
+        }
 
-        internal AbstractRibbonTabModel TabModel        { get; }
+        public IResourceManager       ResourceManager  { get; }
 
-        private  ViewModelFactory       ViewModelFactory => TabModel.ViewModel.ViewModelFactory;
+        //public AbstractRibbonTabModel TabModel         { get; }
 
-        /// <inheritdoc/>
-        public void Invalidate() => TabModel.Invalidate();
+        public ViewModelFactory       ViewModelFactory { get; }//> TabModel.ViewModel.ViewModelFactory;
 
-        /// <inheritdoc/>
-        public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
+        ///// <inheritdoc/>
+        //public void Invalidate() => TabModel.Invalidate();
+
+        ///// <inheritdoc/>
+        //public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -47,27 +53,51 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IButtonModel NewButtonModel(IStrings2 strings,
+        public IButtonModel NewButtonModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => this.NewButtonModel(stringsId, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IButtonModel NewButtonModelMso(IStrings2 strings,
+        public IButtonModel NewButtonModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => this.NewButtonModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IToggleModel NewToggleModel(IStrings2 strings,
+        public IToggleModel NewToggleModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
+        => this.NewToggleModel(stringsId, new ImageObject(image), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IToggleModel NewToggleModelMso(IStrings2 strings,
+        public IToggleModel NewToggleModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => ViewModelFactory.NewToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+        => this.NewToggleModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
+
+        ///// <inheritdoc/>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        //public IButtonModel NewButtonModel(IStrings2 strings,
+        //        IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
+        //=> ViewModelFactory.GetButtonVM.NewButtonModel(strings, new ImageObject(image), isEnabled, isVisible);
+
+        ///// <inheritdoc/>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        //public IButtonModel NewButtonModelMso(IStrings2 strings,
+        //        string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
+        //=> ViewModelFactory.GetButtonVM.NewButtonModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
+
+        ///// <inheritdoc/>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        //public IToggleModel NewToggleModel(IStrings2 strings,
+        //        IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
+        //=> ViewModelFactory.NewToggleModel(strings, new ImageObject(image), isEnabled, isVisible);
+
+        ///// <inheritdoc/>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        //public IToggleModel NewToggleModelMso(IStrings2 strings,
+        //        string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
+        //=> ViewModelFactory.NewToggleModel(strings, new ImageObject(imageMso), isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

@@ -23,7 +23,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void ViewModel_Initialized(object sender, EventArgs e) {
-            Model = new BetterRibbonModel(ViewModel);
+            Model = new BetterRibbonModel(ViewModel, ViewModel.ViewModelFactory.NewModelFactory(new MyResourceManager()));
             ViewModel.Initialized -= ViewModel_Initialized;
         }
 
@@ -41,7 +41,7 @@ namespace PGSolutions.BetterRibbon {
 
         internal BetterRibbonModel     Model     { get; private set; }
 
-        private  Main                  ComEntry  => new Main(Model.NewModelFactory);
+        private  Main                  ComEntry  => new Main(ViewModel.ViewModelFactory.NewModelFactory);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

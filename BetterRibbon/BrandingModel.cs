@@ -12,9 +12,9 @@ using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(IRibbonViewModel viewModel, string viewModelName)
+        public BrandingModel(IRibbonViewModel viewModel, IModelFactoryInternal factory, string viewModelName)
         : base(viewModel, viewModelName) {
-            BrandingButtonModel = viewModel.ViewModelFactory.NewButtonModel("BrandingButton", ButtonClicked,
+            BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
                 new ImageObject(BrandingIcon));
 
             Invalidate();

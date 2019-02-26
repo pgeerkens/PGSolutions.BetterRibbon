@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ComClasses;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -16,9 +17,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IModelFactory)]
     public interface IModelFactory {
-        /// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
-        [DispId(1), Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
-        void Invalidate();
+        ///// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
+        //[DispId(1), Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
+        //void Invalidate();
 
         /// <summary>.</summary>
         [DispId(2), Description(".")]
@@ -32,10 +33,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IStrings2 NewControlStrings2(string label, string screenTip, string superTip,
                 string keyTip, string description);
 
-        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
-        /// <param name="controlId">The ID of the control to be detached.</param>
-        [DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
-        void DetachProxy(string controlId);
+        ///// <summary>Deactivate the specified control, detaching any attached data source.</summary>
+        ///// <param name="controlId">The ID of the control to be detached.</param>
+        //[DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
+        //void DetachProxy(string controlId);
 
         /// <summary>.</summary>
         [DispId(4), Description(".")]
@@ -46,25 +47,25 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(5), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        IButtonModel NewButtonModel(IStrings2 strings,
+        IButtonModel NewButtonModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(6), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IButtonModel NewButtonModelMso(IStrings2 strings,
+        IButtonModel NewButtonModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(7), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IToggleModel NewToggleModel(IStrings2 strings,
+        IToggleModel NewToggleModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(8), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IToggleModel NewToggleModelMso(IStrings2 strings,
+        IToggleModel NewToggleModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
@@ -112,5 +113,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
         [DispId(19), Description(".")]
         ISelectableItemModel NewSelectableModel(string controlID, IStrings strings);
+    }
+
+    public interface IModelFactoryInternal: IModelFactory {
+        /// <summary>.</summary>
+        ViewModelFactory ViewModelFactory { get; }
+
+        /// <summary>.</summary>
+        IResourceManager ResourceManager { get; }
     }
 }

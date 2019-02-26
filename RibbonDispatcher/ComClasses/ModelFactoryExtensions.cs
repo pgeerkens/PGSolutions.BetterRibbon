@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using System;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings  = IControlStrings;
@@ -26,17 +27,37 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 bool isEnabled, bool isVisible)
         => new GroupModel(factory.GetControl<GroupVM>, strings) { IsEnabled=isEnabled, IsVisible=isVisible };
 
+
+
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public static ButtonModel NewButtonModel(this ViewModelFactory factory, IStrings strings,
+        public static ButtonModel NewButtonModel(this IModelFactoryInternal factory, string controlId,
                 ImageObject image, bool isEnabled, bool isVisible)
-        => new ButtonModel(factory.GetControl<ButtonVM>, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+        =>  new ButtonModel(factory.ViewModelFactory.GetControl<ButtonVM>,
+                            factory.ResourceManager.GetControlStrings2(controlId))
+                            { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
-        public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
+        public static ToggleModel NewToggleModel(this IModelFactoryInternal factory, string controlId,
                 ImageObject image, bool isEnabled, bool isVisible)
-        => new ToggleModel(factory.GetControl<CheckBoxVM>, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+        =>  new ToggleModel(factory.ViewModelFactory.GetControl<CheckBoxVM>,
+                            factory.ResourceManager.GetControlStrings2(controlId))
+                            { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IToggleSource, IToggleVM, ToggleModel>();
+
+
+
+        ///// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        //public static ButtonModel NewButtonModel(this Func<string,ButtonVM> func, IStrings strings,
+        //        ImageObject image, bool isEnabled, bool isVisible)
+        //=> new ButtonModel(func, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+        //        .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
+
+        ///// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
+        //public static ToggleModel NewToggleModel(this ViewModelFactory factory, IStrings strings,
+        //        ImageObject image, bool isEnabled, bool isVisible)
+        //=> new ToggleModel(factory.GetControl<CheckBoxVM>, strings) { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+        //        .InitializeModel<IToggleSource, IToggleVM, ToggleModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
         public static EditBoxModel NewEditBoxModel(this ViewModelFactory factory, IStrings strings,
@@ -95,7 +116,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             .InitializeModel<IButtonSource, ISplitPressButtonVM, SplitPressButtonModel>();
 
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
-            where TModel : ControlModel<TSource, TVM> where TSource : IControlSource where TVM : IControlVM {
+            where TModel: ControlModel<TSource, TVM> where TSource: IControlSource where TVM: IControlVM {
 
             model.SetShowInactive(false);
             model.Invalidate();

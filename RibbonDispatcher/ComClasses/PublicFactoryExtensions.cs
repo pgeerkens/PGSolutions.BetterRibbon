@@ -2,22 +2,25 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
-
+using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
+    using IStrings = IControlStrings;
+    using IStrings2 = IControlStrings2;
+
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
     public static partial class PublicFactoryExtensions {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
-        public static IModelFactory NewModelFactory(this AbstractRibbonTabModel model)
-            => new ModelFactory(model);
+        public static IModelFactoryInternal NewModelFactory(this ViewModelFactory viewModelFactory, IResourceManager manager)
+            => new ModelFactory(viewModelFactory, manager);
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IButtonModel NewButtonModel(this ViewModelFactory factory, string id,
+        public static IButtonModel NewButtonModel(this IModelFactoryInternal factory, string id,
                 ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = factory?.NewButtonModel(factory.GetStrings2(id), image, isEnabled, isVisible);
+            var model = factory.NewButtonModel(id, image, isEnabled, isVisible);
 
             model.Clicked += handler;
             return model?.Attach(id);
@@ -25,13 +28,34 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IToggleModel NewToggleModel(this ViewModelFactory factory, string id,
+        public static IToggleModel NewToggleModel(this IModelFactoryInternal factory, string id,
                 ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = factory?.NewToggleModel(factory.GetStrings2(id), image, isEnabled, isVisible);
+            var model = factory.NewToggleModel(id, image, isEnabled, isVisible);
 
             model.Toggled += handler;
             return model?.Attach(id);
         }
+
+        ///// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        //public static IButtonModel NewButtonModel(this ViewModelFactory factory, string id, //IStrings2 strings,
+        //        ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
+        //    var model = factory?.GetButtonVM.NewButtonModel(factory.GetStrings2(id), image, isEnabled, isVisible);
+        //    //var model = ViewModelFactoryExtensions.NewButtonModel(factory?.GetButtonVM,strings, image, isEnabled, isVisible);
+
+        //    model.Clicked += handler;
+        //    return model?.Attach(id);
+        //}
+
+        ///// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
+        //[SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        //public static IToggleModel NewToggleModel(this ViewModelFactory factory, string id,
+        //        ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
+        //    var model = factory?.NewToggleModel(factory.GetStrings2(id), image, isEnabled, isVisible);
+
+        //    model.Toggled += handler;
+        //    return model?.Attach(id);
+        //}
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
