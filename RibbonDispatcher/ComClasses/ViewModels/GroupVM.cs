@@ -16,9 +16,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         GroupVM IActivatable<IControlSource,GroupVM>.Attach(IControlSource source)
         => Attach<GroupVM>(source);
-
-        public override string Description
-        => throw new InvalidOperationException("Attribute Description not supported on a Group.");
     }
 
     internal class KeyedControls: KeyedCollection<string, IActivatable> {

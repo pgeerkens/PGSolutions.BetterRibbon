@@ -22,9 +22,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         bool     IsVisible    { get; }
 
         /// <summary>.</summary>
-        bool     ShowInactive { get; }
-
-        /// <summary>.</summary>
         void     SetShowInactive(bool showInactive);
     }
 

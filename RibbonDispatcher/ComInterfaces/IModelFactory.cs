@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    using IStrings = IControlStrings;
+    using IStrings  = IControlStrings;
+    using IStrings2 = IControlStrings2;
 
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
     [CLSCompliant(true)][ComVisible(true)]
@@ -22,9 +23,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(2), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IStrings NewControlStrings(string label,
-                string screenTip = "", string superTip = "",
-                string keyTip = "", string alternateLabel = "", string description = "");
+        IStrings NewControlStrings(string label, string screenTip, string superTip,
+                string keyTip);
+
+        /// <summary>.</summary>
+        [DispId(18), Description(".")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IStrings2 NewControlStrings2(string label, string screenTip, string superTip,
+                string keyTip, string description);
 
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>
@@ -40,25 +46,25 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(5), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        IButtonModel NewButtonModel(IStrings strings,
+        IButtonModel NewButtonModel(IStrings2 strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(6), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IButtonModel NewButtonModelMso(IStrings strings,
+        IButtonModel NewButtonModelMso(IStrings2 strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(7), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IToggleModel NewToggleModel(IStrings strings,
+        IToggleModel NewToggleModel(IStrings2 strings,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(8), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IToggleModel NewToggleModelMso(IStrings strings,
+        IToggleModel NewToggleModelMso(IStrings2 strings,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
@@ -88,19 +94,19 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         [DispId(13), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        IMenuModel NewMenuModel(IStrings strings, bool isEnabled = true, bool isVisible = true);
+        IMenuModel NewMenuModel(IStrings2 strings, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(14), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ISplitButtonModel NewSplitToggleButtonModel(IStrings splitStrings, IStrings menuStrings,
-                IStrings toggleStrings, bool isEnabled = true, bool isVisible = true);
+        ISplitButtonModel NewSplitToggleButtonModel(IStrings splitStrings, IStrings2 menuStrings,
+                IStrings2 toggleStrings, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [DispId(15), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        ISplitButtonModel NewSplitPressButtonModel(IStrings splitStrings, IStrings menuStrings,
-                IStrings buttonStrings, bool isEnabled = true, bool isVisible = true);
+        ISplitButtonModel NewSplitPressButtonModel(IStrings splitStrings, IStrings2 menuStrings,
+                IStrings2 buttonStrings, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>

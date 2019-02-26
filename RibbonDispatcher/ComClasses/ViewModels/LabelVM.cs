@@ -20,7 +20,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public bool IsLarge => Source?.IsLarge ?? false;
         #endregion
 
-        public override string Description
-        => throw new InvalidOperationException("Attribute Description not supported on a Label.");
+        protected override bool DefaultShowInactive { get => true; set { } }
     }
 }

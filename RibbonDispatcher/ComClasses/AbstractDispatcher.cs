@@ -95,10 +95,15 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         #region IControlVM implementation
         /// <summary>All of the defined controls.</summary>
-        private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
+        private IDescriptionableVM Descriptionables(string controlId) => ViewModelFactory.Descriptionables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public string GetDescription(IRibbonControl Control)
-            => Controls(Control?.Id)?.Description ?? Control.Unknown("Description");
+            => Descriptionables(Control?.Id)?.Description ?? Control.Unknown("Description");
+        #endregion
+
+        #region IControlVM implementation
+        /// <summary>All of the defined controls.</summary>
+        private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool   GetEnabled(IRibbonControl Control)
             => Controls(Control?.Id)?.IsEnabled ?? false;

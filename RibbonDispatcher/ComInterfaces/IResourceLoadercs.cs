@@ -22,7 +22,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Optional]string Label,
             [Optional]string ScreenTip,
             [Optional]string SuperTip,
-            [Optional]string AlternateLabel,
+            [Optional]string KeyTip);
+
+        /// <summary>Adds a new ControlString to the collection, and returns it.</summary>
+        [Description("Adds a new ControlString to the collection, and returns it.")]
+        string AddControlStrings2(string ControlId,
+            [Optional]string Label,
+            [Optional]string ScreenTip,
+            [Optional]string SuperTip,
             [Optional]string Description,
             [Optional]string KeyTip);
     }

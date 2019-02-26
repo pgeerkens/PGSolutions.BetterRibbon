@@ -10,6 +10,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             IActivatable<IButtonSource,IButtonVM>, ISizeableVM, IClickableVM, IImageableVM {
         internal ButtonVM(string itemId) : base(itemId) { }
 
+        /// <inheritdoc/>
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+
         #region IActivatable implementation
         /// <inheritdoc/>
         public new IButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);

@@ -10,6 +10,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         IActivatable<IToggleSource, IToggleVM>, IToggleableVM {
         internal CheckBoxVM(string itemId) : base(itemId) { }
 
+        /// <inheritdoc/>
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+
         #region IActivatable implementation
         /// <inheritdoc/>
         public new IToggleVM Attach(IToggleSource source) => Attach<CheckBoxVM>(source);

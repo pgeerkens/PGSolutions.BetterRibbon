@@ -34,9 +34,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;
         #endregion
-
-        public override string Description
-        => throw new InvalidOperationException("Attribute Description not supported on a Split Button.");
     }
 
     internal class SplitToggleButtonVM: SplitButtonVM<IToggleSource>, ISplitToggleButtonVM,
@@ -69,11 +66,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <inheritdoc/>>
         public void OnToggled(IRibbonControl control, bool isPressed)
         => Toggled?.Invoke(control,isPressed);
-
-        /// <inheritdoc/>>
-        public override string Label => !IsPressed || string.IsNullOrEmpty(Strings?.AlternateLabel)
-                                     ? base.Label
-                                     : AlternateLabel;
         #endregion
     }
 

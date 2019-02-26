@@ -223,10 +223,10 @@ Private Sub Class_Initialize()
     With BetterRibbon
         Set CustomGroup = .NewGroupModel(FindStrings("CustomizableGroup"))
     
-        Set Toggle1 = .NewToggleModelMso(FindStrings("Toggle1"), "MarginsShowHide")
-        Set Toggle2 = .NewToggleModelMso(FindStrings("Toggle2"), "MarginsShowHide")
-        Set Toggle3 = .NewToggleModelMso(FindStrings("Toggle3"), "MarginsShowHide")
-        Set Toggle4 = .NewToggleModelMso(FindStrings("Toggle4"), "MarginsShowHide")
+        Set Toggle1 = .NewToggleModelMso(FindStrings2("Toggle1"), "MarginsShowHide")
+        Set Toggle2 = .NewToggleModelMso(FindStrings2("Toggle2"), "MarginsShowHide")
+        Set Toggle3 = .NewToggleModelMso(FindStrings2("Toggle3"), "MarginsShowHide")
+        Set Toggle4 = .NewToggleModelMso(FindStrings2("Toggle4"), "MarginsShowHide")
         
         Set DropDown1 = .NewDropDownModel(FindStrings("DropDown1"))
         DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly", FindStrings("LabelOnly"))) _
@@ -234,9 +234,9 @@ Private Sub Class_Initialize()
                  .AddSelectableModel(.NewSelectableModel("LabelAndImage", FindStrings("LabelAndImage"))) _
                  .SelectedIndex = 2
         
-        Set Button1 = .NewButtonModelMso(FindStrings("Button1"), "MacroPlay")
-        Set Button2 = .NewButtonModelMso(FindStrings("Button2"), "MacroPlay")
-        Set Button3 = .NewButtonModelMso(FindStrings("Button3"), "Refresh")
+        Set Button1 = .NewButtonModelMso(FindStrings2("Button1"), "MacroPlay")
+        Set Button2 = .NewButtonModelMso(FindStrings2("Button2"), "MacroPlay")
+        Set Button3 = .NewButtonModelMso(FindStrings2("Button3"), "Refresh")
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
@@ -266,7 +266,22 @@ Private Function FindStrings(ByVal Search As String) As IControlStrings
         Set FindStrings = .Initialize( _
                 KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
                 Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
-                AlternateLabel:=FindStr(Search, Range(ControlStringsRangeName), 4), _
+                ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
+                SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6))
+    End With
+XT: Exit Function
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+    Resume          ' for debugging only
+End Function
+
+Private Function FindStrings2(ByVal Search As String) As IControlStrings2
+    Const ControlStringsRangeName As String = "ControlStringData"
+    
+    On Error GoTo EH
+    With New RibbonControlStrings
+        Set FindStrings2 = .Initialize2( _
+                KeyTip:=FindStr(Search, Range(ControlStringsRangeName), 2), _
+                Label:=FindStr(Search, Range(ControlStringsRangeName), 3), _
                 ScreenTip:=FindStr(Search, Range(ControlStringsRangeName), 5), _
                 SuperTip:=FindStr(Search, Range(ControlStringsRangeName), 6), _
                 Description:=FindStr(Search, Range(ControlStringsRangeName), 7))

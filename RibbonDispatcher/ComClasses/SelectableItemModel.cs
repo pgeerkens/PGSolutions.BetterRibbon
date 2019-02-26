@@ -32,7 +32,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public string ScreenTip => Strings.ScreenTip;
         public string SuperTip  => Strings.SuperTip;
         public string KeyTip    => Strings.KeyTip;
-        public string Description => Strings.Description;
 
         public new ISelectableItemVM ViewModel => this;
 

@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         Dictionary<string, IControlStrings>  _controls;
-        Dictionary<string, IPictureDisp>           _images;
+        Dictionary<string, IPictureDisp>     _images;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -37,8 +37,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             string Label            = null,
             string ScreenTip        = null,
             string SuperTip         = null,
-            string AlternateLabel   = null,
-            string Description      = null,
             string KeyTip           = null
         )
         {
@@ -46,8 +44,26 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                     Label           ?? ControlId,
                     ScreenTip       ?? $"{ControlId} ScreenTip",
                     SuperTip        ?? $"{ControlId} SuperTip",
+                    KeyTip          ?? ""));
+            return ControlId;
+        }
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)")]
+        public string AddControlStrings2(string ControlId,
+            string Label            = null,
+            string ScreenTip        = null,
+            string SuperTip         = null,
+            string Description      = null,
+            string KeyTip           = null
+        )
+        {
+            _controls.Add(ControlId, new ControlStrings2(
+                    Label           ?? ControlId,
+                    ScreenTip       ?? $"{ControlId} ScreenTip",
+                    SuperTip        ?? $"{ControlId} SuperTip",
                     KeyTip          ?? "",
-                    AlternateLabel  ?? $"{ControlId} Alternate",
                     Description     ?? $"{ControlId} Description"));
             return ControlId;
         }
@@ -63,6 +79,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public IControlStrings GetControlStrings(string ControlId) =>
             _controls.FirstOrDefault(i => i.Key == ControlId).Value;
+
+        /// <inheritdoc/>
+        public IControlStrings2 GetControlStrings2(string ControlId) =>
+            _controls.FirstOrDefault(i => i.Key == ControlId).Value as IControlStrings2;
+
         /// <inheritdoc/>
         public object GetImage(string Name) =>
             _images.FirstOrDefault(i => i.Key == Name).Value;

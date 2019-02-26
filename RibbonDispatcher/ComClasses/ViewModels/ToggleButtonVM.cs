@@ -14,13 +14,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public new ToggleButtonVM Attach(IToggleSource source) => Attach<ToggleButtonVM>(source);
         #endregion
 
-        #region IToggleable implementation
-        /// <inheritdoc/>>
-        public override string Label => !IsPressed || string.IsNullOrEmpty(Strings?.AlternateLabel)
-                                     ? base.Label
-                                     : AlternateLabel;
-        #endregion
-
         #region ISizeable implementation
         /// <inheritdoc/>
         public override bool IsLarge => Source?.IsLarge ?? false;

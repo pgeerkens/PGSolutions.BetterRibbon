@@ -29,17 +29,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         public bool  IsVisible    { get; set; } = true;
 
-        public bool  ShowInactive { get; private set; } = true;
-
         /// <inheritdoc/>
         public virtual void Invalidate() => ViewModel?.Invalidate();
 
         //public void Detach() => ViewModel.Detach();
 
         /// <inheritdoc/>
-        public virtual void SetShowInactive(bool showInactive) {
-            ShowInactive = showInactive;
-            ViewModel?.Invalidate();
-        }
+        public virtual void SetShowInactive(bool showInactive) => ViewModel?.Invalidate();
     }
 }

@@ -27,10 +27,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         public virtual string ScreenTip      => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
         public virtual string SuperTip       => Strings?.SuperTip ?? $"{Id} SuperTip";
-        /// <inheritdoc/>
-        public virtual string AlternateLabel => Strings?.AlternateLabel ?? $"{Id} Alternate";
-        /// <inheritdoc/>
-        public virtual string Description    => Strings?.Description ?? $"{Id} Description";
 
         /// <inheritdoc/>
         protected virtual IControlStrings Strings => Source?.Strings;
@@ -63,13 +59,13 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         }
 
         /// <inheritdoc/>
-        public bool ShowInactive => Source?.ShowInactive ?? _defaultShowInactive;
+        public bool ShowInactive => DefaultShowInactive;
 
         /// <inheritdoc/>
         public void SetShowInactive(bool showInactive) {
-            _defaultShowInactive = showInactive; Invalidate();
+            DefaultShowInactive = showInactive; Invalidate();
         }
-        bool _defaultShowInactive = false;
+        protected virtual bool DefaultShowInactive { get; set; } = false;
         #endregion
 
         /// <inheritdoc/>

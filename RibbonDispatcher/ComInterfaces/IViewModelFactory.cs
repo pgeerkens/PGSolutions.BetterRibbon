@@ -19,14 +19,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(1), Description("")]
         IControlStrings GetStrings(string controlId);
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        /// <summary>.</summary>
+        /// <param name="controlId"></param>
         [DispId(2), Description("")]
-        IControlStrings NewControlStrings(string label,
-                                          string screenTip      = null,
-                                          string superTip       = null,
-                                          string keyTip         = null,
-                                          string alternateLabel = null,
-                                          string description    = null);
+        IControlStrings2 GetStrings2(string controlId);
 
         /// <summary>.</summary>
         [DispId(3), Description("")]

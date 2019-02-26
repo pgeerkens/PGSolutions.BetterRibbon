@@ -24,9 +24,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;
+ 
+        /// <inheritdoc/>
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
         #endregion
-
-        public override string Description
-        => throw new InvalidOperationException("Attribute Description not supported on a Tab.");
     }
 }

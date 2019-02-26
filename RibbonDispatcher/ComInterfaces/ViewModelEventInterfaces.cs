@@ -105,4 +105,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         int ItemWidth  { get; }
     }
+
+    [CLSCompliant(true)]
+    public interface IDescriptionableVM {
+        string Description { get; }
+    }
 }

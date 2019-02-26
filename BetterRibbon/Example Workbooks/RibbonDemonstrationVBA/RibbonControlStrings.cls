@@ -25,22 +25,14 @@ Private Type TControlStrings
     Label          As String
     ScreenTip      As String
     SuperTip       As String
-    AlternateLabel As String
     KeyTip         As String
     Description    As String
 End Type
 Private This As TControlStrings
 
 Implements PGSolutions_RibbonDispatcher.IControlStrings
-
-Private Property Get IControlStrings_AlternateLabel() As String
-    IControlStrings_AlternateLabel = This.AlternateLabel
-End Property
-
-Private Property Get IControlStrings_Description() As String
-    IControlStrings_Description = This.Description
-End Property
-
+Implements PGSolutions_RibbonDispatcher.IControlStrings2
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Private Property Get IControlStrings_KeyTip() As String
     IControlStrings_KeyTip = This.KeyTip
 End Property
@@ -56,20 +48,51 @@ End Property
 Private Property Get IControlStrings_SuperTip() As String
     IControlStrings_SuperTip = This.SuperTip
 End Property
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Private Property Get IControlStrings2_Description() As String
+    IControlStrings_Description = This.Description
+End Property
 
+Private Property Get IControlStrings2_KeyTip() As String
+    IControlStrings_KeyTip = This.KeyTip
+End Property
+
+Private Property Get IControlStrings2_Label() As String
+    IControlStrings_Label = This.Label
+End Property
+
+Private Property Get IControlStrings2_ScreenTip() As String
+    IControlStrings_ScreenTip = This.ScreenTip
+End Property
+
+Private Property Get IControlStrings2_SuperTip() As String
+    IControlStrings_SuperTip = This.SuperTip
+End Property
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Function Initialize(ByVal Label As String, _
     Optional ByVal ScreenTip As String, _
     Optional ByVal SuperTip As String, _
-    Optional ByVal AlternateLabel As String, _
-    Optional ByVal KeyTip As String, _
-    Optional ByVal Description As String _
-) As RibbonControlStrings
+    Optional ByVal KeyTip As String _
+) As IControlStrings
     This.Label = Label
     This.ScreenTip = ScreenTip
     This.SuperTip = SuperTip
-    This.AlternateLabel = AlternateLabel
+    This.KeyTip = KeyTip
+
+    Set Initialize = Me
+End Function
+
+Public Function Initialize2(ByVal Label As String, _
+    Optional ByVal ScreenTip As String, _
+    Optional ByVal SuperTip As String, _
+    Optional ByVal KeyTip As String, _
+    Optional ByVal Description As String _
+) As IControlStrings2
+    This.Label = Label
+    This.ScreenTip = ScreenTip
+    This.SuperTip = SuperTip
     This.KeyTip = KeyTip
     This.Description = Description
 
-    Set Initialize = Me
+    Set Initialize2 = Me
 End Function

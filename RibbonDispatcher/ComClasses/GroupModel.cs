@@ -31,9 +31,14 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
+        /// <inheritdoc/>
         public override void SetShowInactive(bool showInactive)
         => ViewModel.SetShowInactive(showInactive);
 
+        /// <inheritdoc/>
+        public bool ShowInactive { get; }
+
+        /// <inheritdoc/>
         public void Detach() => ViewModel.Detach();
     }
 }

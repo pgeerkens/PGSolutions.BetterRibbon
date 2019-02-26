@@ -47,6 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             _textEditables = new Dictionary<string, IEditableVM>();
             _dynamicMenus  = new Dictionary<string, IDynamicMenuVM>();
             _gallerySizes  = new Dictionary<string, IGallerySizeVM>();
+            _descriptionable = new Dictionary<string, IDescriptionableVM>();
         }
 
         /// <inheritdoc/>
@@ -63,16 +64,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         => Controls.FirstOrDefault(c => c.Key == controlId).Value as TControl;
 
         #region IVewModelFactory implementation
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IControlStrings NewControlStrings(string label,
-                                                 string screenTip      = null,
-                                                 string superTip       = null,
-                                                 string keyTip         = null,
-                                                 string alternateLabel = null,
-                                                 string description    = null)
-        => new ControlStrings(label, screenTip, superTip, keyTip, alternateLabel, description);
-
         public IControlStrings GetStrings(string controlId) => ResourceManager.GetControlStrings(controlId);
+
+        public IControlStrings2 GetStrings2(string controlId) => ResourceManager.GetControlStrings2(controlId);
 
         public object LoadImage(string imageId) => ResourceManager.GetImage(imageId);
         #endregion
@@ -88,6 +82,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         private  readonly IDictionary<string, IEditableVM>    _textEditables;
         private  readonly IDictionary<string, IDynamicMenuVM> _dynamicMenus;
         private  readonly IDictionary<string, IGallerySizeVM> _gallerySizes;
+        private  readonly IDictionary<string, IDescriptionableVM> _descriptionable;
 
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IControlVM>    Controls      => new ReadOnlyDictionary<string, IControlVM>(_controls);
@@ -118,22 +113,29 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string, IGallerySizeVM> GallerySizes => new ReadOnlyDictionary<string, IGallerySizeVM>(_gallerySizes);
+
+        /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
+        internal IReadOnlyDictionary<string, IDescriptionableVM> Descriptionables => new ReadOnlyDictionary<string, IDescriptionableVM>(_descriptionable);
         #endregion
 
         #region Factoy Method implementation
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         internal T Add<T, TSource>(T ctrl) where T : AbstractControlVM<TSource> where TSource : class, IControlSource {
-            if (!_controls.ContainsKey(ctrl.Id)) _controls.Add(ctrl.Id, ctrl);
+            if (!_controls.ContainsKey(ctrl.Id)) {
+                _controls       .Add(ctrl.Id, ctrl);
+                _sizeables      .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
+                _clickables     .AddNotNull(ctrl.Id, ctrl as IClickableVM);
+                _selectables    .AddNotNull(ctrl.Id, ctrl as ISelectableVM);
+                _selectables2   .AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
+                _imageables     .AddNotNull(ctrl.Id, ctrl as IImageableVM);
+                _toggleables    .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
+                _textEditables  .AddNotNull(ctrl.Id, ctrl as IEditableVM);
+                _dynamicMenus   .AddNotNull(ctrl.Id, ctrl as IDynamicMenuVM);
+                _gallerySizes   .AddNotNull(ctrl.Id, ctrl as IGallerySizeVM);
+                _descriptionable.AddNotNull(ctrl.Id, ctrl as IDescriptionableVM);
 
-            _clickables.AddNotNull(ctrl.Id, ctrl as IClickableVM);
-            _sizeables.AddNotNull(ctrl.Id, ctrl as ISizeableVM);
-            _selectables.AddNotNull(ctrl.Id, ctrl as ISelectableVM);
-            _selectables2.AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
-            _imageables.AddNotNull(ctrl.Id, ctrl as IImageableVM);
-            _toggleables.AddNotNull(ctrl.Id, ctrl as IToggleableVM);
-            _textEditables.AddNotNull(ctrl.Id, ctrl as IEditableVM);
-
-            ctrl.Changed += OnChanged;
+                ctrl.Changed += OnChanged;
+            }
             return ctrl;
         }
 

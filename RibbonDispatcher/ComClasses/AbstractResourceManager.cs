@@ -21,8 +21,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                     GetCurrentUIString($"{ControlId}_Label")          ?? ControlId.Unknown(),
                     GetCurrentUIString($"{ControlId}_ScreenTip")      ?? ControlId.Unknown("ScreenTip"),
                     GetCurrentUIString($"{ControlId}_SuperTip")       ?? ControlId.Unknown("SuperTip"),
+                    GetCurrentUIString($"{ControlId}_KeyTip")         ?? ""
+            );
+
+        /// <inheritdoc/>
+        public IControlStrings2 GetControlStrings2(string ControlId) =>
+            new ControlStrings2(
+                    GetCurrentUIString($"{ControlId}_Label")          ?? ControlId.Unknown(),
+                    GetCurrentUIString($"{ControlId}_ScreenTip")      ?? ControlId.Unknown("ScreenTip"),
+                    GetCurrentUIString($"{ControlId}_SuperTip")       ?? ControlId.Unknown("SuperTip"),
                     GetCurrentUIString($"{ControlId}_KeyTip")         ?? "",
-                    GetCurrentUIString($"{ControlId}_AlternateLabel") ?? ControlId.Unknown("Alternate"),
                     GetCurrentUIString($"{ControlId}_Description")    ?? ControlId.Unknown("Description")
             );
 

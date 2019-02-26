@@ -28,8 +28,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>.</summary>
         void   Detach();
 
-        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
-        string Description  { get; }
         /// <summary>Returns the screenTip string for this control.</summary>
         string ScreenTip    { get; }
         /// <summary>Returns the SuperTip string for this control.</summary>
@@ -38,15 +36,16 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IButtonVM: IControlVM, IClickableVM, IImageableVM, ISizeableVM { }
+    public interface IButtonVM: IControlVM, IClickableVM, IImageableVM, ISizeableVM, IDescriptionableVM {
+    }
 
     /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface ICheckBoxVM: IControlVM, IToggleableVM { }
+    public interface ICheckBoxVM: IControlVM, IToggleableVM, IDescriptionableVM { }
 
     /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IToggleVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM { }
+    public interface IToggleVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM, IDescriptionableVM { }
 
     /// <summary>The total interface exposed by <see cref="VM.EditBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
@@ -74,7 +73,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
     [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
-    public interface IGalleryM: IControlVM, IGallerySizeVM, ISelectableVM, ISelectable2VM { }
+    public interface IGalleryM: IControlVM, IGallerySizeVM, ISelectableVM, ISelectable2VM, IDescriptionableVM { }
 
     public interface ILabelVM: IControlVM { }
 
@@ -90,5 +89,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IButtonVM ButtonVM { get; }
     }
 
-    public interface IMenuVM: IControlVM { }
+    public interface IMenuVM: IControlVM, IDescriptionableVM { }
 }

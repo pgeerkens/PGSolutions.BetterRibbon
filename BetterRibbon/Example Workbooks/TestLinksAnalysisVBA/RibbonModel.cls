@@ -46,14 +46,14 @@ End Function
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
     With BetterRibbon
-        Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls"))
+        Set CustomGroup = .NewGroupModel(.NewControlStrings(Label:="VBA Custom Controls", _
+                ScreenTip:="", superTip:="", keyTip:=""))
         
-        Set Strings = .NewControlStrings(Label:="Run All Scan/Parse Tests", _
+        Set Strings = .NewControlStrings2(Label:="Run All Scan/Parse Tests", _
                 ScreenTip:="Unit Test for Linka Parser", _
                 superTip:="Performs a connection test and then ten" & vbNewLine & _
                           "specific scanning and parsing tests on " & vbNewLine & _
-                          "various formulas.", keyTip:="", _
-                alternateLabel:="", Description:="")
+                          "various formulas.", keyTip:="", Description:="")
                 
         Set Button1 = .NewButtonModelMso(Strings, "MacroPlay")
     End With
