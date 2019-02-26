@@ -15,8 +15,9 @@ Public Function AlternateToggle(ByVal Factory As IModelFactory, Mode As Boolean,
     On Error GoTo EH
     AlternateToggle = Not Mode
     
-    Factory.DetachProxy ToggleID
-    Factory.DetachProxy CheckBoxID
+    'Factory.DetachProxy ToggleID
+    'Factory.DetachProxy CheckBoxID
+    Model.Detach
     Model.Attach IIf(AlternateToggle, ToggleID, CheckBoxID)
     Model.SetImageMso ToggleImage(Model.IsPressed)
     Model.Invalidate

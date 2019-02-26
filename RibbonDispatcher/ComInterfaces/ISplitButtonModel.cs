@@ -95,6 +95,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         ISplitPressButtonModel Attach(string controlId);
 
+        /// <summary>.</summary>
+        [Description(".")]
+        void Detach();
+
         /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
         new IControlStrings Strings {
             [Description("Gets the IControlStrings for this control.")]

@@ -37,6 +37,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             return this;
         }
 
+        public void Detach() => ViewModel.Detach();
+
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
     }

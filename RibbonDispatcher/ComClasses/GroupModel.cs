@@ -37,8 +37,5 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         public bool ShowInactive { get; }
-
-        /// <inheritdoc/>
-        public void Detach() => ViewModel.Detach();
     }
 }

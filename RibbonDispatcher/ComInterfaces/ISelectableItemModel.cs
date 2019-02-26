@@ -56,6 +56,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>.</summary>
         [Description(".")]
+        void Detach();
+
+        /// <summary>.</summary>
+        [Description(".")]
         void SetImageDisp(IPictureDisp image);
         /// <summary>.</summary>
         [Description(".")]

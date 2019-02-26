@@ -15,11 +15,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
     [Description("The COM visible Model for Ribbon Button controls.")]
     [CLSCompliant(true)]
-    //[ComVisible(true)]
-    //[ClassInterface(ClassInterfaceType.None)]
-    //[ComSourceInterfaces(typeof(IClickedEvent))]
-    //[ComDefaultInterface(typeof(ISplitButtonModel))]
-    //[Guid(Guids.SplitButtonModel)]
     public abstract class SplitButtonModel<TSource,TControl>: ControlModel<TSource,TControl>,
             ISplitButtonModel
         where TSource: IControlSource where TControl: ISplitButtonVM {

@@ -35,5 +35,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         ILabelModel Attach(string controlId);
+
+        /// <summary>.</summary>
+        [Description(".")]
+        void Detach();
     }
 }

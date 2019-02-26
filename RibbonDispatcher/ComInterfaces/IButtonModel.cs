@@ -46,6 +46,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         IButtonModel Attach(string controlId);
 
+        /// <summary>.</summary>
+        [Description(".")]
+        void Detach();
+
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
         void Invalidate();
