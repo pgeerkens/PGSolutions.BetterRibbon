@@ -19,6 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public void Detach() {
             ViewModel.Detach();
+            ViewModel.Invalidate();
             ViewModel = default;
         }
 

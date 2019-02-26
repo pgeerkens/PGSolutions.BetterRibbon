@@ -25,11 +25,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         private IModelFactoryInternal _factory => this;
 
-        ///// <inheritdoc/>
-        //public void Invalidate() => TabModel.Invalidate();
-
-        ///// <inheritdoc/>
-        //public void DetachProxy(string controlId) => TabModel.DetachProxy(controlId);
+        /// <inheritdoc/>
+        public void DetachProxy(string controlId) => ViewModelFactory.GetControl<IControlVM>(controlId).Detach();
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -91,7 +88,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public ILabelModel NewLabelModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => _factory.NewLabelModel(stringsId, isEnabled, isVisible);
+        => ModelFactoryExtensions.NewLabelModel(this, stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

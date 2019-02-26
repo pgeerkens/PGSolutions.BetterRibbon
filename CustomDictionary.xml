@@ -20,6 +20,7 @@
         <Word>activatable</Word>
         <Word>behaviour</Word>
         <Word>ctl</Word>
+        <Word>descriptionable</Word>
         <Word>dest</Word>
         <Word>disp</Word>       <!-- Inherited usage in IPictureDisp retained for consistency -->
         <Word>dockable</Word>

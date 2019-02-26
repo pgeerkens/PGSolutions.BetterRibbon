@@ -32,6 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     }
 
     /// <summary>The COM visible Model for Ribbon Split (Toggle) Button controls.</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Description("The COM visible Model for Ribbon Split (Toggle) Button controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -70,6 +71,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     }
 
     /// <summary>The COM visible Model for Ribbon Split (Press) Button controls.</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Description("The COM visible Model for Ribbon Split (Press) Button controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -97,11 +99,11 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         }
 
         #region Pressable implementation
-        public event ClickedEventHandler Pressd;
+        public event ClickedEventHandler Pressed;
 
         public ButtonModel Button { get; }
 
-        private void OnClicked(IRibbonControl control) => Pressd?.Invoke(control);
+        private void OnClicked(IRibbonControl control) => Pressed?.Invoke(control);
         #endregion
     }
 }

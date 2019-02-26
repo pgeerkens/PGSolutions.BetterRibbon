@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IEditBoxModel NewEditBoxModel(this IModelFactoryInternal factory, string id,
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
-            var model = ViewModelFactoryExtensions.NewEditBoxModel(factory, id, isEnabled, isVisible);
+            var model = ModelFactoryExtensions.NewEditBoxModel(factory, id, isEnabled, isVisible);
 
             model.Edited += handler;
             return model?.Attach(id);
@@ -60,7 +60,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IDropDownModel NewDropDownModel(this IModelFactoryInternal factory, string id,
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {
-            var model = ViewModelFactoryExtensions.NewDropDownModel(factory, id, isEnabled, isVisible);
+            var model = ModelFactoryExtensions.NewDropDownModel(factory, id, isEnabled, isVisible);
 
             model.SelectionMade += handler;
             return model?.Attach(id);
@@ -69,8 +69,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonLabelModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static ILabelModel NewLabelModel(this IModelFactoryInternal factory, string id,
-                ClickedEventHandler handler, bool isEnabled = true, bool isVisible = true)
-        => factory?.NewLabelModel(id, isEnabled, isVisible)
+                bool isEnabled = true, bool isVisible = true)
+        => ModelFactoryExtensions.NewLabelModel(factory, id, isEnabled, isVisible)
                   ?.Attach(id);
     }
 }

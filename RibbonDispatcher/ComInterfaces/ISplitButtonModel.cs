@@ -9,9 +9,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
     [Description("")]
     [CLSCompliant(true)]
-    //[ComVisible(true)]
-    //[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    //[Guid(Guids.ISplitButtonModel)]
     public interface ISplitButtonModel {
         /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
         IControlStrings Strings {

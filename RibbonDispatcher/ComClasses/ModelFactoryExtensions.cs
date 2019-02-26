@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings2 = IControlStrings2;
 
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the common link between <see cref="ControlModel{TSource, TCtrl}"/> objects created from VBA and C#.></summary>
-    internal static partial class ViewModelFactoryExtensions {
+    internal static partial class ModelFactoryExtensions {
         public static IStrings GetStrings(this IViewModelFactory vm, string controlId)
         => vm.ResourceManager.GetControlStrings(controlId);
 

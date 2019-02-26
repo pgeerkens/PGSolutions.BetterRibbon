@@ -22,90 +22,102 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //void Invalidate();
 
         /// <summary>.</summary>
-        [DispId(2), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(2), Description(".")]
         IStrings NewControlStrings(string label, string screenTip, string superTip,
                 string keyTip);
 
         /// <summary>.</summary>
-        [DispId(18), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(18), Description(".")]
         IStrings2 NewControlStrings2(string label, string screenTip, string superTip,
                 string keyTip, string description);
 
-        ///// <summary>Deactivate the specified control, detaching any attached data source.</summary>
-        ///// <param name="controlId">The ID of the control to be detached.</param>
-        //[DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
-        //void DetachProxy(string controlId);
+        /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
+        /// <param name="controlId">The ID of the control to be detached.</param>
+        [DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
+        void DetachProxy(string controlId);
 
         /// <summary>.</summary>
-        [DispId(4), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(4), Description(".")]
         IGroupModel NewGroupModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(5), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
+        [DispId(5), Description(".")]
         IButtonModel NewButtonModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(6), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(6), Description(".")]
         IButtonModel NewButtonModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(7), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(7), Description(".")]
         IToggleModel NewToggleModel(string stringsId,
                 IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(8), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(8), Description(".")]
         IToggleModel NewToggleModelMso(string stringsId,
                 string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(9), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(9), Description(".")]
         IEditBoxModel NewEditBoxModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(10), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(10), Description(".")]
         IDropDownModel NewDropDownModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(11), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(11), Description(".")]
         IComboBoxModel NewComboBoxModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(12), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(12), Description(".")]
         ILabelModel NewLabelModel(string stringsId,
                 bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(13), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(13), Description(".")]
         IMenuModel NewMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [DispId(14), Description(".")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(15), Description(".")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [DispId(15), Description(".")]
         ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true);
 

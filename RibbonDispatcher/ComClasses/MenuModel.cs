@@ -11,6 +11,7 @@ using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary></summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
     [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -36,8 +37,6 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
             }
             return this;
         }
-
-        public void Detach() => ViewModel.Detach();
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;
