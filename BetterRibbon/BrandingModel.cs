@@ -5,10 +5,13 @@ using System;
 using System.Text;
 using stdole;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher;
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
+
 using PGSolutions.RibbonUtilities.VbaSourceExport;
+
 using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {

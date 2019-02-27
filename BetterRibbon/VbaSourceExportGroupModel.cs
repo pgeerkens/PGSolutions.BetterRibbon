@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 using PGSolutions.RibbonUtilities.LinksAnalysis;

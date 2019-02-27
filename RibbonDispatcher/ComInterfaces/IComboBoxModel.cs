@@ -38,9 +38,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set;
         }
 
-        /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
-        IComboBoxModel AddSelectableModel(ISelectableItemModel selectableModel);
-
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         IComboBoxModel Attach(string controlId);
@@ -52,5 +49,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [Description("Queues a request for this control to be refreshed.")]
         void Invalidate();
+
+        /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
+        IComboBoxModel AddSelectableModel(ISelectableItemModel selectableModel);
     }
 }

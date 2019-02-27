@@ -11,10 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IActivatable implementation
         public new IEditBoxVM Attach(IEditBoxSource source) => Attach<EditBoxVM>(source);
 
-        public override void Detach() {
-            Edited = null;
-            base.Detach();
-        }
+        public override void Detach() { Edited = null; base.Detach(); }
         #endregion
 
         #region IEditable implementation

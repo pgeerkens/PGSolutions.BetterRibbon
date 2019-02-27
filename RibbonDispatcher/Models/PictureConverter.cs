@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using stdole;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     [SuppressMessage("Microsoft.Design", "CA1052:StaticHolderTypesShouldBeSealed")]
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
             Justification = "False positive - static methods ARE accessed.")]

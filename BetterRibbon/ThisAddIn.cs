@@ -6,8 +6,8 @@ using System.Deployment.Application;
 using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
-
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher;
+using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.BetterRibbon {
     using Excel    = Microsoft.Office.Interop.Excel;

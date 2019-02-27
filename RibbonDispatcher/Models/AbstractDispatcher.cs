@@ -12,7 +12,7 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 

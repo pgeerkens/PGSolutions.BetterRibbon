@@ -13,10 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IActivatable implementation
         public new IDropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
 
-        public override void Detach() {
-            SelectionMade = null;
-            base.Detach();
-        }
+        public override void Detach() { SelectionMade = null; base.Detach(); }
         #endregion
 
         #region IListable implementation

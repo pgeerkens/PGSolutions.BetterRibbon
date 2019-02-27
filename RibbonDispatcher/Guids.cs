@@ -56,10 +56,10 @@ namespace PGSolutions.RibbonDispatcher {
         public const string SplitToggleButtonModel  = "69E19425" + GuidSpace;
         public const string ISplitPressButtonModel  = "69E19426" + GuidSpace;
         public const string SplitPressButtonModel   = "69E19427" + GuidSpace;
-        //public const string IComboBoxModel          = "69E19428" + GuidSpace;
-        //public const string ComboBoxModel           = "69E19429" + GuidSpace;
-        //public const string IImageObject            = "69E1942A" + GuidSpace;
-        //public const string ImageObject             = "69E1942B" + GuidSpace;
+        public const string IStaticComboBoxModel    = "69E19428" + GuidSpace;
+        public const string StaticComboBoxModel     = "69E19429" + GuidSpace;
+        public const string IStaticDropDownModel    = "69E1942A" + GuidSpace;
+        public const string StaticDropDownModel     = "69E1942B" + GuidSpace;
         //public const string IButtonModel            = "69E1942C" + GuidSpace;
         //public const string ButtonModel             = "69E1942D" + GuidSpace;
         //public const string IToggleModel            = "69E1942E" + GuidSpace;

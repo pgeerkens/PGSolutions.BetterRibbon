@@ -16,7 +16,7 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
-    using static RibbonDispatcher.ComClasses.Extensions;
+    using static RibbonDispatcher.Extensions;
     using Models     = IReadOnlyList<VbaSourceExportGroupModel>;
     using ViewModels = RibbonDispatcher.ViewModels;
 

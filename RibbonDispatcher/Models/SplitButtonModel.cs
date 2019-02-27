@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     using Microsoft.Office.Core;
     using IStrings = IControlStrings;
 

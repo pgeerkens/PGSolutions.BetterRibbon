@@ -6,7 +6,7 @@ using System;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     using IStrings = IControlStrings;
 
     public abstract class AbstractRibbonGroupModel : IControlSource, ICanInvalidate {

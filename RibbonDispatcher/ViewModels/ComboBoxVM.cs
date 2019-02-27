@@ -11,10 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IActivatable implementation
         public new IComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
 
-        public override void Detach() {
-            Edited = null;
-            base.Detach();
-        }
+        public override void Detach() { Edited = null; base.Detach(); }
         #endregion
 
         #region IListable implementation

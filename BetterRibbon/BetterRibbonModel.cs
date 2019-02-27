@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.BetterRibbon {

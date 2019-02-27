@@ -7,7 +7,7 @@ using stdole;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     using IStrings = IControlStrings;
     using IStrings2 = IControlStrings2;
 

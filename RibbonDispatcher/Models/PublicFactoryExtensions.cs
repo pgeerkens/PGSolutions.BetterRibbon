@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
     public static partial class PublicFactoryExtensions {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>

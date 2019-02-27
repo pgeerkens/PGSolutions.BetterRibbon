@@ -4,7 +4,7 @@
 
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     public sealed class CustomButtonsGroupModel : AbstractRibbonGroupModel, IControlSource {
         public CustomButtonsGroupModel(IRibbonViewModel viewModel, AbstractModelFactory factory, string viewModelName)

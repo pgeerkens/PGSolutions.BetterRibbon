@@ -8,39 +8,35 @@ using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using Microsoft.Office.Core;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
-    /// <summary>The COM visible Model for Ribbon Button controls.</summary>
-    [Description("The COM visible Model for Ribbon Button controls.")]
+namespace PGSolutions.RibbonDispatcher.Models {
+    /// <summary></summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
+    [Description("")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IClickedEvent))]
-    [ComDefaultInterface(typeof(IButtonModel))]
-    [Guid(Guids.ButtonModel)]
-    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>,
-            IButtonModel, IButtonSource {
-        internal ButtonModel(Func<string, ButtonVM> funcViewModel, IControlStrings strings)
-        : base(funcViewModel, strings) { }
+    [ComDefaultInterface(typeof(IMenuModel))]
+    [Guid(Guids.MenuModel)]
+    public class MenuModel: ControlModel<IMenuSource,IMenuVM>,
+            IMenuModel, IMenuSource {
+        internal MenuModel(Func<string,MenuVM> funcViewModel,
+                IControlStrings strings)
+        : base(funcViewModel, strings)
+        { }
 
-        public event ClickedEventHandler Clicked;
-
-        public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public IButtonModel Attach(string controlId) {
+        /// <inheritdoc/>
+        public IMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
-                ViewModel.Clicked += OnClicked;
                 ViewModel.Invalidate();
             }
             return this;
         }
-
-        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
 
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso)     => Image = imageMso;

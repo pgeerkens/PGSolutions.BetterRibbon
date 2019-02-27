@@ -182,7 +182,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal StaticComboBoxVM NewStaticComboBox(string controlId, IList<StaticItemVM> items)
-        => Add<StaticComboBoxVM, IComboBoxSource>(new StaticComboBoxVM(controlId,items));
+        => Add<StaticComboBoxVM, IStaticComboBoxSource>(new StaticComboBoxVM(controlId,items));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal LabelVM NewLabel(string controlId)

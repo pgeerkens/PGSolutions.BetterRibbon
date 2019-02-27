@@ -17,10 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public new IButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);
 
         /// <inheritdoc/>
-        public override void Detach() {
-            Clicked = null;
-            base.Detach();
-        }
+        public override void Detach() { Clicked = null; base.Detach(); }
         #endregion
 
         #region IClickable implementation

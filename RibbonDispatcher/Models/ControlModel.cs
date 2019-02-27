@@ -7,7 +7,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     public abstract class ControlModel<TSource,TCtrl>: IControlSource
             where TSource: IControlSource
             where TCtrl: IControlVM {

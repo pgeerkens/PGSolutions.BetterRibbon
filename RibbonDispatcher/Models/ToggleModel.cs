@@ -11,7 +11,7 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>The COM visible Model for Ribbon EditBox controls.</summary>
     [Description("The COM visible Model for Ribbon EditBox controls.")]
     [CLSCompliant(true), ComVisible(true)]

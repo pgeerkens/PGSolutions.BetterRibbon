@@ -17,10 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public new IToggleVM Attach(IToggleSource source) => Attach<CheckBoxVM>(source);
 
         /// <inheritdoc/>
-        public override void Detach() {
-            Toggled = null;
-            base.Detach();
-        }
+        public override void Detach() { Toggled = null; base.Detach(); }
         #endregion
 
         #region IToggleable implementation

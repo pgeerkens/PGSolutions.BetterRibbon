@@ -8,7 +8,7 @@ using stdole;
 
 using Microsoft.Office.Core;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>TODO</summary>
     public static partial class ResourceManagerExtensions {
         /// <summary>TODO</summary>

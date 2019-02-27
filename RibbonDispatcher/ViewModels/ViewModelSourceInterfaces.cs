@@ -34,7 +34,12 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         void     SetShowInactive(bool showInactive);
     }
 
-    public interface IButtonSource : IControlSource {
+    public interface ISizeSource {
+        /// <summary>.</summary>
+        bool        IsLarge   { get; }
+    }
+
+    public interface IImageSource {
         /// <summary>.</summary>
         ImageObject Image     { get; }
 
@@ -43,18 +48,27 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
         bool        ShowLabel { get; }
-
-        /// <summary>.</summary>
-        bool        IsLarge   { get; }
     }
 
-    public interface IToggleSource : IButtonSource {
+    public interface IToggleDataSource {
         /// <summary>.</summary>
         bool        IsPressed { get; }
     }
 
+    public interface IEditDataSource {
+        /// <summary>.</summary>
+        string      Text      { get; }
+    }
+
+    public interface ISelectableSource {
+        /// <summary>.</summary>
+        int     SelectedIndex { get; }
+        /// <summary>.</summary>
+        string  SelectedId    { get; }
+    }
+
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface ISelectableSource: IControlSource, IEnumerable<ISelectableItemSource> {
+    public interface IListDataSource : IEnumerable<ISelectableItemSource> {
         /// <summary>.</summary>
         int         Count     { get; }
 
@@ -65,57 +79,28 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         new IEnumerator<ISelectableItemSource> GetEnumerator();
     }
 
-    public interface IStaticListSource {
-        /// <summary>.</summary>
-        int     SelectedIndex { get; }
-        /// <summary>.</summary>
-        string  SelectedId    { get; }
-    }
+
+    public interface IEditBoxSource: IControlSource, IEditDataSource { }
+
+    public interface IButtonSource : IControlSource, IImageSource, ISizeSource { }
+
+    public interface IToggleSource : IControlSource, IToggleDataSource, IImageSource, ISizeSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IDropDownSource : ISelectableSource, IStaticListSource {
-    }
+    public interface IDropDownSource: IControlSource, ISelectableSource, IListDataSource { }
 
-    public interface IStaticDropDownSource : IControlSource, IStaticListSource {
-    }
-
-    public interface IEditBoxSource: IControlSource {
-        /// <summary>.</summary>
-        string      Text      { get; }
-    }
+    public interface IStaticDropDownSource : IControlSource, ISelectableSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IComboBoxSource: ISelectableSource, IEditBoxSource { }
+    public interface IComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
 
-    public interface ISelectableItemSource: IControlSource {
+    public interface IStaticComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
+
+    public interface ISelectableItemSource: IControlSource, IImageSource, ISizeSource {
         string Id        { get; }
-
-        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool   ShowImage { get; }
-
-        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool   ShowLabel { get; }
-
-        /// <summary>.</summary>
-        bool   IsLarge   { get; }
-
-        /// <summary>.</summary>
-        ImageObject Image { get; }
     }
 
-    public interface ILabelSource: IControlSource {
-        /// <summary>.</summary>
-        bool IsLarge { get; }
-    }
+    public interface ILabelSource: IControlSource, ISizeSource { }
 
-    public interface IMenuSource: IControlSource {
-        /// <summary>.</summary>
-        ImageObject Image { get; }
-
-        /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowImage { get; }
-
-        /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool ShowLabel { get; }
-    }
+    public interface IMenuSource: IControlSource, IImageSource { }
 }

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {

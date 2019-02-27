@@ -5,20 +5,18 @@ using System.Collections.Generic;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal class StaticComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBoxVM,
-            IActivatable<IComboBoxSource, IComboBoxVM>, IEditableVM {
+    /// <summary>The ViewModel for static ribbon ComboBox objects.</summary>
+    internal class StaticComboBoxVM: AbstractControlVM<IStaticComboBoxSource>, IComboBoxVM,
+            IActivatable<IStaticComboBoxSource,IComboBoxVM>, IEditableVM {
         public StaticComboBoxVM(string itemId, IList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
         private IList<StaticItemVM> Items { get; }
 
         #region IActivatable implementation
-        public new IComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
+        public new IComboBoxVM Attach(IStaticComboBoxSource source) => Attach<StaticComboBoxVM>(source);
 
-        public override void Detach() {
-            Edited = null;
-            base.Detach();
-        }
+        public override void Detach() { Edited = null; base.Detach(); }
         #endregion
 
         #region IListable implementation

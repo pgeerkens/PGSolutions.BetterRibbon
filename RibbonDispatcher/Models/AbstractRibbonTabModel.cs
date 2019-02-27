@@ -6,7 +6,7 @@ using System.Linq;
 
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     using IModels  = IReadOnlyList<ICanInvalidate>;
 
     public abstract class AbstractRibbonTabModel {

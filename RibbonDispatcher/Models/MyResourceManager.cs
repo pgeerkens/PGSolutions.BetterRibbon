@@ -4,9 +4,8 @@
 using System.Reflection;
 using System.Resources;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     public class MyResourceManager: IResourceLoader {
         public MyResourceManager() : this(Assembly.GetCallingAssembly()) { }
 

@@ -63,20 +63,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComClasses\AbstractModelFactory.cs" />
-    <Compile Include="ComClasses\AbstractRibbonGroupModel.cs" />
-    <Compile Include="ComClasses\AbstractRibbonTabModel.cs" />
-    <Compile Include="ComClasses\Models\ComboBoxModel.cs" />
-    <Compile Include="ComClasses\CustomButtonsModel.cs" />
+    <Compile Include="ComInterfaces\IStaticComboBoxModel.cs" />
+    <Compile Include="Models\AbstractModelFactory.cs" />
+    <Compile Include="Models\AbstractRibbonGroupModel.cs" />
+    <Compile Include="Models\AbstractRibbonTabModel.cs" />
+    <Compile Include="Models\ComboBoxModel.cs" />
+    <Compile Include="Models\CustomButtonsModel.cs" />
     <Compile Include="ControlStrings2.cs" />
+    <Compile Include="ComInterfaces\IStaticDropDownModel.cs" />
+    <Compile Include="Models\StaticComboBoxModel.cs" />
+    <Compile Include="Models\StaticDropDownModel.cs" />
     <Compile Include="ViewModels\IRibbonViewModel.cs" />
-    <Compile Include="ComClasses\Models\LabelModel.cs" />
-    <Compile Include="ComClasses\Models\MenuModel.cs" />
-    <Compile Include="ComClasses\ModelFactory.cs" />
-    <Compile Include="ComClasses\Models\EditBoxModel.cs" />
-    <Compile Include="ComClasses\PublicFactoryExtensions.cs" />
+    <Compile Include="Models\LabelModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\ModelFactory.cs" />
+    <Compile Include="Models\EditBoxModel.cs" />
+    <Compile Include="Models\PublicFactoryExtensions.cs" />
     <Compile Include="ViewModels\RibbonViewModelExtensions.cs" />
-    <Compile Include="ComClasses\Models\SplitButtonModel.cs" />
+    <Compile Include="Models\SplitButtonModel.cs" />
     <Compile Include="ViewModels\AbstractContainerVM.cs" />
     <Compile Include="ViewModels\StaticComboBoVMx.cs" />
     <Compile Include="ViewModels\StaticDropDownVM.cs" />
@@ -88,23 +92,23 @@
     <Compile Include="ViewModels\XmParserExtensions.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IEditBoxModel.cs" />
-    <Compile Include="ComClasses\PictureConverter.cs">
+    <Compile Include="Models\PictureConverter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ComClasses\ModelFactoryExtensions.cs" />
+    <Compile Include="Models\ModelFactoryExtensions.cs" />
     <Compile Include="ViewModels\ComboBoxVM.cs" />
     <Compile Include="ViewModels\EditBoxVM.cs" />
     <Compile Include="ViewModels\ControlViewModelInterfaces.cs" />
-    <Compile Include="ComClasses\Models\ControlModel.cs" />
+    <Compile Include="Models\ControlModel.cs" />
     <Compile Include="ViewModels\GroupVM.cs" />
-    <Compile Include="ComClasses\Extensions.cs" />
-    <Compile Include="ComClasses\Models\ButtonModel.cs" />
-    <Compile Include="ComClasses\Models\DropDownModel.cs" />
-    <Compile Include="ComClasses\Models\GroupModel.cs" />
-    <Compile Include="ComClasses\Models\ToggleModel.cs" />
-    <Compile Include="ComClasses\Models\SelectableItemModel.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Models\ButtonModel.cs" />
+    <Compile Include="Models\DropDownModel.cs" />
+    <Compile Include="Models\GroupModel.cs" />
+    <Compile Include="Models\ToggleModel.cs" />
+    <Compile Include="Models\SelectableItemModel.cs" />
     <Compile Include="ComInterfaces\ILabelModel.cs" />
-    <Compile Include="ImageObject.cs" />
+    <Compile Include="ViewModels\ImageObject.cs" />
     <Compile Include="ComInterfaces\IButtonModel.cs" />
     <Compile Include="ComInterfaces\IDropDownModel.cs" />
     <Compile Include="ComInterfaces\IGroupModel.cs" />
@@ -114,7 +118,7 @@
     <Compile Include="ViewModels\ViewModelSourceInterfaces.cs" />
     <Compile Include="ComInterfaces\IToggleModel.cs" />
     <Compile Include="ViewModels\IActivatable.cs" />
-    <Compile Include="ComClasses\AbstractDispatcher.cs" />
+    <Compile Include="Models\AbstractDispatcher.cs" />
     <Compile Include="ViewModels\ControlChangedEventArgs.cs" />
     <Compile Include="ViewModels\ButtonVM.cs" />
     <Compile Include="ViewModels\CheckBoxVM.cs" />
@@ -135,8 +139,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DictionaryExtensions.cs" />
-    <Compile Include="ComClasses\MyResourceManager.cs" />
-    <Compile Include="ComClasses\ResourceManagerExtensions.cs" />
+    <Compile Include="Models\MyResourceManager.cs" />
+    <Compile Include="Models\ResourceManagerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

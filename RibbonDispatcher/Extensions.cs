@@ -6,12 +6,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher {
     public static partial class Extensions {
         private const string Caption = "PGSolutions Ribbon Dispatcher";
 
         /// <summary>Returns the name of the calling method. </summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Because that's just how it works!")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
+                Justification = "Because that's just how it works!")]
         public static string CallerName([CallerMemberName] string memberName = "") => memberName;
 
         /// <summary>.</summary>

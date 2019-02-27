@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
+    /// <summary>The ViewModel for static ribbon DropDown objects.</summary>
     internal class StaticDropDownVM : AbstractControlVM<IStaticDropDownSource>, IDropDownVM,
             IActivatable<IStaticDropDownSource,IDropDownVM>, ISelectableVM {
         internal StaticDropDownVM(string itemId, IList<StaticItemVM> items)
@@ -16,10 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IActivatable implementation
         public new IDropDownVM Attach(IStaticDropDownSource source) => Attach<StaticDropDownVM>(source);
 
-        public override void Detach() {
-            SelectionMade = null;
-            base.Detach();
-        }
+        public override void Detach() { SelectionMade = null; base.Detach(); }
         #endregion
 
         #region IListable implementation

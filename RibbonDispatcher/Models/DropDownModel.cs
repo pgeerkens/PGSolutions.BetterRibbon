@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
@@ -13,7 +14,7 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.RibbonDispatcher.ComClasses {
+namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
     [Description("The COM visible Model for Ribbon Drop Down controls")]
     [CLSCompliant(true)]
@@ -24,15 +25,16 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     [Guid(Guids.DropDownModel)]
     public sealed class DropDownModel : ControlModel<IDropDownSource,IDropDownVM>,
             IDropDownModel, IDropDownSource, IEnumerable<ISelectableItemSource>, IEnumerable {
-        internal DropDownModel(Func<string, DropDownVM> funcViewModel,
-                IControlStrings strings)
-        : base(funcViewModel, strings)
-        { }
+        internal DropDownModel(Func<string, DropDownVM> funcViewModel, IControlStrings strings)
+        : base(funcViewModel, strings) { }
 
         public event SelectionMadeEventHandler SelectionMade;
 
         public int    SelectedIndex { get; set; }
-        public string SelectedId    { get; set; }
+        public string SelectedId    {
+            get => Items[SelectedIndex].Id;
+            set => SelectedIndex = Items.Where((item,i) => item.Id == value).Select((a,b)=>b).FirstOrDefault();
+        }
 
         public IDropDownModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
