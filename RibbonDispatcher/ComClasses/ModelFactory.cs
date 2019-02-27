@@ -12,9 +12,9 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings2 = IControlStrings2;
 
     /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
-    internal class ModelFactory : AbstractModelFactory, IModelFactory {
+    public class ModelFactory : AbstractModelFactory, IModelFactory {
         /// <summary>.</summary>
-        public ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
+        internal ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
         : base(viewModelFactory, manager) { }
 
         /// <inheritdoc/>
@@ -22,20 +22,18 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings NewControlStrings(string label, string screenTip, string superTip,
-                string keyTip)
+        public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip)
         => new ControlStrings(label, screenTip, superTip, keyTip);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip,
-                string keyTip, string description)
+        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
+                string description)
         =>  new ControlStrings2(label, screenTip, superTip, keyTip, description);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new IGroupModel NewGroupModel(string stringsId,
-                bool isEnabled = true, bool isVisible = true)
+        public new IGroupModel NewGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewGroupModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>

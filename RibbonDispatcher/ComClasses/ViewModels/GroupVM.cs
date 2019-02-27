@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
     public class GroupVM : AbstractContainerVM<IControlSource>, IGroupVM, 
             IActivatable<IControlSource,GroupVM> {
-        internal GroupVM(IViewModelFactory factory, string itemId)
+        internal GroupVM(ViewModelFactory factory, string itemId)
         : base(factory, itemId) { }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
@@ -18,8 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         => Attach<GroupVM>(source);
     }
 
-    internal class KeyedControls: KeyedCollection<string, IActivatable> {
+    internal class KeyedControls: KeyedCollection<string, IControlVM> {
         public KeyedControls() : base() { }
-        protected override string GetKeyForItem(IActivatable control) => control?.Id;
+        protected override string GetKeyForItem(IControlVM control) => control?.Id;
     }
 }

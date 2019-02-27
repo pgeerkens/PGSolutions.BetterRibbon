@@ -32,6 +32,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         string ScreenTip    { get; }
         /// <summary>Returns the SuperTip string for this control.</summary>
         string SuperTip     { get; }
+
+        void OnPurged(IContainerControl sender);
+        void SetShowInactive(bool showInactive);
     }
 
     /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>

@@ -9,7 +9,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     internal abstract class SplitButtonVM<TSource>: AbstractContainerVM<TSource>, ISplitButtonVM,
             IActivatable<TSource,ISplitButtonVM>, ISizeableVM, IImageableVM
         where TSource: IButtonSource {
-        public SplitButtonVM(IViewModelFactory factory, string itemId, IMenuVM menu)
+        public SplitButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu)
         : base(factory,itemId)
         => MenuVM = menu;
 
@@ -38,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
     internal class SplitToggleButtonVM: SplitButtonVM<IToggleSource>, ISplitToggleButtonVM,
             IActivatable<IToggleSource,ISplitToggleButtonVM>, IToggleableVM {
-        public SplitToggleButtonVM(IViewModelFactory factory, string itemId, IMenuVM menu, IToggleVM toggle)
+        public SplitToggleButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IToggleVM toggle)
         : base(factory, itemId, menu)
         => ToggleVM = toggle;
 
@@ -71,7 +71,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
     internal class SplitPressButtonVM: SplitButtonVM<IButtonSource>, ISplitPressButtonVM,
             IActivatable<IButtonSource,ISplitPressButtonVM>, IClickableVM {
-        public SplitPressButtonVM(IViewModelFactory factory, string itemId, IMenuVM menu, IButtonVM button)
+        public SplitPressButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IButtonVM button)
         : base(factory, itemId, menu)
         => ButtonVM = button;
 

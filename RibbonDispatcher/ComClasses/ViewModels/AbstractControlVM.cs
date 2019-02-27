@@ -17,25 +17,33 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
         /// <summary>TODO</summary>
         internal event ChangedEventHandler Changed;
 
+        /// <summary>Raised after the control has been purged from the ViewModel and can no longer service Ribbon callbacks.</summary>
+        internal event PurgedEventHandler Purged;
+
+        public void OnPurged(IContainerControl sender) {
+            Source = default;
+            Purged?.Invoke(sender, new ControlPurgedEventArgs(Id));
+        }
+
         /// <inheritdoc/>
-        public string Id             { get; }
+        public string Id                { get; }
         /// <inheritdoc/>
-        public virtual string KeyTip         => Strings?.KeyTip ?? "";
+        public virtual string KeyTip    => Strings?.KeyTip ?? "";
         /// <inheritdoc/>
-        public virtual string Label          => Strings?.Label ?? Id;
+        public virtual string Label     => Strings?.Label ?? Id;
         /// <inheritdoc/>
-        public virtual string ScreenTip      => Strings?.ScreenTip ?? $"{Id} ScreenTip";
+        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{Id} ScreenTip";
         /// <inheritdoc/>
-        public virtual string SuperTip       => Strings?.SuperTip ?? $"{Id} SuperTip";
+        public virtual string SuperTip  => Strings?.SuperTip ?? $"{Id} SuperTip";
 
         /// <inheritdoc/>
         protected virtual IControlStrings Strings => Source?.Strings;
 
         /// <inheritdoc/>
-        public bool IsEnabled        => Source?.IsEnabled ?? false;
+        public bool IsEnabled => Source?.IsEnabled ?? false;
 
         /// <inheritdoc/>
-        public bool IsVisible        => Source?.IsVisible ?? ShowInactive;
+        public bool IsVisible => Source?.IsVisible ?? ShowInactive;
         #endregion
 
         #region IActivatable implementation

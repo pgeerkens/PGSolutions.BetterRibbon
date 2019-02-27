@@ -45,6 +45,8 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
         public override void Invalidate() { }
 
+        public void OnPurged(IContainerControl sender) { }  // Own VM!
+
         public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
         public void SetImageMso(string imageMso) => Image = imageMso;
     }

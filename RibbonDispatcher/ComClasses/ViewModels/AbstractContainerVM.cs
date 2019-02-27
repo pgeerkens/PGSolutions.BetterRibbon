@@ -12,18 +12,25 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
     public abstract class AbstractContainerVM<TSource>: AbstractControlVM<TSource>, IContainerControl
         where TSource : IControlSource {
-        protected AbstractContainerVM(IViewModelFactory factory, string itemId)
+        protected AbstractContainerVM(ViewModelFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;
             Controls = new KeyedControls();
         }
 
-        internal IViewModelFactory Factory { get; }
+        internal ViewModelFactory Factory { get; }
 
-        protected KeyedCollection<string, IActivatable> Controls { get; }
+        protected KeyedCollection<string, IControlVM> Controls { get; }
+
+        public void PurgeChildren() {
+            foreach(var child in Controls) {
+                if (child is IContainerControl container) container.PurgeChildren();
+                Factory.Remove(this,child);
+            }
+        }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public void Add(IActivatable control) {
+        public void Add(IControlVM control) {
             if (control == null) return;
             Controls.Add(control);
         }
@@ -37,7 +44,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
 
         public override void Invalidate() => Invalidate(null);
 
-        internal void Invalidate(Action<IActivatable> action) {
+        internal void Invalidate(Action<IControlVM> action) {
             foreach (var ctrl in Controls) {
                 if (ctrl != this) {
                     action?.Invoke(ctrl);
@@ -55,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses.ViewModels {
             base.Detach();
         }
 
-        IEnumerator<IActivatable> IEnumerable<IActivatable>.GetEnumerator() => Controls.GetEnumerator();
+        IEnumerator<IControlVM> IEnumerable<IControlVM>.GetEnumerator() => Controls.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => Controls.GetEnumerator();
     }
 }

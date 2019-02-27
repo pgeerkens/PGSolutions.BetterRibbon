@@ -11,6 +11,10 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings2 = IControlStrings2;
 
     /// <summary>Internal implementation of the interface <see cref="IModelFactory"/>.</summary>
+    /// <remarks>
+    /// This class existsto expose the "evented" base classes to internal methods,
+    /// while only the unevented COM-visible interfaces are exposed to VBA clients.
+    /// </remarks>
     public abstract class AbstractModelFactory {
         /// <summary>.</summary>
         protected AbstractModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager) {
@@ -83,7 +87,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
                 bool isEnabled, bool isVisible)
         => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings(splitStringId),
                 new ToggleModel(GetControl<ToggleButtonVM>, GetStrings2(toggleStringId)),
-                new MenuModel(ViewModelFactory.GetControl<MenuVM>, GetStrings2(menuStringId)))
+                new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringId)))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
             .InitializeModel<IToggleSource, ISplitToggleButtonVM, SplitToggleButtonModel>();
 
