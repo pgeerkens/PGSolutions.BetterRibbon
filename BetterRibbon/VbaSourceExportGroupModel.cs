@@ -2,14 +2,16 @@
 //                                Copyright (c) 2017-8 Pieter Geerkens                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComClasses;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ViewModels;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
         public VbaSourceExportGroupModel(IRibbonViewModel viewModel, AbstractModelFactory factory, string viewModelName, string suffix)
-        : base(viewModel, viewModelName) {
+        : base(viewModel, viewModelName, factory.GetStrings(viewModelName)) {
             Suffix = suffix;
 
             DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",

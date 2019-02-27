@@ -4,19 +4,19 @@
 using System;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;
 
     public abstract class AbstractRibbonGroupModel : IControlSource, ICanInvalidate {
-        protected AbstractRibbonGroupModel(IRibbonViewModel viewModel, string viewModelName)
-        : this(viewModel?.ViewModelFactory.GetControl<GroupVM>(viewModelName)) {
+        protected AbstractRibbonGroupModel(IRibbonViewModel viewModel, string viewModelName, IStrings strings)
+        : this(viewModel?.ViewModelFactory.GetControl<GroupVM>(viewModelName), strings) {
         }
-        private AbstractRibbonGroupModel(IGroupVM viewModel) {
+        private AbstractRibbonGroupModel(IGroupVM viewModel, IStrings strings) {
             ViewModel = (viewModel as IActivatable<IControlSource,GroupVM>)
                       ?.Attach(this);
-            Strings   = ViewModel?.Factory.GetStrings(ViewModel.Id);
+            Strings   = strings;
         }
 
         public bool     IsEnabled    { get; set; } = true;

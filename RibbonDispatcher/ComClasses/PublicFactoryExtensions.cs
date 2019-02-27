@@ -2,7 +2,9 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
@@ -19,7 +21,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IButtonModel NewButtonModel(this AbstractModelFactory factory, string id,
                 ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = factory.NewButtonModel(id, image, isEnabled, isVisible);
+            var model = factory?.NewButtonModel(id, image, isEnabled, isVisible);
 
             model.Clicked += handler;
             return model?.Attach(id);
@@ -29,7 +31,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IToggleModel NewToggleModel(this AbstractModelFactory factory, string id,
                 ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
-            var model = factory.NewToggleModel(id, image, isEnabled, isVisible);
+            var model = factory?.NewToggleModel(id, image, isEnabled, isVisible);
 
             model.Toggled += handler;
             return model?.Attach(id);
@@ -39,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IEditBoxModel NewEditBoxModel(this AbstractModelFactory factory, string id,
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
-            var model = factory.NewEditBoxModel(id, isEnabled, isVisible);
+            var model = factory?.NewEditBoxModel(id, isEnabled, isVisible);
 
             model.Edited += handler;
             return model?.Attach(id);
@@ -50,7 +52,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         public static IComboBoxModel NewComboBoxModel(this AbstractModelFactory factory, string id,
                 EditedEventHandler handler,
                 bool isEnabled = true, bool isVisible = true) {
-            var model = factory.NewComboBoxModel(id, isEnabled, isVisible);
+            var model = factory?.NewComboBoxModel(id, isEnabled, isVisible);
 
             model.Edited += handler;
             return model?.Attach(id);
@@ -60,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IDropDownModel NewDropDownModel(this AbstractModelFactory factory, string id,
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {
-            var model = factory.NewDropDownModel(id, isEnabled, isVisible);
+            var model = factory?.NewDropDownModel(id, isEnabled, isVisible);
 
             model.SelectionMade += handler;
             return model?.Attach(id);
@@ -70,7 +72,7 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static ILabelModel NewLabelModel(this AbstractModelFactory factory, string id,
                 bool isEnabled = true, bool isVisible = true)
-        => factory.NewLabelModel(id, isEnabled, isVisible)
+        => factory?.NewLabelModel(id, isEnabled, isVisible)
                   ?.Attach(id);
     }
 }

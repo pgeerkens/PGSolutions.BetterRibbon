@@ -3,6 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace PGSolutions.RibbonDispatcher {
+     /// <summary>Static clas of ProgIds</summary>
+    public static class ProgIds {
+        /// <summary>ProgID for the Ribbon dispatcher.</summary>
+        public const string RibbonDispatcherProgId = "PGSolutions.RibbonDispatcher";
+    }
+
     /// <summary>Static class of Guids.</summary>
     public static class Guids     {
         public const string GuidSpace               = "-56F3-3B33-B105-9B8188A6F040";

@@ -17,11 +17,11 @@ using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.ComClasses.Extensions;
-    using Models        = IReadOnlyList<VbaSourceExportGroupModel>;
-    using ComInterfaces = RibbonDispatcher.ComInterfaces;
+    using Models     = IReadOnlyList<VbaSourceExportGroupModel>;
+    using ViewModels = RibbonDispatcher.ViewModels;
 
     /// <summary>The TabModel for the VBA Source Export Group on the BetterRibbon.</summary>
-    internal sealed class VbaSourceExportModel : ComInterfaces.ICanInvalidate {
+    internal sealed class VbaSourceExportModel : ViewModels.ICanInvalidate {
         /// <summary>.</summary>
         /// <param name="models"></param>
         public VbaSourceExportModel(Models models) {

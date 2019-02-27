@@ -13,14 +13,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         SizeLarge = RibbonControlSize.RibbonControlSizeLarge
     }
 
-    public delegate void ClickedEventHandler(IRibbonControl control);
-
-    public delegate void ToggledEventHandler(IRibbonControl control, bool isPressed);
-
-    public delegate void SelectionMadeEventHandler(IRibbonControl control, string selectedId, int selectedIndex);
-
-    public delegate void EditedEventHandler(IRibbonControl control, string text);
-
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]

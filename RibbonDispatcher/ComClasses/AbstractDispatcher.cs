@@ -10,11 +10,9 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
-    using ITabSet = IReadOnlyList<TabVM>;
-
     /// <summary>Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.</summary>
     /// <remarks>
     /// DOT NET clients are expected to find it more convenient to inherit their ViewModel 
@@ -42,37 +40,44 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
     public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
-        protected AbstractDispatcher(string controlId, IResourceLoader resourceManager){
+        protected AbstractDispatcher(string controlId, IResourceLoader resourceLoader){
             ControlId        = controlId;
-            ViewModelFactory = new ViewModelFactory(resourceManager);
+            ResourceLoader   = resourceLoader;
+            ViewModelFactory = new ViewModelFactory();
             ViewModelFactory.Changed += OnPropertyChanged;
+            TabViewModels    = new List<TabVM>();
         }
 
         /// <inheritdoc/>
-        public string           ControlId        { get; }
+        public   string           ControlId        { get; }
 
         /// <inheritdoc/>
-        public ViewModelFactory ViewModelFactory { get; }
+        public   ViewModelFactory ViewModelFactory { get; }
 
-        /// <inheritdoc/>
-        public IRibbonUI        RibbonUI         { get; private set; }
+        /// <summary>.</summary>
+        internal IResourceLoader  ResourceLoader   { get; }
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
         #region IRibbonExtensibility implementation
-        /// <inheritdoc/>
-        private ITabSet TabViewModels { get; set; }
-
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
+
+        /// <inheritdoc/>
+        public             IRibbonUI RibbonUI      { get; private set; }
+
+        protected abstract string    RibbonXml     { get; }
+
+        /// <summary>.</summary>
+        private            List<TabVM> TabViewModels { get; }
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
         /// <param name="RibbonID"></param>
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
         public string GetCustomUI(string RibbonID) {
-            TabViewModels = ViewModelFactory.ParseXml(RibbonXml);
+            TabViewModels .ParseXmlTabs(ViewModelFactory,RibbonXml);
 
             return RibbonXml;
         }
@@ -85,14 +90,12 @@ namespace PGSolutions.RibbonDispatcher.ComClasses {
 
             this.InvalidateTab();
         }
-
-        protected abstract string RibbonXml { get; }
-
-        /// <inheritdoc/>
-        public object LoadImage(string ImageId) => ViewModelFactory.LoadImage(ImageId);
         #endregion
 
-        #region IControlVM implementation
+        /// <inheritdoc/>
+        public object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
+
+        #region IDescriptionableVM implementation
         /// <summary>All of the defined controls.</summary>
         private IDescriptionableVM Descriptionables(string controlId) => ViewModelFactory.Descriptionables.GetOrDefault(controlId);
         /// <inheritdoc/>

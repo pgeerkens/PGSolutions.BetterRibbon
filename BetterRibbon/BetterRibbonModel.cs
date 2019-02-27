@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 using PGSolutions.RibbonDispatcher.ComClasses;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
@@ -19,7 +19,7 @@ namespace PGSolutions.BetterRibbon {
                     new VbaSourceExportGroupModel(viewModel, factory, "VbaExportGroupMS", "MS"),
                     new VbaSourceExportGroupModel(viewModel, factory, "VbaExportGroupPG", "PG")
                 } ),
-                new CustomButtonsGroupModel(viewModel, "CustomizableGroup")
+                new CustomButtonsGroupModel(viewModel, factory, "CustomizableGroup")
             }.AsReadOnly()) { }
     }
 }

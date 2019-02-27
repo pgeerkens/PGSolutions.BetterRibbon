@@ -4,7 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ComClasses.ViewModels;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComClasses {
     using IStrings = IControlStrings;

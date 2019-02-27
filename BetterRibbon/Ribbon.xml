@@ -182,7 +182,7 @@
                     <!-- Not Yet Implemented on ComboBox: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                 </mso:box>
                 <mso:box id="CustomVbaBox6" boxStyle="vertical" visible="true" >
-                    <mso:labelControl id="CustomVbaLabel1" 
+                    <mso:labelControl id="CustomVbaLabel1"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip"
                             getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
                     />

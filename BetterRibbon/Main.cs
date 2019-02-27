@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ComClasses;
+using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
@@ -27,6 +27,7 @@ namespace PGSolutions.BetterRibbon {
         public IModelFactory NewBetterRibbon(IResourceLoader manager) => FuncFactory(manager);
 
         /// <inheritdoc/>
+        [CLSCompliant(false)]
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
     }
 }

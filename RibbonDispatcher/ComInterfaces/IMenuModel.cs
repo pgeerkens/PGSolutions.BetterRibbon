@@ -5,6 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
+using PGSolutions.RibbonDispatcher.ViewModels;
+
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
     [Description("")]
