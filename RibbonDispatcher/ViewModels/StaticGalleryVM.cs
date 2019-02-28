@@ -11,8 +11,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public StaticGalleryVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
-        public IReadOnlyList<StaticItemVM> Items { get; }
-
         /// <inheritdoc/>
         public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
 
@@ -20,6 +18,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public new IStaticGalleryVM Attach(IStaticGallerySource source) => Attach<StaticGalleryVM>(source);
 
         public override void Detach() { SelectionMade = null; base.Detach(); }
+        #endregion
+
+        #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items { get; }
         #endregion
 
         #region ISelectable implementation
@@ -37,15 +39,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             SelectionMade?.Invoke(control, selectedId, selectedIndex);
             Invalidate();
         }
-        #endregion
-
-        #region IListable implementation
-        /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        public int    ItemCount                => Items?.Count ?? 0;
-
-        /// <summary>.</summary>
-        /// <param name="index">Index in the selection-list of the item being queried.</param>
-        public IStaticItemVM this[int index] => Items[index];
         #endregion
 
         #region IGallerySizeVM implementation

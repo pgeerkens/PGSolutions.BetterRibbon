@@ -164,22 +164,24 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private ISelectItemsVM SelectItems (string controlId) => ViewModelFactory.SelectItems.GetOrDefault(controlId);
         /// <inheritdoc/>
         public int    GetItemCount(IRibbonControl Control)
-        => SelectItems(Control?.Id)?.ItemCount ?? 0;
+        => SelectItems(Control?.Id)?.Items?.Count ?? 0;
         /// <inheritdoc/>
         public string GetItemId(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?[Index].Id ?? "";
+        => SelectItems(Control?.Id)?.Items[Index].Id ?? "";
         /// <inheritdoc/>
-        public object GetItemImage(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?[Index].Image ?? "MacroSecurity";
+        public object GetItemImage(IRibbonControl Control, int Index) {
+            var image = SelectItems(Control?.Id)?.Items[Index].Image;
+            return image.IsMso ? image.ImageMso : (object)image.ImageDisp ?? "MacroSecurity";
+        }
         /// <inheritdoc/>
         public string GetItemLabel(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?[Index].Label ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.Items[Index].Label ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemScreenTip(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?[Index].ScreenTip ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.Items[Index].ScreenTip ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemSuperTip(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?[Index].SuperTip ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.Items[Index].SuperTip ?? Control.Unknown();
         #endregion
 
         #region ISelectable2VM implementation - DropDown

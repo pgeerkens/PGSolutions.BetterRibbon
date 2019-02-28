@@ -11,8 +11,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal StaticDropDownVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
-        private IReadOnlyList<StaticItemVM> Items { get; }
-
         #region IActivatable implementation
         public new IDropDownVM Attach(IStaticDropDownSource source) => Attach<StaticDropDownVM>(source);
 
@@ -20,6 +18,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #endregion
 
         #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items { get; }
+
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         public int    ItemCount                => Items?.Count ?? 0;
 

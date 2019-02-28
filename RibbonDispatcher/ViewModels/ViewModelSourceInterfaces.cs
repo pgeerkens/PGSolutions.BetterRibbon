@@ -62,10 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IListDataSource {
         /// <summary>.</summary>
-        int         Count     { get; }
-
-        /// <summary>.</summary>
-        ISelectableItemSource this[int index] { get; }
+        IReadOnlyList<IStaticItemVM> Items { get; }
     }
 
     public interface IGridSizeSource {
@@ -89,16 +86,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public interface IDropDownSource: IControlSource, ISelectableSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IStaticDropDownSource : IControlSource, ISelectableSource, IListDataSource { }
+    public interface IStaticDropDownSource : IControlSource, ISelectableSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IStaticComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
+    public interface IStaticComboBoxSource : IControlSource, IEditBoxSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IGallerySource : IControlSource, IGridSizeSource, ISelectableSource, IListDataSource {}
+    public interface IGallerySource : IControlSource, IGridSizeSource, ISelectableSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource { }

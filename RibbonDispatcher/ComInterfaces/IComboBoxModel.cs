@@ -51,6 +51,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         void Invalidate();
 
         /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
-        IComboBoxModel AddSelectableModel(ISelectableItemModel selectableModel);
+        IComboBoxModel AddSelectableModel(IStaticItemVM selectableModel);
     }
 }

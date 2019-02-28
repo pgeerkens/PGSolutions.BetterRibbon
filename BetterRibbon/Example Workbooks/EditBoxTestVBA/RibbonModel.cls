@@ -26,6 +26,9 @@ Private WithEvents Button       As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button.VB_VarHelpID = -1
 Private WithEvents EditBox      As PGSolutions_RibbonDispatcher.EditBoxModel
 Attribute EditBox.VB_VarHelpID = -1
+Private Split2Menu              As PGSolutions_RibbonDispatcher.MenuModel
+Private WithEvents Gallery1     As PGSolutions_RibbonDispatcher.StaticGalleryModel
+Attribute Gallery1.VB_VarHelpID = -1
 
 Private Sub Button_Clicked(ByVal control As Office.IRibbonControl)
     On Error GoTo EH
@@ -47,6 +50,10 @@ Private Sub EditBox_Edited(ByVal control As IRibbonControl, ByVal Text As String
     ButtonProcessing.EditBox_Processing Text
 End Sub
 
+Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
+    MsgBox "The seleccted item was: " & selectedId, vbOKOnly, ThisWorkbook.Name
+End Sub
+
 Friend Sub Activate()
     If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
     If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive False
@@ -58,6 +65,9 @@ Friend Sub Activate()
     
     If Not SplitButton Is Nothing Then SplitButton.Attach "CustomVbaSplit1"
     If Not SplitToggle Is Nothing Then SplitToggle.Attach "CustomVbaSplit2"
+    
+    If Not Gallery1 Is Nothing Then Gallery1.Attach "StaticGallery1"
+    If Not Split2Menu Is Nothing Then Split2Menu.Attach "CustomVbaSplit2Menu"
 End Sub
 
 Private Sub Class_Initialize()
@@ -75,6 +85,8 @@ Private Sub Class_Initialize()
             "CustomVbaSplit1", "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
         Set SplitToggle = .NewSplitToggleButtonModel( _
             "CustomVbaSplit2", "CustomVbaSplit2Menu", "CustomVbaSplit2Toggle")
-            
+        
+        Set Gallery1 = .NewStaticGalleryModel("StaticGallery1")
+        Set Split2Menu = .NewMenuModel("CustomVbaSplit2Menu")
     End With
 End Sub

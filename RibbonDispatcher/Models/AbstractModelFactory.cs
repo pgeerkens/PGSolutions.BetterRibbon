@@ -79,7 +79,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 bool isEnabled, bool isVisible)
         => new StaticComboBoxModel(GetControl<StaticComboBoxVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<IStaticComboBoxSource, IComboBoxVM, StaticComboBoxModel>();
+                .InitializeModel<IStaticComboBoxSource, IStaticComboBoxVM, StaticComboBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
         public GalleryModel NewGalleryModel(string controlId,

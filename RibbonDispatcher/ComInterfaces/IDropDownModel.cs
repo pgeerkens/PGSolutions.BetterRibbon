@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
@@ -38,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
         [DispId( 5),Description("Adds the specified ISelectableItem to the available options in the drop-down list.")]
-        IDropDownModel AddSelectableModel(ISelectableItemModel selectableModel);
+        IDropDownModel AddSelectableModel(IStaticItemVM selectableModel);
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [DispId( 6),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]

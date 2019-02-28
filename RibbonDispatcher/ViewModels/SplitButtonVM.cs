@@ -17,6 +17,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         public override void Invalidate() { MenuVM?.Invalidate(); base.Invalidate(); }
 
+        /// <inheritdoc/>
+        public override void Detach() { MenuVM.Detach(); base.Detach(); }
+
         #region ISizeable implementation
         /// <inheritdoc/>
         public bool IsLarge => Source?.IsLarge ?? false;
@@ -48,7 +51,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public override void Invalidate() { ToggleVM?.Invalidate(); base.Invalidate(); }
 
         /// <inheritdoc/>
-        public override void Detach() { Toggled = null; base.Detach(); }
+        public override void Detach() { Toggled = null; ToggleVM.Detach(); base.Detach(); }
         #endregion
 
         #region IToggleable implementation
@@ -81,7 +84,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public override void Invalidate() { ButtonVM?.Invalidate(); base.Invalidate(); }
 
         /// <inheritdoc/>
-        public override void Detach() { Clicked = null; base.Detach(); }
+        public override void Detach() { Clicked = null; ButtonVM.Detach(); base.Detach(); }
         #endregion
 
         #region IClickable implementation

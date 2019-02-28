@@ -2,10 +2,10 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComDefaultInterface(typeof(IComboBoxModel))]
     [Guid(Guids.ComboBoxModel)]
     public sealed class ComboBoxModel: ControlModel<IComboBoxSource,IComboBoxVM>, IComboBoxModel,
-            IComboBoxSource, IEnumerable<ISelectableItemSource>, IEnumerable {
+            IComboBoxSource {
         internal ComboBoxModel(Func<string, ComboBoxVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
@@ -36,11 +36,23 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
-        public IComboBoxModel AddSelectableModel(ISelectableItemModel selectableModel) {
-            Items.Add(selectableModel);
+        #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items => _items.AsReadOnly();
+        private List<IStaticItemVM> _items = new List<IStaticItemVM>();
+
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
+        #endregion
+
+        #region IDynamicListable implementation
+        public IComboBoxModel ClearList() { _items.Clear(); return this; }
+
+        public IComboBoxModel AddSelectableModel(IStaticItemVM selectableModel) {
+            _items.Add(selectableModel);
             ViewModel?.Invalidate();
             return this;
         }
+        #endregion
 
         #region IEditableList implementation
         public event EditedEventHandler Edited;
@@ -48,19 +60,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public string Text          { get; set; } = "";
 
         private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control, text);
-        #endregion
-
-        #region IListable implementation
-        public int Count => Items.Count;
-
-        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
-
-        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
-
-        public IEnumerator<ISelectableItemSource> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItemSource;
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         #endregion
     }
 }

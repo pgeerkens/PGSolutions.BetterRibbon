@@ -101,16 +101,18 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     [CLSCompliant(true)]
     public interface IStaticListVM {
-        IReadOnlyList<StaticItemVM> Items { get; }
+        IReadOnlyList<IStaticItemVM> Items { get; }
     }
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
     public interface ISelectItemsVM {    // DropDown & ComboBox & Gallery
-        /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        int ItemCount { get; }
+        ///// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
+        //int ItemCount { get; }
 
-        IStaticItemVM this[int index] { get; }
+        //IStaticItemVM this[int index] { get; }
+
+        IReadOnlyList<IStaticItemVM> Items { get; }
     }
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>

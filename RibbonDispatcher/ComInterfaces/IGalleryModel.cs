@@ -37,7 +37,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set; }
 
         /// <summary>Adds the specified <see cref="ISelectableItem"/> to the available options in the drop-down list.</summary>
-        IGalleryModel AddSelectableModel(ISelectableItemModel selectableModel);
+        IGalleryModel AddSelectableModel(IStaticItemVM selectableModel);
 
         /// <summary>Gets or sets the height in pixels for items.</summary>
         int ItemHeight {

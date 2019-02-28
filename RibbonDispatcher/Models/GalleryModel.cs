@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,6 +27,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal GalleryModel(Func<string, GalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
+        #region IActivatable implementation
         public IGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
@@ -37,11 +37,22 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
-        #region IDynamicListable implementation
-        public IGalleryModel ClearList() { Items.Clear(); return this; }
+        public override void Detach() { SelectionMade = null;  base.Detach(); }
+        #endregion
 
-        public IGalleryModel AddSelectableModel(ISelectableItemModel selectableModel) {
-            Items.Add(selectableModel);
+        #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items => _items.AsReadOnly();
+        private List<IStaticItemVM> _items = new List<IStaticItemVM>();
+
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
+        #endregion
+
+        #region IDynamicListable implementation
+        public IGalleryModel ClearList() { _items.Clear(); return this; }
+
+        public IGalleryModel AddSelectableModel(IStaticItemVM selectableModel) {
+            _items.Add(selectableModel);
             ViewModel?.Invalidate();
             return this;
         }
@@ -55,17 +66,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
         => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
-        #endregion
-
-        #region IListable implementation
-        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
-
-        public int Count => Items.Count;
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
-
-        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
         #endregion
 
         #region IGallerySize implementation

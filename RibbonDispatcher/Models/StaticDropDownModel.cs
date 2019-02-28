@@ -27,10 +27,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComDefaultInterface(typeof(IStaticDropDownModel))]
     [Guid(Guids.StaticDropDownModel)]
     public sealed class StaticDropDownModel : ControlModel<IStaticDropDownSource,IDropDownVM>, IStaticDropDownModel,
-            IStaticDropDownSource, IEnumerable<ISelectableItemSource>, IEnumerable {
+            IStaticDropDownSource {
         internal StaticDropDownModel(Func<string, StaticDropDownVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
+        #region IActivatable implementation
         public IStaticDropDownModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
@@ -39,6 +40,16 @@ namespace PGSolutions.RibbonDispatcher.Models {
             }
             return this;
         }
+
+        public override void Detach() { SelectionMade = null;  base.Detach(); }
+        #endregion
+
+        #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
+
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
+        #endregion
 
         #region ISelectableList implementation
         public event SelectionMadeEventHandler SelectionMade;
@@ -49,22 +60,5 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
         => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
         #endregion
-
-        #region IListable implementation
-        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
-
-        public int Count => Items.Count;
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
-
-        //public IStaticItemVM this[int index] => Items[index];
-        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
-        #endregion
-
-        public IEnumerator<ISelectableItemSource> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItemSource;
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

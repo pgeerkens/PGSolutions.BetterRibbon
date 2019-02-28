@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System.Collections.Generic;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
@@ -17,12 +18,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #endregion
 
         #region IListable implementation
-        /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        public int ItemCount => Source?.Count ?? 0;
-
-        /// <summary>.</summary>
-        /// <param name="index">Index in the selection-list of the item being queried.</param>
-        public IStaticItemVM this[int index] => Source[index];
+        public IReadOnlyList<IStaticItemVM> Items => Source?.Items;
         #endregion
 
         #region ISelectable implementation

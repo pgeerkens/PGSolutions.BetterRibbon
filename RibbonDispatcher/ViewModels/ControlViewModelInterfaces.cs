@@ -59,7 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     /// <summary>The total interface exposed by <see cref="GalleryVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IStaticGalleryVM: IControlVM, IStaticListVM, IGallerySizeVM, ISelectItemsVM, ISelectablesVM, IDescriptionableVM { }
+    public interface IStaticGalleryVM: IControlVM, IStaticListVM, IGallerySizeVM, ISelectablesVM, IDescriptionableVM { }
 
     /// <summary>The total interface exposed by <see cref="StaticItemVM"/> objects.</summary>
     [CLSCompliant(true)]
@@ -68,6 +68,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The total interface exposed by <see cref="ComboBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface IComboBoxVM: IControlVM, ISelectItemsVM, IEditBoxVM { }
+
+    /// <summary>The total interface exposed by <see cref="ComboBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IStaticComboBoxVM: IControlVM, IStaticListVM, IEditBoxVM { }
 
     /// <summary>The total interface exposed by <see cref="GroupVM"/> objects.</summary>
     [CLSCompliant(true)]

@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,6 +27,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal StaticGalleryModel(Func<string, StaticGalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
+        #region IActivatable implementation
         public IStaticGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
@@ -37,6 +37,16 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public override void Detach() { SelectionMade = null;  base.Detach(); }
+        #endregion
+
+        #region IListable implementation
+        public IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
+
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
+        #endregion
+
         #region ISelectableList implementation
         public event SelectionMadeEventHandler SelectionMade;
 
@@ -45,17 +55,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
         => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
-        #endregion
-
-        #region IListable implementation
-        private IReadOnlyList<StaticItemVM> Items => ViewModel.Items;
-
-        public int Count => Items.Count;
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
-
-        public IStaticItemVM this[int index] => Items[index];
         #endregion
 
         #region IGallerySize implementation

@@ -14,9 +14,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     /// <summary>TODO</summary>
+    /// <remarks>Must be an IDispatch interface because an event source.</remarks>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     [Guid(Guids.IClickedEvent)]
     public interface IClickedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
@@ -25,9 +26,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     /// <summary>TODO</summary>
+    /// <remarks>Must be an IDispatch interface because an event source.</remarks>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     [Guid(Guids.IToggledEvent)]
     public interface IToggledEvent {
         /// <summary>Fired when the associated control is toggled by the user.</summary>
@@ -36,20 +38,22 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     }
 
     /// <summary>TODO</summary>
+    /// <remarks>Must be an IDispatch interface because an event source.</remarks>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     [Guid(Guids.IEditedEvent)]
     public interface IEditedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
-        [Description("Fired when the associated control is clicked by the user.")]
+        [Description("Fired when the associated control is edited by the user.")]
         void Edited(IRibbonControl control, string text);
     }
 
     /// <summary>TODO</summary>
+    /// <remarks>Must be an IDispatch interface because an event source.</remarks>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     [Guid(Guids.ISelectionMadeEvent)]
     public interface ISelectionMadeEvent {
         /// <summary>Fired when the associated control has an item selection made by the user.</summary>

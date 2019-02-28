@@ -61,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <inheritdoc/>
         public virtual void Detach() {
             Source = default;
-            Invalidate();
+        //    Invalidate();
         }
 
         /// <inheritdoc/>
