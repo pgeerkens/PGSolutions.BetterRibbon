@@ -50,23 +50,23 @@ Private Property Get IControlStrings_SuperTip() As String
 End Property
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Private Property Get IControlStrings2_Description() As String
-    IControlStrings_Description = This.Description
+    IControlStrings2_Description = This.Description
 End Property
 
 Private Property Get IControlStrings2_KeyTip() As String
-    IControlStrings_KeyTip = This.KeyTip
+    IControlStrings2_KeyTip = This.KeyTip
 End Property
 
 Private Property Get IControlStrings2_Label() As String
-    IControlStrings_Label = This.Label
+    IControlStrings2_Label = This.Label
 End Property
 
 Private Property Get IControlStrings2_ScreenTip() As String
-    IControlStrings_ScreenTip = This.ScreenTip
+    IControlStrings2_ScreenTip = This.ScreenTip
 End Property
 
 Private Property Get IControlStrings2_SuperTip() As String
-    IControlStrings_SuperTip = This.SuperTip
+    IControlStrings2_SuperTip = This.SuperTip
 End Property
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Function Initialize(ByVal Label As String, _
