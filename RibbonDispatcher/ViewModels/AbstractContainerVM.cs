@@ -43,7 +43,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         public override void Invalidate() => Invalidate(null);
 
-        internal void Invalidate(Action<IControlVM> action) {
+        public void Invalidate(Action<IControlVM> action) {
             foreach (var ctrl in Controls) {
                 if (ctrl != this) {
                     action?.Invoke(ctrl);

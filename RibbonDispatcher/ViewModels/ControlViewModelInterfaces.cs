@@ -75,7 +75,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     /// <summary>The total interface exposed by <see cref="GroupVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IGroupVM: IControlVM { }
+    public interface IGroupVM: IControlVM {
+        void Invalidate(Action<IControlVM> action);
+    }
 
     /// <summary>The total interface exposed by <see cref="TabVM"/> objects.</summary>
     [CLSCompliant(true)]

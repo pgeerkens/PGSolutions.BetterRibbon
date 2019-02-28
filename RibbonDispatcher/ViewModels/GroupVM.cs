@@ -13,10 +13,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         public override IGroupVM Attach(IControlSource source) => Attach<GroupVM>(source);
-
-        ///// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        //GroupVM IActivatable<IControlSource,GroupVM>.Attach(IControlSource source)
-        //=> Attach<GroupVM>(source);
     }
 
     internal class KeyedControls: KeyedCollection<string, IControlVM> {

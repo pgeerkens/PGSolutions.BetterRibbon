@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         : this(viewModel?.ViewModelFactory.GetControl<GroupVM>(viewModelName), strings) {
         }
         private AbstractRibbonGroupModel(IGroupVM viewModel, IStrings strings) {
-            ViewModel = (viewModel as IActivatable<IControlSource,GroupVM>)
+            ViewModel = (viewModel as IActivatable<IControlSource,IGroupVM>)
                       ?.Attach(this);
             Strings   = strings;
         }
@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool     ShowInactive { get; private set; } = true;
         public IStrings Strings      { get; private set; }
 
-        internal GroupVM ViewModel { get; }
+        internal IGroupVM ViewModel { get; }
 
         public void Invalidate() => Invalidate(null);
 
