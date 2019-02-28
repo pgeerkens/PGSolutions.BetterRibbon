@@ -15,10 +15,11 @@ namespace PGSolutions.BetterRibbon {
   //  [Guid(Guids.IBetterRibbon)]
     public interface IBetterRibbon {
         /// <summary>Returns a new implementation of the <see cref="IModelFactory"/> interface.</summary>
-        [Description("Returns a new implementation of the IModelFactory interface.")]
+        [DispId( 1),Description("Returns a new implementation of the IModelFactory interface.")]
         IModelFactory    NewBetterRibbon(IResourceLoader manager);
+
         /// <summary>Returns a new implementation of the <see cref="ILinksAnalyzer"/> interface.</summary>
-        [Description("Returns a new implementation of the ILinksAnalyzer interface.")]
+        [DispId( 2),Description("Returns a new implementation of the ILinksAnalyzer interface.")]
         ILinksAnalyzer NewLinksAnalyzer();
     }
 }

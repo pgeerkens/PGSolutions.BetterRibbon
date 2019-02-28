@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Office.Core;
@@ -85,6 +86,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         bool    IsPressed         { get; }
     }
 
+    [CLSCompliant(true)]
     public interface IEditableVM {
         /// <summary>TODO</summary>
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
@@ -97,21 +99,18 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         void OnEdited(IRibbonControl sender, string text);
     }
 
+    [CLSCompliant(true)]
+    public interface IStaticListVM {
+        IReadOnlyList<StaticItemVM> Items { get; }
+    }
+
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
     public interface ISelectItemsVM {    // DropDown & ComboBox & Gallery
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        int     ItemCount         { get; }
-        /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
-        string  ItemId(int Index);
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        object  ItemImage(int Index);
-        /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        string  ItemLabel(int Index);
-        /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        string  ItemScreenTip(int Index);
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        string  ItemSuperTip(int Index);
+        int ItemCount { get; }
+
+        IStaticItemVM this[int index] { get; }
     }
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>

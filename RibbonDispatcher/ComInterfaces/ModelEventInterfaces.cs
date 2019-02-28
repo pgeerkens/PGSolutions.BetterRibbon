@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IClickedEvent)]
     public interface IClickedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
@@ -27,7 +27,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IToggledEvent)]
     public interface IToggledEvent {
         /// <summary>Fired when the associated control is toggled by the user.</summary>
@@ -38,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IEditedEvent)]
     public interface IEditedEvent {
         /// <summary>Fired when the associated control is clicked by the user.</summary>
@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>TODO</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISelectionMadeEvent)]
     public interface ISelectionMadeEvent {
         /// <summary>Fired when the associated control has an item selection made by the user.</summary>

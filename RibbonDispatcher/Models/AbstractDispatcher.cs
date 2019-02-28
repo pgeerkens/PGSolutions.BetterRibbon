@@ -167,19 +167,19 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => SelectItems(Control?.Id)?.ItemCount ?? 0;
         /// <inheritdoc/>
         public string GetItemId(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.ItemId(Index) ?? "";
+        => SelectItems(Control?.Id)?[Index].Id ?? "";
         /// <inheritdoc/>
         public object GetItemImage(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.ItemImage(Index) ?? "MacroSecurity";
+        => SelectItems(Control?.Id)?[Index].Image ?? "MacroSecurity";
         /// <inheritdoc/>
         public string GetItemLabel(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.ItemLabel(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?[Index].Label ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemScreenTip(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.ItemScreenTip(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?[Index].ScreenTip ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemSuperTip(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.ItemSuperTip(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?[Index].SuperTip ?? Control.Unknown();
         #endregion
 
         #region ISelectable2VM implementation - DropDown

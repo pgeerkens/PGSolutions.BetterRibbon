@@ -12,8 +12,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary>The COM visible Model for Ribbon EditBox controls.</summary>
-    [Description("The COM visible Model for Ribbon EditBox controls.")]
+    /// <summary>The COM visible Model for Ribbon ToggleButton and CHeckBox controls.</summary>
+    [Description("The COM visible Model for Ribbon ToggleButton and CHeckBox controls.")]
     [CLSCompliant(true), ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(IToggledEvent))]

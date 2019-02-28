@@ -12,7 +12,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     using IStrings2 = IControlStrings2;
 
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
-    [CLSCompliant(true)][ComVisible(true)]
+    [Description("The main interface for VBA to access the Ribbon dispatcher.")]
+        [CLSCompliant(true)][ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IModelFactory)]
     public interface IModelFactory {

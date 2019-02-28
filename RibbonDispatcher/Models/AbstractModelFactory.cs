@@ -93,7 +93,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 bool isEnabled, bool isVisible)
         => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<IStaticGallerySource, IGalleryVM, StaticGalleryModel>();
+                .InitializeModel<IStaticGallerySource, IStaticGalleryVM, StaticGalleryModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public LabelModel NewLabelModel(string controlId,

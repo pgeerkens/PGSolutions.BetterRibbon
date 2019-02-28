@@ -87,7 +87,7 @@
     <Compile Include="ViewModels\RibbonViewModelExtensions.cs" />
     <Compile Include="Models\SplitButtonModel.cs" />
     <Compile Include="ViewModels\AbstractContainerVM.cs" />
-    <Compile Include="ViewModels\StaticComboBoVMx.cs" />
+    <Compile Include="ViewModels\StaticComboBoxVM.cs" />
     <Compile Include="ViewModels\StaticDropDownVM.cs" />
     <Compile Include="ViewModels\IContainerControl.cs" />
     <Compile Include="ViewModels\LabelVM.cs" />

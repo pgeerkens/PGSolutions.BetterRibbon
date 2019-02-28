@@ -4,6 +4,8 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ViewModels;
+using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
@@ -39,9 +41,31 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set; }
 
         /// <summary>Gets or sets the width in pixels for items.</summary>
-        int ItemWidth{
+        int ItemWidth {
             [Description("Gets or sets the width in pixels for items.")]
             get; set; }
+
+        #region IImageable implementation
+        /// <summary>.</summary>
+        ImageObject Image {
+        [Description(".")]
+            get; set; }
+
+        bool ShowImage {
+            [Description("Gets or sets the width in pixels for items.")]
+            get; set; }
+
+        bool ShowLabel {
+            [Description("Gets or sets the width in pixels for items.")]
+            get; set; }
+
+        /// <summary>.</summary>
+        [Description(".")]
+        void SetImageDisp(IPictureDisp image);
+        /// <summary>.</summary>
+        [Description(".")]
+        void SetImageMso(string imageMso);
+        #endregion
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]

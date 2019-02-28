@@ -8,10 +8,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for static ribbon DropDown objects.</summary>
     internal class StaticDropDownVM : AbstractControlVM<IStaticDropDownSource>, IDropDownVM,
             IActivatable<IStaticDropDownSource,IDropDownVM>, ISelectItemsVM {
-        internal StaticDropDownVM(string itemId, IList<StaticItemVM> items)
+        internal StaticDropDownVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
-        private IList<StaticItemVM> Items { get; }
+        private IReadOnlyList<StaticItemVM> Items { get; }
 
         #region IActivatable implementation
         public new IDropDownVM Attach(IStaticDropDownSource source) => Attach<StaticDropDownVM>(source);
@@ -22,16 +22,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IListable implementation
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         public int    ItemCount                => Items?.Count ?? 0;
-        /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
-        public string ItemId(int Index)        => Items[Index].Id;
-        /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        public string ItemLabel(int Index)     => Items[Index].Label;
-        /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public string ItemScreenTip(int Index) => Items[Index].ScreenTip;
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public string ItemSuperTip(int Index)  => Items[Index].SuperTip;
-        /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        public object ItemImage(int Index)     => "MacroSecurity";
+
+        /// <summary>.</summary>
+        /// <param name="index">Index in the selection-list of the item being queried.</param>
+        public IStaticItemVM this[int index] => Items[index];
         #endregion
 
         #region ISelectable implementation

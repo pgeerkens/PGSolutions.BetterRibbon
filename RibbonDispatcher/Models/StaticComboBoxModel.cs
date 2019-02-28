@@ -13,11 +13,11 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
+    /// <summary>The COM visible Model for Ribbon static ComboBox controls.</summary>
+    [Description("The COM visible Model for Ribbon static ComboBox controls")]
     [SuppressMessage("Microsoft.Interoperability","CA1409:ComVisibleTypesShouldBeCreatable")]
     [SuppressMessage("Microsoft.Interoperability","CA1405:ComVisibleTypeBaseTypesShouldBeComVisible")]
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    [Description("The COM visible Model for Ribbon Drop Down controls")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]

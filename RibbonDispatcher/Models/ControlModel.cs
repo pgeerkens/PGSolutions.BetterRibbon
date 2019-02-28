@@ -3,9 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-
 
 namespace PGSolutions.RibbonDispatcher.Models {
     public abstract class ControlModel<TSource,TCtrl>: IControlSource
@@ -14,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected ControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
                 IControlStrings strings) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId).Attach(source);
-            Strings   = strings;
+            Strings = strings;
         }
 
         protected Func<string, TSource, TCtrl> AttachToViewModel { get; }

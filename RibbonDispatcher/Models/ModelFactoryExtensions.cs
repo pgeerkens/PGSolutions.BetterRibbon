@@ -2,7 +2,6 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
@@ -11,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <summary>.</summary>
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
-            where TModel: ControlModel<TSource, TVM> where TSource: IControlSource where TVM: IControlVM {
+            where TModel: ControlModel<TSource,TVM> where TSource: IControlSource where TVM: IControlVM {
 
             model.SetShowInactive(false);
             model.Invalidate();

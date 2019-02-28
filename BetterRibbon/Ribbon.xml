@@ -189,23 +189,23 @@
                     <mso:splitButton id="CustomVbaSplit1"
                             getKeytip="getKeytip" getSize="getSize" 
                             getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
-                    >
+                            >
                         <mso:button id="CustomVbaSplit1Button"
                                 getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                                 onAction="onAction" getEnabled="getEnabled" getDescription="getDescription"
                                 getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        />
+                                />
                         <mso:menu id="CustomVbaSplit1Menu" itemSize="normal"
                                 getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                                 getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
                                 getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        >
+                                >
                         </mso:menu>
                     </mso:splitButton>
                     <mso:splitButton id="CustomVbaSplit2"
                             getKeytip="getKeytip" getSize="getSize"
                             getVisible="getVisible" getEnabled="getEnabled" getShowLabel="getShowLabel"
-                    >
+                            >
                         <mso:toggleButton id="CustomVbaSplit2Toggle"
                                 getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                                 onAction="onActionToggle" getEnabled="getEnabled" getDescription="getDescription"
@@ -215,14 +215,85 @@
                                 getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                                 getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
                                 getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                        >
+                                >
+                            <!-- The callback getSize is not supported on Buttons embedded in a SplitButtonMenu. -->
+                            <mso:button id="SplitMenu2Button1" getImage="getImage"
+                                    getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                    onAction="onAction" getVisible="getVisible" getEnabled="getEnabled"
+                                    getShowImage="getShowImage" getShowLabel="getShowLabel"
+                                  />
+                            <mso:menuSeparator id="SplitMenu2Sep1" getTitle="getTitle"/>
+                            <!-- The callback getSize is not supported on Buttons embedded in a SplitButtonMenu. -->
+                            <mso:button id="SplitMenu2Button2" getImage="getImage"
+                                    getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                    onAction="onAction" getVisible="getVisible" getEnabled="getEnabled"
+                                    getShowImage="getShowImage" getShowLabel="getShowLabel"
+                                  />
+                            <!-- The callback getSize is not supported on Buttons embedded in a SplitButtonMenu. -->
+                            <mso:button id="SplitMenu2Button3" getImage="getImage"
+                                    getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                    onAction="onAction" getVisible="getVisible" getEnabled="getEnabled"
+                                    getShowImage="getShowImage" getShowLabel="getShowLabel"
+                                  />
+                            <mso:menuSeparator id="SplitMenu2Sep2" getTitle="getTitle"/>
+                            <mso:gallery id="StaticGallery1"
+                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
+                                getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                getItemCount="getItemCount" getItemID="getItemId"
+                                getItemHeight="getItemHeight" getItemWidth="getItemWidth"
+                                getItemLabel="getItemLabel" getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip"
+                                getItemImage="getItemImage" getSelectedItemIndex="getSelectedItemIndex"
+                                onAction="onActionSelected" columns="7" rows="5" invalidateContentOnDrop="false"
+                                sizeString="WW" showItemImage="false" showItemLabel="true"
+                                >
+                                <mso:item id="item11" label="27"/>
+                                <mso:item id="item12" label="28"/>
+                                <mso:item id="item13" label="29"/>
+                                <mso:item id="item14" label="30"/>
+                                <mso:item id="item15" label="31"/>
+                                <mso:item id="item16" label=" 1"/>
+                                <mso:item id="item17" label=" 2"/>
+                                
+                                <mso:item id="item21" label=" 3"/>
+                                <mso:item id="item22" label=" 4"/>
+                                <mso:item id="item23" label=" 5"/>
+                                <mso:item id="item24" label=" 6"/>
+                                <mso:item id="item25" label=" 7"/>
+                                <mso:item id="item26" label=" 8"/>
+                                <mso:item id="item27" label=" 9"/>
+                                
+                                <mso:item id="item31" label="10"/>
+                                <mso:item id="item32" label="11"/>
+                                <mso:item id="item33" label="12"/>
+                                <mso:item id="item34" label="13"/>
+                                <mso:item id="item35" label="14"/>
+                                <mso:item id="item36" label="15"/>
+                                <mso:item id="item37" label="16"/>
+
+                                <mso:item id="item41" label="17"/>
+                                <mso:item id="item42" label="18"/>
+                                <mso:item id="item43" label="19"/>
+                                <mso:item id="item44" label="20"/>
+                                <mso:item id="item45" label="21"/>
+                                <mso:item id="item46" label="22"/>
+                                <mso:item id="item47" label="23"/>
+
+                                <mso:item id="item51" label="24"/>
+                                <mso:item id="item52" label="25"/>
+                                <mso:item id="item53" label="26"/>
+                                <mso:item id="item54" label="27"/>
+                                <mso:item id="item55" label="28"/>
+                                <mso:item id="item56" label=" 1"/>
+                                <mso:item id="item57" label=" 2"/>
+                            </mso:gallery>
                         </mso:menu>
                     </mso:splitButton>
                     <mso:dynamicMenu id="VbaDynamicMenu1" getContent="getContent" getSize="getSize"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getEnabled="getEnabled" getVisible="getVisible" getDescription="getDescription"
                             getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                    />
+                            />
                 </mso:box>
                 <mso:dialogBoxLauncher>
                     <!-- The callback getSize is not supported on Buttons embedded in a DialogBoxLauncher. -->

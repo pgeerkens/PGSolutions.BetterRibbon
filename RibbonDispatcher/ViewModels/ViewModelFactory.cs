@@ -171,7 +171,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<DropDownVM,IDropDownSource>(new DropDownVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDown view-model instance.</summary>
-        internal StaticDropDownVM NewStaticDropDown(string controlId, IList<StaticItemVM> items)
+        internal StaticDropDownVM NewStaticDropDown(string controlId, IReadOnlyList<StaticItemVM> items)
         => Add<StaticDropDownVM,IStaticDropDownSource>(new StaticDropDownVM(controlId,items));
 
         /// <summary>Returns a new Ribbon SelectableItem view-model instance.</summary>
@@ -188,7 +188,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal StaticComboBoxVM NewStaticComboBox(string controlId, IList<StaticItemVM> items)
+        internal StaticComboBoxVM NewStaticComboBox(string controlId, IReadOnlyList<StaticItemVM> items)
         => Add<StaticComboBoxVM, IStaticComboBoxSource>(new StaticComboBoxVM(controlId,items));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
@@ -196,7 +196,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<GalleryVM, IGallerySource>(new GalleryVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal StaticGalleryVM NewStaticGallery(string controlId, IList<StaticItemVM> items)
+        internal StaticGalleryVM NewStaticGallery(string controlId, IReadOnlyList<StaticItemVM> items)
         => Add<StaticGalleryVM, IStaticGallerySource>(new StaticGalleryVM(controlId,items));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>

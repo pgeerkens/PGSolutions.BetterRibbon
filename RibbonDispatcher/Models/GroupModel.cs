@@ -10,9 +10,9 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary></summary>
+    /// <summary>The COM visible Model for Ribbon Group controls.</summary>
     [SuppressMessage("Microsoft.Interoperability","CA1409:ComVisibleTypesShouldBeCreatable")]
-    [Description("")]
+    [Description("The COM visible Model for Ribbon Group controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]

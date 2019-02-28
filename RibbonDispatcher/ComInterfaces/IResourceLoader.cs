@@ -5,11 +5,10 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ViewModels;
-
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The default COM interface exposed by {ResourceLoader} objects.</summary>
-    [ComVisible(true)]
+    [Description("The default COM interface exposed by {ResourceLoader} objects.")]
+        [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IResourceLoader)]

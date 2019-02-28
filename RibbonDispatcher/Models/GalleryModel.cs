@@ -5,9 +5,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using stdole;
 
 using Microsoft.Office.Core;
 
@@ -15,29 +15,18 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
-    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    [SuppressMessage("Microsoft.Interoperability","CA1409:ComVisibleTypesShouldBeCreatable")]
-    [SuppressMessage("Microsoft.Interoperability","CA1405:ComVisibleTypeBaseTypesShouldBeComVisible")]
-    [Description("The COM visible Model for Ribbon Drop Down controls")]
+    /// <summary>The COM visible Model for Ribbon static Gallery controls.</summary>
+    [Description("The COM visible Model for Ribbon static Gallery controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IGalleryModel))]
     [Guid(Guids.GalleryModel)]
-    public sealed class GalleryModel : ControlModel<IGallerySource,IGalleryVM>,
-            IGalleryModel, IGallerySource, IEnumerable<ISelectableItemSource>, IEnumerable {
+    public sealed class GalleryModel : ControlModel<IGallerySource,IGalleryVM>, IGalleryModel,
+            IGallerySource {
         internal GalleryModel(Func<string, GalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
-
-        public event SelectionMadeEventHandler SelectionMade;
-
-        public int    SelectedIndex { get; set; }
-        public string SelectedId    {
-            get => Items[SelectedIndex].Id;
-            set => SelectedIndex = Items.Where((item,i) => item.Id == value).Select((a,b)=>b).FirstOrDefault();
-        }
 
         public IGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
@@ -48,30 +37,49 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
-        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
-        => SelectionMade?.Invoke(control, SelectedId = selectedId, SelectedIndex = selectedIndex);
+        #region IDynamicListable implementation
+        public IGalleryModel ClearList() { Items.Clear(); return this; }
 
         public IGalleryModel AddSelectableModel(ISelectableItemModel selectableModel) {
             Items.Add(selectableModel);
             ViewModel?.Invalidate();
             return this;
         }
+        #endregion
 
-        /// <inheritdoc/>
-        public int ItemHeight { get; set; }
+        #region ISelectableList implementation
+        public event SelectionMadeEventHandler SelectionMade;
 
-        /// <inheritdoc/>
-        public int ItemWidth  { get; set; }
+        public int    SelectedIndex { get; set; }
+        public string SelectedId    { get => Items[SelectedIndex].Id; set => SelectedIndex = FindId(value); }
 
-        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
+        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
+        => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
+        #endregion
+
+        #region IListable implementation
+        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
 
         public int Count => Items.Count;
 
-        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
 
-        public IEnumerator<ISelectableItemSource> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItemSource;
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
+        #endregion
+
+        #region IGallerySize implementation
+        public int  ItemHeight { get; set; } = 15;
+        public int  ItemWidth  { get; set; } = 15;
+        #endregion
+
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
+
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
+        public void SetImageMso(string imageMso)     => Image = imageMso;
+        #endregion
     }
 }

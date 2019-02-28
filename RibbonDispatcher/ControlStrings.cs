@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher {
-    /// <summary>TODO</summary>
+    /// <summary>The abridged interface required from string-suppliers.</summary>
     [ComVisible(true)]
     [CLSCompliant(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]

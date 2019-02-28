@@ -5,9 +5,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using stdole;
 
 using Microsoft.Office.Core;
 
@@ -15,10 +15,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
-    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    [SuppressMessage("Microsoft.Interoperability","CA1409:ComVisibleTypesShouldBeCreatable")]
-    [SuppressMessage("Microsoft.Interoperability","CA1405:ComVisibleTypeBaseTypesShouldBeComVisible")]
+    /// <summary>The COM visible Model for Ribbon static Gallery controls.</summary>
     [Description("The COM visible Model for Ribbon Drop Down controls")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -26,18 +23,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IStaticGalleryModel))]
     [Guid(Guids.StaticGalleryModel)]
-    public sealed class StaticGalleryModel : ControlModel<IStaticGallerySource,IGalleryVM>,
-            IStaticGalleryModel, IStaticGallerySource, IEnumerable<ISelectableItemSource>, IEnumerable {
+    public sealed class StaticGalleryModel : ControlModel<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryModel,
+            IStaticGallerySource {
         internal StaticGalleryModel(Func<string, StaticGalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
-
-        public event SelectionMadeEventHandler SelectionMade;
-
-        public int    SelectedIndex { get; set; }
-        public string SelectedId    {
-            get => Items[SelectedIndex].Id;
-            set => SelectedIndex = Items.Where((item,i) => item.Id == value).Select((a,b)=>b).FirstOrDefault();
-        }
 
         public IStaticGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
@@ -48,30 +37,42 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        #region ISelectableList implementation
+        public event SelectionMadeEventHandler SelectionMade;
+
+        public int    SelectedIndex { get; set; }
+        public string SelectedId    { get => Items[SelectedIndex].Id; set => SelectedIndex = FindId(value); }
+
         private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
-        => SelectionMade?.Invoke(control, SelectedId = selectedId, SelectedIndex = selectedIndex);
+        => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
+        #endregion
 
-        public IStaticGalleryModel AddSelectableModel(ISelectableItemModel selectableModel) {
-            Items.Add(selectableModel);
-            ViewModel?.Invalidate();
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public int ItemHeight { get; set; }
-
-        /// <inheritdoc/>
-        public int ItemWidth  { get; set; }
-
-        public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
+        #region IListable implementation
+        private IReadOnlyList<StaticItemVM> Items => ViewModel.Items;
 
         public int Count => Items.Count;
 
-        private IList<ISelectableItemModel> Items { get; } = new List<ISelectableItemModel>();
+        public int FindId(string id)
+        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
 
-        public IEnumerator<ISelectableItemSource> GetEnumerator() {
-            foreach (var item in Items) yield return item as ISelectableItemSource;
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public IStaticItemVM this[int index] => Items[index];
+        #endregion
+
+        #region IGallerySize implementation
+        /// <inheritdoc/>
+        public int  ItemHeight { get; set; } = 15;
+
+        /// <inheritdoc/>
+        public int  ItemWidth  { get; set; } = 15;
+        #endregion
+
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
+
+        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
+        public void SetImageMso(string imageMso)     => Image = imageMso;
+        #endregion
     }
 }

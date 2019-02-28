@@ -60,15 +60,12 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IListDataSource : IEnumerable<ISelectableItemSource> {
+    public interface IListDataSource {
         /// <summary>.</summary>
         int         Count     { get; }
 
         /// <summary>.</summary>
         ISelectableItemSource this[int index] { get; }
-
-        /// <summary>.</summary>
-        new IEnumerator<ISelectableItemSource> GetEnumerator();
     }
 
     public interface IGridSizeSource {
@@ -84,9 +81,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     public interface IToggleSource : IImageSizeSource, IToggleDataSource { }
 
-    public interface ISelectableItemSource: IImageSizeSource {
-        string Id { get; }
-    }
+    public interface ISelectableItemSource:  IControlSource, IStaticItemVM { }
 
     public interface IEditBoxSource: IControlSource, IEditDataSource { }
 
@@ -106,7 +101,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public interface IGallerySource : IControlSource, IGridSizeSource, ISelectableSource, IListDataSource {}
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource, IListDataSource { }
+    public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource { }
 
     public interface ILabelSource: IControlSource, ISizeSource { }
 

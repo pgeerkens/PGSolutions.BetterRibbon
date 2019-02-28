@@ -49,7 +49,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
                     case XName name when name == mso+"dropDown"  &&  child.HasElements:
                         parent.Add(factory.NewStaticDropDown(child.Attribute("id").Value,
-                                    child.ParseItemList(mso, factory)));
+                                    child.ParseItemList(mso)));
                         break;
 
                     case XName name when name == mso+"dropDown":
@@ -58,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
                     case XName name when name == mso+"comboBox"  &&  child.HasElements:
                         parent.Add(factory.NewStaticComboBox(child.Attribute("id").Value,
-                                    child.ParseItemList(mso, factory)));
+                                    child.ParseItemList(mso)));
                         break;
 
                     case XName name when name == mso+"comboBox":
@@ -67,7 +67,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
                     case XName name when name == mso+"gallery"  &&  child.HasElements:
                         parent.Add(factory.NewStaticGallery(child.Attribute("id").Value,
-                                    child.ParseItemList(mso, factory)));
+                                    child.ParseItemList(mso)));
                         break;
 
                     case XName name when name == mso+"gallery":
@@ -98,7 +98,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
                     case XName name when name == mso+"splitButton":
                         var menuId   = child.Elements().Last().Attribute("id").Value;
-                        var menuVM   = factory.NewMenu(menuId);
+                        var menuVM   = child.Elements().Last().ParseXmlChildren(mso, factory,
+                                                            factory.NewMenu(menuId));
+
                         var buttonId = child.Elements().First().Attribute("id").Value;
 
                         if (child.Elements().First().Name == mso+"button") {
@@ -123,12 +125,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         break;
                 }
             }
-
             return parent;
         }
 
-        internal static IList<StaticItemVM> ParseItemList(this XElement parent, XNamespace mso,
-                ViewModelFactory factory) {
+        internal static IReadOnlyList<StaticItemVM> ParseItemList(this XElement parent, XNamespace mso) {
             var items = new List<StaticItemVM>();
             foreach (var child in parent.Elements()) {
                 if (parent.Attribute(mso+"idMso") != null  ||  parent.Attribute(mso+"idQ") != null) continue;
@@ -136,10 +136,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 switch (child.Name) {
                     case XName name when name == mso+"item":
                         var id = child.Attribute("id").Value;
-                        items.Add(factory.NewStaticItem(id,
-                            new ControlStrings(child.Attribute("label").Value     ?? id,
-                                               child.Attribute("screentip").Value ?? "",
-                                               child.Attribute("supertip").Value  ?? "", null)
+                        items.Add(new StaticItemVM(id,
+                            new ControlStrings(child.Attribute("label")?.Value     ?? id,
+                                               child.Attribute("screentip")?.Value ?? "",
+                                               child.Attribute("supertip")?.Value  ?? "", null)
                         ));
                         break;
                     default:

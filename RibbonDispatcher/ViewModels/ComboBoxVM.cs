@@ -16,17 +16,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IListable implementation
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        public int    ItemCount                => Source?.Count ?? 0;
-        /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
-        public string ItemId(int Index)        => Source[Index].Id;
-        /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        public string ItemLabel(int Index)     => Source[Index].Strings.Label;
-        /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public string ItemScreenTip(int Index) => Source[Index].Strings.ScreenTip;
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public string ItemSuperTip(int Index)  => Source[Index].Strings.SuperTip;
-        /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
-        public object ItemImage(int Index)     => "MacroSecurity";
+        public int ItemCount => Source?.Count ?? 0;
+
+        /// <summary>.</summary>
+        /// <param name="index">Index in the selection-list of the item being queried.</param>
+        public IStaticItemVM this[int index] => Source[index];
         #endregion
 
         #region IEditable implementation
