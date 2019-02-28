@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => Models.ToList().ForEach(model => model.Invalidate());
 
         /// <inheritdoc/>
-        internal void DetachProxy(string controlId)
+        public void DetachProxy(string controlId)
         => ViewModel.ViewModelFactory.GetControl<IControlVM>(controlId)?.Detach();
 
         public void DetachCustomControls()

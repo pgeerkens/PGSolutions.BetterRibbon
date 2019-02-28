@@ -60,9 +60,26 @@ namespace PGSolutions.RibbonDispatcher {
         public const string StaticComboBoxModel     = "69E19429" + GuidSpace;
         public const string IStaticDropDownModel    = "69E1942A" + GuidSpace;
         public const string StaticDropDownModel     = "69E1942B" + GuidSpace;
-        //public const string IButtonModel            = "69E1942C" + GuidSpace;
-        //public const string ButtonModel             = "69E1942D" + GuidSpace;
-        //public const string IToggleModel            = "69E1942E" + GuidSpace;
-        //public const string ToggleModel             = "69E1942F" + GuidSpace;
+        public const string IGalleryModel           = "69E1942C" + GuidSpace;
+        public const string GalleryModel            = "69E1942D" + GuidSpace;
+        public const string IStaticGalleryModel     = "69E1942E" + GuidSpace;
+        public const string StaticGalleryModel      = "69E1942F" + GuidSpace;
+
+        //public const string IControlStrings2        = "69E19430" + GuidSpace;
+        //public const string ControlStrings2         = "69E19431" + GuidSpace;
+        //public const string IMenuModel              = "69E19432" + GuidSpace;
+        //public const string MenuModel               = "69E19433" + GuidSpace;
+        //public const string ISplitToggleButtonModel = "69E19434" + GuidSpace;
+        //public const string SplitToggleButtonModel  = "69E19435" + GuidSpace;
+        //public const string ISplitPressButtonModel  = "69E19436" + GuidSpace;
+        //public const string SplitPressButtonModel   = "69E19437" + GuidSpace;
+        //public const string IStaticComboBoxModel    = "69E19438" + GuidSpace;
+        //public const string StaticComboBoxModel     = "69E19439" + GuidSpace;
+        //public const string IStaticDropDownModel    = "69E1943A" + GuidSpace;
+        //public const string StaticDropDownModel     = "69E1943B" + GuidSpace;
+        //public const string IGalleryModel           = "69E1943C" + GuidSpace;
+        //public const string GalleryModel            = "69E1943D" + GuidSpace;
+        //public const string IStaticGalleryModel     = "69E1943E" + GuidSpace;
+        //public const string StaticGalleryModel      = "69E1943F" + GuidSpace;
     }
 }

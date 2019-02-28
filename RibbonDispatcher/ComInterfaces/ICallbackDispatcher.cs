@@ -18,11 +18,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId( 1), Description("Loads an image, making it accessible by name to ribbon controls via an 'image' tag.")]
         object LoadImage(string ImageId);
 
-        #region IControlVM implementation
+        #region IDescriptionableVM implementation
         /// <summary>Call back for GetDescription events from ribbon elements.</summary>
         [DispId( 2), Description("Call back for GetDescription events from ribbon elements.")]
         string GetDescription(IRibbonControl Control);
+        #endregion
 
+        #region IControlVM implementation
         /// <summary>Call back for GetEnabled events from ribbon elements.</summary>
         [DispId( 3), Description("Call back for GetEnabled events from ribbon elements.")]
         bool GetEnabled(IRibbonControl Control);
@@ -114,16 +116,16 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Returns the ID of the currently selected list item.</summary>
         /// <remarks>This callback is typically used only for list controls with a dynamic list.</remarks>
         [DispId(22), Description("Returns the ID of the currently selected list item.\nThis callback is typically used only for list controls with a dynamic list.")]
-        string GetSelectedItemId(IRibbonControl Control);
+        string GetSelectedItemId(IRibbonControl control);
 
         /// <summary>Returns the index of the currently selected list item.</summary>
         /// <remarks>This callback is typically used only for list controls with a static list.</remarks>
         [DispId(23), Description("Returns the index of the currently selected list item.\nThis callback is typically used only for list controls with a static list.")]
-        int GetSelectedItemIndex(IRibbonControl Control);
+        int GetSelectedItemIndex(IRibbonControl control);
 
         /// <summary>Call back for OnAction events from the drop-down ribbon elements.</summary>
         [DispId(24), Description("Call back for OnAction events from the drop-down ribbon elements.")]
-        void OnActionSelected(IRibbonControl Control, string SelectedId, int SelectedIndex);
+        void OnActionSelected(IRibbonControl control, string selectedId, int selectedIndex);
         #endregion
 
         #region IEditableVM implementation - EditBox & ComboBox
@@ -155,6 +157,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <param name="control"></param>
         [DispId(29), Description("Asks for the width of items, in pixels.")]
         int GetItemWidth(IRibbonControl control);
+        #endregion
+
+        #region IMenuSeparatorVM implementation
+        /// <summary>For a menu separator, gets the text to be displayed .</summary>
+        /// <param name="control"></param>
+        [DispId(30), Description("For a menu separator, gets the text to be displayed ")]
+        string GetTitle(IRibbonControl control);
         #endregion
     }
 }

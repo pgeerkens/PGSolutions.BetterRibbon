@@ -3,19 +3,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     using IStrings = IControlStrings;
 
-    public delegate void ClickedEventHandler(IRibbonControl control);
-
-    public delegate void ToggledEventHandler(IRibbonControl control, bool isPressed);
-
-    public delegate void SelectionMadeEventHandler(IRibbonControl control, string selectedId, int selectedIndex);
-
-    public delegate void EditedEventHandler(IRibbonControl control, string text);
-
+    #region Component interfaces
     public interface ICanInvalidate {
         void Invalidate();
     }
@@ -79,28 +71,49 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         new IEnumerator<ISelectableItemSource> GetEnumerator();
     }
 
+    public interface IGridSizeSource {
+        int ItemHeight { get; }
+        int ItemWidth  { get; }
+    }
+    #endregion
+
+    #region Object Source interfaces
+    public interface IImageSizeSource: IControlSource, IImageSource, ISizeSource { }
+
+    public interface IButtonSource : IImageSizeSource { }
+
+    public interface IToggleSource : IImageSizeSource, IToggleDataSource { }
+
+    public interface ISelectableItemSource: IImageSizeSource {
+        string Id { get; }
+    }
 
     public interface IEditBoxSource: IControlSource, IEditDataSource { }
-
-    public interface IButtonSource : IControlSource, IImageSource, ISizeSource { }
-
-    public interface IToggleSource : IControlSource, IToggleDataSource, IImageSource, ISizeSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IDropDownSource: IControlSource, ISelectableSource, IListDataSource { }
 
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IStaticDropDownSource : IControlSource, ISelectableSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
 
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IStaticComboBoxSource : IControlSource, IEditBoxSource, IListDataSource { }
 
-    public interface ISelectableItemSource: IControlSource, IImageSource, ISizeSource {
-        string Id        { get; }
-    }
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public interface IGallerySource : IControlSource, IGridSizeSource, ISelectableSource, IListDataSource {}
+
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource, IListDataSource { }
 
     public interface ILabelSource: IControlSource, ISizeSource { }
 
     public interface IMenuSource: IControlSource, IImageSource { }
+
+    public interface IMenuSeparatorSource: IControlSource {
+        string Title { get; }
+    }
+    #endregion
 }

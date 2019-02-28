@@ -27,10 +27,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public string ItemSuperTip(int Index)  => Source[Index].Strings.SuperTip;
         /// <summary>Call back for GetItemLabel events from the drop-down ribbon elements.</summary>
         public object ItemImage(int Index)     => "MacroSecurity";
-        /// <summary>Call back for GetItemScreenTip events from the drop-down ribbon elements.</summary>
-        public bool   ItemShowImage(int Index) => Source[Index].ShowImage;
-        /// <summary>Call back for GetItemSuperTip events from the drop-down ribbon elements.</summary>
-        public bool   ItemShowLabel(int Index) => Source[Index].ShowImage;
         #endregion
 
         #region IEditable implementation

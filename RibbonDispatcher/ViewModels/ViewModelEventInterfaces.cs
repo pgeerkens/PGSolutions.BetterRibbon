@@ -7,6 +7,43 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
+    public delegate void ClickedEventHandler(IRibbonControl control);
+
+    public delegate void ToggledEventHandler(IRibbonControl control, bool isPressed);
+
+    public delegate void SelectionMadeEventHandler(IRibbonControl control, string selectedId, int selectedIndex);
+
+    public delegate void EditedEventHandler(IRibbonControl control, string text);
+
+    /// <summary>.</summary>
+    /// <typeparam name="T"></typeparam>
+    public class EventArgs<T>:EventArgs {
+        public EventArgs(T value) : base() => Value = value;
+
+        public T Value { get; }
+    }
+
+    public class ToggledEventArgs : EventArgs<bool> {
+        public ToggledEventArgs(bool isPressed) : base(isPressed) { }
+    }
+
+    public class SelectedEventArgs : EventArgs<ValueTuple<string, int>> {
+        public SelectedEventArgs(string SelectedId, int SelectedIndex)
+        : base((SelectedId, SelectedIndex)) { }
+    }
+
+    public class EditedEventArgs : EventArgs<string> {
+        EditedEventArgs(string text) : base(text) { }
+    }
+
+    public delegate void ClickedEventHandler2(object sender, EventArgs e);
+
+    public delegate void ToggledEventHandler2(object sender, ToggledEventArgs e);
+
+    public delegate void SelectionMadeEventHandler2(object sender, SelectedEventArgs e);
+
+    public delegate void EditedEventHandler2(object sender, EditedEventArgs e);
+
     /// <summary>The interface for controls that can have images.</summary>
     [CLSCompliant(true)]
     public interface IImageableVM {
@@ -62,7 +99,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
-    public interface ISelectableVM {    // DropDown & ComboBox
+    public interface ISelectItemsVM {    // DropDown & ComboBox & Gallery
         /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
         int     ItemCount         { get; }
         /// <summary>Call back for GetItemID events from the drop-down ribbon elements.</summary>
@@ -79,7 +116,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
-    public interface ISelectable2VM {   // DropDown
+    public interface ISelectablesVM {   // DropDown
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         event SelectionMadeEventHandler SelectionMade;
 
@@ -109,5 +146,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IDescriptionableVM {
         string Description { get; }
+    }
+
+    [CLSCompliant(true)]
+    public interface IMenuSeparatorVM {
+        string Title { get; }
     }
 }

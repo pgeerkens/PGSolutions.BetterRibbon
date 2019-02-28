@@ -63,7 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComInterfaces\IGalleryModel.cs" />
     <Compile Include="ComInterfaces\IStaticComboBoxModel.cs" />
+    <Compile Include="ComInterfaces\IStaticGalleryModel.cs" />
     <Compile Include="Models\AbstractModelFactory.cs" />
     <Compile Include="Models\AbstractRibbonGroupModel.cs" />
     <Compile Include="Models\AbstractRibbonTabModel.cs" />
@@ -71,8 +73,11 @@
     <Compile Include="Models\CustomButtonsModel.cs" />
     <Compile Include="ControlStrings2.cs" />
     <Compile Include="ComInterfaces\IStaticDropDownModel.cs" />
+    <Compile Include="Models\GalleryModel.cs" />
     <Compile Include="Models\StaticComboBoxModel.cs" />
     <Compile Include="Models\StaticDropDownModel.cs" />
+    <Compile Include="Models\StaticGalleryModel.cs" />
+    <Compile Include="ViewModels\GalleryVM.cs" />
     <Compile Include="ViewModels\IRibbonViewModel.cs" />
     <Compile Include="Models\LabelModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
@@ -88,6 +93,7 @@
     <Compile Include="ViewModels\LabelVM.cs" />
     <Compile Include="ViewModels\MenuVM.cs" />
     <Compile Include="ViewModels\SplitButtonVM.cs" />
+    <Compile Include="ViewModels\StaticGalleryVM.cs" />
     <Compile Include="ViewModels\TabVM.cs" />
     <Compile Include="ViewModels\XmParserExtensions.cs" />
     <Compile Include="ComInterfaces\IComboBoxModel.cs" />

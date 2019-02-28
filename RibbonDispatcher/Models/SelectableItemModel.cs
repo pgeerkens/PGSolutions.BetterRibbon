@@ -18,8 +18,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(ISelectableItemModel))]
     [Guid(Guids.SelectableItemModel)]
-    public class SelectableItemModel : ControlModel<ISelectableItemSource,ISelectableItemVM>,
-            ISelectableItemModel, ISelectableItemSource, ISelectableItemVM {
+    public class SelectableItemModel : ControlModel<ISelectableItemSource,IStaticItemVMM>,
+            ISelectableItemModel, ISelectableItemSource, IStaticItemVMM {
         internal SelectableItemModel(IControlStrings strings)
         : base(null, strings) { }
 
@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public string SuperTip  => Strings.SuperTip;
         public string KeyTip    => Strings.KeyTip;
 
-        public new ISelectableItemVM ViewModel => this;
+        public new IStaticItemVMM ViewModel => this;
 
         public ISelectableItemModel Attach(string controlId) {
             Id = controlId;

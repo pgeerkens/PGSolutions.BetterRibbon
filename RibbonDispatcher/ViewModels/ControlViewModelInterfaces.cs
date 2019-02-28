@@ -2,25 +2,26 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    using VM = ViewModels;
-
-    /// <summary>The base interface for <see cref="VM.AbstractControlVM{TSource}"/> implementations</summary>
+    /// <summary>The base interface for <see cref="AbstractControlVM{TSource}"/> implementations</summary>
     [CLSCompliant(true)]
     public interface IControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
         string Id           { get; }
-        /// <summary>Returns the KeyTip string for this control.</summary>
-        string KeyTip       { get; }
-        /// <summary>Returns the Label string for this control.</summary>
-        string Label        { get; }
         /// <summary>Gets or sets whether or not the control is visible.</summary>
         bool   IsVisible    { get; }
-
         /// <summary>Gets or sets whether or not the control is enabled.</summary>
         bool   IsEnabled    { get; }
+
+        /// <summary>Returns the Label string for this control.</summary>
+        string Label        { get; }
+        /// <summary>Returns the screenTip string for this control.</summary>
+        string ScreenTip    { get; }
+        /// <summary>Returns the SuperTip string for this control.</summary>
+        string SuperTip     { get; }
+        /// <summary>Returns the KeyTip string for this control.</summary>
+        string KeyTip       { get; }
 
         /// <summary>.</summary>
         void   Invalidate();
@@ -28,69 +29,72 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>.</summary>
         void   Detach();
 
-        /// <summary>Returns the screenTip string for this control.</summary>
-        string ScreenTip    { get; }
-        /// <summary>Returns the SuperTip string for this control.</summary>
-        string SuperTip     { get; }
-
         void OnPurged(IContainerControl sender);
         void SetShowInactive(bool showInactive);
     }
 
-    /// <summary>The total interface exposed by <see cref="VM.ButtonVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="ButtonVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IButtonVM: IControlVM, IClickableVM, IImageableVM, ISizeableVM, IDescriptionableVM {
-    }
+    public interface IButtonVM: IControlVM, IClickableVM, IImageableVM, ISizeableVM, IDescriptionableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="CheckBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface ICheckBoxVM: IControlVM, IToggleableVM, IDescriptionableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.CheckBoxVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="ToggleButtonVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface IToggleVM: IControlVM, IToggleableVM, IImageableVM, ISizeableVM, IDescriptionableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.EditBoxVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="EditBoxVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface IEditBoxVM : IControlVM, IEditableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.DropDownVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="DropDownVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IDropDownVM: IControlVM, ISelectableVM, ISelectable2VM { }
+    public interface IDropDownVM: IControlVM, ISelectItemsVM, ISelectablesVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.SelectableItemVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="GalleryVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface ISelectableItemVM: IControlVM, IImageableVM { }
+    public interface IGalleryVM: IControlVM, IGallerySizeVM, ISelectItemsVM, ISelectablesVM, IDescriptionableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.ComboBoxVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="StaticItemVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface IComboBoxVM: IControlVM, ISelectableVM, IEditBoxVM { }
+    public interface IStaticItemVMM: IControlVM, IImageableVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
+    /// <summary>The total interface exposed by <see cref="ComboBoxVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IComboBoxVM: IControlVM, ISelectItemsVM, IEditBoxVM { }
+
+    /// <summary>The total interface exposed by <see cref="GroupVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface IGroupVM: IControlVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.TabVM"/> objects.</summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
+    /// <summary>The total interface exposed by <see cref="TabVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface ITabVM: IControlVM { }
 
-    /// <summary>The total interface exposed by <see cref="VM.GroupVM"/> objects.</summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
-    public interface IGalleryM: IControlVM, IGallerySizeVM, ISelectableVM, ISelectable2VM, IDescriptionableVM { }
-
+    /// <summary>The total interface exposed by <see cref="LabelVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface ILabelVM: IControlVM { }
 
+    [CLSCompliant(true)]
     public interface ISplitButtonVM: IControlVM {
         IMenuVM   MenuVM   { get; }
     }
 
+     /// <summary>The total interface exposed by <see cref="SplitToggleButtonVM"/> objects.</summary>
+   [CLSCompliant(true)]
     public interface ISplitToggleButtonVM: ISplitButtonVM {
         IToggleVM ToggleVM { get; }
     }
 
+     /// <summary>The total interface exposed by <see cref="SplitPressButtonVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface ISplitPressButtonVM: ISplitButtonVM {
         IButtonVM ButtonVM { get; }
     }
 
+     /// <summary>The total interface exposed by <see cref="MenuVM"/> objects.</summary>
+    [CLSCompliant(true)]
     public interface IMenuVM: IControlVM, IDescriptionableVM { }
 }

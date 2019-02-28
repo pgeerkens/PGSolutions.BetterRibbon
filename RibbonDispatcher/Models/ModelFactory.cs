@@ -62,11 +62,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new IComboBoxModel NewComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => base.NewComboBoxModel(stringsId, isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public new IEditBoxModel NewEditBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewEditBoxModel(stringsId, isEnabled, isVisible);
 
@@ -74,6 +69,31 @@ namespace PGSolutions.RibbonDispatcher.Models {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public new IDropDownModel NewDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewDropDownModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IStaticDropDownModel NewStaticDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewStaticDropDownModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IComboBoxModel NewComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewComboBoxModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IStaticComboBoxModel NewStaticComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewStaticComboBoxModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IGalleryModel NewGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewGalleryModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IStaticGalleryModel NewStaticGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewStaticGalleryModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

@@ -95,14 +95,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
 
-        #region IDescriptionableVM implementation
-        /// <summary>All of the defined controls.</summary>
-        private IDescriptionableVM Descriptionables(string controlId) => ViewModelFactory.Descriptionables.GetOrDefault(controlId);
-        /// <inheritdoc/>
-        public string GetDescription(IRibbonControl Control)
-            => Descriptionables(Control?.Id)?.Description ?? Control.Unknown("Description");
-        #endregion
-
         #region IControlVM implementation
         /// <summary>All of the defined controls.</summary>
         private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
@@ -169,41 +161,50 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         #region ISelectableVM implementation - DropDown & ComboBox
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
-        private ISelectableVM Selectables (string controlId) => ViewModelFactory.Selectables.GetOrDefault(controlId);
+        private ISelectItemsVM SelectItems (string controlId) => ViewModelFactory.SelectItems.GetOrDefault(controlId);
         /// <inheritdoc/>
         public int    GetItemCount(IRibbonControl Control)
-            => Selectables(Control?.Id)?.ItemCount ?? 0;
+        => SelectItems(Control?.Id)?.ItemCount ?? 0;
         /// <inheritdoc/>
         public string GetItemId(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemId(Index) ?? "";
+        => SelectItems(Control?.Id)?.ItemId(Index) ?? "";
         /// <inheritdoc/>
         public object GetItemImage(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemImage(Index) ?? "MacroSecurity";
+        => SelectItems(Control?.Id)?.ItemImage(Index) ?? "MacroSecurity";
         /// <inheritdoc/>
         public string GetItemLabel(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemLabel(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.ItemLabel(Index) ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemScreenTip(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemScreenTip(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.ItemScreenTip(Index) ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetItemSuperTip(IRibbonControl Control, int Index)
-            => Selectables(Control?.Id)?.ItemSuperTip(Index) ?? Control.Unknown();
+        => SelectItems(Control?.Id)?.ItemSuperTip(Index) ?? Control.Unknown();
         #endregion
 
         #region ISelectable2VM implementation - DropDown
         /// <summary>All of the defined controls implementing the {ISelectableMixin} interface.</summary>
-        private ISelectable2VM Selectables2(string controlId) => ViewModelFactory.Selectables2.GetOrDefault(controlId);
+        private ISelectablesVM Selectables2(string controlId) => ViewModelFactory.Selectable2.GetOrDefault(controlId);
 
         /// <inheritdoc/>
-        public string GetSelectedItemId(IRibbonControl Control)
-            => Selectables2(Control?.Id)?.SelectedItemId;
+        public string GetSelectedItemId(IRibbonControl control)
+        => Selectables2(control?.Id)?.SelectedItemId;
         /// <inheritdoc/>
-        public int    GetSelectedItemIndex(IRibbonControl Control)
-            => Selectables2(Control?.Id)?.SelectedItemIndex ?? 0;
+        public int    GetSelectedItemIndex(IRibbonControl control)
+            => Selectables2(control?.Id)?.SelectedItemIndex ?? 0;
 
         /// <inheritdoc/>
-        public void   OnActionSelected(IRibbonControl Control, string SelectedId, int SelectedIndex)
-            => Selectables2(Control?.Id)?.OnSelectionMade(Control, SelectedId, SelectedIndex);
+        public void   OnActionSelected(IRibbonControl control, string selectedId, int selectedIndex)
+        => Selectables2(control?.Id)?.OnSelectionMade(control, selectedId, selectedIndex);
+        #endregion
+
+        #region GallerySizeVM implementation
+        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
+        private IGallerySizeVM GallerySizes(string controlId) => ViewModelFactory.GallerySizes.GetOrDefault(controlId);
+
+        public int GetItemHeight(IRibbonControl control) => GallerySizes(control?.Id)?.ItemHeight ?? 0;
+
+        public int GetItemWidth(IRibbonControl control) => GallerySizes(control?.Id)?.ItemWidth ?? 0;
         #endregion
 
         #region IEditableVM implementation - EditBox & ComboBox
@@ -225,13 +226,19 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => DynamicMenus(control?.Id)?.MenuContent ?? MenuContent;
         #endregion
 
-        #region GallerySizeVM implementation
-        /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
-        private IGallerySizeVM GallerySizes(string controlId) => ViewModelFactory.GallerySizes.GetOrDefault(controlId);
+        #region IDescriptionableVM implementation
+        /// <summary>All of the defined controls.</summary>
+        private IDescriptionableVM Descriptionables(string controlId) => ViewModelFactory.Descriptionables.GetOrDefault(controlId);
 
-        public int GetItemHeight(IRibbonControl control) => GallerySizes(control?.Id)?.ItemHeight ?? 0;
+        /// <inheritdoc/>
+        public string GetDescription(IRibbonControl Control)
+            => Descriptionables(Control?.Id)?.Description ?? Control.Unknown("Description");
+        #endregion
 
-        public int GetItemWidth(IRibbonControl control) => GallerySizes(control?.Id)?.ItemWidth ?? 0;
+        #region IMenuSeparatorVM implementation
+        private IMenuSeparatorVM MenuSeparators(string controlId) => ViewModelFactory.MenuSeparators.GetOrDefault(controlId);
+
+        public string GetTitle(IRibbonControl control) =>MenuSeparators(control?.Id)?.Title ?? "";
         #endregion
 
         private static string MenuContent =>

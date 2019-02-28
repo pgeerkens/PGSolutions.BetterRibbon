@@ -5,13 +5,16 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
-    internal class DropDownVM : AbstractControlVM<IDropDownSource>, IDropDownVM,
-            IActivatable<IDropDownSource,IDropDownVM>, ISelectItemsVM {
-        public DropDownVM(string itemId)
+    internal class GalleryVM : AbstractControlVM<IGallerySource>, IGalleryVM,
+            IActivatable<IGallerySource,IGalleryVM>, ISelectItemsVM {
+        public GalleryVM(string itemId)
         : base(itemId) { }
 
+        /// <inheritdoc/>
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+
         #region IActivatable implementation
-        public new IDropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
+        public new IGalleryVM Attach(IGallerySource source) => Attach<GalleryVM>(source);
 
         public override void Detach() { SelectionMade = null; base.Detach(); }
         #endregion
@@ -46,6 +49,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             SelectionMade?.Invoke(control, selectedId, selectedIndex);
             Invalidate();
         }
+        #endregion
+
+        #region IGallerySizeVM implementation
+        public int ItemHeight => Source?.ItemHeight ?? default;
+        public int ItemWidth  => Source?.ItemWidth  ?? default;
         #endregion
     }
 }

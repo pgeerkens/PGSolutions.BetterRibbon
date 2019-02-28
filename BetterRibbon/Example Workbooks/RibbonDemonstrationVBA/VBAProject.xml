@@ -53,7 +53,7 @@
    />
    <References
       Description='PGSolutions Dispatcher for the Office Fluent Ribbon'
-      FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.tlb'
+      FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
       Guid='{BD438F48-A571-4ACE-979A-804179456324}'
       Major='1'
       Minor='0'

@@ -6,7 +6,7 @@ using Microsoft.Office.Core;
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     internal abstract class SplitButtonVM<TSource>: AbstractContainerVM<TSource>, ISplitButtonVM,
             IActivatable<TSource,ISplitButtonVM>, ISizeableVM, IImageableVM
-        where TSource: IButtonSource {
+        where TSource: IImageSizeSource {
         public SplitButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu)
         : base(factory,itemId)
         => MenuVM = menu;

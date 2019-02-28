@@ -53,6 +53,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
 
+        /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
+        public DropDownModel NewDropDownModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new DropDownModel(GetControl<DropDownVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="StaticDropDownModel"/>.</summary>
+        public StaticDropDownModel NewStaticDropDownModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new StaticDropDownModel(GetControl<StaticDropDownVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IStaticDropDownSource, IDropDownVM, StaticDropDownModel>();
+
         /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
         public ComboBoxModel NewComboBoxModel(string controlId,
                 bool isEnabled, bool isVisible)
@@ -60,12 +74,26 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
-        public DropDownModel NewDropDownModel(string controlId,
+        /// <summary>Creates, initializes and returns a new <see cref="StaticComboBoxModel"/>.</summary>
+        public StaticComboBoxModel NewStaticComboBoxModel(string controlId,
                 bool isEnabled, bool isVisible)
-        => new DropDownModel(GetControl<DropDownVM>, GetStrings(controlId))
+        => new StaticComboBoxModel(GetControl<StaticComboBoxVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
+                .InitializeModel<IStaticComboBoxSource, IComboBoxVM, StaticComboBoxModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
+        public GalleryModel NewGalleryModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new GalleryModel(GetControl<GalleryVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IGallerySource, IGalleryVM, GalleryModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="StaticGalleryModel"/>.</summary>
+        public StaticGalleryModel NewStaticGalleryModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IStaticGallerySource, IGalleryVM, StaticGalleryModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public LabelModel NewLabelModel(string controlId,

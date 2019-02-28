@@ -3,10 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
+    using Debug = System.Diagnostics.Debug;
+
     /// <summary>.</summary>
     internal static partial class XmParserExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
@@ -29,6 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             }
         }
 
+        [SuppressMessage("Microsoft.Maintainability","CA1502:AvoidExcessiveComplexity")]
         public static TCtrl ParseXmlChildren<TCtrl>(this XElement element, XNamespace mso,
                 ViewModelFactory factory, TCtrl parent) where TCtrl : IContainerControl {
             foreach (var child in element.Elements()) {
@@ -59,6 +63,15 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
                     case XName name when name == mso+"comboBox":
                         parent.Add(factory.NewComboBox(child.Attribute("id").Value));
+                        break;
+
+                    case XName name when name == mso+"gallery"  &&  child.HasElements:
+                        parent.Add(factory.NewStaticGallery(child.Attribute("id").Value,
+                                    child.ParseItemList(mso, factory)));
+                        break;
+
+                    case XName name when name == mso+"gallery":
+                        parent.Add(factory.NewGallery(child.Attribute("id").Value));
                         break;
 
                     case XName name when name == mso+"button":
@@ -95,7 +108,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                             parent.Add(factory.NewSplitToggleButton(child.Attribute("id").Value, menuVM,
                                         factory.NewToggleButton(buttonId)));
                         } else throw new InvalidOperationException($"Encountered invalid control type: '{child.Elements().First().Name}'");
-
                         break;
 
                     case XName name when name == mso+"group":
@@ -107,6 +119,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         throw new InvalidOperationException($"Tab '{child.Name.LocalName}' found unexpectedly.");
 
                     default:
+                        Debug.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
                         break;
                 }
             }
@@ -130,6 +143,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         ));
                         break;
                     default:
+                        Debug.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}' child of {parent.Attribute("id")}");
                         break;
                 }
             }

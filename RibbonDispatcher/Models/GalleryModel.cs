@@ -6,44 +6,62 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
+
+using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>The COM visible Model for Ribbon Drop Down controls.</summary>
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [SuppressMessage("Microsoft.Interoperability","CA1409:ComVisibleTypesShouldBeCreatable")]
     [SuppressMessage("Microsoft.Interoperability","CA1405:ComVisibleTypeBaseTypesShouldBeComVisible")]
-    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [Description("The COM visible Model for Ribbon Drop Down controls")]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComSourceInterfaces(typeof(IEditedEvent))]
-    [ComDefaultInterface(typeof(IStaticComboBoxModel))]
-    [Guid(Guids.StaticComboBoxModel)]
-    public sealed class StaticComboBoxModel: ControlModel<IStaticComboBoxSource,IComboBoxVM>,
-            IStaticComboBoxModel, IStaticComboBoxSource, IEnumerable<ISelectableItemSource>, IEnumerable {
-        internal StaticComboBoxModel(Func<string, StaticComboBoxVM> funcViewModel,
-                IControlStrings strings)
+    [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
+    [ComDefaultInterface(typeof(IGalleryModel))]
+    [Guid(Guids.GalleryModel)]
+    public sealed class GalleryModel : ControlModel<IGallerySource,IGalleryVM>,
+            IGalleryModel, IGallerySource, IEnumerable<ISelectableItemSource>, IEnumerable {
+        internal GalleryModel(Func<string, GalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
-        public event EditedEventHandler Edited;
+        public event SelectionMadeEventHandler SelectionMade;
 
-        public string Text          { get; set; } = "";
+        public int    SelectedIndex { get; set; }
+        public string SelectedId    {
+            get => Items[SelectedIndex].Id;
+            set => SelectedIndex = Items.Where((item,i) => item.Id == value).Select((a,b)=>b).FirstOrDefault();
+        }
 
-        public IStaticComboBoxModel Attach(string controlId) {
+        public IGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
-                ViewModel.Edited += OnEdited;
+                ViewModel.SelectionMade += OnSelectionMade;
                 ViewModel.Invalidate();
             }
             return this;
         }
 
-        private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control, text);
+        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
+        => SelectionMade?.Invoke(control, SelectedId = selectedId, SelectedIndex = selectedIndex);
+
+        public IGalleryModel AddSelectableModel(ISelectableItemModel selectableModel) {
+            Items.Add(selectableModel);
+            ViewModel?.Invalidate();
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public int ItemHeight { get; set; }
+
+        /// <inheritdoc/>
+        public int ItemWidth  { get; set; }
 
         public ISelectableItemSource this[int index] => Items[index] as ISelectableItemSource;
 

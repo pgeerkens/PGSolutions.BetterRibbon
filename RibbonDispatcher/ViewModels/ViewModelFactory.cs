@@ -34,10 +34,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             _imageables      = new Dictionary<string,IImageableVM>();
             _clickables      = new Dictionary<string,IClickableVM>();
             _toggleables     = new Dictionary<string,IToggleableVM>();
-            _selectables     = new Dictionary<string,ISelectableVM>();
-            _selectables2    = new Dictionary<string,ISelectable2VM>();
+            _selectItems     = new Dictionary<string,ISelectItemsVM>();
+            _selectables     = new Dictionary<string,ISelectablesVM>();
             _dynamicMenus    = new Dictionary<string,IDynamicMenuVM>();
             _gallerySizes    = new Dictionary<string,IGallerySizeVM>();
+            _menuSeparators  = new Dictionary<string,IMenuSeparatorVM>();
             _descriptionable = new Dictionary<string,IDescriptionableVM>();
         }
 
@@ -72,16 +73,19 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal IReadOnlyDictionary<string,IToggleableVM>      Toggleables      => new ReadOnlyDictionary<string,IToggleableVM>(_toggleables);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string,ISelectableVM>      Selectables      => new ReadOnlyDictionary<string,ISelectableVM>(_selectables);
+        internal IReadOnlyDictionary<string,ISelectItemsVM>      SelectItems      => new ReadOnlyDictionary<string,ISelectItemsVM>(_selectItems);
 
         /// <summary>Returns a readonly collection of all Ribbon DropDowns in this Ribbon ViewModel.</summary>
-        internal IReadOnlyDictionary<string,ISelectable2VM>     Selectables2     => new ReadOnlyDictionary<string,ISelectable2VM>(_selectables2);
+        internal IReadOnlyDictionary<string,ISelectablesVM>     Selectable2      => new ReadOnlyDictionary<string,ISelectablesVM>(_selectables);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string,IDynamicMenuVM>     DynamicMenus     => new ReadOnlyDictionary<string,IDynamicMenuVM>(_dynamicMenus);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string,IGallerySizeVM>     GallerySizes     => new ReadOnlyDictionary<string,IGallerySizeVM>(_gallerySizes);
+
+        /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
+        internal IReadOnlyDictionary<string,IMenuSeparatorVM>   MenuSeparators   => new ReadOnlyDictionary<string,IMenuSeparatorVM>(_menuSeparators);
 
         /// <summary>Returns a readonly collection of all Ribbon Toggle Buttons in this Ribbon ViewModel.</summary>
         internal IReadOnlyDictionary<string,IDescriptionableVM> Descriptionables => new ReadOnlyDictionary<string,IDescriptionableVM>(_descriptionable);
@@ -92,10 +96,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         private  readonly IDictionary<string, IImageableVM>       _imageables;
         private  readonly IDictionary<string, IClickableVM>       _clickables;
         private  readonly IDictionary<string, IToggleableVM>      _toggleables;
-        private  readonly IDictionary<string, ISelectableVM>      _selectables;
-        private  readonly IDictionary<string, ISelectable2VM>     _selectables2;
+        private  readonly IDictionary<string, ISelectItemsVM>     _selectItems;
+        private  readonly IDictionary<string, ISelectablesVM>     _selectables;
         private  readonly IDictionary<string, IDynamicMenuVM>     _dynamicMenus;
         private  readonly IDictionary<string, IGallerySizeVM>     _gallerySizes;
+        private  readonly IDictionary<string, IMenuSeparatorVM>   _menuSeparators;
         private  readonly IDictionary<string, IDescriptionableVM> _descriptionable;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
@@ -103,15 +108,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         where TControl: AbstractControlVM<TSource> where TSource: class, IControlSource {
             if (!_controls.ContainsKey(ctrl.Id)) {
                 _controls       .Add(ctrl.Id, ctrl);
+                _editables      .AddNotNull(ctrl.Id, ctrl as IEditableVM);
                 _sizeables      .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
                 _imageables     .AddNotNull(ctrl.Id, ctrl as IImageableVM);
                 _clickables     .AddNotNull(ctrl.Id, ctrl as IClickableVM);
                 _toggleables    .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
-                _selectables    .AddNotNull(ctrl.Id, ctrl as ISelectableVM);
-                _selectables2   .AddNotNull(ctrl.Id, ctrl as ISelectable2VM);
+                _selectItems    .AddNotNull(ctrl.Id, ctrl as ISelectItemsVM);
+                _selectables    .AddNotNull(ctrl.Id, ctrl as ISelectablesVM);
                 _dynamicMenus   .AddNotNull(ctrl.Id, ctrl as IDynamicMenuVM);
                 _gallerySizes   .AddNotNull(ctrl.Id, ctrl as IGallerySizeVM);
-                _editables      .AddNotNull(ctrl.Id, ctrl as IEditableVM);
+                _menuSeparators .AddNotNull(ctrl.Id, ctrl as IMenuSeparatorVM);
                 _descriptionable.AddNotNull(ctrl.Id, ctrl as IDescriptionableVM);
 
                 ctrl.Changed += OnChanged;
@@ -123,15 +129,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             if (requestor==null  ||  ctrl == null) return;
 
             if (_descriptionable.ContainsKey(ctrl.Id)) _descriptionable.Remove(ctrl.Id);
-            if (_editables      .ContainsKey(ctrl.Id)) _editables      .Remove(ctrl.Id);
+            if (_menuSeparators .ContainsKey(ctrl.Id)) _menuSeparators .Remove(ctrl.Id);
             if (_gallerySizes   .ContainsKey(ctrl.Id)) _gallerySizes   .Remove(ctrl.Id);
             if (_dynamicMenus   .ContainsKey(ctrl.Id)) _dynamicMenus   .Remove(ctrl.Id);
-            if (_selectables2   .ContainsKey(ctrl.Id)) _selectables2   .Remove(ctrl.Id);
             if (_selectables    .ContainsKey(ctrl.Id)) _selectables    .Remove(ctrl.Id);
+            if (_selectItems    .ContainsKey(ctrl.Id)) _selectItems    .Remove(ctrl.Id);
             if (_toggleables    .ContainsKey(ctrl.Id)) _toggleables    .Remove(ctrl.Id);
             if (_clickables     .ContainsKey(ctrl.Id)) _clickables     .Remove(ctrl.Id);
             if (_imageables     .ContainsKey(ctrl.Id)) _imageables     .Remove(ctrl.Id);
             if (_sizeables      .ContainsKey(ctrl.Id)) _sizeables      .Remove(ctrl.Id);
+            if (_editables      .ContainsKey(ctrl.Id)) _editables      .Remove(ctrl.Id);
             if (_controls       .ContainsKey(ctrl.Id)) _controls       .Remove(ctrl.Id);
 
             ctrl.OnPurged(requestor);
@@ -183,6 +190,14 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal StaticComboBoxVM NewStaticComboBox(string controlId, IList<StaticItemVM> items)
         => Add<StaticComboBoxVM, IStaticComboBoxSource>(new StaticComboBoxVM(controlId,items));
+
+        /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
+        internal GalleryVM NewGallery(string controlId)
+        => Add<GalleryVM, IGallerySource>(new GalleryVM(controlId));
+
+        /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
+        internal StaticGalleryVM NewStaticGallery(string controlId, IList<StaticItemVM> items)
+        => Add<StaticGalleryVM, IStaticGallerySource>(new StaticGalleryVM(controlId,items));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal LabelVM NewLabel(string controlId)
