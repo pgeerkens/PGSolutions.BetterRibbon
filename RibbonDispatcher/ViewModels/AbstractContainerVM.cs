@@ -9,8 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public abstract class AbstractContainerVM<TSource>: AbstractControlVM<TSource>, IContainerControl
-        where TSource : IControlSource {
+    public abstract class AbstractContainerVM<TSource,TVM>: AbstractControlVM<TSource,TVM>, IContainerControl
+        where TSource : IControlSource where TVM:class,IControlVM {
         protected AbstractContainerVM(ViewModelFactory factory, string itemId)
         : base(itemId) {
             Factory = factory;

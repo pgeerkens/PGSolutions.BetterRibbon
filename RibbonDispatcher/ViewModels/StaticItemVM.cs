@@ -4,7 +4,7 @@
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>TODO</summary>
-    public class StaticItemVM: AbstractControlVM<ISelectableItemSource>, IStaticItemVM,
+    public class StaticItemVM: AbstractControlVM<ISelectableItemSource,IStaticItemVM>, IStaticItemVM,
             IActivatable<ISelectableItemSource,IStaticItemVM>, IImageableVM {
         /// <summary>TODO</summary>
         internal StaticItemVM(string ItemId, IControlStrings strings) : base(ItemId)
@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new IStaticItemVM Attach(ISelectableItemSource source) => Attach<StaticItemVM>(source);
+        public override IStaticItemVM Attach(ISelectableItemSource source) => Attach<StaticItemVM>(source);
         #endregion
 
         #region IImageableVM implementation

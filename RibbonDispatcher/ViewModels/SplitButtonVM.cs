@@ -4,16 +4,14 @@
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal abstract class SplitButtonVM<TSource>: AbstractContainerVM<TSource>, ISplitButtonVM,
-            IActivatable<TSource,ISplitButtonVM>, ISizeableVM, IImageableVM
-        where TSource: IImageSizeSource {
+    internal abstract class SplitButtonVM<TSource,TVM>: AbstractContainerVM<TSource,TVM>, ISplitButtonVM,
+            IActivatable<TSource,TVM>, ISizeableVM, IImageableVM
+        where TSource: IImageSizeSource where TVM:class,ISplitButtonVM {
         public SplitButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu)
         : base(factory,itemId)
         => MenuVM = menu;
 
         public IMenuVM   MenuVM   { get; }
-
-        public new ISplitButtonVM Attach(TSource source) => Attach<SplitButtonVM<TSource>>(source);
 
         public override void Invalidate() { MenuVM?.Invalidate(); base.Invalidate(); }
 
@@ -37,7 +35,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #endregion
     }
 
-    internal class SplitToggleButtonVM: SplitButtonVM<IToggleSource>, ISplitToggleButtonVM,
+    internal class SplitToggleButtonVM: SplitButtonVM<IToggleSource,ISplitToggleButtonVM>, ISplitToggleButtonVM,
             IActivatable<IToggleSource,ISplitToggleButtonVM>, IToggleableVM {
         public SplitToggleButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IToggleVM toggle)
         : base(factory, itemId, menu)
@@ -45,7 +43,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new ISplitToggleButtonVM Attach(IToggleSource source) => Attach<SplitToggleButtonVM>(source);
+        public override ISplitToggleButtonVM Attach(IToggleSource source) => Attach<SplitToggleButtonVM>(source);
 
         /// <inheritdoc/>
         public override void Invalidate() { ToggleVM?.Invalidate(); base.Invalidate(); }
@@ -70,7 +68,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #endregion
     }
 
-    internal class SplitPressButtonVM: SplitButtonVM<IButtonSource>, ISplitPressButtonVM,
+    internal class SplitPressButtonVM: SplitButtonVM<IButtonSource,ISplitPressButtonVM>, ISplitPressButtonVM,
             IActivatable<IButtonSource,ISplitPressButtonVM>, IClickableVM {
         public SplitPressButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IButtonVM button)
         : base(factory, itemId, menu)
@@ -78,7 +76,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new ISplitPressButtonVM Attach(IButtonSource source) => Attach<SplitPressButtonVM>(source);
+        public override ISplitPressButtonVM Attach(IButtonSource source) => Attach<SplitPressButtonVM>(source);
 
         /// <inheritdoc/>
         public override void Invalidate() { ButtonVM?.Invalidate(); base.Invalidate(); }

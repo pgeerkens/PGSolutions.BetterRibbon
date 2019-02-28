@@ -5,12 +5,12 @@
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon ToggleButton objects.</summary>
     internal class ToggleButtonVM : CheckBoxVM, IToggleVM,
-        IActivatable<IToggleSource,ToggleButtonVM>, ISizeableVM, IImageableVM {
+        IActivatable<IToggleSource,IToggleVM>, ISizeableVM, IImageableVM {
         internal ToggleButtonVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new ToggleButtonVM Attach(IToggleSource source) => Attach<ToggleButtonVM>(source);
+        public override IToggleVM Attach(IToggleSource source) => Attach<ToggleButtonVM>(source);
         #endregion
 
         #region ISizeable implementation

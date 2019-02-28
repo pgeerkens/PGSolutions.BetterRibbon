@@ -3,13 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal class MenuVM: AbstractContainerVM<IMenuSource>, IMenuVM,
+    internal class MenuVM: AbstractContainerVM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
         public MenuVM(ViewModelFactory factory, string itemId) : base(factory, itemId) { }
 
         #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        public new IMenuVM Attach(IMenuSource source) => Attach<MenuVM>(source);
+        public override IMenuVM Attach(IMenuSource source) => Attach<MenuVM>(source);
         #endregion
 
         #region IImageable implementation

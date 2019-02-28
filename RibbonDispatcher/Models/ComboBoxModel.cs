@@ -4,17 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.InteropServices;
+using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>The COM visible Model for Ribbon ComboBox controls.</summary>
-    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [Description("The COM visible Model for Ribbon ComboBox controls.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -27,6 +24,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal ComboBoxModel(Func<string, ComboBoxVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
+        #region IActivatable implementation
         public IComboBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
@@ -36,15 +34,16 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public override void Detach() { Edited = null;  base.Detach(); }
+        #endregion
+
         #region IListable implementation
         public IReadOnlyList<IStaticItemVM> Items => _items.AsReadOnly();
-        private List<IStaticItemVM> _items = new List<IStaticItemVM>();
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
         #endregion
 
         #region IDynamicListable implementation
+        private List<IStaticItemVM> _items = new List<IStaticItemVM>();
+
         public IComboBoxModel ClearList() { _items.Clear(); return this; }
 
         public IComboBoxModel AddSelectableModel(IStaticItemVM selectableModel) {
@@ -57,7 +56,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #region IEditableList implementation
         public event EditedEventHandler Edited;
 
-        public string Text          { get; set; } = "";
+        public string Text { get; set; } = "";
 
         private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control, text);
         #endregion

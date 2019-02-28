@@ -9,7 +9,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public abstract class ControlModel<TSource,TCtrl>: IControlSource
             where TSource: IControlSource
             where TCtrl: IControlVM {
-        protected ControlModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel,
+        protected ControlModel(Func<string, IActivatable<TSource,TCtrl>> funcViewModel,
                 IControlStrings strings) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId).Attach(source);
             Strings = strings;
@@ -37,8 +37,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         public virtual void Invalidate() => ViewModel?.Invalidate();
-
-        //public void Detach() => ViewModel.Detach();
 
         /// <inheritdoc/>
         public virtual void SetShowInactive(bool showInactive) => ViewModel?.Invalidate();

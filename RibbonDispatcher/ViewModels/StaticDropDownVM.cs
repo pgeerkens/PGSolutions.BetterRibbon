@@ -6,13 +6,13 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for static ribbon DropDown objects.</summary>
-    internal class StaticDropDownVM : AbstractControlVM<IStaticDropDownSource>, IDropDownVM,
+    internal class StaticDropDownVM : AbstractControlVM<IStaticDropDownSource,IDropDownVM>, IDropDownVM,
             IActivatable<IStaticDropDownSource,IDropDownVM>, ISelectItemsVM {
         internal StaticDropDownVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
         #region IActivatable implementation
-        public new IDropDownVM Attach(IStaticDropDownSource source) => Attach<StaticDropDownVM>(source);
+        public override IDropDownVM Attach(IStaticDropDownSource source) => Attach<StaticDropDownVM>(source);
 
         public override void Detach() { SelectionMade = null; base.Detach(); }
         #endregion

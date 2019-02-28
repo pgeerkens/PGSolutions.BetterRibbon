@@ -6,13 +6,13 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for static ribbon ComboBox objects.</summary>
-    internal class StaticComboBoxVM: AbstractControlVM<IStaticComboBoxSource>, IStaticComboBoxVM,
+    internal class StaticComboBoxVM: AbstractControlVM<IStaticComboBoxSource,IStaticComboBoxVM>, IStaticComboBoxVM,
             IActivatable<IStaticComboBoxSource,IStaticComboBoxVM>, IEditableVM {
         public StaticComboBoxVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
 
         #region IActivatable implementation
-        public new IStaticComboBoxVM Attach(IStaticComboBoxSource source) => Attach<StaticComboBoxVM>(source);
+        public override IStaticComboBoxVM Attach(IStaticComboBoxSource source) => Attach<StaticComboBoxVM>(source);
 
         public override void Detach() { Edited = null; base.Detach(); }
         #endregion

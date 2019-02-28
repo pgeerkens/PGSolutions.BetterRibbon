@@ -6,7 +6,7 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
-    internal class StaticGalleryVM : AbstractControlVM<IStaticGallerySource>, IStaticGalleryVM,
+    internal class StaticGalleryVM : AbstractControlVM<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryVM,
             IActivatable<IStaticGallerySource,IStaticGalleryVM>, ISelectItemsVM {
         public StaticGalleryVM(string itemId, IReadOnlyList<StaticItemVM> items)
         : base(itemId) => Items = items;
@@ -15,7 +15,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
 
         #region IActivatable implementation
-        public new IStaticGalleryVM Attach(IStaticGallerySource source) => Attach<StaticGalleryVM>(source);
+        public override IStaticGalleryVM Attach(IStaticGallerySource source) => Attach<StaticGalleryVM>(source);
 
         public override void Detach() { SelectionMade = null; base.Detach(); }
         #endregion

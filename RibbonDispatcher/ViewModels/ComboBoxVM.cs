@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal class ComboBoxVM: AbstractControlVM<IComboBoxSource>, IComboBoxVM,
+    internal class ComboBoxVM: AbstractControlVM<IComboBoxSource,IComboBoxVM>, IComboBoxVM,
             IActivatable<IComboBoxSource, IComboBoxVM>, IEditableVM {
         public ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
-        public new IComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
+        public override IComboBoxVM Attach(IComboBoxSource source) => Attach<ComboBoxVM>(source);
 
         public override void Detach() { Edited = null; base.Detach(); }
         #endregion

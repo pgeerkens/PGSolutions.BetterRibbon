@@ -4,11 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.InteropServices;
-using stdole;
-
-using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -22,7 +18,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IStaticGalleryModel))]
     [Guid(Guids.StaticGalleryModel)]
-    public sealed class StaticGalleryModel : ControlModel<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryModel,
+    public sealed class StaticGalleryModel : AbstractSelectableModel<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryModel,
             IStaticGallerySource {
         internal StaticGalleryModel(Func<string, StaticGalleryVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
@@ -36,42 +32,15 @@ namespace PGSolutions.RibbonDispatcher.Models {
             }
             return this;
         }
-
-        public override void Detach() { SelectionMade = null;  base.Detach(); }
         #endregion
 
         #region IListable implementation
-        public IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
-        #endregion
-
-        #region ISelectableList implementation
-        public event SelectionMadeEventHandler SelectionMade;
-
-        public int    SelectedIndex { get; set; }
-        public string SelectedId    { get => Items[SelectedIndex].Id; set => SelectedIndex = FindId(value); }
-
-        private void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
-        => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);
+        public override IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
         #endregion
 
         #region IGallerySize implementation
-        /// <inheritdoc/>
         public int  ItemHeight { get; set; } = 15;
-
-        /// <inheritdoc/>
         public int  ItemWidth  { get; set; } = 15;
-        #endregion
-
-        #region IImageable implementation
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
-
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
         #endregion
     }
 }

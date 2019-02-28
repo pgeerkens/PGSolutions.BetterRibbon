@@ -5,7 +5,7 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
-    internal class CheckBoxVM : AbstractControlVM<IToggleSource>, IToggleVM,
+    internal class CheckBoxVM : AbstractControlVM<IToggleSource,IToggleVM>, IToggleVM,
         IActivatable<IToggleSource, IToggleVM>, IToggleableVM {
         public CheckBoxVM(string itemId) : base(itemId) { }
 
@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new IToggleVM Attach(IToggleSource source) => Attach<CheckBoxVM>(source);
+        public override IToggleVM Attach(IToggleSource source) => Attach<CheckBoxVM>(source);
 
         /// <inheritdoc/>
         public override void Detach() { Toggled = null; base.Detach(); }

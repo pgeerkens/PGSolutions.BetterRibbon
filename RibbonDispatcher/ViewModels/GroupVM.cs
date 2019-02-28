@@ -6,14 +6,17 @@ using System.Collections.ObjectModel;
 namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public class GroupVM : AbstractContainerVM<IControlSource>, IGroupVM, 
-            IActivatable<IControlSource,GroupVM> {
+    public class GroupVM : AbstractContainerVM<IControlSource,IGroupVM>, IGroupVM, 
+            IActivatable<IControlSource,IGroupVM> {
         internal GroupVM(ViewModelFactory factory, string itemId)
         : base(factory, itemId) { }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        GroupVM IActivatable<IControlSource,GroupVM>.Attach(IControlSource source)
-        => Attach<GroupVM>(source);
+        public override IGroupVM Attach(IControlSource source) => Attach<GroupVM>(source);
+
+        ///// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        //GroupVM IActivatable<IControlSource,GroupVM>.Attach(IControlSource source)
+        //=> Attach<GroupVM>(source);
     }
 
     internal class KeyedControls: KeyedCollection<string, IControlVM> {

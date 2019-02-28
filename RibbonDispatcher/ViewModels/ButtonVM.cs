@@ -5,7 +5,7 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for ButtonVM objects.</summary>
-    internal class ButtonVM: AbstractControlVM<IButtonSource>, IButtonVM,
+    internal class ButtonVM: AbstractControlVM<IButtonSource,IButtonVM>, IButtonVM,
             IActivatable<IButtonSource,IButtonVM>, ISizeableVM, IClickableVM, IImageableVM {
         public ButtonVM(string itemId) : base(itemId) { }
 
@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IActivatable implementation
         /// <inheritdoc/>
-        public new IButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);
+        public override IButtonVM Attach(IButtonSource source) => Attach<ButtonVM>(source);
 
         /// <inheritdoc/>
         public override void Detach() { Clicked = null; base.Detach(); }

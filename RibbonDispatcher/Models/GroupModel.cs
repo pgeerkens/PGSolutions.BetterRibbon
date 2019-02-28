@@ -18,7 +18,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IGroupModel))]
     [Guid(Guids.GroupModel)]
-    public class GroupModel : ControlModel<IControlSource,GroupVM>,
+    public class GroupModel : ControlModel<IControlSource,IGroupVM>,
             IGroupModel, IControlSource {
         public GroupModel(Func<string,GroupVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings)

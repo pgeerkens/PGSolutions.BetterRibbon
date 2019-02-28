@@ -25,9 +25,9 @@ namespace PGSolutions.RibbonDispatcher {
         public static void MsgBoxShow(this string message, string caption) =>
             MessageBox.Show($"{message}.", caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        public static string Format2(this Version version) =>
+        public  static string Format2(this Version version) =>
             $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}";
-        public static string Format(this Version version) => Format2(version) +
+        public  static string Format(this Version version) => Format2(version) +
             $"({version?.Build.FormatVersionDate()} " +
             $"{version?.Revision.FormatVersionTime()} UTC)";
         private static string FormatVersionDate(this int dayNo) =>

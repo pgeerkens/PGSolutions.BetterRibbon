@@ -6,8 +6,8 @@ using System;
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>TODO</summary>
     [CLSCompliant(true)]
-    public abstract class AbstractControlVM<TSource>: IControlVM, IActivatable<TSource,IControlVM>
-        where TSource: IControlSource {
+    public abstract class AbstractControlVM<TSource,TVM>: IControlVM, IActivatable<TSource,TVM>
+        where TSource: IControlSource where TVM:class,IControlVM {
         /// <summary>TODO</summary>
         protected AbstractControlVM(string itemId) => Id = itemId;
 
@@ -50,19 +50,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         protected bool IsAttached => Source != null;
 
         /// <inheritdoc/>
-        protected virtual T Attach<T>(TSource source) where T: AbstractControlVM<TSource> {
+        protected virtual T Attach<T>(TSource source) where T: AbstractControlVM<TSource,TVM> {
             Source = source;
             Invalidate();
             return this as T;
         }
 
-        public IControlVM Attach(TSource source) => Attach<AbstractControlVM<TSource>>(source);
+        public abstract TVM Attach(TSource source);
 
         /// <inheritdoc/>
-        public virtual void Detach() {
-            Source = default;
-        //    Invalidate();
-        }
+        public virtual void Detach() => Source = default;
 
         /// <inheritdoc/>
         public bool ShowInactive => DefaultShowInactive;

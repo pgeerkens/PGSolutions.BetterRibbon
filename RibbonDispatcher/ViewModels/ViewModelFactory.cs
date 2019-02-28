@@ -104,8 +104,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         private  readonly IDictionary<string, IDescriptionableVM> _descriptionable;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        private TControl Add<TControl,TSource>(TControl ctrl) 
-        where TControl: AbstractControlVM<TSource> where TSource: class, IControlSource {
+        private TControl Add<TControl,TSource,TVM>(TControl ctrl) 
+        where TControl: AbstractControlVM<TSource,TVM>
+        where TSource: class,IControlSource
+        where TVM:class,IControlVM {
             if (!_controls.ContainsKey(ctrl.Id)) {
                 _controls       .Add(ctrl.Id, ctrl);
                 _editables      .AddNotNull(ctrl.Id, ctrl as IEditableVM);
@@ -148,31 +150,31 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region Factoy Method implementation
         /// <summary>.</summary>
         internal TabVM NewTab(string controlId)
-        => Add<TabVM, IControlSource>(new TabVM(this, controlId));
+        => Add<TabVM,IControlSource,ITabVM>(new TabVM(this, controlId));
 
         /// <summary>Returns a new Ribbon Group view-model instance.</summary>
         internal GroupVM NewGroup(string controlId)
-        => Add<GroupVM,IControlSource>(new GroupVM(this, controlId));
+        => Add<GroupVM,IControlSource,IGroupVM>(new GroupVM(this, controlId));
 
         /// <summary>Returns a new Ribbon ActionButton view-model instance.</summary>
         internal ButtonVM NewButton(string controlId)
-        => Add<ButtonVM,IButtonSource>(new ButtonVM(controlId));
+        => Add<ButtonVM,IButtonSource,IButtonVM>(new ButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal ToggleButtonVM NewToggleButton(string controlId)
-        => Add<ToggleButtonVM,IToggleSource>(new ToggleButtonVM(controlId));
+        => Add<ToggleButtonVM,IToggleSource,IToggleVM>(new ToggleButtonVM(controlId));
 
         /// <summary>Returns a new Ribbon CheckBox view-model instance.</summary>
         internal CheckBoxVM NewCheckBox(string controlId)
-        => Add<CheckBoxVM,IToggleSource>(new CheckBoxVM(controlId));
+        => Add<CheckBoxVM,IToggleSource,IToggleVM>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDown view-model instance.</summary>
         internal DropDownVM NewDropDown(string controlId)
-        => Add<DropDownVM,IDropDownSource>(new DropDownVM(controlId));
+        => Add<DropDownVM,IDropDownSource,IDropDownVM>(new DropDownVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDown view-model instance.</summary>
         internal StaticDropDownVM NewStaticDropDown(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticDropDownVM,IStaticDropDownSource>(new StaticDropDownVM(controlId,items));
+        => Add<StaticDropDownVM,IStaticDropDownSource,IDropDownVM>(new StaticDropDownVM(controlId,items));
 
         /// <summary>Returns a new Ribbon SelectableItem view-model instance.</summary>
         [SuppressMessage("Microsoft.Performance","CA1822:MarkMembersAsStatic")]
@@ -181,39 +183,39 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Returns a new Ribbon EditBox view-model instance.</summary>
         internal EditBoxVM NewEditBox(string controlId)
-        => Add<EditBoxVM, IEditBoxSource>(new EditBoxVM(controlId));
+        => Add<EditBoxVM, IEditBoxSource,IEditBoxVM>(new EditBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal ComboBoxVM NewComboBox(string controlId)
-        => Add<ComboBoxVM, IComboBoxSource>(new ComboBoxVM(controlId));
+        => Add<ComboBoxVM, IComboBoxSource,IComboBoxVM>(new ComboBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal StaticComboBoxVM NewStaticComboBox(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticComboBoxVM, IStaticComboBoxSource>(new StaticComboBoxVM(controlId,items));
+        => Add<StaticComboBoxVM, IStaticComboBoxSource,IStaticComboBoxVM>(new StaticComboBoxVM(controlId,items));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal GalleryVM NewGallery(string controlId)
-        => Add<GalleryVM, IGallerySource>(new GalleryVM(controlId));
+        => Add<GalleryVM, IGallerySource,IGalleryVM>(new GalleryVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
         internal StaticGalleryVM NewStaticGallery(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticGalleryVM, IStaticGallerySource>(new StaticGalleryVM(controlId,items));
+        => Add<StaticGalleryVM, IStaticGallerySource,IStaticGalleryVM>(new StaticGalleryVM(controlId,items));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal LabelVM NewLabel(string controlId)
-        => Add<LabelVM, ILabelSource>(new LabelVM(controlId));
+        => Add<LabelVM, ILabelSource,ILabelVM>(new LabelVM(controlId));
 
         /// <summary>Returns a new Ribbon Split(Toggle)Button view-model instance.</summary>
         internal SplitToggleButtonVM NewSplitToggleButton(string controlId, IMenuVM menu, IToggleVM toggle)
-        => Add<SplitToggleButtonVM, IToggleSource>(new SplitToggleButtonVM(this, controlId, menu, toggle));
+        => Add<SplitToggleButtonVM, IToggleSource,ISplitToggleButtonVM>(new SplitToggleButtonVM(this, controlId, menu, toggle));
 
         /// <summary>Returns a new Ribbon Split(Press)Button view-model instance.</summary>
         internal SplitPressButtonVM NewSplitPressButton(string controlId, IMenuVM menu, IButtonVM button)
-        => Add<SplitPressButtonVM, IButtonSource>(new SplitPressButtonVM(this, controlId, menu, button));
+        => Add<SplitPressButtonVM, IButtonSource,ISplitPressButtonVM>(new SplitPressButtonVM(this, controlId, menu, button));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal MenuVM NewMenu(string controlId)
-        => Add<MenuVM, IMenuSource>(new MenuVM(this, controlId));
+        => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(this, controlId));
         #endregion
     }
 }

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
@@ -23,10 +22,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [Guid(Guids.StaticComboBoxModel)]
     public sealed class StaticComboBoxModel: ControlModel<IStaticComboBoxSource,IStaticComboBoxVM>, IStaticComboBoxModel,
             IStaticComboBoxSource {
-        internal StaticComboBoxModel(Func<string, StaticComboBoxVM> funcViewModel,
-                IControlStrings strings)
+        internal StaticComboBoxModel(Func<string, StaticComboBoxVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
 
+        #region IActivatable implementation
         public IStaticComboBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
@@ -36,11 +35,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public override void Detach() { Edited = null;  base.Detach(); }
+        #endregion
+
         #region IListable implementation
         public IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
-
-        public int FindId(string id)
-        => Items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
         #endregion
 
         #region IEditable implementation

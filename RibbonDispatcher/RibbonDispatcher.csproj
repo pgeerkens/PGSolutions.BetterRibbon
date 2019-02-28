@@ -69,6 +69,7 @@
     <Compile Include="Models\AbstractModelFactory.cs" />
     <Compile Include="Models\AbstractRibbonGroupModel.cs" />
     <Compile Include="Models\AbstractRibbonTabModel.cs" />
+    <Compile Include="Models\AbstractSelectableModel.cs" />
     <Compile Include="Models\AbstractSplitButtonModel.cs" />
     <Compile Include="Models\ComboBoxModel.cs" />
     <Compile Include="Models\CustomButtonsModel.cs" />
@@ -146,7 +147,7 @@
     <Compile Include="ViewModels\ViewModelEventInterfaces.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\DictionaryExtensions.cs" />
+    <Compile Include="ViewModels\Extensions.cs" />
     <Compile Include="Models\MyResourceManager.cs" />
     <Compile Include="Models\ResourceManagerExtensions.cs" />
   </ItemGroup>
