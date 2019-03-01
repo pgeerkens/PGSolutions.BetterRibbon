@@ -16,10 +16,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public abstract class AbstractSplitButtonModel<TSource,TControl>: ControlModel<TSource,TControl>,
             ISplitButtonModel
         where TSource: IControlSource where TControl: ISplitButtonVM {
-        protected AbstractSplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel, IStrings strings,
-                MenuModel menu)
+        protected AbstractSplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel,
+                IStrings strings, MenuModel menu)
         : base(funcViewModel, strings)
-        => Menu   = menu;
+        => Menu = menu;
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";

@@ -9,6 +9,9 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
+Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
+
 Public Function AlternateToggle(ByVal Factory As IModelFactory, Mode As Boolean, _
         Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
@@ -19,7 +22,7 @@ Public Function AlternateToggle(ByVal Factory As IModelFactory, Mode As Boolean,
     'Factory.DetachProxy CheckBoxID
     Model.Detach
     Model.Attach IIf(AlternateToggle, ToggleID, CheckBoxID)
-    Model.SetImageMso ToggleImage(Model.IsPressed)
+    Model.SetImage BetterRibbon.NewImageObjectMso(ToggleImage(Model.IsPressed))
     Model.Invalidate
     Application.StatusBar = "Ready ...'"
     
@@ -55,3 +58,15 @@ End Function
 Private Function ShowLabel(ByVal SelectedIndex As Integer) As Boolean
     ShowLabel = ((SelectedIndex + 1) And 1) <> 0
 End Function
+
+Public Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
+    On Error GoTo EH
+    If MBetterRibbon Is Nothing Then
+        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
+            .NewBetterRibbon(New ResourceLoader)
+    End If
+    Set BetterRibbon = MBetterRibbon
+XT: Exit Property
+EH: ErrorUtils.ReRaiseError Err, ModuleName & ".BetterRibbon"
+    Resume          ' for debugging only
+End Property

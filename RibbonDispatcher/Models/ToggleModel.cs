@@ -51,8 +51,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
+        public IToggleModel SetImage(ImageObject image) { Image = image; return this; }
         #endregion
     }
 }

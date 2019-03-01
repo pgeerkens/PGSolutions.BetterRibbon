@@ -13,6 +13,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IDropDownModel)]
     public interface IDropDownModel {
+        event SelectionMadeEventHandler SelectionMade;
+
         /// <summary>Gets or sets the (zero-based) integer of the selected item. Default value.</summary>
         [DispId(0)]
         int SelectedIndex {

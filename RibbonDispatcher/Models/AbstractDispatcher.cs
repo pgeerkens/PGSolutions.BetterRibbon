@@ -33,8 +33,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// 
     /// This class must be COM-Visible for the Ribbon callbacks to be received!
     /// </remarks>
-    [Description("Implementation of (all) the callbacks for the Fluent Ribbon; for .NET clients.")]
+    [Description("Implementation of (all) the callbacks for the Fluent Ribbon.")]
     [Serializable, ComVisible(true), CLSCompliant(true)]
+    [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
@@ -49,13 +50,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         /// <inheritdoc/>
-        public   string           ControlId        { get; }
+        public  string           ControlId        { get; }
 
         /// <inheritdoc/>
-        public   ViewModelFactory ViewModelFactory { get; }
+        public  ViewModelFactory ViewModelFactory { get; }
 
         /// <summary>.</summary>
-        internal IResourceLoader  ResourceLoader   { get; }
+        private IResourceLoader  ResourceLoader   { get; }
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);

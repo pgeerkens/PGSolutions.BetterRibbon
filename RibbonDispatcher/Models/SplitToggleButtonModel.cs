@@ -6,11 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
+using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using Microsoft.Office.Core;
     using IStrings = IControlStrings;
 
     /// <summary>The COM visible Model for Ribbon Split (Toggle) Button controls.</summary>
@@ -32,9 +33,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public ISplitToggleButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
-                Toggle.Attach(ViewModel.ToggleVM.Id);
                 Menu.Attach(ViewModel.MenuVM.Id);
 
+                Toggle.Attach(ViewModel.ToggleVM.Id);
                 Toggle.ViewModel.Toggled += OnToggled;
             }
             ViewModel?.Invalidate();
@@ -52,5 +53,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnToggled(IRibbonControl control, bool isPressed)
         => Toggled?.Invoke(control, IsPressed = isPressed);
         #endregion
+
+        public ISplitToggleButtonModel SetImage(ImageObject image) {Image = image; return this; }
     }
 }

@@ -98,6 +98,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set;
         }
         #endregion
+
+        #region ISizeable implementation
+        /// <summary>.</summary>
+        [DispId(7)]
+        new bool   IsLarge    {
+            [Description(".")]
+            get; set; }
+        #endregion
     }
 
     /// <summary></summary>

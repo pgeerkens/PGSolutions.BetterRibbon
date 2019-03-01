@@ -32,9 +32,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public ISplitPressButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) {
-                Button.Attach(ViewModel.ButtonVM.Id);
                 Menu.Attach(ViewModel.MenuVM.Id);
 
+                Button.Attach(ViewModel.ButtonVM.Id);
                 Button.ViewModel.Clicked += OnClicked;
             }
             ViewModel?.Invalidate();
@@ -44,11 +44,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public override void Detach() { Button.Detach(); base.Detach(); }
 
         #region Pressable implementation
-        public event ClickedEventHandler Pressed;
+        public event ClickedEventHandler Clicked;
 
         public ButtonModel Button { get; }
 
-        private void OnClicked(IRibbonControl control) => Pressed?.Invoke(control);
+        private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
+
+        public ISplitPressButtonModel SetImage(ImageObject image) {Image = image; return this; }
     }
 }

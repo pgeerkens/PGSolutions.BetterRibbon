@@ -13,25 +13,35 @@ namespace PGSolutions.RibbonDispatcher {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IControlStrings2)]
     public interface IControlStrings2 : IControlStrings {
-        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
-        [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
-        string Description { get; }
-
-        /// <summary>Returns the KeyTip string for this control.</summary>
-        [Description("Returns the KeyTip string for this control.")]
-        new string KeyTip { get; }
-
         /// <summary>Returns the Label string for this control.</summary>
+        [DispId(1)]
+        new string Label {
         [Description("Returns the Label string for this control.")]
-        new string Label { get; }
+            get; }
 
         /// <summary>Returns the screenTip string for this control.</summary>
+        [DispId(2)]
+        new string ScreenTip {
         [Description("Returns the screenTip string for this control.")]
-        new string ScreenTip { get; }
+            get; }
 
         /// <summary>Returns the SuperTip string for this control.</summary>
+        [DispId(3)]
+        new string SuperTip {
         [Description("Returns the SuperTip string for this control.")]
-        new string SuperTip { get; }
+            get; }
+
+        /// <summary>Returns the KeyTip string for this control.</summary>
+        [DispId(4)]
+        new string KeyTip {
+        [Description("Returns the KeyTip string for this control.")]
+            get; }
+
+        /// <summary>Returns the Description string for this control. Only applicable for Menu Items.</summary>
+        [DispId(5)]
+        string Description {
+        [Description("Returns the Description string for this control. Only applicable for Menu Items.")]
+            get; }
     }
 
     /// <summary>TODO</summary>
@@ -41,7 +51,6 @@ namespace PGSolutions.RibbonDispatcher {
     [ComDefaultInterface(typeof(IControlStrings2))]
     [Guid(Guids.ControlStrings2)]
     public class ControlStrings2 : ControlStrings, IControlStrings2 {
-        public new static ControlStrings2 Empty { get; } = new ControlStrings2();
         private ControlStrings2() : this(null) { }
 
         /// <summary>TODO</summary>
@@ -53,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher {
             string keyTip         = null,
             string description    = null
         ) : base(label, screenTip, superTip,keyTip)
-        => Description     = description;
+        => Description = description;
         /// <inheritdoc/>
         public string Description { get; }
 

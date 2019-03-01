@@ -16,9 +16,9 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
-Private LabelTest               As PGSolutions_RibbonDispatcher.LabelModel
-Private SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
-Private SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
+Private LabelTest               As PGSolutions_RibbonDispatcher.LabelControlModel
+Private WithEvents SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
+Private WithEvents SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
 Attribute SplitToggle.VB_VarHelpID = -1
 Private WithEvents Dialog       As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Dialog.VB_VarHelpID = -1
@@ -54,6 +54,14 @@ Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal
     MsgBox "The seleccted item was: " & selectedId, vbOKOnly, ThisWorkbook.Name
 End Sub
 
+Private Sub SplitButton_Clicked(ByVal control As Office.IRibbonControl)
+    MsgBox "Pressed!", vbOKOnly, "SplitButton_Clicked"
+End Sub
+
+Private Sub SplitToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+    MsgBox "Toggled now: " & SplitToggle.IsPressed, vbOKOnly, "SplitToggle_Toggled"
+End Sub
+
 Friend Sub Activate()
     If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
     If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive False
@@ -71,22 +79,31 @@ Friend Sub Activate()
 End Sub
 
 Private Sub Class_Initialize()
+    On Error GoTo EH
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
     With BetterRibbon
         Set CustomGroup = .NewGroupModel("CustomizableGroup")
-        Set LabelTest = .NewLabelModel("CustomVbaLabel1")
+        Set LabelTest = .NewLabelControlModel("CustomVbaLabel1")
         
         Set EditBox = .NewEditBoxModel("CustomVbaEditBox1")
         EditBox.Text = "Default"
         
-        Set Button = .NewButtonModelMso("CustomizableButton3", "RefreshAll")
+        Set Button = .NewButtonModel("CustomizableButton3") _
+                     .SetImage(.NewImageObjectMso("RefreshAll"))
         Set Dialog = .NewButtonModel("CustomVbaDialog")
-        Set SplitButton = .NewSplitPressButtonModel( _
-            "CustomVbaSplit1", "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
-        Set SplitToggle = .NewSplitToggleButtonModel( _
-            "CustomVbaSplit2", "CustomVbaSplit2Menu", "CustomVbaSplit2Toggle")
+        Set SplitButton = .NewSplitPressButtonModel("CustomVbaSplit1", _
+                        "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
+        Set SplitToggle = .NewSplitToggleButtonModel("CustomVbaSplit2", _
+                        "CustomVbaSplit2Menu", "CustomVbaSplit2Toggle")
         
         Set Gallery1 = .NewStaticGalleryModel("StaticGallery1")
         Set Split2Menu = .NewMenuModel("CustomVbaSplit2Menu")
+        
+        Dim v
+        Set v = .NewSplitPressButtonModel("CustomVbaSplit1", _
+                        "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
     End With
+XT: Exit Sub
+EH: MsgBox Err.Description, vbOKOnly
+    Resume Next
 End Sub

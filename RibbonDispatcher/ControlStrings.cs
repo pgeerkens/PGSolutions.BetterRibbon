@@ -13,21 +13,29 @@ namespace PGSolutions.RibbonDispatcher {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IControlStrings)]
     public interface IControlStrings {
-        /// <summary>Returns the KeyTip string for this control.</summary>
-        [Description("Returns the KeyTip string for this control.")]
-        string KeyTip           { get; }
-
         /// <summary>Returns the Label string for this control.</summary>
+        [DispId(1)]
+        string Label {
         [Description("Returns the Label string for this control.")]
-        string Label            { get; }
+            get; }
 
         /// <summary>Returns the screenTip string for this control.</summary>
+        [DispId(2)]
+        string ScreenTip {
         [Description("Returns the screenTip string for this control.")]
-        string ScreenTip        { get; }
+            get; }
 
         /// <summary>Returns the SuperTip string for this control.</summary>
+        [DispId(3)]
+        string SuperTip {
         [Description("Returns the SuperTip string for this control.")]
-        string SuperTip         { get; }
+            get; }
+
+        /// <summary>Returns the KeyTip string for this control.</summary>
+        [DispId(4)]
+        string KeyTip {
+        [Description("Returns the KeyTip string for this control.")]
+            get; }
     }
 
     /// <summary>TODO</summary>
@@ -37,7 +45,6 @@ namespace PGSolutions.RibbonDispatcher {
     [ComDefaultInterface(typeof(IControlStrings))]
     [Guid(Guids.ControlStrings)]
     public class ControlStrings: IControlStrings {
-        public static ControlStrings Empty { get; } = new ControlStrings();
         private ControlStrings() : this(null) { }
 
         /// <summary>TODO</summary>

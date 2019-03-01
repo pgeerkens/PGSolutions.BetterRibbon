@@ -15,6 +15,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IButtonModel)]
     public interface IButtonModel {
+        event ClickedEventHandler Clicked;
+
         #region IActivable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [DispId(1),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
@@ -77,10 +79,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Sets the image for this control to the MCO image as named.</summary>
         [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
-        void SetImageDisp(IPictureDisp image);
-        /// <summary>Sets the current image for this control to the provided <see cref="IPictureDisp"/>.</summary>
-        [DispId(12),Description("Sets the image for this control to the MCO image as named..")]
-        void SetImageMso(string imageMso);
+        IButtonModel SetImage(ImageObject image);
         #endregion
     }
 }

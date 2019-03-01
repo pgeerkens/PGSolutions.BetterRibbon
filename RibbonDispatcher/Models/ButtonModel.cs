@@ -42,7 +42,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
 
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
+        public IButtonModel SetImage(ImageObject image) { Image = image; return this; }
     }
 }

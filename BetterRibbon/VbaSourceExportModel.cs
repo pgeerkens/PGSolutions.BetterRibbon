@@ -44,7 +44,7 @@ namespace PGSolutions.BetterRibbon {
         public void Invalidate() {
             foreach (var model in Models) {
                 model.DestIsSrc.IsPressed = DestIsSrc;
-                model.DestIsSrc.SetImageMso(DestIsSrc.ToggleImage());
+                model.DestIsSrc.SetImage(DestIsSrc.ToggleImage());
                 model.ExportSelected.IsEnabled = ! DestIsSrc;
                 model.DestIsSrc.IsLarge      = model.Suffix == "PG";
                 model.ExportSelected.IsLarge = model.Suffix == "PG";

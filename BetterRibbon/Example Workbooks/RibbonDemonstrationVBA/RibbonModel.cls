@@ -14,10 +14,8 @@ Attribute VB_Exposed = False
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private Const COMAddInName            As String = "PGSolutions.BetterRibbon"
 Private Const ControlStringsRangeName As String = "ControlStringData"
 
-Private MBetterRibbon        As PGSolutions_RibbonDispatcher.IModelFactory
 Private CustomGroup          As PGSolutions_RibbonDispatcher.IGroupModel
 
 Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
@@ -46,7 +44,7 @@ Attribute Button3.VB_VarHelpID = -1
 Private Sub Toggle1_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     CustomGroup.SetShowInactive IsPressed
-    Toggle1.SetImageMso ToggleImage(IsPressed)
+    Toggle1.SetImage BetterRibbon.NewImageObjectMso(ToggleImage(IsPressed))
     
     Invalidate
 XT: Exit Sub
@@ -60,7 +58,7 @@ Private Sub Toggle2_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As 
     Toggle1.IsLarge = Not IsPressed
     Toggle2.IsLarge = Not IsPressed
     Toggle3.IsLarge = Not IsPressed
-    Toggle2.SetImageMso ToggleImage(IsPressed)
+    Toggle2.SetImage BetterRibbon.NewImageObjectMso(ToggleImage(IsPressed))
     
     Invalidate
 XT: Exit Sub
@@ -74,7 +72,7 @@ Private Sub Toggle3_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As 
     Button1.IsLarge = Not IsPressed
     Button2.IsLarge = Not IsPressed
     Button3.IsLarge = Not IsPressed
-    Toggle3.SetImageMso ToggleImage(IsPressed)
+    Toggle3.SetImage BetterRibbon.NewImageObjectMso(ToggleImage(IsPressed))
     DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
@@ -223,10 +221,14 @@ Private Sub Class_Initialize()
     With BetterRibbon
         Set CustomGroup = .NewGroupModel("CustomizableGroup")
     
-        Set Toggle1 = .NewToggleModelMso("Toggle1", "MarginsShowHide")
-        Set Toggle2 = .NewToggleModelMso("Toggle2", "MarginsShowHide")
-        Set Toggle3 = .NewToggleModelMso("Toggle3", "MarginsShowHide")
-        Set Toggle4 = .NewToggleModelMso("Toggle4", "MarginsShowHide")
+        Set Toggle1 = .NewToggleModel("Toggle1") _
+                      .SetImage(.NewImageObjectMso("MarginsShowHide"))
+        Set Toggle2 = .NewToggleModel("Toggle2") _
+                      .SetImage(.NewImageObjectMso("MarginsShowHide"))
+        Set Toggle3 = .NewToggleModel("Toggle3") _
+                      .SetImage(.NewImageObjectMso("MarginsShowHide"))
+        Set Toggle4 = .NewToggleModel("Toggle4") _
+                      .SetImage(.NewImageObjectMso("MarginsShowHide"))
         
         Set DropDown1 = .NewDropDownModel("DropDown1")
         DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly")) _
@@ -235,9 +237,12 @@ Private Sub Class_Initialize()
                  .SelectedIndex = 2
         'DropDown1.ShowImage = false
         
-        Set Button1 = .NewButtonModelMso("Button1", "MacroPlay")
-        Set Button2 = .NewButtonModelMso("Button2", "MacroPlay")
-        Set Button3 = .NewButtonModelMso("Button3", "Refresh")
+        Set Button1 = .NewButtonModel("Button1") _
+                      .SetImage(.NewImageObjectMso("MacroPlay"))
+        Set Button2 = .NewButtonModel("Button2") _
+                      .SetImage(.NewImageObjectMso("MacroPlay"))
+        Set Button3 = .NewButtonModel("Button3") _
+                      .SetImage(.NewImageObjectMso("Refresh"))
     End With
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
@@ -247,15 +252,3 @@ EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
     End Select
     Resume          ' for debugging only
 End Sub
-
-Private Property Get BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
-    On Error GoTo EH
-    If MBetterRibbon Is Nothing Then
-        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
-            .NewBetterRibbon(New ResourceLoader)
-    End If
-    Set BetterRibbon = MBetterRibbon
-XT: Exit Property
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
-    Resume          ' for debugging only
-End Property

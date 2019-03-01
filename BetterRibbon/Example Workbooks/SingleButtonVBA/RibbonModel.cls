@@ -34,6 +34,7 @@ Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
     With BetterRibbon
         Set CustomGroup = .NewGroupModel("CustomizableGroup")
-        Set Button1 = .NewButtonModelMso("CustomizableButton1", "MacroPlay")
+        Set Button1 = .NewButtonModel("CustomizableButton1") _
+                      .SetImage(.NewImageObjectMso("MacroPlay"))
     End With
 End Sub

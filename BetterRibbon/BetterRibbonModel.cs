@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
@@ -11,7 +11,7 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
-        internal BetterRibbonModel(IRibbonViewModel viewModel, AbstractModelFactory factory)
+        internal BetterRibbonModel(IRibbonViewModel viewModel, IModelFactory factory)
         : base(viewModel, new List<ICanInvalidate> {
                 new BrandingModel(viewModel, factory, "BrandingGroup"),
                 new LinksAnalysisModel(viewModel, factory, "LinksAnalysisGroup"),

@@ -16,6 +16,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IToggleModel)]
     public interface IToggleModel {
+        event ToggledEventHandler Toggled;
+
         /// <summary>True exaactly when this control is in the Pressed state. Default value.</summary>
         [DispId(0)]
         bool   IsPressed {
@@ -84,10 +86,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Sets the image for this control to the MCO image as named.</summary>
         [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
-        void SetImageDisp(IPictureDisp image);
-        /// <summary>Sets the current image for this control to the provided <see cref="IPictureDisp"/>.</summary>
-        [DispId(12),Description("Sets the image for this control to the MCO image as named..")]
-        void SetImageMso(string imageMso);
+        IToggleModel SetImage(ImageObject image);
         #endregion
 
     }

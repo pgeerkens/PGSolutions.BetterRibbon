@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
@@ -12,6 +13,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IStaticDropDownModel)]
     public interface IStaticDropDownModel {
+        event SelectionMadeEventHandler SelectionMade;
+
         /// <summary>Gets or sets the (zero-based) integer of the selected item. Default value.</summary>
         [DispId(0)]
         int SelectedIndex {

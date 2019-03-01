@@ -14,6 +14,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IStaticComboBoxModel)]
     public interface IStaticComboBoxModel {
+        event EditedEventHandler Edited;
+
         /// <summary>Gets or sets the content of the <see cref="EditBoxVM"/>. Default value.</summary>
         [DispId(0)]
         string Text {

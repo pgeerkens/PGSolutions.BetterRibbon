@@ -13,7 +13,8 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
     [Description("The main interface for VBA to access the Ribbon dispatcher.")]
-        [CLSCompliant(true)][ComVisible(true)]
+    [CLSCompliant(true)]
+    [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IModelFactory)]
     public interface IModelFactory {
@@ -37,39 +38,33 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
         void DetachProxy(string controlId);
 
-        /// <summary>.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(4), Description(".")]
-        IGroupModel NewGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true);
+        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
+        [SuppressMessage("Microsoft.Naming","CA1720:IdentifiersShouldNotContainTypeNames",MessageId = "strings")]
+        [DispId(4), Description("Returns a new ImageObject from the supplied IPictureDisp.")]
+        ViewModels.ImageObject NewImageObject(IPictureDisp image);
 
-        /// <summary>.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(5), Description(".")]
-        IButtonModel NewButtonModel(string stringsId,
-                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
+        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied MSO image name.</summary>
+        [SuppressMessage("Microsoft.Naming","CA1720:IdentifiersShouldNotContainTypeNames",MessageId = "strings")]
+        [DispId(5), Description("Returns a new ImageObject from the supplied MSO image name.")]
+        ViewModels.ImageObject NewImageObjectMso(string imageMso);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(6), Description(".")]
-        IButtonModel NewButtonModelMso(string stringsId,
-                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
+        IGroupModel NewGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
         [DispId(7), Description(".")]
-        IToggleModel NewToggleModel(string stringsId,
-                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true);
+        IButtonModel NewButtonModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(8), Description(".")]
-        IToggleModel NewToggleModelMso(string stringsId,
-                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true);
+        IToggleModel NewToggleModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
@@ -117,14 +112,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(14), Description("Returns a new model for a Split(Toggle)Button control.")]
-        ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
+        ISplitToggleButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>Returns a new model for a Split(Press)Button control.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(15), Description("Returns a new model for a Split(Press)Button control.")]
-        ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
+        ISplitPressButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
@@ -149,5 +144,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(24), Description(".")]
         IMenuSeparatorModel NewMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true);
+
+        /// <summary>.</summary>
+        [DispId(25)]
+        IStrings GetStrings(string id);
+
+        /// <summary>.</summary>
+        [DispId(26)]
+        IStrings2 GetStrings2(string id);
     }
 }

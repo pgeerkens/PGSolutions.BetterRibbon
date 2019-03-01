@@ -22,13 +22,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip)
+        public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip=null)
         => new ControlStrings(label, screenTip, superTip, keyTip);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
-                string description)
+        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip=null,
+                string description=null)
         =>  new ControlStrings2(label, screenTip, superTip, keyTip, description);
 
         /// <inheritdoc/>
@@ -38,27 +38,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IButtonModel NewButtonModel(string stringsId,
-                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => base.NewButtonModel(stringsId, new ImageObject(image), isEnabled, isVisible);
+        public new IButtonModel NewButtonModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewButtonModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IButtonModel NewButtonModelMso(string stringsId,
-                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => base.NewButtonModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IToggleModel NewToggleModel(string stringsId,
-                IPictureDisp image = null, bool isEnabled = true, bool isVisible = true)
-        => base.NewToggleModel(stringsId, new ImageObject(image), isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IToggleModel NewToggleModelMso(string stringsId,
-                string imageMso = "MacroSecurity", bool isEnabled = true, bool isVisible = true)
-        => base.NewToggleModel(stringsId, new ImageObject(imageMso), isEnabled, isVisible);
+        public new IToggleModel NewToggleModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewToggleModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -97,13 +83,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new ISplitButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
+        public new ISplitToggleButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true)
         => base.NewSplitToggleButtonModel(splitStringId, menuStringId, toggleStringId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new ISplitButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
+        public new ISplitPressButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true)
         => base.NewSplitPressButtonModel(splitStringId, menuStringId, buttonStringId,  isEnabled, isVisible);
 

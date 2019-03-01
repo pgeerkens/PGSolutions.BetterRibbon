@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -26,6 +27,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         internal ViewModelFactory ViewModelFactory { get; }
 
+        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
+        public ImageObject NewImageObject(IPictureDisp image) => new ImageObject(image);
+
+        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied MSO image name.</summary>
+        public ImageObject NewImageObjectMso(string imageMso) => new ImageObject(imageMso);
+
         /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
         public GroupModel NewGroupModel(string controlId,
                 bool isEnabled, bool isVisible)
@@ -33,17 +40,15 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible };
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public ButtonModel NewButtonModel(string controlId,
-                ImageObject image, bool isEnabled, bool isVisible)
+        public ButtonModel NewButtonModel(string controlId, bool isEnabled, bool isVisible)
         => new ButtonModel(GetControl<ButtonVM>, GetStrings2(controlId))
-                { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+                { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
-        public ToggleModel NewToggleModel(string controlId,
-                ImageObject image, bool isEnabled, bool isVisible)
+        public ToggleModel NewToggleModel(string controlId, bool isEnabled, bool isVisible)
         => new ToggleModel(GetControl<CheckBoxVM>, GetStrings2(controlId))
-                { Image=image, IsEnabled=isEnabled, IsVisible=isVisible }
+                { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IToggleSource, IToggleVM, ToggleModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
@@ -141,7 +146,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IMenuSeparatorSource, IMenuSeparatorVM, MenuSeparatorModel>();
 
-        public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
+        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => ViewModelFactory.GetControl<TControl>(controlId);
 
         public IStrings GetStrings(string id) => ResourceManager.GetControlStrings(id);
