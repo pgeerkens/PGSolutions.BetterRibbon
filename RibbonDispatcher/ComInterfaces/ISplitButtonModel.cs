@@ -106,6 +106,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description(".")]
             get; set; }
         #endregion
+
+        [DispId(8)]
+        IMenuModel MenuModel { get; }
+
+        [DispId(9)]
+        IToggleModel ToggleModel { get; }
     }
 
     /// <summary></summary>
@@ -157,5 +163,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description(".")]
             get; set; }
         #endregion
+
+        [DispId(8)]
+        IMenuModel MenuModel { get; }
+
+        [DispId(9)]
+        IButtonModel ButtonModel { get; }
     }
 }

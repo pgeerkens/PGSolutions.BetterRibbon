@@ -19,15 +19,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected AbstractSplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel,
                 IStrings strings, MenuModel menu)
         : base(funcViewModel, strings)
-        => Menu = menu;
+        => _menuModel = menu;
 
         public bool        IsLarge   { get; set; } = true;
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public MenuModel   Menu      { get; }
+        public IMenuModel MenuModel => _menuModel; private MenuModel _menuModel { get; }
 
-        public override void Detach() { Menu.Detach(); base.Detach(); }
+        protected void Attach(string controlId, TSource @this) {
+            ViewModel = AttachToViewModel(controlId, @this);
+            if (ViewModel != null) { MenuModel.Attach(ViewModel.MenuVM.Id); }
+        }
+
+        public override void Detach() { MenuModel.Detach(); base.Detach(); }
     }
 }

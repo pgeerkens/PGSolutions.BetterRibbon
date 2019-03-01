@@ -28,27 +28,25 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal SplitToggleButtonModel(Func<string,SplitToggleButtonVM> funcViewModel,
                 IStrings strings, ToggleModel toggle, MenuModel menu)
         : base(funcViewModel, strings, menu)
-        => Toggle = toggle;
+        => _toggleModel = toggle;
 
         public ISplitToggleButtonModel Attach(string controlId) {
-            ViewModel = AttachToViewModel(controlId, this);
+            base.Attach(controlId, this);
             if (ViewModel != null) {
-                Menu.Attach(ViewModel.MenuVM.Id);
-
-                Toggle.Attach(ViewModel.ToggleVM.Id);
-                Toggle.ViewModel.Toggled += OnToggled;
+                _toggleModel.Attach(ViewModel.ToggleVM.Id);
+                _toggleModel.ViewModel.Toggled += OnToggled;
             }
             ViewModel?.Invalidate();
             return this;
         }
 
-        public override void Detach() { Toggle.Detach(); base.Detach(); }
+        public override void Detach() { ToggleModel.Detach(); base.Detach(); }
 
         #region Toggleable implementation
         public event ToggledEventHandler Toggled;
 
-        public ToggleModel Toggle    { get; }
-        public bool        IsPressed { get => Toggle.IsPressed; set => Toggle.IsPressed = value; }
+        public IToggleModel ToggleModel => _toggleModel; private ToggleModel _toggleModel   { get; }
+        public bool        IsPressed { get => ToggleModel.IsPressed; set => ToggleModel.IsPressed = value; }
 
         private void OnToggled(IRibbonControl control, bool isPressed)
         => Toggled?.Invoke(control, IsPressed = isPressed);

@@ -6,11 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
+using Microsoft.Office.Core;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using Microsoft.Office.Core;
     using IStrings = IControlStrings;
 
     /// <summary>The COM visible Model for Ribbon Split (Press) Button controls.</summary>
@@ -27,26 +28,24 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal SplitPressButtonModel(Func<string,SplitPressButtonVM> funcViewModel,
                 IStrings strings, ButtonModel button, MenuModel menu)
         : base(funcViewModel, strings, menu)
-        => Button = button;
+        => _buttonModel = button;
 
         public ISplitPressButtonModel Attach(string controlId) {
-            ViewModel = AttachToViewModel(controlId, this);
+            base.Attach(controlId, this);
             if (ViewModel != null) {
-                Menu.Attach(ViewModel.MenuVM.Id);
-
-                Button.Attach(ViewModel.ButtonVM.Id);
-                Button.ViewModel.Clicked += OnClicked;
+                _buttonModel.Attach(ViewModel.ButtonVM.Id);
+                _buttonModel.ViewModel.Clicked += OnClicked;
             }
             ViewModel?.Invalidate();
             return this;
         }
 
-        public override void Detach() { Button.Detach(); base.Detach(); }
+        public override void Detach() { ButtonModel.Detach(); base.Detach(); }
 
         #region Pressable implementation
         public event ClickedEventHandler Clicked;
 
-        public ButtonModel Button { get; }
+        public IButtonModel ButtonModel => _buttonModel; private ButtonModel _buttonModel { get; }
 
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion

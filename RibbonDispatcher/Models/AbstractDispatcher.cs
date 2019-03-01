@@ -61,6 +61,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
+        /// <inheritdoc/>
+        public object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
+
         #region IRibbonExtensibility implementation
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
@@ -92,9 +95,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             this.InvalidateTab();
         }
         #endregion
-
-        /// <inheritdoc/>
-        public object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
 
         #region IControlVM implementation
         /// <summary>All of the defined controls.</summary>
