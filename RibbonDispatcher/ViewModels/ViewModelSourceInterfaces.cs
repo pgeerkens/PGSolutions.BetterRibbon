@@ -100,7 +100,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource { }
 
-    public interface ILabelSource: IControlSource, ISizeSource { }
+    public interface ILabelControlSource: IControlSource, ISizeSource { }
 
     public interface IMenuSource: IControlSource, IImageSource { }
 

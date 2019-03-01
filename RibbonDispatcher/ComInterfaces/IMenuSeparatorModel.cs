@@ -10,12 +10,17 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Description("")]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.ILabelModel)]
-    public interface ILabelModel {
+    [Guid(Guids.IMenuSeparatorModel)]
+    public interface IMenuSeparatorModel {
+        /// <summary>The text to be displayed as a menu separator, insteaf of a horizontal line.</summary>
+        [DispId(0),Description("The text to be displayed as a menu separator, insteaf of a horizontal line.")]
+        string Title {
+            get; set; }
+
         #region IActivable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         [DispId(1),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        ILabelModel Attach(string controlId);
+        IMenuSeparatorModel Attach(string controlId);
 
         /// <summary>.</summary>
         [DispId(2),Description(".")]
@@ -25,32 +30,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(3),Description("Queues a request for this control to be refreshed.")]
         void Invalidate();
         #endregion
-
-        #region IControl implementation
-        /// <summary>Gets the {IControlStrings} for this control.</summary>
-        [DispId(4)]
-        IControlStrings Strings {
-            [Description("Gets the {IControlStrings} for this control.")]
-            get;
-        }
-        /// <summary>Gets or sets whether the control is enabled.</summary>
-        [DispId(5)]
-        bool IsEnabled {
-            [Description("Gets or sets whether the control is enabled.")]
-            get; set;
-        }
-        /// <summary>Gets or sets whether the control is visible.</summary>
-        [DispId(6)]
-        bool IsVisible {
-            [Description("Gets or sets whether the control is visible.")]
-            get; set;
-        }
-        #endregion
-
-        /// <summary>Gets or sets whether this control displays a label.</summary>
-        [DispId(10)]
-        bool   ShowLabel  {
-            [Description("Gets or sets whether this control displays a label.")]
-            get; set; }
     }
 }

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComInterfaces\IGalleryModel.cs" />
+    <Compile Include="ComInterfaces\IMenuSeparatorModel.cs" />
     <Compile Include="ComInterfaces\IStaticComboBoxModel.cs" />
     <Compile Include="ComInterfaces\IStaticGalleryModel.cs" />
     <Compile Include="Models\AbstractModelFactory.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="ControlStrings2.cs" />
     <Compile Include="ComInterfaces\IStaticDropDownModel.cs" />
     <Compile Include="Models\GalleryModel.cs" />
+    <Compile Include="Models\MenuSeparatorModel.cs" />
     <Compile Include="Models\SplitPressButtonModel.cs" />
     <Compile Include="Models\SplitToggleButtonModel.cs" />
     <Compile Include="Models\StaticComboBoxModel.cs" />
@@ -83,17 +85,18 @@
     <Compile Include="Models\StaticGalleryModel.cs" />
     <Compile Include="ViewModels\GalleryVM.cs" />
     <Compile Include="ViewModels\IRibbonViewModel.cs" />
-    <Compile Include="Models\LabelModel.cs" />
+    <Compile Include="Models\LabelControlModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Models\EditBoxModel.cs" />
     <Compile Include="Models\PublicFactoryExtensions.cs" />
+    <Compile Include="ViewModels\MenuSeparatorVM.cs" />
     <Compile Include="ViewModels\RibbonViewModelExtensions.cs" />
     <Compile Include="ViewModels\AbstractContainerVM.cs" />
     <Compile Include="ViewModels\StaticComboBoxVM.cs" />
     <Compile Include="ViewModels\StaticDropDownVM.cs" />
     <Compile Include="ViewModels\IContainerControl.cs" />
-    <Compile Include="ViewModels\LabelVM.cs" />
+    <Compile Include="ViewModels\LabelControlVM.cs" />
     <Compile Include="ViewModels\MenuVM.cs" />
     <Compile Include="ViewModels\SplitButtonVM.cs" />
     <Compile Include="ViewModels\StaticGalleryVM.cs" />
@@ -116,7 +119,7 @@
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\ToggleModel.cs" />
     <Compile Include="Models\SelectableItemModel.cs" />
-    <Compile Include="ComInterfaces\ILabelModel.cs" />
+    <Compile Include="ComInterfaces\ILabelControlModel.cs" />
     <Compile Include="ViewModels\ImageObject.cs" />
     <Compile Include="ComInterfaces\IButtonModel.cs" />
     <Compile Include="ComInterfaces\IDropDownModel.cs" />

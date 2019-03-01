@@ -3,18 +3,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal class LabelVM: AbstractControlVM<ILabelSource,ILabelVM>, ILabelVM,
-             IActivatable<ILabelSource,ILabelVM>, ISizeableVM {
-        public LabelVM(string itemId) : base(itemId) { }
+    internal class MenuSeparatorVM: AbstractControlVM<IMenuSeparatorSource,IMenuSeparatorVM>, IMenuSeparatorVM,
+             IActivatable<IMenuSeparatorSource,IMenuSeparatorVM> {
+        public MenuSeparatorVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        public override ILabelVM Attach(ILabelSource source) => Attach<LabelVM>(source);
+        public override IMenuSeparatorVM Attach(IMenuSeparatorSource source) => Attach<MenuSeparatorVM>(source);
         #endregion
 
         #region ISizeable implementation
         /// <inheritdoc/>
-        public bool IsLarge => Source?.IsLarge ?? false;
+        public string Title => Source?.Title ?? "";
         #endregion
 
         protected override bool DefaultShowInactive { get => true; set { } }

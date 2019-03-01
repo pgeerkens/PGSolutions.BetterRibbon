@@ -8,7 +8,7 @@ using System.Linq;
 using System.Xml.Linq;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    using Debug = System.Diagnostics.Debug;
+    using Trace = System.Diagnostics.Trace;
 
     /// <summary>.</summary>
     internal static partial class XmParserExtensions {
@@ -83,7 +83,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         break;
 
                     case XName name when name == mso+"labelControl":
-                        parent.Add(factory.NewLabel(child.Attribute("id").Value));
+                        parent.Add(factory.NewLabelControl(child.Attribute("id").Value));
+                        break;
+
+                    case XName name when name == mso+"menuSeparator":
+                        parent.Add(factory.NewMenuSeparator(child.Attribute("id").Value));
                         break;
 
                     case XName name when name == mso+"box"
@@ -121,7 +125,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         throw new InvalidOperationException($"Tab '{child.Name.LocalName}' found unexpectedly.");
 
                     default:
-                        Debug.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
+                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
                         break;
                 }
             }
@@ -143,7 +147,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         ));
                         break;
                     default:
-                        Debug.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}' child of {parent.Attribute("id")}");
+                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}' child of {parent.Attribute("id")}");
                         break;
                 }
             }

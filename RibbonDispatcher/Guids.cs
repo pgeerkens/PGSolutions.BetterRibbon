@@ -43,8 +43,8 @@ namespace PGSolutions.RibbonDispatcher {
         public const string SelectableItemModel     = "69E19419" + GuidSpace;
         //public const string IGroupModel             = "69E1941A" + GuidSpace;
         public const string CheckBoxModel           = "69E1941B" + GuidSpace;
-        public const string ILabelModel             = "69E1941C" + GuidSpace;
-        public const string LabelModel              = "69E1941D" + GuidSpace;
+        public const string ILabelControlModel      = "69E1941C" + GuidSpace;
+        public const string LabelControlModel              = "69E1941D" + GuidSpace;
         public const string IEditBoxModel           = "69E1941E" + GuidSpace;
         public const string EditBoxModel            = "69E1941F" + GuidSpace;
 
@@ -65,8 +65,8 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IStaticGalleryModel     = "69E1942E" + GuidSpace;
         public const string StaticGalleryModel      = "69E1942F" + GuidSpace;
 
-        //public const string IControlStrings2        = "69E19430" + GuidSpace;
-        //public const string ControlStrings2         = "69E19431" + GuidSpace;
+        public const string IMenuSeparatorModel     = "69E19430" + GuidSpace;
+        public const string MenuSeparatorModel      = "69E19431" + GuidSpace;
         //public const string IMenuModel              = "69E19432" + GuidSpace;
         //public const string MenuModel               = "69E19433" + GuidSpace;
         //public const string ISplitToggleButtonModel = "69E19434" + GuidSpace;

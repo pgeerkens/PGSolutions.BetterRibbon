@@ -70,9 +70,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonLabelModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static ILabelModel NewLabelModel(this AbstractModelFactory factory, string id,
+        public static ILabelControlModel NewLabelModel(this AbstractModelFactory factory, string id,
                 bool isEnabled = true, bool isVisible = true)
-        => factory?.NewLabelModel(id, isEnabled, isVisible)
+        => factory?.NewLabelControlModel(id, isEnabled, isVisible)
                   ?.Attach(id);
     }
 }

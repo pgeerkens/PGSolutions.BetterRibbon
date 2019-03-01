@@ -87,18 +87,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new IGalleryModel NewGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => base.NewGalleryModel(stringsId, isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new IStaticGalleryModel NewStaticGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => base.NewStaticGalleryModel(stringsId, isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new ILabelModel NewLabelModel(string stringsId, bool isEnabled = true, bool isVisible = true)
-        => base.NewLabelModel(stringsId, isEnabled, isVisible);
+        public new ILabelControlModel NewLabelControlModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewLabelControlModel(stringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -120,5 +110,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public new ISelectableItemModel NewSelectableModel(string controlID)
         => base.NewSelectableModel(controlID);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IGalleryModel NewGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewGalleryModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IStaticGalleryModel NewStaticGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewStaticGalleryModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IMenuSeparatorModel NewMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewMenuSeparatorModel(stringsId, isEnabled, isVisible);
     }
 }

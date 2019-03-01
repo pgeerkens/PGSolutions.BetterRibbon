@@ -16,19 +16,18 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(ILabelModel))]
-    [Guid(Guids.LabelModel)]
-    public class LabelModel: ControlModel<ILabelSource, ILabelVM>,
-            ILabelModel, ILabelSource {
-        internal LabelModel(Func<string, LabelVM> funcViewModel,
+    [ComDefaultInterface(typeof(ILabelControlModel))]
+    [Guid(Guids.LabelControlModel)]
+    public class LabelControlModel: ControlModel<ILabelControlSource, ILabelControlVM>,
+            ILabelControlModel, ILabelControlSource {
+        internal LabelControlModel(Func<string, LabelControlVM> funcViewModel,
                 IControlStrings strings)
-        : base(funcViewModel, strings)
-        { }
+        : base(funcViewModel, strings) { }
 
         public bool        IsLarge   { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
 
-        public ILabelModel Attach(string controlId) {
+        public ILabelControlModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             ViewModel?.Invalidate();
             return this;

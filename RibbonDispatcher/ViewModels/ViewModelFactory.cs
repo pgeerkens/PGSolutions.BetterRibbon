@@ -202,8 +202,12 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<StaticGalleryVM, IStaticGallerySource,IStaticGalleryVM>(new StaticGalleryVM(controlId,items));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
-        internal LabelVM NewLabel(string controlId)
-        => Add<LabelVM, ILabelSource,ILabelVM>(new LabelVM(controlId));
+        internal LabelControlVM NewLabelControl(string controlId)
+        => Add<LabelControlVM, ILabelControlSource,ILabelControlVM>(new LabelControlVM(controlId));
+
+        /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
+        internal MenuSeparatorVM NewMenuSeparator(string controlId)
+        => Add<MenuSeparatorVM, IMenuSeparatorSource,IMenuSeparatorVM>(new MenuSeparatorVM(controlId));
 
         /// <summary>Returns a new Ribbon Split(Toggle)Button view-model instance.</summary>
         internal SplitToggleButtonVM NewSplitToggleButton(string controlId, IMenuVM menu, IToggleVM toggle)

@@ -81,26 +81,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IStaticComboBoxSource, IStaticComboBoxVM, StaticComboBoxModel>();
 
-        /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
-        public GalleryModel NewGalleryModel(string controlId,
+        /// <summary>Creates, initializes and returns a new <see cref="LabelControlModel"/>.</summary>
+        public LabelControlModel NewLabelControlModel(string controlId,
                 bool isEnabled, bool isVisible)
-        => new GalleryModel(GetControl<GalleryVM>, GetStrings(controlId))
+        => new LabelControlModel(GetControl<LabelControlVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<IGallerySource, IGalleryVM, GalleryModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="StaticGalleryModel"/>.</summary>
-        public StaticGalleryModel NewStaticGalleryModel(string controlId,
-                bool isEnabled, bool isVisible)
-        => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings(controlId))
-                { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<IStaticGallerySource, IStaticGalleryVM, StaticGalleryModel>();
-
-        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public LabelModel NewLabelModel(string controlId,
-                bool isEnabled, bool isVisible)
-        => new LabelModel(GetControl<LabelVM>, GetStrings(controlId))
-                { IsEnabled=isEnabled, IsVisible=isVisible }
-                .InitializeModel<ILabelSource, ILabelVM, LabelModel>();
+                .InitializeModel<ILabelControlSource, ILabelControlVM, LabelControlModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public MenuModel NewMenuModel(string controlId,
@@ -133,6 +119,27 @@ namespace PGSolutions.RibbonDispatcher.Models {
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "factory")]
         public ISelectableItemModel NewSelectableModel(string controlID)
         => new SelectableItemModel(GetStrings(controlID)).Attach(controlID);
+
+        /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
+        public GalleryModel NewGalleryModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new GalleryModel(GetControl<GalleryVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IGallerySource, IGalleryVM, GalleryModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="StaticGalleryModel"/>.</summary>
+        public StaticGalleryModel NewStaticGalleryModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IStaticGallerySource, IStaticGalleryVM, StaticGalleryModel>();
+
+        /// <summary>Creates, initializes and returns a new <see cref="MenuSeparatorModel"/>.</summary>
+        public MenuSeparatorModel NewMenuSeparatorModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new MenuSeparatorModel(GetControl<MenuSeparatorVM>, GetStrings(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IMenuSeparatorSource, IMenuSeparatorVM, MenuSeparatorModel>();
 
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => ViewModelFactory.GetControl<TControl>(controlId);

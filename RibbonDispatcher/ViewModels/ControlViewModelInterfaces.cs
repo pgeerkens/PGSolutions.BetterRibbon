@@ -83,9 +83,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface ITabVM: IControlVM { }
 
-    /// <summary>The total interface exposed by <see cref="LabelVM"/> objects.</summary>
+    /// <summary>The total interface exposed by <see cref="LabelControlVM"/> objects.</summary>
     [CLSCompliant(true)]
-    public interface ILabelVM: IControlVM { }
+    public interface ILabelControlVM: IControlVM { }
 
     [CLSCompliant(true)]
     public interface ISplitButtonVM: IControlVM {
@@ -107,4 +107,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
      /// <summary>The total interface exposed by <see cref="MenuVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface IMenuVM: IControlVM, IDescriptionableVM { }
+
+    [CLSCompliant(true)]
+    public interface IMenuSeparatorVM: IControlVM {
+        string Title { get; }
+    }
 }
