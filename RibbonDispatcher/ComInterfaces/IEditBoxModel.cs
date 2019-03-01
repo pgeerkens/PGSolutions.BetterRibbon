@@ -57,5 +57,27 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set;
         }
         #endregion
+
+        #region IImageable implementation
+        /// <summary>Returns ths current image for this control as either a <<see cref="string"/> or <see cref="IPictureDisp"/>.</summary>
+        [DispId(8)]
+        ImageObject Image {
+            [Description("Returns ths current image for this control as either a string or IPictureDisp.")]
+            get; }
+        /// <summary>Gets or sets Whether this control displays an image.</summary>
+        [DispId(9)]
+        bool   ShowImage  {
+            [Description("Gets or sets Whether this control displays an image.")]
+            get; set; }
+        /// <summary>Gets or sets whether this control displays a label.</summary>
+        [DispId(10)]
+        bool   ShowLabel  {
+            [Description("Gets or sets whether this control displays a label.")]
+            get; set; }
+
+        /// <summary>Sets the image for this control to the MCO image as named.</summary>
+        [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
+        IEditBoxModel SetImage(ImageObject image);
+        #endregion
     }
 }

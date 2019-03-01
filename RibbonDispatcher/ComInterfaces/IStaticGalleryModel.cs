@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
@@ -57,6 +56,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         }
         #endregion
 
+        #region ISizeable implementation
+        /// <summary>.</summary>
+        [DispId(7)]
+        bool   IsLarge    {
+            [Description(".")]
+            get; set; }
+        #endregion
+
         #region IImageable implementation
         /// <summary>Returns ths current image for this control as either a <<see cref="string"/> or <see cref="IPictureDisp"/>.</summary>
         [DispId(8)]
@@ -74,30 +81,29 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets whether this control displays a label.")]
             get; set; }
 
-        /// <summary>Sets the image for this control to the MCO image as named.</summary>
-        [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
-        void SetImageDisp(IPictureDisp image);
-        /// <summary>Sets the current image for this control to the provided <see cref="IPictureDisp"/>.</summary>
-        [DispId(12),Description("Sets the image for this control to the MCO image as named..")]
-        void SetImageMso(string imageMso);
+        /// <summary>Sets the image for this control to the <see cref="ImageObject"/> provided.</summary>
+        [DispId(11),Description("Sets the current image for this control to the provided ImageObject.")]
+        IStaticGalleryModel SetImage(ImageObject image);
         #endregion
 
         /// <summary>Gets or sets the selected item by ID.</summary>
-        [DispId(13)]
+        [DispId(12)]
         string SelectedId {
             [Description("Gets or sets the selected item by ID.")]
             get; set; }
 
+        #region IGallerySize implementation
         /// <summary>Gets or sets the height in pixels for items.</summary>
-        [DispId(14)]
+        [DispId(15)]
         int ItemHeight {
             [Description("Gets or sets the height in pixels for items.")]
             get; set; }
 
         /// <summary>Gets or sets the width in pixels for items.</summary>
-        [DispId(15)]
+        [DispId(16)]
         int ItemWidth {
             [Description("Gets or sets the width in pixels for items.")]
             get; set; }
+        #endregion
     }
 }

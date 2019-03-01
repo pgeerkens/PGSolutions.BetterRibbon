@@ -34,6 +34,14 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public override void Detach() { Edited = null;  base.Detach(); }
         #endregion
 
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
+
+        public IComboBoxModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
+
         #region IListable implementation
         public IReadOnlyList<IStaticItemVM> Items => _items.AsReadOnly();
         #endregion

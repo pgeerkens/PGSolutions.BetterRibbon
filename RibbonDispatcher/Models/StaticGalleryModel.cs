@@ -31,6 +31,14 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
         #endregion
 
+        #region ISizeable implementation
+        public bool        IsLarge   { get; set; } = true;
+        #endregion
+
+        #region IImageable implementation
+        public IStaticGalleryModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
+
         #region IListable implementation
         public override IReadOnlyList<IStaticItemVM> Items => ViewModel.Items;
         #endregion

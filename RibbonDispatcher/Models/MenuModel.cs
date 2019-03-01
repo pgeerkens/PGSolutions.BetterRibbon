@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -36,7 +35,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
+        #region IImageable implementation
+        public IMenuModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
     }
 }

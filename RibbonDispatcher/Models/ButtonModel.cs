@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -19,17 +18,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(IButtonModel))]
     [Guid(Guids.ButtonModel)]
-    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>,
-            IButtonModel, IButtonSource {
+    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>, IButtonModel,
+            IButtonSource {
         internal ButtonModel(Func<string, ButtonVM> funcViewModel, IControlStrings strings)
         : base(funcViewModel, strings) { }
-
-        public event ClickedEventHandler Clicked;
-
-        public bool        IsLarge   { get; set; } = true;
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
 
         public IButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
@@ -37,8 +29,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        #region IClickable implementation
+        public event ClickedEventHandler Clicked;
+
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
+        #endregion
+
+        public bool        IsLarge   { get; set; } = true;
+
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
 
         public IButtonModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
     }
 }

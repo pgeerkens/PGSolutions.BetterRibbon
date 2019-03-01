@@ -26,16 +26,26 @@ namespace PGSolutions.RibbonDispatcher.Models {
         : base(funcViewModel, strings)
         { }
 
-        public event EditedEventHandler Edited;
-
-        public string Text { get; set; } = "";
-
         public IEditBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             if (ViewModel != null) { ViewModel.Edited+= OnEdited; }
             return this;
         }
 
+        #region IEditable implementation
+        public event EditedEventHandler Edited;
+
+        public string Text { get; set; } = "";
+
         private void OnEdited(IRibbonControl control, string text) => Edited?.Invoke(control,text);
+        #endregion
+
+        #region IImageable implementation
+        public ImageObject Image     { get; set; } = "MacroSecurity";
+        public bool        ShowImage { get; set; } = true;
+        public bool        ShowLabel { get; set; } = true;
+
+        public IEditBoxModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
     }
 }

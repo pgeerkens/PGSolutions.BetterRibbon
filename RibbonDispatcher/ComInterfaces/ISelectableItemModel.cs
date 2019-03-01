@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ViewModels;
 
@@ -79,12 +78,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets whether this control displays a label.")]
             get; set; }
 
-        /// <summary>Sets the image for this control to the MCO image as named.</summary>
-        [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
-        void SetImageDisp(IPictureDisp image);
-        /// <summary>Sets the current image for this control to the provided <see cref="IPictureDisp"/>.</summary>
-        [DispId(12),Description("Sets the image for this control to the MCO image as named..")]
-        void SetImageMso(string imageMso);
+        /// <summary>Sets the image for this control to the <see cref="ImageObject"/> provided.</summary>
+        [DispId(11),Description("Sets the current image for this control to the provided ImageObject.")]
+        ISelectableItemModel SetImage(ImageObject image);
         #endregion
     }
 }

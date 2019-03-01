@@ -40,9 +40,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public ImageObject Image     { get; set; } = "MacroSecurity";
         public bool        ShowImage { get; set; } = true;
         public bool        ShowLabel { get; set; } = true;
-
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso)     => Image = imageMso;
-        #endregion
+       #endregion
     }
 }

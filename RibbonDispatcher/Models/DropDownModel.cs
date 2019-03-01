@@ -31,6 +31,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
         #endregion
 
+        #region IImageable implementation
+        public IDropDownModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
+
         #region IListable implementation
         public override IReadOnlyList<IStaticItemVM> Items => _items.AsReadOnly();
         #endregion

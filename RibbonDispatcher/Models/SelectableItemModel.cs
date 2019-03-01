@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -47,7 +46,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public void OnPurged(IContainerControl sender) { }  // Own VM!
 
-        public void SetImageDisp(IPictureDisp image) => Image = new ImageObject(image);
-        public void SetImageMso(string imageMso) => Image = imageMso;
+        #region IImageable implementation
+        public ISelectableItemModel SetImage(ImageObject image) { Image = image; return this; }
+        #endregion
     }
 }

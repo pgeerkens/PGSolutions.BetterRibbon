@@ -81,7 +81,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
         public string GetCustomUI(string RibbonID) {
-            TabViewModels .ParseXmlTabs(ViewModelFactory,RibbonXml);
+            TabViewModels.ParseXmlTabs(ViewModelFactory,RibbonXml);
 
             return RibbonXml;
         }

@@ -106,33 +106,33 @@
                     />
                 </mso:box>
                 <mso:box id="CustomVbaBox3" boxStyle="vertical" visible="true" >
-                    <!-- Not Yet Implemented on DropDown: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                     <!-- Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
                     <mso:dropDown id="CustomVbaDropDown1"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
                             showItemImage="true" showItemLabel="true"
                     >
                     </mso:dropDown>
-                    <!-- Not Yet Implemented on DropDown: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                     <!-- Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
                     <mso:dropDown id="CustomVbaDropDown2"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
                             showItemImage="true" showItemLabel="true"
                     >
                     </mso:dropDown>
-                    <!-- Not Yet Implemented on DropDown: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                     <!-- Only one of getSelectedItemID and getSelectedIndex can be specified, though both are implemented. -->
                     <mso:dropDown id="CustomVbaDropDown3"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onAction="onActionSelected" getSelectedItemID="getSelectedItemID"
@@ -161,25 +161,25 @@
                     <mso:editBox id="CustomVbaEditBox1"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             onChange="onTextChanged" getText="getText" maxLength="15" sizeString="__m____m____m__"
                     />
-                    <!-- Not Yet Implemented on ComboBox: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                     <mso:comboBox id="CustomVbaComboBoxPassive1"  invalidateContentOnDrop="false"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onChange="onTextChanged" getText="getText" maxLength="15" sizeString="__m____m____m__"
                     />
-                    <!-- Not Yet Implemented on ComboBox: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                     <mso:comboBox id="CustomVbaComboBoxActive1" invalidateContentOnDrop="true"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             getVisible="getVisible" getEnabled="getEnabled"
+                            getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel"
                             getItemCount="getItemCount" getItemID="getItemId" getItemLabel="getItemLabel"
                             getItemScreentip="getItemScreentip" getItemSupertip="getItemSupertip" getItemImage="getItemImage"
                             onChange="onTextChanged" getText="getText" maxLength="15" sizeString="__m____m____m__"
                     />
-                    <!-- Not Yet Implemented on ComboBox: getImage="getImage" getShowImage="getShowImage" getShowLabel="getShowLabel" -->
                 </mso:box>
                 <mso:box id="CustomVbaBox6" boxStyle="vertical" visible="true" >
                     <mso:labelControl id="CustomVbaLabel1"

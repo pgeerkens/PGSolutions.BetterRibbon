@@ -235,7 +235,7 @@ Private Sub Class_Initialize()
                  .AddSelectableModel(.NewSelectableModel("ImageOnly")) _
                  .AddSelectableModel(.NewSelectableModel("LabelAndImage")) _
                  .SelectedIndex = 2
-        'DropDown1.ShowImage = false
+       ' DropDown1.ShowImage = False
         
         Set Button1 = .NewButtonModel("Button1") _
                       .SetImage(.NewImageObjectMso("MacroPlay"))
