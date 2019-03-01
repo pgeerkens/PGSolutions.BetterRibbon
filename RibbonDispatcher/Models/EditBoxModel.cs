@@ -32,10 +32,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public IEditBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Edited+= OnEdited;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.Edited+= OnEdited; }
             return this;
         }
 

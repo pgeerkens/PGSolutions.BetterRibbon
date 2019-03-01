@@ -36,7 +36,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 _buttonModel.Attach(ViewModel.ButtonVM.Id);
                 _buttonModel.ViewModel.Clicked += OnClicked;
             }
-            ViewModel?.Invalidate();
             return this;
         }
 

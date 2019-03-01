@@ -29,7 +29,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public ILabelControlModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            ViewModel?.Invalidate();
             return this;
         }
     }

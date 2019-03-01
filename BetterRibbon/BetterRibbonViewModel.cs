@@ -23,10 +23,10 @@ namespace PGSolutions.BetterRibbon {
     /// This class MUST be ComVisible for the ribbon to launch properly; <see cref="IRibbonExtensibility"/>.
     /// </remarks>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
-    [ComVisible(true)]
     [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
+    [ComVisible(true)]
     public sealed class BetterRibbonViewModel: AbstractDispatcher, IRibbonExtensibility {
         internal BetterRibbonViewModel(string controlId) : base(controlId, new MyResourceManager()) { }
 

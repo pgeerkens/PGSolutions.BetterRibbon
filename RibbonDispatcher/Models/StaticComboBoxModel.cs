@@ -28,10 +28,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #region IActivatable implementation
         public IStaticComboBoxModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Edited += OnEdited;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.Edited += OnEdited; }
             return this;
         }
 

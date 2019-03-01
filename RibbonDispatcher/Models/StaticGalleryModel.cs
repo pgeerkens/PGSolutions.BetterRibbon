@@ -26,10 +26,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #region IActivatable implementation
         public IStaticGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.SelectionMade += OnSelectionMade;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.SelectionMade += OnSelectionMade; }
             return this;
         }
         #endregion

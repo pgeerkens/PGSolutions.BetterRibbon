@@ -33,10 +33,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public IButtonModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Clicked += OnClicked;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.Clicked += OnClicked; }
             return this;
         }
 

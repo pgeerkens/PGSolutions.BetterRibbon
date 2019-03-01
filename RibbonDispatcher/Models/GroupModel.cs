@@ -27,9 +27,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public IGroupModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Invalidate();
-            }
             return this;
         }
 

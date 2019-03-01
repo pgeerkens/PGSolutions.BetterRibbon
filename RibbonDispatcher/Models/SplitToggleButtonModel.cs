@@ -36,7 +36,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 _toggleModel.Attach(ViewModel.ToggleVM.Id);
                 _toggleModel.ViewModel.Toggled += OnToggled;
             }
-            ViewModel?.Invalidate();
             return this;
         }
 

@@ -38,7 +38,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public ISelectableItemModel Attach(string controlId) {
             Id = controlId;
-            Invalidate();
             return this;
         }
 

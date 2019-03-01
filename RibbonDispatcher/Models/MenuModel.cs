@@ -33,9 +33,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public IMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Invalidate();
-            }
             return this;
         }
 

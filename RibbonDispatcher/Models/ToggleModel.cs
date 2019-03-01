@@ -26,10 +26,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public IToggleModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.Toggled += OnToggled;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.Toggled += OnToggled; }
             return this;
         }
 

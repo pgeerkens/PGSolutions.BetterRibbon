@@ -26,10 +26,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #region IActivatable implementation
         public IGalleryModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            if (ViewModel != null) {
-                ViewModel.SelectionMade += OnSelectionMade;
-                ViewModel.Invalidate();
-            }
+            if (ViewModel != null) { ViewModel.SelectionMade += OnSelectionMade; }
             return this;
         }
         #endregion
@@ -44,7 +41,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public IGalleryModel AddSelectableModel(IStaticItemVM selectableModel) {
             _items.Add(selectableModel);
-            ViewModel?.Invalidate();
             return this;
         }
         #endregion

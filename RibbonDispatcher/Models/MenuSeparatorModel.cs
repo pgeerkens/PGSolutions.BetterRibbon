@@ -28,7 +28,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public IMenuSeparatorModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
-            ViewModel?.Invalidate();
             return this;
         }
     }
