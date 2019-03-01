@@ -14,15 +14,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IResourceLoader)]
     public interface IResourceLoader {
         /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
-        [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
+        [DispId(1), Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
         IControlStrings GetControlStrings(string ControlId);
 
         /// <summary>Returns the {IRibbonTextLanguageControl} for the given {ControlId}.</summary>
-        [Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
+        [DispId(2), Description("Returns the IRibbonTextLanguageControl for the given ControlId.")]
         IControlStrings2 GetControlStrings2(string ControlId);
 
         /// <summary>Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.</summary>
-        [Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]
+        [DispId(3), Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]
         object GetImage(string Name);
     }
 }

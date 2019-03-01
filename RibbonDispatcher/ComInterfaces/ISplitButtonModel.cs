@@ -5,38 +5,49 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher.ViewModels;
-
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary></summary>
     [Description("")]
     [CLSCompliant(true)]
     public interface ISplitButtonModel {
-        /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
+        #region IActivable implementation
+        /// <summary>.</summary>
+        [DispId(2),Description(".")]
+        void Detach();
+
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [DispId(3),Description("Queues a request for this control to be refreshed.")]
+        void Invalidate();
+        #endregion
+
+        #region IControl implementation
+        /// <summary>Gets the {IControlStrings} for this control.</summary>
+        [DispId(4)]
         IControlStrings Strings {
-            [Description("Gets the IControlStrings for this control.")]
+            [Description("Gets the {IControlStrings} for this control.")]
             get;
         }
-
         /// <summary>Gets or sets whether the control is enabled.</summary>
+        [DispId(5)]
         bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
+        [DispId(6)]
         bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
-        /// <summary>.</summary>
-        bool IsLarge {
-            [Description(".")]
-            get; set;
-        }
+        #endregion
 
-        /// <summary>Queues a request for this control to be refreshed.</summary>
-        [Description("Queues a request for this control to be refreshed.")]
-        void Invalidate();
+        #region ISizeable implementation
+        /// <summary>.</summary>
+        [DispId(7)]
+        bool   IsLarge    {
+            [Description(".")]
+            get; set; }
+        #endregion
     }
 
     /// <summary></summary>
@@ -46,41 +57,47 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISplitToggleButtonModel)]
     public interface ISplitToggleButtonModel: ISplitButtonModel {
-        /// <summary>Gets or sets whether the control is pressed.</summary>
+        /// <summary>True exaactly when this control is in the Pressed state. Default value.</summary>
+        [DispId(0)]    
         bool IsPressed {
-            [Description("Gets or sets whether the control is enabled.")]
+            [Description("True exaactly when this control is in the Pressed state. Default value.")]
             get; set;
         }
 
+        #region IActivable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
+        [DispId(1),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         ISplitToggleButtonModel Attach(string controlId);
 
-        /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
+        /// <summary>.</summary>
+        [DispId(2),Description(".")]
+        new void Detach();
+
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [DispId(3),Description("Queues a request for this control to be refreshed.")]
+        new void Invalidate();
+        #endregion
+
+        #region IControl implementation
+        /// <summary>Gets the {IControlStrings} for this control.</summary>
+        [DispId(4)]
         new IControlStrings Strings {
-            [Description("Gets the IControlStrings for this control.")]
+            [Description("Gets the {IControlStrings} for this control.")]
             get;
         }
-
         /// <summary>Gets or sets whether the control is enabled.</summary>
+        [DispId(5)]
         new bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
+        [DispId(6)]
         new bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
-        /// <summary>.</summary>
-        new bool IsLarge {
-            [Description(".")]
-            get; set;
-        }
-
-        /// <summary>Queues a request for this control to be refreshed.</summary>
-        [Description("Queues a request for this control to be refreshed.")]
-        new void Invalidate();
+        #endregion
     }
 
     /// <summary></summary>
@@ -90,38 +107,47 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ISplitPressButtonModel)]
     public interface ISplitPressButtonModel: ISplitButtonModel {
+        #region IActivable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
+        [DispId(1),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
         ISplitPressButtonModel Attach(string controlId);
 
         /// <summary>.</summary>
-        [Description(".")]
-        void Detach();
+        [DispId(2),Description(".")]
+        new void Detach();
 
-        /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [DispId(3),Description("Queues a request for this control to be refreshed.")]
+        new void Invalidate();
+        #endregion
+
+        #region IControl implementation
+        /// <summary>Gets the {IControlStrings} for this control.</summary>
+        [DispId(4)]
         new IControlStrings Strings {
-            [Description("Gets the IControlStrings for this control.")]
+            [Description("Gets the {IControlStrings} for this control.")]
             get;
         }
-
         /// <summary>Gets or sets whether the control is enabled.</summary>
+        [DispId(5)]
         new bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
+        [DispId(6)]
         new bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
-        /// <summary>.</summary>
-        new bool IsLarge {
-            [Description(".")]
-            get; set;
-        }
+        #endregion
 
-        /// <summary>Queues a request for this control to be refreshed.</summary>
-        [Description("Queues a request for this control to be refreshed.")]
-        new void Invalidate();
+        #region ISizeable implementation
+        /// <summary>.</summary>
+        [DispId(7)]
+        new bool   IsLarge    {
+            [Description(".")]
+            get; set; }
+        #endregion
     }
 }

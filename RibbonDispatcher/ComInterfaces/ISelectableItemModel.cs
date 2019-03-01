@@ -16,55 +16,75 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.ISelectableItemModel)]
     public interface ISelectableItemModel: IControlSource {
         /// <summary>TODO</summary>
+        [DispId(0)]
         string Id { get; }
 
+        #region IActivable implementation
+        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
+        [DispId(1),Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
+        ISelectableItemModel Attach(string controlId);
+
+        /// <summary>.</summary>
+        [DispId(2),Description(".")]
+        void Detach();
+
+        /// <summary>Queues a request for this control to be refreshed.</summary>
+        [DispId(3),Description("Queues a request for this control to be refreshed.")]
+        void Invalidate();
+        #endregion
+
+        #region IControl implementation
         /// <summary>Gets the {IControlStrings} for this control.</summary>
+        [DispId(4)]
         new IControlStrings Strings {
             [Description("Gets the {IControlStrings} for this control.")]
             get;
         }
-
         /// <summary>Gets or sets whether the control is enabled.</summary>
+        [DispId(5)]
         new bool IsEnabled {
             [Description("Gets or sets whether the control is enabled.")]
             get; set;
         }
         /// <summary>Gets or sets whether the control is visible.</summary>
+        [DispId(6)]
         new bool IsVisible {
             [Description("Gets or sets whether the control is visible.")]
             get; set;
         }
+        #endregion
 
-        /// <summary>Queues a request for this control to be refreshed.</summary>
-        [Description("Queues a request for this control to be refreshed.")]
-        void Invalidate();
+        #region ISizeable implementation
+        /// <summary>.</summary>
+        [DispId(7)]
+        bool   IsLarge    {
+            [Description(".")]
+            get; set; }
+        #endregion
 
-        /// <summary>.</summary>
-        [Description(".")]
-        bool IsLarge { get; set; }
-        /// <summary>.</summary>
-        [Description(".")]
-        ImageObject Image { get; set; }
-        /// <summary>.</summary>
-        [Description(".")]
-        bool ShowImage { get; set; }
-        /// <summary>.</summary>
-        [Description(".")]
-        bool ShowLabel { get; set; }
+        #region IImageable implementation
+        /// <summary>Returns ths current image for this control as either a <<see cref="string"/> or <see cref="IPictureDisp"/>.</summary>
+        [DispId(8)]
+        ImageObject Image {
+            [Description("Returns ths current image for this control as either a string or IPictureDisp.")]
+            get; }
+        /// <summary>Gets or sets Whether this control displays an image.</summary>
+        [DispId(9)]
+        bool   ShowImage  {
+            [Description("Gets or sets Whether this control displays an image.")]
+            get; set; }
+        /// <summary>Gets or sets whether this control displays a label.</summary>
+        [DispId(10)]
+        bool   ShowLabel  {
+            [Description("Gets or sets whether this control displays a label.")]
+            get; set; }
 
-        /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        [Description("Attaches this control-model to the specified ribbon-control as data source and event sink.")]
-        ISelectableItemModel Attach(string controlId);
-
-        /// <summary>.</summary>
-        [Description(".")]
-        void Detach();
-
-        /// <summary>.</summary>
-        [Description(".")]
+        /// <summary>Sets the image for this control to the MCO image as named.</summary>
+        [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
         void SetImageDisp(IPictureDisp image);
-        /// <summary>.</summary>
-        [Description(".")]
+        /// <summary>Sets the current image for this control to the provided <see cref="IPictureDisp"/>.</summary>
+        [DispId(12),Description("Sets the image for this control to the MCO image as named..")]
         void SetImageMso(string imageMso);
+        #endregion
     }
 }
