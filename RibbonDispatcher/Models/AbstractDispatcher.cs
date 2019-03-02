@@ -38,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
-    public abstract class AbstractDispatcher: ICallbackDispatcher, IRibbonViewModel {
+    public abstract class AbstractDispatcher: ICallbackDispatcher {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
         protected AbstractDispatcher(string controlId, IResourceLoader resourceLoader){
@@ -72,9 +72,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public event EventHandler Initialized;
 
         /// <inheritdoc/>
-        public             IRibbonUI RibbonUI      { get; private set; }
+        public             IRibbonUI   RibbonUI      { get; private set; }
 
-        protected abstract string    RibbonXml     { get; }
+        protected abstract string      RibbonXml     { get; }
 
         /// <summary>.</summary>
         private            List<TabVM> TabViewModels { get; }
@@ -95,7 +95,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
             Initialized?.Invoke(this, EventArgs.Empty);
 
-            this.InvalidateTab();
+            RibbonUI?.InvalidateControl(ControlId);
         }
         #endregion
 

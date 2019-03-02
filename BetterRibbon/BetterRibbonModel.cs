@@ -11,15 +11,15 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
-        internal BetterRibbonModel(IRibbonViewModel viewModel, IModelFactory factory)
+        internal BetterRibbonModel(BetterRibbonViewModel viewModel, IModelFactory factory)
         : base(viewModel, new List<ICanInvalidate> {
-                new BrandingModel(viewModel, factory, "BrandingGroup"),
-                new LinksAnalysisModel(viewModel, factory, "LinksAnalysisGroup"),
+                new BrandingModel(factory, viewModel.BrandingGroupVM),
+                new LinksAnalysisModel(factory, viewModel.LinkedAnalysisGroupVM),
                 new VbaSourceExportModel( new List<VbaSourceExportGroupModel>() {
-                    new VbaSourceExportGroupModel(viewModel, factory, "VbaExportGroupMS", "MS"),
-                    new VbaSourceExportGroupModel(viewModel, factory, "VbaExportGroupPG", "PG")
+                    new VbaSourceExportGroupModel(factory, viewModel.VbaExportGroupVM_MS, "MS"),
+                    new VbaSourceExportGroupModel(factory, viewModel.VbaExportGroupVM_PG, "PG")
                 } ),
-                new CustomButtonsGroupModel(viewModel, factory, "CustomizableGroup")
+                new CustomButtonsGroupModel(factory, viewModel.CustomControlsGroupVM)
             }.AsReadOnly()) { }
     }
 }

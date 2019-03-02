@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected AbstractRibbonGroupModel(IRibbonViewModel viewModel, string viewModelName, IStrings strings)
         : this(viewModel?.GetControl<GroupVM>(viewModelName), strings) {
         }
-        private AbstractRibbonGroupModel(IGroupVM viewModel, IStrings strings) {
+        protected AbstractRibbonGroupModel(IGroupVM viewModel, IStrings strings) {
             ViewModel = (viewModel as IActivatable<IControlSource,IGroupVM>)
                       ?.Attach(this);
             Strings   = strings;

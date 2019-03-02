@@ -12,8 +12,8 @@ using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 namespace PGSolutions.BetterRibbon {
     /// <summary>The TabModel for the Links Aalysis Group on the BetterRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
-        public LinksAnalysisModel(IRibbonViewModel viewModel, IModelFactory factory, string viewModelName)
-        : base(viewModel, viewModelName, factory.GetStrings(viewModelName)) {
+        public LinksAnalysisModel(IModelFactory factory, IGroupVM viewModel)
+        : base(viewModel, factory.GetStrings(viewModel.Id)) {
             AnalyzeCurrentModel  = factory.NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, "EditLinks");
             AnalyzeSelectedModel = factory.NewButtonModel("AnalyzeLinksSelected", AnalyzeSelectedClicked, "EditLinks");
 

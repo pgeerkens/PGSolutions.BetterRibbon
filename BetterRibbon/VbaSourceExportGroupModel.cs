@@ -10,8 +10,8 @@ using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
-        public VbaSourceExportGroupModel(IRibbonViewModel viewModel, IModelFactory factory, string viewModelName, string suffix)
-        : base(viewModel, viewModelName, factory.GetStrings(viewModelName)) {
+        public VbaSourceExportGroupModel(IModelFactory factory, IGroupVM viewModel, string suffix)
+        : base(viewModel, factory.GetStrings(viewModel.Id)) {
             Suffix = suffix;
 
             DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",
@@ -34,7 +34,7 @@ namespace PGSolutions.BetterRibbon {
 
         public IButtonModel ExportCurrent  { get; }
 
-        public string             Suffix         { get; }
+        public string             Suffix   { get; }
 
         private void OnUseSrcFolderToggled(IRibbonControl control, bool isPressed)
         => UseSrcFolderToggled?.Invoke(control, isPressed);

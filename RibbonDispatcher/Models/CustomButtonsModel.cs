@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     public sealed class CustomButtonsGroupModel : AbstractRibbonGroupModel, IControlSource {
-        public CustomButtonsGroupModel(IRibbonViewModel viewModel, IModelFactory factory, string viewModelName)
-        : base(viewModel, viewModelName, factory?.GetStrings(viewModelName)) { }
+        public CustomButtonsGroupModel(IModelFactory factory, IGroupVM viewModel)
+        : base(viewModel, factory?.GetStrings(viewModel.Id)) { }
     }
 }

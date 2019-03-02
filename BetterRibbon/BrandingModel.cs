@@ -16,8 +16,8 @@ using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
-        public BrandingModel(IRibbonViewModel viewModel, IModelFactory factory, string viewModelName)
-        : base(viewModel, viewModelName, factory.GetStrings(viewModelName)) {
+        public BrandingModel(IModelFactory factory, IGroupVM viewModel)
+        : base(viewModel, factory.GetStrings(viewModel.Id)) {
             BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
                 new ImageObject(BrandingIcon));
 
