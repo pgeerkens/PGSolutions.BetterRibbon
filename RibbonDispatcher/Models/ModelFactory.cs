@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Diagnostics.CodeAnalysis;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -110,5 +111,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public new IMenuSeparatorModel NewMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewMenuSeparatorModel(stringsId, isEnabled, isVisible);
+
+        /// <inheritdoc/>
+        public IImageObject GetImage(IPictureDisp image) => new ImageObject(image);
+
+        /// <inheritdoc/>
+        public IImageObject GetImage(string imageMso) => new ImageObject(imageMso);
     }
 }

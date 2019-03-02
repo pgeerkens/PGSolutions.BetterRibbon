@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes",
             Justification ="Unnecessaty.")]
     [CLSCompliant(true)]
-    public class ImageObject: IImageObject {
+    internal class ImageObject: IImageObject {
         // TODO - only used in BrandingModel constructor - necessary?
         public ImageObject(string imageMso)    => _image = imageMso;
         public ImageObject(IPictureDisp image) => _image = image;
@@ -27,9 +27,5 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     }
 
     public static partial class Extensions {
-        public static object Image(this IImageObject @this)
-        =>  @this.IsMso ? @this.ImageMso as object : @this.ImageDisp;
-
-        public static IImageObject ToImageObject(this string @this) => new ImageObject(@this);
     }
 }

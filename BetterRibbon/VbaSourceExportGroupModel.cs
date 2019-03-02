@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using Microsoft.Office.Core;
 
+using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {

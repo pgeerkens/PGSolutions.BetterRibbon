@@ -12,15 +12,12 @@ using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
-    /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
+    /// <summary>The concrete instantiation of <see cref="AbstractDispatcher"/> for <see cref="ThisAddIn"/>.</summary>
     /// <remarks>
-    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
     /// 
-    /// Take care renaming this class, or its namespace; and coordinate any such with the content
-    /// of the (hidden) ThisAddIn.Designer.xml file. Commit frequently. Excel is very tempermental
-    /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
+    /// This class MUST be ComVisible for the ribbon to launch properly;
+    /// <see cref="IRibbonExtensibility"/>.
     /// 
-    /// This class MUST be ComVisible for the ribbon to launch properly; <see cref="IRibbonExtensibility"/>.
     /// </remarks>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]

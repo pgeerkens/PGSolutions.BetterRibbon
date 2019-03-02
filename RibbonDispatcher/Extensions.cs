@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher {
     public static partial class Extensions {
@@ -34,5 +35,14 @@ namespace PGSolutions.RibbonDispatcher {
             new DateTime(2000, 1, 1).AddDays(dayNo).ToUniversalTime().ToString("yyyy-MM-dd");
         private static string FormatVersionTime(this int halfSeconds) =>
             new DateTime(2000, 1, 1).AddSeconds(2 * halfSeconds).ToUniversalTime().ToString("HH:mm:ss");
+
+        public static object Image(this IImageObject @this)
+        =>  @this.IsMso ? @this.ImageMso as object : @this.ImageDisp;
+
+        public static IImageObject ToImageObject(this string @this) => new ImageObject(@this);
+
+        /// <inheritdoc/>
+        public static IImageObject ToggleImage(this bool isPressed)
+        => isPressed ? "TagMarkComplete".ToImageObject() : "MarginsShowHide".ToImageObject();
     }
 }

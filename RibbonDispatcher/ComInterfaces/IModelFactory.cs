@@ -152,11 +152,19 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         IMenuSeparatorModel NewMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>.</summary>
-        [DispId(25)]
+        [DispId(25), Description(".")]
         IStrings GetStrings(string id);
 
         /// <summary>.</summary>
-        [DispId(26)]
+        [DispId(26), Description(".")]
         IStrings2 GetStrings2(string id);
+
+        /// <summary>.</summary>
+        [DispId(27), Description(".")]
+        IImageObject GetImage(IPictureDisp image);
+
+        /// <summary>.</summary>
+        [DispId(28), Description(".")]
+        IImageObject GetImage(string imageMso);
     }
 }
