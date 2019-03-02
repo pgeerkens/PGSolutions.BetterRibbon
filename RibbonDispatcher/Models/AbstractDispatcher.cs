@@ -55,6 +55,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public  ViewModelFactory ViewModelFactory { get; }
 
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
+        => ViewModelFactory.GetControl<TControl>(controlId);
+
         /// <summary>.</summary>
         private IResourceLoader  ResourceLoader   { get; }
 
@@ -106,8 +109,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public string GetKeyTip(IRibbonControl Control)
             => Controls(Control?.Id)?.KeyTip ?? "";
         /// <inheritdoc/>
-        public string GetLabel(IRibbonControl Control)
-            => Controls(Control?.Id)?.Label ?? Control.Unknown();
+        public string GetLabel(IRibbonControl Control) {
+            var wkbkName = Control.Context.Application.ActiveWorkbook.Name;
+            return Controls(Control?.Id)?.Label ?? Control.Unknown();
+        }
+//            => Controls(Control?.Id)?.Label ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetScreenTip(IRibbonControl Control)
             => Controls(Control?.Id)?.ScreenTip ?? Control.Unknown("ScreenTip");

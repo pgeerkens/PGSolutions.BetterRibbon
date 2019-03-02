@@ -17,15 +17,16 @@ namespace PGSolutions.BetterRibbon {
     public partial class ThisAddIn {
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            ViewModel = new BetterRibbonViewModel("TabPGSolutions");
-            ViewModel.Initialized += ViewModel_Initialized;
-            return ViewModel;
+            Dispatcher = new Dispatcher("TabPGSolutions");
+            Dispatcher.Initialized += ViewModel_Initialized;
+            return Dispatcher;
         }
 
         private void ViewModel_Initialized(object sender, EventArgs e) {
-            Model = new BetterRibbonModel(ViewModel, 
-                    ViewModel.ViewModelFactory.NewModelFactory(new MyResourceManager()));
-            ViewModel.Initialized -= ViewModel_Initialized;
+            ViewModel = new BetterRibbonViewModel(Dispatcher,"TabPGSolutions");
+            Model     = new BetterRibbonModel(ViewModel, 
+                    Dispatcher.ViewModelFactory.NewModelFactory(new MyResourceManager()));
+            Dispatcher.Initialized -= ViewModel_Initialized;
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
@@ -39,11 +40,13 @@ namespace PGSolutions.BetterRibbon {
         protected override object RequestComAddInAutomationService()
         => ComEntry as IBetterRibbon;
 
-        internal BetterRibbonViewModel ViewModel { get; private set; }
+        internal Dispatcher            Dispatcher { get; private set; }
 
-        internal BetterRibbonModel     Model     { get; private set; }
+        internal BetterRibbonViewModel ViewModel  { get; private set; }
 
-        private  Main                  ComEntry  => new Main(ViewModel.ViewModelFactory.NewModelFactory);
+        internal BetterRibbonModel     Model      { get; private set; }
+
+        private  Main                  ComEntry   => new Main(Dispatcher.ViewModelFactory.NewModelFactory);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

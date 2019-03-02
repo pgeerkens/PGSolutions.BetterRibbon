@@ -24,7 +24,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         public void DetachProxy(string controlId)
-        => ViewModel.ViewModelFactory.GetControl<IControlVM>(controlId)?.Detach();
+        => ViewModel.GetControl<IControlVM>(controlId)?.Detach();
 
         public void DetachCustomControls()
         => Models.OfType<CustomButtonsGroupModel>().ToList().ForEach(model => model.DetachControls());
