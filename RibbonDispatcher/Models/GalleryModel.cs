@@ -34,7 +34,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool        IsLarge   { get; set; } = true;
 
         #region IImageable implementation
-        public IGalleryModel SetImage(ImageObject image) { Image = image; return this; }
+        public IGalleryModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
 
         #region IListable implementation

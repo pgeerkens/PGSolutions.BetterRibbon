@@ -18,6 +18,7 @@ Option Explicit
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
 Private LabelTest               As PGSolutions_RibbonDispatcher.LabelControlModel
 Private WithEvents SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
+Attribute SplitButton.VB_VarHelpID = -1
 Private WithEvents SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
 Attribute SplitToggle.VB_VarHelpID = -1
 Private WithEvents Dialog       As PGSolutions_RibbonDispatcher.ButtonModel
@@ -29,6 +30,9 @@ Attribute EditBox.VB_VarHelpID = -1
 Private Split2Menu              As PGSolutions_RibbonDispatcher.MenuModel
 Private WithEvents Gallery1     As PGSolutions_RibbonDispatcher.StaticGalleryModel
 Attribute Gallery1.VB_VarHelpID = -1
+
+Private WithEvents InnerToggle  As PGSolutions_RibbonDispatcher.ToggleModel
+Attribute InnerToggle.VB_VarHelpID = -1
 
 Private Sub Button_Clicked(ByVal control As Office.IRibbonControl)
     On Error GoTo EH
@@ -52,6 +56,10 @@ End Sub
 
 Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
     MsgBox "The seleccted item was: " & selectedId, vbOKOnly, ThisWorkbook.Name
+End Sub
+
+Private Sub InnerToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+    MsgBox "From InnerToggle", vbOKOnly
 End Sub
 
 Private Sub SplitButton_Clicked(ByVal control As Office.IRibbonControl)
@@ -99,9 +107,7 @@ Private Sub Class_Initialize()
         Set Gallery1 = .NewStaticGalleryModel("StaticGallery1")
         Set Split2Menu = .NewMenuModel("CustomVbaSplit2Menu")
         
-        Dim v
-        Set v = .NewSplitPressButtonModel("CustomVbaSplit1", _
-                        "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
+        Set InnerToggle = SplitToggle.ToggleModel
     End With
 XT: Exit Sub
 EH: MsgBox Err.Description, vbOKOnly

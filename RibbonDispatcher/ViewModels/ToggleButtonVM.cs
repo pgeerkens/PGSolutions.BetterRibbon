@@ -20,7 +20,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IImageable implementation
         /// <inheritdoc/>
-        public override ImageObject Image => Source?.Image ?? "MacroSecurity";
+        public override IImageObject Image => Source?.Image ?? "MacroSecurity".ToImageObject();
 
         /// <inheritdoc/>
         public override bool ShowImage => Source?.ShowImage ?? (Source?.Image != null);

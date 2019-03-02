@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IButtonModel NewButtonModel(this IModelFactory factory, string id,
-                ClickedEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
+                ClickedEventHandler handler, IImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewButtonModel(id, isEnabled, isVisible).SetImage(image);
 
             model.Clicked += handler;
@@ -27,7 +27,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IToggleModel NewToggleModel(this IModelFactory factory, string id,
-                ToggledEventHandler handler, ImageObject image, bool isEnabled = true, bool isVisible = true) {
+                ToggledEventHandler handler, IImageObject image, bool isEnabled = true, bool isVisible = true) {
             var model = factory?.NewToggleModel(id, isEnabled, isVisible).SetImage(image);
 
             model.Toggled += handler;

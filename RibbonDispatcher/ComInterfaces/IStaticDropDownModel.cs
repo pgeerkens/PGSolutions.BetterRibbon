@@ -59,7 +59,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         #region IImageable implementation
         /// <summary>Returns ths current image for this control as either a <<see cref="string"/> or <see cref="IPictureDisp"/>.</summary>
         [DispId(8)]
-        ImageObject Image {
+        IImageObject Image {
             [Description("Returns ths current image for this control as either a string or IPictureDisp.")]
             get; }
         /// <summary>Gets or sets Whether this control displays an image.</summary>
@@ -73,9 +73,9 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description("Gets or sets whether this control displays a label.")]
             get; set; }
 
-        /// <summary>Sets the image for this control to the <see cref="ImageObject"/> provided.</summary>
+        /// <summary>Sets the image for this control to the <see cref="IImageObject"/> provided.</summary>
         [DispId(11),Description("Sets the current image for this control to the provided ImageObject.")]
-        IStaticDropDownModel SetImage(ImageObject image);
+        IStaticDropDownModel SetImage(IImageObject image);
         #endregion
 
         /// <summary>Gets or sets the ID of the selected item.</summary>

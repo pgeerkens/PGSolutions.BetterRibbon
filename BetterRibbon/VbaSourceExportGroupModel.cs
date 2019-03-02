@@ -17,9 +17,9 @@ namespace PGSolutions.BetterRibbon {
             DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",
                                 OnUseSrcFolderToggled, false.ToggleImage());
             ExportSelected = factory.NewButtonModel($"SelectedProjectButton{suffix}",
-                                OnExportSelected, "SaveAll");
+                                OnExportSelected, "SaveAll".ToImageObject());
             ExportCurrent  = factory.NewButtonModel($"CurrentProjectButton{suffix}",
-                                OnExportCurrent, "FileSaveAs");
+                                OnExportCurrent, "FileSaveAs".ToImageObject());
 
             Invalidate();
         }
@@ -34,7 +34,7 @@ namespace PGSolutions.BetterRibbon {
 
         public IButtonModel ExportCurrent  { get; }
 
-        public string             Suffix   { get; }
+        public string       Suffix         { get; }
 
         private void OnUseSrcFolderToggled(IRibbonControl control, bool isPressed)
         => UseSrcFolderToggled?.Invoke(control, isPressed);

@@ -49,6 +49,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 
-        public ISplitPressButtonModel SetImage(ImageObject image) {Image = image; return this; }
+        public ISplitPressButtonModel SetImage(IImageObject image) {Image = image; return this; }
     }
 }

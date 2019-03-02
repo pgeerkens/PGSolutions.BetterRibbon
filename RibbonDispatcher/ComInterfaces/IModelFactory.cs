@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using PGSolutions.RibbonDispatcher.ViewModels;
 using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
@@ -12,6 +13,13 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     using IStrings2 = IControlStrings2;
 
     /// <summary>The main interface for VBA to access the Ribbon dispatcher.</summary>
+    /// <remarks>
+    /// The {SuppressMessage} attributes are left in the source here, instead of being 'fired and
+    /// forgotten' to the Global Suppresion file, as commentary on a practice often seen as a C#
+    /// anti-pattern. Although non-standard C# practice, these "optional parameters with default 
+    /// values" usages are (believed to be) the only means of implementing functionality equivalent
+    /// to "overrides" in a COM-compatible way.
+    /// </remarks>
     [Description("The main interface for VBA to access the Ribbon dispatcher.")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -23,12 +31,10 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         //void Invalidate();
 
         /// <summary>.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(2), Description(".")]
         IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip);
 
         /// <summary>.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(18), Description(".")]
         IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
                 string description);
@@ -38,15 +44,15 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         [DispId(3), Description("Deactivate the specified control, detaching any attached data source.")]
         void DetachProxy(string controlId);
 
-        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
+        /// <summary>Returns a new <see cref="IImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
         [SuppressMessage("Microsoft.Naming","CA1720:IdentifiersShouldNotContainTypeNames",MessageId = "strings")]
         [DispId(4), Description("Returns a new ImageObject from the supplied IPictureDisp.")]
-        ViewModels.ImageObject NewImageObject(IPictureDisp image);
+        IImageObject NewImageObject(IPictureDisp image);
 
-        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied MSO image name.</summary>
+        /// <summary>Returns a new <see cref="IImageObject"/> from the supplied MSO image name.</summary>
         [SuppressMessage("Microsoft.Naming","CA1720:IdentifiersShouldNotContainTypeNames",MessageId = "strings")]
         [DispId(5), Description("Returns a new ImageObject from the supplied MSO image name.")]
-        ViewModels.ImageObject NewImageObjectMso(string imageMso);
+        IImageObject NewImageObjectMso(string imageMso);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]

@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IImageableVM implementation
         /// <inheritdoc/>
-        public ImageObject Image => Source?.Image ?? "MacroSecurity";
+        public IImageObject Image => Source?.Image ?? "MacroSecurity".ToImageObject();
 
         /// <inheritdoc/>
         public bool ShowImage => Source?.ShowImage ?? (Source?.Image != null);

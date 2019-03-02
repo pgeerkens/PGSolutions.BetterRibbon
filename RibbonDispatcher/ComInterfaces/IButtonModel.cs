@@ -62,7 +62,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         #region IImageable implementation
         /// <summary>Returns ths current image for this control as either a <<see cref="string"/> or <see cref="IPictureDisp"/>.</summary>
         [DispId(8)]
-        ImageObject Image {
+        IImageObject Image {
             [Description("Returns ths current image for this control as either a string or IPictureDisp.")]
             get; }
         /// <summary>Gets or sets Whether this control displays an image.</summary>
@@ -78,7 +78,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Sets the image for this control to the MCO image as named.</summary>
         [DispId(11),Description("Sets the current image for this control to the provided IPictureDisp.")]
-        IButtonModel SetImage(ImageObject image);
+        IButtonModel SetImage(IImageObject image);
         #endregion
     }
 }

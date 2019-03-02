@@ -51,6 +51,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => Toggled?.Invoke(control, IsPressed = isPressed);
         #endregion
 
-        public ISplitToggleButtonModel SetImage(ImageObject image) {Image = image; return this; }
+        public ISplitToggleButtonModel SetImage(IImageObject image) {Image = image; return this; }
     }
 }

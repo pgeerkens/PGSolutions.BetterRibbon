@@ -49,11 +49,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IImageableVM {
         /// <summary>Returns the current Image for the control as either a {string} naming an MsoImage or an {IPictureDisp}.</summary>
-        ImageObject Image       { get; }
+        IImageObject Image       { get; }
         /// <summary>Gets or sets whether to show the control's image; ignored by Large controls.</summary>
-        bool        ShowImage   { get; }
+        bool         ShowImage   { get; }
         /// <summary>Gets or sets whether to show the control's label; ignored by Large controls.</summary>
-        bool        ShowLabel   { get; }
+        bool         ShowLabel   { get; }
     }
 
     /// <summary>The interface for controls that can be sized.</summary>

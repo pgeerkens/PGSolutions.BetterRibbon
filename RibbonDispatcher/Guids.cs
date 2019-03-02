@@ -18,7 +18,7 @@ namespace PGSolutions.RibbonDispatcher {
         public const string IEditedEvent            = "69E19401" + GuidSpace;
         public const string IToggledEvent           = "69E19402" + GuidSpace;
         public const string ISelectionMadeEvent     = "69E19403" + GuidSpace;
-        //public const string IToggledEventArgs       = "69E19404" + GuidSpace;
+        public const string IImageObject            = "69E19404" + GuidSpace;
         public const string IViewModelFactory       = "69E19405" + GuidSpace;   // Required for typelib creation
         public const string ViewModelFactory        = "69E19406" + GuidSpace;   // Required for typelib creation
         public const string IResourceLoader         = "69E19407" + GuidSpace;

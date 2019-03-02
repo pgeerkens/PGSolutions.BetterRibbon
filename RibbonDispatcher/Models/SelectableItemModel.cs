@@ -22,10 +22,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal SelectableItemModel(IControlStrings strings)
         : base(null, strings) { }
 
-        public bool        IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
+        public bool         IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
+        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
+        public bool         ShowImage { get; set; } = true;
+        public bool         ShowLabel { get; set; } = true;
 
         public string Id        { get; set; } = null;
         public string Label     => Strings.Label;
@@ -47,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public void OnPurged(IContainerControl sender) { }  // Own VM!
 
         #region IImageable implementation
-        public ISelectableItemModel SetImage(ImageObject image) { Image = image; return this; }
+        public ISelectableItemModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
     }
 }

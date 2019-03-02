@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IImageable implementation
         /// <inheritdoc/>
-        public virtual ImageObject Image => null;
+        public virtual IImageObject Image => null;
 
         /// <inheritdoc/>
         public virtual bool ShowImage => false;

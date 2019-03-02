@@ -18,9 +18,9 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     /// <summary>Extension methods for Excel objects.</summary>
     [CLSCompliant(false)]
     public static class ExcelLinksExtensions {
-        /// <inheritdoc/>
-        public static string ToggleImage(this bool isPressed)
-        => isPressed ? "TagMarkComplete" : "MarginsShowHide";
+        ///// <inheritdoc/>
+        //public static ImageObject ToggleImage(this bool isPressed)
+        //=> isPressed ? "TagMarkComplete" : "MarginsShowHide";
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions)")]
         public static void WriteLinks(this Workbook wb, ILinksAnalysis links) {

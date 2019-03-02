@@ -31,6 +31,7 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
+            Application.WorkbookActivate += Workbook_Activate;
             Application.WorkbookDeactivate += Workbook_Deactivate;
             Application.WindowDeactivate += Window_Deactivate;
         }
@@ -58,6 +59,9 @@ namespace PGSolutions.BetterRibbon {
 
         /// <summary>.</summary>
         public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
+
+        private void Workbook_Activate(Workbook wb)
+        => Dispatcher.CurrentWorkbookName = wb.Name;
 
         [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
         private void Workbook_Deactivate(Workbook wb)

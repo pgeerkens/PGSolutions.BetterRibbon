@@ -12,16 +12,12 @@ using System.Runtime.InteropServices;
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
     /// <remarks>
-    /// The {SuppressMessage} attributes are left in the source here, instead of being 'fired and
-    /// forgotten' to the Global Suppresion file, as commentary on a practice often seen as a C#
-    /// anti-pattern. Although non-standard C# practice, these "optional parameters with default 
-    /// values" usages are (believed to be) the only means of implementing functionality equivalent
-    /// to "overrides" in a COM-compatible way.
     /// 
     /// This class must be COM-Visible for the typelib to be created. 
+    /// 
     /// </remarks>
     [CLSCompliant(true)]
-    [Description("Implementation of the factory for Ribbon objects. Visible to enable TypeLib creation.")]
+    [Description("The view-model factory for Ribbon objects. Visible to enable TypeLib creation.")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IViewModelFactory))]
     [ComVisible(true), Serializable, Guid(Guids.ViewModelFactory)]

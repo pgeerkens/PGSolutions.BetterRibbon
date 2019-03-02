@@ -36,7 +36,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #endregion
 
         #region IImageable implementation
-        public IStaticGalleryModel SetImage(ImageObject image) { Image = image; return this; }
+        public IStaticGalleryModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
 
         #region IListable implementation

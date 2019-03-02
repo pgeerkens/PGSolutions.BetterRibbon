@@ -38,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
-    public abstract class AbstractDispatcher: ICallbackDispatcher {
+    public abstract class AbstractDispatcher:  ICallbackDispatcher {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
         protected AbstractDispatcher(string controlId, IResourceLoader resourceLoader){
@@ -54,6 +54,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         public  ViewModelFactory ViewModelFactory { get; }
+
+        public string CurrentWorkbookName { get; set; }
 
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => ViewModelFactory.GetControl<TControl>(controlId);
@@ -111,6 +113,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public string GetLabel(IRibbonControl Control) {
             var wkbkName = Control.Context.Application.ActiveWorkbook.Name;
+            if (wkbkName != CurrentWorkbookName) System.Diagnostics.Trace.WriteLine($"Expected '{CurrentWorkbookName}' found '{wkbkName}'");
             return Controls(Control?.Id)?.Label ?? Control.Unknown();
         }
 //            => Controls(Control?.Id)?.Label ?? Control.Unknown();
@@ -138,7 +141,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private IImageableVM Imageables (string controlId) => ViewModelFactory.Imageables.GetOrDefault(controlId);
         /// <inheritdoc/>
         public object GetImage(IRibbonControl Control)
-            => Imageables(Control?.Id)?.Image.Image ?? "MacroSecurity";
+            => Imageables(Control?.Id)?.Image?.Image() ?? "MacroSecurity";
         /// <inheritdoc/>
         public bool   GetShowImage(IRibbonControl Control)
             => Imageables(Control?.Id)?.ShowImage ?? false;

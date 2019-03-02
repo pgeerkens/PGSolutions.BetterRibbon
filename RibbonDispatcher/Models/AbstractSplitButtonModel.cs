@@ -21,10 +21,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
         : base(funcViewModel, strings)
         => _menuModel = menu;
 
-        public bool        IsLarge   { get; set; } = true;
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
+        public bool         IsLarge   { get; set; } = true;
+        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
+        public bool         ShowImage { get; set; } = true;
+        public bool         ShowLabel { get; set; } = true;
 
         public IMenuModel MenuModel => _menuModel; private MenuModel _menuModel { get; }
 

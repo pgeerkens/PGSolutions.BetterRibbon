@@ -38,11 +38,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool        IsLarge   { get; set; } = true;
 
         #region IImageable implementation
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
+        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
+        public bool         ShowImage { get; set; } = true;
+        public bool         ShowLabel { get; set; } = true;
 
-        public IButtonModel SetImage(ImageObject image) { Image = image; return this; }
+        public IButtonModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
     }
 }

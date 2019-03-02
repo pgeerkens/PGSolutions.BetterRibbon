@@ -32,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #endregion
 
         #region IImageable implementation
-        public IDropDownModel SetImage(ImageObject image) { Image = image; return this; }
+        public IDropDownModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
 
         #region IListable implementation

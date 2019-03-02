@@ -12,12 +12,11 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonUtilities;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
 namespace PGSolutions.BetterRibbon {
     using static RibbonDispatcher.Extensions;
-    using Models     = IReadOnlyList<VbaSourceExportGroupModel>;
+    using Models = IReadOnlyList<VbaSourceExportGroupModel>;
     using ViewModels = RibbonDispatcher.ViewModels;
 
     /// <summary>The TabModel for the VBA Source Export Group on the BetterRibbon.</summary>

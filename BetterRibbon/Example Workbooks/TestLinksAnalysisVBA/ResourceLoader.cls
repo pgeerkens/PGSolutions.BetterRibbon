@@ -24,9 +24,9 @@ Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) A
             Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
                 Label:="Run All Scan/Parse Tests", _
                 ScreenTip:="Unit Test for Linka Parser", _
-                superTip:="Performs a connection test and then ten" & vbNewLine & _
-                          "specific scanning and parsing tests on " & vbNewLine & _
-                          "various formulas.", keyTip:="", Description:="")
+                superTip:="Performs a connection test and then ten specific " & _
+                          "scanning and parsing tests on various formulas.", _
+                keyTip:="", Description:="")
         Case Else:
             Set IResourceLoader_GetControlStrings2 = Nothing
     End Select

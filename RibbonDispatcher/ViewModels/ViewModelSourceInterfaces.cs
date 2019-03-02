@@ -33,13 +33,13 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     public interface IImageSource {
         /// <summary>.</summary>
-        ImageObject Image     { get; }
+        IImageObject Image     { get; }
 
         /// <summary>Gets whether the image for this control should be displayed when its size is {rdRegular}.</summary>
-        bool        ShowImage { get; }
+        bool         ShowImage { get; }
 
         /// <summary>Gets whether the label for this control should be displayed when its size is {rdRegular}.</summary>
-        bool        ShowLabel { get; }
+        bool         ShowLabel { get; }
     }
 
     public interface IToggleDataSource {

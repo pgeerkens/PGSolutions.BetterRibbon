@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
-    /// <summary>The complete set of Ribbon Cllbacks supported by this implementation.</summary>
-    [Description("The complete set of Ribbon Cllbacks supported by this implementation.")]
+    /// <summary>The complete set of Ribbon Callbacks supported by this implementation.</summary>
+    [Description("The complete set of Ribbon Callbacks supported by this implementation.")]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.ICallbackDispatcher)]

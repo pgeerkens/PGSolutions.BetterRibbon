@@ -44,11 +44,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         #endregion
 
         #region IImageable implementation
-        public ImageObject Image     { get; set; } = "MacroSecurity";
-        public bool        ShowImage { get; set; } = true;
-        public bool        ShowLabel { get; set; } = true;
+        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
+        public bool         ShowImage { get; set; } = true;
+        public bool         ShowLabel { get; set; } = true;
 
-        public IToggleModel SetImage(ImageObject image) { Image = image; return this; }
+        public IToggleModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
     }
 }

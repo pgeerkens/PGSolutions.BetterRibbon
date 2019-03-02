@@ -27,11 +27,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         internal ViewModelFactory ViewModelFactory { get; }
 
-        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
-        public ImageObject NewImageObject(IPictureDisp image) => new ImageObject(image);
+        /// <summary>Returns a new <see cref="IImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
+        public IImageObject NewImageObject(IPictureDisp image) => new ImageObject(image);
 
-        /// <summary>Returns a new <see cref="ImageObject"/> from the supplied MSO image name.</summary>
-        public ImageObject NewImageObjectMso(string imageMso) => new ImageObject(imageMso);
+        /// <summary>Returns a new <see cref="IImageObject"/> from the supplied MSO image name.</summary>
+        public IImageObject NewImageObjectMso(string imageMso) => new ImageObject(imageMso);
 
         /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
         public GroupModel NewGroupModel(string controlId,
