@@ -6,7 +6,6 @@ using System.ComponentModel;
 
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.BetterRibbon {
@@ -15,25 +14,19 @@ namespace PGSolutions.BetterRibbon {
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
     public sealed class BetterRibbonViewModel: GroupVM, IRibbonViewModel {
-        internal BetterRibbonViewModel(AbstractDispatcher dispatcher, string controlId)
-        : base(dispatcher.ViewModelFactory,controlId) {
-            ControlId             = controlId;
-            RibbonUI              = dispatcher.RibbonUI;
-            BrandingGroupVM       = GetControl<GroupVM>("BrandingGroup");
-            LinkedAnalysisGroupVM = GetControl<GroupVM>("LinksAnalysisGroup");
-            VbaExportGroupVM_MS   = GetControl<GroupVM>("VbaExportGroupMS");
-            VbaExportGroupVM_PG   = GetControl<GroupVM>("VbaExportGroupPG");
-            CustomControlsGroupVM = GetControl<GroupVM>("CustomizableGroup");
-        }
-
+        internal BetterRibbonViewModel(Dispatcher dispatcher) 
+        : base("TabPGSolutions",dispatcher.TabViewModels)
+        => RibbonUI      = dispatcher.RibbonUI;
+                
         /// <inheritdoc/>
-        public string    ControlId             { get; }
-        public IRibbonUI RibbonUI              { get; }
+        public  IRibbonUI RibbonUI  { get; }
+        private TabVM     TabMS     => Controls.Item<TabVM>("TabDeveloper");
+        private TabVM     TabPG     => Controls.Item<TabVM>(ControlId);
 
-        public GroupVM   BrandingGroupVM       { get; }
-        public GroupVM   LinkedAnalysisGroupVM { get; }
-        public GroupVM   VbaExportGroupVM_MS   { get; }
-        public GroupVM   VbaExportGroupVM_PG   { get; }
-        public GroupVM   CustomControlsGroupVM { get; }
+        public  IGroupVM  BrandingGroupVM       => TabPG.GetControl<GroupVM>("BrandingGroup");
+        public  IGroupVM  LinkedAnalysisGroupVM => TabPG.GetControl<GroupVM>("LinksAnalysisGroup");
+        public  IGroupVM  VbaExportGroupVM_MS   => TabMS.GetControl<GroupVM>("VbaExportGroupMS");
+        public  IGroupVM  VbaExportGroupVM_PG   => TabPG.GetControl<GroupVM>("VbaExportGroupPG");
+        public  IGroupVM  CustomControlsGroupVM => TabPG.GetControl<GroupVM>("CustomizableGroup");
     }
 }

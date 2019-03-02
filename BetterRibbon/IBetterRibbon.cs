@@ -12,8 +12,8 @@ namespace PGSolutions.BetterRibbon {
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-  //  [Guid(Guids.IBetterRibbon)]
-    public interface IBetterRibbon {
+  //  [Guid(Guids.IComEntry)]
+    public interface IComEntry {
         /// <summary>Returns a new implementation of the <see cref="IModelFactory"/> interface.</summary>
         [DispId( 1),Description("Returns a new implementation of the IModelFactory interface.")]
         IModelFactory    NewBetterRibbon(IResourceLoader manager);

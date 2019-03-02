@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     internal static partial class XmParserExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
-        public static void ParseXmlTabs(this IList<TabVM> tabModels, ViewModelFactory factory, string ribbonXml) {
+        public static void ParseXmlTabs(this KeyedControls tabModels, ViewModelFactory factory, string ribbonXml) {
             var doc  = XDocument.Parse(ribbonXml);
             var root = doc.Root;
             var mso  = (XNamespace)( from a in doc.Descendants().Attributes()

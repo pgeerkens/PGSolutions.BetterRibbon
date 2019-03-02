@@ -91,6 +91,7 @@
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Models\EditBoxModel.cs" />
     <Compile Include="Models\PublicFactoryExtensions.cs" />
+    <Compile Include="ViewModels\KeyedControls.cs" />
     <Compile Include="ViewModels\MenuSeparatorVM.cs" />
     <Compile Include="ViewModels\RibbonViewModelExtensions.cs" />
     <Compile Include="ViewModels\AbstractContainerVM.cs" />

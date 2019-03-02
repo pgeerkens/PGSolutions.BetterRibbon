@@ -8,7 +8,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             IActivatable<TSource,TVM>, ISizeableVM, IImageableVM
         where TSource: IImageSizeSource where TVM:class,ISplitButtonVM {
         public SplitButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu)
-        : base(factory,itemId)
+        : base(itemId)
         => MenuVM = menu;
 
         public IMenuVM   MenuVM   { get; }

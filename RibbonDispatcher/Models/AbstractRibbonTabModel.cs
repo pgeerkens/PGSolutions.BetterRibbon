@@ -15,9 +15,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
             Models    = models;
         }
 
-        public  IRibbonViewModel ViewModel { get; }
+        public    IRibbonViewModel ViewModel { get; }
 
-        private IModels          Models    { get; }
+        protected IModels          Models    { get; }
 
         public void Invalidate()
         => Models.ToList().ForEach(model => model.Invalidate());

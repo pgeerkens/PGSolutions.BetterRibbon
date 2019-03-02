@@ -11,8 +11,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public static partial class PublicFactoryExtensions {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
-        public static IModelFactory NewModelFactory(this ViewModelFactory viewModelFactory, IResourceLoader resourceLoader)
-            => new ModelFactory(viewModelFactory, resourceLoader);
+        public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
+            => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]

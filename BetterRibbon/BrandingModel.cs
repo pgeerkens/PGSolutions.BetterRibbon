@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Text;
-using stdole;
 
 using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
@@ -19,7 +18,7 @@ namespace PGSolutions.BetterRibbon {
         public BrandingModel(IModelFactory factory, IGroupVM viewModel)
         : base(viewModel, factory.GetStrings(viewModel.Id)) {
             BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
-                new ImageObject(BrandingIcon));
+                factory.GetImage(Resources.PGeerkens.ImageToPictureDisp()));
 
             Invalidate();
         }
@@ -42,7 +41,5 @@ namespace PGSolutions.BetterRibbon {
 
         static Version DispatcherVersion => typeof(ViewModelFactory).Assembly.GetName().Version;
         static Version UtilitiesVersion  => typeof(VbaExportEventArgs).Assembly.GetName().Version;
-
-        private static IPictureDisp BrandingIcon => Resources.PGeerkens.ImageToPictureDisp();
     }
 }

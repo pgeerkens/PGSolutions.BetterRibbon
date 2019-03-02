@@ -3,6 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -20,6 +22,9 @@ namespace PGSolutions.BetterRibbon {
                     new VbaSourceExportGroupModel(factory, viewModel.VbaExportGroupVM_PG, "PG")
                 } ),
                 new CustomButtonsGroupModel(factory, viewModel.CustomControlsGroupVM)
-            }.AsReadOnly()) { }
+            }.AsReadOnly())
+        => CustomGroupModel = Models.OfType<CustomButtonsGroupModel>().FirstOrDefault();
+
+        internal CustomButtonsGroupModel CustomGroupModel { get;}
     }
 }

@@ -15,11 +15,11 @@ namespace PGSolutions.BetterRibbon {
     [Serializable, CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IBetterRibbon))]
-    [Guid(RibbonDispatcher.Guids.BetterRibbonMain)]
+    [ComDefaultInterface(typeof(IComEntry))]
+    [Guid(RibbonDispatcher.Guids.IComEntry)]
     [ProgId(ProgIds.RibbonDispatcherProgId)]
-    public sealed class Main : IBetterRibbon {
-        internal Main(Func<IResourceLoader,IModelFactory> funcFactory) => FuncFactory = funcFactory;
+    public sealed class ComEntry : IComEntry {
+        internal ComEntry(Func<IResourceLoader,IModelFactory> funcFactory) => FuncFactory = funcFactory;
 
         Func<IResourceLoader,IModelFactory> FuncFactory { get; }
 

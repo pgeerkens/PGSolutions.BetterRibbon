@@ -46,8 +46,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
 
         /// <summary>.</summary>
-        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
-        => Controls.FirstOrDefault(c => c.Key == controlId).Value as TControl;
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
+        => Controls[controlId] as TControl;
 
         #region Dictionaries
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>
@@ -150,7 +150,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Returns a new Ribbon Group view-model instance.</summary>
         internal GroupVM NewGroup(string controlId)
-        => Add<GroupVM,IControlSource,IGroupVM>(new GroupVM(this, controlId));
+        => Add<GroupVM,IControlSource,IGroupVM>(new GroupVM(controlId));
 
         /// <summary>Returns a new Ribbon ActionButton view-model instance.</summary>
         internal ButtonVM NewButton(string controlId)

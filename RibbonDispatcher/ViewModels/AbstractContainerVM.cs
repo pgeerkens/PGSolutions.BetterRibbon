@@ -4,27 +4,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public abstract class AbstractContainerVM<TSource,TVM>: AbstractControlVM<TSource,TVM>, IContainerControl
         where TSource : IControlSource where TVM:class,IControlVM {
-        protected AbstractContainerVM(ViewModelFactory factory, string itemId)
-        : base(itemId) {
-            Factory = factory;
-            Controls = new KeyedControls();
-        }
+        protected AbstractContainerVM(string itemId) : this(itemId, new KeyedControls()) { }
+        protected AbstractContainerVM(string itemId, KeyedControls controls) : base(itemId)
+        => Controls = controls;
 
-        internal ViewModelFactory Factory { get; }
+        protected KeyedControls Controls { get; }
 
-        protected KeyedCollection<string, IControlVM> Controls { get; }
+        public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
+        => Controls.Item<TControl>(controlId);
 
         public void PurgeChildren() {
             foreach(var child in Controls) {
                 if (child is IContainerControl container) container.PurgeChildren();
-                Factory.Remove(this,child);
+                Controls.Clear();
             }
         }
 
@@ -34,7 +32,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             Controls.Add(control);
         }
 
-        public new void SetShowInactive(bool showInactive) {
+        public new      void SetShowInactive(bool showInactive) {
             foreach (var vm in Controls) {
                 if (vm != this) { vm.SetShowInactive(showInactive); }
             }
@@ -43,7 +41,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         public override void Invalidate() => Invalidate(null);
 
-        public void Invalidate(Action<IControlVM> action) {
+        public          void Invalidate(Action<IControlVM> action) {
             foreach (var ctrl in Controls) {
                 if (ctrl != this) {
                     action?.Invoke(ctrl);

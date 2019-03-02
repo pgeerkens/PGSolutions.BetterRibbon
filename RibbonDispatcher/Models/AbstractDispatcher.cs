@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -25,7 +24,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     ///  - In some instances, a disambiguating usage-suffix such as in OnActionToggle(,)
     ///    instead of a plain OnAction(,).
     ///    
-    /// Whenever possible the ViewModel will return default values acceptable to OFFICE
+    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
+    /// 
+    /// Whenever possible the AbstractDispatcher will return default values acceptable to OFFICE
     /// even if the Control.ControlId supplied to a callback is unknown. These defaults are
     /// chosen to maximize visibility for the unknown control, but disable its functionality.
     /// This is believed to support the principle of 'least surprise', given the OFFICE 
@@ -41,33 +42,23 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public abstract class AbstractDispatcher:  ICallbackDispatcher {
 
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
-        protected AbstractDispatcher(string controlId, IResourceLoader resourceLoader){
-            ControlId        = controlId;
-            ResourceLoader   = resourceLoader;
+        protected AbstractDispatcher(){
             ViewModelFactory = new ViewModelFactory();
             ViewModelFactory.Changed += OnPropertyChanged;
-            TabViewModels    = new List<TabVM>();
+            TabViewModels    = new KeyedControls();
         }
 
         /// <inheritdoc/>
-        public  string           ControlId        { get; }
+        public ViewModelFactory ViewModelFactory { get; }
 
         /// <inheritdoc/>
-        public  ViewModelFactory ViewModelFactory { get; }
-
-        public string CurrentWorkbookName { get; set; }
-
-        public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
-        => ViewModelFactory.GetControl<TControl>(controlId);
-
-        /// <summary>.</summary>
-        private IResourceLoader  ResourceLoader   { get; }
+        public string        CurrentWorkbookName { get; set; }
 
         private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
         /// <inheritdoc/>
-        public object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
+        public abstract object LoadImage(string ImageId);
 
         #region IRibbonExtensibility implementation
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
@@ -79,7 +70,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected abstract string      RibbonXml     { get; }
 
         /// <summary>.</summary>
-        private            List<TabVM> TabViewModels { get; }
+        public KeyedControls           TabViewModels { get; }
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
         /// <param name="RibbonID"></param>
@@ -96,8 +87,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             RibbonUI = ribbonUI;
 
             Initialized?.Invoke(this, EventArgs.Empty);
-
-            RibbonUI?.InvalidateControl(ControlId);
         }
         #endregion
 

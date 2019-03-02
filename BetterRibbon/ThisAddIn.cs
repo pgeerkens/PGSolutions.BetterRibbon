@@ -13,11 +13,19 @@ namespace PGSolutions.BetterRibbon {
     using Excel    = Microsoft.Office.Interop.Excel;
     using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
+    /// <summary>.</summary>
+    /// <remarks>
+    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
+    /// 
+    /// Take care renaming this class, or its namespace; and coordinate any such with the content
+    /// of the (hidden) ThisAddIn.Designer.xml file. Commit frequently. Excel is very tempermental
+    /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
+    /// </remarks>
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            Dispatcher = new Dispatcher("TabPGSolutions");
+            Dispatcher = new Dispatcher();
             Dispatcher.Initialized += ViewModel_Initialized;
             return Dispatcher;
         }
@@ -25,9 +33,10 @@ namespace PGSolutions.BetterRibbon {
         private void ViewModel_Initialized(object sender, EventArgs e) {
             Dispatcher.Initialized -= ViewModel_Initialized;
 
-            ViewModel = new BetterRibbonViewModel(Dispatcher,"TabPGSolutions");
-            Model     = new BetterRibbonModel(ViewModel, 
-                    Dispatcher.ViewModelFactory.NewModelFactory(new MyResourceManager()));
+            ViewModel = new BetterRibbonViewModel(Dispatcher);
+            Model = new BetterRibbonModel(ViewModel, Dispatcher.NewModelFactory(new MyResourceManager()));
+
+            ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
@@ -39,7 +48,7 @@ namespace PGSolutions.BetterRibbon {
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() => ComEntry as IBetterRibbon;
+        protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
 
         internal Dispatcher            Dispatcher { get; private set; }
 
@@ -47,7 +56,7 @@ namespace PGSolutions.BetterRibbon {
 
         internal BetterRibbonModel     Model      { get; private set; }
 
-        private  Main                  ComEntry   => new Main(Dispatcher.ViewModelFactory.NewModelFactory);
+        private  ComEntry              ComEntry   => new ComEntry(Dispatcher.NewModelFactory);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

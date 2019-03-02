@@ -35,7 +35,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 
-        public bool        IsLarge   { get; set; } = true;
+        public bool         IsLarge   { get; set; } = true;
 
         #region IImageable implementation
         public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
