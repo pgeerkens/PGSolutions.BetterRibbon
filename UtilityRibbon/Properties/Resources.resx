@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BrandingButton_Label" xml:space="preserve">
+    <value>A Better Ribbon</value>
+  </data>
+  <data name="BrandingButton_ScreenTip" xml:space="preserve">
+    <value>Pretty (Darn) Good Solutions</value>
+  </data>
+  <data name="BrandingButton_SuperTip" xml:space="preserve">
+    <value>Simple robust solutions to complex problems, by Pieter Geerkens
+
+https://github.com/pgeerkens/PGSolutions.BetterRibbon</value>
+  </data>
+  <data name="BrandingGroup_Label" xml:space="preserve">
+    <value>PGSolutions</value>
+  </data>
+  <data name="CurrentProjectButtonMS_Label" xml:space="preserve">
+    <value>Export Current</value>
+  </data>
+  <data name="CurrentProjectButtonMS_ScreenTip" xml:space="preserve">
+    <value>Export VBA from Current Workbook</value>
+  </data>
+  <data name="CurrentProjectButtonMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from the current Excel workbook.</value>
+  </data>
+  <data name="CurrentProjectButtonPG_Label" xml:space="preserve">
+    <value>Export Current</value>
+  </data>
+  <data name="CurrentProjectButtonPG_ScreenTip" xml:space="preserve">
+    <value>Export VBA from Current Workbook</value>
+  </data>
+  <data name="CurrentProjectButtonPG_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from the current Excel workbook.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ribbon.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SelectedProjectButtonMS_Label" xml:space="preserve">
+    <value>Export Selected</value>
+  </data>
+  <data name="SelectedProjectButtonMS_ScreenTip" xml:space="preserve">
+    <value>Export from Selected Workbook(s)</value>
+  </data>
+  <data name="SelectedProjectButtonMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from selected Excel workbook(s).</value>
+  </data>
+  <data name="SelectedProjectButtonPG_Label" xml:space="preserve">
+    <value>Export Selected</value>
+  </data>
+  <data name="SelectedProjectButtonPG_ScreenTip" xml:space="preserve">
+    <value>Export from Selected Workbook(s)</value>
+  </data>
+  <data name="SelectedProjectButtonPG_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code from selected Excel workbook(s).</value>
+  </data>
+  <data name="UseSrcFolderToggleMS_Label" xml:space="preserve">
+    <value>Use 'SRC' folder</value>
+  </data>
+  <data name="UseSrcFolderToggleMS_ScreenTip" xml:space="preserve">
+    <value>Toggles use of folder-name SRC</value>
+  </data>
+  <data name="UseSrcFolderToggleMS_SuperTip" xml:space="preserve">
+    <value>By default VBAExport is to a directory 'SRC' sibling to the workbook. and Multi-Select is disabled..
+
+When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled.</value>
+  </data>
+  <data name="VbaExportGroupMS_Label" xml:space="preserve">
+    <value>VBA by PGSolutions</value>
+  </data>
+  <data name="VbaExportGroupMS_ScreenTip" xml:space="preserve">
+    <value>VBA Source Export Controls</value>
+  </data>
+  <data name="VbaExportGroupMS_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code to a sibling directory of each workbook, by module type:
+
+Class modules as .CLS
+Standard modules as .VBA
+MSForm modules as .FRM
+
+Project references as .XML</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_Label" xml:space="preserve">
+    <value>Use 'SRC' folder</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_ScreenTip" xml:space="preserve">
+    <value>Toggles use of folder-name SRC</value>
+  </data>
+  <data name="UseSrcFolderTogglePG_SuperTip" xml:space="preserve">
+    <value>By default VBAExport is to a directory 'SRC' sibling to the workbook. and Multi-Select is disabled..
+
+When this toggle is raised the export is instead to a directory eponymous with the workbook, suffixed by VBA. and Multi-Select is enabled.</value>
+  </data>
+  <data name="VbaExportGroupPG_Label" xml:space="preserve">
+    <value>VBA Source Code Export</value>
+  </data>
+  <data name="VbaExportGroupPG_ScreenTip" xml:space="preserve">
+    <value>VBA Source Export Controls</value>
+  </data>
+  <data name="VbaExportGroupPG_SuperTip" xml:space="preserve">
+    <value>Exports all VBA code to a sibling directory of each workbook, by module type:
+
+Class modules as .CLS
+Standard modules as .VBA
+MSForm modules as .FRM
+
+Project references as .XML</value>
+  </data>
+  <data name="CustomizableGroup_ScreenTip" xml:space="preserve">
+    <value>Application-Customizable Controls</value>
+  </data>
+  <data name="CustomizableGroup_SuperTip" xml:space="preserve">
+    <value>These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus.</value>
+  </data>
+  <data name="CustomizableGroup_Label" xml:space="preserve">
+    <value>Controls Customizable in VBA</value>
+  </data>
+  <data name="PGeerkens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PGeerkens.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeLinksCurrent_Label" xml:space="preserve">
+    <value>Analyze Current WB</value>
+  </data>
+  <data name="AnalyzeLinksCurrent_ScreenTip" xml:space="preserve">
+    <value>Analyze Links in Current WB</value>
+  </data>
+  <data name="AnalyzeLinksCurrent_SuperTip" xml:space="preserve">
+    <value>Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references.
+
+Should be idempotent, as the output worksheets (ie "Links Errors", "Linked Files" and "Links Analysis") are omitted from the analysis</value>
+  </data>
+  <data name="AnalyzeLinksSelected_Label" xml:space="preserve">
+    <value>Analyze Listed WBs</value>
+  </data>
+  <data name="AnalyzeLinksSelected_ScreenTip" xml:space="preserve">
+    <value>Analyze Links in Listed WBs</value>
+  </data>
+  <data name="AnalyzeLinksSelected_SuperTip" xml:space="preserve">
+    <value>Provides an analysis of all (non-Table) external links found in this WB in either cell formulas or named references.
+
+All valid WB names in the currently selected Range are analyzed.
+
+Always performed in a separate Excel instance to avoid file name conflicts with open workbooks.</value>
+  </data>
+  <data name="LinksAnalysisGroup_Label" xml:space="preserve">
+    <value>External Links Analysis</value>
+  </data>
+  <data name="LinksAnalysisGroup_ScreenTip" xml:space="preserve">
+    <value>External Links Analyzer</value>
+  </data>
+  <data name="LinksAnalysisGroup_SuperTip" xml:space="preserve">
+    <value>Reports on all external links detected in either the current workbook, or the list of workbooks in column 1 of the currently selected Range.
+
+Both cell formulas and Named Ranges are searched.</value>
+  </data>
+  <data name="BackgroundModeToggle_Label" xml:space="preserve">
+    <value>Background Mode</value>
+  </data>
+  <data name="BackgroundModeToggle_ScreenTip" xml:space="preserve">
+    <value>Toggles Background-Mode </value>
+  </data>
+  <data name="BackgroundModeToggle_SuperTip" xml:space="preserve">
+    <value>When pressed, uses a separate background instance of Excel for analysis of a file list, instead of the default instance. 
+
+This is a beta feature, not yet fully tested.</value>
+  </data>
+</root>

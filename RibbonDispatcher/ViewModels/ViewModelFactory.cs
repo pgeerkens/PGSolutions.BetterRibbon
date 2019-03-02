@@ -36,14 +36,20 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             _gallerySizes    = new Dictionary<string,IGallerySizeVM>();
             _menuSeparators  = new Dictionary<string,IMenuSeparatorVM>();
             _descriptionable = new Dictionary<string,IDescriptionableVM>();
+
+            TabViewModels    = new KeyedControls();
         }
 
         /// <summary>.</summary>
         internal event ChangedEventHandler Changed;
 
+        public void ClearChangedListeners() => Changed = null;
+
         /// <summary>.</summary>
         internal void OnChanged(object sender, IControlChangedEventArgs e)
         => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
+
+        public KeyedControls TabViewModels { get; }
 
         /// <summary>.</summary>
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM

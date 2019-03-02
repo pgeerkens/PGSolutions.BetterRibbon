@@ -40,21 +40,19 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractDispatcher:  ICallbackDispatcher {
-
         /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
-        protected AbstractDispatcher(){
-            ViewModelFactory = new ViewModelFactory();
+        protected AbstractDispatcher(){ }
+
+        /// <inheritdoc/>
+        public ViewModelFactory ViewModelFactory { get; private set; }
+
+        protected void SetViewModelFactory(ViewModelFactory factory) {
+            ViewModelFactory?.ClearChangedListeners();
+            ViewModelFactory = factory;;
             ViewModelFactory.Changed += OnPropertyChanged;
-            TabViewModels    = new KeyedControls();
         }
 
-        /// <inheritdoc/>
-        public ViewModelFactory ViewModelFactory { get; }
-
-        /// <inheritdoc/>
-        public string        CurrentWorkbookName { get; set; }
-
-        private void OnPropertyChanged(object sender, IControlChangedEventArgs e)
+        protected virtual void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 
         /// <inheritdoc/>
@@ -65,22 +63,15 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public event EventHandler Initialized;
 
         /// <inheritdoc/>
-        public             IRibbonUI   RibbonUI      { get; private set; }
+        public          IRibbonUI RibbonUI  { get; private set; }
 
-        protected abstract string      RibbonXml     { get; }
-
-        /// <summary>.</summary>
-        public KeyedControls           TabViewModels { get; }
+        protected abstract string RibbonXml { get; }
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
         /// <param name="RibbonID"></param>
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
-        public string GetCustomUI(string RibbonID) {
-            TabViewModels.ParseXmlTabs(ViewModelFactory,RibbonXml);
-
-            return RibbonXml;
-        }
+        public virtual string GetCustomUI(string RibbonID) => RibbonXml;
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
         public virtual void OnRibbonLoad(IRibbonUI ribbonUI) {
@@ -95,26 +86,22 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private IControlVM Controls (string controlId) => ViewModelFactory.Controls.GetOrDefault(controlId);
         /// <inheritdoc/>
         public bool   GetEnabled(IRibbonControl Control)
-            => Controls(Control?.Id)?.IsEnabled ?? false;
+        => Controls(Control?.Id)?.IsEnabled ?? false;
         /// <inheritdoc/>
         public string GetKeyTip(IRibbonControl Control)
-            => Controls(Control?.Id)?.KeyTip ?? "";
+        => Controls(Control?.Id)?.KeyTip ?? "";
         /// <inheritdoc/>
-        public string GetLabel(IRibbonControl Control) {
-            var wkbkName = Control.Context.Application.ActiveWorkbook.Name;
-            if (wkbkName != CurrentWorkbookName) System.Diagnostics.Trace.WriteLine($"Expected '{CurrentWorkbookName}' found '{wkbkName}'");
-            return Controls(Control?.Id)?.Label ?? Control.Unknown();
-        }
-//            => Controls(Control?.Id)?.Label ?? Control.Unknown();
+        public string GetLabel(IRibbonControl Control)
+        => Controls(Control?.Id)?.Label ?? Control.Unknown();
         /// <inheritdoc/>
         public string GetScreenTip(IRibbonControl Control)
-            => Controls(Control?.Id)?.ScreenTip ?? Control.Unknown("ScreenTip");
+        => Controls(Control?.Id)?.ScreenTip ?? Control.Unknown("ScreenTip");
         /// <inheritdoc/>
         public string GetSuperTip(IRibbonControl Control)
-            => Controls(Control?.Id)?.SuperTip ?? Control.Unknown("SuperTip");
+        => Controls(Control?.Id)?.SuperTip ?? Control.Unknown("SuperTip");
         /// <inheritdoc/>
         public bool   GetVisible(IRibbonControl Control)
-            => Controls(Control?.Id)?.IsVisible ?? true;
+        => Controls(Control?.Id)?.IsVisible ?? true;
         #endregion
 
         #region ISizeableVM implementation

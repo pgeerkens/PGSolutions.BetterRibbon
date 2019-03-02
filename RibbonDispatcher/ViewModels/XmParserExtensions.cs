@@ -11,25 +11,32 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     using Trace = System.Diagnostics.Trace;
 
     /// <summary>.</summary>
-    internal static partial class XmParserExtensions {
+    public static partial class XmParserExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
-        public static void ParseXmlTabs(this KeyedControls tabModels, ViewModelFactory factory, string ribbonXml) {
-            var doc  = XDocument.Parse(ribbonXml);
+        public static ViewModelFactory ParseXmlTabs(this string ribbonXml)
+        => XDocument.Parse(ribbonXml).ParseXmlTabs();
+
+        /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
+        /// <param name="ribbonXml"></param>
+        public static ViewModelFactory ParseXmlTabs(this XDocument doc) {
+            var factory = new ViewModelFactory();
             var root = doc.Root;
+            var pg   = (XNamespace)"https://github.com/pgeerkens/PGSolutions.UtilityRibbon"; 
             var mso  = (XNamespace)( from a in doc.Descendants().Attributes()
                                      where a.IsNamespaceDeclaration && a.Name.LocalName == "mso"
                                      select a
                                    ).FirstOrDefault()?.Value;
             foreach (var tab in root.Descendants(mso+"tab")) {
                 if (tab.Attribute("idMso") != null) {
-                    tabModels?.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idMso").Value)));
-                } else if (tab.Attribute("id") != null) {
-                    tabModels?.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
+                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idMso").Value)));
+                } else if (tab.Attribute("id") != null  ||  tab.Attribute("idQ") != null) {
+                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
                 } else {
                     continue;
                 }
             }
+            return factory;
         }
 
         [SuppressMessage("Microsoft.Maintainability","CA1502:AvoidExcessiveComplexity")]
