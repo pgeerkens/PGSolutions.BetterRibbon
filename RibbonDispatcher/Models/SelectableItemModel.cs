@@ -20,16 +20,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public class SelectableItemModel : ControlModel<ISelectableItemSource,IStaticItemVM>,
             ISelectableItemModel, ISelectableItemSource, IStaticItemVM {
         internal SelectableItemModel(IControlStrings strings)
-        : base(null, strings) {
-            var start = ControlId.IndexOf(':') + 1;
-            LocalId = start > 0 ? ControlId.Substring(start) : ControlId;
-        }
+        : base(null, strings) { }
 
         public bool         IsLarge   { get => false; set { /* Not Supported - so ignore */ } } 
         public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
         public bool         ShowImage { get; set; } = true;
         public bool         ShowLabel { get; set; } = true;
-        public string       LocalId   { get; }
 
         public string ControlId { get; set; } = null;
         public string Label     => Strings.Label;

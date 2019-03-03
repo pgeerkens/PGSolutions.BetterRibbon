@@ -9,11 +9,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public abstract class AbstractControlVM<TSource,TVM>: IControlVM, IActivatable<TSource,TVM>
         where TSource: IControlSource where TVM:class,IControlVM {
         /// <summary>TODO</summary>
-        protected AbstractControlVM(string controlId) {
-            ControlId = controlId;
-            var start = ControlId.IndexOf(':') + 1;
-            LocalId = start > 0 ? ControlId.Substring(start) : ControlId;
-        }
+        protected AbstractControlVM(string controlId) =>  ControlId = controlId;
 
         #region Common Control implementation
         /// <summary>TODO</summary>
@@ -46,8 +42,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <inheritdoc/>
         public bool IsVisible => Source?.IsVisible ?? ShowInactive;
-
-        public string LocalId { get; }
         #endregion
 
         #region IActivatable implementation

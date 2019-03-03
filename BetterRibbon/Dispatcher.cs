@@ -52,7 +52,7 @@ namespace PGSolutions.BetterRibbon {
 
         public override void RegisterWorkbook(string workbookName) {
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
-                factory = RibbonXmlDoc.ParseXmlTabs();
+                factory = RibbonXmlDoc.Root.ParseXmlTabs();
                 Factories.Add(workbookName, factory);
             }
             SetViewModelFactory(factory);

@@ -67,8 +67,8 @@ namespace PGSolutions.RibbonDispatcher {
 
         public const string IMenuSeparatorModel     = "69E19430" + GuidSpace;
         public const string MenuSeparatorModel      = "69E19431" + GuidSpace;
-        //public const string IMenuModel              = "69E19432" + GuidSpace;
-        //public const string MenuModel               = "69E19433" + GuidSpace;
+        public const string IDynamicMenuModel       = "69E19432" + GuidSpace;
+        public const string DynamicMenuModel        = "69E19433" + GuidSpace;
         //public const string ISplitToggleButtonModel = "69E19434" + GuidSpace;
         //public const string SplitToggleButtonModel  = "69E19435" + GuidSpace;
         //public const string ISplitPressButtonModel  = "69E19436" + GuidSpace;

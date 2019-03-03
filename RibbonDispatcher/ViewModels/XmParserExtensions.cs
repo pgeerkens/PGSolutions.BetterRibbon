@@ -15,83 +15,90 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
         public static ViewModelFactory ParseXmlTabs(this string ribbonXml)
-        => XDocument.Parse(ribbonXml).ParseXmlTabs();
+        => XDocument.Parse(ribbonXml).Root.ParseXmlTabs();
 
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
-        public static ViewModelFactory ParseXmlTabs(this XDocument doc) {
+        public static ViewModelFactory ParseXmlTabs(this XElement root) {
             var factory = new ViewModelFactory();
-            var pg   = (XNamespace)"https://github.com/pgeerkens/PGSolutions.UtilityRibbon"; 
-            var mso  = (XNamespace)( from a in doc.Descendants().Attributes()
-                                     where a.IsNamespaceDeclaration && a.Name.LocalName == "mso"
-                                     select a
-                                   ).FirstOrDefault()?.Value;
-            foreach (var tab in doc.Root.Descendants(mso+"tab")) {
-                if (tab.Attribute("idMso") != null) {
-                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idMso").Value)));
-                } else if (tab.Attribute("id") != null) {
-                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
-                } else if (tab.Attribute("idQ") != null) {
-                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idQ").Value.Substring(3))));
-                } else {
-                    continue;
+            foreach (var tab in root.Descendants().Where(d => d.Name.LocalName == "tab")) {
+                var name = tab.Attribute("idQ")?.Value?.Substring(3) 
+                        ?? tab.Attribute("idMso")?.Value
+                        ?? tab.Attribute("id")?.Value;
+                if (name != null) {
+                    factory.TabViewModels.Add(tab.ParseXmlChildren(factory, factory?.NewTab(name)));
                 }
             }
             return factory;
         }
 
-        [SuppressMessage("Microsoft.Maintainability","CA1502:AvoidExcessiveComplexity")]
-        public static TCtrl ParseXmlChildren<TCtrl>(this XElement element, XNamespace mso,
-                ViewModelFactory factory, TCtrl parent) where TCtrl : IContainerControl {
-            string controlId = null;
+        public static KeyedControls ParseXmlMenu(this XElement element, ViewModelFactory factory) {
+            var controls = new KeyedControls();
+
             foreach (var child in element.Elements()) {
-                if (child.Attribute(mso+"idMso") != null  ||  child.Attribute(mso+"idQ") != null) continue;
+                var x = ParseXmlChild(child,factory);
+                if (x != null) controls.Add(x);
+            }
 
-                switch (child.Name) {
-                    case XName name when child.HasElements && StaticActions.TryGetValue(name.LocalName,out var action):
-                        if (TryGetControlId(child,ref controlId)) { parent.Add(action(controlId,child,factory,mso)); }
-                        break;
+            return controls;
+        }
 
-                    case XName name when Actions.TryGetValue(name.LocalName,out var action):
-                        if (TryGetControlId(child,ref controlId)) { parent.Add(action(controlId,factory)); }
-                        break;
-
-                    case XName name when name == mso+"dialogBoxLauncher":
-                        child.ParseXmlChildren(mso, factory, parent);
-                        break;
-
-                    case XName name when name == mso+"splitButton":
-                        var menuId   = child.Elements().Last().Attribute("id").Value;
-                        var menuVM   = child.Elements().Last().ParseXmlChildren(mso, factory,
-                                                            factory.NewMenu(menuId));
-
-                        var buttonId = child.Elements().First().Attribute("id").Value;
-
-                        if (child.Elements().First().Name == mso+"button") {
-                            parent.Add(factory.NewSplitPressButton(child.Attribute("id").Value, menuVM,
-                                        factory.NewButton(buttonId)));
-                        } else if (child.Elements().First().Name == mso+"toggleButton") {
-                            parent.Add(factory.NewSplitToggleButton(child.Attribute("id").Value, menuVM,
-                                        factory.NewToggleButton(buttonId)));
-                        } else throw new InvalidOperationException($"Encountered invalid control type: '{child.Elements().First().Name}'");
-                        break;
-
-                    default:
-                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
-                        break;
-                }
+        [SuppressMessage("Microsoft.Maintainability","CA1502:AvoidExcessiveComplexity")]
+        public static TCtrl ParseXmlChildren<TCtrl>(this XElement element, ViewModelFactory factory,
+                TCtrl parent) where TCtrl : IContainerControl {
+            foreach (var child in element.Elements()) {
+                var x = ParseXmlChild(child,factory);
+                if (x != null) parent.Add(x);
             }
             return parent;
         }
 
-        private static Dictionary<string,Func<string,XElement,ViewModelFactory,XNamespace,IControlVM>> StaticActions
-            = new Dictionary<string,Func<string,XElement,ViewModelFactory,XNamespace,IControlVM>>() {
-                {"dropDown",(controlId,child,factory,mso) => factory.NewStaticDropDown(controlId, child.ParseItemList(mso)) },
-                {"comboBox",(controlId,child,factory,mso) => factory.NewStaticComboBox(controlId, child.ParseItemList(mso)) },
-                {"gallery", (controlId,child,factory,mso) => factory.NewStaticGallery(controlId, child.ParseItemList(mso)) },
-                {"group",   (controlId,child,factory,mso) => child.ParseXmlChildren(mso, factory, factory.NewGroup(controlId)) },
-                {"box",     (controlId,child,factory,mso) => child.ParseXmlChildren(mso,factory,factory.NewBoxControl(controlId))},
-                {"menu",    (controlId,child,factory,mso) => child.ParseXmlChildren(mso, factory, factory.NewMenu(controlId)) }
+        public static IControlVM ParseXmlChild(XElement child, ViewModelFactory factory) {
+            string controlId = null;
+            switch (child.Name.LocalName) {
+                case string name when child.HasElements && StaticActions.TryGetValue(name,out var action):
+                    if (TryGetControlId(child,ref controlId)) { return action(controlId,child,factory); }
+                    break;
+
+                case string name when Actions.TryGetValue(name,out var action):
+                    if (TryGetControlId(child,ref controlId)) { return action(controlId,factory); }
+                    break;
+
+                case string name when name == "dialogBoxLauncher":
+                    return ParseXmlChild(child.Elements().FirstOrDefault(), factory);
+
+                case string name when name == "splitButton":
+                    var menuId   = child.Elements().Last().Attribute("id").Value;
+                    var menuVM   = child.Elements().Last().ParseXmlChildren(factory,factory.NewMenu(menuId));
+
+                    var buttonId = child.Elements().First().Attribute("id").Value;
+
+                    if (child.Elements().First().Name.LocalName == "button") {
+                        return factory.NewSplitPressButton(child.Attribute("id").Value, menuVM,
+                                    factory.NewButton(buttonId));
+                    } else if (child.Elements().First().Name.LocalName == "toggleButton") {
+                        return factory.NewSplitToggleButton(child.Attribute("id").Value, menuVM,
+                                    factory.NewToggleButton(buttonId));
+                    } else {
+                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
+                    }
+                    break;
+
+                default:
+                    Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}'");
+                    break;
+            }
+            return null;
+        }
+
+        private static Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>> StaticActions
+            = new Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>>() {
+                {"dropDown",   (controlId,child,factory) => factory.NewStaticDropDown(controlId, child.Elements().ParseItemList()) },
+                {"comboBox",   (controlId,child,factory) => factory.NewStaticComboBox(controlId, child.Elements().ParseItemList()) },
+                {"gallery",    (controlId,child,factory) => factory.NewStaticGallery(controlId, child.Elements().ParseItemList()) },
+                {"group",      (controlId,child,factory) => child.ParseXmlChildren(factory, factory.NewGroup(controlId)) },
+                {"box",        (controlId,child,factory) => child.ParseXmlChildren(factory,factory.NewBoxControl(controlId))},
+                {"menu",       (controlId,child,factory) => child.ParseXmlChildren(factory, factory.NewMenu(controlId)) }
             };
 
         private static Dictionary<string,Func<string,ViewModelFactory,IControlVM>> Actions
@@ -102,6 +109,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 {"checkBox",     (controlId,factory) => factory.NewCheckBox(controlId) },
                 {"dropDown",     (controlId,factory) => factory.NewDropDown(controlId) },
                 {"comboBox",     (controlId,factory) => factory.NewComboBox(controlId) },
+                {"dynamicMenu",  (controlId,factory) => factory.NewDynamicMenu(controlId) },
                 {"toggleButton", (controlId,factory) => factory.NewToggleButton(controlId) },
                 {"labelControl", (controlId,factory) => factory.NewLabelControl(controlId) },
                 {"menuSeparator",(controlId,factory) => factory.NewMenuSeparator(controlId) }
@@ -110,13 +118,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         private static bool TryGetControlId(XElement child, ref string controlId)
         => (controlId = child.Attribute("id")?.Value ?? child.Attribute("idQ")?.Value)  !=  null;
 
-        internal static IReadOnlyList<StaticItemVM> ParseItemList(this XElement parent, XNamespace mso) {
+        internal static IReadOnlyList<StaticItemVM> ParseItemList(this IEnumerable<XElement> elements) {
             var items = new List<StaticItemVM>();
-            foreach (var child in parent.Elements()) {
-                if (parent.Attribute(mso+"idMso") != null  ||  parent.Attribute(mso+"idQ") != null) continue;
-
-                switch (child.Name) {
-                    case XName name when name == mso+"item":
+            foreach (var child in elements) {
+                switch (child.Name.LocalName) {
+                    case string name when name == "item":
                         var id = child.Attribute("id").Value;
                         items.Add(new StaticItemVM(id,
                                 new ControlStrings(child.Attribute("label")?.Value     ?? id,
@@ -125,7 +131,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         ));
                         break;
                     default:
-                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}' child of {parent.Attribute("id")}");
+                        Trace.WriteLine($"Skipped a {child.Name.LocalName}: '{child.Attribute("id")}' child of {child.Parent.Attribute("id")}");
                         break;
                 }
             }

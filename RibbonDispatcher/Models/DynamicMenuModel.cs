@@ -16,17 +16,17 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IMenuModel))]
-    [Guid(Guids.MenuModel)]
-    public class MenuModel: ControlModel<IMenuSource,IMenuVM>, IMenuModel,
-            IMenuSource {
-        internal MenuModel(Func<string,MenuVM> funcViewModel,
+    [ComDefaultInterface(typeof(IDynamicMenuModel))]
+    [Guid(Guids.DynamicMenuModel)]
+    public class DynamicMenuModel: ControlModel<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuModel,
+            IDynamicMenuSource {
+        internal DynamicMenuModel(Func<string,DynamicMenuVM> funcViewModel,
                 IControlStrings strings)
         : base(funcViewModel, strings)
         { }
 
         /// <inheritdoc/>
-        public IMenuModel Attach(string controlId) {
+        public IDynamicMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             return this;
         }
@@ -38,7 +38,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool         ShowLabel { get; set; } = true;
 
         #region IImageable implementation
-        public IMenuModel SetImage(IImageObject image) { Image = image; return this; }
+        public IDynamicMenuModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
+
+        public string       Content   { get; }
     }
 }

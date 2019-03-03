@@ -3,9 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal class MenuVM: AbstractContainerVM<IMenuSource,IMenuVM>, IMenuVM,
+    public class MenuVM: AbstractContainerVM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
-        public MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }
+        internal MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }
 
         #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
@@ -21,7 +21,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;
- 
+        #endregion
+
+        #region IDescriptionable implementation
         /// <inheritdoc/>
         public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
         #endregion

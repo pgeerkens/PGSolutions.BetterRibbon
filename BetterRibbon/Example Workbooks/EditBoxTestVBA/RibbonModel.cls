@@ -33,6 +33,17 @@ Attribute Gallery1.VB_VarHelpID = -1
 Private WithEvents InnerToggle  As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute InnerToggle.VB_VarHelpID = -1
 
+'Private WithEvents DynamicMenu    As PGSolutions_RibbonDispatcher.DynamicMenuModel
+Private DynamicMenu     As PGSolutions_RibbonDispatcher.DynamicMenuModel
+Attribute DynamicMenu.VB_VarHelpID = -1
+
+Private WithEvents DynamicButton  As PGSolutions_RibbonDispatcher.ButtonModel
+Attribute DynamicButton.VB_VarHelpID = -1
+Private WithEvents DynamicToggle  As PGSolutions_RibbonDispatcher.ToggleModel
+Attribute DynamicToggle.VB_VarHelpID = -1
+Private WithEvents DynamicGallery As PGSolutions_RibbonDispatcher.StaticGalleryModel
+Attribute DynamicGallery.VB_VarHelpID = -1
+
 Private Sub Button_Clicked(ByVal control As Office.IRibbonControl)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
@@ -49,12 +60,24 @@ Private Sub Dialog_Clicked(ByVal control As Office.IRibbonControl)
             " Dialog Launch Test"
 End Sub
 
+Private Sub DynamicButton_Clicked(ByVal control As Office.IRibbonControl)
+    MsgBox "Pressed!", vbOKOnly, "DynamicButton_Clicked"
+End Sub
+
+Private Sub DynamicGallery_SelectionMade(ByVal control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
+    MsgBox "Selected # " & SelectedIndex & ": " & SelectedId, vbOKOnly, "DynamicGallery_SelectionMade"
+End Sub
+
+Private Sub DynamicToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+    MsgBox "Toggled to " & IsPressed, vbOKOnly, "DynamicToggle_Toggled"
+End Sub
+
 Private Sub EditBox_Edited(ByVal control As IRibbonControl, ByVal Text As String)
     ButtonProcessing.EditBox_Processing Text
 End Sub
 
-Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal selectedId As String, ByVal SelectedIndex As Long)
-    MsgBox "The seleccted item was: " & selectedId, vbOKOnly, ThisWorkbook.Name
+Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
+    MsgBox "The seleccted item was: " & SelectedId, vbOKOnly, ThisWorkbook.Name
 End Sub
 
 Private Sub InnerToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
@@ -83,6 +106,11 @@ Friend Sub Activate()
     
     If Not Gallery1 Is Nothing Then Gallery1.Attach "StaticGallery1"
     If Not Split2Menu Is Nothing Then Split2Menu.Attach "CustomVbaSplit2Menu"
+    
+    If Not DynamicMenu Is Nothing Then DynamicMenu.Attach "VbaDynamicMenu1"
+    If Not DynamicButton Is Nothing Then DynamicButton.Attach "Custom2VbaButton1"
+    If Not DynamicToggle Is Nothing Then DynamicToggle.Attach "Custom2VbaToggleButton2"
+    If Not DynamicGallery Is Nothing Then DynamicGallery.Attach "Custom2VbaStaticGallery2"
 End Sub
 
 Private Sub Class_Initialize()
@@ -107,6 +135,12 @@ Private Sub Class_Initialize()
         Set Split2Menu = .NewMenuModel("CustomVbaSplit2Menu")
         
         Set InnerToggle = SplitToggle.ToggleModel
+        
+        Set DynamicMenu = .NewDynamicMenuModel("VbaDynamicMenu1")
+        
+        Set DynamicButton = .NewButtonModel("Custom2VbaButton1")
+        Set DynamicToggle = .NewToggleModel("Custom2VbaToggleButton2")
+        Set DynamicGallery = .NewStaticGalleryModel("Custom2VbaStaticGallery2")
     End With
     
     Activate

@@ -127,8 +127,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
-    public interface IDynamicMenuVM {
-        string MenuContent { get; }
+    public interface IDynamicMenuVM : IControlVM {
+        string Content { get; }
     }
 
     /// <summary>The interface for galleries with sizeable items.</summary>
@@ -142,5 +142,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IDescriptionableVM {
         string Description { get; }
+    }
+
+    [CLSCompliant(true)]
+    public interface IContentVM {
+        string Content { get; }
     }
 }

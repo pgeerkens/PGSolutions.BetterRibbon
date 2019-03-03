@@ -152,5 +152,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public IStrings GetStrings(string id) => ResourceManager.GetControlStrings(id);
 
         public IStrings2 GetStrings2(string id) => ResourceManager.GetControlStrings2(id);
+
+        /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
+        public DynamicMenuModel NewDynamicMenuModel(string controlId,
+                bool isEnabled, bool isVisible)
+        => new DynamicMenuModel(GetControl<DynamicMenuVM>, GetStrings2(controlId))
+                { IsEnabled=isEnabled, IsVisible=isVisible }
+                .InitializeModel<IDynamicMenuSource, IDynamicMenuVM, DynamicMenuModel>();
     }
 }

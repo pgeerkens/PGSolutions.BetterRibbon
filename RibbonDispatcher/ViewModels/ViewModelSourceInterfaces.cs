@@ -109,5 +109,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public interface IMenuSeparatorSource: IControlSource {
         string Title { get; }
     }
+
+    public interface IDynamicMenuSource : IMenuSource, IContentVM { }
     #endregion
 }

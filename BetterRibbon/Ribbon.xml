@@ -7,7 +7,7 @@
   <mso:ribbon startFromScratch="false">
     <mso:tabs>
         <mso:tab idQ="pg:TabPGSolutions" label="PGSolutions" visible="true">
-            <mso:group idQ="pg:CustomizableGroup" getVisible="getVisible" insertAfterQ="pg:LinksAnalysisGroup"
+            <mso:group id="CustomizableGroup" getVisible="getVisible"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                 <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true">
                     <mso:toggleButton id="CustomVbaToggle1" getImage="getImage"

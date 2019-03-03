@@ -7,7 +7,7 @@
     <mso:ribbon startFromScratch="false">
         <mso:tabs>
             <mso:tab idMso="TabDeveloper" >
-                <mso:group idQ="pg:VbaExportGroupMS" getVisible="getVisible" insertAfterMso="XmlExport"
+                <mso:group id="VbaExportGroupMS" getVisible="getVisible" insertAfterMso="XmlExport"
                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                     <mso:box id="VbaExportBoxMS" getVisible="getVisible" boxStyle="vertical">
                         <mso:toggleButton id="UseSrcFolderToggleMS" getVisible="getVisible" getEnabled="getEnabled"
@@ -29,22 +29,15 @@
                 </mso:group>
             </mso:tab>
             <mso:tab idQ="pg:TabPGSolutions" label="PGSolutions" visible="true">
-                <mso:group idQ="pg:LinksAnalysisGroup" getVisible="getVisible" insertBeforeQ="pg:CustomizableGroup"
+                <mso:group id="BrandingGroup" getVisible="getVisible"
                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-                    <mso:box id="LinksAnalysisBox" getVisible="getVisible" boxStyle="vertical">
-                        <mso:button id="AnalyzeLinksCurrent" getVisible="getVisible" getEnabled="getEnabled"
-                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
-                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                                onAction="onAction"
-                       />
-                        <mso:button id="AnalyzeLinksSelected" getVisible="getVisible" getEnabled="getEnabled"
-                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
-                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
-                                onAction="onAction"
-                       />
-                    </mso:box>
+                    <mso:button id="BrandingButton" getImage="getImage"
+                            getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
+                            getShowImage="getShowImage" getShowLabel="getShowLabel"
+                     />
                 </mso:group>
-                <mso:group idQ="pg:VbaExportGroupPG" getVisible="getVisible" insertBeforeQ="pg:LinksAnalysisGroup"
+                <mso:group id="VbaExportGroupPG" getVisible="getVisible" 
                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                     <mso:box id="VbaExportBoxPG" getVisible="getVisible" boxStyle="vertical">
                         <mso:toggleButton id="UseSrcFolderTogglePG" getVisible="getVisible" getEnabled="getEnabled"
@@ -64,13 +57,20 @@
                        />
                     </mso:box>
                 </mso:group>
-                <mso:group idQ="pg:BrandingGroup" getVisible="getVisible" insertBeforeQ="pg:VbaExportGroupPG"
+                <mso:group id="LinksAnalysisGroup" getVisible="getVisible"
                            getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-                    <mso:button id="BrandingButton" getImage="getImage"
-                            getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
-                            onAction="onAction" getVisible="getVisible" getEnabled="getEnabled" getSize="getSize"
-                            getShowImage="getShowImage" getShowLabel="getShowLabel"
-                     />
+                    <mso:box id="LinksAnalysisBox" getVisible="getVisible" boxStyle="vertical">
+                        <mso:button id="AnalyzeLinksCurrent" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                        <mso:button id="AnalyzeLinksSelected" getVisible="getVisible" getEnabled="getEnabled"
+                                getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
+                                getSize="getSize" getShowImage="getShowImage" getShowLabel="getShowLabel" getImage="getImage"
+                                onAction="onAction"
+                       />
+                    </mso:box>
                 </mso:group>
             </mso:tab>
         </mso:tabs>

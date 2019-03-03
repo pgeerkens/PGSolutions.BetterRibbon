@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
@@ -226,6 +225,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal MenuVM NewMenu(string controlId)
         => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(this, controlId));
+
+        /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
+        internal DynamicMenuVM NewDynamicMenu(string controlId)
+        => Add<DynamicMenuVM, IDynamicMenuSource,IDynamicMenuVM>(new DynamicMenuVM(this, controlId));
         #endregion
     }
 }

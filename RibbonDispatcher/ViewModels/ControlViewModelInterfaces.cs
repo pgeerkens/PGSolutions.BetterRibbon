@@ -23,8 +23,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns the KeyTip string for this control.</summary>
         string KeyTip       { get; }
 
-        string LocalId      { get; }
-
         /// <summary>.</summary>
         void   Invalidate();
 

@@ -117,5 +117,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         public IImageObject GetImage(string imageMso) => new ImageObject(imageMso);
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        public new IDynamicMenuModel NewDynamicMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewDynamicMenuModel(stringsId, isEnabled, isVisible);
     }
 }

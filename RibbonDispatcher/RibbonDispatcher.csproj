@@ -63,8 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComInterfaces\IDynamicMenuModel.cs" />
     <Compile Include="ComInterfaces\IGalleryModel.cs" />
+    <Compile Include="Models\DynamicMenuModel.cs" />
     <Compile Include="ViewModels\BoxControlVM.cs" />
+    <Compile Include="ViewModels\DynamicMenuVM.cs" />
     <Compile Include="ViewModels\IImageObject.cs" />
     <Compile Include="ComInterfaces\IMenuSeparatorModel.cs" />
     <Compile Include="ComInterfaces\IStaticComboBoxModel.cs" />

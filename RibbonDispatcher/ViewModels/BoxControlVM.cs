@@ -16,7 +16,5 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public override IBoxControlVM Attach(IBoxControlSource source) => Attach<BoxControlVM>(source);
 
         protected override bool DefaultShowInactive { get => true; set { } }
-
-        public string    ControlId => base.ControlId;
     }
 }
