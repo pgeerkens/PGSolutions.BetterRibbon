@@ -55,7 +55,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public virtual void RegisterWorkbook(string workbookName) { }
 
         protected virtual void OnPropertyChanged(object sender, IControlChangedEventArgs e)
-        => RibbonUI?.InvalidateControl(e.ControlId);
+        => RibbonUI?.InvalidateControl(e.Control.LocalId);
 
         /// <inheritdoc/>
         public abstract object LoadImage(string ImageId);
@@ -155,7 +155,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => SelectItems(Control?.Id)?.Items?.Count ?? 0;
         /// <inheritdoc/>
         public string GetItemId(IRibbonControl Control, int Index)
-        => SelectItems(Control?.Id)?.Items[Index].Id ?? "";
+        => SelectItems(Control?.Id)?.Items[Index].ControlId ?? "";
         /// <inheritdoc/>
         public object GetItemImage(IRibbonControl Control, int Index) {
             var image = SelectItems(Control?.Id)?.Items[Index].Image;

@@ -28,7 +28,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public event SelectionMadeEventHandler SelectionMade;
 
         public int    SelectedIndex { get; set; }
-        public string SelectedId    { get => Items[SelectedIndex].Id; set => SelectedIndex = FindId(value); }
+        public string SelectedId    { get => Items[SelectedIndex].ControlId; set => SelectedIndex = FindId(value); }
 
         protected void OnSelectionMade(IRibbonControl control, string selectedId, int selectedIndex)
         => SelectionMade?.Invoke(control, selectedId, SelectedIndex = selectedIndex);

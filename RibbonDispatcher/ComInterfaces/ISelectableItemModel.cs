@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ISelectableItemModel: IControlSource {
         /// <summary>TODO</summary>
         [DispId(0)]
-        string Id { get; }
+        string ControlId { get; }
 
         #region IActivable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>

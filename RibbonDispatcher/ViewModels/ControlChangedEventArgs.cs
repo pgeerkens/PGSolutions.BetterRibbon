@@ -17,9 +17,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     internal class ControlChangedEventArgs : EventArgs, IControlChangedEventArgs {
         /// <summary>TODO</summary>
-        public ControlChangedEventArgs(string controlId) => ControlId = controlId;
+        public ControlChangedEventArgs(IControlVM control) => Control = control;
         /// <summary>TODO</summary>
-        public string ControlId { get; }
+        public IControlVM Control { get; }
     }
 
     /// <summary>TODO</summary>

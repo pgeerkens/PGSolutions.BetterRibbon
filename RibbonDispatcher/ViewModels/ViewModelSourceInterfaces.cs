@@ -102,6 +102,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     public interface ILabelControlSource: IControlSource, ISizeSource { }
 
+    public interface IBoxControlSource: IControlSource { }
+
     public interface IMenuSource: IControlSource, IImageSource { }
 
     public interface IMenuSeparatorSource: IControlSource {

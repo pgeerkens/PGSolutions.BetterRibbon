@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public ButtonVM(string itemId) : base(itemId) { }
 
         /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
 
         #region IActivatable implementation
         /// <inheritdoc/>

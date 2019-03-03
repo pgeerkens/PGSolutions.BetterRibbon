@@ -10,6 +10,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IControlChangedEventArgs {
         /// <summary>The</summary>
-        string ControlId { get; }
+        IControlVM Control { get; }
     }
 }

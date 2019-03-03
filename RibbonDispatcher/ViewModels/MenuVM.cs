@@ -23,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public bool ShowLabel => Source?.ShowLabel ?? true;
  
         /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
         #endregion
     }
 }

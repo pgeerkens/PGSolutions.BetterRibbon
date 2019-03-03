@@ -11,7 +11,7 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 namespace PGSolutions.UtilityRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
         public VbaSourceExportGroupModel(IModelFactory factory, IGroupVM viewModel, string suffix)
-        : base(viewModel, factory.GetStrings(viewModel.Id)) {
+        : base(viewModel, factory.GetStrings(viewModel?.ControlId)) {
             Suffix = suffix;
 
             DestIsSrc      = factory.NewToggleModel($"UseSrcFolderToggle{suffix}",

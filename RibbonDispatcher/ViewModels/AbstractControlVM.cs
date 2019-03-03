@@ -9,7 +9,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public abstract class AbstractControlVM<TSource,TVM>: IControlVM, IActivatable<TSource,TVM>
         where TSource: IControlSource where TVM:class,IControlVM {
         /// <summary>TODO</summary>
-        protected AbstractControlVM(string itemId) => Id = itemId;
+        protected AbstractControlVM(string controlId) {
+            ControlId = controlId;
+            var start = ControlId.IndexOf(':') + 1;
+            LocalId = start > 0 ? ControlId.Substring(start) : ControlId;
+        }
 
         #region Common Control implementation
         /// <summary>TODO</summary>
@@ -20,19 +24,19 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         public void OnPurged(IContainerControl sender) {
             Source = default;
-            Purged?.Invoke(sender, new ControlPurgedEventArgs(Id));
+            Purged?.Invoke(sender, new ControlPurgedEventArgs(ControlId));
         }
 
         /// <inheritdoc/>
-        public string Id                { get; }
+        public         string ControlId { get; }
         /// <inheritdoc/>
         public virtual string KeyTip    => Strings?.KeyTip ?? "";
         /// <inheritdoc/>
-        public virtual string Label     => Strings?.Label ?? Id;
+        public virtual string Label     => Strings?.Label ?? ControlId;
         /// <inheritdoc/>
-        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{Id} ScreenTip";
+        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{ControlId} ScreenTip";
         /// <inheritdoc/>
-        public virtual string SuperTip  => Strings?.SuperTip ?? $"{Id} SuperTip";
+        public virtual string SuperTip  => Strings?.SuperTip ?? $"{ControlId} SuperTip";
 
         /// <inheritdoc/>
         protected virtual IControlStrings Strings => Source?.Strings;
@@ -42,6 +46,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <inheritdoc/>
         public bool IsVisible => Source?.IsVisible ?? ShowInactive;
+
+        public string LocalId { get; }
         #endregion
 
         #region IActivatable implementation
@@ -72,6 +78,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #endregion
 
         /// <inheritdoc/>
-        public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(Id));
+        public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(this));
     }
 }

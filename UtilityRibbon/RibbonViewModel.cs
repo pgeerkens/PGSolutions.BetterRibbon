@@ -22,9 +22,9 @@ namespace PGSolutions.UtilityRibbon {
         private TabVM TabMS => Controls.Item<TabVM>("TabDeveloper");
         private TabVM TabPG => Controls.Item<TabVM>(ControlId);
 
-        public  IGroupVM  BrandingGroupVM       => TabPG.GetControl<GroupVM>("BrandingGroup");
-        public  IGroupVM  LinkedAnalysisGroupVM => TabPG.GetControl<GroupVM>("LinksAnalysisGroup");
-        public  IGroupVM  VbaExportGroupVM_MS   => TabMS.GetControl<GroupVM>("VbaExportGroupMS");
-        public  IGroupVM  VbaExportGroupVM_PG   => TabPG.GetControl<GroupVM>("VbaExportGroupPG");
+        public  IGroupVM  BrandingGroupVM       => TabPG.GetControl<GroupVM>("pg:BrandingGroup");
+        public  IGroupVM  LinkedAnalysisGroupVM => TabPG.GetControl<GroupVM>("pg:LinksAnalysisGroup");
+        public  IGroupVM  VbaExportGroupVM_MS   => TabMS.GetControl<GroupVM>("pg:VbaExportGroupMS");
+        public  IGroupVM  VbaExportGroupVM_PG   => TabPG.GetControl<GroupVM>("pg:VbaExportGroupPG");
     }
 }

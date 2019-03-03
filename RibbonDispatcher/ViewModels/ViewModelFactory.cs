@@ -46,8 +46,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public void ClearChangedListeners() => Changed = null;
 
         /// <summary>.</summary>
-        internal void OnChanged(object sender, IControlChangedEventArgs e)
-        => Changed?.Invoke(this, new ControlChangedEventArgs(e.ControlId));
+        internal void OnChanged(object sender, ControlChangedEventArgs e)
+        => Changed?.Invoke(this, e);
 
         public KeyedControls TabViewModels { get; }
 
@@ -110,19 +110,19 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         where TControl: AbstractControlVM<TSource,TVM>
         where TSource: class,IControlSource
         where TVM:class,IControlVM {
-            if (!_controls.ContainsKey(ctrl.Id)) {
-                _controls       .Add(ctrl.Id, ctrl);
-                _editables      .AddNotNull(ctrl.Id, ctrl as IEditableVM);
-                _sizeables      .AddNotNull(ctrl.Id, ctrl as ISizeableVM);
-                _imageables     .AddNotNull(ctrl.Id, ctrl as IImageableVM);
-                _clickables     .AddNotNull(ctrl.Id, ctrl as IClickableVM);
-                _toggleables    .AddNotNull(ctrl.Id, ctrl as IToggleableVM);
-                _selectItems    .AddNotNull(ctrl.Id, ctrl as ISelectItemsVM);
-                _selectables    .AddNotNull(ctrl.Id, ctrl as ISelectablesVM);
-                _dynamicMenus   .AddNotNull(ctrl.Id, ctrl as IDynamicMenuVM);
-                _gallerySizes   .AddNotNull(ctrl.Id, ctrl as IGallerySizeVM);
-                _menuSeparators .AddNotNull(ctrl.Id, ctrl as IMenuSeparatorVM);
-                _descriptionable.AddNotNull(ctrl.Id, ctrl as IDescriptionableVM);
+            if (!_controls.ContainsKey(ctrl.ControlId)) {
+                _controls       .Add(ctrl.ControlId, ctrl);
+                _editables      .AddNotNull(ctrl.ControlId, ctrl as IEditableVM);
+                _sizeables      .AddNotNull(ctrl.ControlId, ctrl as ISizeableVM);
+                _imageables     .AddNotNull(ctrl.ControlId, ctrl as IImageableVM);
+                _clickables     .AddNotNull(ctrl.ControlId, ctrl as IClickableVM);
+                _toggleables    .AddNotNull(ctrl.ControlId, ctrl as IToggleableVM);
+                _selectItems    .AddNotNull(ctrl.ControlId, ctrl as ISelectItemsVM);
+                _selectables    .AddNotNull(ctrl.ControlId, ctrl as ISelectablesVM);
+                _dynamicMenus   .AddNotNull(ctrl.ControlId, ctrl as IDynamicMenuVM);
+                _gallerySizes   .AddNotNull(ctrl.ControlId, ctrl as IGallerySizeVM);
+                _menuSeparators .AddNotNull(ctrl.ControlId, ctrl as IMenuSeparatorVM);
+                _descriptionable.AddNotNull(ctrl.ControlId, ctrl as IDescriptionableVM);
 
                 ctrl.Changed += OnChanged;
             }
@@ -132,18 +132,18 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal void Remove(IContainerControl requestor, IControlVM ctrl) {
             if (requestor==null  ||  ctrl == null) return;
 
-            if (_descriptionable.ContainsKey(ctrl.Id)) _descriptionable.Remove(ctrl.Id);
-            if (_menuSeparators .ContainsKey(ctrl.Id)) _menuSeparators .Remove(ctrl.Id);
-            if (_gallerySizes   .ContainsKey(ctrl.Id)) _gallerySizes   .Remove(ctrl.Id);
-            if (_dynamicMenus   .ContainsKey(ctrl.Id)) _dynamicMenus   .Remove(ctrl.Id);
-            if (_selectables    .ContainsKey(ctrl.Id)) _selectables    .Remove(ctrl.Id);
-            if (_selectItems    .ContainsKey(ctrl.Id)) _selectItems    .Remove(ctrl.Id);
-            if (_toggleables    .ContainsKey(ctrl.Id)) _toggleables    .Remove(ctrl.Id);
-            if (_clickables     .ContainsKey(ctrl.Id)) _clickables     .Remove(ctrl.Id);
-            if (_imageables     .ContainsKey(ctrl.Id)) _imageables     .Remove(ctrl.Id);
-            if (_sizeables      .ContainsKey(ctrl.Id)) _sizeables      .Remove(ctrl.Id);
-            if (_editables      .ContainsKey(ctrl.Id)) _editables      .Remove(ctrl.Id);
-            if (_controls       .ContainsKey(ctrl.Id)) _controls       .Remove(ctrl.Id);
+            if (_descriptionable.ContainsKey(ctrl.ControlId)) _descriptionable.Remove(ctrl.ControlId);
+            if (_menuSeparators .ContainsKey(ctrl.ControlId)) _menuSeparators .Remove(ctrl.ControlId);
+            if (_gallerySizes   .ContainsKey(ctrl.ControlId)) _gallerySizes   .Remove(ctrl.ControlId);
+            if (_dynamicMenus   .ContainsKey(ctrl.ControlId)) _dynamicMenus   .Remove(ctrl.ControlId);
+            if (_selectables    .ContainsKey(ctrl.ControlId)) _selectables    .Remove(ctrl.ControlId);
+            if (_selectItems    .ContainsKey(ctrl.ControlId)) _selectItems    .Remove(ctrl.ControlId);
+            if (_toggleables    .ContainsKey(ctrl.ControlId)) _toggleables    .Remove(ctrl.ControlId);
+            if (_clickables     .ContainsKey(ctrl.ControlId)) _clickables     .Remove(ctrl.ControlId);
+            if (_imageables     .ContainsKey(ctrl.ControlId)) _imageables     .Remove(ctrl.ControlId);
+            if (_sizeables      .ContainsKey(ctrl.ControlId)) _sizeables      .Remove(ctrl.ControlId);
+            if (_editables      .ContainsKey(ctrl.ControlId)) _editables      .Remove(ctrl.ControlId);
+            if (_controls       .ContainsKey(ctrl.ControlId)) _controls       .Remove(ctrl.ControlId);
 
             ctrl.OnPurged(requestor);
         }
@@ -206,6 +206,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal LabelControlVM NewLabelControl(string controlId)
         => Add<LabelControlVM, ILabelControlSource,ILabelControlVM>(new LabelControlVM(controlId));
+
+        /// <summary>Returns a new Ribbon BoxControl view-model instance.</summary>
+        internal BoxControlVM NewBoxControl(string controlId)
+        => Add<BoxControlVM, IBoxControlSource,IBoxControlVM>(new BoxControlVM(controlId));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal MenuSeparatorVM NewMenuSeparator(string controlId)

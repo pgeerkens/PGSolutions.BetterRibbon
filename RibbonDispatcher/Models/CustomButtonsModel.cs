@@ -8,6 +8,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>Implementation of <see cref="AbstractRibbonGroupModel"/> for the VBA-customizable ribbon controls..</summary>
     public sealed class CustomButtonsGroupModel : AbstractRibbonGroupModel, IControlSource {
         public CustomButtonsGroupModel( Func<string,IControlStrings> func, IGroupVM viewModel)
-        : base(viewModel, func(viewModel.Id)) { }
+        : base(viewModel, func(viewModel.ControlId)) { }
     }
 }

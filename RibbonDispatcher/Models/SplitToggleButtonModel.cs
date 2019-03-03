@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public ISplitToggleButtonModel Attach(string controlId) {
             base.Attach(controlId, this);
             if (ViewModel != null) {
-                _toggleModel.Attach(ViewModel.ToggleVM.Id);
+                _toggleModel.Attach(ViewModel.ToggleVM.ControlId);
                 _toggleModel.ViewModel.Toggled += OnToggled;
             }
             return this;

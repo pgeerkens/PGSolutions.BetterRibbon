@@ -9,7 +9,7 @@
         <mso:tab idQ="pg:TabPGSolutions" label="PGSolutions" visible="true">
             <mso:group idQ="pg:CustomizableGroup" getVisible="getVisible" insertAfterQ="pg:LinksAnalysisGroup"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
-                <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true" >
+                <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true">
                     <mso:toggleButton id="CustomVbaToggle1" getImage="getImage"
                             getLabel="getLabel" getScreentip="getScreentip" getSupertip="getSupertip" getKeytip="getKeytip"
                             onAction="onActionToggle" getVisible="getVisible" getEnabled="getEnabled" getPressed="getPressed"

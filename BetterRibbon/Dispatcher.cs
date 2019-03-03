@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.BetterRibbon.Properties;

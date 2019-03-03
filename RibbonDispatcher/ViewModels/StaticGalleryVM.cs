@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         : base(itemId) => Items = items;
 
         /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{Id} Description";
+        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
 
         #region IActivatable implementation
         public override IStaticGalleryVM Attach(IStaticGallerySource source) => Attach<StaticGalleryVM>(source);

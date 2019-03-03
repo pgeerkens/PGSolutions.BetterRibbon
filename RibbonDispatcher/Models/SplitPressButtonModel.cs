@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public ISplitPressButtonModel Attach(string controlId) {
             base.Attach(controlId, this);
             if (ViewModel != null) {
-                _buttonModel.Attach(ViewModel.ButtonVM.Id);
+                _buttonModel.Attach(ViewModel.ButtonVM.ControlId);
                 _buttonModel.ViewModel.Clicked += OnClicked;
             }
             return this;

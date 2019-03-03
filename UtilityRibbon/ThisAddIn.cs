@@ -33,7 +33,7 @@ namespace PGSolutions.UtilityRibbon {
             ViewModel = new RibbonViewModel(Dispatcher);
             Model = new RibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
 
-            ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
+            ViewModel.RibbonUI?.InvalidateControl(ViewModel.ControlId);
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }

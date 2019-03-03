@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComInterfaces\IGalleryModel.cs" />
+    <Compile Include="ViewModels\BoxControlVM.cs" />
     <Compile Include="ViewModels\IImageObject.cs" />
     <Compile Include="ComInterfaces\IMenuSeparatorModel.cs" />
     <Compile Include="ComInterfaces\IStaticComboBoxModel.cs" />

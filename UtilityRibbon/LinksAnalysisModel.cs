@@ -14,7 +14,7 @@ namespace PGSolutions.UtilityRibbon {
     /// <summary>The TabModel for the Links Aalysis Group on the UtilityRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(IModelFactory factory, IGroupVM viewModel)
-        : base(viewModel, factory.GetStrings(viewModel.Id)) {
+        : base(viewModel, factory.GetStrings(viewModel.ControlId)) {
             AnalyzeCurrentModel  = factory.NewButtonModel("AnalyzeLinksCurrent", AnalyzeCurrentClicked, "EditLinks".ToImageObject());
             AnalyzeSelectedModel = factory.NewButtonModel("AnalyzeLinksSelected", AnalyzeSelectedClicked, "EditLinks".ToImageObject());
 

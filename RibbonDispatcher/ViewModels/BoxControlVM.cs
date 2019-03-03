@@ -5,17 +5,18 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [CLSCompliant(true)]
-    public class GroupVM : AbstractContainerVM<IControlSource,IGroupVM>, IGroupVM, 
-            IActivatable<IControlSource,IGroupVM> {
-        internal protected GroupVM(string controlId, KeyedControls controls) : base(controlId, controls) { }
-        internal protected GroupVM(string controlId) : base(controlId) { }
+    public class BoxControlVM: AbstractContainerVM<IBoxControlSource,IBoxControlVM>, IBoxControlVM,
+             IActivatable<IBoxControlSource,IBoxControlVM> {
+        internal protected BoxControlVM(string controlId, KeyedControls controls) : base(controlId, controls) { }
+        internal protected BoxControlVM(string controlId) : base(controlId) { }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
-        public override IGroupVM Attach(IControlSource source) => Attach<GroupVM>(source);
+        public override IBoxControlVM Attach(IBoxControlSource source) => Attach<BoxControlVM>(source);
 
         protected override bool DefaultShowInactive { get => true; set { } }
+
+        public string    ControlId => base.ControlId;
     }
 }

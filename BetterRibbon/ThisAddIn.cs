@@ -40,7 +40,7 @@ namespace PGSolutions.BetterRibbon {
             ViewModel = new RibbonViewModel(Dispatcher);
             Model = new RibbonModel(ViewModel, new MyResourceManager().GetControlStrings);
 
-            ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
+            ViewModel.RibbonUI?.InvalidateControl(ViewModel.ControlId);
         }
 
         internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);

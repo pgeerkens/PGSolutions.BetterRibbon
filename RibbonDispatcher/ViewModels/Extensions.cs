@@ -8,7 +8,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>TODO</summary>
     public static partial class Extensions {
         public static int FindId(this IReadOnlyList<IStaticItemVM> items, string id)
-        => items.Where((i,n) => i.Id == id).Select((i,n)=>n).FirstOrDefault();
+        => items.Where((i,n) => i.ControlId == id).Select((i,n)=>n).FirstOrDefault();
 
         /// <summary>Adds the specified element to the dictionary only when it is not null.</summary>
         public static void AddNotNull<TValue>(this IDictionary<string, TValue> dictionary, string itemId, TValue ctrl) {

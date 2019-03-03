@@ -16,7 +16,7 @@ using PGSolutions.UtilityRibbon.Properties;
 namespace PGSolutions.UtilityRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
         public BrandingModel(IModelFactory factory, IGroupVM viewModel)
-        : base(viewModel, factory.GetStrings(viewModel.Id)) {
+        : base(viewModel, factory.GetStrings(viewModel.ControlId)) {
             BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
                 factory.GetImage(Resources.PGeerkens.ImageToPictureDisp()));
 

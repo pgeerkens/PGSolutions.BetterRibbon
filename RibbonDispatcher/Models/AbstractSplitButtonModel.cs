@@ -30,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         protected void Attach(string controlId, TSource @this) {
             ViewModel = AttachToViewModel(controlId, @this);
-            if (ViewModel != null) { MenuModel.Attach(ViewModel.MenuVM.Id); }
+            if (ViewModel != null) { MenuModel.Attach(ViewModel.MenuVM.ControlId); }
         }
 
         public override void Detach() { MenuModel.Detach(); base.Detach(); }

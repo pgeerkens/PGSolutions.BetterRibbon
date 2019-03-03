@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PGSolutions.RibbonDispatcher;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 

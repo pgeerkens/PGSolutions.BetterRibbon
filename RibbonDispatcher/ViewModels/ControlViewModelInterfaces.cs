@@ -8,7 +8,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
-        string Id           { get; }
+        string ControlId           { get; }
         /// <summary>Gets or sets whether or not the control is visible.</summary>
         bool   IsVisible    { get; }
         /// <summary>Gets or sets whether or not the control is enabled.</summary>
@@ -22,6 +22,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         string SuperTip     { get; }
         /// <summary>Returns the KeyTip string for this control.</summary>
         string KeyTip       { get; }
+
+        string LocalId      { get; }
 
         /// <summary>.</summary>
         void   Invalidate();
@@ -86,6 +88,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The total interface exposed by <see cref="LabelControlVM"/> objects.</summary>
     [CLSCompliant(true)]
     public interface ILabelControlVM: IControlVM { }
+
+    /// <summary>The total interface exposed by <see cref="BoxControlVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IBoxControlVM: IControlVM { }
 
     [CLSCompliant(true)]
     public interface ISplitButtonVM: IControlVM {
