@@ -12,8 +12,8 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 namespace PGSolutions.UtilityRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
-    internal sealed class Model : AbstractRibbonTabModel {
-        public Model(ViewModel viewModel, IModelFactory factory)
+    internal sealed class RibbonModel : AbstractRibbonTabModel {
+        public RibbonModel(RibbonViewModel viewModel, IModelFactory factory)
         : base(viewModel, new List<ICanInvalidate> {
                 new BrandingModel(factory, viewModel.BrandingGroupVM),
                 new LinksAnalysisModel(factory, viewModel.LinkedAnalysisGroupVM),

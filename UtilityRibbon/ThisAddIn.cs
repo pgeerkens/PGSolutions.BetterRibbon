@@ -30,8 +30,8 @@ namespace PGSolutions.UtilityRibbon {
         private void ViewModel_Initialized(object sender, EventArgs e) {
             Dispatcher.Initialized -= ViewModel_Initialized;
 
-            ViewModel = new ViewModel(Dispatcher);
-            Model = new Model(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
+            ViewModel = new RibbonViewModel(Dispatcher);
+            Model = new RibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
 
             ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
         }
@@ -45,10 +45,10 @@ namespace PGSolutions.UtilityRibbon {
 
         internal Dispatcher Dispatcher { get; private set; }
 
-        internal ViewModel   ViewModel { get; private set; }
+        internal RibbonViewModel   ViewModel { get; private set; }
 
         [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
-        internal Model       Model     { get; private set; }
+        internal RibbonModel       Model     { get; private set; }
 
         private static ComEntry ComEntry { get; } = new ComEntry();
 

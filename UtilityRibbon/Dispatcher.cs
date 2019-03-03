@@ -22,7 +22,7 @@ namespace PGSolutions.UtilityRibbon {
     /// <see cref="IRibbonExtensibility"/>.
     /// 
     /// </remarks>
-    [Description("The (top-level) ViewModel for the ribbon interface - MUST be COM-visible")]
+    [Description("The (top-level) RibbonViewModel for the ribbon interface - MUST be COM-visible")]
     [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]

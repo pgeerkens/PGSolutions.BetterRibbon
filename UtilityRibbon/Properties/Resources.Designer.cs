@@ -60,7 +60,6 @@ namespace PGSolutions.UtilityRibbon.Properties {
             }
         }
         
-        
         /// <summary>
         ///   Looks up a localized string similar to Analyze Current WB.
         /// </summary>
@@ -309,26 +308,15 @@ namespace PGSolutions.UtilityRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PGeerkens1 {
-            get {
-                object obj = ResourceManager.GetObject("PGeerkens1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;!-- Copyright 2018-2019 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
-        ///&lt;mso:customUI xmlns=&quot;https://github.com/pgeerkens/PGSolutions.UtilityRibbon&quot;
+        ///&lt;mso:customUI xmlns:pg=&quot;https://github.com/pgeerkens/PGSolutions.BetterRibbon&quot;
         ///              xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
         ///              onLoad=&quot;OnRibbonLoad&quot; loadImage=&quot;Ribbon_LoadImage&quot;&gt;
-        ///    &lt;mso:ribbon&gt;
+        ///    &lt;mso:ribbon startFromScratch=&quot;false&quot;&gt;
         ///        &lt;mso:tabs&gt;
-        ///            &lt;mso:tab idMso=&quot;TabDeveloper&quot; &gt;
-        ///     [rest of string was truncated]&quot;;.
+        ///            &lt;mso:tab i [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Ribbon {
             get {

@@ -190,8 +190,8 @@
     <Compile Include="ComEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IComEntry.cs" />
-    <Compile Include="UtilityRibbonModel.cs" />
-    <Compile Include="UtilityRibbonViewModel.cs" />
+    <Compile Include="RibbonModel.cs" />
+    <Compile Include="RibbonViewModel.cs" />
     <Compile Include="BrandingModel.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="LinksAnalysisModel.cs" />

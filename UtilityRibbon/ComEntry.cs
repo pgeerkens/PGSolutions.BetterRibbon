@@ -17,7 +17,6 @@ namespace PGSolutions.UtilityRibbon {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IComEntry))]
     [Guid(RibbonDispatcher.Guids.IComEntry)]
-    [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class ComEntry : IComEntry {
         internal ComEntry() { }
 

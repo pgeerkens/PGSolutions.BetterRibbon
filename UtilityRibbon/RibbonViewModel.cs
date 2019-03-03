@@ -9,12 +9,12 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.UtilityRibbon {
-    /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
-    [Description("The (top-level) ViewModel for the ribbon interface.")]
+    /// <summary>The (top-level) RibbonViewModel for the ribbon interface.</summary>
+    [Description("The (top-level) RibbonViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
-    internal sealed class ViewModel: GroupVM, IRibbonViewModel {
-        public ViewModel(Dispatcher dispatcher) 
-        : base("pg:TabPGSolutions",dispatcher.ViewModelFactory?.TabViewModels)
+    internal sealed class RibbonViewModel: GroupVM, IRibbonViewModel {
+        public RibbonViewModel(Dispatcher dispatcher) 
+        : base("TabPGSolutions",dispatcher.ViewModelFactory?.TabViewModels)
         => RibbonUI = dispatcher.RibbonUI;
                 
         /// <inheritdoc/>

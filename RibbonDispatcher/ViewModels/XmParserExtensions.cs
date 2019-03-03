@@ -33,7 +33,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 } else if (tab.Attribute("id") != null) {
                     factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
                 } else if (tab.Attribute("idQ") != null) {
-                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idQ").Value)));
+                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idQ").Value.Substring(3))));
                 } else {
                     continue;
                 }
@@ -126,8 +126,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                         break;
 
                     case XName name when name == mso+"group":
-                        parent.Add(child.ParseXmlChildren(mso, factory,
-                                factory.NewGroup(child.Attribute("id").Value)));
+                        var groupName = child.Attribute("id")?.Value ?? child.Attribute("idQ")?.Value.Substring(3);
+                        if (groupName != null) { parent.Add(child.ParseXmlChildren(mso, factory, factory.NewGroup(groupName))); }
                         break;
 
                     case XName name when name == mso+"tab":
