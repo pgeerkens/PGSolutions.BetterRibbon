@@ -7,7 +7,7 @@ Attribute VB_Name = "ButtonProcessing"
 '''=======================================================================================
 Option Explicit
 Option Private Module
-Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Public Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
 
 Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory

@@ -25,15 +25,17 @@ namespace PGSolutions.RibbonDispatcher.Models {
         : base(funcViewModel, strings)
         { }
 
-        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
-        public bool         ShowImage { get; set; } = true;
-        public bool         ShowLabel { get; set; } = true;
-
         /// <inheritdoc/>
         public IMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             return this;
         }
+
+        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
+
+        public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
+        public bool         ShowImage { get; set; } = true;
+        public bool         ShowLabel { get; set; } = true;
 
         #region IImageable implementation
         public IMenuModel SetImage(IImageObject image) { Image = image; return this; }

@@ -13,8 +13,8 @@ namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) ViewModel for the ribbon interface.</summary>
     [Description("The (top-level) ViewModel for the ribbon interface.")]
     [CLSCompliant(false)]
-    public sealed class BetterRibbonViewModel: GroupVM, IRibbonViewModel {
-        internal BetterRibbonViewModel(Dispatcher dispatcher) 
+    public sealed class RibbonViewModel: GroupVM, IRibbonViewModel {
+        internal RibbonViewModel(Dispatcher dispatcher) 
         : base("pg:TabPGSolutions",dispatcher.ViewModelFactory?.TabViewModels)
         => RibbonUI      = dispatcher.RibbonUI;
                 

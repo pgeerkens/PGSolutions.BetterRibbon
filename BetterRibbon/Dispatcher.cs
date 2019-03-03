@@ -44,22 +44,20 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
         private IResourceLoader ResourceLoader { get; } = new MyResourceManager();
 
-        public void Workbook_Activate() {
-            var name = ":";
-            Factories.Add(name,RibbonXmlDoc.ParseXmlTabs()); 
-            SetViewModelFactory(Factories[name]);
+        /// inheritdoc/>
+        public override string GetCustomUI(string RibbonID) {
+            SetViewModelFactory(RibbonXml.ParseXmlTabs());
 
-            RibbonUI.InvalidateControl("pg:TabPGSolutions");
+            return base.GetCustomUI(RibbonID);
         }
 
-        public void Workbook_Activate(Workbook wb) {
-            var name = wb.Name;
-            if (!Factories.ContainsKey(name)) { 
-                Factories.Add(name,RibbonXmlDoc.ParseXmlTabs()); 
+        public override void RegisterWorkbook(string workbookName) {
+            if ( ! Factories.TryGetValue(workbookName,out var factory)) {
+                factory = RibbonXmlDoc.ParseXmlTabs();
+                Factories.Add(workbookName, factory);
             }
-            SetViewModelFactory(Factories[name]);
-
-            RibbonUI.InvalidateControl("pg:TabPGSolutions");
+            SetViewModelFactory(factory);
+            RibbonUI.Invalidate();
         }
 
         /// <inheritdoc/>

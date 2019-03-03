@@ -7,8 +7,8 @@ Attribute VB_Name = "Utilities"
 '''=======================================================================================
 Option Explicit
 Option Private Module
-Private Const ModuleName As String = "RibbonUtils."
-Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Private Const ModuleName    As String = "RibbonUtils."
+Public Const COMAddInName   As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
 
 Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory

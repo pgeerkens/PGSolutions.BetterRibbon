@@ -21,39 +21,31 @@ namespace PGSolutions.BetterRibbon {
     /// </remarks>
     [CLSCompliant(false)]
     public partial class ThisAddIn {
-        /// <summary>.</summary>
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            Dispatcher = new Dispatcher();
-            Dispatcher.Initialized += ViewModel_Initialized;
-            return Dispatcher;
-        }
+        private void ThisAddIn_Startup(object sender, EventArgs e)
+        => Dispatcher.Initialized += ViewModel_Initialized;
+
+        internal Dispatcher      Dispatcher { get; private set; } = new Dispatcher();
+        internal RibbonViewModel ViewModel  { get; private set; }
+        internal RibbonModel     Model      { get; private set; }
+        private  ComEntry        ComEntry   => new ComEntry(Dispatcher.NewModelFactory);
+
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
+
+        protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
 
         private void ViewModel_Initialized(object sender, EventArgs e) {
             Dispatcher.Initialized -= ViewModel_Initialized;
 
-            Dispatcher.Workbook_Activate();
-            ViewModel = new BetterRibbonViewModel(Dispatcher);
-            Model = new BetterRibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
+            Dispatcher.RegisterWorkbook(":");
+            ViewModel = new RibbonViewModel(Dispatcher);
+            Model = new RibbonModel(ViewModel, new MyResourceManager().GetControlStrings);
 
             ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
-
-            Application.WorkbookActivate += Dispatcher.Workbook_Activate;
         }
 
-        private void ThisAddIn_Startup(object sender, EventArgs e) { }
+        internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
-
-        /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
-
-        internal Dispatcher            Dispatcher { get; private set; }
-
-        internal BetterRibbonViewModel ViewModel  { get; private set; }
-
-        internal BetterRibbonModel     Model      { get; private set; }
-
-        private  ComEntry              ComEntry   => new ComEntry(Dispatcher.NewModelFactory);
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

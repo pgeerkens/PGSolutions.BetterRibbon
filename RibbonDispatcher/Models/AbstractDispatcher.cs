@@ -52,6 +52,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
             ViewModelFactory.Changed += OnPropertyChanged;
         }
 
+        public virtual void RegisterWorkbook(string workbookName) { }
+
         protected virtual void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.ControlId);
 

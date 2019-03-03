@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
@@ -29,5 +28,8 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         [CLSCompliant(false)]
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
+
+        public void RegisterWorkbook(string workbookName)
+        => Globals.ThisAddIn.RegisterWorkbook(workbookName);
     }
 }

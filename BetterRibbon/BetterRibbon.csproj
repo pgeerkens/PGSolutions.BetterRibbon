@@ -198,10 +198,10 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="BetterRibbonModel.cs" />
+    <Compile Include="RibbonModel.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IBetterRibbon.cs" />
+    <Compile Include="IComEntry.cs" />
     <Compile Include="ComEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -249,7 +249,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="BetterRibbonViewModel.cs" />
+    <Compile Include="RibbonViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>

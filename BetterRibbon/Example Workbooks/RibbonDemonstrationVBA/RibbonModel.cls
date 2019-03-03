@@ -244,6 +244,7 @@ Private Sub Class_Initialize()
         Set Button3 = .NewButtonModel("Button3") _
                       .SetImage(.NewImageObjectMso("Refresh"))
     End With
+    Activate
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
         Case vbAbort:  ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Class_Initialize"

@@ -35,6 +35,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
 
+        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
+
         public bool         IsLarge   { get; set; } = true;
 
         #region IImageable implementation

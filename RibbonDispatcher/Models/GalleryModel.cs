@@ -31,6 +31,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
         #endregion
 
+        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
+
         public bool        IsLarge   { get; set; } = true;
 
         #region IImageable implementation

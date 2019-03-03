@@ -28,7 +28,7 @@ namespace PGSolutions.UtilityRibbon {
         private void ButtonClicked(object sender) => new StringBuilder()
             .AppendLine($"PGSolutions Better Ribbon")
             .AppendLine()
-            .AppendLine($"Better Ribbon V {Globals.ThisAddIn.VersionNo3}")
+            .AppendLine($"Better Ribbon V {ThisAddIn.VersionNo3}")
             .AppendLine($"Ribbon Utilities V {UtilitiesVersion.Format2()}")
             .AppendLine($"Ribbon ModelFactory V {DispatcherVersion.Format2()}")
             .AppendLine()

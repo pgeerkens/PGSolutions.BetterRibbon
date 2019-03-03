@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -12,10 +12,10 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 namespace PGSolutions.BetterRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
-    public sealed class BetterRibbonModel : AbstractRibbonTabModel {
-        internal BetterRibbonModel(BetterRibbonViewModel viewModel, IModelFactory factory)
+    public sealed class RibbonModel : AbstractRibbonTabModel {
+        internal RibbonModel(RibbonViewModel viewModel, Func<string,IControlStrings> func)
         : base(viewModel, new List<ICanInvalidate> {
-                new CustomButtonsGroupModel(factory, viewModel.CustomControlsGroupVM)
+                new CustomButtonsGroupModel(func, viewModel.CustomControlsGroupVM)
             }.AsReadOnly())
         => CustomGroupModel = Models.OfType<CustomButtonsGroupModel>().FirstOrDefault();
 

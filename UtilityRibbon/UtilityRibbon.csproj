@@ -189,7 +189,7 @@
   <ItemGroup>
     <Compile Include="ComEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IUtilityRibbon.cs" />
+    <Compile Include="IComEntry.cs" />
     <Compile Include="UtilityRibbonModel.cs" />
     <Compile Include="UtilityRibbonViewModel.cs" />
     <Compile Include="BrandingModel.cs" />

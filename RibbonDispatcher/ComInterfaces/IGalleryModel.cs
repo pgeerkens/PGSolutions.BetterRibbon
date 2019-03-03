@@ -39,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         #region IControl implementation
         /// <summary>Gets the {IControlStrings} for this control.</summary>
         [DispId(4)]
-        IControlStrings Strings {
+        IControlStrings2 Strings {
             [Description("Gets the {IControlStrings} for this control.")]
             get;
         }

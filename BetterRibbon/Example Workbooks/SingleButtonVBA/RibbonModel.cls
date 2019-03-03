@@ -37,4 +37,6 @@ Private Sub Class_Initialize()
         Set Button1 = .NewButtonModel("CustomizableButton1") _
                       .SetImage(.NewImageObjectMso("MacroPlay"))
     End With
+    
+    Activate
 End Sub

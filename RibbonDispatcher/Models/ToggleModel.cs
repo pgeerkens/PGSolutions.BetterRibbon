@@ -38,6 +38,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => Toggled?.Invoke(control, IsPressed = isPressed);
         #endregion
 
+        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
+
         #region ISizeable implementation
         public bool        IsLarge   { get; set; } = true;
         #endregion

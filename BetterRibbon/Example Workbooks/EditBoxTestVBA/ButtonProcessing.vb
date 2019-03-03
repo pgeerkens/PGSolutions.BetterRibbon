@@ -18,6 +18,10 @@ Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
     Set BetterRibbon = MBetterRibbon
 End Function
 
+Public Sub Register()
+    Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
+End Sub
+
 Public Sub EditBox_Processing(ByVal Text As String)
     MsgBox "VBA EditBox edited to value: '" & Text & "'.", vbOKOnly Or vbInformation, ActiveWorkbook.Name
 End Sub

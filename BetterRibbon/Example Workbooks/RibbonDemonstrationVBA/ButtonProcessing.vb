@@ -12,6 +12,15 @@ Private Const ModuleName    As String = "ButtonProcessing"
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
 Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
 
+Public Sub Register()
+    On Error GoTo EH
+    Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
+    
+XT: Exit Sub
+EH: ErrorUtils.ReRaiseError Err, ModuleName & ".AlternateToggle"
+    Resume          ' for debugging only
+End Sub
+
 Public Function AlternateToggle(ByVal Factory As IModelFactory, Mode As Boolean, _
         Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean

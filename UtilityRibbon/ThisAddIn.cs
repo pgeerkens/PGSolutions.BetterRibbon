@@ -50,7 +50,7 @@ namespace PGSolutions.UtilityRibbon {
         [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         internal Model       Model     { get; private set; }
 
-        private static ComEntry ComEntry  => new ComEntry();
+        private static ComEntry ComEntry { get; } = new ComEntry();
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

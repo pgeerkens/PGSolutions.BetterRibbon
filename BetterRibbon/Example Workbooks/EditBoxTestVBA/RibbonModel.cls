@@ -109,6 +109,8 @@ Private Sub Class_Initialize()
         
         Set InnerToggle = SplitToggle.ToggleModel
     End With
+    
+    Activate
 XT: Exit Sub
 EH: MsgBox Err.Description, vbOKOnly
     Resume Next

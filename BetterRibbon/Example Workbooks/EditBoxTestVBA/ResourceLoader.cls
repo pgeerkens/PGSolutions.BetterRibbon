@@ -14,7 +14,7 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-
+ 
 Implements IResourceLoader
 
 ' Button, ToggleButton, CheckBox, Menu, and Gallery controls
