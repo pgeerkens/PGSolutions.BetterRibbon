@@ -15,13 +15,13 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public sealed class BetterRibbonViewModel: GroupVM, IRibbonViewModel {
         internal BetterRibbonViewModel(Dispatcher dispatcher) 
-        : base("TabPGSolutions",dispatcher.TabViewModels)
+        : base("pg:TabPGSolutions",dispatcher.ViewModelFactory?.TabViewModels)
         => RibbonUI      = dispatcher.RibbonUI;
                 
         /// <inheritdoc/>
-        public  IRibbonUI RibbonUI  { get; }
-        private TabVM     TabMS     => Controls.Item<TabVM>("TabDeveloper");
-        private TabVM     TabPG     => Controls.Item<TabVM>(ControlId);
+        public  IRibbonUI RibbonUI { get; }
+        private TabVM     TabMS    => Controls.Item<TabVM>("TabDeveloper");
+        private TabVM     TabPG    => Controls.Item<TabVM>(ControlId);
 
         public  IGroupVM  BrandingGroupVM       => TabPG.GetControl<GroupVM>("BrandingGroup");
         public  IGroupVM  LinkedAnalysisGroupVM => TabPG.GetControl<GroupVM>("LinksAnalysisGroup");

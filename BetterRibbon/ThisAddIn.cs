@@ -10,8 +10,6 @@ using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.BetterRibbon {
-    using Excel    = Microsoft.Office.Interop.Excel;
-    using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
     /// <summary>.</summary>
     /// <remarks>
@@ -33,17 +31,16 @@ namespace PGSolutions.BetterRibbon {
         private void ViewModel_Initialized(object sender, EventArgs e) {
             Dispatcher.Initialized -= ViewModel_Initialized;
 
+            Dispatcher.Workbook_Activate();
             ViewModel = new BetterRibbonViewModel(Dispatcher);
-            Model = new BetterRibbonModel(ViewModel, Dispatcher.NewModelFactory(new MyResourceManager()));
+            Model = new BetterRibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
 
             ViewModel.RibbonUI?.InvalidateControl(ViewModel.Id);
+
+            Application.WorkbookActivate += Dispatcher.Workbook_Activate;
         }
 
-        private void ThisAddIn_Startup(object sender, EventArgs e) {
-            Application.WorkbookActivate += Workbook_Activate;
-            Application.WorkbookDeactivate += Workbook_Deactivate;
-            Application.WindowDeactivate += Window_Deactivate;
-        }
+        private void ThisAddIn_Startup(object sender, EventArgs e) { }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
@@ -61,25 +58,13 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
-            : null;
+            : new Version(0,0,0,0).Format();
 
         /// <summary>.</summary>
         public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
 
         /// <summary>.</summary>
-        public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
-
-        private void Workbook_Activate(Workbook wb)
-        => Dispatcher.CurrentWorkbookName = wb.Name;
-
-        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
-        private void Workbook_Deactivate(Workbook wb)
-        => Model?.DetachCustomControls();
-
-        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wb" )]
-        [SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "wn" )]
-        private void Window_Deactivate(Workbook wb, Excel.Window wn) 
-        => Model?.DetachCustomControls();
+        public static string VersionNo3 => typeof(ThisAddIn).Assembly.GetName().Version?.Format();
 
         #region VSTO generated code
 

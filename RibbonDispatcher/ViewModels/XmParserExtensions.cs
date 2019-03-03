@@ -30,8 +30,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             foreach (var tab in root.Descendants(mso+"tab")) {
                 if (tab.Attribute("idMso") != null) {
                     factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idMso").Value)));
-                } else if (tab.Attribute("id") != null  ||  tab.Attribute("idQ") != null) {
+                } else if (tab.Attribute("id") != null) {
                     factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("id").Value)));
+                } else if (tab.Attribute("idQ") != null) {
+                    factory.TabViewModels.Add(tab.ParseXmlChildren(mso, factory, factory?.NewTab(tab.Attribute("idQ").Value)));
                 } else {
                     continue;
                 }

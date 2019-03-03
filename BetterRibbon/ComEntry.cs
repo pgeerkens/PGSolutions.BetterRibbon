@@ -17,7 +17,7 @@ namespace PGSolutions.BetterRibbon {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IComEntry))]
     [Guid(RibbonDispatcher.Guids.IComEntry)]
-    [ProgId(ProgIds.RibbonDispatcherProgId)]
+//    [ProgId(ProgIds.RibbonDispatcherProgId)]
     public sealed class ComEntry : IComEntry {
         internal ComEntry(Func<IResourceLoader,IModelFactory> funcFactory) => FuncFactory = funcFactory;
 

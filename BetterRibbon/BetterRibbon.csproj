@@ -43,7 +43,7 @@
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl>https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues</SupportUrl>
     <FriendlyName>PGSolutions BetterRibbon</FriendlyName>
-    <OfficeApplicationDescription>Ribbon Dispatcher and Utilities for the Office Fluent Ribbon in Excel &amp; Access.</OfficeApplicationDescription>
+    <OfficeApplicationDescription>Ribbon Dispatcher for the Office Fluent Ribbon in Excel &amp; Access.</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
@@ -199,11 +199,9 @@
   -->
   <ItemGroup>
     <Compile Include="BetterRibbonModel.cs" />
-    <Compile Include="BrandingModel.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IBetterRibbon.cs" />
-    <Compile Include="LinksAnalysisModel.cs" />
     <Compile Include="ComEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -211,8 +209,6 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <Compile Include="VbaSourceExportGroupModel.cs" />
-    <Compile Include="VbaSourceExportModel.cs" />
     <Content Include="Example Workbooks\Database1.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -269,9 +265,6 @@
     <EmbeddedResource Include="Ribbon.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\RD-AboutWindow.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

@@ -55,13 +55,13 @@ namespace PGSolutions.UtilityRibbon {
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
-            : null;
+            : new Version(0,0,0,0).Format();
 
         /// <summary>.</summary>
         public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
 
         /// <summary>.</summary>
-        public string VersionNo3 =>GetType().Assembly.GetName().Version?.Format();
+        public static string VersionNo3 => typeof(ThisAddIn).Assembly.GetName().Version?.Format();
 
         #region VSTO generated code
 

@@ -15,16 +15,10 @@ namespace PGSolutions.BetterRibbon {
     public sealed class BetterRibbonModel : AbstractRibbonTabModel {
         internal BetterRibbonModel(BetterRibbonViewModel viewModel, IModelFactory factory)
         : base(viewModel, new List<ICanInvalidate> {
-                new BrandingModel(factory, viewModel.BrandingGroupVM),
-                new LinksAnalysisModel(factory, viewModel.LinkedAnalysisGroupVM),
-                new VbaSourceExportModel( new List<VbaSourceExportGroupModel>() {
-                    new VbaSourceExportGroupModel(factory, viewModel.VbaExportGroupVM_MS, "MS"),
-                    new VbaSourceExportGroupModel(factory, viewModel.VbaExportGroupVM_PG, "PG")
-                } ),
                 new CustomButtonsGroupModel(factory, viewModel.CustomControlsGroupVM)
             }.AsReadOnly())
         => CustomGroupModel = Models.OfType<CustomButtonsGroupModel>().FirstOrDefault();
 
-        internal CustomButtonsGroupModel CustomGroupModel { get;}
+        internal CustomButtonsGroupModel CustomGroupModel { get; }
     }
 }
