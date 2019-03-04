@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>Implementation of the factory for Ribbon objects.</summary>
@@ -36,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             _menuSeparators  = new Dictionary<string,IMenuSeparatorVM>();
             _descriptionable = new Dictionary<string,IDescriptionableVM>();
 
-            TabViewModels    = new KeyedControls();
+            ViewModelRoot    = new KeyedControls();
         }
 
         /// <summary>.</summary>
@@ -49,7 +51,18 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Changed?.Invoke(this, e);
 
         /// <summary> TODO Is this needed? Where used, really? </summary>
-        public KeyedControls TabViewModels { get; }
+        public KeyedControls ViewModelRoot { get; private set; }
+
+        /// <summary>Returns this <see cref="ViewModelFactory"/> loaded from the suppied XML.</summary>
+        /// <param name="ribbonXml"></param>
+        public static ViewModelFactory ParseXmlDoc(XElement root) {
+            var factory = new ViewModelFactory();
+            var tabs = root.Descendants().Where(d => d.Name.LocalName == "tabs")
+                           .FirstOrDefault().ParseXmlChildren(factory);
+            factory.ViewModelRoot = new KeyedControls(tabs);
+
+            return factory;
+        }
 
         /// <summary>.</summary>
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
@@ -124,7 +137,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 _menuSeparators .AddNotNull(ctrl.ControlId, ctrl as IMenuSeparatorVM);
                 _descriptionable.AddNotNull(ctrl.ControlId, ctrl as IDescriptionableVM);
 
-                if (ctrl is ITabVM tab) TabViewModels.Add(tab); // TODO - Is this needed?
+                if (ctrl is ITabVM tab) ViewModelRoot.Add(tab); // TODO - Is this needed?
                 ctrl.Changed += OnChanged;
             }
             return ctrl;
@@ -152,8 +165,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region Factoy Method implementation
         /// <summary>.</summary>
-        internal TabVM NewTab(string controlId)
-        => Add<TabVM,IControlSource,ITabVM>(new TabVM(this, controlId));
+        internal TabVM NewTab(string controlId, IEnumerable<IControlVM> controls)
+        => Add<TabVM,IControlSource,ITabVM>(new TabVM(controlId, controls));
 
         /// <summary>Returns a new Ribbon Group view-model instance.</summary>
         internal GroupVM NewGroup(string controlId, IEnumerable<IControlVM> controls)
@@ -203,7 +216,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<LabelControlVM, ILabelControlSource,ILabelControlVM>(new LabelControlVM(controlId));
 
         /// <summary>Returns a new Ribbon BoxControl view-model instance.</summary>
-        internal BoxControlVM NewBoxControl(string controlId, IEnumerable<IControlVM> controls)
+        internal BoxControlVM NewBox(string controlId, IEnumerable<IControlVM> controls)
         => Add<BoxControlVM, IBoxControlSource,IBoxControlVM>(new BoxControlVM(controlId, controls));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>

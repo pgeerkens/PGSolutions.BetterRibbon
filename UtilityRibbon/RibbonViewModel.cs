@@ -14,7 +14,7 @@ namespace PGSolutions.UtilityRibbon {
     [CLSCompliant(false)]
     internal sealed class RibbonViewModel: GroupVM, IRibbonViewModel {
         public RibbonViewModel(Dispatcher dispatcher) 
-        : base("TabPGSolutions",dispatcher.ViewModelFactory?.TabViewModels)
+        : base("TabPGSolutions",dispatcher.ViewModelFactory?.ViewModelRoot)
         => RibbonUI = dispatcher.RibbonUI;
                 
         /// <inheritdoc/>

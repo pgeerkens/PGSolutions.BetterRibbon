@@ -54,8 +54,5 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>TODO</summary>
         public static IPictureDisp IconToPictureDisp(this Icon icon)
             => PictureConverter.IconToPictureDisp(icon);
-
-        /// <summary>Return a ControlId with the qualifying namespace prefix (ie "pg:") removed</summary>
-        public static string XNS(this string controlId) => controlId?.Substring(controlId.IndexOf(':')+1);
     }
 }

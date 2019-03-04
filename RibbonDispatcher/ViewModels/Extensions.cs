@@ -20,5 +20,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             if (dictionary == null) return default;
             return dictionary.TryGetValue(key ?? "", out var ctrl) ? ctrl : default;
         }
+
+        /// <summary>Return a ControlId with the qualifying namespace prefix (ie "pg:") removed</summary>
+        public static string XNS(this string controlId) => controlId?.Substring(controlId.IndexOf(':')+1);
     }
 }

@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-using PGSolutions.RibbonDispatcher.Models;
-
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     using Trace = System.Diagnostics.Trace;
 
@@ -16,25 +14,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
         public static ViewModelFactory ParseXmlTabs(this string ribbonXml)
-        => XDocument.Parse(ribbonXml).Root.ParseXmlTabs();
+        => ViewModelFactory.ParseXmlDoc(XDocument.Parse(ribbonXml).Root);
 
-        /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
-        /// <param name="ribbonXml"></param>
-        public static ViewModelFactory ParseXmlTabs(this XElement root) {
-            var factory = new ViewModelFactory();
-            foreach (var tab in root.Descendants().Where(d => d.Name.LocalName == "tab")) {
-                var name = tab.Attribute("idQ")?.Value?.XNS()
-                        ?? tab.Attribute("idMso")?.Value
-                        ?? tab.Attribute("id")?.Value;
-                if (name != null) {
-                    //factory.TabViewModels.Add(tab.ParseXmlChildren(factory, factory?.NewTab(name)));
-                    tab.ParseXmlChildren(factory, factory?.NewTab(name));
-                }
-            }
-            return factory;
-        }
-
-        public static KeyedControls ParseXmlMenu(this XElement element, ViewModelFactory factory) {
+        internal static KeyedControls ParseXmlMenu(this XElement element, ViewModelFactory factory) {
             var controls = new KeyedControls();
 
             foreach (var child in element.Elements()) {
@@ -45,16 +27,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             return controls;
         }
 
-        private static TCtrl ParseXmlChildren<TCtrl>(this XElement element, ViewModelFactory factory,
-                TCtrl parent) where TCtrl : IContainerControl {
-            foreach (var child in element.Elements()) {
-                var x = ParseXmlChild(child,factory);
-                if (x != null) parent.Add(x);
-            }
-            return parent;
-        }
-
-        private static IReadOnlyList<IControlVM> ParseXmlChildren(this XElement element, ViewModelFactory factory)
+        internal static IReadOnlyList<IControlVM> ParseXmlChildren(this XElement element, ViewModelFactory factory)
         => (from child in element.Elements() select ParseXmlChild(child,factory)).ToList();
 
         private static IReadOnlyList<StaticItemVM> ParseItemList(this IEnumerable<XElement> elements)
@@ -71,6 +44,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 case string name when name == "dialogBoxLauncher":
                     return child.Elements().FirstOrDefault().ParseXmlChild(factory);
 
+                // ANd our friend the SPlitBUtton is just very, very, special
                 case string name when name == "splitButton":
                     var menu = child.Elements().Last().ParseXmlChild(factory) as IMenuVM;
 
@@ -92,12 +66,13 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         private static Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>> Actions
             = new Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>>() {
-                {"dropDown",     (controlId,element,factory) => factory.NewDropDown(controlId,element.Elements().ParseItemList()) },
-                {"comboBox",     (controlId,element,factory) => factory.NewComboBox(controlId,element.Elements().ParseItemList()) },
-                {"gallery",      (controlId,element,factory) => factory.NewGallery(controlId,element.Elements().ParseItemList()) },
-                {"menu",         (controlId,element,factory) => factory.NewMenu(controlId, element.ParseXmlChildren(factory)) },
-                {"box",          (controlId,element,factory) => factory.NewBoxControl(controlId, element.ParseXmlChildren(factory)) },
-                {"group",        (controlId,element,factory) => factory.NewGroup(controlId, element.ParseXmlChildren(factory)) },
+                {"box",      (controlId,element,factory) => factory.NewBox(controlId,element.ParseXmlChildren(factory)) },
+                {"dropDown", (controlId,element,factory) => factory.NewDropDown(controlId,element.Elements().ParseItemList()) },
+                {"comboBox", (controlId,element,factory) => factory.NewComboBox(controlId,element.Elements().ParseItemList()) },
+                {"gallery",  (controlId,element,factory) => factory.NewGallery(controlId,element.Elements().ParseItemList()) },
+                {"group",    (controlId,element,factory) => factory.NewGroup(controlId,element.ParseXmlChildren(factory)) },
+                {"menu",     (controlId,element,factory) => factory.NewMenu(controlId,element.ParseXmlChildren(factory)) },
+                {"tab",      (controlId,element,factory) => factory.NewTab(controlId,element.ParseXmlChildren(factory)) },
 
                 {"button",       (controlId,element,factory) => factory.NewButton(controlId) },
                 {"editBox",      (controlId,element,factory) => factory.NewEditBox(controlId) },
@@ -114,6 +89,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             };
 
         private static bool TryGetControlId(XElement child, ref string controlId)
-        => (controlId = child.Attribute("id")?.Value ?? child.Attribute("idQ")?.Value?.XNS())  !=  null;
+        => (controlId = child.Attribute("id")?.Value
+                     ?? child.Attribute("idMso")?.Value
+                     ?? child.Attribute("idQ")?.Value?.XNS())  !=  null;
     }
 }

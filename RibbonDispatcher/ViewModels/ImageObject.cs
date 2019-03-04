@@ -25,7 +25,4 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 Justification = "Unnecessary - the existing properties achieve that.")]
         public static implicit operator ImageObject(string s) => new ImageObject(s);
     }
-
-    public static partial class Extensions {
-    }
 }
