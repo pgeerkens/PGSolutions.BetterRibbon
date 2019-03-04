@@ -55,7 +55,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public static IPictureDisp IconToPictureDisp(this Icon icon)
             => PictureConverter.IconToPictureDisp(icon);
 
-        /// <summary>Return a string with the namespace alias "pg:" removed</summary>
-        public static string Xns(this string controlId) => controlId?.Substring(controlId.IndexOf(':')+1);
+        /// <summary>Return a ControlId with the qualifying namespace prefix (ie "pg:") removed</summary>
+        public static string XNS(this string controlId) => controlId?.Substring(controlId.IndexOf(':')+1);
     }
 }

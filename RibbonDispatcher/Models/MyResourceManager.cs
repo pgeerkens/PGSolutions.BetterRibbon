@@ -18,20 +18,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public IControlStrings GetControlStrings(string ControlId) =>
             new ControlStrings(
-                    GetCurrentUIString($"{ControlId.Xns()}_Label")     ?? ControlId.Unknown(),
-                    GetCurrentUIString($"{ControlId.Xns()}_ScreenTip") ?? ControlId.Unknown("ScreenTip"),
-                    GetCurrentUIString($"{ControlId.Xns()}_SuperTip")  ?? ControlId.Unknown("SuperTip"),
-                    GetCurrentUIString($"{ControlId.Xns()}_KeyTip")    ?? ""
+                    GetCurrentUIString($"{ControlId.XNS()}_Label")     ?? ControlId.Unknown(),
+                    GetCurrentUIString($"{ControlId.XNS()}_ScreenTip") ?? ControlId.Unknown("ScreenTip"),
+                    GetCurrentUIString($"{ControlId.XNS()}_SuperTip")  ?? ControlId.Unknown("SuperTip"),
+                    GetCurrentUIString($"{ControlId.XNS()}_KeyTip")    ?? ""
             );
 
         /// <inheritdoc/>
         public IControlStrings2 GetControlStrings2(string ControlId) =>
             new ControlStrings2(
-                    GetCurrentUIString($"{ControlId.Xns()}_Label")       ?? ControlId.Unknown(),
-                    GetCurrentUIString($"{ControlId.Xns()}_ScreenTip")   ?? ControlId.Unknown("ScreenTip"),
-                    GetCurrentUIString($"{ControlId.Xns()}_SuperTip")    ?? ControlId.Unknown("SuperTip"),
-                    GetCurrentUIString($"{ControlId.Xns()}_KeyTip")      ?? "",
-                    GetCurrentUIString($"{ControlId.Xns()}_Description") ?? ControlId.Unknown("Description")
+                    GetCurrentUIString($"{ControlId.XNS()}_Label")       ?? ControlId.Unknown(),
+                    GetCurrentUIString($"{ControlId.XNS()}_ScreenTip")   ?? ControlId.Unknown("ScreenTip"),
+                    GetCurrentUIString($"{ControlId.XNS()}_SuperTip")    ?? ControlId.Unknown("SuperTip"),
+                    GetCurrentUIString($"{ControlId.XNS()}_KeyTip")      ?? "",
+                    GetCurrentUIString($"{ControlId.XNS()}_Description") ?? ControlId.Unknown("Description")
             );
 
         /// <inheritdoc/>

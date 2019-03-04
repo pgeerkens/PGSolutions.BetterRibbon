@@ -48,6 +48,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal void OnChanged(object sender, ControlChangedEventArgs e)
         => Changed?.Invoke(this, e);
 
+        /// <summary> TODO Is this needed? Where used, really? </summary>
         public KeyedControls TabViewModels { get; }
 
         /// <summary>.</summary>
@@ -123,6 +124,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 _menuSeparators .AddNotNull(ctrl.ControlId, ctrl as IMenuSeparatorVM);
                 _descriptionable.AddNotNull(ctrl.ControlId, ctrl as IDescriptionableVM);
 
+                if (ctrl is ITabVM tab) TabViewModels.Add(tab); // TODO - Is this needed?
                 ctrl.Changed += OnChanged;
             }
             return ctrl;
@@ -154,8 +156,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<TabVM,IControlSource,ITabVM>(new TabVM(this, controlId));
 
         /// <summary>Returns a new Ribbon Group view-model instance.</summary>
-        internal GroupVM NewGroup(string controlId)
-        => Add<GroupVM,IControlSource,IGroupVM>(new GroupVM(controlId));
+        internal GroupVM NewGroup(string controlId, IEnumerable<IControlVM> controls)
+        => Add<GroupVM,IControlSource,IGroupVM>(new GroupVM(controlId, controls));
 
         /// <summary>Returns a new Ribbon ActionButton view-model instance.</summary>
         internal ButtonVM NewButton(string controlId)
@@ -170,12 +172,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<CheckBoxVM,IToggleSource,IToggleVM>(new CheckBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon DropDown view-model instance.</summary>
-        internal DropDownVM NewDropDown(string controlId)
-        => Add<DropDownVM,IDropDownSource,IDropDownVM>(new DropDownVM(controlId));
-
-        /// <summary>Returns a new Ribbon DropDown view-model instance.</summary>
-        internal StaticDropDownVM NewStaticDropDown(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticDropDownVM,IStaticDropDownSource,IDropDownVM>(new StaticDropDownVM(controlId,items));
+        internal IDropDownVM NewDropDown(string controlId, IReadOnlyList<StaticItemVM> items)
+        => (items?.Count ?? 0) > 0
+            ? Add<StaticDropDownVM,IStaticDropDownSource,IDropDownVM>(new StaticDropDownVM(controlId,items))
+            : Add<DropDownVM,IDropDownSource,IDropDownVM>(new DropDownVM(controlId)) as IDropDownVM;
 
         /// <summary>Returns a new Ribbon SelectableItem view-model instance.</summary>
         [SuppressMessage("Microsoft.Performance","CA1822:MarkMembersAsStatic")]
@@ -187,28 +187,24 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<EditBoxVM, IEditBoxSource,IEditBoxVM>(new EditBoxVM(controlId));
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal ComboBoxVM NewComboBox(string controlId)
-        => Add<ComboBoxVM, IComboBoxSource,IComboBoxVM>(new ComboBoxVM(controlId));
+        internal IControlVM NewComboBox(string controlId, IReadOnlyList<StaticItemVM> items)
+        => (items?.Count ?? 0) > 0
+            ? Add<StaticComboBoxVM, IStaticComboBoxSource,IStaticComboBoxVM>(new StaticComboBoxVM(controlId,items))
+            : Add<ComboBoxVM, IComboBoxSource,IComboBoxVM>(new ComboBoxVM(controlId)) as IControlVM;
 
         /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal StaticComboBoxVM NewStaticComboBox(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticComboBoxVM, IStaticComboBoxSource,IStaticComboBoxVM>(new StaticComboBoxVM(controlId,items));
-
-        /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal GalleryVM NewGallery(string controlId)
-        => Add<GalleryVM, IGallerySource,IGalleryVM>(new GalleryVM(controlId));
-
-        /// <summary>Returns a new Ribbon ComboBox view-model instance.</summary>
-        internal StaticGalleryVM NewStaticGallery(string controlId, IReadOnlyList<StaticItemVM> items)
-        => Add<StaticGalleryVM, IStaticGallerySource,IStaticGalleryVM>(new StaticGalleryVM(controlId,items));
+        internal IControlVM NewGallery(string controlId, IReadOnlyList<StaticItemVM> items)
+        => (items?.Count ?? 0) > 0
+            ? Add<StaticGalleryVM, IStaticGallerySource,IStaticGalleryVM>(new StaticGalleryVM(controlId,items))
+            : Add<GalleryVM, IGallerySource,IGalleryVM>(new GalleryVM(controlId)) as IControlVM;
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal LabelControlVM NewLabelControl(string controlId)
         => Add<LabelControlVM, ILabelControlSource,ILabelControlVM>(new LabelControlVM(controlId));
 
         /// <summary>Returns a new Ribbon BoxControl view-model instance.</summary>
-        internal BoxControlVM NewBoxControl(string controlId)
-        => Add<BoxControlVM, IBoxControlSource,IBoxControlVM>(new BoxControlVM(controlId));
+        internal BoxControlVM NewBoxControl(string controlId, IEnumerable<IControlVM> controls)
+        => Add<BoxControlVM, IBoxControlSource,IBoxControlVM>(new BoxControlVM(controlId, controls));
 
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal MenuSeparatorVM NewMenuSeparator(string controlId)
@@ -223,8 +219,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Add<SplitPressButtonVM, IButtonSource,ISplitPressButtonVM>(new SplitPressButtonVM(this, controlId, menu, button));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
-        internal MenuVM NewMenu(string controlId)
-        => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(this, controlId));
+        internal MenuVM NewMenu(string controlId, IEnumerable<IControlVM> controls)
+        => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(this, controlId, controls));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal DynamicMenuVM NewDynamicMenu(string controlId)

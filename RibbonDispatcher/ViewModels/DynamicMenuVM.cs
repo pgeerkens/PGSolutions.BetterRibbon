@@ -14,6 +14,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         public override IDynamicMenuVM Attach(IDynamicMenuSource source) => Attach<DynamicMenuVM>(source);
+
+        public override void Detach() { CheckSum = 0; base.Detach(); }
         #endregion
 
         #region DynamicContent implementation

@@ -11,8 +11,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public abstract class AbstractContainerVM<TSource,TVM>: AbstractControlVM<TSource,TVM>, IContainerControl
         where TSource : IControlSource where TVM:class,IControlVM {
         protected AbstractContainerVM(string itemId) : this(itemId, new KeyedControls()) { }
-        protected AbstractContainerVM(string itemId, KeyedControls controls) : base(itemId)
-        => Controls = controls;
+        protected AbstractContainerVM(string itemId, IEnumerable<IControlVM> controls) : base(itemId)
+        => Controls = new KeyedControls(controls);
 
         protected KeyedControls Controls { get; set; }
 

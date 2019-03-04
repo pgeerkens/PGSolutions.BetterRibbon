@@ -18,7 +18,6 @@ Option Explicit
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
 Private LabelTest               As PGSolutions_RibbonDispatcher.LabelControlModel
 Private WithEvents SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
-Attribute SplitButton.VB_VarHelpID = -1
 Private WithEvents SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
 Attribute SplitToggle.VB_VarHelpID = -1
 Private WithEvents Dialog       As PGSolutions_RibbonDispatcher.ButtonModel
@@ -49,7 +48,6 @@ Private Sub Button_Clicked(ByVal Control As Office.IRibbonControl)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
-    Activate
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or vbInformation
     Resume XT
@@ -66,7 +64,7 @@ Private Sub DynamicButton_Clicked(ByVal Control As Office.IRibbonControl)
 End Sub
 
 Private Sub DynamicGallery_SelectionMade(ByVal Control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
-    MsgBox "Selected # " & SelectedIndex & ": " & SelectedId, vbOKOnly, "DynamicGallery_SelectionMade"
+'    MsgBox "Selected # " & SelectedIndex & ": " & SelectedId, vbOKOnly, "DynamicGallery_SelectionMade"
 End Sub
 
 Private Sub DynamicMenu_GetContent(ByVal Control As Office.IRibbonControl, ByRef Content As String)
@@ -96,7 +94,7 @@ EH: MsgBox Err.Description, vbOKOnly
 End Sub
 
 Private Sub DynamicToggle_Toggled(ByVal Control As Office.IRibbonControl, ByVal IsPressed As Boolean)
-    MsgBox "Toggled to " & IsPressed, vbOKOnly, "DynamicToggle_Toggled"
+'    MsgBox "Toggled to " & IsPressed, vbOKOnly, "DynamicToggle_Toggled"
 End Sub
 
 Private Sub EditBox_Edited(ByVal Control As IRibbonControl, ByVal Text As String)

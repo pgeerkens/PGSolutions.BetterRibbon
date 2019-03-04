@@ -2,10 +2,14 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using System.Collections.Generic;
+
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     public class MenuVM: AbstractContainerVM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
         internal MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }
+        internal MenuVM(ViewModelFactory factory, string itemId, IEnumerable<IControlVM> controls)
+        : base(itemId,controls) { }
 
         #region IActivatable implementation
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>

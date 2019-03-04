@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
@@ -9,8 +10,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public class BoxControlVM: AbstractContainerVM<IBoxControlSource,IBoxControlVM>, IBoxControlVM,
              IActivatable<IBoxControlSource,IBoxControlVM> {
-        internal protected BoxControlVM(string controlId, KeyedControls controls) : base(controlId, controls) { }
-        internal protected BoxControlVM(string controlId) : base(controlId) { }
+    //    internal protected BoxControlVM(string controlId, KeyedControls controls) : base(controlId, controls) { }
+        internal protected BoxControlVM(string controlId, IEnumerable<IControlVM> controls) : base(controlId,controls) { }
 
         /// <summary>Attaches this control-model to the specified ribbon-control as data source and event sink.</summary>
         public override IBoxControlVM Attach(IBoxControlSource source) => Attach<BoxControlVM>(source);
