@@ -56,6 +56,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             => PictureConverter.IconToPictureDisp(icon);
 
         /// <summary>Return a string with the namespace alias "pg:" removed</summary>
-        public static string Xns(this string controlId) => controlId?.Replace("pg:","");
+        public static string Xns(this string controlId) => controlId?.Substring(controlId.IndexOf(':')+1);
     }
 }

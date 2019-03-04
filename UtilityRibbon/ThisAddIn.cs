@@ -4,7 +4,7 @@
 using System;
 using System.Deployment.Application;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
@@ -19,6 +19,7 @@ namespace PGSolutions.UtilityRibbon {
     /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
     /// </remarks>
     [CLSCompliant(true)]
+    [ProgId("PGSolutions.UtilityRibbon")]
     public partial class ThisAddIn {
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {

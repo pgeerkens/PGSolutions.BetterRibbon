@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
+using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     using Trace = System.Diagnostics.Trace;
@@ -22,7 +23,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public static ViewModelFactory ParseXmlTabs(this XElement root) {
             var factory = new ViewModelFactory();
             foreach (var tab in root.Descendants().Where(d => d.Name.LocalName == "tab")) {
-                var name = tab.Attribute("idQ")?.Value?.Substring(3) 
+                var name = tab.Attribute("idQ")?.Value?.Xns()
                         ?? tab.Attribute("idMso")?.Value
                         ?? tab.Attribute("id")?.Value;
                 if (name != null) {
@@ -116,7 +117,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             };
 
         private static bool TryGetControlId(XElement child, ref string controlId)
-        => (controlId = child.Attribute("id")?.Value ?? child.Attribute("idQ")?.Value)  !=  null;
+        => (controlId = child.Attribute("id")?.Value ?? child.Attribute("idQ")?.Value?.Xns())  !=  null;
 
         internal static IReadOnlyList<StaticItemVM> ParseItemList(this IEnumerable<XElement> elements) {
             var items = new List<StaticItemVM>();
