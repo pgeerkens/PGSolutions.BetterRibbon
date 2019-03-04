@@ -26,16 +26,14 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             GetContent?.Invoke(control, ref content);
 
             var checkSum = GetHash(content);
-            PurgeChildren();
-            var x = XDocument.Parse(content ?? TestMenuContent);
-            var y = x.Root;
-            var z = y.ParseXmlMenu(Factory);
-
-            Controls = XDocument.Parse(TestMenuContent).Root.ParseXmlMenu(Factory);
-            ContentLoaded?.Invoke(control);
+            if (checkSum != CheckSum) {
+                PurgeChildren();
+                Controls = XDocument.Parse(TestMenuContent).Root.ParseXmlMenu(Factory);
+                ContentLoaded?.Invoke(control);
+                CheckSum = checkSum;
+            }
 
             Invalidate(c => c.SetShowInactive(true));
-            CheckSum = checkSum;
         }
 
         private ViewModelFactory    Factory  { get; }
@@ -51,8 +49,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                 ba[j] ^= (byte)content[i];
             }
             ulong result = 0;
-            for (var j=0; j < 8; j++) result = result<<8 + ba[j];
-            return result;
+            for (var j=0; j < 7; j++) result = (result + ba[j]) << 8;
+            return result + ba[7];
         }
         #endregion
 

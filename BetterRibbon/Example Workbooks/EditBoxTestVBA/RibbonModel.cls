@@ -18,6 +18,7 @@ Option Explicit
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
 Private LabelTest               As PGSolutions_RibbonDispatcher.LabelControlModel
 Private WithEvents SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
+Attribute SplitButton.VB_VarHelpID = -1
 Private WithEvents SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
 Attribute SplitToggle.VB_VarHelpID = -1
 Private WithEvents Dialog       As PGSolutions_RibbonDispatcher.ButtonModel
@@ -44,7 +45,7 @@ Attribute DynamicToggle.VB_VarHelpID = -1
 Private WithEvents DynamicGallery As PGSolutions_RibbonDispatcher.StaticGalleryModel
 Attribute DynamicGallery.VB_VarHelpID = -1
 
-Private Sub Button_Clicked(ByVal control As Office.IRibbonControl)
+Private Sub Button_Clicked(ByVal Control As Office.IRibbonControl)
     On Error GoTo EH
     If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
@@ -55,24 +56,36 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or 
     Resume          ' for debugging only
 End Sub
 
-Private Sub Dialog_Clicked(ByVal control As Office.IRibbonControl)
+Private Sub Dialog_Clicked(ByVal Control As Office.IRibbonControl)
     MsgBox "This mimics a pop-up dialog for testing", vbOKOnly Or vbQuestion, _
             " Dialog Launch Test"
 End Sub
 
-Private Sub DynamicButton_Clicked(ByVal control As Office.IRibbonControl)
+Private Sub DynamicButton_Clicked(ByVal Control As Office.IRibbonControl)
     MsgBox "Pressed!", vbOKOnly, "DynamicButton_Clicked"
 End Sub
 
-Private Sub DynamicGallery_SelectionMade(ByVal control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
+Private Sub DynamicGallery_SelectionMade(ByVal Control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
     MsgBox "Selected # " & SelectedIndex & ": " & SelectedId, vbOKOnly, "DynamicGallery_SelectionMade"
 End Sub
 
-Private Sub DynamicMenu_GetContent(ByVal control As Office.IRibbonControl, ByRef content As String)
+Private Sub DynamicMenu_GetContent(ByVal Control As Office.IRibbonControl, ByRef Content As String)
     On Error GoTo EH
     Dim ws As Worksheet: Set ws = Sheets.Item("XmlContent")
     Dim r As Range: Set r = ws.Range("A1")
-    content = Sheets.Item("XmlContent").Range("A1").Value2
+    Content = Sheets.Item("XmlContent").Range("A1").Value2
+XT: Exit Sub
+EH: MsgBox Err.Description, vbOKOnly
+    Resume Next
+End Sub
+
+Private Sub DynamicMenu_ContentLoaded(ByVal Control As Office.IRibbonControl)
+    On Error GoTo EH
+    With BetterRibbon
+        Set DynamicButton = .NewButtonModel("Custom2VbaButton1")
+        Set DynamicToggle = .NewToggleModel("Custom2VbaToggleButton2")
+        Set DynamicGallery = .NewStaticGalleryModel("Custom2VbaStaticGallery2")
+    End With
     
     If Not DynamicButton Is Nothing Then DynamicButton.Attach "Custom2VbaButton1"
     If Not DynamicToggle Is Nothing Then DynamicToggle.Attach "Custom2VbaToggleButton2"
@@ -82,27 +95,27 @@ EH: MsgBox Err.Description, vbOKOnly
     Resume Next
 End Sub
 
-Private Sub DynamicToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub DynamicToggle_Toggled(ByVal Control As Office.IRibbonControl, ByVal IsPressed As Boolean)
     MsgBox "Toggled to " & IsPressed, vbOKOnly, "DynamicToggle_Toggled"
 End Sub
 
-Private Sub EditBox_Edited(ByVal control As IRibbonControl, ByVal Text As String)
+Private Sub EditBox_Edited(ByVal Control As IRibbonControl, ByVal Text As String)
     ButtonProcessing.EditBox_Processing Text
 End Sub
 
-Private Sub Gallery1_SelectionMade(ByVal control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
+Private Sub Gallery1_SelectionMade(ByVal Control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
     MsgBox "The seleccted item was: " & SelectedId, vbOKOnly, ThisWorkbook.Name
 End Sub
 
-Private Sub InnerToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub InnerToggle_Toggled(ByVal Control As Office.IRibbonControl, ByVal IsPressed As Boolean)
     MsgBox "From InnerToggle", vbOKOnly
 End Sub
 
-Private Sub SplitButton_Clicked(ByVal control As Office.IRibbonControl)
+Private Sub SplitButton_Clicked(ByVal Control As Office.IRibbonControl)
     MsgBox "Pressed!", vbOKOnly, "SplitButton_Clicked"
 End Sub
 
-Private Sub SplitToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
+Private Sub SplitToggle_Toggled(ByVal Control As Office.IRibbonControl, ByVal IsPressed As Boolean)
     MsgBox "Toggled now: " & SplitToggle.IsPressed, vbOKOnly, "SplitToggle_Toggled"
 End Sub
 
@@ -148,10 +161,6 @@ Private Sub Class_Initialize()
         Set InnerToggle = SplitToggle.ToggleModel
         
         Set DynamicMenu = .NewDynamicMenuModel("VbaDynamicMenu1")
-        
-        Set DynamicButton = .NewButtonModel("Custom2VbaButton1")
-        Set DynamicToggle = .NewToggleModel("Custom2VbaToggleButton2")
-        Set DynamicGallery = .NewStaticGalleryModel("Custom2VbaStaticGallery2")
     End With
     
     Activate
