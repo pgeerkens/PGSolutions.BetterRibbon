@@ -41,10 +41,10 @@ namespace PGSolutions.RibbonDispatcher {
         public const string ComboBoxModel           = "69E19417" + GuidSpace;
         public const string ISelectableItemModel    = "69E19418" + GuidSpace;
         public const string SelectableItemModel     = "69E19419" + GuidSpace;
-        //public const string IGroupModel             = "69E1941A" + GuidSpace;
+        public const string IGetContentEvent        = "69E1941A" + GuidSpace;
         public const string CheckBoxModel           = "69E1941B" + GuidSpace;
         public const string ILabelControlModel      = "69E1941C" + GuidSpace;
-        public const string LabelControlModel              = "69E1941D" + GuidSpace;
+        public const string LabelControlModel       = "69E1941D" + GuidSpace;
         public const string IEditBoxModel           = "69E1941E" + GuidSpace;
         public const string EditBoxModel            = "69E1941F" + GuidSpace;
 

@@ -18,7 +18,6 @@ Private MRibbonModel    As RibbonModel
 
 Private Sub Workbook_Activate()
     Register
-    
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
 End Sub
 

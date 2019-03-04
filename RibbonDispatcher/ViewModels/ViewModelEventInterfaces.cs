@@ -16,6 +16,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     public delegate void EditedEventHandler(IRibbonControl control, string text);
 
+    public delegate void ContentEventHandler(IRibbonControl control, ref string content);
+
     /// <summary>.</summary>
     /// <typeparam name="T"></typeparam>
     public class EventArgs<T>:EventArgs {
@@ -128,7 +130,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The interface for controls that have a selectable list of items.</summary>
     [CLSCompliant(true)]
     public interface IDynamicMenuVM : IControlVM {
-        string Content { get; }
+        event ContentEventHandler GetContent;
+        event ClickedEventHandler ContentLoaded;
+
+        void OnGetContent(IRibbonControl control, out string content);
     }
 
     /// <summary>The interface for galleries with sizeable items.</summary>
@@ -144,8 +149,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         string Description { get; }
     }
 
-    [CLSCompliant(true)]
-    public interface IContentVM {
-        string Content { get; }
-    }
+    //[CLSCompliant(true)]
+    //public interface IContentVM {
+    //    string OnGetContent(IRibbonControl control);
+    //}
 }

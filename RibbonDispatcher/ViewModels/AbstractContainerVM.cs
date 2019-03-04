@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         protected AbstractContainerVM(string itemId, KeyedControls controls) : base(itemId)
         => Controls = controls;
 
-        protected KeyedControls Controls { get; }
+        protected KeyedControls Controls { get; set; }
 
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         => Controls.Item<TControl>(controlId);
@@ -22,8 +22,9 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public void PurgeChildren() {
             foreach(var child in Controls) {
                 if (child is IContainerControl container) container.PurgeChildren();
-                Controls.Clear();
+                child.Detach();
             }
+            Controls.Clear();
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]

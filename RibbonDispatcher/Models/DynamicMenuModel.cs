@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-
+using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
@@ -16,6 +16,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
+    [ComSourceInterfaces(typeof(IGetContentEvent))]
     [ComDefaultInterface(typeof(IDynamicMenuModel))]
     [Guid(Guids.DynamicMenuModel)]
     public class DynamicMenuModel: ControlModel<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuModel,
@@ -28,6 +29,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public IDynamicMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
+            if (ViewModel != null) {
+                ViewModel.GetContent    += OnGetContent;
+                ViewModel.ContentLoaded += OnContentLoaded;
+            }
             return this;
         }
 
@@ -41,6 +46,17 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public IDynamicMenuModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
 
-        public string       Content   { get; }
+        public event ContentEventHandler GetContent;
+
+        public event ClickedEventHandler ContentLoaded;
+
+        public void OnGetContent(IRibbonControl control, ref string content) {
+            content = null;
+            GetContent?.Invoke(control, ref content);
+        }
+
+        public void OnContentLoaded(IRibbonControl control) => ContentLoaded?.Invoke(control);
+
+        public string       Content   { get; private set; }
     }
 }

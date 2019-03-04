@@ -1,12 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 using System.Xml.Linq;
+
+using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     public class DynamicMenuVM : AbstractContainerVM<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuVM,
-            IActivatable<IDynamicMenuSource,IDynamicMenuVM>, IContentVM {
+            IActivatable<IDynamicMenuSource,IDynamicMenuVM>{
         internal DynamicMenuVM(ViewModelFactory factory, string itemId) : base(itemId)
         => Factory = factory;
 
@@ -15,25 +16,44 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public override IDynamicMenuVM Attach(IDynamicMenuSource source) => Attach<DynamicMenuVM>(source);
         #endregion
 
-        #region DynamicCOntent implementation
-        protected new KeyedControls Controls { get; private set; }
-        private ViewModelFactory    Factory  { get; }
+        #region DynamicContent implementation
+        public event ContentEventHandler GetContent;
 
-        public string Content {
-            get {
-                PurgeChildren();
-                var x = XDocument.Parse(TestMenuContent);
-                var y = x.Root;
-                var z = y.ParseXmlMenu(Factory);
+        public event ClickedEventHandler ContentLoaded;
 
-                Controls = XDocument.Parse(TestMenuContent).Root.ParseXmlMenu(Factory);
-                Invalidate(c => c.SetShowInactive(true));
+        public void OnGetContent(IRibbonControl control, out string content) {
+            content = TestMenuContent;
+            GetContent?.Invoke(control, ref content);
 
-                return Source?.Content ?? TestMenuContent;
-            }
+            var checkSum = GetHash(content);
+            PurgeChildren();
+            var x = XDocument.Parse(content ?? TestMenuContent);
+            var y = x.Root;
+            var z = y.ParseXmlMenu(Factory);
+
+            Controls = XDocument.Parse(TestMenuContent).Root.ParseXmlMenu(Factory);
+            ContentLoaded?.Invoke(control);
+
+            Invalidate(c => c.SetShowInactive(true));
+            CheckSum = checkSum;
         }
 
+        private ViewModelFactory    Factory  { get; }
+
+        private ulong               CheckSum { get; set; }
+
         public new bool ShowInactive => true;
+
+        private ulong GetHash(string content) {
+            var ba = new byte[8];
+            for (int i=0, j=0; i < content.Length; i++, j++) {
+                if (j==8) j = 0;
+                ba[j] ^= (byte)content[i];
+            }
+            ulong result = 0;
+            for (var j=0; j < 8; j++) result = result<<8 + ba[j];
+            return result;
+        }
         #endregion
 
         private static string TestMenuContent =>

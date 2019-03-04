@@ -33,9 +33,9 @@ Attribute Gallery1.VB_VarHelpID = -1
 Private WithEvents InnerToggle  As PGSolutions_RibbonDispatcher.ToggleModel
 Attribute InnerToggle.VB_VarHelpID = -1
 
-'Private WithEvents DynamicMenu    As PGSolutions_RibbonDispatcher.DynamicMenuModel
-Private DynamicMenu     As PGSolutions_RibbonDispatcher.DynamicMenuModel
+Private WithEvents DynamicMenu    As PGSolutions_RibbonDispatcher.DynamicMenuModel
 Attribute DynamicMenu.VB_VarHelpID = -1
+'Private DynamicMenu     As PGSolutions_RibbonDispatcher.DynamicMenuModel
 
 Private WithEvents DynamicButton  As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute DynamicButton.VB_VarHelpID = -1
@@ -66,6 +66,20 @@ End Sub
 
 Private Sub DynamicGallery_SelectionMade(ByVal control As Office.IRibbonControl, ByVal SelectedId As String, ByVal SelectedIndex As Long)
     MsgBox "Selected # " & SelectedIndex & ": " & SelectedId, vbOKOnly, "DynamicGallery_SelectionMade"
+End Sub
+
+Private Sub DynamicMenu_GetContent(ByVal control As Office.IRibbonControl, ByRef content As String)
+    On Error GoTo EH
+    Dim ws As Worksheet: Set ws = Sheets.Item("XmlContent")
+    Dim r As Range: Set r = ws.Range("A1")
+    content = Sheets.Item("XmlContent").Range("A1").Value2
+    
+    If Not DynamicButton Is Nothing Then DynamicButton.Attach "Custom2VbaButton1"
+    If Not DynamicToggle Is Nothing Then DynamicToggle.Attach "Custom2VbaToggleButton2"
+    If Not DynamicGallery Is Nothing Then DynamicGallery.Attach "Custom2VbaStaticGallery2"
+XT: Exit Sub
+EH: MsgBox Err.Description, vbOKOnly
+    Resume Next
 End Sub
 
 Private Sub DynamicToggle_Toggled(ByVal control As Office.IRibbonControl, ByVal IsPressed As Boolean)
@@ -108,9 +122,6 @@ Friend Sub Activate()
     If Not Split2Menu Is Nothing Then Split2Menu.Attach "CustomVbaSplit2Menu"
     
     If Not DynamicMenu Is Nothing Then DynamicMenu.Attach "VbaDynamicMenu1"
-    If Not DynamicButton Is Nothing Then DynamicButton.Attach "Custom2VbaButton1"
-    If Not DynamicToggle Is Nothing Then DynamicToggle.Attach "Custom2VbaToggleButton2"
-    If Not DynamicGallery Is Nothing Then DynamicGallery.Attach "Custom2VbaStaticGallery2"
 End Sub
 
 Private Sub Class_Initialize()

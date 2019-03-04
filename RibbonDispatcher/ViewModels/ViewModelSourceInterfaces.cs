@@ -110,6 +110,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         string Title { get; }
     }
 
-    public interface IDynamicMenuSource : IMenuSource, IContentVM { }
+    public interface IDynamicMenuSource : IMenuSource { }
     #endregion
 }

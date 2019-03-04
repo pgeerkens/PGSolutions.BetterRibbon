@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
+using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public enum ERibbonControlSize {
@@ -59,5 +60,21 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         /// <summary>Fired when the associated control has an item selection made by the user.</summary>
         [Description("Fired when the associated control has an item selection made by the user.")]
         void SelectionMade(IRibbonControl control, string selectedId, int selectedIndex);
+    }
+
+    /// <summary>TODO</summary>
+    /// <remarks>Must be an IDispatch interface because an event source.</remarks>
+    [ComVisible(true)]
+    [CLSCompliant(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [Guid(Guids.IGetContentEvent)]
+    public interface IGetContentEvent {
+        /// <summary>Fired when the associated menu content is desired from the clientr.</summary>
+        [Description("Fired when the associated menu content is desired from the client.")]
+        void GetContent(IRibbonControl control, ref string content);
+
+        /// <summary>Fired when the menu content has been fully loaded.</summary>
+        [Description("Fired when the menu content has been fully loaded.")]
+        void ContentLoaded(IRibbonControl control);
     }
 }

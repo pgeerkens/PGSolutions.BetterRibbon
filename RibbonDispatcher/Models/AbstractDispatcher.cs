@@ -212,9 +212,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>All of the defined controls implementing the {IClickableVM} interface.</summary>
         private IDynamicMenuVM DynamicMenus(string controlId) => ViewModelFactory.DynamicMenus.GetOrDefault(controlId);
 
-        public string GetContent(IRibbonControl control)
-        => DynamicMenus(control?.Id)?.Content
-                ?? @"<menu xmlns=\'http://schemas.microsoft.com/office/2006/01/customui\'></menu>";
+        public string GetContent(IRibbonControl control) {
+            var content = @"<menu xmlns=\'http://schemas.microsoft.com/office/2006/01/customui\'></menu>";
+            DynamicMenus(control?.Id)?.OnGetContent(control, out content);
+            return content;
+        }
         #endregion
 
         #region IDescriptionableVM implementation
