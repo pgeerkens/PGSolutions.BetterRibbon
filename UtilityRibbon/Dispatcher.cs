@@ -30,22 +30,10 @@ namespace PGSolutions.UtilityRibbon {
     public sealed class Dispatcher: AbstractDispatcher, IRibbonExtensibility {
         internal Dispatcher() : base() { }
 
-        /// <summary>.</summary>
+        /// </inheritdoc>
         protected override string RibbonXml      => Resources.Ribbon;
 
-        /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
-        private   IResourceLoader ResourceLoader { get; } = new MyResourceManager();
-
-        /// <summary>Requests the XML Ribbon Definition string.</summary>
-        /// <param name="RibbonID"></param>
-        /// <returns></returns>
-        public override string GetCustomUI(string RibbonID) {
-            SetViewModelFactory(RibbonXml.ParseXmlTabs());
-
-            return base.GetCustomUI(RibbonID);
-        }
-
-        /// <inheritdoc/>
-        public override object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
+        /// </inheritdoc>
+        protected override   IResourceLoader ResourceLoader { get; } = new MyResourceManager();
     }
 }

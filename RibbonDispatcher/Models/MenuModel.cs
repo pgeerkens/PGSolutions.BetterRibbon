@@ -33,11 +33,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
+        public bool         IsLarge   { get; set; } = true;
+
+        #region IImageable implementation
         public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
         public bool         ShowImage { get; set; } = true;
         public bool         ShowLabel { get; set; } = true;
 
-        #region IImageable implementation
         public IMenuModel SetImage(IImageObject image) { Image = image; return this; }
         #endregion
     }

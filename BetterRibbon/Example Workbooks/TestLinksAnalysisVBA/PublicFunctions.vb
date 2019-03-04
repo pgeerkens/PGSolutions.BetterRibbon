@@ -10,13 +10,13 @@ Option Private Module
 
 Private Const ModuleName   As String = "PublicFunctions."
 
-Public Function Env(Value As Variant) As String
-    Env = Environ(Value)
-End Function
-
 Public Function DeskTop(Optional ByVal AllUsers As Boolean = False) As String
     DeskTop = IIf(AllUsers, _
             CreateObject("WScript.Shell").SpecialFolders("AllUsersDesktop"), _
             CreateObject("WScript.Shell").SpecialFolders("Desktop")) _
             & "\"
+End Function
+
+Public Function Env(Value As Variant) As String
+    Env = Environ(Value)
 End Function

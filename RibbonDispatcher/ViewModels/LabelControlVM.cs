@@ -17,6 +17,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public bool IsLarge => Source?.IsLarge ?? false;
         #endregion
 
-        protected override bool DefaultShowInactive { get => true; set { } }
+        //protected override bool DefaultShowInactive { get => true; set { } }
     }
 }

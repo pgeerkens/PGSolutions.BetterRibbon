@@ -48,7 +48,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         protected void SetViewModelFactory(ViewModelFactory factory) {
             ViewModelFactory?.ClearChangedListeners();
-            ViewModelFactory = factory;;
+            ViewModelFactory = factory;
             ViewModelFactory.Changed += OnPropertyChanged;
         }
 
@@ -58,7 +58,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => RibbonUI?.InvalidateControl(e.Control.ControlId);
 
         /// <inheritdoc/>
-        public abstract object LoadImage(string ImageId);
+        public virtual object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
 
         #region IRibbonExtensibility implementation
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
@@ -73,7 +73,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <param name="RibbonID"></param>
         /// <returns>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "RibbonID")]
-        public virtual string GetCustomUI(string RibbonID) => RibbonXml;
+        public virtual string GetCustomUI(string RibbonID)  {
+            SetViewModelFactory(RibbonXml.ParseXmlTabs());
+
+            return RibbonXml;
+        }
 
         /// <summary>Callback from VSTO/VSTA signalling successful Ribbon load, and providing the <see cref="IRibbonUI"/> handle.</summary>
         public virtual void OnRibbonLoad(IRibbonUI ribbonUI) {
@@ -81,6 +85,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
             Initialized?.Invoke(this, EventArgs.Empty);
         }
+
+        /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
+        protected virtual IResourceLoader ResourceLoader { get; }
         #endregion
 
         #region IControlVM implementation

@@ -25,5 +25,9 @@ namespace PGSolutions.BetterRibbon {
         /// <summary>.</summary>
         [DispId( 3),Description(".")]
         void RegisterWorkbook(string workbookName);
+
+        /// <summary>Returns a new implementation of the <see cref="IModelServer"/> interface.</summary>
+        [DispId( 4),Description("Returns a new implementation of the IModelServer interface.")]
+        IModelServer  NewModelServer(IResourceLoader manager);
     }
 }

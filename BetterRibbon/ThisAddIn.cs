@@ -3,9 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Deployment.Application;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
+
 using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
 
@@ -21,8 +21,15 @@ namespace PGSolutions.BetterRibbon {
     /// </remarks>
     [CLSCompliant(false)]
     public partial class ThisAddIn {
-        private void ThisAddIn_Startup(object sender, EventArgs e)
-        => Dispatcher.Initialized += ViewModel_Initialized;
+        private void ThisAddIn_Startup(object sender, EventArgs e) {
+            Dispatcher.Initialized += ViewModel_Initialized;
+
+    //        Application.WorkbookActivate    += Workbook_Activate;
+    //        Application.WorkbookDeactivate  += Workbook_Deactivate;
+            Application.WorkbookBeforeSave  += Workbook_BeforeSave;
+            Application.WorkbookAfterSave   += Workbook_AfterSave;
+            Application.WorkbookBeforeClose += Workbook_Close;
+        }
 
         internal Dispatcher      Dispatcher { get; private set; } = new Dispatcher();
         internal RibbonViewModel ViewModel  { get; private set; }
@@ -44,6 +51,21 @@ namespace PGSolutions.BetterRibbon {
         }
 
         internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
+
+        //private void Workbook_Activate(Workbook wb)   => Dispatcher.RegisterWorkbook(wb.Name);
+
+        //private void Workbook_Deactivate(Workbook wb) => Dispatcher.SetCurrentWorkbook(":");
+
+        private void Workbook_BeforeSave(Workbook wb,bool SaveAsUI,ref bool Cancel) {
+            Dispatcher.FloatCurrent(wb.Name);
+        }
+        private void Workbook_AfterSave(Workbook wb,bool Success) {
+            Dispatcher.SaveCurrent(wb.Name);
+        }
+        private void Workbook_Close(Workbook wb,ref bool Cancel) {
+            Dispatcher.FloatCurrent(wb.Name);
+            Dispatcher.RegisterWorkbook(":");
+        }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 

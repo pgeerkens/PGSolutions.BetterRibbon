@@ -40,11 +40,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
                     if (TryGetControlId(child,ref controlId)) { return action(controlId,child,factory); }
                     break;
 
-                // The control dialogBoxLauncher has no ControlId - so special handling needed
+                // The dialogBoxLauncher control has no ControlId - so special handling needed
                 case string name when name == "dialogBoxLauncher":
                     return child.Elements().FirstOrDefault().ParseXmlChild(factory);
 
-                // ANd our friend the SPlitBUtton is just very, very, special
+                // And our friend the SplitButton is just very, very, special
                 case string name when name == "splitButton":
                     var menu = child.Elements().Last().ParseXmlChild(factory) as IMenuVM;
 
@@ -66,13 +66,14 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         private static Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>> Actions
             = new Dictionary<string,Func<string,XElement,ViewModelFactory,IControlVM>>() {
-                {"box",      (controlId,element,factory) => factory.NewBox(controlId,element.ParseXmlChildren(factory)) },
-                {"dropDown", (controlId,element,factory) => factory.NewDropDown(controlId,element.Elements().ParseItemList()) },
-                {"comboBox", (controlId,element,factory) => factory.NewComboBox(controlId,element.Elements().ParseItemList()) },
-                {"gallery",  (controlId,element,factory) => factory.NewGallery(controlId,element.Elements().ParseItemList()) },
-                {"group",    (controlId,element,factory) => factory.NewGroup(controlId,element.ParseXmlChildren(factory)) },
-                {"menu",     (controlId,element,factory) => factory.NewMenu(controlId,element.ParseXmlChildren(factory)) },
-                {"tab",      (controlId,element,factory) => factory.NewTab(controlId,element.ParseXmlChildren(factory)) },
+                {"dropDown",   (controlId,element,factory) => factory.NewDropDown(controlId,element.Elements().ParseItemList()) },
+                {"comboBox",   (controlId,element,factory) => factory.NewComboBox(controlId,element.Elements().ParseItemList()) },
+                {"gallery",    (controlId,element,factory) => factory.NewGallery(controlId,element.Elements().ParseItemList()) },
+                {"group",      (controlId,element,factory) => factory.NewGroup(controlId,element.ParseXmlChildren(factory)) },
+                {"menu",       (controlId,element,factory) => factory.NewMenu(controlId,element.ParseXmlChildren(factory)) },
+                {"box",        (controlId,element,factory) => factory.NewBox(controlId,element.ParseXmlChildren(factory)) },
+                {"tab",        (controlId,element,factory) => factory.NewTab(controlId,element.ParseXmlChildren(factory)) },
+                {"buttonGroup",(controlId,element,factory) => factory.NewButtonGroup(controlId,element.ParseXmlChildren(factory)) },
 
                 {"button",       (controlId,element,factory) => factory.NewButton(controlId) },
                 {"editBox",      (controlId,element,factory) => factory.NewEditBox(controlId) },

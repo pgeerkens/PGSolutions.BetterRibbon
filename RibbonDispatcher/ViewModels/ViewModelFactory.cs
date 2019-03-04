@@ -219,6 +219,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal BoxControlVM NewBox(string controlId, IEnumerable<IControlVM> controls)
         => Add<BoxControlVM, IBoxControlSource,IBoxControlVM>(new BoxControlVM(controlId, controls));
 
+        /// <summary>Returns a new Ribbon BoxControl view-model instance.</summary>
+        internal ButtonGroupVM NewButtonGroup(string controlId, IEnumerable<IControlVM> controls)
+        => Add<ButtonGroupVM, IButtonGroupSource,IButtonGroupVM>(new ButtonGroupVM(controlId, controls));
+
         /// <summary>Returns a new Ribbon LabelControl view-model instance.</summary>
         internal MenuSeparatorVM NewMenuSeparator(string controlId)
         => Add<MenuSeparatorVM, IMenuSeparatorSource,IMenuSeparatorVM>(new MenuSeparatorVM(controlId));

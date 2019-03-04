@@ -15,7 +15,6 @@ Attribute VB_Exposed = True
 '''=======================================================================================
 Option Explicit
 Private CustomGroup         As PGSolutions_RibbonDispatcher.IGroupModel
-
 Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
@@ -27,20 +26,12 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
     Resume XT
 End Sub
 
-Friend Sub Activate()
-    If Not CustomGroup Is Nothing Then CustomGroup.Attach "CustomizableGroup"
-    If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive False
-    If Not Button1 Is Nothing Then Button1.Attach "CustomizableButton1"
-    If Not Button1 Is Nothing Then Button1.Invalidate
-End Sub
-
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
-    With BetterRibbon
-        Set CustomGroup = .NewGroupModel("CustomizableGroup")
-        Set Button1 = .NewButtonModel("CustomizableButton1") _
+    With ThisWorkbook.ModelServer
+        Set CustomGroup = .GetGroupModel("CustomizableGroup")
+        CustomGroup.SetShowInactive False
+        Set Button1 = .GetButtonModel("CustomizableButton1") _
                       .SetImage(.NewImageObjectMso("MacroPlay"))
     End With
-    
-    Activate
 End Sub

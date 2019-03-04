@@ -21,7 +21,7 @@ Implements IResourceLoader
 Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings2
     Select Case (ControlId)
         Case "CustomizableButton1":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ThisWorkbook.ModelServer.NewControlStrings2( _
                 Label:="Run All Scan/Parse Tests", _
                 ScreenTip:="Unit Test for Linka Parser", _
                 superTip:="Performs a connection test and then ten specific " & _
@@ -36,7 +36,7 @@ End Function
 Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings
     Select Case (ControlId)
         Case "CustomizableGroup":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ThisWorkbook.ModelServer.NewControlStrings( _
                 Label:="VBA Custom Controls", _
                 ScreenTip:="", superTip:="", keyTip:="")
         Case Else:

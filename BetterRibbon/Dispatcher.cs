@@ -33,21 +33,28 @@ namespace PGSolutions.BetterRibbon {
     public sealed class Dispatcher: AbstractDispatcher, IRibbonExtensibility {
         internal Dispatcher() : base() { }
 
-        /// <summary>.</summary>
-        protected override string RibbonXml    => Resources.Ribbon;
+        /// </inheritdoc>
+        protected override string          RibbonXml      => Resources.Ribbon;
 
-        private XDocument         RibbonXmlDoc { get; } = XDocument.Parse(Resources.Ribbon);
+        /// </inheritdoc>
+        protected override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
 
-        private Dictionary        Factories    { get; } = new Dictionary();
+        private            XDocument       RibbonXmlDoc   { get; } = XDocument.Parse(Resources.Ribbon);
 
-        /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
-        private IResourceLoader ResourceLoader { get; } = new MyResourceManager();
+        private            Dictionary      Factories      { get; } = new Dictionary();
 
-        /// inheritdoc/>
-        public override string GetCustomUI(string RibbonID) {
-            SetViewModelFactory(RibbonXml.ParseXmlTabs());
+        public override void OnRibbonLoad(IRibbonUI ribbonUI) {
+            SaveCurrent(":");
 
-            return base.GetCustomUI(RibbonID);
+            base.OnRibbonLoad(ribbonUI);
+        }
+
+        private void SetCurrentWorkbook(string workbookName) {
+            if (Factories.TryGetValue(workbookName, out var factory))
+                SetViewModelFactory(factory);
+            else
+                SetViewModelFactory(Factories[":"]);
+            RibbonUI?.Invalidate();
         }
 
         public override void RegisterWorkbook(string workbookName) {
@@ -55,11 +62,16 @@ namespace PGSolutions.BetterRibbon {
                 factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root);
                 Factories.Add(workbookName, factory);
             }
-            SetViewModelFactory(factory);
-            RibbonUI.Invalidate();
+            SetCurrentWorkbook(workbookName);
         }
 
-        /// <inheritdoc/>
-        public override object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
+        public void SaveCurrent(string workbookName) {
+            if ( ! Factories.ContainsKey(workbookName)) Factories.Add(workbookName, ViewModelFactory);
+            RegisterWorkbook(workbookName);
+        }
+
+        public void FloatCurrent(string workbookName) {
+            if (Factories.ContainsKey(workbookName)) Factories.Remove(workbookName);
+        }
     }
 }

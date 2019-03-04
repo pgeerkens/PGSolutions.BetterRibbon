@@ -21,6 +21,7 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         public  IRibbonUI RibbonUI { get; }
 
+        /// <inheritdoc/>
         public  IGroupVM  CustomControlsGroupVM
         => Controls.Item<TabVM>(ControlId).GetControl<GroupVM>("CustomizableGroup");
     }

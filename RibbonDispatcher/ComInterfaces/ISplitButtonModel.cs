@@ -48,6 +48,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             [Description(".")]
             get; set; }
         #endregion
+
+        /// <summary>Gets or sets Whether this control displays an image.</summary>
+        [DispId(10)]
+        bool   ShowImage  {
+            [Description("Gets or sets Whether this control displays an image.")]
+            get; set; }
     }
 
     /// <summary></summary>
@@ -112,6 +118,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         [DispId(9)]
         IToggleModel ToggleModel { get; }
+
+        /// <summary>Gets or sets Whether this control displays an image.</summary>
+        [DispId(10)]
+        new bool   ShowImage  {
+            [Description("Gets or sets Whether this control displays an image.")]
+            get; set; }
     }
 
     /// <summary></summary>
@@ -169,5 +181,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         [DispId(9)]
         IButtonModel ButtonModel { get; }
+
+        /// <summary>Gets or sets Whether this control displays an image.</summary>
+        [DispId(10)]
+        new bool   ShowImage  {
+            [Description("Gets or sets Whether this control displays an image.")]
+            get; set; }
     }
 }

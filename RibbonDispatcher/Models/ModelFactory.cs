@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using stdole;
 
@@ -12,7 +13,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
     using IStrings2 = IControlStrings2;
 
     /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
-    public class ModelFactory : AbstractModelFactory, IModelFactory {
+    [Description("COM-visible implementation of the interface IModelFactory.")]
+    public partial class ModelFactory : AbstractModelFactory, IModelFactory {
         /// <summary>.</summary>
         internal ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
         : base(viewModelFactory, manager) { }

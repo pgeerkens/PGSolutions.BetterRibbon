@@ -91,6 +91,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IBoxControlVM: IControlVM { }
 
+    /// <summary>The total interface exposed by <see cref="BoxControlVM"/> objects.</summary>
+    [CLSCompliant(true)]
+    public interface IButtonGroupVM: IControlVM { }
+
     [CLSCompliant(true)]
     public interface ISplitButtonVM: IControlVM {
         IMenuVM   MenuVM   { get; }

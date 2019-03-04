@@ -14,7 +14,17 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private MRibbonModel    As RibbonModel
+Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+Private MModelServer        As PGSolutions_RibbonDispatcher.IModelServer
+Private MRibbonModel        As RibbonModel
+
+Public Function ModelServer() As PGSolutions_RibbonDispatcher.IModelServer
+    If MModelServer Is Nothing Then
+        Set MModelServer = Application.COMAddIns(COMAddInName).Object _
+                .NewBetterRibbon(New ResourceLoader)
+    End If
+    Set ModelServer = MModelServer
+End Function
 
 Private Sub Workbook_Activate()
     Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name

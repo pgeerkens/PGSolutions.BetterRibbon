@@ -29,13 +29,13 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
+
         #region IClickable implementation
         public event ClickedEventHandler Clicked;
 
         private void OnClicked(IRibbonControl control) => Clicked?.Invoke(control);
         #endregion
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         public bool         IsLarge   { get; set; } = true;
 

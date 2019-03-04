@@ -14,14 +14,13 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-
 Implements IResourceLoader
 
-' Button, ToggleButton, CheckBox, Menu, and Gallery controls
+' For Button, ToggleButton, CheckBox, Menu, DynamicMenu, and Gallery controls
 Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings2
     Select Case (ControlId)
         Case "CustomizableButton1":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ThisWorkbook.ModelServer.NewControlStrings2( _
                 Label:="This is cool!", _
                 ScreenTip:="VBA-Customized Button Screentip", _
                 SuperTip:="This button is completely" & vbNewLine & _
@@ -36,7 +35,7 @@ End Function
 Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings
     Select Case (ControlId)
         Case "CustomizableGroup":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ThisWorkbook.ModelServer.NewControlStrings( _
                 Label:="VBA Custom Controls", _
                 ScreenTip:="", SuperTip:="", KeyTip:="")
         Case Else:

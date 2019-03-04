@@ -25,6 +25,10 @@ namespace PGSolutions.BetterRibbon {
         public IModelFactory NewBetterRibbon(IResourceLoader manager) => FuncFactory(manager);
 
         /// <inheritdoc/>
+        public IModelServer NewModelServer(IResourceLoader manager)
+        => FuncFactory(manager) as IModelServer;
+
+        /// <inheritdoc/>
         [CLSCompliant(false)]
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
 
