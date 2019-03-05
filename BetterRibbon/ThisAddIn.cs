@@ -24,8 +24,7 @@ namespace PGSolutions.BetterRibbon {
         private void ThisAddIn_Startup(object sender, EventArgs e) {
             Dispatcher.Initialized += ViewModel_Initialized;
 
-    //        Application.WorkbookActivate    += Workbook_Activate;
-    //        Application.WorkbookDeactivate  += Workbook_Deactivate;
+            Application.WorkbookActivate    += Workbook_Activate;
             Application.WorkbookBeforeSave  += Workbook_BeforeSave;
             Application.WorkbookAfterSave   += Workbook_AfterSave;
             Application.WorkbookBeforeClose += Workbook_Close;
@@ -50,19 +49,19 @@ namespace PGSolutions.BetterRibbon {
             ViewModel.RibbonUI?.InvalidateControl(ViewModel.ControlId);
         }
 
-        internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
+        internal void RegisterWorkbook(string workbookName)
+        => Dispatcher.RegisterWorkbook(workbookName);
 
-        //private void Workbook_Activate(Workbook wb)   => Dispatcher.RegisterWorkbook(wb.Name);
+        private void Workbook_Activate(Workbook wb)
+        => Dispatcher.RegisterWorkbook(wb.Name);
 
-        //private void Workbook_Deactivate(Workbook wb) => Dispatcher.SetCurrentWorkbook(":");
+        private void Workbook_BeforeSave(Workbook wb, bool SaveAsUI, ref bool Cancel)
+        => Dispatcher.FloatCurrent(wb.Name);
 
-        private void Workbook_BeforeSave(Workbook wb,bool SaveAsUI,ref bool Cancel) {
-            Dispatcher.FloatCurrent(wb.Name);
-        }
-        private void Workbook_AfterSave(Workbook wb,bool Success) {
-            Dispatcher.SaveCurrent(wb.Name);
-        }
-        private void Workbook_Close(Workbook wb,ref bool Cancel) {
+        private void Workbook_AfterSave(Workbook wb, bool Success)
+        => Dispatcher.SaveCurrent(wb.Name);
+
+        private void Workbook_Close(Workbook wb, ref bool Cancel) {
             Dispatcher.FloatCurrent(wb.Name);
             Dispatcher.RegisterWorkbook(":");
         }

@@ -10,7 +10,6 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ViewModels;
 
 using PGSolutions.UtilityRibbon.Properties;
 
@@ -30,10 +29,10 @@ namespace PGSolutions.UtilityRibbon {
     public sealed class Dispatcher: AbstractDispatcher, IRibbonExtensibility {
         internal Dispatcher() : base() { }
 
-        /// </inheritdoc>
+        /// <inheritdoc/>
         protected override string RibbonXml      => Resources.Ribbon;
 
-        /// </inheritdoc>
-        protected override   IResourceLoader ResourceLoader { get; } = new MyResourceManager();
+        /// <inheritdoc/>
+        protected override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
     }
 }

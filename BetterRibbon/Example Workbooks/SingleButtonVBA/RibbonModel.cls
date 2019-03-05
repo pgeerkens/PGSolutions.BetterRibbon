@@ -24,6 +24,7 @@ End Sub
 
 Private Sub Class_Initialize()
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
+    ThisWorkbook.Register
     With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
 

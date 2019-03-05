@@ -21,6 +21,14 @@ Private Sub Workbook_Activate()
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
 End Sub
 
+'Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
+'    MsgBox IIf(MRibbonModel Is Nothing, "Now nothing!", "Fine!"), vbOKOnly, "BeforeSave"
+'End Sub
+
+'Private Sub Workbook_AfterSave(ByVal Success As Boolean)
+'    MsgBox IIf(MRibbonModel Is Nothing, "Now nothing!", "Fine!"), vbOKOnly, "AfterSave"
+'End Sub
+
 Private Sub Workbook_Open()
     If DeskTop(False) = "D:\Users\Pieter\Desktop\" _
     Or ThisWorkbook.Path = DeskTop(True) & "Example Workbooks" _

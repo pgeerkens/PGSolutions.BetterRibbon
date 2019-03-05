@@ -57,17 +57,21 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected virtual void OnPropertyChanged(object sender, IControlChangedEventArgs e)
         => RibbonUI?.InvalidateControl(e.Control.ControlId);
 
-        /// <inheritdoc/>
+        /// summary>.<summary/>
         public virtual object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);
 
         #region IRibbonExtensibility implementation
         /// <summary>Raised to signal completion of the Ribbon load.</summary>
         public event EventHandler Initialized;
 
-        /// <inheritdoc/>
-        public          IRibbonUI RibbonUI  { get; private set; }
+        /// summary>.<summary/>
+        public             IRibbonUI       RibbonUI       { get; private set; }
 
-        protected abstract string RibbonXml { get; }
+        /// summary>.<summary/>
+        protected abstract string          RibbonXml      { get; }
+
+        /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
+        protected abstract IResourceLoader ResourceLoader { get; }
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
         /// <param name="RibbonID"></param>
@@ -85,9 +89,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
             Initialized?.Invoke(this, EventArgs.Empty);
         }
-
-        /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
-        protected virtual IResourceLoader ResourceLoader { get; }
         #endregion
 
         #region IControlVM implementation
