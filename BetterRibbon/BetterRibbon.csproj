@@ -32,9 +32,9 @@
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
-    <InstallUrl>\\alienware15\Publish\BetterRibbon\</InstallUrl>
+    <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.62</ApplicationVersion>
+    <ApplicationVersion>1.2.0.8</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -222,6 +222,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Example Workbooks\TestLinksAnalysis.xlsb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.tlb">
+      <Link>bin\Release\PGSolutions.RibbonDispatcher.tlb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RibbonUtilities\bin\Release\PGSolutions.RibbonUtilities.tlb">
+      <Link>bin\Release\PGSolutions.RibbonUtilities.tlb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RibbonUtilities\bin\Debug\PGSolutions.RibbonUtilities.tlb">
+      <Link>bin\Debug\PGSolutions.RibbonUtilities.tlb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb">
+      <Link>bin\Debug\PGSolutions.RibbonDispatcher.tlb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="BetterRibbonKey.snk" />

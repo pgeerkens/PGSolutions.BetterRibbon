@@ -35,8 +35,10 @@ namespace PGSolutions.BetterRibbon {
         internal RibbonModel     Model      { get; private set; }
         private  ComEntry        ComEntry   => new ComEntry(Dispatcher.NewModelFactory);
 
+        /// <inheritdoc/>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
 
+        /// <inheritdoc/>
         protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
 
         private void ViewModel_Initialized(object sender, EventArgs e) {

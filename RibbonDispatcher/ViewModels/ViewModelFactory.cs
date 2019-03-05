@@ -66,7 +66,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>.</summary>
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
-        => Controls[controlId] as TControl;
+        { Controls.TryGetValue(controlId,out var control); return control as TControl; }
 
         #region Dictionaries
         /// <summary>Returns a readonly collection of all Ribbon Controls in this Ribbon ViewModel.</summary>

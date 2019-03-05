@@ -32,6 +32,7 @@ namespace PGSolutions.BetterRibbon {
         [CLSCompliant(false)]
         public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
 
+        /// <inheritdoc/>
         public void RegisterWorkbook(string workbookName)
         => Globals.ThisAddIn.RegisterWorkbook(workbookName);
     }

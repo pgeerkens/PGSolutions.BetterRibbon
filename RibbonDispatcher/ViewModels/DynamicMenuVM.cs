@@ -30,7 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             var checkSum = GetHash(content);
             if (checkSum != CheckSum) {
                 PurgeChildren();
-                Controls = XDocument.Parse(TestMenuContent).Root.ParseXmlMenu(Factory);
+                Controls = XDocument.Parse(content).Root.ParseXmlMenu(Factory);
                 ContentLoaded?.Invoke(control);
                 CheckSum = checkSum;
             }
