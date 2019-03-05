@@ -28,11 +28,29 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         #endregion
 
         #region IControl implementation
-        /// <summary>Gets the {IControlStrings} for this control.</summary>
+        /// <summary>Gets the <see cref="IControlStrings"/> for this control.</summary>
         [DispId(4)]
-        IControlStrings2 Strings {
-            [Description("Gets the {IControlStrings} for this control.")]
-            get;
+        string Label {
+            [Description("Gets the IControlStrings for this control.")]
+            get; set;
+        }
+        /// <summary>Gets the ScreenTip (concise hover-help) for this control.</summary>
+        [DispId(17)]
+        string ScreenTip {
+            [Description("Gets the ScreenTip (concise hover-help) for this control.")]
+            get; set;
+        }
+        /// <summary>Gets the SuperTip (expanded hover-help) for this control.</summary>
+        [DispId(18)]
+        string SuperTip {
+            [Description("Gets the SuperTip (expanded hover-help) for this control.")]
+            get; set;
+        }
+        /// <summary>Gets the KeyTip (keyboard shortcut) for this control.</summary>
+        [DispId(19)]
+        string KeyTip {
+            [Description("Gets the KeyTip (keyboard shortcut) for this control.")]
+            get; set;
         }
         /// <summary>Gets or sets whether the control is enabled.</summary>
         [DispId(5)]

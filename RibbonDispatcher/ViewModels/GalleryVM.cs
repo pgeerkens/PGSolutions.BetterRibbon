@@ -6,13 +6,10 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
-    internal class GalleryVM : AbstractControlVM<IGallerySource,IGalleryVM>, IGalleryVM,
+    internal class GalleryVM : AbstractControl2VM<IGallerySource,IGalleryVM>, IGalleryVM,
             IActivatable<IGallerySource,IGalleryVM> {
         public GalleryVM(string itemId)
         : base(itemId) { }
-
-        /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
 
         #region IActivatable implementation
         public override IGalleryVM Attach(IGallerySource source) => Attach<GalleryVM>(source);

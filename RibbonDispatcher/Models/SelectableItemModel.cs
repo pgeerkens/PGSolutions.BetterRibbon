@@ -28,10 +28,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public bool         ShowLabel { get; set; } = true;
 
         public string ControlId { get; set; } = null;
-        public string Label     => Strings.Label;
-        public string ScreenTip => Strings.ScreenTip;
-        public string SuperTip  => Strings.SuperTip;
-        public string KeyTip    => Strings.KeyTip;
 
         public new IStaticItemVM ViewModel => this;
 

@@ -10,6 +10,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
+    using IStrings2 = IControlStrings2;
+
     /// <summary>The COM visible Model for Ribbon Menu controls.</summary>
     [Description("The COM visible Model for Ribbon Menu controls.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
@@ -19,12 +21,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(IGetContentEvent))]
     [ComDefaultInterface(typeof(IDynamicMenuModel))]
     [Guid(Guids.DynamicMenuModel)]
-    public class DynamicMenuModel: ControlModel<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuModel,
+    public class DynamicMenuModel: ControlModel2<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuModel,
             IDynamicMenuSource {
-        internal DynamicMenuModel(Func<string,DynamicMenuVM> funcViewModel,
-                IControlStrings strings)
-        : base(funcViewModel, strings)
-        { }
+        internal DynamicMenuModel(Func<string,DynamicMenuVM> funcViewModel, IStrings2 strings)
+        : base(funcViewModel, strings) { }
 
         /// <inheritdoc/>
         public IDynamicMenuModel Attach(string controlId) {
@@ -35,8 +35,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             }
             return this;
         }
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         public IImageObject Image     { get; set; } = "MacroSecurity".ToImageObject();
         public bool         ShowImage { get; set; } = true;

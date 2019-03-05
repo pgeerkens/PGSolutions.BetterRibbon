@@ -104,7 +104,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public SplitToggleButtonModel NewSplitToggleButtonModel(
                 string splitStringId, string menuStringId, string toggleStringId,
                 bool isEnabled, bool isVisible)
-        => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings(splitStringId),
+        => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings2(splitStringId),
                 new ToggleModel(GetControl<ToggleButtonVM>, GetStrings2(toggleStringId)),
                 new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringId)))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
@@ -114,7 +114,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public SplitPressButtonModel NewSplitPressButtonModel(
                 string splitStringId, string menuStringId, string buttonStringId,
                 bool isEnabled, bool isVisible)
-        => new SplitPressButtonModel(GetControl<SplitPressButtonVM>, GetStrings(splitStringId),
+        => new SplitPressButtonModel(GetControl<SplitPressButtonVM>, GetStrings2(splitStringId),
                 new ButtonModel(GetControl<ButtonVM>, GetStrings2(buttonStringId)),
                 new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringId)))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
@@ -128,14 +128,14 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
         public GalleryModel NewGalleryModel(string controlId,
                 bool isEnabled, bool isVisible)
-        => new GalleryModel(GetControl<GalleryVM>, GetStrings(controlId))
+        => new GalleryModel(GetControl<GalleryVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IGallerySource, IGalleryVM, GalleryModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="StaticGalleryModel"/>.</summary>
         public StaticGalleryModel NewStaticGalleryModel(string controlId,
                 bool isEnabled, bool isVisible)
-        => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings(controlId))
+        => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IStaticGallerySource, IStaticGalleryVM, StaticGalleryModel>();
 

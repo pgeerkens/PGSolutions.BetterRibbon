@@ -5,16 +5,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    using IStrings = IControlStrings;
-
     #region Component interfaces
     public interface ICanInvalidate {
         void Invalidate();
     }
 
     public interface IControlSource {
-        /// <summary>Gets the <see cref="IRibbonControlStrings"/> for this control.</summary>
-        IStrings Strings      { get; }
+        /// <summary>Gets the label for this control.</summary>
+        string  Label      { get; }
+        /// <summary>Gets the SuperTip (concise hover-help) for this control.</summary>
+        string  ScreenTip  { get; }
+        /// <summary>Gets the SuperTip (expanded hover-help) for this control.</summary>
+        string  SuperTip   { get; }
+        /// <summary>Gets the key tip (keyboard shortcut) for this control.</summary>
+        string  KeyTip     { get; }
 
         /// <summary>Gets whether the control is enabled.</summary>
         bool     IsEnabled    { get; }
@@ -25,6 +29,13 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>.</summary>
         void     SetShowInactive(bool showInactive);
     }
+
+    public interface IDescriptionSource {
+        /// <summary>Gets the description for this control.</summary>
+        string Description {set; get; }
+    }
+
+    public interface IControlSource2: IControlSource, IDescriptionSource { }
 
     public interface ISizeSource {
         /// <summary>.</summary>
@@ -74,16 +85,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     #region Object Source interfaces
     public interface IImageSizeSource: IControlSource, IImageSource, ISizeSource { }
 
-    public interface IButtonSource : IImageSizeSource { }
+    public interface IButtonSource : IControlSource2, IDescriptionSource, IImageSizeSource { }
 
-    public interface IToggleSource : IImageSizeSource, IToggleDataSource { }
+    public interface IToggleSource : IControlSource2, IDescriptionSource, IImageSizeSource, IToggleDataSource { }
 
     public interface ISelectableItemSource:  IControlSource, IStaticItemVM { }
 
     public interface IEditBoxSource: IControlSource, IEditDataSource { }
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IDropDownSource: IControlSource, ISelectableSource, IListDataSource { }
+    public interface IDropDownSource: IControlSource, ISelectableSource, IListDataSource, IImageSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IStaticDropDownSource : IControlSource, ISelectableSource { }
@@ -95,10 +106,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public interface IStaticComboBoxSource : IControlSource, IEditBoxSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IGallerySource : IControlSource, IGridSizeSource, ISelectableSource, IListDataSource { }
+    public interface IGallerySource : IControlSource2, IDescriptionSource, IGridSizeSource, ISelectableSource, IListDataSource { }
 
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    public interface IStaticGallerySource: IControlSource, IGridSizeSource, ISelectableSource { }
+    public interface IStaticGallerySource: IControlSource2, IDescriptionSource, IGridSizeSource, ISelectableSource { }
 
     public interface ILabelControlSource: IControlSource, ISizeSource { }
 
@@ -106,7 +117,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     public interface IButtonGroupSource: IControlSource { }
 
-    public interface IMenuSource: IControlSource, IImageSource { }
+    public interface IMenuSource: IControlSource2, IDescriptionSource, IImageSource { }
 
     public interface IMenuSeparatorSource: IControlSource {
         string Title { get; }

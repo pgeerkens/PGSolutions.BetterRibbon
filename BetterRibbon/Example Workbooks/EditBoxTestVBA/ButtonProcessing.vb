@@ -8,14 +8,14 @@ Attribute VB_Name = "ButtonProcessing"
 Option Explicit
 Option Private Module
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
-Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
+Private MModelServer        As PGSolutions_RibbonDispatcher.IModelServer
 
-Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
-    If MBetterRibbon Is Nothing Then
-        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
+Public Function ModelServer() As PGSolutions_RibbonDispatcher.IModelServer
+    If MModelServer Is Nothing Then
+        Set MModelServer = Application.COMAddIns(COMAddInName).Object _
                 .NewBetterRibbon(New ResourceLoader)
     End If
-    Set BetterRibbon = MBetterRibbon
+    Set ModelServer = MModelServer
 End Function
 
 Public Sub Register()

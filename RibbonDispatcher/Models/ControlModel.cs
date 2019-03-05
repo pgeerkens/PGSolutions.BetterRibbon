@@ -6,13 +6,17 @@ using System;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
+    using IStrings = IControlStrings;
+
     public abstract class ControlModel<TSource,TCtrl>: IControlSource
             where TSource: IControlSource
             where TCtrl: IControlVM {
-        protected ControlModel(Func<string, IActivatable<TSource,TCtrl>> funcViewModel,
-                IControlStrings strings) {
+        protected ControlModel(Func<string, IActivatable<TSource,TCtrl>> funcViewModel, IStrings strings) {
             AttachToViewModel = (controlId, source) => funcViewModel(controlId).Attach(source);
-            Strings = strings;
+            Label     = strings?.Label;
+            ScreenTip = strings?.ScreenTip;
+            SuperTip  = strings?.SuperTip;
+            KeyTip    = strings?.KeyTip;
         }
 
         protected Func<string, TSource, TCtrl> AttachToViewModel { get; }
@@ -24,16 +28,22 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         /// <inheritdoc/>
-        public IControlStrings Strings { get; }
+        public string  Label      { get; set; }
+        /// <inheritdoc/>
+        public string  ScreenTip  { get; set; }
+        /// <inheritdoc/>
+        public string  SuperTip   { get; set; }
+        /// <inheritdoc/>
+        public string  KeyTip     { get; set; }
 
         /// <inheritdoc/>
-        public TCtrl ViewModel    { get; set; }
+        public TCtrl    ViewModel { get; set; }
 
         /// <inheritdoc/>
-        public bool  IsEnabled    { get; set; } = true;
+        public bool     IsEnabled { get; set; } = true;
 
         /// <inheritdoc/>
-        public bool  IsVisible    { get; set; } = true;
+        public bool     IsVisible { get; set; } = true;
 
         /// <inheritdoc/>
         public virtual void Invalidate() => ViewModel?.Invalidate();

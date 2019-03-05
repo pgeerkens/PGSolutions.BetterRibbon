@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
-using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public enum ERibbonControlSize {

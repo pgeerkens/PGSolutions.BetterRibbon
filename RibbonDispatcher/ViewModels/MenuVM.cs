@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    public class MenuVM: AbstractContainerVM<IMenuSource,IMenuVM>, IMenuVM,
+    public class MenuVM: AbstractContainer2VM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
         internal MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }
         internal MenuVM(ViewModelFactory factory, string itemId, IEnumerable<IControlVM> controls)
@@ -25,11 +25,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <inheritdoc/>
         public bool ShowLabel => Source?.ShowLabel ?? true;
-        #endregion
-
-        #region IDescriptionable implementation
-        /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
         #endregion
     }
 }

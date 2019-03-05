@@ -10,6 +10,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
+    using IStrings2 = IControlStrings2;
+
     /// <summary>The COM visible Model for Ribbon Menu controls.</summary>
     [Description("The COM visible Model for Ribbon Menu controls.")]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
@@ -18,20 +20,16 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IMenuModel))]
     [Guid(Guids.MenuModel)]
-    public class MenuModel: ControlModel<IMenuSource,IMenuVM>, IMenuModel,
+    public class MenuModel: ControlModel2<IMenuSource,IMenuVM>, IMenuModel,
             IMenuSource {
-        internal MenuModel(Func<string,MenuVM> funcViewModel,
-                IControlStrings strings)
-        : base(funcViewModel, strings)
-        { }
+        internal MenuModel(Func<string,MenuVM> funcViewModel, IStrings2 strings)
+        : base(funcViewModel, strings) { }
 
         /// <inheritdoc/>
         public IMenuModel Attach(string controlId) {
             ViewModel = AttachToViewModel(controlId, this);
             return this;
         }
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         public bool         IsLarge   { get; set; } = true;
 

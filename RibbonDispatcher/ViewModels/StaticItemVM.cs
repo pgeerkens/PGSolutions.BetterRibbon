@@ -7,10 +7,21 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public class StaticItemVM: AbstractControlVM<ISelectableItemSource,IStaticItemVM>, IStaticItemVM,
             IActivatable<ISelectableItemSource,IStaticItemVM>, IImageableVM {
         /// <summary>TODO</summary>
-        internal StaticItemVM(string ItemId, IControlStrings strings) : base(ItemId)
-        => Strings = strings;
+        internal StaticItemVM(string ItemId, IControlStrings strings) : base(ItemId) {
+            Label     = strings.Label;
+            ScreenTip = strings.ScreenTip;
+            SuperTip  = strings.SuperTip;
+            KeyTip    = strings.KeyTip;
+        }
 
-        protected override IControlStrings Strings { get; }
+        /// <inheritdoc/>
+        public override string Label     { get; }
+        /// <inheritdoc/>
+        public override string ScreenTip { get; }
+        /// <inheritdoc/>
+        public override string SuperTip  { get; }
+        /// <inheritdoc/>
+        public override string KeyTip    { get; }
 
         #region IActivatable implementation
         /// <inheritdoc/>

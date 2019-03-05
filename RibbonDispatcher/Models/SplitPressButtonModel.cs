@@ -12,7 +12,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using IStrings = IControlStrings;
+    using IStrings2 = IControlStrings2;
 
     /// <summary>The COM visible Model for Ribbon Split (Press) Button controls.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
@@ -26,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public class SplitPressButtonModel: AbstractSplitButtonModel<IButtonSource,ISplitPressButtonVM>,
             ISplitPressButtonModel, IButtonSource {
         internal SplitPressButtonModel(Func<string,SplitPressButtonVM> funcViewModel,
-                IStrings strings, ButtonModel button, MenuModel menu)
+                IStrings2 strings, ButtonModel button, MenuModel menu)
         : base(funcViewModel, strings, menu)
         => _buttonModel = button;
 

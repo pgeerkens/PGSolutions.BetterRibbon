@@ -31,8 +31,6 @@ Public Sub Register()
 End Sub
 
 Private Sub Workbook_Activate()
-  '  Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
-    
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
 End Sub
 

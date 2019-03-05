@@ -26,9 +26,11 @@ Public Function ModelServer() As PGSolutions_RibbonDispatcher.IModelServer
     Set ModelServer = MModelServer
 End Function
 
-Private Sub Workbook_Activate()
+Public Sub Register()
     Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
-    
+End Sub
+
+Private Sub Workbook_Activate()
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
 End Sub
 

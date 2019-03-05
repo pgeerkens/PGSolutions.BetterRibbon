@@ -33,12 +33,12 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>.</summary>
         [DispId(2), Description(".")]
-        IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip);
+        IStrings NewControlStrings(string label, string screenTip="", string superTip="", string keyTip="");
 
         /// <summary>.</summary>
         [DispId(18), Description(".")]
-        IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
-                string description);
+        IStrings2 NewControlStrings2(string label, string screenTip="", string superTip="", string keyTip="",
+                string description="");
 
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>

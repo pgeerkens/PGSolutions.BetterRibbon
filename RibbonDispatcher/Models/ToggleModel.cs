@@ -11,6 +11,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
+    using IStrings2 = IControlStrings2;
+
     /// <summary>The COM visible Model for Ribbon ToggleButton and CHeckBox controls.</summary>
     [Description("The COM visible Model for Ribbon ToggleButton and CHeckBox controls.")]
     [CLSCompliant(true), ComVisible(true)]
@@ -18,9 +20,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(IToggledEvent))]
     [ComDefaultInterface(typeof(IToggleModel))]
     [Guid(Guids.ToggleModel)]
-    public sealed class ToggleModel : ControlModel<IToggleSource, IToggleVM>,
+    public sealed class ToggleModel : ControlModel2<IToggleSource, IToggleVM>,
             IToggleModel, IToggleSource {
-        internal ToggleModel(Func<string, CheckBoxVM> funcViewModel, IControlStrings strings)
+        internal ToggleModel(Func<string, CheckBoxVM> funcViewModel, IStrings2 strings)
         : base(funcViewModel, strings) { }
 
         public IToggleModel Attach(string controlId) {
@@ -37,8 +39,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         private void OnToggled(IRibbonControl control, bool isPressed)
         => Toggled?.Invoke(control, IsPressed = isPressed);
         #endregion
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         #region ISizeable implementation
         public bool        IsLarge   { get; set; } = false;

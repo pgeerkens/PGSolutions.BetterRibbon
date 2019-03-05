@@ -18,8 +18,6 @@ Private MRibbonModel            As RibbonModel
 
 Private Sub Workbook_Activate()
     On Error GoTo EH
-    Register
-    
     If MRibbonModel Is Nothing Then Set MRibbonModel = New RibbonModel
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Workbook_Activate", vbOKOnly Or vbInformation

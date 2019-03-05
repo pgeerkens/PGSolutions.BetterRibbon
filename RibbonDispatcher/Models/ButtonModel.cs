@@ -18,9 +18,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(IClickedEvent))]
     [ComDefaultInterface(typeof(IButtonModel))]
     [Guid(Guids.ButtonModel)]
-    public class ButtonModel: ControlModel<IButtonSource,IButtonVM>, IButtonModel,
+    public class ButtonModel: ControlModel2<IButtonSource,IButtonVM>, IButtonModel,
             IButtonSource {
-        internal ButtonModel(Func<string, ButtonVM> funcViewModel, IControlStrings strings)
+        internal ButtonModel(Func<string, ButtonVM> funcViewModel, IControlStrings2 strings)
         : base(funcViewModel, strings) { }
 
         public IButtonModel Attach(string controlId) {
@@ -28,8 +28,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             if (ViewModel != null) { ViewModel.Clicked += OnClicked; }
             return this;
         }
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         #region IClickable implementation
         public event ClickedEventHandler Clicked;

@@ -27,11 +27,16 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or 
 End Sub
 
 Private Sub Class_Initialize()
+    On Error GoTo EH
     Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
+    ThisWorkbook.Register
     With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
         CustomGroup.SetShowInactive False
         Set Button1 = .GetButtonModel("CustomizableButton1") _
                       .SetImage(.NewImageObjectMso("MacroPlay"))
     End With
+XT: Exit Sub
+EH: MsgBox Err.Description, vbOKOnly Or vbInformation
+    Resume Next
 End Sub

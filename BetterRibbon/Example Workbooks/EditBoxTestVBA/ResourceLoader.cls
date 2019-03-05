@@ -21,37 +21,37 @@ Implements IResourceLoader
 Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings2
     Select Case ControlId
         Case "CustomizableButton3":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="Refresh Ribbon", _
                 ScreenTip:="Unit Test for Linka Parser", _
                 superTip:="Performs Initialize & Attach on the whole Ribbon Tab.", _
                 KeyTip:="", Description:="")
         Case "CustomVbaSplit1Menu":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="Split1 Menu", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="", Description:="")
         Case "CustomVbaSplit1Button":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="Split1 Button", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="", Description:="")
         Case "CustomVbaSplit2Menu":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="Split2 Menu", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="", Description:="")
         Case "CustomVbaSplit2Toggle":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="Split2 Toggle", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="", Description:="")
         Case "CustomVbaDialog":
-            Set IResourceLoader_GetControlStrings2 = BetterRibbon.NewControlStrings2( _
+            Set IResourceLoader_GetControlStrings2 = ModelServer.NewControlStrings2( _
                 Label:="A Dialog", _
                 ScreenTip:="", _
                 superTip:="", _
@@ -65,29 +65,29 @@ End Function
 Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings
     Select Case ControlId
         Case "CustomizableGroup":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ModelServer.NewControlStrings( _
                 Label:="VBA Custom Controls", _
                 ScreenTip:="", superTip:="", KeyTip:="")
         Case "CustomVbaEditBox1":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ModelServer.NewControlStrings( _
                 Label:="An EditBox", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="")
         Case "CustomVbaLabel1":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ModelServer.NewControlStrings( _
                 Label:="A Label", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="")
         Case "CustomVbaSplit1":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ModelServer.NewControlStrings( _
                 Label:="SplitPress", _
                 ScreenTip:="", _
                 superTip:="", _
                 KeyTip:="")
         Case "CustomVbaSplit2":
-            Set IResourceLoader_GetControlStrings = BetterRibbon.NewControlStrings( _
+            Set IResourceLoader_GetControlStrings = ModelServer.NewControlStrings( _
                 Label:="SplitToggle", _
                 ScreenTip:="", _
                 superTip:="", _

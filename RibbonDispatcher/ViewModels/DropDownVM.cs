@@ -7,7 +7,7 @@ using Microsoft.Office.Core;
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon DropDown objects.</summary>
     internal class DropDownVM : AbstractControlVM<IDropDownSource,IDropDownVM>, IDropDownVM,
-            IActivatable<IDropDownSource,IDropDownVM>, ISelectItemsVM {
+            IActivatable<IDropDownSource,IDropDownVM>, ISelectItemsVM, IImageableVM {
         public DropDownVM(string itemId)
         : base(itemId) { }
 
@@ -15,6 +15,17 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         public override IDropDownVM Attach(IDropDownSource source) => Attach<DropDownVM>(source);
 
         public override void Detach() { SelectionMade = null; base.Detach(); }
+        #endregion
+
+        #region IImageable implementation
+        /// <inheritdoc/>
+        public IImageObject Image => Source?.Image ?? "MacroSecurity".ToImageObject();
+
+        /// <inheritdoc/>
+        public bool ShowImage => Source?.ShowImage ?? (Source?.Image != null);
+
+        /// <inheritdoc/>
+        public bool ShowLabel => Source?.ShowLabel ?? true;
         #endregion
 
         #region IListable implementation

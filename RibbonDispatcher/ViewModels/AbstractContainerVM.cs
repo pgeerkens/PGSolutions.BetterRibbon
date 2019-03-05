@@ -8,6 +8,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public abstract class AbstractContainer2VM<TSource,TVM>: AbstractContainerVM<TSource,TVM>, IContainerControl
+        where TSource: IControlSource2 where TVM: class,IControlVM {
+        protected AbstractContainer2VM(string itemId) : this(itemId, new KeyedControls()) { }
+        protected AbstractContainer2VM(string itemId, IEnumerable<IControlVM> controls)
+        : base(itemId) { }
+
+        #region IDescriptionable implementation
+        /// <inheritdoc/>
+        public virtual string Description => Source?.Description ?? $"{ControlId} Description";
+        #endregion
+    }
+
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public abstract class AbstractContainerVM<TSource,TVM>: AbstractControlVM<TSource,TVM>, IContainerControl
         where TSource : IControlSource where TVM:class,IControlVM {
         protected AbstractContainerVM(string itemId) : this(itemId, new KeyedControls()) { }

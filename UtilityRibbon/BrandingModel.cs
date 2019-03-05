@@ -32,7 +32,7 @@ namespace PGSolutions.UtilityRibbon {
             .AppendLine($"Ribbon Utilities V {UtilitiesVersion.Format2()}")
             .AppendLine($"Ribbon ModelFactory V {DispatcherVersion.Format2()}")
             .AppendLine()
-            .AppendLine($"{BrandingButtonModel.Strings.SuperTip}")
+            .AppendLine($"{BrandingButtonModel.SuperTip}")
         #if DEBUG
             .AppendLine()
             .AppendLine("***  DEBUG build  ***")

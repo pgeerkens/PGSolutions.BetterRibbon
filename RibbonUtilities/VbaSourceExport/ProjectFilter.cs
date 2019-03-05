@@ -37,18 +37,25 @@ namespace PGSolutions.RibbonUtilities.VbaSourceExport {
         protected static void ExtractProjectModules(VBProject project, string path) {
             if (project == null ) throw new ArgumentNullException(nameof(project));
 
-            try {
-                foreach (VBComponent component in project.VBComponents) {
-                    component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),
-                            TypeExtension((VbExt_ct)component.Type)));
-                }
+            var retries = 3;
+            while (retries > 0) {
+                try {
+                    foreach (VBComponent component in project.VBComponents) {
+                        component.Export(Path.ChangeExtension(Path.Combine(path, component.Name),
+                                TypeExtension((VbExt_ct)component.Type)));
+                    }
 
-                File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
-            }
-            catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)
-                                      ||  ex.HResult == unchecked((int)0x800AC35C)) {
-                throw new IOException(
-                    $"A file or directory conflict occurred. Please retry.\n\nPath:\n{path}", ex);
+                    File.WriteAllText(Path.Combine(path, "VBAProject.xml"), GetProjectDefinitionXml(project));
+                    break;
+                }
+                catch (COMException ex) when (ex.HResult == unchecked((int)0x800AC372)
+                                          ||  ex.HResult == unchecked((int)0x800AC373)
+                                          ||  ex.HResult == unchecked((int)0x800AC35C)) {
+                    if (retries-- > 0) continue;
+
+                    throw new IOException(
+                        $"A file or directory conflict occurred. Please retry.\n\nPath:\n{path}", ex);
+                }
             }
         }
 

@@ -5,12 +5,9 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for ButtonVM objects.</summary>
-    internal class ButtonVM: AbstractControlVM<IButtonSource,IButtonVM>, IButtonVM,
+    internal class ButtonVM: AbstractControl2VM<IButtonSource,IButtonVM>, IButtonVM,
             IActivatable<IButtonSource,IButtonVM>, ISizeableVM, IClickableVM, IImageableVM {
         public ButtonVM(string itemId) : base(itemId) { }
-
-        /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
 
         #region IActivatable implementation
         /// <inheritdoc/>

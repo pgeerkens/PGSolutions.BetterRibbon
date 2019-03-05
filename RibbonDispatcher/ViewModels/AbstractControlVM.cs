@@ -26,16 +26,13 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <inheritdoc/>
         public         string ControlId { get; }
         /// <inheritdoc/>
-        public virtual string KeyTip    => Strings?.KeyTip ?? "";
+        public virtual string KeyTip    => Source?.KeyTip ?? "";
         /// <inheritdoc/>
-        public virtual string Label     => Strings?.Label ?? ControlId;
+        public virtual string Label     => Source?.Label ?? ControlId;
         /// <inheritdoc/>
-        public virtual string ScreenTip => Strings?.ScreenTip ?? $"{ControlId} ScreenTip";
+        public virtual string ScreenTip => Source?.ScreenTip ?? $"{ControlId} ScreenTip";
         /// <inheritdoc/>
-        public virtual string SuperTip  => Strings?.SuperTip ?? $"{ControlId} SuperTip";
-
-        /// <inheritdoc/>
-        protected virtual IControlStrings Strings => Source?.Strings;
+        public virtual string SuperTip  => Source?.SuperTip ?? $"{ControlId} SuperTip";
 
         /// <inheritdoc/>
         public bool IsEnabled => Source?.IsEnabled ?? false;
@@ -73,5 +70,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <inheritdoc/>
         public virtual void Invalidate() => Changed?.Invoke(this, new ControlChangedEventArgs(this));
+    }
+
+    /// <summary>TODO</summary>
+    [CLSCompliant(true)]
+    public abstract class AbstractControl2VM<TSource,TVM>: AbstractControlVM<TSource,TVM>, IControlVM,
+            IActivatable<TSource,TVM>
+        where TSource: IControlSource2 where TVM:class,IControlVM {
+        /// <summary>TODO</summary>
+        protected AbstractControl2VM(string controlId) : base(controlId) { }
+
+        public virtual string Description => Source?.Description ?? $"{ControlId} Description";
     }
 }

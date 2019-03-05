@@ -5,12 +5,9 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>The ViewModel for Ribbon CheckBoxVM objects.</summary>
-    internal class CheckBoxVM : AbstractControlVM<IToggleSource,IToggleVM>, IToggleVM,
+    internal class CheckBoxVM : AbstractControl2VM<IToggleSource,IToggleVM>, IToggleVM,
         IActivatable<IToggleSource, IToggleVM>, IToggleableVM {
         public CheckBoxVM(string itemId) : base(itemId) { }
-
-        /// <inheritdoc/>
-        public virtual string Description => (Strings as IControlStrings2)?.Description ?? $"{ControlId} Description";
 
         #region IActivatable implementation
         /// <inheritdoc/>

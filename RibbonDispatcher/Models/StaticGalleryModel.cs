@@ -10,7 +10,9 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    /// <summary>The COM visible Model for Ribbon static Gallery controls.</summary>
+    using IStrings2 = IControlStrings2;
+
+   /// <summary>The COM visible Model for Ribbon static Gallery controls.</summary>
     [Description("The COM visible Model for Ribbon Drop Down controls")]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -18,9 +20,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IStaticGalleryModel))]
     [Guid(Guids.StaticGalleryModel)]
-    public sealed class StaticGalleryModel : AbstractSelectableModel<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryModel,
+    public sealed class StaticGalleryModel : AbstractSelectableModel2<IStaticGallerySource,IStaticGalleryVM>, IStaticGalleryModel,
             IStaticGallerySource {
-        internal StaticGalleryModel(Func<string, StaticGalleryVM> funcViewModel, IControlStrings strings)
+        internal StaticGalleryModel(Func<string, StaticGalleryVM> funcViewModel, IStrings2 strings)
         : base(funcViewModel, strings) { }
 
         #region IActivatable implementation

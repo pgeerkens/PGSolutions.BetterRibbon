@@ -148,9 +148,4 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public interface IDescriptionableVM {
         string Description { get; }
     }
-
-    //[CLSCompliant(true)]
-    //public interface IContentVM {
-    //    string OnGetContent(IRibbonControl control);
-    //}
 }

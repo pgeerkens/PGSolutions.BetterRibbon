@@ -8,16 +8,17 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using IStrings = IControlStrings;
+    using IStrings  = IControlStrings;
+    using IStrings2 = IControlStrings2;
 
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>
     [Description("The COM visible Model for Ribbon Button controls.")]
     [CLSCompliant(true)]
-    public abstract class AbstractSplitButtonModel<TSource,TControl>: ControlModel<TSource,TControl>,
+    public abstract class AbstractSplitButtonModel<TSource,TControl>: ControlModel2<TSource,TControl>,
             ISplitButtonModel
         where TSource: IControlSource where TControl: ISplitButtonVM {
         protected AbstractSplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel,
-                IStrings strings, MenuModel menu)
+                IStrings2 strings, MenuModel menu)
         : base(funcViewModel, strings)
         => _menuModel = menu;
 

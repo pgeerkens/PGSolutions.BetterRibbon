@@ -66,6 +66,8 @@
     <Compile Include="ComInterfaces\IDynamicMenuModel.cs" />
     <Compile Include="ComInterfaces\IGalleryModel.cs" />
     <Compile Include="ComInterfaces\IModelServer.cs" />
+    <Compile Include="Models\AbstractSelectableModel2.cs" />
+    <Compile Include="Models\ControlModel2.cs" />
     <Compile Include="Models\DynamicMenuModel.cs" />
     <Compile Include="Models\ModelFactory2.cs" />
     <Compile Include="ViewModels\BoxControlVM.cs" />

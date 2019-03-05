@@ -12,7 +12,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using IStrings = IControlStrings;
+    using IStrings2 = IControlStrings2;
 
     /// <summary>The COM visible Model for Ribbon Split (Toggle) Button controls.</summary>
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable")]
@@ -26,7 +26,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public class SplitToggleButtonModel: AbstractSplitButtonModel<IToggleSource,ISplitToggleButtonVM>,
             ISplitToggleButtonModel, IToggleSource {
         internal SplitToggleButtonModel(Func<string,SplitToggleButtonVM> funcViewModel,
-                IStrings strings, ToggleModel toggle, MenuModel menu)
+                IStrings2 strings, ToggleModel toggle, MenuModel menu)
         : base(funcViewModel, strings, menu)
         => _toggleModel = toggle;
 

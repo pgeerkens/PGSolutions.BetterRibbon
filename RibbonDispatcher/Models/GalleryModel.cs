@@ -10,6 +10,9 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
+    using IStrings = IControlStrings;
+    using IStrings2 = IControlStrings2;
+
     /// <summary>The COM visible Model for Ribbon static Gallery controls.</summary>
     [Description("The COM visible Model for Ribbon static Gallery controls.")]
     [CLSCompliant(true)]
@@ -18,9 +21,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComSourceInterfaces(typeof(ISelectionMadeEvent))]
     [ComDefaultInterface(typeof(IGalleryModel))]
     [Guid(Guids.GalleryModel)]
-    public sealed class GalleryModel : AbstractSelectableModel<IGallerySource,IGalleryVM>, IGalleryModel,
+    public sealed class GalleryModel : AbstractSelectableModel2<IGallerySource,IGalleryVM>, IGalleryModel,
             IGallerySource {
-        internal GalleryModel(Func<string, GalleryVM> funcViewModel, IControlStrings strings)
+        internal GalleryModel(Func<string, GalleryVM> funcViewModel, IStrings2 strings)
         : base(funcViewModel, strings) { }
 
         #region IActivatable implementation
@@ -30,8 +33,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
         #endregion
-
-        public new IControlStrings2 Strings => base.Strings as IControlStrings2;
 
         public bool        IsLarge   { get; set; } = true;
 
