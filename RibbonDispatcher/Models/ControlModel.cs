@@ -10,9 +10,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
     public abstract class ControlModel<TSource,TCtrl>: IControlSource
             where TSource: IControlSource
-            where TCtrl: IControlVM {
+            where TCtrl: class,IControlVM {
         protected ControlModel(Func<string, IActivatable<TSource,TCtrl>> funcViewModel, IStrings strings) {
-            AttachToViewModel = (controlId, source) => funcViewModel(controlId).Attach(source);
+            AttachToViewModel = (controlId, source) => funcViewModel(controlId)?.Attach(source);
             Label     = strings?.Label;
             ScreenTip = strings?.ScreenTip;
             SuperTip  = strings?.SuperTip;

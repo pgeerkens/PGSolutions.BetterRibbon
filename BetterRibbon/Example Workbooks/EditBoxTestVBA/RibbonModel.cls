@@ -84,6 +84,7 @@ Private Sub DynamicMenu_ContentLoaded(ByVal control As Office.IRibbonControl)
                              .SetImage(.NewImageObjectMso("FunctionsDateTimeInsertGallery"))
     End With
     DynamicGallery_SelectionMade Nothing, DynamicGallery.SelectedId, DynamicGallery.SelectedIndex
+    DynamicGallery.Invalidate
 XT: Exit Sub
 EH: MsgBox Err.Description, vbOKOnly
     Resume Next
@@ -132,7 +133,6 @@ Private Sub Class_Initialize()
         
         Set DynamicMenu = .GetDynamicMenuModel("VbaDynamicMenu1")
     End With
-    
 XT: Exit Sub
 EH: MsgBox Err.Description, vbOKOnly
     Resume Next

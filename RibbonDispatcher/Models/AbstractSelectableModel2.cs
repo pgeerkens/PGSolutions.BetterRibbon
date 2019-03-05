@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>A variation on <see cref="AbstractSelectableModel"/> exposing Description text.</summary>
     public abstract class AbstractSelectableModel2<TSource,TCtrl> : AbstractSelectableModel<TSource,TCtrl>, IControlSource
             where TSource: IControlSource
-            where TCtrl: IControlVM  {
+            where TCtrl: class,IControlVM  {
         internal AbstractSelectableModel2(Func<string, IActivatable<TSource, TCtrl>> funcViewModel, IStrings2 strings)
         : base(funcViewModel,strings) => Description = strings?.Description;
 

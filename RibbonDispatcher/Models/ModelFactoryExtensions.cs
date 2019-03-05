@@ -10,7 +10,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <summary>.</summary>
         public static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
-            where TModel: ControlModel<TSource,TVM> where TSource: IControlSource where TVM: IControlVM {
+            //where TModel: ControlModel<TSource,TVM> where TSource: IControlSource where TVM: IControlVM {
+            where TModel: class,IControlSource where TSource: IControlSource where TVM: IControlVM {
 
             model.SetShowInactive(false);
             model.Invalidate();

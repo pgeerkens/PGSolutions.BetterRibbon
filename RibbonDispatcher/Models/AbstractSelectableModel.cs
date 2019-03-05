@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
     public abstract class AbstractSelectableModel<TSource,TCtrl> : ControlModel<TSource,TCtrl>, IControlSource
             where TSource: IControlSource
-            where TCtrl: IControlVM  {
+            where TCtrl: class,IControlVM  {
         internal AbstractSelectableModel(Func<string, IActivatable<TSource, TCtrl>> funcViewModel, IStrings strings)
         : base(funcViewModel,strings) { }
 

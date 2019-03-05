@@ -47,7 +47,7 @@
       FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
       Guid='{BD438F48-A571-4ACE-979A-804179456324}'
       Major='1'
-      Minor='0'
+      Minor='2'
       Name='PGSolutions_RibbonDispatcher'
       Type='vbext_rk_TypeLib'
    />

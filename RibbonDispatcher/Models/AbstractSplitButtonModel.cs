@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [CLSCompliant(true)]
     public abstract class AbstractSplitButtonModel<TSource,TControl>: ControlModel2<TSource,TControl>,
             ISplitButtonModel
-        where TSource: IControlSource where TControl: ISplitButtonVM {
+        where TSource: IControlSource where TControl: class,ISplitButtonVM {
         protected AbstractSplitButtonModel(Func<string,IActivatable<TSource,TControl>> funcViewModel,
                 IStrings2 strings, MenuModel menu)
         : base(funcViewModel, strings)

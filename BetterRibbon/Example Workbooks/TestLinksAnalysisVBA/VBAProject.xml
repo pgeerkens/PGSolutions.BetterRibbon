@@ -47,7 +47,7 @@
       FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonUtilities\bin\Debug\PGSolutions.RibbonUtilities.tlb'
       Guid='{69E19418-56F4-3B33-B105-9B8188A6F040}'
       Major='1'
-      Minor='0'
+      Minor='2'
       Name='PGSolutions_RibbonUtilities'
       Type='vbext_rk_TypeLib'
    />
@@ -56,7 +56,7 @@
       FullPath='D:\Users\Pieter\Source\Git\PGSolutions.BetterRibbon\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb'
       Guid='{BD438F48-A571-4ACE-979A-804179456324}'
       Major='1'
-      Minor='0'
+      Minor='2'
       Name='PGSolutions_RibbonDispatcher'
       Type='vbext_rk_TypeLib'
    />

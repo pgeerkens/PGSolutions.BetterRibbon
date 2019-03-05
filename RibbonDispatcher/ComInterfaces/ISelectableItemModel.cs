@@ -29,7 +29,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Queues a request for this control to be refreshed.</summary>
         [DispId(3),Description("Queues a request for this control to be refreshed.")]
-        void Invalidate();
+        new void Invalidate();
         #endregion
 
         #region IControl implementation

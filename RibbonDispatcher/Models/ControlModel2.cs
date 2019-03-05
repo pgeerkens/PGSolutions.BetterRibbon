@@ -14,7 +14,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// <typeparam name="TCtrl"></typeparam>
     public abstract class ControlModel2<TSource,TCtrl>: ControlModel<TSource,TCtrl>
             where TSource: IControlSource
-            where TCtrl: IControlVM {
+            where TCtrl: class,IControlVM {
         protected ControlModel2(Func<string, IActivatable<TSource,TCtrl>> funcViewModel, IStrings2 strings)
         : base(funcViewModel, strings)=> Description = strings?.Description;
 

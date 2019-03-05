@@ -28,6 +28,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>.</summary>
         void     SetShowInactive(bool showInactive);
+
+        void Invalidate();
     }
 
     public interface IDescriptionSource {
