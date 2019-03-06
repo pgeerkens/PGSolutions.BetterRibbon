@@ -165,7 +165,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>.</summary>
         [DispId(28), Description(".")]
-        IImageObject GetImage(string imageMso);
+        IImageObject GetImageMso(string imageMso);
 
         /// <summary>.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]

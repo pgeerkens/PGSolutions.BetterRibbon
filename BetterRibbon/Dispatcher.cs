@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.Models;
-using PGSolutions.BetterRibbon.Properties;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
-using System.Xml.Linq;
+using PGSolutions.BetterRibbon.Properties;
 
 namespace PGSolutions.BetterRibbon {
     using Dictionary = Dictionary<string,ViewModelFactory>;

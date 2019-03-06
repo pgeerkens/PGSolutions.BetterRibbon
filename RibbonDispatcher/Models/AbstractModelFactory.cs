@@ -1,7 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-using System.Diagnostics.CodeAnalysis;
 using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -16,7 +15,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// This class existsto expose the "evented" base classes to internal methods,
     /// while only the unevented COM-visible interfaces are exposed to VBA clients.
     /// </remarks>
-    public abstract class AbstractModelFactory {
+    public abstract class AbstractModelFactory: IModelFactory {
         /// <summary>.</summary>
         protected AbstractModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager) {
             ViewModelFactory = viewModelFactory;
@@ -26,6 +25,9 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal IResourceLoader ResourceManager { get; }
 
         internal ViewModelFactory ViewModelFactory { get; }
+
+        /// <inheritdoc/>
+        public void DetachProxy(string controlId) => ViewModelFactory.GetControl<IControlVM>(controlId).Detach();
 
         /// <summary>Returns a new <see cref="IImageObject"/> from the supplied <see cref="IPictureDisp"/>.</summary>
         public IImageObject NewImageObject(IPictureDisp image) => new ImageObject(image);
@@ -121,7 +123,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
             .InitializeModel<IButtonSource, ISplitPressButtonVM, SplitPressButtonModel>();
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "factory")]
         public ISelectableItemModel NewSelectableModel(string controlID)
         => new SelectableItemModel(GetStrings(controlID)).Attach(controlID);
 
@@ -146,12 +147,26 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IMenuSeparatorSource, IMenuSeparatorVM, MenuSeparatorModel>();
 
-        internal TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
-        => ViewModelFactory.GetControl<TControl>(controlId);
+        /// <inheritdoc/>
+        public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip=null)
+        => new ControlStrings(label, screenTip, superTip, keyTip);
 
+        /// <inheritdoc/>
+        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip=null,
+                string description=null)
+        =>  new ControlStrings2(label, screenTip, superTip, keyTip, description);
+
+        /// <inheritdoc/>
         public IStrings GetStrings(string id) => ResourceManager.GetControlStrings(id);
 
+        /// <inheritdoc/>
         public IStrings2 GetStrings2(string id) => ResourceManager.GetControlStrings2(id);
+
+        /// <inheritdoc/>
+        public IImageObject GetImage(IPictureDisp image) => new ImageObject(image);
+
+        /// <inheritdoc/>
+        public IImageObject GetImageMso(string imageMso) => new ImageObject(imageMso);
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public IDynamicMenuModel NewDynamicMenuModel(string controlId,
@@ -159,5 +174,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => new DynamicMenuModel(GetControl<DynamicMenuVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IDynamicMenuSource, IDynamicMenuVM, DynamicMenuModel>();
+
+        /// <summary>Returns the control identifed by <paramref name="controlId"/> if one meeting the type constraints exists; else null.</summary>
+        /// <typeparam name="TControl">Type filter for the returned control, constrained as a class,<see cref="IControlVM"/>.</typeparam>
+        /// <param name="controlId"></param>
+        /// <returns>A <typeparamref name="TControl"/></returns>
+        internal TControl GetControl<TControl>(string controlId) where TControl: class,IControlVM
+        => ViewModelFactory.GetControl<TControl>(controlId);
     }
 }

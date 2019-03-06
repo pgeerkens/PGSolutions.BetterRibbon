@@ -3,35 +3,19 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
+//** This (partial) implementation provides the COM-compatible, variable-parameter
+//** wrapper to the base functionality defined in AbstractModelFactory: IModelFactory.
 namespace PGSolutions.RibbonDispatcher.Models {
-    using IStrings = IControlStrings;
-    using IStrings2 = IControlStrings2;
-
     /// <summary>COM-visible implementation of the interface <see cref="IModelFactory"/>.</summary>
     [Description("COM-visible implementation of the interface IModelFactory.")]
-    public partial class ModelFactory : AbstractModelFactory, IModelFactory {
+    public partial class ModelFactory : AbstractModelFactory {
         /// <summary>.</summary>
         internal ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
         : base(viewModelFactory, manager) { }
-
-        /// <inheritdoc/>
-        public void DetachProxy(string controlId) => ViewModelFactory.GetControl<IControlVM>(controlId).Detach();
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip=null)
-        => new ControlStrings(label, screenTip, superTip, keyTip);
-
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip=null,
-                string description=null)
-        =>  new ControlStrings2(label, screenTip, superTip, keyTip, description);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
@@ -96,10 +80,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => base.NewSplitPressButtonModel(splitStringId, menuStringId, buttonStringId,  isEnabled, isVisible);
 
         /// <inheritdoc/>
-        public new ISelectableItemModel NewSelectableModel(string controlID)
-        => base.NewSelectableModel(controlID);
-
-        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public new IGalleryModel NewGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewGalleryModel(stringsId, isEnabled, isVisible);
@@ -113,12 +93,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public new IMenuSeparatorModel NewMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true)
         => base.NewMenuSeparatorModel(stringsId, isEnabled, isVisible);
-
-        /// <inheritdoc/>
-        public IImageObject GetImage(IPictureDisp image) => new ImageObject(image);
-
-        /// <inheritdoc/>
-        public IImageObject GetImage(string imageMso) => new ImageObject(imageMso);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
