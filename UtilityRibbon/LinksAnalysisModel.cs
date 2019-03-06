@@ -10,8 +10,8 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 using PGSolutions.RibbonUtilities.LinksAnalysis.Interfaces;
 
-namespace PGSolutions.UtilityRibbon {
-    /// <summary>The TabModel for the Links Aalysis Group on the UtilityRibbon.</summary>
+namespace PGSolutions.ToolsRibbon {
+    /// <summary>The TabModel for the Links Aalysis Group on the ToolsRibbon.</summary>
     internal sealed class LinksAnalysisModel : AbstractRibbonGroupModel {
         public LinksAnalysisModel(IModelFactory factory, IGroupVM viewModel)
         : base(viewModel, factory.GetStrings(viewModel.ControlId)) {

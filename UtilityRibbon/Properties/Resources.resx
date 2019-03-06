@@ -223,15 +223,6 @@ MSForm modules as .FRM
 
 Project references as .XML</value>
   </data>
-  <data name="CustomizableGroup_ScreenTip" xml:space="preserve">
-    <value>Application-Customizable Controls</value>
-  </data>
-  <data name="CustomizableGroup_SuperTip" xml:space="preserve">
-    <value>These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus.</value>
-  </data>
-  <data name="CustomizableGroup_Label" xml:space="preserve">
-    <value>Controls Customizable in VBA</value>
-  </data>
   <data name="PGeerkens" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PGeerkens.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

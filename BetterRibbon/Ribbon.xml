@@ -3,14 +3,14 @@
 <!-- When debugging, remember to check: Options -> Advanced -> General -> Show_Add-In_user_interface_errors. -->
 <!-- This allows the Tabs to merge between AddIns while directing Group callbacks to respective server. -->
 <mso:customUI xmlns:pg="https://github.com/pgeerkens/PGSolutions.BetterRibbon"
-              xmlns:ur="PGSolutions.UtilityRibbon"
               xmlns:br="PGSolutions.BetterRibbon"
+              xmlns:tr="PGSolutions.ToolsRibbon"
               xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui"
               onLoad="OnRibbonLoad" loadImage="Ribbon_LoadImage">
   <mso:ribbon startFromScratch="false">
     <mso:tabs>
         <mso:tab idQ="pg:TabPGSolutions" label="PGSolutions" visible="true">
-            <mso:group idQ="br:CustomizableGroup" getVisible="getVisible" insertAfterQ="ur:LinksAnalysisGroup"
+            <mso:group idQ="br:CustomizableGroup" getVisible="getVisible" insertAfterQ="tr:LinksAnalysisGroup"
                        getLabel="getLabel" getKeytip="getKeytip" getScreentip="getScreentip" getSupertip="getSupertip">
                 <mso:box id="CustomVbaBox1" boxStyle="vertical" visible="true">
                     <mso:toggleButton id="CustomVbaToggle1" getImage="getImage"

@@ -24,24 +24,24 @@
     <ProjectGuid>{9931504E-2D70-402C-BD11-A4F73E5874C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>PGSolutions.UtilityRibbon</RootNamespace>
-    <AssemblyName>PGSolutions.UtilityRibbon</AssemblyName>
+    <RootNamespace>PGSolutions.ToolsRibbon</RootNamespace>
+    <AssemblyName>PGSolutions.ToolsRibbon</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>..\..\Publish\UtilityRibbon\</PublishUrl>
-    <InstallUrl />
+    <PublishUrl>..\..\Publish2\ToolsRibbon\</PublishUrl>
+    <InstallUrl>\\ALIENWARE15\Publish\ToolsRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.2.0.8</ApplicationVersion>
+    <ApplicationVersion>1.2.0.15</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <ProductName>PGSolutions.UtilityRibbon</ProductName>
+    <ProductName>PGSolutions.ToolsRibbon</ProductName>
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl>https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues</SupportUrl>
-    <FriendlyName>PGSolutions.UtilityRibbon</FriendlyName>
+    <FriendlyName>PGSolutions.ToolsRibbon</FriendlyName>
     <OfficeApplicationDescription>Ribbon Utilities for the Office Fluent Ribbon in Excel &amp; Access.</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
@@ -119,7 +119,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>VSTO40</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\PGSolutions.UtilityRibbon.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\PGSolutions.ToolsRibbon.xml</DocumentationFile>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <!--
@@ -192,6 +192,7 @@
     <Compile Include="ComEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IComEntry.cs" />
+    <Compile Include="PublicFactoryExtensions.cs" />
     <Compile Include="RibbonModel.cs" />
     <Compile Include="RibbonViewModel.cs" />
     <Compile Include="BrandingModel.cs" />
@@ -200,7 +201,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ribbon.cs" />
     <Compile Include="VbaSourceExportGroupModel.cs" />
     <Compile Include="VbaSourceExportModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -245,7 +245,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Ribbon.xml" />
+    <EmbeddedResource Include="Ribbon.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
@@ -284,8 +286,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Excel" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Excel" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Excel\InstallRoot\Path#excel.exe" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="Excel" GeneratedCodeNamespace="UtilityRibbon" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="5F7C4B35CCEBCE9519CC04491E73560210DA5FE1" />
+        <Host Name="Excel" GeneratedCodeNamespace="ToolsRibbon" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="5F7C4B35CCEBCE9519CC04491E73560210DA5FE1" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

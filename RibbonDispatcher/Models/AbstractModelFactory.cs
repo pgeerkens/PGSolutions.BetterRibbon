@@ -34,74 +34,74 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public IImageObject NewImageObjectMso(string imageMso) => new ImageObject(imageMso);
 
         /// <summary>Creates, initializes and returns a new <see cref="GroupModel"/>.</summary>
-        public GroupModel NewGroupModel(string controlId,
+        public IGroupModel NewGroupModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new GroupModel(GetControl<GroupVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible };
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public ButtonModel NewButtonModel(string controlId, bool isEnabled, bool isVisible)
+        public IButtonModel NewButtonModel(string controlId, bool isEnabled, bool isVisible)
         => new ButtonModel(GetControl<ButtonVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IButtonSource, IButtonVM, ButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ToggleModel"/>.</summary>
-        public ToggleModel NewToggleModel(string controlId, bool isEnabled, bool isVisible)
+        public IToggleModel NewToggleModel(string controlId, bool isEnabled, bool isVisible)
         => new ToggleModel(GetControl<CheckBoxVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IToggleSource, IToggleVM, ToggleModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="EditBoxModel"/>.</summary>
-        public EditBoxModel NewEditBoxModel(string controlId,
+        public IEditBoxModel NewEditBoxModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new EditBoxModel(GetControl<EditBoxVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IEditBoxSource, IEditBoxVM, EditBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="DropDownModel"/>.</summary>
-        public DropDownModel NewDropDownModel(string controlId,
+        public IDropDownModel NewDropDownModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new DropDownModel(GetControl<DropDownVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IDropDownSource, IDropDownVM, DropDownModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="StaticDropDownModel"/>.</summary>
-        public StaticDropDownModel NewStaticDropDownModel(string controlId,
+        public IStaticDropDownModel NewStaticDropDownModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new StaticDropDownModel(GetControl<StaticDropDownVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IStaticDropDownSource, IDropDownVM, StaticDropDownModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ComboBoxModel"/>.</summary>
-        public ComboBoxModel NewComboBoxModel(string controlId,
+        public IComboBoxModel NewComboBoxModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new ComboBoxModel(GetControl<ComboBoxVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IComboBoxSource, IComboBoxVM, ComboBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="StaticComboBoxModel"/>.</summary>
-        public StaticComboBoxModel NewStaticComboBoxModel(string controlId,
+        public IStaticComboBoxModel NewStaticComboBoxModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new StaticComboBoxModel(GetControl<StaticComboBoxVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IStaticComboBoxSource, IStaticComboBoxVM, StaticComboBoxModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="LabelControlModel"/>.</summary>
-        public LabelControlModel NewLabelControlModel(string controlId,
+        public ILabelControlModel NewLabelControlModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new LabelControlModel(GetControl<LabelControlVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<ILabelControlSource, ILabelControlVM, LabelControlModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public MenuModel NewMenuModel(string controlId,
+        public IMenuModel NewMenuModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new MenuModel(GetControl<MenuVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IMenuSource, IMenuVM, MenuModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public SplitToggleButtonModel NewSplitToggleButtonModel(
+        public ISplitToggleButtonModel NewSplitToggleButtonModel(
                 string splitStringId, string menuStringId, string toggleStringId,
                 bool isEnabled, bool isVisible)
         => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings2(splitStringId),
@@ -111,7 +111,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             .InitializeModel<IToggleSource, ISplitToggleButtonVM, SplitToggleButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public SplitPressButtonModel NewSplitPressButtonModel(
+        public ISplitPressButtonModel NewSplitPressButtonModel(
                 string splitStringId, string menuStringId, string buttonStringId,
                 bool isEnabled, bool isVisible)
         => new SplitPressButtonModel(GetControl<SplitPressButtonVM>, GetStrings2(splitStringId),
@@ -126,21 +126,21 @@ namespace PGSolutions.RibbonDispatcher.Models {
         => new SelectableItemModel(GetStrings(controlID)).Attach(controlID);
 
         /// <summary>Creates, initializes and returns a new <see cref="GalleryModel"/>.</summary>
-        public GalleryModel NewGalleryModel(string controlId,
+        public IGalleryModel NewGalleryModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new GalleryModel(GetControl<GalleryVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IGallerySource, IGalleryVM, GalleryModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="StaticGalleryModel"/>.</summary>
-        public StaticGalleryModel NewStaticGalleryModel(string controlId,
+        public IStaticGalleryModel NewStaticGalleryModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new StaticGalleryModel(GetControl<StaticGalleryVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
                 .InitializeModel<IStaticGallerySource, IStaticGalleryVM, StaticGalleryModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="MenuSeparatorModel"/>.</summary>
-        public MenuSeparatorModel NewMenuSeparatorModel(string controlId,
+        public IMenuSeparatorModel NewMenuSeparatorModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new MenuSeparatorModel(GetControl<MenuSeparatorVM>, GetStrings(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
@@ -154,7 +154,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public IStrings2 GetStrings2(string id) => ResourceManager.GetControlStrings2(id);
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
-        public DynamicMenuModel NewDynamicMenuModel(string controlId,
+        public IDynamicMenuModel NewDynamicMenuModel(string controlId,
                 bool isEnabled, bool isVisible)
         => new DynamicMenuModel(GetControl<DynamicMenuVM>, GetStrings2(controlId))
                 { IsEnabled=isEnabled, IsVisible=isVisible }

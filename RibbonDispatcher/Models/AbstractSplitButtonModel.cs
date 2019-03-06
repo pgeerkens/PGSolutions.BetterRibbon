@@ -8,7 +8,6 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    using IStrings  = IControlStrings;
     using IStrings2 = IControlStrings2;
 
     /// <summary>The COM visible Model for Ribbon Button controls.</summary>

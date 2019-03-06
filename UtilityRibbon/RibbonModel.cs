@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     /// <summary>The (top-level) TabModel for the ribbon interface.</summary>
     [CLSCompliant(false)]
     internal sealed class RibbonModel : AbstractRibbonTabModel {

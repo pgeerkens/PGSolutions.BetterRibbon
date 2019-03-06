@@ -69,14 +69,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2BA69C75A3F84ADEA7383EDA4231B638"
+        "MsmKey" = "8:_23B79CBB6D034CF79B0CA73EB925732D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2CD37360DE035274623917DE608324CA"
-        "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
+        "MsmKey" = "8:_2BA69C75A3F84ADEA7383EDA4231B638"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -141,7 +141,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5B60624A5DC2475797776FEBE307D543"
+        "MsmKey" = "8:_5B3B0D921A9648DDB59739D3C692FCC2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -154,12 +154,6 @@
         "Entry"
         {
         "MsmKey" = "8:_9BB450D384B04082A590C604DD882E1E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A98E4A5503E246C8B179B1A676AA02E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -203,12 +197,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DE651AEFDCB247EBADDE97D30BA0C71B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_065BC91C93474CD68C49B8E928C73633"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -263,6 +251,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_057DF66FECEF0E37F4C885A7B850A5D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_065BC91C93474CD68C49B8E928C73633"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -436,7 +430,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonDispatcher, Version=1.0.1.0, Culture=neutral, PublicKeyToken=2067fbafe17df3c6, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonDispatcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=2067fbafe17df3c6, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2369F475A72B5C965B5623FDAD0019D9"
@@ -463,6 +457,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23B79CBB6D034CF79B0CA73EB925732D"
+            {
+            "SourcePath" = "8:..\\UtilityRibbon\\bin\\Release\\PGSolutions.ToolsRibbon.vsto"
+            "TargetName" = "8:PGSolutions.ToolsRibbon.vsto"
+            "Tag" = "8:"
+            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2BA69C75A3F84ADEA7383EDA4231B638"
             {
             "SourcePath" = "8:..\\BetterRibbon\\bin\\Release\\PGSolutions.BetterRibbon.vsto"
@@ -487,7 +501,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonUtilities, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b1407009db00379f, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:PGSolutions.RibbonUtilities, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b1407009db00379f, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2CD37360DE035274623917DE608324CA"
@@ -627,10 +641,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B60624A5DC2475797776FEBE307D543"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B3B0D921A9648DDB59739D3C692FCC2"
             {
-            "SourcePath" = "8:..\\UtilityRibbon\\bin\\Release\\PGSolutions.UtilityRibbon.dll.manifest"
-            "TargetName" = "8:PGSolutions.UtilityRibbon.dll.manifest"
+            "SourcePath" = "8:..\\UtilityRibbon\\bin\\Release\\PGSolutions.ToolsRibbon.dll.manifest"
+            "TargetName" = "8:PGSolutions.ToolsRibbon.dll.manifest"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
             "Condition" = "8:"
@@ -671,26 +685,6 @@
             {
             "SourcePath" = "8:..\\BetterRibbon\\bin\\Release\\PGSolutions.BetterRibbon.dll.manifest"
             "TargetName" = "8:PGSolutions.BetterRibbon.dll.manifest"
-            "Tag" = "8:"
-            "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A98E4A5503E246C8B179B1A676AA02E8"
-            {
-            "SourcePath" = "8:..\\UtilityRibbon\\bin\\Release\\PGSolutions.UtilityRibbon.vsto"
-            "TargetName" = "8:PGSolutions.UtilityRibbon.vsto"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"
             "Condition" = "8:"
@@ -836,15 +830,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PGSolutions.BetterRibbon"
-        "ProductCode" = "8:{CA0DAF85-79DA-47D3-9A2F-C50E2491DACB}"
-        "PackageCode" = "8:{1975FCF5-CBBD-4AA5-9946-B0AB4B82E131}"
+        "ProductCode" = "8:{BEAD1F32-B78E-41E6-8E4E-7A8964D4ED50}"
+        "PackageCode" = "8:{E978618B-C117-467C-95DC-7BBC342C4728}"
         "UpgradeCode" = "8:{29C7E5C8-FF18-40DF-86D1-E44B03F568B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:PGSolutions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues"
@@ -914,6 +908,52 @@
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_3351AC8719BC4ED8B3BF2DDB9FFB5905"
+                                                            {
+                                                            "Name" = "8:PGSolutions.ToolsRibbon"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_242ED66D1FD7488086B7AEAFE0E4F5C4"
+                                                                    {
+                                                                    "Name" = "8:Description"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:PGSolutions ToolsRibbon for MS-Excel"
+                                                                    }
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_29B2EC80AFF045148ED0087A1CCE913C"
+                                                                    {
+                                                                    "Name" = "8:FriendlyName"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:PGSolutions ToolsRibbon for MS-Excel"
+                                                                    }
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_314147E683164AEF9CCD6ACBAB34B560"
+                                                                    {
+                                                                    "Name" = "8:LoadBehavior"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:3"
+                                                                    "Value" = "3:3"
+                                                                    }
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_FB84643C5DE948C7B7B72F3410ABCDEC"
+                                                                    {
+                                                                    "Name" = "8:Manifest"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:file:///[TARGETDIR]PGSolutions.ToolsRibbon.vsto|vstolocal"
+                                                                    }
+                                                                }
+                                                            }
                                                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_E0EB662B26DC42978B83321AF1B089C1"
                                                             {
                                                             "Name" = "8:PGSolutions.BetterRibbon"
@@ -1082,6 +1122,52 @@
                                                                             "Transitive" = "11:FALSE"
                                                                             "ValueTypes" = "3:1"
                                                                             "Value" = "8:PGSolutions BetterRibbon for MS-Excel"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_FA3DD6CD0DF142D281699CDD9EF6CFAF"
+                                                                    {
+                                                                    "Name" = "8:PGSolutions.ToolsRibbon"
+                                                                    "Condition" = "8:"
+                                                                    "AlwaysCreate" = "11:FALSE"
+                                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                                    "Transitive" = "11:FALSE"
+                                                                        "Keys"
+                                                                        {
+                                                                        }
+                                                                        "Values"
+                                                                        {
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6F6EA7C9DE5846BFB63925A88BD3073B"
+                                                                            {
+                                                                            "Name" = "8:Description"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:1"
+                                                                            "Value" = "8:PGSolutions ToolsRibbon for MS-Excel"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_D2B2B17CE2D1411ABA8527D67E40D95B"
+                                                                            {
+                                                                            "Name" = "8:Manifest"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:1"
+                                                                            "Value" = "8:file:///[TARGETDIR]PGSolutions.ToolsRibbon.vsto|vstolocal"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_DE9C8F625F094FA4866B9E8F49C6D1B2"
+                                                                            {
+                                                                            "Name" = "8:LoadBehavior"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:3"
+                                                                            "Value" = "3:3"
+                                                                            }
+                                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E23976E80C054A08B6D6E8DEE98A7572"
+                                                                            {
+                                                                            "Name" = "8:FriendlyName"
+                                                                            "Condition" = "8:"
+                                                                            "Transitive" = "11:FALSE"
+                                                                            "ValueTypes" = "3:1"
+                                                                            "Value" = "8:PGSolutions ToolsRibbon for MS-Excel"
                                                                             }
                                                                         }
                                                                     }
@@ -1590,7 +1676,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_065BC91C93474CD68C49B8E928C73633"
             {
-            "SourcePath" = "8:..\\UtilityRibbon\\obj\\Debug\\PGSolutions.UtilityRibbon.dll"
+            "SourcePath" = "8:..\\UtilityRibbon\\obj\\Debug\\PGSolutions.ToolsRibbon.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2ADF23C2DD2C4CF0A6D327C855D4EE4E"

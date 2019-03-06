@@ -9,7 +9,7 @@ using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
     [SuppressMessage( "Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable" )]
     [Serializable, CLSCompliant(true)]

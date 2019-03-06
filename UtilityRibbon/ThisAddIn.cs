@@ -10,7 +10,7 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     /// <summary>.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
@@ -20,7 +20,7 @@ namespace PGSolutions.UtilityRibbon {
     /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
     /// </remarks>
     [CLSCompliant(true)]
-    [ProgId("PGSolutions.UtilityRibbon")]
+    [ProgId("PGSolutions.ToolsRibbon")]
     public partial class ThisAddIn {
         /// <summary>.</summary>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
-namespace PGSolutions.UtilityRibbon{
+namespace PGSolutions.ToolsRibbon {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]

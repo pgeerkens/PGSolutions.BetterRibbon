@@ -14,7 +14,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-SinglePackage", "Setu
 		{9931504E-2D70-402C-BD11-A4F73E5874C4} = {9931504E-2D70-402C-BD11-A4F73E5874C4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityRibbon", "UtilityRibbon\UtilityRibbon.csproj", "{9931504E-2D70-402C-BD11-A4F73E5874C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsRibbon", "UtilityRibbon\ToolsRibbon.csproj", "{9931504E-2D70-402C-BD11-A4F73E5874C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

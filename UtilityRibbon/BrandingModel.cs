@@ -11,9 +11,9 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
-using PGSolutions.UtilityRibbon.Properties;
+using PGSolutions.ToolsRibbon.Properties;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     internal sealed class BrandingModel : AbstractRibbonGroupModel {
         public BrandingModel(IModelFactory factory, IGroupVM viewModel)
         : base(viewModel, factory.GetStrings(viewModel.ControlId)) {

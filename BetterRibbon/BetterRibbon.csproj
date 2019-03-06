@@ -31,15 +31,15 @@
     <TargetFrameworkProfile />
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>..\..\Publish\BetterRibbon\</PublishUrl>
-    <InstallUrl />
+    <PublishUrl>..\..\Publish2\BetterRibbon\</PublishUrl>
+    <InstallUrl>\\ALIENWARE15\Publish2\BetterRibbon\</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.2.0.8</ApplicationVersion>
+    <ApplicationVersion>1.2.0.15</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <ProductName>PGSolutionsBetterRibbon</ProductName>
+    <ProductName>PGSolutions BetterRibbon</ProductName>
     <PublisherName>PGSolutions</PublisherName>
     <SupportUrl>https://github.com/pgeerkens/PGSolutions.BetterRibbon/issues</SupportUrl>
     <FriendlyName>PGSolutions BetterRibbon</FriendlyName>
@@ -224,24 +224,11 @@
     <Content Include="Example Workbooks\TestLinksAnalysis.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.tlb">
-      <Link>bin\Release\PGSolutions.RibbonDispatcher.tlb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\RibbonUtilities\bin\Release\PGSolutions.RibbonUtilities.tlb">
-      <Link>bin\Release\PGSolutions.RibbonUtilities.tlb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\RibbonUtilities\bin\Debug\PGSolutions.RibbonUtilities.tlb">
-      <Link>bin\Debug\PGSolutions.RibbonUtilities.tlb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\RibbonDispatcher\bin\Debug\PGSolutions.RibbonDispatcher.tlb">
-      <Link>bin\Debug\PGSolutions.RibbonDispatcher.tlb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="BetterRibbonKey.snk" />
     <Content Include="Example Workbooks\Book1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Example Workbooks\EditBoxTest.xlsb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\PGeerkens1.bmp" />
@@ -312,11 +299,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RibbonUtilities\RibbonUtilities.csproj">
-      <Project>{fab5de05-0232-4053-b4ce-ce9a1a312750}</Project>
-      <Name>RibbonUtilities</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
     <ProjectReference Include="..\RibbonDispatcher\RibbonDispatcher.csproj">
       <Project>{bd438f48-a571-4ace-979a-804179456324}</Project>
       <Name>RibbonDispatcher</Name>

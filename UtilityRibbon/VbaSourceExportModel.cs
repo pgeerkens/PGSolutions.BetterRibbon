@@ -14,12 +14,12 @@ using Microsoft.Office.Interop.Excel;
 using PGSolutions.RibbonUtilities;
 using PGSolutions.RibbonUtilities.VbaSourceExport;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     using static RibbonDispatcher.Extensions;
     using Models = IReadOnlyList<VbaSourceExportGroupModel>;
     using ViewModels = RibbonDispatcher.ViewModels;
 
-    /// <summary>The TabModel for the VBA Source Export Group on the UtilityRibbon.</summary>
+    /// <summary>The TabModel for the VBA Source Export Group on the ToolsRibbon.</summary>
     internal sealed class VbaSourceExportModel : ViewModels.ICanInvalidate {
         /// <summary>.</summary>
         /// <param name="models"></param>

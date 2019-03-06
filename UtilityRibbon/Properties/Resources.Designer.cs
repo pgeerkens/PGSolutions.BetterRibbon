@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PGSolutions.UtilityRibbon.Properties {
+namespace PGSolutions.ToolsRibbon.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PGSolutions.UtilityRibbon.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PGSolutions.UtilityRibbon.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PGSolutions.ToolsRibbon.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -242,33 +242,6 @@ namespace PGSolutions.UtilityRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Controls Customizable in VBA.
-        /// </summary>
-        internal static string CustomizableGroup_Label {
-            get {
-                return ResourceManager.GetString("CustomizableGroup_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Application-Customizable Controls.
-        /// </summary>
-        internal static string CustomizableGroup_ScreenTip {
-            get {
-                return ResourceManager.GetString("CustomizableGroup_ScreenTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus..
-        /// </summary>
-        internal static string CustomizableGroup_SuperTip {
-            get {
-                return ResourceManager.GetString("CustomizableGroup_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to External Links Analysis.
         /// </summary>
         internal static string LinksAnalysisGroup_Label {
@@ -311,11 +284,11 @@ namespace PGSolutions.UtilityRibbon.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;!-- Copyright 2018-2019 Pieter Geerkens --&gt;
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
-        ///&lt;!-- The &apos;pg&apos; namespace must be the add-in ProgId for InvalidateControl callbacks to work. --&gt;
-        ///&lt;mso:customUI xmlns:pg=&quot;PGSolutions.UtilityRibbon&quot;
-        ///              xmlns:mso=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot;
-        ///              onLoad=&quot;OnRibbonLoad&quot; loadImage=&quot;Ribbon_LoadImage&quot;&gt;
-        ///    &lt;mso:ribbon s [rest of string was truncated]&quot;;.
+        ///&lt;!-- This allows the Tabs to merge between AddIns while directing Group callbacks to respective server. --&gt;
+        ///&lt;mso:customUI xmlns:pg=&quot;https://github.com/pgeerkens/PGSolutions.BetterRibbon&quot;
+        ///              xmlns:ur=&quot;PGSolutions.ToolsRibbon&quot;
+        ///              xmlns:br=&quot;PGSolutions.BetterRibbon&quot;
+        ///              xmlns:ms [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Ribbon {
             get {

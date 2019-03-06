@@ -8,13 +8,8 @@ using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
     /// <summary>These extension methods on <see cref="ViewModelFactory"/> are the public API to C# for creation of objects subclassing <see cref="ControlModel{TSource, TCtrl}"/>.</summary>
-    public static partial class PublicFactoryExtensions {
-        /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
-        /// <param name="model"></param>
-        public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
-            => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
-
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonButtonModel"/>.</summary>
+    internal static partial class PublicFactoryExtensions {
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IButtonModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IButtonModel NewButtonModel(this IModelFactory factory, string id,
                 ClickedEventHandler handler, IImageObject image, bool isEnabled = true, bool isVisible = true) {
@@ -24,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return model?.Attach(id);
         }
 
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonToggleModel"/>.</summary>
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IToggleModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IToggleModel NewToggleModel(this IModelFactory factory, string id,
                 ToggledEventHandler handler, IImageObject image, bool isEnabled = true, bool isVisible = true) {
@@ -34,7 +29,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return model?.Attach(id);
         }
 
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IEditBoxModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IEditBoxModel NewEditBoxModel(this IModelFactory factory, string id,
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
@@ -44,7 +39,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return model?.Attach(id);
         }
 
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IComboBoxModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IComboBoxModel NewComboBoxModel(this IModelFactory factory, string id,
                 EditedEventHandler handler,
@@ -55,7 +50,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return model?.Attach(id);
         }
 
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonDropDownModel"/>.</summary>
+        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IDropDownModel"/>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IDropDownModel NewDropDownModel(this IModelFactory factory, string id,
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {
@@ -64,12 +59,5 @@ namespace PGSolutions.RibbonDispatcher.Models {
             model.SelectionMade += handler;
             return model?.Attach(id);
         }
-
-        /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="RibbonLabelModel"/>.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static ILabelControlModel NewLabelModel(this IModelFactory factory, string id,
-                bool isEnabled = true, bool isVisible = true)
-        => factory?.NewLabelControlModel(id, isEnabled, isVisible)
-                  ?.Attach(id);
     }
 }

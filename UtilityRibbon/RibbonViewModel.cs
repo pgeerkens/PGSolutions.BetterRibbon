@@ -8,7 +8,7 @@ using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     /// <summary>The (top-level) RibbonViewModel for the ribbon interface.</summary>
     [Description("The (top-level) RibbonViewModel for the ribbon interface.")]
     [CLSCompliant(false)]

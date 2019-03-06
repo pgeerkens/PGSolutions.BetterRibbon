@@ -11,9 +11,9 @@ using Microsoft.Office.Core;
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-using PGSolutions.UtilityRibbon.Properties;
+using PGSolutions.ToolsRibbon.Properties;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     /// <summary>The concrete instantiation of <see cref="AbstractDispatcher"/> for <see cref="ThisAddIn"/>.</summary>
     /// <remarks>
     /// 

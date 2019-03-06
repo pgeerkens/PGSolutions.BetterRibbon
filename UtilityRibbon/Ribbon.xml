@@ -3,7 +3,7 @@
 <!-- When debugging, remember to check: Options -> Advanced -> General -> Show_Add-In_user_interface_errors. -->
 <!-- This allows the Tabs to merge between AddIns while directing Group callbacks to respective server. -->
 <mso:customUI xmlns:pg="https://github.com/pgeerkens/PGSolutions.BetterRibbon"
-              xmlns:ur="PGSolutions.UtilityRibbon"
+              xmlns:ur="PGSolutions.ToolsRibbon"
               xmlns:br="PGSolutions.BetterRibbon"
               xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui"
               onLoad="OnRibbonLoad" loadImage="Ribbon_LoadImage">

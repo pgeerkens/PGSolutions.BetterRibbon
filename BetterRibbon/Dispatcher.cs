@@ -33,16 +33,17 @@ namespace PGSolutions.BetterRibbon {
     public sealed class Dispatcher: AbstractDispatcher, IRibbonExtensibility {
         internal Dispatcher() : base() { }
 
-        /// </inheritdoc>
+        /// <inheritdoc/>
         protected override string          RibbonXml      => Resources.Ribbon;
 
-        /// </inheritdoc>
+        /// <inheritdoc/>
         protected override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
 
         private            XDocument       RibbonXmlDoc   { get; } = XDocument.Parse(Resources.Ribbon);
 
         private            Dictionary      Factories      { get; } = new Dictionary();
 
+        /// <inheritdoc/>
         public override void OnRibbonLoad(IRibbonUI ribbonUI) {
             SaveCurrent(":");
 
@@ -50,13 +51,12 @@ namespace PGSolutions.BetterRibbon {
         }
 
         private void SetCurrentWorkbook(string workbookName) {
-            if (Factories.TryGetValue(workbookName, out var factory))
-                SetViewModelFactory(factory);
-            else
-                SetViewModelFactory(Factories[":"]);
+            Factories.TryGetValue(workbookName, out var factory);
+            SetViewModelFactory(factory ?? Factories[":"]);
             RibbonUI?.Invalidate();
         }
 
+        /// <inheritdoc/>
         public override void RegisterWorkbook(string workbookName) {
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
                 factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root);
@@ -65,12 +65,14 @@ namespace PGSolutions.BetterRibbon {
             SetCurrentWorkbook(workbookName);
         }
 
-        public void SaveCurrent(string workbookName) {
+        /// <inheritdoc/>
+        internal void SaveCurrent(string workbookName) {
             if ( ! Factories.ContainsKey(workbookName)) Factories.Add(workbookName, ViewModelFactory);
             RegisterWorkbook(workbookName);
         }
 
-        public void FloatCurrent(string workbookName) {
+        /// <inheritdoc/>
+        internal void FloatCurrent(string workbookName) {
             if (Factories.ContainsKey(workbookName)) Factories.Remove(workbookName);
         }
     }

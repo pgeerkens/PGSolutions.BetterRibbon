@@ -8,7 +8,7 @@ using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
-namespace PGSolutions.UtilityRibbon {
+namespace PGSolutions.ToolsRibbon {
     internal sealed class VbaSourceExportGroupModel : AbstractRibbonGroupModel {
         public VbaSourceExportGroupModel(IModelFactory factory, IGroupVM viewModel, string suffix)
         : base(viewModel, factory.GetStrings(viewModel?.ControlId)) {

@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.BetterRibbon {
     /// <summary>The publicly available entry points to the library.</summary>
@@ -27,10 +26,6 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         public IModelServer NewModelServer(IResourceLoader manager)
         => FuncFactory(manager) as IModelServer;
-
-        /// <inheritdoc/>
-        [CLSCompliant(false)]
-        public ILinksAnalyzer NewLinksAnalyzer() => new LinksAnalyzer();
 
         /// <inheritdoc/>
         public void RegisterWorkbook(string workbookName)
