@@ -76,7 +76,7 @@ End Sub
 
 Private Sub DynamicMenu_ContentLoaded(ByVal control As Office.IRibbonControl)
     On Error GoTo EH
-    With ModelServer
+    With ThisWorkbook.ModelServer
         Set DynamicButton = .GetButtonModel("Custom2VbaButton1")
         Set DynamicToggle = .GetToggleModel("Custom2VbaToggleButton2")
         Set DynamicGallery = .GetStaticGalleryModel("Custom2VbaStaticGallery2") _
@@ -111,8 +111,7 @@ End Sub
 
 Private Sub Class_Initialize()
     On Error GoTo EH
-    Register
-    With ModelServer
+    With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
         Set LabelTest = .GetLabelControlModel("CustomVbaLabel1")
         
@@ -126,12 +125,14 @@ Private Sub Class_Initialize()
                         "CustomVbaSplit1Menu", "CustomVbaSplit1Button")
         Set SplitToggle = .GetSplitToggleButtonModel("CustomVbaSplit2", _
                         "CustomVbaSplit2Menu", "CustomVbaSplit2Toggle")
+        SplitToggle.IsPressed = False
         
         Set Gallery1 = .GetStaticGalleryModel("StaticGallery1")
         Set Split2Menu = .GetMenuModel("CustomVbaSplit2Menu")
         
         Set DynamicMenu = .GetDynamicMenuModel("VbaDynamicMenu1")
     End With
+    CustomGroup.Invalidate
 XT: Exit Sub
 EH: MsgBox Err.Description, vbOKOnly
     Resume Next

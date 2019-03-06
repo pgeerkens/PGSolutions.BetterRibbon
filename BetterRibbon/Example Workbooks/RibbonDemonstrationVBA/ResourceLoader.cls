@@ -14,44 +14,44 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-
+ 
+''' <summary>Local implementation of IResourceLoader serving control display strings to the dispatcher.</summary
+''' <remarks>
+''' This implementation performs a lookup into a named data range "ControlStringData" on
+''' a _very hidden_ worksheet to find the control strings for custom ribbon controls.
+''' </remarks>
 Implements IResourceLoader
+Private Const DataRangeName As String = "ControlStringData"
 
-' Button, ToggleButton, CheckBox, Menu, and Gallery controls
+''' <summary>Serving Button, ToggleButton, CheckBox, Menu, and Gallery controls. </summary>
 Private Function IResourceLoader_GetControlStrings2(ByVal Search As String) As IControlStrings2
-    Const ControlStringsRangeName As String = "ControlStringData"
-    
     On Error GoTo EH
-    Dim RowNo As Double: RowNo = Application.Match(Search, Range(ControlStringsRangeName).Columns.Item(1), 0)
+    Dim RowNo As Double: RowNo = Application.Match(Search, Range(DataRangeName).Columns.Item(1), 0)
     With New RibbonControlStrings
-        Set IResourceLoader_GetControlStrings2 = .Initialize2( _
-                KeyTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 2), _
-                Label:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 3), _
-                ScreenTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 4), _
-                SuperTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 5), _
-                Description:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 6))
+        Set IResourceLoader_GetControlStrings2 = .Initialize2(Label:=Index(RowNo, 3), _
+            ScreenTip:=Index(RowNo, 4), SuperTip:=Index(RowNo, 5), KeyTip:=Index(RowNo, 2), _
+            Description:=Index(RowNo, 6))
     End With
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".IResourceLoader_GetControlStrings2"
     Resume          ' for debugging only
 End Function
 
-' All other controls
+''' <summary>Serving all other controls. </summary>
 Private Function IResourceLoader_GetControlStrings(ByVal Search As String) As IControlStrings
-    Const ControlStringsRangeName As String = "ControlStringData"
-    
     On Error GoTo EH
-    Dim RowNo As Double: RowNo = Application.Match(Search, Range(ControlStringsRangeName).Columns.Item(1), 0)
+    Dim RowNo As Double: RowNo = Application.Match(Search, Range(DataRangeName).Columns.Item(1), 0)
     With New RibbonControlStrings
-        Set IResourceLoader_GetControlStrings = .Initialize( _
-            KeyTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 2), _
-            Label:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 3), _
-            ScreenTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 4), _
-            SuperTip:=Application.WorksheetFunction.Index(Range(ControlStringsRangeName), RowNo, 5))
+        Set IResourceLoader_GetControlStrings = .Initialize(Label:=Index(RowNo, 3), _
+            ScreenTip:=Index(RowNo, 4), KeyTip:=Index(RowNo, 2), SuperTip:=Index(RowNo, 5))
     End With
 XT: Exit Function
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".IResourceLoader_GetControlStrings"
     Resume          ' for debugging only
+End Function
+
+Private Function Index(ByVal RowNo As Double, ByVal ColNo As Double) As Variant
+    Index = Application.WorksheetFunction.Index(Range(DataRangeName), RowNo, ColNo)
 End Function
 
 Private Function IResourceLoader_GetImage(ByVal Name As String) As Variant
@@ -64,6 +64,6 @@ Private Function FindStr(ByVal Search As String, ByVal Range As Range, ByVal Col
     FindStr = IIf(VarType(v) = vbString, v, "")
 XT: Exit Function
 EH: If Err.Number = 1004 Then Resume Next
-    ErrorUtils.ReRaiseError Err, TypeName(Me) & ".BetterRibbon"
+    ErrorUtils.ReRaiseError Err, TypeName(Me) & ".FindStr"
     Resume          ' for debugging only
 End Function

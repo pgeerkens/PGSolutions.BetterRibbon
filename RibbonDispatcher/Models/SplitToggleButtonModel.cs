@@ -39,6 +39,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public override void Invalidate() { ToggleModel.Invalidate(); base.Invalidate(); }
+
         public override void Detach() { ToggleModel.Detach(); base.Detach(); }
 
         #region Toggleable implementation

@@ -14,6 +14,7 @@ using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 using PGSolutions.BetterRibbon.Properties;
+using System.Collections.ObjectModel;
 
 namespace PGSolutions.BetterRibbon {
     using Dictionary = Dictionary<string,ViewModelFactory>;
@@ -41,7 +42,7 @@ namespace PGSolutions.BetterRibbon {
 
         private            XDocument       RibbonXmlDoc   { get; } = XDocument.Parse(Resources.Ribbon);
 
-        private            Dictionary      Factories      { get; } = new Dictionary();
+        private            Factories       Factories      { get; } = new Factories();
 
         /// <inheritdoc/>
         public override void OnRibbonLoad(IRibbonUI ribbonUI) {
@@ -50,30 +51,35 @@ namespace PGSolutions.BetterRibbon {
             base.OnRibbonLoad(ribbonUI);
         }
 
-        private void SetCurrentWorkbook(string workbookName) {
-            Factories.TryGetValue(workbookName, out var factory);
-            SetViewModelFactory(factory ?? Factories[":"]);
-            RibbonUI?.Invalidate();
-        }
-
         /// <inheritdoc/>
         public override void RegisterWorkbook(string workbookName) {
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
-                factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root);
-                Factories.Add(workbookName, factory);
+                factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root).ReKey(workbookName);
+                Factories.Add(factory);
             }
-            SetCurrentWorkbook(workbookName);
+            SetViewModelFactory(factory);
+            System.Diagnostics.Debug.Assert(ViewModelFactory.Key == workbookName);
         }
 
         /// <inheritdoc/>
         internal void SaveCurrent(string workbookName) {
-            if ( ! Factories.ContainsKey(workbookName)) Factories.Add(workbookName, ViewModelFactory);
-            RegisterWorkbook(workbookName);
+            ViewModelFactory.ReKey(workbookName);
+            if ( ! Factories.Contains(ViewModelFactory)) Factories.Add(ViewModelFactory);
+            SetViewModelFactory(ViewModelFactory);
+            System.Diagnostics.Debug.Assert(ViewModelFactory.Key == workbookName);
         }
 
         /// <inheritdoc/>
-        internal void FloatCurrent(string workbookName) {
-            if (Factories.ContainsKey(workbookName)) Factories.Remove(workbookName);
+        internal void FloatCurrent() {
+            if (Factories.Contains(ViewModelFactory)) Factories.Remove(ViewModelFactory);
         }
+    }
+    internal class Factories: KeyedCollection<string,ViewModelFactory> {
+        protected override string GetKeyForItem(ViewModelFactory item) => item.Key;
+
+        public bool TryGetValue(string key, out ViewModelFactory factory)
+        => (factory = TryGetValue(key)) != null;
+
+        public ViewModelFactory TryGetValue(string key) => Contains(key) ? this[key] : default;
     }
 }

@@ -20,7 +20,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// values" usages are (believed to be) the only means of implementing functionality equivalent
     /// to "overrides" in a COM-compatible way.
     /// </remarks>
-    [Description("This alternative interface returns model controls, automatically attahced to the eponymous view-model control if it exists.")]
+    [Description(
+@"This alternative interface returns model controls, automatically attached to the eponymous view-
+model control if it exists.
+
+To effectively use this (alternative) interface the stringsId for each model control used in
+retrieving its display strings must be the same as the controlId for the view-model being
+attached to - as only one string is provided. This does not prevent mised usage"
+    )]
     [CLSCompliant(true)]
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]

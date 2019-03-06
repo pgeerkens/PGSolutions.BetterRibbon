@@ -50,6 +50,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             ViewModelFactory?.ClearChangedListeners();
             ViewModelFactory = factory;
             ViewModelFactory.Changed += OnPropertyChanged;
+            RibbonUI?.Invalidate();
         }
 
         public virtual void RegisterWorkbook(string workbookName) { }

@@ -14,8 +14,8 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private CustomGroup         As PGSolutions_RibbonDispatcher.IGroupModel
-Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
+Private CustomGroup         As IGroupModel
+Private WithEvents Button1  As ButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal control As IRibbonControl)
@@ -23,8 +23,7 @@ Private Sub Button1_Clicked(ByVal control As IRibbonControl)
 End Sub
 
 Private Sub Class_Initialize()
-    Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
-    ThisWorkbook.Register
+    Dim Strings As IControlStrings
     With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
 

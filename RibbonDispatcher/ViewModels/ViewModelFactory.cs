@@ -22,9 +22,12 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IViewModelFactory))]
     [ComVisible(true), Serializable, Guid(Guids.ViewModelFactory)]
-    public partial class ViewModelFactory : IViewModelFactory {
+    public class ViewModelFactory : IViewModelFactory {
         // The nature of this class and constructor ensures automated TypeLib creation.
-        public ViewModelFactory() {
+        public ViewModelFactory() : this(":") { }
+        // The nature of this class and constructor ensures automated TypeLib creation.
+        public ViewModelFactory(string key) {
+            Key = key;
             _controls        = new Dictionary<string,IControlVM>();
             _editables       = new Dictionary<string,IEditableVM>();
             _sizeables       = new Dictionary<string,ISizeableVM>();
@@ -40,6 +43,10 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
             ViewModelRoot    = new KeyedControls();
         }
+
+        public string Key { get; private set; }
+
+        public ViewModelFactory ReKey(string newKey) { Key = newKey; return this; }
 
         /// <summary>.</summary>
         internal event ChangedEventHandler Changed;

@@ -14,37 +14,35 @@ Attribute VB_Exposed = False
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private Const ControlStringsRangeName As String = "ControlStringData"
+Private CustomGroup          As IGroupModel
 
-Private CustomGroup          As PGSolutions_RibbonDispatcher.IGroupModel
-
-Private WithEvents Toggle1   As PGSolutions_RibbonDispatcher.ToggleModel
+Private WithEvents Toggle1   As ToggleModel
 Attribute Toggle1.VB_VarHelpID = -1
-Private WithEvents Toggle2   As PGSolutions_RibbonDispatcher.ToggleModel
+Private WithEvents Toggle2   As ToggleModel
 Attribute Toggle2.VB_VarHelpID = -1
-Private WithEvents Toggle3   As PGSolutions_RibbonDispatcher.ToggleModel
+Private WithEvents Toggle3   As ToggleModel
 Attribute Toggle3.VB_VarHelpID = -1
-Private WithEvents Toggle4   As PGSolutions_RibbonDispatcher.ToggleModel
+Private WithEvents Toggle4   As ToggleModel
 Attribute Toggle4.VB_VarHelpID = -1
 
-Private WithEvents DropDown1 As PGSolutions_RibbonDispatcher.DropDownModel
+Private WithEvents DropDown1 As DropDownModel
 Attribute DropDown1.VB_VarHelpID = -1
-Private WithEvents DropDown2 As PGSolutions_RibbonDispatcher.DropDownModel
+Private WithEvents DropDown2 As DropDownModel
 Attribute DropDown2.VB_VarHelpID = -1
-Private WithEvents Dropdown3 As PGSolutions_RibbonDispatcher.DropDownModel
+Private WithEvents Dropdown3 As DropDownModel
 Attribute Dropdown3.VB_VarHelpID = -1
 
-Private WithEvents Button1   As PGSolutions_RibbonDispatcher.ButtonModel
+Private WithEvents Button1   As ButtonModel
 Attribute Button1.VB_VarHelpID = -1
-Private WithEvents Button2   As PGSolutions_RibbonDispatcher.ButtonModel
+Private WithEvents Button2   As ButtonModel
 Attribute Button2.VB_VarHelpID = -1
-Private WithEvents Button3   As PGSolutions_RibbonDispatcher.ButtonModel
+Private WithEvents Button3   As ButtonModel
 Attribute Button3.VB_VarHelpID = -1
 
 Private Sub Toggle1_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
     CustomGroup.SetShowInactive IsPressed
-    Toggle1.SetImage ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
+    Toggle1.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
     
     Invalidate
 XT: Exit Sub
@@ -58,7 +56,7 @@ Private Sub Toggle2_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As 
     Toggle1.IsLarge = Not IsPressed
     Toggle2.IsLarge = Not IsPressed
     Toggle3.IsLarge = Not IsPressed
-    Toggle2.SetImage ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
+    Toggle2.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
     
     Invalidate
 XT: Exit Sub
@@ -72,7 +70,7 @@ Private Sub Toggle3_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As 
     Button1.IsLarge = Not IsPressed
     Button2.IsLarge = Not IsPressed
     Button3.IsLarge = Not IsPressed
-    Toggle3.SetImage ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
+    Toggle3.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
     DropDown1.IsEnabled = Toggle3.IsPressed
     
     Invalidate
@@ -128,7 +126,7 @@ End Sub
 Private Sub Button1_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
-    IsToggle = AlternateToggle(ModelServer, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
+    IsToggle = AlternateToggle(ThisWorkbook.ModelServer, IsToggle, Toggle2, "CustomVbaToggle2", "CustomVbaCheckBox2")
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button1_Clicked", vbOKOnly Or vbInformation
     Resume XT
@@ -138,7 +136,7 @@ End Sub
 Private Sub Button2_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
     Static IsToggle As Boolean
-    IsToggle = AlternateToggle(ModelServer, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
+    IsToggle = AlternateToggle(ThisWorkbook.ModelServer, IsToggle, Toggle3, "CustomVbaToggle3", "CustomVbaCheckBox3")
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
     Resume XT
@@ -147,7 +145,6 @@ End Sub
 
 Private Sub Button3_Clicked(ByVal control As IRibbonControl)
     On Error GoTo EH
-    If Not CustomGroup Is Nothing Then CustomGroup.Detach
     Class_Initialize
 XT: Exit Sub
 EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or vbInformation
@@ -156,57 +153,38 @@ EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button3_Clicked", vbOKOnly Or 
 End Sub
 
 Private Sub Invalidate()
-    On Error GoTo EH
+    On Error Resume Next
+    Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
+    DropDown1.IsEnabled = Toggle3.IsPressed
+    CustomGroup.SetShowInactive Toggle1.IsPressed
     
-    If Not Toggle1 Is Nothing Then Toggle1.Invalidate
-    If Not Toggle2 Is Nothing Then Toggle2.Invalidate
-    If Not Toggle3 Is Nothing Then Toggle3.Invalidate
-    If Not Toggle4 Is Nothing Then Toggle4.Invalidate
+    Toggle1.Invalidate
+    Toggle2.Invalidate
+    Toggle3.Invalidate
+    Toggle4.Invalidate
     
-    If Not DropDown1 Is Nothing Then DropDown1.Invalidate
-    If Not DropDown2 Is Nothing Then DropDown2.Invalidate
-    If Not Dropdown3 Is Nothing Then Dropdown3.Invalidate
+    DropDown1.Invalidate
+    DropDown2.Invalidate
+    Dropdown3.Invalidate
     
-    If Not Button1 Is Nothing Then Button1.Invalidate
-    If Not Button2 Is Nothing Then Button2.Invalidate
-    If Not Button3 Is Nothing Then Button3.Invalidate
+    Button1.Invalidate
+    Button2.Invalidate
+    Button3.Invalidate
     
-    If Not CustomGroup Is Nothing Then CustomGroup.Invalidate
+    CustomGroup.Invalidate
     Application.StatusBar = "Ready ...'"
 XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Invalidate"
-    Resume          ' for debugging only
-End Sub
-
-Friend Sub Initialize()
-    On Error GoTo EH
-   
-    ' Set initial status
-    If Not Toggle4 Is Nothing Then _
-        Toggle4.IsPressed = (ThisWorkbook.Worksheets("Control Strings").Visible = xlSheetVisible)
-    If Not CustomGroup Is Nothing Then CustomGroup.SetShowInactive Toggle1.IsPressed
-    DropDown1.IsEnabled = Toggle3.IsPressed
-    
-    Invalidate
-XT: Exit Sub
-EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Activate")
-        Case vbAbort:  ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Activate"
-        Case vbRetry:  Resume
-        Case vbIgnore: Resume Next
-    End Select
-    Resume          ' for debugging only
 End Sub
 
 Private Sub Class_Initialize()
     On Error GoTo EH
-    Register
-    With ModelServer
+    If Not CustomGroup Is Nothing Then CustomGroup.Detach
+    With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
     End With
     
-    ' Demonstrate how the models ccan treat the viewmodels as a 'skin'
-    Dim ModelFactory As IModelFactory: Set ModelFactory = ModelServer
-    With ModelFactory
+    ' Demonstrate how the models can treat the viewmodels as a pure 'skin'
+    With ThisWorkbook.ModelFactory
         Set Toggle1 = .NewToggleModel("Toggle1").Attach("CustomVbaToggle1") _
                       .SetImage(.NewImageObjectMso("MarginsShowHide"))
         Set Toggle2 = .NewToggleModel("Toggle2").Attach("CustomVbaCheckBox2") _
@@ -217,11 +195,11 @@ Private Sub Class_Initialize()
                       .SetImage(.NewImageObjectMso("MarginsShowHide"))
         
         Set DropDown1 = .NewDropDownModel("DropDown1").Attach("CustomVbaDropDown1") _
-                        .SetImage(.NewImageObjectMso("MacroPlay"))
-        DropDown1.AddSelectableModel(.NewSelectableModel("LabelOnly")) _
-                 .AddSelectableModel(.NewSelectableModel("ImageOnly")) _
-                 .AddSelectableModel(.NewSelectableModel("LabelAndImage")) _
-                 .SelectedIndex = 2
+                        .SetImage(.NewImageObjectMso("MacroPlay")) _
+                        .AddSelectableModel(.NewSelectableModel("LabelOnly")) _
+                        .AddSelectableModel(.NewSelectableModel("ImageOnly")) _
+                        .AddSelectableModel(.NewSelectableModel("LabelAndImage"))
+        DropDown1.SelectedIndex = 2
         DropDown1.ShowImage = True
         
         Set Button1 = .NewButtonModel("Button1").Attach("CustomizableButton1") _
@@ -231,7 +209,8 @@ Private Sub Class_Initialize()
         Set Button3 = .NewButtonModel("Button3").Attach("CustomizableButton3") _
                       .SetImage(.NewImageObjectMso("Refresh"))
     End With
-    Initialize
+       
+    Invalidate
 XT: Exit Sub
 EH: Select Case MsgBoxAbortRetryIgnore(Err, TypeName(Me) & ".Class_Initialize")
         Case vbAbort:  ErrorUtils.ReRaiseError Err, TypeName(Me) & ".Class_Initialize"

@@ -9,18 +9,6 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
-Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
-Private MModelServer        As PGSolutions_RibbonDispatcher.IModelServer
-
-Public Sub Register()
-    On Error GoTo EH
-    Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
-    
-XT: Exit Sub
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".AlternateToggle"
-    Resume          ' for debugging only
-End Sub
-
 Public Function AlternateToggle(ByVal Factory As IModelServer, Mode As Boolean, _
         Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
@@ -29,7 +17,7 @@ Public Function AlternateToggle(ByVal Factory As IModelServer, Mode As Boolean, 
     
     Model.Detach
     Model.Attach IIf(AlternateToggle, ToggleID, CheckBoxID)
-    Model.SetImage ModelServer.NewImageObjectMso(ToggleImage(Model.IsPressed))
+    Model.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(Model.IsPressed))
     Model.Invalidate
     Application.StatusBar = "Ready ...'"
     
@@ -65,15 +53,3 @@ End Function
 Private Function ShowLabel(ByVal SelectedIndex As Integer) As Boolean
     ShowLabel = ((SelectedIndex + 1) And 1) <> 0
 End Function
-
-Public Property Get ModelServer() As PGSolutions_RibbonDispatcher.IModelServer
-    On Error GoTo EH
-    If MModelServer Is Nothing Then
-        Set MModelServer = Application.COMAddIns(COMAddInName).Object _
-            .NewBetterRibbon(New ResourceLoader)
-    End If
-    Set ModelServer = MModelServer
-XT: Exit Property
-EH: ErrorUtils.ReRaiseError Err, ModuleName & ".BetterRibbon"
-    Resume          ' for debugging only
-End Property

@@ -33,6 +33,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
             if (ViewModel != null) { MenuModel.Attach(ViewModel.MenuVM.ControlId); }
         }
 
+        public override void Invalidate() { MenuModel.Invalidate(); base.Invalidate(); }
+
         public override void Detach() { MenuModel.Detach(); base.Detach(); }
     }
 }

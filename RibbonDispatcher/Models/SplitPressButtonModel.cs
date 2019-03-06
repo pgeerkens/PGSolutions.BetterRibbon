@@ -39,6 +39,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
             return this;
         }
 
+        public override void Invalidate() { ButtonModel.Invalidate(); base.Invalidate(); }
+
         public override void Detach() { ButtonModel.Detach(); base.Detach(); }
 
         #region Pressable implementation

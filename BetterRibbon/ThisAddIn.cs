@@ -58,14 +58,14 @@ namespace PGSolutions.BetterRibbon {
         => Dispatcher.RegisterWorkbook(wb.Name);
 
         private void Workbook_BeforeSave(Workbook wb, bool SaveAsUI, ref bool Cancel)
-        => Dispatcher.FloatCurrent(wb.Name);
+        => Dispatcher.FloatCurrent();
 
         private void Workbook_AfterSave(Workbook wb, bool Success)
         => Dispatcher.SaveCurrent(wb.Name);
 
         private void Workbook_Close(Workbook wb, ref bool Cancel) {
-            Dispatcher.FloatCurrent(wb.Name);
-            Dispatcher.RegisterWorkbook(":");
+            Dispatcher.FloatCurrent();
+//            Dispatcher.RegisterWorkbook(":");
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }

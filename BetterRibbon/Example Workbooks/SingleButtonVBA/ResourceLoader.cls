@@ -16,8 +16,8 @@ Attribute VB_Exposed = True
 Option Explicit
 Implements IResourceLoader
 
-' For Button, ToggleButton, CheckBox, Menu, DynamicMenu, and Gallery controls
-Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings2
+''' <summary>Serving Button, ToggleButton, CheckBox, Menu, and Gallery controls. </summary>
+Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As IControlStrings2
     Select Case (ControlId)
         Case "CustomizableButton1":
             Set IResourceLoader_GetControlStrings2 = ThisWorkbook.ModelServer.NewControlStrings2( _
@@ -31,8 +31,8 @@ Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) A
     End Select
 End Function
 
-' All other controls
-Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings
+''' <summary>Serving all other controls. </summary>
+Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As IControlStrings
     Select Case (ControlId)
         Case "CustomizableGroup":
             Set IResourceLoader_GetControlStrings = ThisWorkbook.ModelServer.NewControlStrings( _
