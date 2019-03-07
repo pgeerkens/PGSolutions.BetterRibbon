@@ -18,6 +18,7 @@ Option Explicit
 Private CustomGroup             As PGSolutions_RibbonDispatcher.IGroupModel
 Private LabelTest               As PGSolutions_RibbonDispatcher.LabelControlModel
 Private WithEvents SplitButton  As PGSolutions_RibbonDispatcher.SplitPressButtonModel
+Attribute SplitButton.VB_VarHelpID = -1
 Private WithEvents SplitToggle  As PGSolutions_RibbonDispatcher.SplitToggleButtonModel
 Attribute SplitToggle.VB_VarHelpID = -1
 Private WithEvents Dialog       As PGSolutions_RibbonDispatcher.ButtonModel

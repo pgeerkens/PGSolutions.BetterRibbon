@@ -2,22 +2,17 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
-using PGSolutions.RibbonDispatcher.ViewModels;
 using PGSolutions.BetterRibbon.Properties;
-using System.Collections.ObjectModel;
 
 namespace PGSolutions.BetterRibbon {
-    using Dictionary = Dictionary<string,ViewModelFactory>;
 
     /// <summary>The concrete instantiation of <see cref="AbstractDispatcher"/> for <see cref="ThisAddIn"/>.</summary>
     /// <remarks>
@@ -31,55 +26,13 @@ namespace PGSolutions.BetterRibbon {
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
             Justification = "Public, Non-Creatable, class with exported Events.")]
     [ComVisible(true)]
-    public sealed class Dispatcher: AbstractDispatcher, IRibbonExtensibility {
-        internal Dispatcher() : base() { }
+    public sealed class CustomDispatcher: AbstractCustomDispatcher, IRibbonExtensibility {
+        internal CustomDispatcher() : base() { }
 
         /// <inheritdoc/>
         protected override string          RibbonXml      => Resources.Ribbon;
 
         /// <inheritdoc/>
-        protected override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
-
-        private            XDocument       RibbonXmlDoc   { get; } = XDocument.Parse(Resources.Ribbon);
-
-        private            Factories       Factories      { get; } = new Factories();
-
-        /// <inheritdoc/>
-        public override void OnRibbonLoad(IRibbonUI ribbonUI) {
-            SaveCurrent(":");
-
-            base.OnRibbonLoad(ribbonUI);
-        }
-
-        /// <inheritdoc/>
-        public override void RegisterWorkbook(string workbookName) {
-            if ( ! Factories.TryGetValue(workbookName,out var factory)) {
-                factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root).ReKey(workbookName);
-                Factories.Add(factory);
-            }
-            SetViewModelFactory(factory);
-            System.Diagnostics.Debug.Assert(ViewModelFactory.Key == workbookName);
-        }
-
-        /// <inheritdoc/>
-        internal void SaveCurrent(string workbookName) {
-            ViewModelFactory.ReKey(workbookName);
-            if ( ! Factories.Contains(ViewModelFactory)) Factories.Add(ViewModelFactory);
-            SetViewModelFactory(ViewModelFactory);
-            System.Diagnostics.Debug.Assert(ViewModelFactory.Key == workbookName);
-        }
-
-        /// <inheritdoc/>
-        internal void FloatCurrent() {
-            if (Factories.Contains(ViewModelFactory)) Factories.Remove(ViewModelFactory);
-        }
-    }
-    internal class Factories: KeyedCollection<string,ViewModelFactory> {
-        protected override string GetKeyForItem(ViewModelFactory item) => item.Key;
-
-        public bool TryGetValue(string key, out ViewModelFactory factory)
-        => (factory = TryGetValue(key)) != null;
-
-        public ViewModelFactory TryGetValue(string key) => Contains(key) ? this[key] : default;
+        public    override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
     }
 }

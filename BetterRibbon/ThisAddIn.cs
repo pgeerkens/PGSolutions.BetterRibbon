@@ -7,11 +7,11 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using PGSolutions.RibbonDispatcher;
-using PGSolutions.RibbonDispatcher.Models;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.BetterRibbon {
 
-    /// <summary>.</summary>
+    /// <summary>Partial class interface between Designer-authored and humn-authored code.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
     /// 
@@ -22,51 +22,27 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         private void ThisAddIn_Startup(object sender, EventArgs e) {
-            Dispatcher.Initialized += ViewModel_Initialized;
+            Dispatcher.RegisterWorkbook(":");
+            ViewModel = new RibbonViewModel(Dispatcher);
 
-            Application.WorkbookActivate    += Workbook_Activate;
-            Application.WorkbookBeforeSave  += Workbook_BeforeSave;
-            Application.WorkbookAfterSave   += Workbook_AfterSave;
-            Application.WorkbookBeforeClose += Workbook_Close;
+            Application.WorkbookActivate    += Dispatcher.Workbook_Activate;
+            Application.WorkbookDeactivate  += Dispatcher.Workbook_Deactivate;
+            Application.WorkbookBeforeSave  += Dispatcher.Workbook_BeforeSave;
+            Application.WorkbookAfterSave   += Dispatcher.Workbook_AfterSave;
+            Application.WorkbookBeforeClose += Dispatcher.Workbook_Close;
         }
 
-        internal Dispatcher      Dispatcher { get; private set; } = new Dispatcher();
-        internal RibbonViewModel ViewModel  { get; private set; }
-        internal RibbonModel     Model      { get; private set; }
-        private  ComEntry        ComEntry   => new ComEntry(Dispatcher.NewModelFactory);
+        internal CustomDispatcher      Dispatcher { get; } = new CustomDispatcher();
+        internal RibbonViewModel       ViewModel  { get; private set; }
+        private  ICustomRibbonComEntry ComEntry   => new ComEntry(Dispatcher);
 
         /// <inheritdoc/>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
 
         /// <inheritdoc/>
-        protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
+        protected override object RequestComAddInAutomationService() => ComEntry;
 
-        private void ViewModel_Initialized(object sender, EventArgs e) {
-            Dispatcher.Initialized -= ViewModel_Initialized;
-
-            Dispatcher.RegisterWorkbook(":");
-            ViewModel = new RibbonViewModel(Dispatcher);
-            Model = new RibbonModel(ViewModel, new MyResourceManager().GetControlStrings);
-
-            ViewModel.RibbonUI?.InvalidateControl(ViewModel.ControlId);
-        }
-
-        internal void RegisterWorkbook(string workbookName)
-        => Dispatcher.RegisterWorkbook(workbookName);
-
-        private void Workbook_Activate(Workbook wb)
-        => Dispatcher.RegisterWorkbook(wb.Name);
-
-        private void Workbook_BeforeSave(Workbook wb, bool SaveAsUI, ref bool Cancel)
-        => Dispatcher.FloatCurrent();
-
-        private void Workbook_AfterSave(Workbook wb, bool Success)
-        => Dispatcher.SaveCurrent(wb.Name);
-
-        private void Workbook_Close(Workbook wb, ref bool Cancel) {
-            Dispatcher.FloatCurrent();
-//            Dispatcher.RegisterWorkbook(":");
-        }
+        internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 

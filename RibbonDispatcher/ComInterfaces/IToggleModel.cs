@@ -19,7 +19,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         event ToggledEventHandler Toggled;
 
         /// <summary>True exaactly when this control is in the Pressed state. Default value.</summary>
-        [DispId(0)]
+        [DispId(12)]
         bool   IsPressed {
             [Description("True exaactly when this control is in the Pressed state. Default value.")]
             get; set; }

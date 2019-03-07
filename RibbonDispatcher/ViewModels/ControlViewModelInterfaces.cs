@@ -8,7 +8,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [CLSCompliant(true)]
     public interface IControlVM {
         /// <summary>Returns the unique (within this ribbon) identifier for this control.</summary>
-        string ControlId           { get; }
+        string ControlId    { get; }
         /// <summary>Gets or sets whether or not the control is visible.</summary>
         bool   IsVisible    { get; }
         /// <summary>Gets or sets whether or not the control is enabled.</summary>

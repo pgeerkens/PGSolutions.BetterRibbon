@@ -4,15 +4,14 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 
-namespace PGSolutions.BetterRibbon {
+namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>THe main interface for VBA to access the Ribbon dispatcher.</summary>
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-  //  [Guid(Guids.IComEntry)]
-    public interface IComEntry {
+    [Guid(Guids.ICustomRibbonComEntry)]
+    public interface ICustomRibbonComEntry {
         /// <summary>Returns a new implementation of the <see cref="IModelFactory"/> interface.</summary>
         [DispId( 1),Description("Returns a new implementation of the IModelFactory interface.")]
         IModelFactory  NewBetterRibbon(IResourceLoader manager);

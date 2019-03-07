@@ -32,7 +32,11 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 The model objects returned by this interface will not respond to any Ribbon callbacks until 
 they have been attached to a view-model object. The 'stringsId' supplied to the constructor
 is used to retrieve display strings from the client-supplied IResourceLoader - and need not
-relate to the controlId subsequently used to identify the attahced view-model control."
+relate to the controlId subsequently used to identify the attahced view-model control.
+
+In the current implementation interfaces IModelFactory and IModelServer are provided by the
+same underlying object. It is the intent that they should always work properly in conjunction
+with each other."
     )]
     [CLSCompliant(true)]
     [ComVisible(true)]

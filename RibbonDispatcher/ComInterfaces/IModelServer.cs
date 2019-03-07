@@ -26,7 +26,11 @@ model control if it exists.
 
 To effectively use this (alternative) interface the stringsId for each model control used in
 retrieving its display strings must be the same as the controlId for the view-model being
-attached to - as only one string is provided. This does not prevent mised usage"
+attached to - as only one string is provided. This does not prevent mised usage
+
+In the current implementation interfaces IModelFactory and IModelServer are provided by the
+same underlying object. It is the intent that they should always work properly in conjunction
+with each other."
     )]
     [CLSCompliant(true)]
     [ComVisible(true)]
@@ -37,14 +41,16 @@ attached to - as only one string is provided. This does not prevent mised usage"
         //[DispId(1), Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
         //void Invalidate();
 
-        /// <summary>.</summary>
-        [DispId(2), Description(".")]
-        IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip);
+        /// <summary>Returns a new <see cref="IStrings"/> constructed from the supplied strings.</summary>
+        [DispId(2), Description("Returns a new IControlStrings constructed from the supplied strings.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IStrings NewControlStrings(string label, string screenTip="", string superTip="", string keyTip="");
 
-        /// <summary>.</summary>
-        [DispId(18), Description(".")]
-        IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip,
-                string description);
+        /// <summary>Returns a new <see cref="IStrings2"/> constructed from the supplied strings.</summary>
+        [DispId(18), Description("Returns a new IControlStrings2 constructed from the supplied strings.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
+        IStrings2 NewControlStrings2(string label, string screenTip="", string superTip="", string keyTip="",
+                string description="");
 
         /// <summary>Deactivate the specified control, detaching any attached data source.</summary>
         /// <param name="controlId">The ID of the control to be detached.</param>
@@ -61,64 +67,64 @@ attached to - as only one string is provided. This does not prevent mised usage"
         [DispId(5), Description("Returns a new ImageObject from the supplied MSO image name.")]
         IImageObject NewImageObjectMso(string imageMso);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Group model, attached to the named view-model ribbon group.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(6), Description(".")]
+        [DispId(6), Description("Returns a new ribbon Group model, attached to the named view-model ribbon group.")]
         IGroupModel GetGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Button model, attached to the named view-model ribbon button.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification="Matches COM usage.")]
-        [DispId(7), Description(".")]
+        [DispId(7), Description("Returns a new ribbon Button model, attached to the named view-model ribbon button.")]
         IButtonModel GetButtonModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon ToggleButton model, attached to the named view-model ribbon toggleButton.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(8), Description(".")]
+        [DispId(8), Description("Returns a new ribbon ToggleButton model, attached to the named view-model ribbon toggleButton.")]
         IToggleModel GetToggleModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon EditBOx model, attached to the named view-model ribbon editBox.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(9), Description(".")]
+        [DispId(9), Description("Returns a new ribbon EditBOx model, attached to the named view-model ribbon editBox.")]
         IEditBoxModel GetEditBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon DropDown model, attached to the named view-model ribbon dropDOwn.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(10), Description(".")]
+        [DispId(10), Description("Returns a new ribbon DropDown model, attached to the named view-model ribbon dropDOwn.")]
         IDropDownModel GetDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon DropDown model, attached to the named view-model static ribbon dropDown.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(20), Description(".")]
+        [DispId(20), Description("Returns a new ribbon DropDown model, attached to the named view-model static ribbon dropDown.")]
         IStaticDropDownModel GetStaticDropDownModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon ComboBox model, attached to the named view-model ribbon comboBox.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(11), Description(".")]
+        [DispId(11), Description("Returns a new ribbon ComboBox model, attached to the named view-model static ribbon comboBox.")]
         IComboBoxModel GetComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon ComboBox model, attached to the named view-model static ribbon comboBox.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(21), Description(".")]
+        [DispId(21), Description("Returns a new ribbon ComboBox model, attached to the named view-model static ribbon comboBox.")]
         IStaticComboBoxModel GetStaticComboBoxModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Label model, attached to the named view-model static ribbon labelControl.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(12), Description(".")]
+        [DispId(12), Description("Returns a new ribbon Label model, attached to the named view-model static ribbon labelControl.")]
         ILabelControlModel GetLabelControlModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Menu model, attached to the named view-model static ribbon menu.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(13), Description(".")]
+        [DispId(13), Description("Returns a new ribbon Menu model, attached to the named view-model static ribbon menu.")]
         IMenuModel GetMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>Returns a new model for a Split(Toggle)Button control.</summary>
@@ -135,49 +141,49 @@ attached to - as only one string is provided. This does not prevent mised usage"
         ISplitPressButtonModel GetSplitPressButtonModel(string splitStringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon SelectableItem model, attached to the named view-model ribbon item.</summary>
         /// <param name="controlId">The ID of the new {ISelectableItem} to be returned.</param>
-        [DispId(19), Description(".")]
+        [DispId(19), Description("Returns a new ribbon SelectableItem model, attached to the named view-model static ribbon item.")]
         ISelectableItemModel GetSelectableModel(string controlID);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Gallery model, attached to the named view-model ribbon gallery.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(22), Description(".")]
+        [DispId(22), Description("Returns a new ribbon Gallery model, attached to the named view-model static ribbon gallery.")]
         IGalleryModel GetGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon Gallery model, attached to the named view-model static ribbon gallery.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(23), Description(".")]
+        [DispId(23), Description("Returns a new ribbon Gallery model, attached to the named view-model static ribbon gallery.")]
         IStaticGalleryModel GetStaticGalleryModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon MenuSeparator model, attached to the named view-model ribbon menuSeparator.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(24), Description(".")]
+        [DispId(24), Description("Returns a new ribbon MenuSeparator model, attached to the named view-model ribbon menuSeparator.")]
         IMenuSeparatorModel GetMenuSeparatorModel(string stringsId, bool isEnabled = true, bool isVisible = true);
 
-        /// <summary>.</summary>
-        [DispId(25), Description(".")]
+        /// <summary>Returns an <see cref="IStrings"/> requested from the client-supplied <see cref="IResourceLoader"/> for the supplied <paramref name="id"/>.</summary>
+        [DispId(25), Description("Returns an IControlStrings requested from the client-supplied IResourceLoader for the supplied id..")]
         IStrings GetStrings(string id);
 
-        /// <summary>.</summary>
-        [DispId(26), Description(".")]
+        /// <summary>Returns an <see cref="IStrings2"/> requested from the client-supplied <see cref="IResourceLoader"/> for the supplied <paramref name="id"/>.</summary>
+        [DispId(26), Description("Returns an IControlStrings2 requested from the client-supplied IResourceLoader for the supplied id.")]
         IStrings2 GetStrings2(string id);
 
-        /// <summary>.</summary>
-        [DispId(27), Description(".")]
+        /// <summary>Returns the supplied <see cref="IPictureDisp"/> wrapped as an <see cref="IImageObject"/>.</summary>
+        [DispId(27), Description("Returns the supplied IPictureDisp wrapped as an IImageObject.")]
         IImageObject GetImage(IPictureDisp image);
 
-        /// <summary>.</summary>
-        [DispId(28), Description(".")]
+        /// <summary>Returns the supplied MSO name-string wrapped as an <see cref="IImageObject"/>.</summary>
+        [DispId(28), Description("Returns the supplied MSO name-string wrapped as an IImageObject.")]
         IImageObject GetImageMso(string imageMso);
 
-        /// <summary>.</summary>
+        /// <summary>Returns a new ribbon DynamicMenu model, attached to the named view-model ribbon dynamicMenu.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "strings")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        [DispId(29), Description(".")]
+        [DispId(29), Description("Returns a new ribbon DynamicMenu model, attached to the named view-model ribbon dynamicMenu.")]
         IDynamicMenuModel GetDynamicMenuModel(string stringsId, bool isEnabled = true, bool isVisible = true);
     }
 }

@@ -198,10 +198,8 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="RibbonModel.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IComEntry.cs" />
     <Compile Include="ComEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -11,8 +11,8 @@ namespace PGSolutions.ToolsRibbon {
     [ComVisible(true)]
     [CLSCompliant(false)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid(Guids.IComEntry)]
-    public interface IComEntry {
+    [Guid(Guids.IToolsComEntry)]
+    public interface IToolsComEntry {
         /// <summary>Returns a new implementation of the <see cref="ILinksAnalyzer"/> interface.</summary>
         [DispId(1),Description("Returns a new implementation of the ILinksAnalyzer interface.")]
         ILinksAnalyzer NewLinksAnalyzer();

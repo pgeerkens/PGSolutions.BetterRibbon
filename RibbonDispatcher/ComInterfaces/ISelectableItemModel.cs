@@ -15,7 +15,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.ISelectableItemModel)]
     public interface ISelectableItemModel: IControlSource {
         /// <summary>TODO</summary>
-        [DispId(0)]
+        [DispId(12)]
         string ControlId { get; }
 
         #region IActivable implementation

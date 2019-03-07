@@ -12,7 +12,8 @@ namespace PGSolutions.RibbonDispatcher {
     /// <summary>Static class of Guids.</summary>
     public static class Guids     {
         public const string GuidSpace               = "-56F3-3B33-B105-9B8188A6F040";
-        public const string IComEntry               = "69E193FF" + GuidSpace;
+        public const string ICustomRibbonComEntry   = "69E193FF" + GuidSpace;
+        public const string CustomRibbonComEntry    = "69E193FF" + GuidSpace;
 
         public const string IClickedEvent           = "69E19400" + GuidSpace;
         public const string IEditedEvent            = "69E19401" + GuidSpace;
@@ -69,9 +70,9 @@ namespace PGSolutions.RibbonDispatcher {
         public const string MenuSeparatorModel      = "69E19431" + GuidSpace;
         public const string IDynamicMenuModel       = "69E19432" + GuidSpace;
         public const string DynamicMenuModel        = "69E19433" + GuidSpace;
-        public const string IModelServer          = "69E19434" + GuidSpace;
-        //public const string SplitToggleButtonModel  = "69E19435" + GuidSpace;
-        //public const string ISplitPressButtonModel  = "69E19436" + GuidSpace;
+        public const string IModelServer            = "69E19434" + GuidSpace;
+        //public const string ToolsComEntry           = "69E19435" + GuidSpace;
+        //public const string IToolsComEntry          = "69E19436" + GuidSpace;
         //public const string SplitPressButtonModel   = "69E19437" + GuidSpace;
         //public const string IStaticComboBoxModel    = "69E19438" + GuidSpace;
         //public const string StaticComboBoxModel     = "69E19439" + GuidSpace;

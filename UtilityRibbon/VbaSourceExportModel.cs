@@ -152,7 +152,7 @@ namespace PGSolutions.ToolsRibbon {
             .AppendLine("    Developer")
             .AppendLine("        -> Macro Security")
             .AppendLine("        -> Trust Access to the VBA Project object model")
-            .ToString().MsgBoxShow("VBA Project Object RibbonModel Not Trusted");
+            .ToString().MsgBoxShow("VBA Project Object Ribbon Model Not Trusted");
 
         private static Application Application => Globals.ThisAddIn.Application;
     }

@@ -26,8 +26,8 @@ namespace PGSolutions.RibbonUtilities.LinksAnalysis {
         public const string LinksAnalyzerTypelib    = "69E19418" + LinksAnalyzerGuidSpace;
         public const string IExternalLinks2         = "69E1941A" + LinksAnalyzerGuidSpace;
         public const string ExternalLinks2          = "69E1941B" + LinksAnalyzerGuidSpace;
-        //public const string IEToken                 = "69E1941C" + LinksAnalyzerGuidSpace;
-        //public const string IEToken                 = "69E1941D" + LinksAnalyzerGuidSpace;
+        public const string IToolsComEntry          = "69E1941C" + LinksAnalyzerGuidSpace;
+        public const string ToolsComEntry           = "69E1941D" + LinksAnalyzerGuidSpace;
         //public const string EToken                  = "69E1941E" + LinksAnalyzerGuidSpace;
         //public const string EToken                  = "69E1941F" + LinksAnalyzerGuidSpace;
     }

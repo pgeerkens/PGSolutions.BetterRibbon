@@ -43,6 +43,9 @@
     <AssemblyOriginatorKeyFile>RibbonDispatcherKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -63,12 +66,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComInterfaces\ICustomRibbonComEntry.cs" />
     <Compile Include="ComInterfaces\IDynamicMenuModel.cs" />
     <Compile Include="ComInterfaces\IGalleryModel.cs" />
     <Compile Include="ComInterfaces\IModelServer.cs" />
+    <Compile Include="Models\AbstractCustomDispatcher.cs" />
     <Compile Include="Models\AbstractSelectableModel2.cs" />
     <Compile Include="Models\ControlModel2.cs" />
     <Compile Include="Models\DynamicMenuModel.cs" />
+    <Compile Include="Models\Factories.cs" />
     <Compile Include="Models\ModelFactory2.cs" />
     <Compile Include="ViewModels\BoxControlVM.cs" />
     <Compile Include="ViewModels\ButtonGroupVM.cs" />
@@ -83,7 +89,6 @@
     <Compile Include="Models\AbstractSelectableModel.cs" />
     <Compile Include="Models\AbstractSplitButtonModel.cs" />
     <Compile Include="Models\ComboBoxModel.cs" />
-    <Compile Include="Models\CustomButtonsModel.cs" />
     <Compile Include="ControlStrings2.cs" />
     <Compile Include="ComInterfaces\IStaticDropDownModel.cs" />
     <Compile Include="Models\GalleryModel.cs" />
@@ -101,7 +106,6 @@
     <Compile Include="Models\EditBoxModel.cs" />
     <Compile Include="ViewModels\KeyedControls.cs" />
     <Compile Include="ViewModels\MenuSeparatorVM.cs" />
-    <Compile Include="ViewModels\RibbonViewModelExtensions.cs" />
     <Compile Include="ViewModels\AbstractContainerVM.cs" />
     <Compile Include="ViewModels\StaticComboBoxVM.cs" />
     <Compile Include="ViewModels\StaticDropDownVM.cs" />

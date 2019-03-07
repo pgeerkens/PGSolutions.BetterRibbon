@@ -69,6 +69,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IGetContentEvent)]
     public interface IGetContentEvent {
         /// <summary>Fired when the associated menu content is desired from the clientr.</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design","CA1045:DoNotPassTypesByReference",MessageId = "1#")]
         [Description("Fired when the associated menu content is desired from the client.")]
         void GetContent(IRibbonControl control, ref string content);
 

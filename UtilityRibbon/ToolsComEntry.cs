@@ -5,8 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-using PGSolutions.RibbonDispatcher;
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonUtilities.LinksAnalysis;
 
 namespace PGSolutions.ToolsRibbon {
@@ -15,10 +13,10 @@ namespace PGSolutions.ToolsRibbon {
     [Serializable, CLSCompliant(true)]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [ComDefaultInterface(typeof(IComEntry))]
-    [Guid(RibbonDispatcher.Guids.IComEntry)]
-    public sealed class ComEntry : IComEntry {
-        internal ComEntry() { }
+    [ComDefaultInterface(typeof(IToolsComEntry))]
+    [Guid(Guids.IToolsComEntry)]
+    public sealed class ToolsComEntry : IToolsComEntry {
+        internal ToolsComEntry() { }
 
         /// <inheritdoc/>
         [CLSCompliant(false)]

@@ -16,7 +16,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         event SelectionMadeEventHandler SelectionMade;
 
         /// <summary>Gets or sets the (zero-based) integer of the selected item. Default value.</summary>
-        [DispId(0)]
+        [DispId(20)]
         int SelectedIndex {
             [Description("Gets or sets the (zero-based) integer of the selected item. Default value.")]
             get; set; }

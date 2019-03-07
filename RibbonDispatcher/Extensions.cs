@@ -37,7 +37,7 @@ namespace PGSolutions.RibbonDispatcher {
             new DateTime(2000, 1, 1).AddSeconds(2 * halfSeconds).ToUniversalTime().ToString("HH:mm:ss");
 
         public static object Image(this IImageObject @this)
-        =>  @this.IsMso ? @this.ImageMso as object : @this.ImageDisp;
+        =>  @this?.IsMso??false ? @this?.ImageMso as object : @this?.ImageDisp;
 
         public static IImageObject ToImageObject(this string @this) => new ImageObject(@this);
 

@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Deployment.Application;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
@@ -11,7 +10,7 @@ using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.ToolsRibbon {
-    /// <summary>.</summary>
+    /// <summary>Partial class interface between Designer-authored and humn-authored code.</summary>
     /// <remarks>
     /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
     /// 
@@ -33,9 +32,9 @@ namespace PGSolutions.ToolsRibbon {
             Dispatcher.Initialized -= ViewModel_Initialized;
 
             ViewModel = new RibbonViewModel(Dispatcher);
-            Model = new RibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
+            new RibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
 
-            ViewModel.RibbonUI?.InvalidateControl(ViewModel.ControlId);
+            Dispatcher.RibbonUI?.InvalidateControl(ViewModel.ControlId);
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e) { }
@@ -43,16 +42,13 @@ namespace PGSolutions.ToolsRibbon {
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
         /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() => ComEntry as IComEntry;
+        protected override object RequestComAddInAutomationService() => ComEntry as IToolsComEntry;
 
-        internal Dispatcher Dispatcher { get; private set; }
+        internal Dispatcher          Dispatcher { get; private set; }
 
-        internal RibbonViewModel   ViewModel { get; private set; }
+        internal RibbonViewModel     ViewModel  { get; private set; }
 
-        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
-        internal RibbonModel       Model     { get; private set; }
-
-        private static ComEntry ComEntry { get; } = new ComEntry();
+        private static ToolsComEntry ComEntry   { get; } = new ToolsComEntry();
 
         /// <summary>.</summary>
         public static string VersionNo => ApplicationDeployment.IsNetworkDeployed

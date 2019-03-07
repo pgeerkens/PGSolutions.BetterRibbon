@@ -30,9 +30,9 @@ namespace PGSolutions.ToolsRibbon {
         internal Dispatcher() : base() { }
 
         /// <inheritdoc/>
-        protected override string RibbonXml      => Resources.Ribbon;
+        protected override string          RibbonXml      => Resources.Ribbon;
 
         /// <inheritdoc/>
-        protected override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
+        public    override IResourceLoader ResourceLoader { get; } = new MyResourceManager();
     }
 }

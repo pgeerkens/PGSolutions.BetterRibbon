@@ -11,8 +11,5 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>.</summary>
         TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM;
-
-        /// <summary>.</summary>
-        IRibbonUI        RibbonUI         { get; }
     }
 }

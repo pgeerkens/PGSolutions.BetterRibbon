@@ -13,7 +13,9 @@ using System.Diagnostics.CodeAnalysis;
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "PGSolutions.BetterRibbon.ThisAddIn.#StartCaching(System.String)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "PGSolutions.BetterRibbon.ThisAddIn.#StopCaching(System.String)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "PGSolutions.BetterRibbon.ThisAddIn.#IsCached(System.String)")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "PGSolutions.BetterRibbon.ThisAddIn.#NeedsFill(System.String)")]
+[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#StartCaching(System.String)")]
+[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#StopCaching(System.String)")]
+[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#IsCached(System.String)")]
+[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#NeedsFill(System.String)")]
+
+[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#Model")]

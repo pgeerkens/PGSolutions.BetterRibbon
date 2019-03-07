@@ -53,10 +53,10 @@ End Sub
 
 Private Sub Toggle2_Toggled(ByVal control As IRibbonControl, ByVal IsPressed As Boolean)
     On Error GoTo EH
-    Toggle1.IsLarge = Not IsPressed
-    Toggle2.IsLarge = Not IsPressed
-    Toggle3.IsLarge = Not IsPressed
-    Toggle2.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(IsPressed))
+    Toggle1.IsLarge = Not Toggle2.IsPressed
+    Toggle2.IsLarge = Not Toggle2.IsPressed
+    Toggle3.IsLarge = Not Toggle2.IsPressed
+    Toggle2.SetImage ThisWorkbook.ModelServer.NewImageObjectMso(ToggleImage(Toggle2.IsPressed))
     
     Invalidate
 XT: Exit Sub
@@ -189,6 +189,7 @@ Private Sub Class_Initialize()
                       .SetImage(.NewImageObjectMso("MarginsShowHide"))
         Set Toggle2 = .NewToggleModel("Toggle2").Attach("CustomVbaCheckBox2") _
                       .SetImage(.NewImageObjectMso("MarginsShowHide"))
+        Toggle2.IsPressed = True
         Set Toggle3 = .NewToggleModel("Toggle3").Attach("CustomVbaCheckBox3") _
                       .SetImage(.NewImageObjectMso("MarginsShowHide"))
         Set Toggle4 = .NewToggleModel("Toggle4").Attach("CustomVbaCheckBox1") _

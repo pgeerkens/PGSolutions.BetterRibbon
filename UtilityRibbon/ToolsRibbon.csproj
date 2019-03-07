@@ -189,9 +189,9 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="ComEntry.cs" />
+    <Compile Include="ToolsComEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IComEntry.cs" />
+    <Compile Include="IToolsComEntry.cs" />
     <Compile Include="PublicFactoryExtensions.cs" />
     <Compile Include="RibbonModel.cs" />
     <Compile Include="RibbonViewModel.cs" />

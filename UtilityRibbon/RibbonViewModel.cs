@@ -15,10 +15,9 @@ namespace PGSolutions.ToolsRibbon {
     internal sealed class RibbonViewModel: GroupVM, IRibbonViewModel {
         public RibbonViewModel(Dispatcher dispatcher) 
         : base("TabPGSolutions",dispatcher.ViewModelFactory?.ViewModelRoot)
-        => RibbonUI = dispatcher.RibbonUI;
+        { }
                 
         /// <inheritdoc/>
-        public  IRibbonUI RibbonUI { get; }
         private TabVM TabMS => Controls.Item<TabVM>("TabDeveloper");
         private TabVM TabPG => Controls.Item<TabVM>(ControlId);
 

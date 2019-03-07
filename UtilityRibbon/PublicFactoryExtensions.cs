@@ -30,6 +30,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IEditBoxModel"/>.</summary>
+        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IEditBoxModel NewEditBoxModel(this IModelFactory factory, string id,
                 EditedEventHandler handler, bool isEnabled = true, bool isVisible = true) {
@@ -40,6 +41,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IComboBoxModel"/>.</summary>
+        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IComboBoxModel NewComboBoxModel(this IModelFactory factory, string id,
                 EditedEventHandler handler,
@@ -51,6 +53,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         /// <summary>Creates, initializes, attaches to the specified control view-model, and returns a new <see cref="IDropDownModel"/>.</summary>
+        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static IDropDownModel NewDropDownModel(this IModelFactory factory, string id,
                 SelectionMadeEventHandler handler, bool isEnabled = true, bool isVisible = true) {

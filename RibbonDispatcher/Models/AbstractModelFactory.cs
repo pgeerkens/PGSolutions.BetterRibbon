@@ -15,6 +15,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     /// This class existsto expose the "evented" base classes to internal methods,
     /// while only the unevented COM-visible interfaces are exposed to VBA clients.
     /// </remarks>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability","CA1506:AvoidExcessiveClassCoupling")]
     public abstract class AbstractModelFactory: IModelFactory {
         /// <summary>.</summary>
         protected AbstractModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager) {
@@ -148,10 +149,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
                 .InitializeModel<IMenuSeparatorSource, IMenuSeparatorVM, MenuSeparatorModel>();
 
         /// <inheritdoc/>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design","CA1026:DefaultParametersShouldNotBeUsed")]
         public IStrings NewControlStrings(string label, string screenTip, string superTip, string keyTip=null)
         => new ControlStrings(label, screenTip, superTip, keyTip);
 
         /// <inheritdoc/>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design","CA1026:DefaultParametersShouldNotBeUsed")]
         public IStrings2 NewControlStrings2(string label, string screenTip, string superTip, string keyTip=null,
                 string description=null)
         =>  new ControlStrings2(label, screenTip, superTip, keyTip, description);

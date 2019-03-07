@@ -17,7 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
         event EditedEventHandler Edited;
 
         /// <summary>Gets or sets the content of the <see cref="EditBoxVM"/>. Default value.</summary>
-        [DispId(0)]
+        [DispId(12)]
         string Text {
             [Description("Gets or sets the content of the EditBOxVM. Default value.")]
             get; set;

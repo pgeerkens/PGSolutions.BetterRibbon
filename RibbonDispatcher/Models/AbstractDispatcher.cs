@@ -40,7 +40,6 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComDefaultInterface(typeof(ICallbackDispatcher))]
     [Guid(Guids.AbstractDispatcher)]
     public abstract class AbstractDispatcher:  ICallbackDispatcher {
-        /// <summary>Initializes this instance with the supplied {IRibbonUI} and {IResourceLoader}.</summary>
         protected AbstractDispatcher(){ }
 
         /// <inheritdoc/>
@@ -72,7 +71,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected abstract string          RibbonXml      { get; }
 
         /// <summary>The <see cref="IResourceLoader"/> for common shared resources.</summary>
-        protected abstract IResourceLoader ResourceLoader { get; }
+        public    abstract IResourceLoader ResourceLoader { get; }
 
         /// <summary>The callback from VSTO/VSTA requesting the Ribbon XML text.</summary>
         /// <param name="RibbonID"></param>

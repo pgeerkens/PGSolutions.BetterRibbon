@@ -9,8 +9,8 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "ButtonProcessing"
 
-Public Function AlternateToggle(ByVal Factory As IModelServer, Mode As Boolean, _
-        Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
+Public Function AlternateToggle(ByVal Factory As IModelServer, ByVal Mode As Boolean, _
+        ByVal Model As ToggleModel, ByVal ToggleID As String, ByVal CheckBoxID As String _
 ) As Boolean
     On Error GoTo EH
     AlternateToggle = Not Mode

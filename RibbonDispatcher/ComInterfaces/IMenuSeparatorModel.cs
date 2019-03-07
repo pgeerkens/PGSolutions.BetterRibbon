@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.IMenuSeparatorModel)]
     public interface IMenuSeparatorModel {
         /// <summary>The text to be displayed as a menu separator, insteaf of a horizontal line.</summary>
-        [DispId(0),Description("The text to be displayed as a menu separator, insteaf of a horizontal line.")]
+        [DispId(12),Description("The text to be displayed as a menu separator, insteaf of a horizontal line.")]
         string Title {
             get; set; }
 

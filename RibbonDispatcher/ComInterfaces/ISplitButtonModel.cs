@@ -82,7 +82,7 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     [Guid(Guids.ISplitToggleButtonModel)]
     public interface ISplitToggleButtonModel: ISplitButtonModel {
         /// <summary>True exaactly when this control is in the Pressed state. Default value.</summary>
-        [DispId(0)]    
+        [DispId(12)]    
         bool IsPressed {
             [Description("True exaactly when this control is in the Pressed state. Default value.")]
             get; set;
