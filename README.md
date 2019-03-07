@@ -15,52 +15,97 @@ The supplied Add-In also comes with a built in suite of Ribbon controls that can
 - 3 (Action)Buttons.
 
 The code to activate one of the (Action)Buttons, with Click event handler programmed in VBA and custom text defined at
-run time, is as simple as this, in two modules:
+run time, is as simple as this, in three modules:
 
-**RibbonModel:**
+**RibbonModel**, declaring, initializing and handling the events from the controls used:
 
     Option Explicit
+    Private CustomGroup         As IGroupModel
+    Private WithEvents Button1  As ButtonModel
+    Attribute Button1.VB_VarHelpID = -1
 
-    Private WithEvents Button1  As RibbonDispatcherX.RibbonButton
-    Private Button1Strings      As RibbonDispatcherX.IRibbonControlStrings
-
-    Private Sub Button1_Clicked()
-        MsgBox "Button1 clicked.", vbOKOnly Or vbInformation, TypeName(Me)
-    End Sub
-
-    Friend Sub Activate()
-        With AddInHandle
-            Set Button1 = .AttachButton("CustomizableButton1", Button1Strings)
-            Button1.SetImageMso "RefreshAll"
-        End With
+    Private Sub Button1_Clicked(ByVal control As IRibbonControl)
+        ButtonProcessing.Button1_Processing
     End Sub
 
     Private Sub Class_Initialize()
-        With AddInHandle
-            Set Button1Strings = .NewControlStrings(Label:="This is cool!", _
-                    ScreenTip:="Button1 Screentip", _
-                    AuperTip:="Lots of good things" & vbNewLine & _
-                              "can be done here to" & vbNewLine & _
-                              "show off a bit.", keyTip:="", _
-                    alternateLabel:="", Description:="")
+        Dim Strings As IControlStrings
+        With ThisWorkbook.ModelServer
+            Set CustomGroup = .GetGroupModel("CustomizableGroup")
+
+            Set Button1 = .GetButtonModel("CustomizableButton1") _
+                          .SetImage(.NewImageObjectMso("MacroPlay"))
         End With
     End Sub
-
-    Private Function AddInHandle() As RibbonDispatcherX.IRibbonDispatcher
-        Set AddInHandle = Application.COMAddIns("ExcelRibbon").Object
-    End Function
     
-and **ThisWorkbook:**
+**ResourceLoader**, supplying string and image resources to the dispatcher:
 
     Option Explicit
-    Private MRibbonModel    As SingleButton.RibbonModel
+    Implements IResourceLoader
+
+    ''' <summary>Serving Button, ToggleButton, CheckBox, Menu, and Gallery controls. </summary>
+    Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As IControlStrings2
+        Select Case (ControlId)
+            Case "CustomizableButton1":
+                Set IResourceLoader_GetControlStrings2 = ThisWorkbook.ModelServer.NewControlStrings2( _
+                    Label:="This is cool!", _
+                    ScreenTip:="VBA-Customized Button Screentip", _
+                    SuperTip:="This button is completely" & vbNewLine & _
+                              "customized within the VBA" & vbNewLine & _
+                              "workbook.", KeyTip:="", Description:="")
+            Case Else:
+                Set IResourceLoader_GetControlStrings2 = Nothing
+        End Select
+    End Function
+
+    ''' <summary>Serving all other controls. </summary>
+    Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As IControlStrings
+        Select Case (ControlId)
+            Case "CustomizableGroup":
+                Set IResourceLoader_GetControlStrings = ThisWorkbook.ModelServer.NewControlStrings( _
+                    Label:="VBA Custom Controls", _
+                    ScreenTip:="", SuperTip:="", KeyTip:="")
+            Case Else:
+                Set IResourceLoader_GetControlStrings = Nothing
+        End Select
+    End Function
+
+    Private Function IResourceLoader_GetImage(ByVal Name As String) As Variant
+        IResourceLoader_GetImage = "MacroSecurity"
+    End Function
+
+    
+and **ThisWorkbook**, initializng the connection to the dispatcher.
+
+    Option Explicit
+    Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
+    Private MModelServer        As IModelServer
+    Private MRibbonModel        As RibbonModel
+
+    Public Function ModelServer() As IModelServer
+        If MModelServer Is Nothing Then
+            Set MModelServer = Application.COMAddIns(COMAddInName).Object _
+                    .NewBetterRibbon(New ResourceLoader)
+        End If
+        Set ModelServer = MModelServer
+    End Function
 
     Private Sub Workbook_Activate()
-        MRibbonModel.Activate
+        If MRibbonModel Is Nothing Then
+            Application.COMAddIns(COMAddInName).Object.RegisterWorkbook ThisWorkbook.Name
+            Set MRibbonModel = New RibbonModel
+        End If
     End Sub
 
+    ' Depending on Workbook location, pops-up a dialog to assist with setting debug breakpoints.
     Private Sub Workbook_Open()
-        Set MRibbonModel = New RibbonModel
+        If DeskTop(False) = "D:\Users\Pieter\Desktop\" _
+        Or ThisWorkbook.Path = DeskTop(True) & "Example Workbooks" _
+        Or ThisWorkbook.Path = DeskTop(False) & "Example Workbooks" Then _
+            MsgBox "Pause for Ctrl-Break to ease debugging." & vbNewLine & vbNewLine & _
+                   "This message can be disabled by moving the workbook" & vbNewLine & _
+                   "out of the Desktop folder 'Example Workbooks'.", _
+                   vbOKOnly, ThisWorkbook.Name
     End Sub
 
 The *Workbook_Activate* event is programmed as the controls for this workbook are automatically deactivated when the workbook loses
