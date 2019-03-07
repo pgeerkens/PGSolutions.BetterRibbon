@@ -2,28 +2,40 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Deployment.Application;
 using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
 
-using PGSolutions.RibbonDispatcher;
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.BetterRibbon {
-
     /// <summary>Partial class interface between Designer-authored and humn-authored code.</summary>
     /// <remarks>
-    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226"> For more information about adding callback methods.</a>
+    /// <a href=" https://go.microsoft.com/fwlink/?LinkID=271226">Adding Ribbon XML to a project.</a>
     /// 
-    /// Take care renaming this class, or its namespace; and coordinate any such with the content
+    /// Take care renaming this class or its namespace; and coordinate any such with the content
     /// of the (hidden) ThisAddIn.Designer.xml file. Commit frequently. Excel is very tempermental
     /// on the naming of ribbon objects and provides poor, and very minimal, diagnostic information.
     /// </remarks>
     [CLSCompliant(false)]
     public partial class ThisAddIn {
+        /// <summary>The ribbon-callback dispatcher for VBA customizable ribbon tabs/groups.</summary>
+        internal CustomDispatcher      Dispatcher { get; }
+                    = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
+
+        /// <summary>The VBA-accessible entry point for the ribbon dispatcher.</summary>
+        private  ICustomRibbonComEntry ComEntry   => new CustomRibbonComEntry(Dispatcher);
+
+        /// <summary>Root view-model for the VBA customizable ribbon.</summary>
+        internal CustomRibbonViewModel ViewModel  { get; private set; }
+
+        /// <inheritdoc/>
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
+
+        /// <inheritdoc/>
+        protected override object RequestComAddInAutomationService() => ComEntry;
+
         private void ThisAddIn_Startup(object sender, EventArgs e) {
-            Dispatcher.RegisterWorkbook(":");
-            ViewModel = new RibbonViewModel(Dispatcher);
+            ViewModel = new CustomRibbonViewModel(Dispatcher);
 
             Application.WorkbookActivate    += Dispatcher.Workbook_Activate;
             Application.WorkbookDeactivate  += Dispatcher.Workbook_Deactivate;
@@ -32,30 +44,7 @@ namespace PGSolutions.BetterRibbon {
             Application.WorkbookBeforeClose += Dispatcher.Workbook_Close;
         }
 
-        internal CustomDispatcher      Dispatcher { get; } = new CustomDispatcher();
-        internal RibbonViewModel       ViewModel  { get; private set; }
-        private  ICustomRibbonComEntry ComEntry   => new ComEntry(Dispatcher);
-
-        /// <inheritdoc/>
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
-
-        /// <inheritdoc/>
-        protected override object RequestComAddInAutomationService() => ComEntry;
-
-        internal void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
-
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
-
-        /// <summary>.</summary>
-        public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
-            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
-            : new Version(0,0,0,0).Format();
-
-        /// <summary>.</summary>
-        public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
-
-        /// <summary>.</summary>
-        public static string VersionNo3 => typeof(ThisAddIn).Assembly.GetName().Version?.Format();
 
         #region VSTO generated code
 

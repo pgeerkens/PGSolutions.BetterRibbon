@@ -16,6 +16,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-SinglePackage", "Setu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsRibbon", "UtilityRibbon\ToolsRibbon.csproj", "{9931504E-2D70-402C-BD11-A4F73E5874C4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example Workbooks", "Example Workbooks", "{09CDE3CB-8043-4C5A-8635-285A5A35196D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

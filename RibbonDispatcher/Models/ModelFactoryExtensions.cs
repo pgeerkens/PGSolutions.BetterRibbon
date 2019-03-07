@@ -13,6 +13,11 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
             => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
 
+        /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
+        /// <param name="model"></param>
+        public static IModelServer NewModelServer(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
+            => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
+
         /// <summary>.</summary>
         internal static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)
             where TModel: class,IControlSource where TSource: IControlSource where TVM: IControlVM {

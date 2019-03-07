@@ -2,27 +2,48 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
+using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.RibbonDispatcher.Models {
-    [CLSCompliant(false)]
+    /// <summary>The concrete instantiation of <see cref="AbstractDispatcher"/> for <see cref="ThisAddIn"/>.</summary>
+    /// <remarks>
+    /// 
+    /// This class MUST be ComVisible for the ribbon to launch properly;
+    /// <see cref="IRibbonExtensibility"/>.
+    /// 
+    /// </remarks>
+    [Description("The (top-level) ViewModel for the ribbon interface - MUST be COM-visible")]
+    [CLSCompliant(true)]
+    [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
+            Justification = "Public, Non-Creatable, class with exported Events.")]
     [ComVisible(true)]
-    public abstract class AbstractCustomDispatcher: AbstractDispatcher {
-        protected AbstractCustomDispatcher()
-        => RibbonXmlDoc = XDocument.Parse(RibbonXml);
+    public class CustomDispatcher: AbstractDispatcher, IRibbonExtensibility {
+        public CustomDispatcher(string ribbonXml, IResourceLoader loader){
+            ResourceLoader = loader;
+            RibbonXml      = ribbonXml;
+            RibbonXDoc     = XDocument.Parse(RibbonXml);
+        }
+        /// <inheritdoc/>
+        public    override IResourceLoader ResourceLoader { get; }
 
-        private            XDocument       RibbonXmlDoc   { get; }
+        /// <inheritdoc/>
+        protected override string    RibbonXml  { get; }
 
-        private            Factories       Factories      { get; } = new Factories();
+        private            XDocument RibbonXDoc { get; }
+
+        private            Factories Factories  { get; } = new Factories();
 
         /// <inheritdoc/>
         public override void OnRibbonLoad(IRibbonUI ribbonUI) {
-            SaveCurrent(":");
+            SaveCurrent(InvalidFileName);
 
             base.OnRibbonLoad(ribbonUI);
         }
@@ -30,7 +51,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public override void RegisterWorkbook(string workbookName) {
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
-                factory = ViewModelFactory.ParseXmlDoc(RibbonXmlDoc.Root).ReKey(workbookName);
+                factory = ViewModelFactory.ParseXmlDoc(RibbonXDoc.Root).ReKey(workbookName);
                 Factories.Add(factory);
             }
             SetViewModelFactory(factory);
@@ -40,7 +61,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         public void Workbook_Activate(Workbook wb) => RegisterWorkbook(wb.Name);
 
-        public void Workbook_Deactivate(Workbook wb) { }
+        public void Workbook_Deactivate(Workbook wb) => RegisterWorkbook(InvalidFileName);
 
         public void Workbook_BeforeSave(Workbook wb, bool SaveAsUI, ref bool Cancel) => FloatCurrent();
 
@@ -60,5 +81,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
         internal void FloatCurrent() {
             if (Factories.Contains(ViewModelFactory)) Factories.Remove(ViewModelFactory);
         }
+
+        /// <summary>":" is an invalid file name - so can never be the name of a workbook</summary>
+        private const string InvalidFileName = ":";
     }
 }

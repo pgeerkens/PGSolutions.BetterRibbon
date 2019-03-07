@@ -43,6 +43,9 @@ namespace PGSolutions.ToolsRibbon {
             }
         }
 
+        /// <summary>Posts status reports on the application StatusBar.</summary>
+        /// <param name="sender">Originating object for the status post.</param>
+        /// <param name="e">An <see cref="RibbonUtilities.EventArgs{T}"/> containing the status to be posted.</param>
         private void StatusAvailable(object sender, RibbonUtilities.EventArgs<string> e)
         => Application.StatusBar = e.Value;
 

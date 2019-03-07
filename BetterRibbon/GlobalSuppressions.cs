@@ -17,5 +17,3 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#StopCaching(System.String)")]
 [assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#IsCached(System.String)")]
 [assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#NeedsFill(System.String)")]
-
-[assembly: SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode",Scope = "member",Target = "PGSolutions.BetterRibbon.ThisAddIn.#Model")]

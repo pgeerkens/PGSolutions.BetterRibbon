@@ -188,6 +188,16 @@ namespace PGSolutions.ToolsRibbon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BrandingImage {
+            get {
+                object obj = ResourceManager.GetObject("BrandingImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Current.
         /// </summary>
         internal static string CurrentProjectButtonMS_Label {
@@ -267,16 +277,6 @@ namespace PGSolutions.ToolsRibbon.Properties {
         internal static string LinksAnalysisGroup_SuperTip {
             get {
                 return ResourceManager.GetString("LinksAnalysisGroup_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PGeerkens {
-            get {
-                object obj = ResourceManager.GetObject("PGeerkens", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

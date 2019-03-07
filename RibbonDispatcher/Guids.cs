@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher {
     /// <summary>Static class of Guids.</summary>
     public static class Guids     {
         public const string GuidSpace               = "-56F3-3B33-B105-9B8188A6F040";
-        public const string ICustomRibbonComEntry   = "69E193FF" + GuidSpace;
+        public const string ICustomRibbonComEntry   = "69E193FE" + GuidSpace;
         public const string CustomRibbonComEntry    = "69E193FF" + GuidSpace;
 
         public const string IClickedEvent           = "69E19400" + GuidSpace;

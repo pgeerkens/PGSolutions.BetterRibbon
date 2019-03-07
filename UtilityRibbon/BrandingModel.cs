@@ -18,7 +18,7 @@ namespace PGSolutions.ToolsRibbon {
         public BrandingModel(IModelFactory factory, IGroupVM viewModel)
         : base(viewModel, factory.GetStrings(viewModel.ControlId)) {
             BrandingButtonModel = factory.NewButtonModel("BrandingButton", ButtonClicked,
-                factory.GetImage(Resources.PGeerkens.ImageToPictureDisp()));
+                factory.GetImage(Resources.BrandingImage.ImageToPictureDisp()));
 
             Invalidate();
         }

@@ -4,8 +4,6 @@
 using System;
 using System.ComponentModel;
 
-using Microsoft.Office.Core;
-
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.ToolsRibbon {

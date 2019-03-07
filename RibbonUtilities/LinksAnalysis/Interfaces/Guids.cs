@@ -4,8 +4,6 @@
 
 namespace PGSolutions.RibbonUtilities.LinksAnalysis {
     public static class Guids {
-        public const string IComEntry               = "69E193FF" + LinksAnalyzerGuidSpace;
-
         private const string LinksAnalyzerGuidSpace = "-56F4-3B33-B105-9B8188A6F040";
         public const string IToken                  = "69E19400" + LinksAnalyzerGuidSpace;
         public const string EToken                  = "69E19402" + LinksAnalyzerGuidSpace;

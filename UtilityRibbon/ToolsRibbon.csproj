@@ -255,8 +255,7 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PGeerkens.bmp" />
-    <Content Include="Resources\PGeerkens1.bmp" />
+    <None Include="Resources\PGS.bmp" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

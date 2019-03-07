@@ -70,7 +70,7 @@ namespace PGSolutions.BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application-Customizable Controls.
+        ///   Looks up a localized string similar to VBA-Customizable Controls.
         /// </summary>
         internal static string CustomizableGroup_ScreenTip {
             get {
@@ -79,21 +79,13 @@ namespace PGSolutions.BetterRibbon.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate when a workbook unaware of the customizations receives focus, and re-activate again when an aware workbook receives focus..
+        ///   Looks up a localized string similar to These controls can be dynamically customized, both in behaviour and appearance, within the VBA code for a workbook. The controls automatically deactivate with a workbook, and re-activate again when an aware workbook receives focus. 
+        ///
+        ///Each workbook has its own copy of the model-viewmodel pair behind each Ribbon control, allowing customizations to be specific to each workbook..
         /// </summary>
         internal static string CustomizableGroup_SuperTip {
             get {
                 return ResourceManager.GetString("CustomizableGroup_SuperTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PGeerkens {
-            get {
-                object obj = ResourceManager.GetObject("PGeerkens", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -103,13 +95,13 @@ namespace PGSolutions.BetterRibbon.Properties {
         ///&lt;!-- When debugging, remember to check: Options -&gt; Advanced -&gt; General -&gt; Show_Add-In_user_interface_errors. --&gt;
         ///&lt;!-- This allows the Tabs to merge between AddIns while directing Group callbacks to respective server. --&gt;
         ///&lt;mso:customUI xmlns:pg=&quot;https://github.com/pgeerkens/PGSolutions.BetterRibbon&quot;
-        ///              xmlns:ur=&quot;PGSolutions.ToolsRibbon&quot;
         ///              xmlns:br=&quot;PGSolutions.BetterRibbon&quot;
-        ///              xmlns: [rest of string was truncated]&quot;;.
+        ///              xmlns:tr=&quot;PGSolutions.ToolsRibbon&quot;
+        ///              xmlns:ms [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Ribbon {
+        internal static string RibbonXml {
             get {
-                return ResourceManager.GetString("Ribbon", resourceCulture);
+                return ResourceManager.GetString("RibbonXml", resourceCulture);
             }
         }
     }
