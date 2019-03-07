@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using stdole;
 
 namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     /// <summary>The default COM interface exposed by {ResourceLoader} objects.</summary>
@@ -23,6 +24,6 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
 
         /// <summary>Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.</summary>
         [DispId(3), Description("Returns the image(as an ImageMso string or an IPictureDisp) associated with the supplied name.")]
-        object GetImage(string Name);
+        IPictureDisp GetImage(string Name);
     }
 }

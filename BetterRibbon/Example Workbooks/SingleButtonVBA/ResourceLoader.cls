@@ -14,31 +14,30 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-
 Implements IResourceLoader
 
-' Button, ToggleButton, CheckBox, Menu, and Gallery controls
-Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings2
+''' <summary>Serving Button, ToggleButton, CheckBox, Menu, and Gallery controls. </summary>
+Private Function IResourceLoader_GetControlStrings2(ByVal ControlId As String) As IControlStrings2
     Select Case (ControlId)
         Case "CustomizableButton1":
             Set IResourceLoader_GetControlStrings2 = ThisWorkbook.ModelServer.NewControlStrings2( _
-                Label:="Run All Scan/Parse Tests", _
-                ScreenTip:="Unit Test for Linka Parser", _
-                superTip:="Performs a connection test and then ten specific " & _
-                          "scanning and parsing tests on various formulas.", _
-                keyTip:="", Description:="")
+                Label:="This is cool!", _
+                ScreenTip:="VBA-Customized Button Screentip", _
+                SuperTip:="This button is completely" & vbNewLine & _
+                          "customized within the VBA" & vbNewLine & _
+                          "workbook.", KeyTip:="", Description:="")
         Case Else:
             Set IResourceLoader_GetControlStrings2 = Nothing
     End Select
 End Function
 
-' All other controls
-Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As PGSolutions_RibbonDispatcher.IControlStrings
+''' <summary>Serving all other controls. </summary>
+Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As IControlStrings
     Select Case (ControlId)
         Case "CustomizableGroup":
             Set IResourceLoader_GetControlStrings = ThisWorkbook.ModelServer.NewControlStrings( _
                 Label:="VBA Custom Controls", _
-                ScreenTip:="", superTip:="", keyTip:="")
+                ScreenTip:="", SuperTip:="", KeyTip:="")
         Case Else:
             Set IResourceLoader_GetControlStrings = Nothing
     End Select

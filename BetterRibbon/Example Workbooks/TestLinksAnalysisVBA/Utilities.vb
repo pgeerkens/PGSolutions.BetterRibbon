@@ -8,15 +8,14 @@ Attribute VB_Name = "Utilities"
 Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "RibbonUtils."
-Public Const COMAddInName   As String = "PGSolutions.BetterRibbon"
-Private MBetterRibbon       As PGSolutions_RibbonDispatcher.IModelFactory
+Public Const COMAddInName   As String = "PGSolutions.ToolsRibbon"
 
-Public Function BetterRibbon() As PGSolutions_RibbonDispatcher.IModelFactory
-    If MBetterRibbon Is Nothing Then
-        Set MBetterRibbon = Application.COMAddIns(COMAddInName).Object _
+Public Function ToolsRibbon() As PGSolutions_RibbonDispatcher.IModelServer
+    If MModelServer Is Nothing Then
+        Set MModelServer = Application.COMAddIns(COMAddInName).Object _
                 .NewBetterRibbon(New ResourceLoader)
     End If
-    Set BetterRibbon = MBetterRibbon
+    Set ModelServer = MModelServer
 End Function
 
 Public Function NewLinksLexer(CellRef As ISourceCellRef, Formula As String) As ILinksLexer
@@ -35,7 +34,7 @@ End Property
 
 Public Function AddInHandle() As ILinksAnalyzer
     On Error GoTo EH
-    Set AddInHandle = Application.COMAddIns("PGSolutions.BetterRibbon").Object.NewLinksAnalyzer
+    Set AddInHandle = Application.COMAddIns(COMAddInName).Object.NewLinksAnalyzer
 XT: Exit Function
 EH: ErrorUtils.ReRaiseError Err, ModuleName & "AddInHandle"
     Resume          ' for debugging only
@@ -53,7 +52,7 @@ Public Function TestAddinConnection() As Boolean
         Messages    As String
     
     StepName = "Get COMAddIns as Object"
-    Set objAddIns = Application.COMAddIns("PGSolutions.BetterRibbon")
+    Set objAddIns = Application.COMAddIns(COMAddInName)
     Messages = Messages & vbNewLine & "Success - " & StepName
     
     StepName = "Get AddInHandle as Object"

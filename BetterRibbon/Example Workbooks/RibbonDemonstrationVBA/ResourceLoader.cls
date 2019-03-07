@@ -54,8 +54,8 @@ Private Function Index(ByVal RowNo As Double, ByVal ColNo As Double) As Variant
     Index = Application.WorksheetFunction.Index(Range(DataRangeName), RowNo, ColNo)
 End Function
 
-Private Function IResourceLoader_GetImage(ByVal Name As String) As Variant
-    IResourceLoader_GetImage = "MacroSecurity"
+Private Function IResourceLoader_GetImage(ByVal Name As String) As IPictureDisp
+    Set IResourceLoader_GetImage = Nothing
 End Function
 
 Private Function FindStr(ByVal Search As String, ByVal Range As Range, ByVal ColNo As Integer) As String

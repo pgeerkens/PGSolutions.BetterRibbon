@@ -15,10 +15,10 @@ Attribute VB_Exposed = True
 '''=======================================================================================
 Option Explicit
 Private Const COMAddInName  As String = "PGSolutions.BetterRibbon"
-Private MModelServer        As PGSolutions_RibbonDispatcher.IModelServer
+Private MModelServer        As IModelServer
 Private MRibbonModel        As RibbonModel
 
-Public Function ModelServer() As PGSolutions_RibbonDispatcher.IModelServer
+Public Function ModelServer() As IModelServer
     If MModelServer Is Nothing Then
         Set MModelServer = Application.COMAddIns(COMAddInName).Object _
                 .NewBetterRibbon(New ResourceLoader)

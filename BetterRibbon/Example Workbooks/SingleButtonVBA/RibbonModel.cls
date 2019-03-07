@@ -14,28 +14,20 @@ Attribute VB_Exposed = True
 '''             https://github.com/pgeerkens/PGSolutions.BetterRibbon/blob/dev/LICENSE
 '''=======================================================================================
 Option Explicit
-Private CustomGroup         As PGSolutions_RibbonDispatcher.IGroupModel
-Private WithEvents Button1  As PGSolutions_RibbonDispatcher.ButtonModel
+Private CustomGroup         As IGroupModel
+Private WithEvents Button1  As ButtonModel
 Attribute Button1.VB_VarHelpID = -1
 
 Private Sub Button1_Clicked(ByVal control As IRibbonControl)
-    On Error GoTo EH
-    LinksLexerTests.TestAll
-XT: Exit Sub
-EH: ErrorUtils.DisplayError Err, TypeName(Me) & ".Button2_Clicked", vbOKOnly Or vbInformation
-    Resume XT
+    ButtonProcessing.Button1_Processing
 End Sub
 
 Private Sub Class_Initialize()
-    On Error GoTo EH
-    Dim Strings As PGSolutions_RibbonDispatcher.IControlStrings
+    Dim Strings As IControlStrings
     With ThisWorkbook.ModelServer
         Set CustomGroup = .GetGroupModel("CustomizableGroup")
-        CustomGroup.SetShowInactive False
+
         Set Button1 = .GetButtonModel("CustomizableButton1") _
                       .SetImage(.NewImageObjectMso("MacroPlay"))
     End With
-XT: Exit Sub
-EH: MsgBox Err.Description, vbOKOnly Or vbInformation
-    Resume Next
 End Sub

@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Reflection;
 using System.Resources;
+using stdole;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -37,7 +38,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
             );
 
         /// <inheritdoc/>
-        public object GetImage(string Name) => ResourceManager.GetResourceImage(Name);
+        public IPictureDisp GetImage(string Name) => ResourceManager.GetResourceImage(Name);
 
         protected string GetCurrentUIString(string controlId) => ResourceManager.GetCurrentUIString(controlId);
     }

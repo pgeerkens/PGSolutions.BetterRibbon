@@ -97,6 +97,6 @@ Private Function IResourceLoader_GetControlStrings(ByVal ControlId As String) As
     End Select
 End Function
 
-Private Function IResourceLoader_GetImage(ByVal Name As String) As Variant
-    IResourceLoader_GetImage = "MacroSecurity"
+Private Function IResourceLoader_GetImage(ByVal Name As String) As IPictureDisp
+    Set IResourceLoader_GetImage = Nothing
 End Function
