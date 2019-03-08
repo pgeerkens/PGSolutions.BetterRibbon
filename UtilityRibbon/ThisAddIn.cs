@@ -2,13 +2,8 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Deployment.Application;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
-
-using PGSolutions.RibbonDispatcher;
-using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.ToolsRibbon {
     /// <summary>Partial class interface between Designer-authored and humn-authored code.</summary>
@@ -22,46 +17,20 @@ namespace PGSolutions.ToolsRibbon {
     [CLSCompliant(true)]
     [ProgId("PGSolutions.ToolsRibbon")]
     public partial class ThisAddIn {
-        /// <summary>.</summary>
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            Dispatcher = new Dispatcher();
-            Dispatcher.Initialized += ViewModel_Initialized;
-            return Dispatcher;
-        }
+        private Dispatcher      Dispatcher { get; } = new Dispatcher();
 
-        [SuppressMessage("Microsoft.Usage","CA1806:DoNotIgnoreMethodResults",MessageId = "PGSolutions.ToolsRibbon.RibbonModel")]
-        private void ViewModel_Initialized(object sender, EventArgs e) {
-            Dispatcher.Initialized -= ViewModel_Initialized;
+        private IToolsComEntry  ComEntry   { get; } = new ToolsComEntry();
 
-            ViewModel = new RibbonViewModel(Dispatcher);
-            new RibbonModel(ViewModel,Dispatcher.NewModelFactory(new MyResourceManager()));
+        private RibbonViewModel ViewModel  { get; set; }
 
-            Dispatcher.RibbonUI?.InvalidateControl(ViewModel.ControlId);
-        }
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
 
-        private void ThisAddIn_Startup(object sender, EventArgs e) { }
+        protected override object RequestComAddInAutomationService() => ComEntry;
+
+        private void ThisAddIn_Startup(object sender, EventArgs e)
+        => ViewModel = new RibbonViewModel(Dispatcher);
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
-
-        /// <summary>.</summary>
-        protected override object RequestComAddInAutomationService() => ComEntry as IToolsComEntry;
-
-        internal Dispatcher          Dispatcher { get; private set; }
-
-        internal RibbonViewModel     ViewModel  { get; private set; }
-
-        private static ToolsComEntry ComEntry   { get; } = new ToolsComEntry();
-
-        /// <summary>.</summary>
-        public static string VersionNo => ApplicationDeployment.IsNetworkDeployed
-            ? ApplicationDeployment.CurrentDeployment.CurrentVersion?.Format()
-            : new Version(0,0,0,0).Format();
-
-        /// <summary>.</summary>
-        public static string VersionNo2 => System.Windows.Forms.Application.ProductVersion;
-
-        /// <summary>.</summary>
-        public static string VersionNo3 => typeof(ThisAddIn).Assembly.GetName().Version?.Format();
 
         #region VSTO generated code
 

@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.ToolsRibbon {
@@ -13,7 +14,7 @@ namespace PGSolutions.ToolsRibbon {
     internal sealed class RibbonViewModel: GroupVM, IRibbonViewModel {
         public RibbonViewModel(Dispatcher dispatcher) 
         : base("TabPGSolutions",dispatcher.ViewModelFactory?.ViewModelRoot)
-        { }
+        => new RibbonModel(this,dispatcher.NewModelFactory());
                 
         /// <inheritdoc/>
         private TabVM TabMS => Controls.Item<TabVM>("TabDeveloper");

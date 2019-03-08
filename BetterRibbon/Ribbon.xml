@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2018-2019 Pieter Geerkens -->
 <!-- When debugging, remember to check: Options -> Advanced -> General -> Show_Add-In_user_interface_errors. -->
-<!-- This allows the Tabs to merge between AddIns while directing Group callbacks to respective server. -->
+<!-- 
+Note the use of a single shared namespace for the Ribbon Tab and a unique namespace for 
+each specific AddIn. This structue allows a single Tab to be shared by mutiple AddIns 
+while directing Group callbacks to their respective (add-in specific) dispatcher. 
+-->
 <mso:customUI xmlns:pg="https://github.com/pgeerkens/PGSolutions.BetterRibbon"
               xmlns:br="PGSolutions.BetterRibbon"
               xmlns:tr="PGSolutions.ToolsRibbon"

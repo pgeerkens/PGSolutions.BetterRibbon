@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
+using PGSolutions.RibbonDispatcher.Models;
 using PGSolutions.RibbonDispatcher.ViewModels;
 
 namespace PGSolutions.ToolsRibbon {

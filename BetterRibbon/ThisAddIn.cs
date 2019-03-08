@@ -21,7 +21,7 @@ namespace PGSolutions.BetterRibbon {
     public partial class ThisAddIn {
         /// <summary>The ribbon-callback dispatcher for VBA customizable ribbon tabs/groups.</summary>
         internal CustomDispatcher      Dispatcher { get; }
-                    = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
+                = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
 
         /// <summary>The VBA-accessible entry point for the ribbon dispatcher.</summary>
         private  ICustomRibbonComEntry ComEntry   => new CustomRibbonComEntry(Dispatcher);

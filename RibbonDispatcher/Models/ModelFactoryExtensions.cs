@@ -11,6 +11,12 @@ namespace PGSolutions.RibbonDispatcher.Models {
     public static partial class ModelFactoryExtensions {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
+        public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher)
+            => dispatcher?.NewModelFactory(dispatcher?.ResourceLoader)
+                ?? throw new ArgumentNullException(nameof(dispatcher));
+
+        /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
+        /// <param name="model"></param>
         public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
             => new ModelFactory(dispatcher?.ViewModelFactory, resourceLoader)
                 ?? throw new ArgumentNullException(nameof(dispatcher));
