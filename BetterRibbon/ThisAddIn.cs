@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.Models;
@@ -19,15 +20,16 @@ namespace PGSolutions.BetterRibbon {
     [CLSCompliant(false)]
     public partial class ThisAddIn {
         /// <summary>The ribbon-callback dispatcher for VBA customizable ribbon tabs/groups.</summary>
-        internal CustomDispatcher      Dispatcher { get; }
-                = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
+        internal CustomDispatcher      Dispatcher { get; private set; }
+             //   = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
 
         /// <summary>Root view-model for the VBA customizable ribbon.</summary>
         [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         internal CustomRibbonViewModel ViewModel  { get; private set; }
 
         /// <inheritdoc/>
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
+        => Dispatcher = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
 
         /// <summary>Returns the VBA-accessible entry point for the ribbon dispatcher.</summary>
         protected override object RequestComAddInAutomationService() => CustomRibbonComEntry.New(Dispatcher);
@@ -44,6 +46,16 @@ namespace PGSolutions.BetterRibbon {
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e) { }
 
+        private static Assembly Current_AssemblyResolve(object sender,ResolveEventArgs args) {
+            const string dllName = "EmbedAssembly.PGSolutions.RibbonDispatcher.dll";
+
+            using(var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(dllName)) {
+                byte[] assemblyData = new byte[stream.Length];
+                stream.Read(assemblyData, 0, assemblyData.Length);
+                return Assembly.Load(assemblyData);
+            }
+        }
+
         #region VSTO generated code
 
         /// <summary>
@@ -55,7 +67,7 @@ namespace PGSolutions.BetterRibbon {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }

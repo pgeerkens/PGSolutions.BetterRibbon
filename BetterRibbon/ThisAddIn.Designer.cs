@@ -32,6 +32,9 @@ namespace PGSolutions.BetterRibbon {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         public ThisAddIn(global::Microsoft.Office.Tools.Excel.ApplicationFactory factory, global::System.IServiceProvider serviceProvider) : 
                 base(factory, serviceProvider, "AddIn", "ThisAddIn") {
+            System.AppDomain.CurrentDomain.AssemblyResolve += 
+                    new System.ResolveEventHandler(Current_AssemblyResolve);
+
             Globals.Factory = factory;
         }
         

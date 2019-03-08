@@ -197,6 +197,9 @@
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <EmbeddedResource Include="..\RibbonDispatcher\bin\Release\PGSolutions.RibbonDispatcher.dll">
+      <Link>PGSolutions.RibbonDispatcher.dll</Link>
+    </EmbeddedResource>
     <Content Include="Example Workbooks\Database1.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
