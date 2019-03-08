@@ -69,15 +69,15 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new ISplitToggleButtonModel NewSplitToggleButtonModel(string splitStringId, string menuStringId,
-                string toggleStringId, bool isEnabled = true, bool isVisible = true)
-        => base.NewSplitToggleButtonModel(splitStringId, menuStringId, toggleStringId, isEnabled, isVisible);
+        public new ISplitToggleButtonModel NewSplitToggleButtonModel(string splitStringsId, string menuStringsId,
+                string toggleStringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewSplitToggleButtonModel(splitStringsId, menuStringsId, toggleStringsId, isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
-        public new ISplitPressButtonModel NewSplitPressButtonModel(string splitStringId, string menuStringId,
-                string buttonStringId, bool isEnabled = true, bool isVisible = true)
-        => base.NewSplitPressButtonModel(splitStringId, menuStringId, buttonStringId,  isEnabled, isVisible);
+        public new ISplitPressButtonModel NewSplitPressButtonModel(string splitStringsId, string menuStringsId,
+                string buttonStringsId, bool isEnabled = true, bool isVisible = true)
+        => base.NewSplitPressButtonModel(splitStringsId, menuStringsId, buttonStringsId,  isEnabled, isVisible);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]

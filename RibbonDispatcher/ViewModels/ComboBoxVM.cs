@@ -6,7 +6,7 @@ using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     internal class ComboBoxVM: AbstractControlVM<IComboBoxSource,IComboBoxVM>, IComboBoxVM,
-            IActivatable<IComboBoxSource, IComboBoxVM>, IEditableVM {
+            IActivatable<IComboBoxSource,IComboBoxVM>, IEditableVM {
         public ComboBoxVM(string itemId) : base(itemId) { }
 
         #region IActivatable implementation

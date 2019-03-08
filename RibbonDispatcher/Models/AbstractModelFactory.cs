@@ -105,21 +105,21 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public ISplitToggleButtonModel NewSplitToggleButtonModel(
-                string splitStringId, string menuStringId, string toggleStringId,
+                string splitStringsId, string menuStringsId, string toggleStringsId,
                 bool isEnabled, bool isVisible)
-        => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings2(splitStringId),
-                new ToggleModel(GetControl<ToggleButtonVM>, GetStrings2(toggleStringId)),
-                new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringId)))
+        => new SplitToggleButtonModel(GetControl<SplitToggleButtonVM>, GetStrings2(splitStringsId),
+                new ToggleModel(GetControl<ToggleButtonVM>, GetStrings2(toggleStringsId)),
+                new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringsId)))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
             .InitializeModel<IToggleSource, ISplitToggleButtonVM, SplitToggleButtonModel>();
 
         /// <summary>Creates, initializes and returns a new <see cref="ButtonModel"/>.</summary>
         public ISplitPressButtonModel NewSplitPressButtonModel(
-                string splitStringId, string menuStringId, string buttonStringId,
+                string splitStringsId, string menuStringsId, string buttonStringsId,
                 bool isEnabled, bool isVisible)
-        => new SplitPressButtonModel(GetControl<SplitPressButtonVM>, GetStrings2(splitStringId),
-                new ButtonModel(GetControl<ButtonVM>, GetStrings2(buttonStringId)),
-                new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringId)))
+        => new SplitPressButtonModel(GetControl<SplitPressButtonVM>, GetStrings2(splitStringsId),
+                new ButtonModel(GetControl<ButtonVM>, GetStrings2(buttonStringsId)),
+                new MenuModel(GetControl<MenuVM>, GetStrings2(menuStringsId)))
                 { IsEnabled=isEnabled, IsVisible=isVisible }
             .InitializeModel<IButtonSource, ISplitPressButtonVM, SplitPressButtonModel>();
 

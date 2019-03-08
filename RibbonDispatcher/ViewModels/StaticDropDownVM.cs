@@ -19,13 +19,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         #region IListable implementation
         public IReadOnlyList<IStaticItemVM> Items { get; }
-
-        /// <summary>Call back for ItemCount events from the drop-down ribbon elements.</summary>
-        public int    ItemCount                => Items?.Count ?? 0;
-
-        /// <summary>.</summary>
-        /// <param name="index">Index in the selection-list of the item being queried.</param>
-        public IStaticItemVM this[int index] => Items[index];
         #endregion
 
         #region ISelectable implementation

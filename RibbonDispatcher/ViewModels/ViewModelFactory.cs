@@ -252,7 +252,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal MenuVM NewMenu(string controlId, IEnumerable<IControlVM> controls)
-        => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(this, controlId, controls));
+        => Add<MenuVM, IMenuSource,IMenuVM>(new MenuVM(controlId, controls));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal DynamicMenuVM NewDynamicMenu(string controlId)
