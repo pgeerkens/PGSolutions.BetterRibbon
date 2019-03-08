@@ -19,13 +19,11 @@ namespace PGSolutions.ToolsRibbon {
     public partial class ThisAddIn {
         private Dispatcher      Dispatcher { get; } = new Dispatcher();
 
-        private IToolsComEntry  ComEntry   { get; } = new ToolsComEntry();
-
         private RibbonViewModel ViewModel  { get; set; }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
 
-        protected override object RequestComAddInAutomationService() => ComEntry;
+        protected override object RequestComAddInAutomationService() => ToolsComEntry.New();
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         => ViewModel = new RibbonViewModel(Dispatcher);

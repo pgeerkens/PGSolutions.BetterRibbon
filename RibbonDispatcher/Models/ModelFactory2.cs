@@ -7,6 +7,8 @@ using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.Models {
     public partial class ModelFactory : AbstractModelFactory, IModelServer {
+        public override IModelFactory AsFactory => this;
+
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         public IGroupModel GetGroupModel(string stringsId, bool isEnabled = true, bool isVisible = true)

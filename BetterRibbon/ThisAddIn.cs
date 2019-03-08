@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Core;
 
-using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.Models;
 
 namespace PGSolutions.BetterRibbon {
@@ -23,9 +22,6 @@ namespace PGSolutions.BetterRibbon {
         internal CustomDispatcher      Dispatcher { get; }
                 = new CustomDispatcher(Properties.Resources.RibbonXml,new MyResourceManager());
 
-        /// <summary>The VBA-accessible entry point for the ribbon dispatcher.</summary>
-        private  ICustomRibbonComEntry ComEntry   => new CustomRibbonComEntry(Dispatcher);
-
         /// <summary>Root view-model for the VBA customizable ribbon.</summary>
         [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         internal CustomRibbonViewModel ViewModel  { get; private set; }
@@ -33,8 +29,8 @@ namespace PGSolutions.BetterRibbon {
         /// <inheritdoc/>
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject() => Dispatcher;
 
-        /// <inheritdoc/>
-        protected override object RequestComAddInAutomationService() => ComEntry;
+        /// <summary>Returns the VBA-accessible entry point for the ribbon dispatcher.</summary>
+        protected override object RequestComAddInAutomationService() => CustomRibbonComEntry.New(Dispatcher);
 
         private void ThisAddIn_Startup(object sender, EventArgs e) {
             ViewModel = new CustomRibbonViewModel(Dispatcher);

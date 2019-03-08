@@ -14,14 +14,14 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
     public interface ICustomRibbonComEntry {
         /// <summary>Returns a new implementation of the <see cref="IModelFactory"/> interface.</summary>
         [DispId( 1),Description("Returns a new implementation of the IModelFactory interface.")]
-        IModelFactory  NewBetterRibbon(IResourceLoader manager);
+        IModelFactory  NewBetterRibbon(IResourceLoader loader);
 
-        /// <summary>.</summary>
-        [DispId( 3),Description(".")]
+        /// <summary>Creates a Ribbon ViewModel for this workbook and registers it with the Dispatcher.</summary>
+        [DispId( 3),Description("Creates a Ribbon ViewModel for this workbook and registers it with the Dispatcher.")]
         void RegisterWorkbook(string workbookName);
 
         /// <summary>Returns a new implementation of the <see cref="IModelServer"/> interface.</summary>
         [DispId( 4),Description("Returns a new implementation of the IModelServer interface.")]
-        IModelServer  NewModelServer(IResourceLoader manager);
+        IModelServer  NewModelServer(IResourceLoader loader);
     }
 }

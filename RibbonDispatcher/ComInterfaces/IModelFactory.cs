@@ -43,9 +43,9 @@ with each other."
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     [Guid(Guids.IModelFactory)]
     public interface IModelFactory {
-        ///// <summary>Queues a refresh of the PGSolutions Ribbon Tab.</summary>
-        //[DispId(1), Description("Queues a refresh of the PGSolutions Ribbon Tab.")]
-        //void Invalidate();
+        /// <summary>Returns the associated <see cref="IModelServer"/> for this dispatcher.</summary>
+        [DispId(1), Description("Returns the associated IModelServer for this dispatcher.")]
+        IModelServer AsServer { get; }
 
         /// <summary>Returns a new <see cref="IStrings"/> constructed from the supplied strings.</summary>
         [DispId(2), Description("Returns a new IControlStrings constructed from the supplied strings.")]

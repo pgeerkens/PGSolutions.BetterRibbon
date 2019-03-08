@@ -14,6 +14,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [Description("COM-visible implementation of the interface IModelFactory.")]
     public partial class ModelFactory : AbstractModelFactory {
         /// <summary>.</summary>
+        public override IModelServer  AsServer  => this;
+
         internal ModelFactory(ViewModelFactory viewModelFactory, IResourceLoader manager)
         : base(viewModelFactory, manager) { }
 

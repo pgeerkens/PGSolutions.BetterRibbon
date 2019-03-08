@@ -16,6 +16,8 @@ namespace PGSolutions.ToolsRibbon {
     [ComDefaultInterface(typeof(IToolsComEntry))]
     [Guid(Guids.IToolsComEntry)]
     public sealed class ToolsComEntry : IToolsComEntry {
+        internal static IToolsComEntry New() => new ToolsComEntry();
+
         internal ToolsComEntry() { }
 
         /// <inheritdoc/>

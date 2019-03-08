@@ -27,6 +27,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         internal ViewModelFactory ViewModelFactory { get; }
 
+        public abstract IModelFactory AsFactory { get; }
+
+        public abstract IModelServer  AsServer  { get; }
+
         /// <inheritdoc/>
         public void DetachProxy(string controlId) => ViewModelFactory.GetControl<IControlVM>(controlId).Detach();
 

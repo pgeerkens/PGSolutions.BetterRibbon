@@ -9,13 +9,14 @@ Option Explicit
 Option Private Module
 Private Const ModuleName    As String = "RibbonUtils."
 Public Const COMAddInName   As String = "PGSolutions.ToolsRibbon"
+Private MToolsRibbon        As PGSolutions_RibbonDispatcher.IModelServer
 
 Public Function ToolsRibbon() As PGSolutions_RibbonDispatcher.IModelServer
-    If MModelServer Is Nothing Then
-        Set MModelServer = Application.COMAddIns(COMAddInName).Object _
+    If MToolsRibbon Is Nothing Then
+        Set MToolsRibbon = Application.COMAddIns(COMAddInName).Object _
                 .NewBetterRibbon(New ResourceLoader)
     End If
-    Set ModelServer = MModelServer
+    Set ToolsRibbon = MToolsRibbon
 End Function
 
 Public Function NewLinksLexer(CellRef As ISourceCellRef, Formula As String) As ILinksLexer

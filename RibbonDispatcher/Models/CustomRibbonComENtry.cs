@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 
 namespace PGSolutions.RibbonDispatcher.Models {
@@ -16,17 +17,20 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [ComDefaultInterface(typeof(ICustomRibbonComEntry))]
     [Guid(Guids.CustomRibbonComEntry)]
     public sealed class CustomRibbonComEntry : ICustomRibbonComEntry {
-        public CustomRibbonComEntry(CustomDispatcher dispatcher) => Dispatcher = dispatcher;
+        public static ICustomRibbonComEntry New(CustomDispatcher dispatcher)
+        => new CustomRibbonComEntry(dispatcher);
 
-        CustomDispatcher Dispatcher { get; }
+        private CustomRibbonComEntry(CustomDispatcher dispatcher) => Dispatcher = dispatcher;
 
-        /// <inheritdoc/>
-        public IModelFactory NewBetterRibbon(IResourceLoader manager) => Dispatcher.NewModelFactory(manager);
-
-        /// <inheritdoc/>
-        public IModelServer NewModelServer(IResourceLoader manager)   => Dispatcher.NewModelServer(manager);
+        private CustomDispatcher Dispatcher { get; }
 
         /// <inheritdoc/>
-        public void RegisterWorkbook(string workbookName)             => Dispatcher.RegisterWorkbook(workbookName);
+        public IModelFactory NewBetterRibbon(IResourceLoader loader) => Dispatcher.NewModelFactory(loader);
+
+        /// <inheritdoc/>
+        public IModelServer NewModelServer(IResourceLoader loader)   => Dispatcher.NewModelServer(loader);
+
+        /// <inheritdoc/>
+        public void RegisterWorkbook(string workbookName) => Dispatcher.RegisterWorkbook(workbookName);
     }
 }
