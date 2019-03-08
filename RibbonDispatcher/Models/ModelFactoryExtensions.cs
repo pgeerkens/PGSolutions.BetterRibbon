@@ -1,6 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
 using PGSolutions.RibbonDispatcher.ViewModels;
@@ -11,12 +12,14 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
         public static IModelFactory NewModelFactory(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
-            => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
+            => new ModelFactory(dispatcher?.ViewModelFactory, resourceLoader)
+                ?? throw new ArgumentNullException(nameof(dispatcher));
 
         /// <summary>Returns a new instance of an <see cref="IModelFactory"/>.</summary>
         /// <param name="model"></param>
         public static IModelServer NewModelServer(this AbstractDispatcher dispatcher, IResourceLoader resourceLoader)
-            => new ModelFactory(dispatcher.ViewModelFactory, resourceLoader);
+            => new ModelFactory(dispatcher?.ViewModelFactory, resourceLoader)
+                ?? throw new ArgumentNullException(nameof(dispatcher));
 
         /// <summary>.</summary>
         internal static TModel InitializeModel<TSource, TVM, TModel>(this TModel model)

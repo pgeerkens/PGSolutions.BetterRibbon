@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Deployment.Application;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Core;
 
@@ -28,6 +29,7 @@ namespace PGSolutions.ToolsRibbon {
             return Dispatcher;
         }
 
+        [SuppressMessage("Microsoft.Usage","CA1806:DoNotIgnoreMethodResults",MessageId = "PGSolutions.ToolsRibbon.RibbonModel")]
         private void ViewModel_Initialized(object sender, EventArgs e) {
             Dispatcher.Initialized -= ViewModel_Initialized;
 

@@ -17,6 +17,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// This class must be COM-Visible for the typelib to be created. 
     /// 
     /// </remarks>
+    [SuppressMessage("Microsoft.Maintainability","CA1506:AvoidExcessiveClassCoupling")]
     [CLSCompliant(true)]
     [Description("The view-model factory for Ribbon objects. Visible to enable TypeLib creation.")]
     [ClassInterface(ClassInterfaceType.None)]
@@ -46,7 +47,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         public string Key { get; private set; }
 
-        public ViewModelFactory ReKey(string newKey) { Key = newKey; return this; }
+        public ViewModelFactory Rekey(string newKey) { Key = newKey; return this; }
 
         /// <summary>.</summary>
         internal event ChangedEventHandler Changed;

@@ -55,7 +55,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         public virtual void RegisterWorkbook(string workbookName) { }
 
         protected virtual void OnPropertyChanged(object sender, IControlChangedEventArgs e)
-        => RibbonUI?.InvalidateControl(e.Control.ControlId);
+        => RibbonUI?.InvalidateControl(e?.Control.ControlId);
 
         /// summary>.<summary/>
         public virtual object LoadImage(string ImageId) => ResourceLoader.GetImage(ImageId);

@@ -13,7 +13,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [CLSCompliant(false)]
     public sealed class CustomRibbonViewModel: GroupVM, IRibbonViewModel {
         public CustomRibbonViewModel(CustomDispatcher dispatcher) 
-        : base("TabPGSolutions",dispatcher.ViewModelFactory?.ViewModelRoot) { }
+        : base("TabPGSolutions",dispatcher?.ViewModelFactory?.ViewModelRoot) { }
 
         /// <inheritdoc/>
         public  IGroupVM  CustomControlsGroupVM

@@ -1,10 +1,11 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
+    [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class MenuVM: AbstractContainer2VM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
         internal MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }

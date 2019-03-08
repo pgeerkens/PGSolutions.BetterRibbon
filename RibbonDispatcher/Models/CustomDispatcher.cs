@@ -51,7 +51,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
         /// <inheritdoc/>
         public override void RegisterWorkbook(string workbookName) {
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
-                factory = ViewModelFactory.ParseXmlDoc(RibbonXDoc.Root).ReKey(workbookName);
+                factory = ViewModelFactory.ParseXmlDoc(RibbonXDoc.Root).Rekey(workbookName);
                 Factories.Add(factory);
             }
             SetViewModelFactory(factory);
@@ -59,19 +59,26 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
 
+        [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Workbook_Activate(Workbook wb) => RegisterWorkbook(wb.Name);
 
+        [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Workbook_Deactivate(Workbook wb) => RegisterWorkbook(InvalidFileName);
 
+        [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Workbook_BeforeSave(Workbook wb, bool SaveAsUI, ref bool Cancel) => FloatCurrent();
 
-        public void Workbook_AfterSave(Workbook wb, bool Success) => SaveCurrent(wb.Name);
+        [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
+        public void Workbook_AfterSave(Workbook wb, bool Success) => SaveCurrent(wb?.Name);
 
+        [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Workbook_Close(Workbook wb, ref bool Cancel) => FloatCurrent();
 
         /// <inheritdoc/>
         internal void SaveCurrent(string workbookName) {
-            ViewModelFactory.ReKey(workbookName);
+            if (workbookName == null) throw new ArgumentNullException(nameof(workbookName));
+
+            ViewModelFactory.Rekey(workbookName);
             if ( ! Factories.Contains(ViewModelFactory)) Factories.Add(ViewModelFactory);
             SetViewModelFactory(ViewModelFactory);
             System.Diagnostics.Debug.Assert(ViewModelFactory.Key == workbookName);

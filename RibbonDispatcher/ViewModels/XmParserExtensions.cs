@@ -10,7 +10,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     using Trace = System.Diagnostics.Trace;
 
     /// <summary>The methods to construct a View-Model hierarchy from an XML ribbon definition.</summary>
-    public static partial class XmParserExtensions {
+    public static partial class XmlParserExtensions {
         /// <summary>Returns the supplied RibbonXml after parsing it to creates the <see cref="RibbonViewModel"/>.</summary>
         /// <param name="ribbonXml"></param>
         public static ViewModelFactory ParseXmlTabs(this string ribbonXml)

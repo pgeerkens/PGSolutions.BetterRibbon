@@ -15,10 +15,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
         protected AbstractRibbonGroupModel(IGroupVM viewModel, IStrings strings) {
             ViewModel = (viewModel as IActivatable<IControlSource,IGroupVM>)
                       ?.Attach(this);
-            Label     = strings.Label;
-            ScreenTip = strings.ScreenTip;
-            SuperTip  = strings.SuperTip;
-            KeyTip    = strings.KeyTip;
+            Label     = strings?.Label     ?? "Label";
+            ScreenTip = strings?.ScreenTip ?? "ScreenTip";
+            SuperTip  = strings?.SuperTip  ?? "SuperTip";
+            KeyTip    = strings?.KeyTip    ?? "";
         }
 
         /// <inheritdoc/>

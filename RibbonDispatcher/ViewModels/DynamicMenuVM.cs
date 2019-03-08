@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class DynamicMenuVM : AbstractContainerVM<IDynamicMenuSource,IDynamicMenuVM>, IDynamicMenuVM,
             IActivatable<IDynamicMenuSource,IDynamicMenuVM>{
         internal DynamicMenuVM(ViewModelFactory factory, string itemId) : base(itemId)
@@ -44,7 +45,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         private ulong               CheckSum { get; set; }
 
-        private ulong GetHash(string content) {
+        private static ulong GetHash(string content) {
             var ba = new byte[8];
             for (int i=0, j=0; i < content.Length; i++, j++) {
                 if (j==8) j = 0;

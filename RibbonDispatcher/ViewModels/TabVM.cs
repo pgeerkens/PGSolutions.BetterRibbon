@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class TabVM: AbstractContainerVM<IControlSource,ITabVM>, ITabVM, 
             IActivatable<IControlSource,ITabVM> {
         internal TabVM(string itemId, IEnumerable<IControlVM> controls)
