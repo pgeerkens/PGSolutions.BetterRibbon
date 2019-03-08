@@ -4,10 +4,10 @@
 using Microsoft.Office.Core;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
-    internal abstract class SplitButtonVM<TSource,TVM>: AbstractContainerVM<TSource,TVM>, ISplitButtonVM,
+    internal abstract class SplitButtonVM<TSource,TVM>: AbstractControlVM<TSource,TVM>, ISplitButtonVM,
             IActivatable<TSource,TVM>, ISizeableVM, IImageableVM
         where TSource: IImageSizeSource where TVM:class,ISplitButtonVM {
-        public SplitButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu)
+        public SplitButtonVM(string itemId, IMenuVM menu)
         : base(itemId)
         => MenuVM = menu;
 
@@ -37,8 +37,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     internal class SplitToggleButtonVM: SplitButtonVM<IToggleSource,ISplitToggleButtonVM>, ISplitToggleButtonVM,
             IActivatable<IToggleSource,ISplitToggleButtonVM>, IToggleableVM {
-        public SplitToggleButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IToggleVM toggle)
-        : base(factory, itemId, menu)
+        public SplitToggleButtonVM(string itemId, IMenuVM menu, IToggleVM toggle)
+        : base(itemId, menu)
         => ToggleVM = toggle;
 
         #region IActivatable implementation
@@ -70,8 +70,8 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
     internal class SplitPressButtonVM: SplitButtonVM<IButtonSource,ISplitPressButtonVM>, ISplitPressButtonVM,
             IActivatable<IButtonSource,ISplitPressButtonVM>, IClickableVM {
-        public SplitPressButtonVM(ViewModelFactory factory, string itemId, IMenuVM menu, IButtonVM button)
-        : base(factory, itemId, menu)
+        public SplitPressButtonVM(string itemId, IMenuVM menu, IButtonVM button)
+        : base(itemId, menu)
         => ButtonVM = button;
 
         #region IActivatable implementation

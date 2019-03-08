@@ -8,7 +8,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     [SuppressMessage("Microsoft.Naming","CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class MenuVM: AbstractContainer2VM<IMenuSource,IMenuVM>, IMenuVM,
             IActivatable<IMenuSource,IMenuVM>, IImageableVM {
-        internal MenuVM(ViewModelFactory factory, string itemId) : base(itemId) { }
         internal MenuVM(ViewModelFactory factory, string itemId, IEnumerable<IControlVM> controls)
         : base(itemId,controls) { }
 

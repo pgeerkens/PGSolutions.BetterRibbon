@@ -12,7 +12,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         where TSource: IControlSource2 where TVM: class,IControlVM {
         protected AbstractContainer2VM(string itemId) : this(itemId, new KeyedControls()) { }
         protected AbstractContainer2VM(string itemId, IEnumerable<IControlVM> controls)
-        : base(itemId) { }
+        : base(itemId,controls) { }
 
         #region IDescriptionable implementation
         /// <inheritdoc/>
@@ -27,6 +27,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         protected AbstractContainerVM(string itemId, IEnumerable<IControlVM> controls) : base(itemId)
         => Controls = new KeyedControls(controls);
 
+        [SuppressMessage("Microsoft.Usage","CA2227:CollectionPropertiesShouldBeReadOnly")]
         protected KeyedControls Controls { get; set; }
 
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM

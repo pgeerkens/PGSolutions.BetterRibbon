@@ -189,10 +189,10 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="PublicFactoryExtensions.cs" />
     <Compile Include="ToolsComEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IToolsComEntry.cs" />
-    <Compile Include="PublicFactoryExtensions.cs" />
     <Compile Include="RibbonModel.cs" />
     <Compile Include="RibbonViewModel.cs" />
     <Compile Include="BrandingModel.cs" />

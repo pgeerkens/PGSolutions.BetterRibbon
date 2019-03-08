@@ -64,8 +64,5 @@ namespace PGSolutions.RibbonDispatcher.ComInterfaces {
             get; set;
         }
         #endregion
-
-        [DispId(7)]
-        string Content { get; }
     }
 }

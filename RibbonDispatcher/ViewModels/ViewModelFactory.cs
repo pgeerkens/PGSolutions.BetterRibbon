@@ -26,7 +26,6 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
     public class ViewModelFactory : IViewModelFactory {
         // The nature of this class and constructor ensures automated TypeLib creation.
         public ViewModelFactory() : this(":") { }
-        // The nature of this class and constructor ensures automated TypeLib creation.
         public ViewModelFactory(string key) {
             Key = key;
             _controls        = new Dictionary<string,IControlVM>();
@@ -45,13 +44,16 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
             ViewModelRoot    = new KeyedControls();
         }
 
+        [ComVisible(false)]
         public string Key { get; private set; }
 
+        [ComVisible(false)]
         public ViewModelFactory Rekey(string newKey) { Key = newKey; return this; }
 
         /// <summary>.</summary>
         internal event ChangedEventHandler Changed;
 
+        [ComVisible(false)]
         public void ClearChangedListeners() => Changed = null;
 
         /// <summary>.</summary>
@@ -59,11 +61,15 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         => Changed?.Invoke(this, e);
 
         /// <summary> TODO Is this needed? Where used, really? </summary>
+        [ComVisible(false)]
         public KeyedControls ViewModelRoot { get; private set; }
 
         /// <summary>Returns this <see cref="ViewModelFactory"/> loaded from the suppied XML.</summary>
         /// <param name="ribbonXml"></param>
+        [ComVisible(false)]
         public static ViewModelFactory ParseXmlDoc(XElement root) {
+            if (root == null) throw new ArgumentNullException(nameof(root));
+
             var factory = new ViewModelFactory();
             var tabs = root.Descendants().Where(d => d.Name.LocalName == "tabs")
                            .FirstOrDefault().ParseXmlChildren(factory);
@@ -73,6 +79,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         }
 
         /// <summary>.</summary>
+        [ComVisible(false)]
         public TControl GetControl<TControl>(string controlId) where TControl : class, IControlVM
         { Controls.TryGetValue(controlId,out var control); return control as TControl; }
 
@@ -237,11 +244,11 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
 
         /// <summary>Returns a new Ribbon Split(Toggle)Button view-model instance.</summary>
         internal SplitToggleButtonVM NewSplitToggleButton(string controlId, IMenuVM menu, IToggleVM toggle)
-        => Add<SplitToggleButtonVM, IToggleSource,ISplitToggleButtonVM>(new SplitToggleButtonVM(this, controlId, menu, toggle));
+        => Add<SplitToggleButtonVM, IToggleSource,ISplitToggleButtonVM>(new SplitToggleButtonVM(controlId, menu, toggle));
 
         /// <summary>Returns a new Ribbon Split(Press)Button view-model instance.</summary>
         internal SplitPressButtonVM NewSplitPressButton(string controlId, IMenuVM menu, IButtonVM button)
-        => Add<SplitPressButtonVM, IButtonSource,ISplitPressButtonVM>(new SplitPressButtonVM(this, controlId, menu, button));
+        => Add<SplitPressButtonVM, IButtonSource,ISplitPressButtonVM>(new SplitPressButtonVM(controlId, menu, button));
 
         /// <summary>Returns a new Ribbon ToggleButton view-model instance.</summary>
         internal MenuVM NewMenu(string controlId, IEnumerable<IControlVM> controls)

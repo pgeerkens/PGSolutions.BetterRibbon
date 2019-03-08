@@ -54,7 +54,5 @@ namespace PGSolutions.RibbonDispatcher.Models {
         }
 
         public void OnContentLoaded(IRibbonControl control) => ContentLoaded?.Invoke(control);
-
-        public string       Content   { get; private set; }
     }
 }

@@ -131,14 +131,14 @@ with each other."
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(14), Description("Returns a new model for a Split(Toggle)Button control.")]
-        ISplitToggleButtonModel GetSplitToggleButtonModel(string splitStringId, string menuStringId,
+        ISplitToggleButtonModel GetSplitToggleButtonModel(string stringId, string menuStringId,
                 string toggleStringId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>Returns a new model for a Split(Press)Button control.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string")]
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Matches COM usage.")]
         [DispId(15), Description("Returns a new model for a Split(Press)Button control.")]
-        ISplitPressButtonModel GetSplitPressButtonModel(string splitStringId, string menuStringId,
+        ISplitPressButtonModel GetSplitPressButtonModel(string stringId, string menuStringId,
                 string buttonStringId, bool isEnabled = true, bool isVisible = true);
 
         /// <summary>Returns a new ribbon SelectableItem model, attached to the named view-model ribbon item.</summary>

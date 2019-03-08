@@ -11,7 +11,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         internal KeyedControls(IEnumerable<IControlVM> list) : base() {
             foreach (var item in list) base.Add(item);
         }
-        protected override string GetKeyForItem(IControlVM control) => control?.ControlId;
+        protected override string GetKeyForItem(IControlVM item) => item?.ControlId;
 
         public TCtrl Item<TCtrl>(string id) where TCtrl:IControlVM 
         => this.Contains(id) && this[id] is TCtrl ctrl ? ctrl : default;

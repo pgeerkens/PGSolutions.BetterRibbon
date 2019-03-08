@@ -23,9 +23,10 @@ namespace PGSolutions.RibbonDispatcher.Models {
     [Description("The (top-level) ViewModel for the ribbon interface - MUST be COM-visible")]
     [CLSCompliant(true)]
     [SuppressMessage("Microsoft.Interoperability", "CA1409:ComVisibleTypesShouldBeCreatable",
-            Justification = "Public, Non-Creatable, class with exported Events.")]
+            Justification = "Public, Non-Creatable, class with exported methods.")]
     [ComVisible(true)]
     public class CustomDispatcher: AbstractDispatcher, IRibbonExtensibility {
+        [SuppressMessage("Microsoft.Usage","CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CustomDispatcher(string ribbonXml, IResourceLoader loader){
             ResourceLoader = loader;
             RibbonXml      = ribbonXml;
@@ -50,6 +51,8 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
         /// <inheritdoc/>
         public override void RegisterWorkbook(string workbookName) {
+            if (workbookName == null) throw new ArgumentNullException(nameof(workbookName));
+
             if ( ! Factories.TryGetValue(workbookName,out var factory)) {
                 factory = ViewModelFactory.ParseXmlDoc(RibbonXDoc.Root).Rekey(workbookName);
                 Factories.Add(factory);
@@ -60,7 +63,7 @@ namespace PGSolutions.RibbonDispatcher.Models {
 
 
         [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
-        public void Workbook_Activate(Workbook wb) => RegisterWorkbook(wb.Name);
+        public void Workbook_Activate(Workbook wb) => RegisterWorkbook(wb?.Name);
 
         [SuppressMessage("Microsoft.Naming","CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Workbook_Deactivate(Workbook wb) => RegisterWorkbook(InvalidFileName);

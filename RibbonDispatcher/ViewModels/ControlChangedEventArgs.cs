@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PGSolutions.RibbonDispatcher.ViewModels {
     /// <summary>TODO</summary>
@@ -29,6 +30,7 @@ namespace PGSolutions.RibbonDispatcher.ViewModels {
         /// <summary>TODO</summary>
         public ControlPurgedEventArgs(string controlId) => ControlId = controlId;
         /// <summary>TODO</summary>
+        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         public string ControlId { get; }
     }
 }

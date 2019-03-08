@@ -2,6 +2,7 @@
 //                             Copyright (c) 2017-2019 Pieter Geerkens                            //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Office.Core;
 
 using PGSolutions.RibbonDispatcher.ComInterfaces;
@@ -26,6 +27,7 @@ namespace PGSolutions.BetterRibbon {
         private  ICustomRibbonComEntry ComEntry   => new CustomRibbonComEntry(Dispatcher);
 
         /// <summary>Root view-model for the VBA customizable ribbon.</summary>
+        [SuppressMessage("Microsoft.Performance","CA1811:AvoidUncalledPrivateCode")]
         internal CustomRibbonViewModel ViewModel  { get; private set; }
 
         /// <inheritdoc/>
